@@ -55,8 +55,7 @@ syntax enable " 構文に色を付ける
 " 文字
 "----------------------------------------------------------
 set fileencoding=utf-8 " 保存時の文字コード
-set fileencodings=ucs-boms,utf-8,euc-jp,cp932 "
-" 読み込み時の文字コードの自動判別. 左側が優先される
+set fileencodings=ucs-boms,utf-8,euc-jp,cp932 " 読み込み時の文字コードの自動判別. 左側が優先される
 set fileformats=unix,dos,mac " 改行コードの自動判別. 左側が優先される
 set ambiwidth=double " □や○文字が崩れる問題を解決
 
@@ -72,7 +71,7 @@ set ruler " ステータスラインの右側にカーソルの位置を表示�
 " コマンドモード
 "----------------------------------------------------------
 set wildmenu " コマンドモードの補完
-set history=500 " 保存するコマンド履歴の数
+set history=300 " 保存するコマンド履歴の数
 
 "----------------------------------------------------------
 " タブ・インデント
@@ -102,8 +101,6 @@ set cursorline " カーソルラインをハイライト
 " 行が折り返し表示されていた場合、行単位ではなく表示行単位でカーソルを移動する
 nnoremap j gj
 nnoremap k gk
-nnoremap <down> gj
-nnoremap <up> gk
 
 " バックスペースキーの有効化
 set backspace=indent,eol,start
@@ -112,7 +109,7 @@ set backspace=indent,eol,start
 " カッコ・タグの対応
 "----------------------------------------------------------
 set showmatch " 括弧の対応関係を一瞬表示する
-set matchtime=3
+set matchtime=1
 set matchpairs& matchpairs+=<:>
 source $VIMRUNTIME/macros/matchit.vim " Vimの「%」を拡張する
 let g:lexima_enable_newline_rules=0   " 括弧の改行ルールを無効にする
@@ -129,11 +126,10 @@ set noswapfile
 "----------------------------------------------------------
 set list " 不可視文字の可視化
 set wrap " 長いテキストの折り返し
-" スクリーンベルの無効化
-set t_vb=
+set display=lastline " 長いテキストを隠さない
+set t_vb= " スクリーンベルの無効化
 set novisualbell
-" 不可視文字をUnicodeで綺麗に
-set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
+set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲ " 不可視文字をUnicodeで綺麗に
 
 "----------------------------------------------------------
 " マクロおよびキー設定
@@ -141,6 +137,8 @@ set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
 " 素早くjjでESCにする
 inoremap jj <Esc>
 vnoremap jj <Esc>
+" leaderをスペースにする
+let g:mapleader = ' '
 " 検索語にジャンプした検索単語を画面中央に持ってくる
 nnoremap n nzz
 nnoremap N Nzz
@@ -170,9 +168,6 @@ inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
-" Delが遠いので近くする
-inoremap <C-]> <BS>
-nnoremap <C-]> <BS>
 " nomalモードでも改行や削除ができるようにする
 nnoremap <CR> a<CR><ESC>
 nnoremap <BS> a<BS><ESC>

@@ -1,4 +1,5 @@
-# viライクな操作を有効にする bindkey -v
+# viライクな操作を有効にする
+bindkey -v
 
 # 自動補完を有効にする
 autoload -U compinit; compinit
@@ -51,7 +52,9 @@ function zle-keymap-select {
 }
 zle -N zle-keymap-select
 
-PROMPT="${fg[green]}%n@%m${reset_color}/${VIMODE}:${fg[blue]}[%~]${reset_color}%#%B>%b "
+PROMPT="${fg[green]}%n@%m${reset_color}[${VIMODE}]:${fg[blue]}%~${reset_color}%# "
+
+EDITER="vim"
 
 alias c='clear'
 alias cdd='cd ~/Develops'
@@ -59,12 +62,11 @@ alias cdv='cd ~/.vim'
 alias ls='ls -a --color=auto'
 alias mk='mkdir'
 alias rm='rm -i'
-alias vimrc='vim ~/.vimrc'
-alias zshrc='vim ~/.zshrc'
-alias update='source ~/.zshrc'
-alias herokulogin='heroku login --interactive'
+alias vimconf="$EDITER ~/.vimrc"
+alias zshconf="$EDITER ~/.zshrc"
+alias update="source ~/.zshrc"
+alias herokulogin="heroku login --interactive"
+alias q="exit"
 
-alias atom='vim'
-alias code='vim'
-alias emacs='vim'
-alias vi='vim'
+cd ~/Develops
+. ~/Develops/venv/bin/activate

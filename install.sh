@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 DOTPATH=~/dotfiles
 
@@ -8,3 +8,8 @@ do
 
   ln -snfv "$DOTPATH/$f" "$HOME"/"$f"
 done
+
+if [ "$SHELL" != "/usr/bin/zsh" ]; then
+  chsh -s /usr/bin/zsh
+  echo "Please reboot"
+fi
