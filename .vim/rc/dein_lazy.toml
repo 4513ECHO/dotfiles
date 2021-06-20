@@ -1,0 +1,15 @@
+# pythonコード補完
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+hook_post_update = '''
+  autocmd FileType python setlocal completeopt-=preview
+  let g:jedi#force_py_version="3"
+'''
+on_ft = ['python']
+[[plugins]]
+repo = 'ervandew/supertab'
+hook_post_update = '''
+  let g:SuperTabContextDefaultCompletionType = "comtext"
+  let g:SuperTabDefaultCompletionType = "<c-n>"
+'''
+on_ft = ['python']
