@@ -1,6 +1,6 @@
 set encoding=utf-8
 scriptencoding utf-8
-
+language ja_JP.UTF-8
 
 "-------------------------------------
 " dein.vim
