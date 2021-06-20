@@ -10,7 +10,6 @@ do
   echo "link $f"
 done
 
-if [ "$SHELL" != "/usr/bin/zsh" ]; then
-  chsh -s /usr/bin/zsh
-  echo "Please reboot"
+if [ "$SHELL" != "*/zsh" ]; then
+  echo "Please change shell to zsh"
 fi
