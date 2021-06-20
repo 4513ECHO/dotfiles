@@ -34,12 +34,6 @@ zstyle ':completion:*:default' menu select=1
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 # フロンプトの設定
-#VIMODE="${fg[cyan]}INSERT${reset_color}"
-#VI_NORMAL="${fg[green]}NORMAL${reset_color}"
-#VI_INSERT="${fg[cyan]}INSERT${reset_color}"
-#VIMODE="${${KEYMAP/vicmd/$VI_NORMAL}/(main|viins)/$VI_INSERT}"
-#PROMPT="${fg[green]}%n@%m${reset_color}[${VIMODE}]:${fg[blue]}%~${reset_color} %#"
-
 autoload -Uz colors; colors
 autoload -Uz add-zsh-hook
 autoload -Uz terminfo
@@ -57,14 +51,14 @@ function zle-keymap-select zle-line-init zle-line-finish
     PROMPT_2="$fg[cyan]-- INSERT --$reset_color"
     ;;
   vicmd)
-    PROMPT_2="${fg[green]}-- NORMAL --$reset_color"
+    PROMPT_2="${fg[white]}-- NORMAL --$reset_color"
     ;;
   vivis|vivli)
     PROMPT_2="$fg[yellow]-- VISUAL --$reset_color"
     ;;
   esac
 
-  PROMPT="%{$terminfo_down_sc$PROMPT_2$terminfo[rc]%}[%(?.%{${fg[green]}%}.%{${fg[red]}%})%n%{${reset_color}%}]%# "
+  PROMPT="%{$terminfo_down_sc$PROMPT_2$terminfo[rc]%}${fg[green]}%n@%m${reset_color}:${fg[blue]}%~${reset_color} %#"
   zle reset-prompt
 }
 
@@ -88,5 +82,4 @@ alias herokulogin="heroku login --interactive"
 alias q="exit"
 
 # ターミナル起動時に自動で仮想環境を起動する
-cd ~/Develops
 . ~/Develops/venv/bin/activate
