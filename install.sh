@@ -6,7 +6,8 @@ for f in .??*
 do
   [ "$f" = ".git" ] && continue
 
-  ln -snfv "$DOTPATH/$f" "$HOME"/"$f"
+  ln -snfv $DOTPATH/$f $HOME/$f
+  echo "link $f"
 done
 
 if [ "$SHELL" != "/usr/bin/zsh" ]; then
