@@ -67,12 +67,12 @@ zle -N zle-line-finish
 zle -N zle-keymap-select
 zle -N edit-command-line
 
-# git ブランチ名を色付きで表示させるメソッド
+# gitのブランチを色付きで表示させる
 function rprompt-git-current-branch {
   local branch_name st branch_status
 
     if [ ! -e  ".git"  ]; then
-# git 管理されていないディレクトリは何も返さない
+      # git 管理されていないディレクトリは何も返さない
       return
     fi
     branch_name=`git rev-parse --abbrev-ref HEAD 2> /dev/null`
