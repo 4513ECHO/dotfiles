@@ -121,6 +121,8 @@ alias zshconf="$EDITER ~/.zshrc"
 alias update="source ~/.zshrc"
 alias herokulogin="heroku login --interactive"
 alias q="exit"
+alias gcm="git commit -m"
+alias gpom="git push origin main"
 
 # ターミナル起動時に自動で仮想環境を起動する
 . ~/Develops/venv/bin/activate
