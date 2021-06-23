@@ -125,4 +125,4 @@ alias gcm="git commit -m"
 alias gpom="git push origin main"
 
 # ターミナル起動時に自動で仮想環境を起動する
-. ~/Develops/venv/bin/activate
+#. ~/Develops/venv/bin/activate

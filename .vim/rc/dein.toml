@@ -37,19 +37,6 @@ repo = 'rking/ag.vim'
 # プロジェクトに入ってるESLintを読み込む
 [[plugins]]
 repo = 'pmsorhaindo/syntastic-local-eslint.vim'
-# pythonコード補完
-[[plugins]]
-repo = 'davidhalter/jedi-vim'
-hook_post_update = '''
-  autocmd FileType python setlocal completeopt-=preview
-  let g:jedi#force_py_version="3"
-'''
-[[plugins]]
-repo = 'ervandew/supertab'
-hook_post_update = '''
-  let g:SuperTabContextDefaultCompletionType = "comtext"
-  let g:SuperTabDefaultCompletionType = "<c-n>"
-'''
 # 括弧補完
 [[plugins]]
 repo = 'cohama/lexima.vim'
