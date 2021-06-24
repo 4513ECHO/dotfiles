@@ -108,7 +108,7 @@ setopt prompt_subst
 RPROMPT='`rprompt-git-current-branch`'
 
 
-EDITER="vim"
+EDITOR="vim"
 
 # 各種エイリアスの設定
 alias c='clear'
@@ -116,8 +116,8 @@ alias cdd='cd ~/Develops'
 alias cdv='cd ~/.vim'
 alias ls='ls -a --color=auto'
 alias rm='rm -i'
-alias vimconf="$EDITER ~/.vimrc"
-alias zshconf="$EDITER ~/.zshrc"
+alias vimconf="$EDITOR ~/.vimrc"
+alias zshconf="$EDITOR ~/.zshrc"
 alias update="source ~/.zshrc"
 alias herokulogin="heroku login --interactive"
 alias q="exit"
