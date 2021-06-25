@@ -124,5 +124,8 @@ alias q="exit"
 alias gcm="git commit -m"
 alias gpom="git push origin main"
 
-# ターミナル起動時に自動で仮想環境を起動する
-#. ~/Develops/venv/bin/activate
+# venvの設定
+if [ -n "${VIRTUAL_ENV}" ]; then
+  . ${VIRTUAL_ENV}/bin/activate
+  PROMPT="(`basename \"${VIRTUAL_ENV}\"`)${PROMRT}"
+fi
