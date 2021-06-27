@@ -34,9 +34,6 @@ repo = 'suy/vim-ctrlp-commandline'
 # CtrlPの検索にagを使う
 [[plugins]]
 repo = 'rking/ag.vim'
-# プロジェクトに入ってるESLintを読み込む
-[[plugins]]
-repo = 'pmsorhaindo/syntastic-local-eslint.vim'
 # 括弧補完
 [[plugins]]
 repo = 'cohama/lexima.vim'
