@@ -122,7 +122,6 @@ alias update="source ~/.zshrc"
 alias herokulogin="heroku login --interactive"
 alias q="exit"
 alias gcm="git commit -m"
-alias gpom="git push origin main"
 
 # venvの設定
 if [ -n "${VIRTUAL_ENV}" ]; then
