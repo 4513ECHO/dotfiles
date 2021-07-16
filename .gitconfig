@@ -1,7 +1,7 @@
 [include]
   path = ~/.gitconfig.local
 [core]
-  editor = 'vim -c "set fenc=utf-8"'
+  editor = "vim -c 'set fenc=utf-8'"
 	quotepath = false
 [color]
 	diff = auto
