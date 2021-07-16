@@ -167,48 +167,6 @@ if &term =~ "xterm"
   cnoremap <special> <Esc>[201~ <nop>
 endif
 
-"----------------------------------------------------------
-" Syntastic
-"----------------------------------------------------------
-" 構文エラー行に「>>」を表示
-let g:syntastic_enable_signs = 1
-" 他のVimプラグインと競合するのを防ぐ
-let g:syntastic_always_populate_loc_list = 1
-" 構文エラーリストを非表示
-let g:syntastic_auto_loc_list = 0
-" ファイルを開いた時に構文エラーチェックを実行する
-let g:syntastic_check_on_open = 1
-" 「:wq」で終了する時も構文エラーチェックする
-let g:syntastic_check_on_wq = 1
-
-" Javascript用. 構文エラーチェックにESLintを使用
-let g:syntastic_javascript_checkers=['eslint']
-" Python用. 構文エラーチェックにpep8とpyflakesを使用
-let g:syntastic_python_checkers=['pep8', 'pyflakes']
-" Javascript, python以外は構文エラーチェックをしない
-let g:syntastic_mode_map = { 'mode': 'passive',
-			\ 'active_filetypes': ['javascript', 'python'],
-			\ 'passive_filetypes': [] }
-
-"----------------------------------------------------------
-" CtrlP
-"----------------------------------------------------------
-let g:ctrlp_match_window = 'order:ttb,min:20,max:20,results:100' " マッチウインドウの設定. 「下部に表示, 大きさ20行で固定, 検索結果100件」
-let g:ctrlp_show_hidden = 1 " .(ドット)から始まるファイルも検索対象にする
-let g:ctrlp_types = ['fil'] "ファイル検索のみ使用
-let g:ctrlp_extensions = ['funky', 'commandline'] " CtrlPの拡張として「funky」と「commandline」を使用
-
-" CtrlPCommandLineの有効化
-command! CtrlPCommandLine call ctrlp#init(ctrlp#commandline#id())
-
-" CtrlPFunkyの絞り込み検索設定
-let g:ctrlp_funky_matchtype = 'path'
-
-if executable('ag')
-	let g:ctrlp_use_caching=0 " CtrlPのキャッシュを使わない
-	let g:ctrlp_user_command='ag %s -i --hidden -g ""' " 「ag」の検索設定
-endif
-
 " ハイライトグループを知るコマンド:SyntaxInfoを実装
 function! s:get_syn_id(transparent)
 	let synid = synID(line("."), col("."), 1)
