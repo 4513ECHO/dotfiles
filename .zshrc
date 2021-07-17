@@ -34,27 +34,25 @@ autoload -Uz add-zsh-hook
 autoload -Uz terminfo
 
 terminfo_down_sc=${terminfo[cud1]}${terminfo[cuu1]}${terminfo[sc]}${terminfo[cud1]}
-function left_down_prompt_preexec () {
-  print -rn -- ${terminfo[el]}
+left_down_prompt_preexec() {
+  print -rn -- ${erminfo[el]}
 }
 add-zsh-hook preexec left_down_prompt_preexec
 
 function zle-keymap-select zle-line-init zle-line-finish {
+  local mode
   case $KEYMAP in
     main|viins)
-    PROMPT_2="${fg[cyan]}-- INSERT --${reset_color}"
+    mode="${fg[cyan]}-- INSERT --${reset_color}"
     ;;
   vicmd)
-    PROMPT_2="${fg[white]}-- NORMAL --${reset_color}"
-    ;;
-  vivis|vivli)
-    PROMPT_2="${fg[yellow]}-- VISUAL --${reset_color}"
+    mode="${fg[white]}-- NORMAL --${reset_color}"
     ;;
   esac
 
+  MODE="%{$terminfo_down_sc$mode${terminfo[rc]}%}"
   zle reset-prompt
 }
-
 zle -N zle-line-init
 zle -N zle-line-finish
 zle -N zle-keymap-select
@@ -62,7 +60,6 @@ zle -N edit-command-line
 
 function git-prompt () {
   local branchname branch st remote pushed upstream
-
   branchname=`git symbolic-ref --short HEAD 2> /dev/null`
   if [ -z $branchname ]; then
     return
@@ -91,7 +88,7 @@ function git-prompt () {
   echo "$branch$pushed"
 }
 
-PROMPT="%{$terminfo_down_sc$PROMPT_2${terminfo[rc]}%}${fg[green]}%n@%m${reset_color}:${fg[blue]}%~${reset_color} %# "
+PROMPT="$MODE${fg[green]}%n@%m${reset_color}:${fg[blue]}%~${reset_color} %# "
 RPROMPT="`git-prompt`"
 
 EDITOR="vim"
