@@ -1,35 +1,30 @@
-# dein.vim自身を管理
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
-# カラースキーム
 [[plugins]]
-repo = 'tomasr/molokai'
+repo = 'codota/tabnine-vim'
 
-# カラースキームを調べる
-[[plugins]]
-repo = 'guns/xterm-color-table.vim'
-
-# ステータスラインの表示内容強化
-[[plugins]]
-repo = 'itchyny/lightline.vim'
-
-# 末尾の全角半角空白文字を赤くハイライト
-[[plugins]]
-repo = 'bronson/vim-trailing-whitespace'
-
-# カラーコードのプレビュー
-[[plugins]]
-repo = 'gko/vim-coloresque'
-
-# プログラムの即時実行
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 
-# 構文エラーチェック
+[[plugins]]
+repo = 'nanotech/jellybeans.vim'
+
+[[plugins]]
+repo = 'guns/xterm-color-table.vim'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]]
+repo = 'gko/vim-coloresque'
+
 [[plugins]]
 repo = 'scrooloose/syntastic'
-hook_post_updete = '''
+hook_add = '''
   " 構文エラー行に「>>」を表示
   let g:syntastic_enable_signs = 1
   " 他のVimプラグインと競合するのを防ぐ
@@ -38,7 +33,7 @@ hook_post_updete = '''
   let g:syntastic_auto_loc_list = 0
   " ファイルを開いた時に構文エラーチェックを実行する
   let g:syntastic_check_on_open = 1
-  " 「:wq」で終了する時も構文エラーチェックする
+  " 終了する時も構文エラーチェックする
   let g:syntastic_check_on_wq = 1
   " Javascript用. 構文エラーチェックにESLintを使用
   let g:syntastic_javascript_checkers=['eslint']
@@ -50,22 +45,20 @@ hook_post_updete = '''
       \ 'passive_filetypes': [] }
 '''
 
-# 括弧補完
 [[plugins]]
 repo = 'cohama/lexima.vim'
 
 [[plugins]]
 repo = 'ervandew/supertab'
-hook_post_update = '''
+hook_add = '''
   let g:SuperTabContextDefaultCompletionType = "comtext"
   let g:SuperTabDefaultCompletionType = "<c-n>"
 '''
 
-# コードの自動補完
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
 if   = '''has('lua')'''
-hook_post_update = '''
+hook_add = '''
   " Vim起動時にneocompleteを有効にする
   let g:neocomplete#enable_at_startup = 1
   " smartcase有効化
@@ -104,18 +97,4 @@ hook_post_update = '''
   " スニペット内のジャンプもタブキーでジャンプ
   imap <expr><TAB> pumvisible() ? "<C-n>" : neosnippet#jumpable() ? "<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
 '''
-
-# 補完機能
-[[plugins]]
-repo = 'zxqfl/tabnine-vim'
-
-# スニペットの補完機能
-[[plugins]]
-repo = 'Shougo/neosnippet'
-if   = '''has('lua')'''
-
-# スニペット集
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-if   = '''has('lua')'''
 

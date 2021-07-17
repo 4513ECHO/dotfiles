@@ -1,8 +1,7 @@
 set encoding=utf-8
 scriptencoding utf-8
 
-" ------ dein.vim ------
-let s:dein_dir = expand('~/.cache/dein')
+let s:dein_dir = expand('~/.vim/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
 " dein.vimがない場合にGitHubからcloneしてくる
@@ -18,7 +17,7 @@ if dein#load_state(s:dein_dir)
 
   let g:rc_dir    = expand('~/.vim/rc')
   let s:toml      = g:rc_dir . '/dein.toml'
-  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+  let s:lazy_toml = g:rc_dir . '/lazy.toml'
 
   call dein#load_toml(s:toml,      {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
@@ -32,7 +31,7 @@ if dein#check_install()
 endif
 
 " ------ カラースキーム ------
-colorscheme molokai
+colorscheme jellybeans
 
 set t_Co=256
 syntax enable
