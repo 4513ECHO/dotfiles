@@ -39,8 +39,7 @@ left_down_prompt_preexec() {
 }
 add-zsh-hook preexec left_down_prompt_preexec
 
-function zle-keymap-select zle-line-init zle-line-finish
-{
+function zle-keymap-select zle-line-init zle-line-finish {
   case $KEYMAP in
     main|viins)
     PROMPT_2="$fg[cyan]-- INSERT --$reset_color"
@@ -62,46 +61,38 @@ zle -N zle-line-finish
 zle -N zle-keymap-select
 zle -N edit-command-line
 
-# gitのブランチを色付きで表示させる
-function rprompt-git-current-branch {
-  local branch_name st branch_status
+function git-prompt () {
+  local branchname branch st remote pushed upstream
 
-    if [ ! -e  ".git"  ]; then
-      # git 管理されていないディレクトリは何も返さない
-      return
-    fi
-    branch_name=`git rev-parse --abbrev-ref HEAD 2> /dev/null`
-    st=`git status 2> /dev/null`
-    if [[ -n `echo "$st" | grep "^nothing to"`  ]]; then
-# 全て commit されてクリーンな状態
-      branch_status="%F{green}"
-    elif [[ -n `echo "$st" | grep "^Untracked files"`  ]]; then
-# git 管理されていないファイルがある状態
-      branch_status="%F{red}?"
-    elif [[ -n `echo "$st" | grep "^Changes not staged for commit"`  ]]; then
-# git add されていないファイルがある状態
-      branch_status="%F{red}+"
-    elif [[ -n `echo "$st" | grep "^Changes to be committed"`  ]]; then
-# git commit されていないファイルがある状態
-      branch_status="%F{yellow}!"
-    elif [[ -n `echo "$st" | grep "^rebase in progress"`  ]]; then
-# コンフリクトが起こった状態
-      echo "%F{red}!(no branch)"
-      return
+  branchname=`git symbolic-ref --short HEAD 2> /dev/null`
+  if [ -z $branchname ]; then
+    return
+  fi
+  st=`git status 2> /dev/null`
+  if [[ -n `echo "$st" | grep "^nothing to"`  ]]; then
+    branch="%{${fg[green]}%}($branchname)%{$reset_color%}"
+  elif [[ -n `echo "$st" | grep "^nothing added"`  ]]; then
+    branch="%{${fg[yellow]}%}($branchname)%{$reset_color%}"
+  else
+    branch="%{${fg[red]}%}($branchname)%{$reset_color%}"
+  fi
+
+  remote=`git config branch.${branchname}.remote 2> /dev/null`
+  if [ -z $remote  ]; then
+    pushed=''
+  else
+    upstream="${remote}/${branchname}"
+    if [[ -z `git log ${upstream}..${branchname}`  ]]; then
+      pushed="%{${fg[green]}%}[up]%{$reset_color%}"
     else
-# 上記以外の状態の場合
-      branch_status="%F{blue}"
+      pushed="%{${fg[red]}%}[up]%{$reset_color%}"
     fi
-# ブランチ名を色付きで表示する
-    echo "${branch_status}[$branch_name]"
+  fi
+
+  echo "$branch$pushed"
 }
 
-# プロンプトが表示されるたびにプロンプト文字列を評価、置換する
-setopt prompt_subst
-
-# プロンプトの右側にメソッドの結果を表示させる
-RPROMPT='`rprompt-git-current-branch`'
-
+RPROMRT='`git-prompt`'
 
 EDITOR="vim"
 
@@ -120,5 +111,5 @@ alias ....='cd ../../..'
 
 # venvの設定
 if [ -n "${VIRTUAL_ENV}" ]; then
-  PROMPT="(`basename \"${VIRTUAL_ENV}\"`)${PROMRT}"
+PROMPT="(`basename \"${VIRTUAL_ENV}\"`)${PROMRT}"
 fi
