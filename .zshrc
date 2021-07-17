@@ -34,7 +34,7 @@ autoload -Uz add-zsh-hook
 autoload -Uz terminfo
 
 terminfo_down_sc=${terminfo[cud1]}${terminfo[cuu1]}${terminfo[sc]}${terminfo[cud1]}
-left_down_prompt_preexec() {
+function left_down_prompt_preexec () {
   print -rn -- ${terminfo[el]}
 }
 add-zsh-hook preexec left_down_prompt_preexec
@@ -42,17 +42,16 @@ add-zsh-hook preexec left_down_prompt_preexec
 function zle-keymap-select zle-line-init zle-line-finish {
   case $KEYMAP in
     main|viins)
-    PROMPT_2="$fg[cyan]-- INSERT --$reset_color"
+    PROMPT_2="${fg[cyan]}-- INSERT --${reset_color}"
     ;;
   vicmd)
-    PROMPT_2="${fg[white]}-- NORMAL --$reset_color"
+    PROMPT_2="${fg[white]}-- NORMAL --${reset_color}"
     ;;
   vivis|vivli)
-    PROMPT_2="$fg[yellow]-- VISUAL --$reset_color"
+    PROMPT_2="${fg[yellow]}-- VISUAL --${reset_color}"
     ;;
   esac
 
-  PROMPT="%{$terminfo_down_sc$PROMPT_2$terminfo[rc]%}${fg[green]}%n@%m${reset_color}:${fg[blue]}%~${reset_color} %# "
   zle reset-prompt
 }
 
@@ -92,22 +91,23 @@ function git-prompt () {
   echo "$branch$pushed"
 }
 
-RPROMRT='`git-prompt`'
+PROMPT="%{$terminfo_down_sc$PROMPT_2${terminfo[rc]}%}${fg[green]}%n@%m${reset_color}:${fg[blue]}%~${reset_color} %# "
+RPROMRT="`git-prompt`"
 
 EDITOR="vim"
 
-alias c='clear'
-alias cdd='cd ~/Develops'
-alias ls='ls -a --color=auto'
-alias rm='rm -i'
+alias c="clear"
+alias cdd="cd ~/Develops"
+alias ls="ls -a --color=auto"
+alias rm="rm -i"
 alias vimconf="$EDITOR ~/.vimrc"
 alias zshconf="$EDITOR ~/.zshrc"
 alias update="source ~/.zshrc"
 alias herokulogin="heroku login --interactive"
 alias q="exit"
 alias gcm="git commit -m"
-alias ...='cd ../..'
-alias ....='cd ../../..'
+alias ...="cd ../.."
+alias ....="cd ../../.."
 
 # venvの設定
 if [ -n "${VIRTUAL_ENV}" ]; then
