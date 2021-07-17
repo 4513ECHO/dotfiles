@@ -33,8 +33,10 @@ autoload -Uz colors; colors
 autoload -Uz add-zsh-hook
 autoload -Uz terminfo
 
+setopt prompt_subst
+
 terminfo_down_sc=${terminfo[cud1]}${terminfo[cuu1]}${terminfo[sc]}${terminfo[cud1]}
-left_down_prompt_preexec() {
+function left_down_prompt_preexec {
   print -rn -- ${erminfo[el]}
 }
 add-zsh-hook preexec left_down_prompt_preexec
@@ -87,8 +89,10 @@ function git-prompt {
 
   echo "$branch$pushed"
 }
-setopt prompt_subst
-RPROMPT="`git-prompt`"
+
+function precmd () {
+  RPROMPT="`git-prompt`"
+}
 
 EDITOR="vim"
 
