@@ -33,8 +33,6 @@ autoload -Uz colors; colors
 autoload -Uz add-zsh-hook
 autoload -Uz terminfo
 
-setopt prompt_subst
-
 terminfo_down_sc=${terminfo[cud1]}${terminfo[cuu1]}${terminfo[sc]}${terminfo[cud1]}
 left_down_prompt_preexec() {
   print -rn -- ${erminfo[el]}
@@ -60,7 +58,7 @@ zle -N zle-line-finish
 zle -N zle-keymap-select
 zle -N edit-command-line
 
-function git-prompt () {
+function git-prompt {
   local branchname branch st remote pushed upstream
   branchname=`git symbolic-ref --short HEAD 2> /dev/null`
   if [ -z $branchname ]; then
@@ -89,6 +87,7 @@ function git-prompt () {
 
   echo "$branch$pushed"
 }
+setopt prompt_subst
 RPROMPT="`git-prompt`"
 
 EDITOR="vim"
