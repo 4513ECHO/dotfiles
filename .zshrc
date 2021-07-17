@@ -92,7 +92,7 @@ function git-prompt () {
 }
 
 PROMPT="%{$terminfo_down_sc$PROMPT_2${terminfo[rc]}%}${fg[green]}%n@%m${reset_color}:${fg[blue]}%~${reset_color} %# "
-RPROMRT="`git-prompt`"
+RPROMPT="`git-prompt`"
 
 EDITOR="vim"
 
