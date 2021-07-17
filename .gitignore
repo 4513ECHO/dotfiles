@@ -1,2 +1,2 @@
-.vim/dein/
-!.vim/dein/.gitkeep
+/.vim/dein/
+!/.vim/dein/.gitkeep
