@@ -7,12 +7,7 @@ autoload -U compinit; compinit
 # 入力したコマンドが存在せず、かつディレクトリ名と一致するなら、ディレクトリに cd する
 setopt auto_cd
 
-# 2つ上、3つ上にも移動できるようにする
-alias ...='cd ../..'
-alias ....='cd ../../..'
-
 # cd した先のディレクトリをディレクトリスタックに追加する
-# cd +<Tab> でディレクトリの履歴が表示され、そこに移動できる
 setopt auto_pushd
 
 # pushd したとき、ディレクトリがすでにスタックに含まれていればスタックに追加しない
@@ -30,7 +25,7 @@ setopt hist_ignore_space
 # <Tab> でパス名の補完候補を表示したあと、続けて <Tab> を押すと候補からパス名を選択できるようになる
 zstyle ':completion:*:default' menu select=1
 
-# 単語の一部として扱われる文字のセットを指定する
+# 単語の一部として扱われる文字のセット
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 # フロンプトの設定
@@ -38,9 +33,9 @@ autoload -Uz colors; colors
 autoload -Uz add-zsh-hook
 autoload -Uz terminfo
 
-terminfo_down_sc=$terminfo[cud1]$terminfo[cuu1]$terminfo[sc]$terminfo[cud1]
+terminfo_down_sc=${terminfo[cud1]}${terminfo[cuu1]}${terminfo[sc]}${terminfo[cud1]}
 left_down_prompt_preexec() {
-  print -rn -- $terminfo[el]
+  print -rn -- ${terminfo[el]}
 }
 add-zsh-hook preexec left_down_prompt_preexec
 
@@ -110,10 +105,8 @@ RPROMPT='`rprompt-git-current-branch`'
 
 EDITOR="vim"
 
-# 各種エイリアスの設定
 alias c='clear'
 alias cdd='cd ~/Develops'
-alias cdv='cd ~/.vim'
 alias ls='ls -a --color=auto'
 alias rm='rm -i'
 alias vimconf="$EDITOR ~/.vimrc"
@@ -122,9 +115,10 @@ alias update="source ~/.zshrc"
 alias herokulogin="heroku login --interactive"
 alias q="exit"
 alias gcm="git commit -m"
+alias ...='cd ../..'
+alias ....='cd ../../..'
 
 # venvの設定
 if [ -n "${VIRTUAL_ENV}" ]; then
-  . ${VIRTUAL_ENV}/bin/activate
   PROMPT="(`basename \"${VIRTUAL_ENV}\"`)${PROMRT}"
 fi
