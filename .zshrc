@@ -50,7 +50,7 @@ function zle-keymap-select zle-line-init zle-line-finish {
     ;;
   esac
 
-  MODE="%{$terminfo_down_sc$mode${terminfo[rc]}%}"
+  PROMPT="%{$terminfo_down_sc$mode${terminfo[rc]}%}${fg[green]}%n@%m${reset_color}:${fg[blue]}%~${reset_color} %# "
   zle reset-prompt
 }
 zle -N zle-line-init
@@ -87,9 +87,9 @@ function git-prompt () {
 
   echo "$branch$pushed"
 }
-
-PROMPT="$MODE${fg[green]}%n@%m${reset_color}:${fg[blue]}%~${reset_color} %# "
 RPROMPT="`git-prompt`"
+
+setopt prompt_subst
 
 EDITOR="vim"
 
