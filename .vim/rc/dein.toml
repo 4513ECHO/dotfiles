@@ -20,9 +20,6 @@ repo = 'itchyny/lightline.vim'
 repo = 'bronson/vim-trailing-whitespace'
 
 [[plugins]]
-repo = 'gko/vim-coloresque'
-
-[[plugins]]
 repo = 'scrooloose/syntastic'
 hook_add = '''
   " 構文エラー行に「>>」を表示
