@@ -28,20 +28,8 @@ zstyle ':completion:*:default' menu select=1
 # 単語の一部として扱われる文字のセット
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
+export EDITOR="vim"
+
 source .zsh/prompt.zsh
-
-EDITOR="vim"
-
-alias c="clear"
-alias cdd="cd ~/Develops"
-alias ls="ls -a --color=auto"
-alias rm="rm -i"
-alias vimconf="$EDITOR ~/.vimrc"
-alias zshconf="$EDITOR ~/.zshrc"
-alias update="source ~/.zshrc"
-alias herokulogin="heroku login --interactive"
-alias q="exit"
-alias gcm="git commit -m"
-alias ...="cd ../.."
-alias ....="cd ../../.."
+source .zsh/alias.zsh
 
