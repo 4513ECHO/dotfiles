@@ -2,15 +2,16 @@
   path = ~/.gitconfig.local
 [core]
   editor = "vim -c 'set fenc=utf-8'"
-	quotepath = false
+  quotepath = false
 [color]
-	diff = auto
-	status = auto
-	branch = auto
+  diff = auto
+  status = auto
+  branch = auto
+  pull = auto
 [push]
-	default = simple
+  default = simple
 [pull]
-	rebase = false
+  rebase = false
 [url "github:"]
   InsteadOf = https://github.com
   InsteadOf = git@github.com
