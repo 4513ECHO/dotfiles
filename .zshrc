@@ -32,7 +32,3 @@ export EDITOR="vim"
 
 source .zsh/prompt.zsh
 source .zsh/alias.zsh
-
-# SHELL LOGIN WITH TMUX / If not running interactively, do not do anything
-[[ $- != *i*  ]] && return
-[[ -z "$TMUX"  ]] && exec tmux
