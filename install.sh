@@ -1,15 +1,14 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 DOTPATH=~/dotfiles
 
-for f in .??*
+for rc in .??*
 do
-  [ "$f" = ".git" ] && continue
-  [ "$f" = ".gitignore" ] && continue
+  [[ "${rc}" = ".git" ]] && continue
+  [[ "${rc}" = ".gitignore" ]] && continue
 
-  ln -snfv $DOTPATH/$f $HOME/$f
+  ln -snfv "${DOTPATH}/${rc}" "${HOME}/${rc}"
 done
 
-if [ "$SHELL" != "*/zsh" ]; then
-  echo "Please change shell to zsh"
-fi
+[[ ! "${SHELL}" =~ "zsh$" ]] && chsh -s /usr/bin/zsh
+
