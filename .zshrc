@@ -30,5 +30,5 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 export EDITOR="vim"
 
-source .zsh/prompt.zsh
-source .zsh/alias.zsh
+source ./.zsh/prompt.zsh
+source ./.zsh/alias.zsh
