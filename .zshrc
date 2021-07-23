@@ -31,3 +31,4 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 source $DOTPATH/.zsh/prompt.zsh
 source $DOTPATH/.zsh/alias.zsh
+source $DOTPATH/.zsh/venv.zsh
