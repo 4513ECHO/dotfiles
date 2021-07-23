@@ -28,7 +28,6 @@ zstyle ':completion:*:default' menu select=1
 # 単語の一部として扱われる文字のセット
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
-export EDITOR="vim"
 
-source ./.zsh/prompt.zsh
-source ./.zsh/alias.zsh
+source $DOTPATH/.zsh/prompt.zsh
+source $DOTPATH/.zsh/alias.zsh
