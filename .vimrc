@@ -99,10 +99,10 @@ set novisualbell
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲ " 不可視文字をUnicodeで綺麗に
 
 " ------ マクロおよびキー設定 ------
-inoremap jj <Esc> " 素早くjjでESCにする
-vnoremap jj <Esc>
 " leaderをスペースにする
-let g:mapleader = ' '
+let g:mapleader = "\<Space>"
+inoremap <Leader>jj <Esc>
+vnoremap <Leader>jj <Esc>
 " 検索語にジャンプした検索単語を画面中央に持ってくる
 nnoremap n nzz
 nnoremap N Nzz
@@ -133,8 +133,10 @@ inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
 " nomalモードでも改行や削除ができるようにする
-nnoremap <CR> a<CR><ESC>
-nnoremap <BS> a<BS><ESC>
+nnoremap <CR> i<CR><ESC>
+nnoremap <BS> i<BS><ESC>
+" バックスラッシュの入力
+inoremap <Leader>/ \
 " カーソル位置の記憶
 augroup vimrcEx
   augroup ENDaugroup ENDautocmd!

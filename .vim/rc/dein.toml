@@ -5,13 +5,7 @@ repo = 'Shougo/dein.vim'
 repo = 'codota/tabnine-vim'
 
 [[plugins]]
-repo = 'thinca/vim-quickrun'
-
-[[plugins]]
 repo = 'nanotech/jellybeans.vim'
-
-[[plugins]]
-repo = 'guns/xterm-color-table.vim'
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
@@ -38,8 +32,8 @@ hook_add = '''
   let g:syntastic_python_checkers=['pep8', 'pyflakes']
   " Javascript, python以外は構文エラーチェックをしない
   let g:syntastic_mode_map = { 'mode': 'passive',
-      \ 'active_filetypes': ['javascript', 'python'],
-      \ 'passive_filetypes': [] }
+    \ 'active_filetypes': ['javascript', 'python'],
+    \ 'passive_filetypes': [] }
 '''
 
 [[plugins]]
