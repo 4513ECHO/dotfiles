@@ -147,9 +147,10 @@ augroup vimrcEx
 augroup END"`'")"'"
 
 " ファイルタイプの指定
-autocmd BufRead,BufNewFile *.py setfiletype=python
-autocmd BufRead,BufNewFile *.lark setfiletype=lark
+autocmd BufRead,BufNewFile *.py setfiletype python
+autocmd BufRead,BufNewFile *.lark setfiletype lark
 autocmd BufRead,BufNewFile * setlocal formatoptions-=ro
+filetype plugin indent on
 
 " ------ クリップボードからのペースト ------
 " 挿入モードでクリップボードからペーストする時に自動でインデントさせないようにする

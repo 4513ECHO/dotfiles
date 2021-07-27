@@ -1,3 +1,7 @@
+set tabstop=8
+set softtabstop=4
+set shiftwidth=4
+
 syn match pythonEscape +{{+ contained containedin=pythonfString,pythonfDocstring
 syn match pythonEscape +}}+ contained containedin=pythonfString,pythonfDocstring
 
@@ -18,4 +22,4 @@ syn match pythonStringModifier /![sra]/ contained containedin=pythonInterpolatio
 
 hi link pythonfString String
 hi link pythonfDocstring String
-hi link pythonStringModifier PreProc}}"''')"'])
+hi link pythonStringModifier PreProc
