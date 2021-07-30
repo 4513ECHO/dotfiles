@@ -1,7 +1,5 @@
-export PATH="$HOME/local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export DOTPATH="$HOME/dotfiles"
-export ZDOTDIR="$DOTPATH:$HOME"
-export EDITOR="vim"
+export ZDOTDIR="$HOME"
+export EDITOR="vim -O"
 export PAGER="less"
-
-[[ $- =~ i ]] && source .zshrc
