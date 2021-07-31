@@ -2,7 +2,8 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'codota/tabnine-vim'
+repo = 'Shougo/vimproc.vim'
+build = 'make'
 
 [[plugins]]
 repo = 'nanotech/jellybeans.vim'
@@ -14,61 +15,12 @@ repo = 'itchyny/lightline.vim'
 repo = 'bronson/vim-trailing-whitespace'
 
 [[plugins]]
-repo = 'scrooloose/syntastic'
-hook_add = '''
-  " 構文エラー行に「>>」を表示
-  let g:syntastic_enable_signs = 1
-  " 他のVimプラグインと競合するのを防ぐ
-  let g:syntastic_always_populate_loc_list = 1
-  " 構文エラーリストを非表示
-  let g:syntastic_auto_loc_list = 0
-  " ファイルを開いた時に構文エラーチェックを実行する
-  let g:syntastic_check_on_open = 1
-  " 終了する時も構文エラーチェックする
-  let g:syntastic_check_on_wq = 1
-  " Javascript用. 構文エラーチェックにESLintを使用
-  let g:syntastic_javascript_checkers=['eslint']
-  " Python用. 構文エラーチェックにpep8とpyflakesを使用
-  let g:syntastic_python_checkers=['pep8', 'pyflakes']
-  " Javascript, python以外は構文エラーチェックをしない
-  let g:syntastic_mode_map = { 'mode': 'passive',
-    \ 'active_filetypes': ['javascript', 'python'],
-    \ 'passive_filetypes': [] }
-'''
-
-[[plugins]]
 repo = 'cohama/lexima.vim'
-
-[[plugins]]
-repo = 'ervandew/supertab'
-hook_add = '''
-  let g:SuperTabContextDefaultCompletionType = "comtext"
-  let g:SuperTabDefaultCompletionType = "<c-n>"
-'''
 
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
 if   = '''has('lua')'''
 hook_add = '''
-  " Vim起動時にneocompleteを有効にする
-  let g:neocomplete#enable_at_startup = 1
-  " smartcase有効化
-  " 大文字が入力されるまで大文字小文字の区別を無視する
-  let g:neocomplete#enable_smart_case = 1
-  " 3文字以上の単語に対して補完を有効にする
-  let g:neocomplete#min_keyword_length = 3
-  " 区切り文字まで補完する
-  let g:neocomplete#enable_auto_delimiter = 1
-  " 1文字目の入力から補完のポップアップを表示
-  let g:neocomplete#auto_completion_start_length = 1
-  " バックスペースで補完のポップアップを閉じる
-  inoremap <expr><BS> neocomplete#smart_close_popup()."<C-h>"
-  " エンターキーで補完候補の確定.
-  " スニペットの展開もエンターキーで確定
-  imap <expr><CR> neosnippet#expandable() ? "<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "<C-y>" : "<CR>"
-  " タブキーで補完候補の選択.
-  " スニペット内のジャンプもタブキーでジャンプ
-  imap <expr><TAB> pumvisible() ? "<C-n>" : neosnippet#jumpable() ? "<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
   " Vim起動時にneocompleteを有効にする
   let g:neocomplete#enable_at_startup = 1
   " smartcase有効化. 大文字が入力されるまで大文字小文字の区別を無視する

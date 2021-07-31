@@ -1,4 +1,7 @@
 [[plugins]]
+repo = 'codota/tabnine-vim'
+
+[[plugins]]
 repo = 'cespare/vim-toml'
 on_ft = ['toml']
 
@@ -15,16 +18,20 @@ repo = 'lark-parser/vim-lark-syntax'
 on_ft = ['lark']
 
 [[plugins]]
+repo = 'ervandew/supertab'
+hook_add = '''
+  let g:SuperTabContextDefaultCompletionType = "comtext"
+  let g:SuperTabDefaultCompletionType = "<c-n>"
+'''
+on_ft = ['python']
+
+[[plugins]]
 repo = 'guns/xterm-color-table.vim'
 on_cmd = ['XtermColorTable']
 
 [[plugins]]
-repo = 'Shougo/vimproc.vim'
-build = 'make'
-
-[[plugins]]
 repo = 'thinca/vim-quickrun'
-on_souce = ['vimproc.vim']
+on_source = ['vimproc.vim']
 hook_add = '''
   let g:quickrun_config = {
     \"_" : {
@@ -38,7 +45,34 @@ hook_add = '''
 
 [[plugins]]
 repo = 'Shougo/neosnippet.vim'
+on_event = 'InsertEnter'
+on_ft = ['snippet']
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
 on_source = ['neosnippet.vim']
+
+[[plugins]]
+repo = 'scrooloose/syntastic'
+hook_add = '''
+  " 構文エラー行に「>>」を表示
+  let g:syntastic_enable_signs = 1
+  " 他のVimプラグインと競合するのを防ぐ
+  let g:syntastic_always_populate_loc_list = 1
+  " 構文エラーリストを非表示
+  let g:syntastic_auto_loc_list = 0
+  " ファイルを開いた時に構文エラーチェックを実行する
+  let g:syntastic_check_on_open = 1
+  " 終了する時も構文エラーチェックする
+  let g:syntastic_check_on_wq = 1
+  " Javascript用. 構文エラーチェックにESLintを使用
+  let g:syntastic_javascript_checkers=['eslint']
+  " Python用. 構文エラーチェックにpep8とpyflakesを使用
+  let g:syntastic_python_checkers=['pep8', 'pyflakes']
+  " Javascript, python以外は構文エラーチェックをしない
+  let g:syntastic_mode_map = { 'mode': 'passive',
+    \ 'active_filetypes': ['javascript', 'python'],
+    \ 'passive_filetypes': [] }
+'''
+on_ft = ['javascript', 'python']
+
