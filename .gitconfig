@@ -4,10 +4,10 @@
   editor = "vim -c 'set fenc=utf-8'"
   quotepath = false
 [color]
+  ui = auto
   diff = auto
   status = auto
   branch = auto
-  pull = auto
 [push]
   default = simple
 [pull]
