@@ -1,5 +1,5 @@
 export PATH="$HOME/.local/bin:$PATH"
 export DOTPATH="$HOME/dotfiles"
 export ZDOTDIR="$HOME"
-export EDITOR="vim -O"
+export EDITOR="vim"
 export PAGER="less"
