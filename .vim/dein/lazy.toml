@@ -18,14 +18,6 @@ repo = 'lark-parser/vim-lark-syntax'
 on_ft = ['lark']
 
 [[plugins]]
-repo = 'ervandew/supertab'
-hook_add = '''
-  let g:SuperTabContextDefaultCompletionType = "comtext"
-  let g:SuperTabDefaultCompletionType = "<c-n>"
-'''
-on_ft = ['python']
-
-[[plugins]]
 repo = 'guns/xterm-color-table.vim'
 on_cmd = ['XtermColorTable']
 
