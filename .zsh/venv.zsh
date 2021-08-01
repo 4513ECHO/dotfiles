@@ -11,7 +11,7 @@ export REQUESTMENT_TXT="requestments.txt"
 function venv-setup ()  {
   [[ ! -d ${VENV_DIR_NAME} ]] && python3 -m venv ${VENV_DIR_NAME}
   source ${VENV_DIR_NAME}/bin/activate
-  eval "pip install ${DEFAULT_PACKAGES/:/ }"
+  eval "pip install ${DEFAULT_PACKAGES:gs/:/ }"
   [[ -f ${REQUESTMENT_TXT} ]] && pip install -r ${REQUESTMENT_TXT} || touch ${REQUESTMENT_TXT}
 }
 
