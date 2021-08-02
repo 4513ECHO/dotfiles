@@ -110,8 +110,6 @@ nnoremap * *zz
 nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
-" vを二回で行末まで選択
-vnoremap v $h
 " TABで対応ペアにジャンプ
 nnoremap <Tab> %
 vnoremap <Tab> %
@@ -120,10 +118,6 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
-inoremap <Up> <Nop>
-inoremap <Down> <Nop>
-inoremap <Left> <Nop>
-inoremap <Right> <Nop>
 " Shift+hlで行頭行末とかに移動
 noremap <S-h> ^
 noremap <S-l> $
@@ -132,11 +126,9 @@ inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
-" nomalモードでも改行や削除ができるようにする
-nnoremap <CR> i<CR><ESC>
-nnoremap <BS> i<BS><ESC>
 " バックスラッシュの入力
 inoremap <Leader>/ \
+cnoremap <Leader>/ \
 " カーソル位置の記憶
 augroup vimrcEx
   augroup ENDaugroup ENDautocmd!
