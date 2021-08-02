@@ -3,6 +3,7 @@
 [core]
   editor = "vim -c 'set fenc=utf-8'"
   quotepath = false
+	pager = LESSCHARSET=utf-8 less
 [color]
   ui = auto
   diff = auto
