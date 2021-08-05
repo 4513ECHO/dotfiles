@@ -16,7 +16,7 @@ alias zshconf="$EDITOR $ZDOTDIR/.zshrc"
 
 alias c="clear"
 alias g="git"
-alias globalip="curl globalip.me"
+alias globalip="curl -q globalip.me"
 alias herokulogin="heroku login --interactive"
 alias reload="source $ZDOTDIR/.zshrc"
 alias rm="rm -i"
