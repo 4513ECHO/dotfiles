@@ -24,4 +24,5 @@
   cmm = commit -m
   co = checkout
   br = branch
+  df = diff
 
