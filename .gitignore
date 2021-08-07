@@ -1,5 +1,5 @@
 .vim/dein/*
-.vim/color/*
+.vim/colors/*
 
 !**/.gitkeep
 !.vim/dein/*.toml
