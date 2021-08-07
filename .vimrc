@@ -118,6 +118,10 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
 " Shift+hlで行頭行末とかに移動
 noremap <S-h> ^
 noremap <S-l> $
