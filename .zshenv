@@ -6,6 +6,7 @@ export ZDOTDIR="$HOME"
 export EDITOR="vim"
 export PAGER="less"
 export LESS="-g -i -M -R -W -z-4 -x4"
+export LESSCHARSET="UTF-8"
 
 export LANG="ja_JP.UTF-8"
 export LC_TIME="en_US.UTF-8"
