@@ -5,7 +5,7 @@ export ZDOTDIR="$HOME"
 
 export EDITOR="vim"
 export PAGER="less"
-export LESS="-g -i -M -R -S -W -z-4 -x4"
+export LESS="-g -i -M -R -W -z-4 -x4"
 export LANG="ja_JP.UTF-8"
 
 export HISTFILE="$ZDOTDIR/.zsh_history"
