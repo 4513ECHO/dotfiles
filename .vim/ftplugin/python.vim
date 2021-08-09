@@ -4,7 +4,7 @@ setlocal shiftwidth=4
 setlocal expandtab
 setlocal smarttab
 
-let g:python_highlight_all = 1
+let python_highlight_all = 1
 
 " f-string
 syn match pythonEscape +{{+ contained containedin=pythonfString,pythonfDocstring
