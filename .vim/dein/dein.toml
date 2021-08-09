@@ -16,6 +16,10 @@ repo = 'bronson/vim-trailing-whitespace'
 
 [[plugins]]
 repo = 'cohama/lexima.vim'
+hook_add = '''
+" 括弧の改行ルールを無効にする
+let g:lexima_enable_newline_rules=0
+'''
 
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'

@@ -83,7 +83,6 @@ set showmatch " 括弧の対応関係を一瞬表示する
 set matchtime=1
 set matchpairs& matchpairs+=<:>
 source $VIMRUNTIME/macros/matchit.vim " Vimの'%'を拡張する
-let g:lexima_enable_newline_rules=0   " 括弧の改行ルールを無効にする
 
 " バックアップファイルやスワップファイルを作成しない
 set nowritebackup
