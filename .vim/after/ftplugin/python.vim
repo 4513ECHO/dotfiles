@@ -1,13 +1,19 @@
-set tabstop=8
-set softtabstop=4
-set shiftwidth=4
+setlocal tabstop=8
+setlocal softtabstop=4
+setlocal shiftwidth=4
+setlocal expandtab
+setlocal smarttab
 
+let g:python_highlight_all = 1
+
+" f-string
 syn match pythonEscape +{{+ contained containedin=pythonfString,pythonfDocstring
 syn match pythonEscape +}}+ contained containedin=pythonfString,pythonfDocstring
 
 syn region pythonfString matchgroup=pythonQuotes
   \ start=+[fF]\@1<=\z(['"]\)+ end="\z1"
   \ contains=@Spell,pythonEscape,pythonInterpolation
+
 syn region pythonfDocstring matchgroup=pythonQuotes
   \ start=+[fF]\@1<=\z('''\|"""\)+ end="""\z1" keepend
   \ contains=@Spell,pythonEscape,pythonSpaceError,pythonInterpolation,pythonDoctest
@@ -21,5 +27,6 @@ syn match pythonStringModifier /:\(.[<^=>]\)\?[-+ ]\?#\?0\?[0-9]*[_,]\?\(\.[0-9]
 syn match pythonStringModifier /![sra]/ contained containedin=pythonInterpolation
 
 hi link pythonfString String
-hi link pythonfDocstring String
+hi link pyhonfDocstring String
 hi link pythonStringModifier PreProc
+
