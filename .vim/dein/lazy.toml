@@ -1,5 +1,5 @@
-[[plugins]]
-repo = 'codota/tabnine-vim'
+#[[plugins]]
+#repo = 'codota/tabnine-vim'
 
 [[plugins]]
 repo = 'cespare/vim-toml'
