@@ -1,5 +1,26 @@
-#[[plugins]]
-#repo = 'codota/tabnine-vim'
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'cohama/lexima.vim'
+hook_add = '''
+let g:lexima_enable_newline_rules=0
+'''
+on_i = 1
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+on_source = ['vim-lsp']
+
+[[plugins]]
+repo = 'vim-jp/vimdoc-ja'
+on_cmd = ['help']
 
 [[plugins]]
 repo = 'cespare/vim-toml'
@@ -44,27 +65,6 @@ on_ft = ['snippet']
 repo = 'Shougo/neosnippet-snippets'
 on_source = ['neosnippet.vim']
 
-[[plugins]]
-repo = 'scrooloose/syntastic'
-hook_add = '''
-  " 構文エラー行に「>>」を表示
-  let g:syntastic_enable_signs = 1
-  " 他のVimプラグインと競合するのを防ぐ
-  let g:syntastic_always_populate_loc_list = 1
-  " 構文エラーリストを非表示
-  let g:syntastic_auto_loc_list = 0
-  " ファイルを開いた時に構文エラーチェックを実行する
-  let g:syntastic_check_on_open = 1
-  " 終了する時も構文エラーチェックする
-  let g:syntastic_check_on_wq = 1
-  " Javascript用. 構文エラーチェックにESLintを使用
-  let g:syntastic_javascript_checkers=['eslint']
-  " Python用. 構文エラーチェックにpep8とpyflakesを使用
-  let g:syntastic_python_checkers=['pep8', 'pyflakes']
-  " Javascript, python以外は構文エラーチェックをしない
-  let g:syntastic_mode_map = { 'mode': 'passive',
-    \ 'active_filetypes': ['javascript', 'python'],
-    \ 'passive_filetypes': [] }
-'''
-on_ft = ['javascript', 'python']
+#[[plugins]]
+#repo = 'codota/tabnine-vim'
 
