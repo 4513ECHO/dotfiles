@@ -15,6 +15,10 @@ repo = 'prabirshrestha/vim-lsp'
 repo = 'bronson/vim-trailing-whitespace'
 
 [[plugins]]
+repo = 'ConradIrwin/vim-bracketed-paste'
+on_i = 1
+
+[[plugins]]
 repo = 'mattn/vim-lsp-settings'
 on_source = ['vim-lsp']
 

@@ -134,36 +134,18 @@ inoremap <Leader>/ \
 cnoremap <Leader>/ \
 " カーソル位置の記憶
 augroup vimrcEx
-  augroup ENDaugroup ENDautocmd!
-  augroup ENDautocmd BufReadPost *
-        \ if line("'\"") > 1 && line("'\"") <= line('$') |
-        \   exe "normal! g`\"" |
-        \ endif
-augroup END"`'")"'"
+  autocmd!
+  autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line('$') |
+    \   exe "normal! g`\"" |
+    \ endif
+augroup END
 
 " ファイルタイプの指定
 autocmd BufRead,BufNewFile * setlocal formatoptions-=ro
 autocmd BufRead,BufNewFile *.py setfiletype python
 autocmd BufRead,BufNewFile *.lark setfiletype lark
 filetype plugin indent on
-
-" ------ クリップボードからのペースト ------
-" 挿入モードでクリップボードからペーストする時に自動でインデントさせないようにする
-if &term =~ "xterm"
-  let &t_SI .= "\e[?2004h"
-  let &t_EI .= "\e[?2004l"
-  let &pastetoggle = "\e[201~"
-
-  function XTermPasteBegin(ret)
-    set paste
-    return a:ret
-  endfunction
-
-  noremap <special> <expr> <Esc>[200~ XTermPasteBegin("0i")
-  inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
-  cnoremap <special> <Esc>[200~ <nop>
-  cnoremap <special> <Esc>[201~ <nop>
-endif
 
 " ハイライトグループを知るコマンド:SyntaxInfoを実装
 function! s:get_syn_id(transparent)
