@@ -25,5 +25,3 @@ setopt auto_param_keys
 source $DOTPATH/.zsh/prompt.zsh
 source $DOTPATH/.zsh/alias.zsh
 source $DOTPATH/.zsh/venv.zsh
-
-[[ -z $SSH_AUTH_SOCK  ]] && eval $(ssh-agent) && { [[ -f ~/.ssh/id_git_rsa ]] && ssh-add ~/.ssh/id_git_rsa }
