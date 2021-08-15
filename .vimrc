@@ -1,6 +1,9 @@
 set encoding=utf-8
 scriptencoding utf-8
 
+set helplang=ja,en
+set keywordprg=:help
+
 let s:dein_dir = expand('~/.vim/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
@@ -31,8 +34,10 @@ if dein#check_install()
 endif
 
 " ------ カラースキーム ------
-colorscheme jellybeans
+colorscheme iceberg
 
+set termguicolors
+set background=dark
 set t_Co=256
 syntax enable
 

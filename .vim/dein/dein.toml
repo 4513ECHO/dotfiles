@@ -9,6 +9,9 @@ build = 'make'
 repo = 'nanotech/jellybeans.vim'
 
 [[plugins]]
+repo = 'cocopon/iceberg.vim'
+
+[[plugins]]
 repo = 'itchyny/lightline.vim'
 
 [[plugins]]
