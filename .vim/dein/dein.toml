@@ -13,6 +13,12 @@ repo = 'cocopon/iceberg.vim'
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
+on_source = ['jellybeans.vim', 'iceberg.vim']
+hook_add = '''
+let g:lightline = {
+  \ 'colorscheme': 'iceberg',
+  \ }
+'''
 
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
