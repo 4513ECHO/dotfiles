@@ -25,6 +25,10 @@ on_source = ['vim-lsp']
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 on_cmd = ['help']
+hook_add = '''
+set helplang=ja,en
+set keywordprg=:help
+'''
 
 [[plugins]]
 repo = 'cespare/vim-toml'

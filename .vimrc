@@ -1,9 +1,6 @@
 set encoding=utf-8
 scriptencoding utf-8
 
-set helplang=ja,en
-set keywordprg=:help
-
 let s:dein_dir = expand('~/.vim/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
@@ -37,7 +34,6 @@ endif
 colorscheme iceberg
 
 set termguicolors
-set background=dark
 set t_Co=256
 syntax enable
 
@@ -46,12 +42,6 @@ set fileencoding=utf-8 " 保存時の文字コード
 set fileencodings=ucs-boms,utf-8,euc-jp,cp932 " 読み込み時の文字コードの自動判別. 左側が優先される
 set fileformats=unix,dos,mac " 改行コードの自動判別. 左側が優先される
 set ambiwidth=double " □や○文字が崩れる問題を解決
-
-" ------ ステータスライン ------
-set laststatus=2 " ステータスラインを常に表示
-set showmode " 現在のモードを表示
-set showcmd " 打ったコマンドをステータスラインの下に表示
-set ruler " ステータスラインの右側にカーソルの位置を表示する
 
 " ------ コマンドモード ------
 set wildmenu " コマンドモードの補完

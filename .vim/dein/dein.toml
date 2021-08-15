@@ -10,11 +10,18 @@ repo = 'nanotech/jellybeans.vim'
 
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
+hook_add = '''
+set background=dark
+'''
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 on_source = ['jellybeans.vim', 'iceberg.vim']
 hook_add = '''
+set laststatus=2
+set noshowmode
+set showcmd
+set ruler
 let g:lightline = {
   \ 'colorscheme': 'iceberg',
   \ }
