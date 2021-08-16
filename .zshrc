@@ -22,6 +22,7 @@ zstyle ':completion:*:default' menu select=2
 setopt auto_menu
 setopt auto_param_keys
 
-source $DOTPATH/.zsh/prompt.zsh
-source $DOTPATH/.zsh/alias.zsh
-source $DOTPATH/.zsh/venv.zsh
+for rc in $DOTPATH/.zsh/*.zsh;
+do
+  source $rc
+done
