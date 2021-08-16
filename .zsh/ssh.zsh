@@ -3,7 +3,7 @@
 SSH_KEY=id_git_rsa
 
 if [[ ! -f $HOME/.ssh/$SSH_KEY ]]; then
-  exit
+  return
 fi
 
 function enable-post-forward () {
