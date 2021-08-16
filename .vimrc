@@ -26,16 +26,20 @@ if dein#load_state(s:dein_dir)
   call dein#save_state()
 endif
 
+if dein#check_install(['vimproc.vim'])
+  call dein#install(['vimproc.vim'])
+endif
 if dein#check_install()
   call dein#install()
 endif
 
 " ------ カラースキーム ------
+syntax enable
 colorscheme iceberg
+hi String guifg=#a7b1a9
 
 set termguicolors
 set t_Co=256
-syntax enable
 
 " ------ 文字 ------
 set fileencoding=utf-8 " 保存時の文字コード
