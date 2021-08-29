@@ -2,9 +2,7 @@
 
 SSH_KEY=id_git_rsa
 
-if [[ ! -f $HOME/.ssh/$SSH_KEY ]]; then
-  return
-fi
+[[ ! -f $HOME/.ssh/$SSH_KEY ]] && return
 
 function enable-post-forward () {
   if [[ -z $SSH_AUTH_HOCK ]]; then
