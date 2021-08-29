@@ -9,6 +9,8 @@
   diff = auto
   status = auto
   branch = auto
+[help]
+  autocorrect = -1
 [push]
   default = simple
 [pull]
@@ -24,4 +26,6 @@
   co = checkout
   br = branch
   df = diff
+  ps = push
+  pl = pull
 
