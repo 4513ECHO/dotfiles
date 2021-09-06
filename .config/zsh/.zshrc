@@ -22,7 +22,6 @@ zstyle ':completion:*:default' menu select=2
 setopt auto_menu
 setopt auto_param_keys
 
-for rc in $DOTPATH/.zsh/*.zsh;
-do
+for rc in $ZDOTDIR/*.zsh; do
   source $rc
 done

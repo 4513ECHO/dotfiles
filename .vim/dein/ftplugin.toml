@@ -1,0 +1,15 @@
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = ['toml']
+
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+on_ft = ['markdown']
+
+[[plugins]]
+repo = 'gko/vim-coloresque'
+on_ft = ['vim', 'css', 'scss', 'sass']
+
+[[plugins]]
+repo = 'lark-parser/vim-lark-syntax'
+on_ft = ['lark']

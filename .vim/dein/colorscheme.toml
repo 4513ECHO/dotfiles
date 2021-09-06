@@ -1,0 +1,8 @@
+[[plugins]]
+repo = 'nanotech/jellybeans.vim'
+
+[[plugins]]
+repo = 'cocopon/iceberg.vim'
+hook_add = '''
+set background=dark
+'''

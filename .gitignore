@@ -1,5 +1,4 @@
-.vim/dein/*
 .vim/colors/*
+.config/zsh/.zcompdump
 
 !**/.gitkeep
-!.vim/dein/*.toml

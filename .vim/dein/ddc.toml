@@ -1,0 +1,6 @@
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+on_source = ['vim-lsp']

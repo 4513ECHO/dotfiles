@@ -9,18 +9,11 @@ let g:lexima_enable_newline_rules=0
 on_i = 1
 
 [[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-
-[[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
 
 [[plugins]]
 repo = 'ConradIrwin/vim-bracketed-paste'
 on_i = 1
-
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
-on_source = ['vim-lsp']
 
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
@@ -29,22 +22,6 @@ hook_add = '''
 set helplang=ja,en
 set keywordprg=:help
 '''
-
-[[plugins]]
-repo = 'cespare/vim-toml'
-on_ft = ['toml']
-
-[[plugins]]
-repo = 'plasticboy/vim-markdown'
-on_ft = ['markdown']
-
-[[plugins]]
-repo = 'gko/vim-coloresque'
-on_ft = ['vim', 'css', 'scss', 'sass']
-
-[[plugins]]
-repo = 'lark-parser/vim-lark-syntax'
-on_ft = ['lark']
 
 [[plugins]]
 repo = 'guns/xterm-color-table.vim'
@@ -65,14 +42,15 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'Shougo/neosnippet.vim'
-on_event = 'InsertEnter'
-on_ft = ['snippet']
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-on_source = ['neosnippet.vim']
-
-#[[plugins]]
-#repo = 'codota/tabnine-vim'
+repo = 'itchyny/lightline.vim'
+on_source = ['jellybeans.vim', 'iceberg.vim']
+hook_add = '''
+set laststatus=2
+set noshowmode
+set showcmd
+set ruler
+let g:lightline = {
+  \ 'colorscheme': 'iceberg',
+  \ }
+'''
 
