@@ -1,7 +1,8 @@
-export PATH="$HOME/.local/bin:$PATH"
-export POERTY_PATH="$HOME/.poetry/bin"
-export PATH="$POERTY_PATH:$PATH"
+export LOCALPATH="$HOME/.local/bin"
+export POERTYPATH="$HOME/.poetry/bin"
 export DOTPATH="$HOME/dotfiles"
+export DENO_INSTALL="/home/hibiki/.deno"
+export PATH="$DENO_INSTALL/bin:$POERTYPATH:$LOCALPATH:$PATH"
 
 export EDITOR="vim"
 export PAGER="less"
