@@ -1,8 +1,3 @@
-if has('termguicolors')
-  set termguicolors
-endif
-set t_Co=256
-
 set fileencoding=utf-8
 set fileencodings=ucs-boms,utf-8,euc-jp,cp932
 set fileformats=unix,dos,mac "
@@ -10,6 +5,19 @@ set ambiwidth=double
 
 set wildmenu
 set history=300
+
+if has('termguicolors')
+  set termguicolors
+endif
+
+if !has('gui_running')
+  set t_Co=256
+endif
+
+set laststatus=2
+set noshowmode
+set showcmd
+set ruler
 
 set expandtab
 set tabstop=2
@@ -43,8 +51,3 @@ set display=lastline
 set t_vb=
 set novisualbell
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
-
-autocmd vimrc BufReadPost *
-  \ if line("'\"") > 1 && line("'\"") <= line('$') |
-  \   exe "normal! g`\"" |
-  \ endif

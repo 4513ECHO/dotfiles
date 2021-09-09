@@ -45,10 +45,6 @@ hook_add = '''
 repo = 'itchyny/lightline.vim'
 on_source = ['jellybeans.vim', 'iceberg.vim']
 hook_source = '''
-set laststatus=2
-set noshowmode
-set showcmd
-set ruler
 let g:lightline = {
   \ 'colorscheme': 'iceberg'
   \ }
@@ -56,3 +52,4 @@ let g:lightline = {
 
 [[plugins]]
 repo = 'thinca/vim-scouter'
+
