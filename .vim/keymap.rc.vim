@@ -1,9 +1,16 @@
 let g:mapleader = "\<Space>"
-inoremap <Leader>jj <Esc>
-vnoremap <Leader>jj <Esc>
+nnoremap ZZ <Nop>
+nnoremap ZQ <Nop>
+nnoremap <silent> <C-k> "zdd<Up>"zP
+nnoremap <silent> <C-j> "zdd"zp
+nnoremap Q <Nop>
+nnoremap <Leader>p :set paste!<CR>
+nnoremap <Leader><Leader> <ESC>
+vnoremap <Leader><Leader> <ESC>
 nnoremap j gj
 nnoremap k gk
 nnoremap x "_x
+nnoremap s "_s
 nnoremap Y y$
 nnoremap gj j
 nnoremap gk k
