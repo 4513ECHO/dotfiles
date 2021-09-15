@@ -16,7 +16,7 @@ export DOTPATH="$HOME/dotfiles"
 export LOCALPATH="$HOME/.local/bin"
 export POERTYPATH="$HOME/.poetry/bin"
 export DOTPATH="$HOME/dotfiles"
-export DENO_INSTALL="/home/hibiki/.deno"
+export DENO_INSTALL="$XDG_CACHE_HOME/deno"
 export PATH="$DENO_INSTALL/bin:$POERTYPATH:$LOCALPATH:$PATH"
 
 export EDITOR="vim"
@@ -31,3 +31,4 @@ export HISTSIZE=1000000
 export SAVEHIST=1000000
 
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+. "/home/hibiki/.local/share/cargo/env"
