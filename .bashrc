@@ -41,4 +41,3 @@ alias herokulogin="heroku login --interactive"
 alias reload="source ~/.bashrc"
 alias rm="rm -i"
 alias q="exit"
-

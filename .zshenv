@@ -17,7 +17,7 @@ export LOCALPATH="$HOME/.local/bin"
 export POERTYPATH="$HOME/.poetry/bin"
 export DOTPATH="$HOME/dotfiles"
 export DENO_INSTALL="$XDG_CACHE_HOME/deno"
-export PATH="$DENO_INSTALL/bin:$POERTYPATH:$LOCALPATH:$PATH"
+export PATH="$DENO_INSTALL/bin:$CARGO_HOME/bin:$POERTYPATH:$LOCALPATH:$PATH"
 
 export EDITOR="vim"
 export PAGER="less"
@@ -27,8 +27,8 @@ export LESSCHARSET="UTF-8"
 export LANG="ja_JP.UTF-8"
 export LC_TIME="en_US.UTF-8"
 
+export HISTFILE="$XDG_CACHE_HOME/zsh/history"
 export HISTSIZE=1000000
 export SAVEHIST=1000000
 
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
-. "/home/hibiki/.local/share/cargo/env"
