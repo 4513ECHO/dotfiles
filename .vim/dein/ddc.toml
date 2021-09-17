@@ -3,18 +3,20 @@ repo = 'Shougo/ddc.vim'
 depends = ['context_filetype.vim', 'denops.vim']
 on_event = 'InsertEnter'
 hook_source = '''
+
 '''
 
 [[plugins]]
-repo = 'Shougo/context_filetype.vim'
-hook_source = '''
-let g:context_filetype#ignore_patterns = {
-  \ 'toml': ['^\s*#\s*'],
-  \ }
-'''
+repo = 'LumaKernel/ddc-file'
+on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'vim-denops/denops.vim'
+repo = 'Shougo/ddc-around'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-matcher_head'
+on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
