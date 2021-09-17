@@ -37,3 +37,7 @@ function! my_functions#syntax_info() abort
   echo s:get_syn_info()
 endfunction
 
+function! my_functions#has_deno() abort
+  call system("deno")
+  return v:shell_error == 0 ? v:true : v:false
+endfunction
