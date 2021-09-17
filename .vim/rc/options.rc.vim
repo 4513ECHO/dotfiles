@@ -1,6 +1,8 @@
+set encoding=utf-8
+scriptencoding utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-boms,utf-8,euc-jp,cp932
-set fileformats=unix,dos,mac "
+set fileformats=unix,dos,mac
 set ambiwidth=double
 
 set wildmenu
@@ -51,3 +53,7 @@ set display=lastline
 set t_vb=
 set novisualbell
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
+
+set pumheight=10
+set clipboard=unnamed
+set mouse=a

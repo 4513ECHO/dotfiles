@@ -1,10 +1,8 @@
 let g:mapleader = ","
 nnoremap ZZ <Nop>
 nnoremap ZQ <Nop>
-nnoremap <silent> <C-k> "zdd<Up>"zP
-nnoremap <silent> <C-j> "zdd"zp
 nnoremap Q <Nop>
-nnoremap <Leader>p :set paste!<CR>
+nnoremap <silent> <Leader>p :<C-u>:set paste!<CR>
 inoremap <Leader><Leader> <ESC>
 vnoremap <Leader><Leader> <ESC>
 nnoremap j gj
