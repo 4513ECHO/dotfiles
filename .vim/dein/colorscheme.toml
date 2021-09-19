@@ -5,4 +5,7 @@ repo = 'nanotech/jellybeans.vim'
 repo = 'cocopon/iceberg.vim'
 hook_add = '''
 set background=dark
+autocmd vimrc VimEnter * nested
+      \ colorscheme iceberg
+      \ | hi String guifg=#a7b1a9
 '''

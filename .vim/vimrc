@@ -1,4 +1,3 @@
-runtime! rc/*.rc.vim
+if !1 | finish | endif " for vim-tiny and vim-small
 
-colorscheme iceberg
-hi String guifg=#a7b1a9
+runtime! rc/*.rc.vim
