@@ -1,8 +1,11 @@
-inoremap <silent><expr> <C-n> ddc#complete_common_string()
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? '<C-n>' :
+inoremap <silent><expr> <C-n>
+      \ pumvisible() ? '<Down>' :
       \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
-      \ '<TAB>' : ddc#manual_complete()
+      \ '<C-n>' : ddc#manual_complete()
+
+set completeopt=menuone,noinsert
+inoremap <expr> <CR> pumvisible() ? '<C-y>' : '<CR>'
+inoremap <expr><C-p> pumvisible() ? '<Up>' : '<C-p>'
 
 call ddc#custom#patch_global(
       \ 'sources', ['around', 'file', 'ddc-vim-lsp']

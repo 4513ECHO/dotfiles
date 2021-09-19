@@ -29,11 +29,18 @@ on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
-om_func = 'lsp#enable'
+on_func = 'lsp#enable'
 
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
 on_source = ['vim-lsp']
-hook_source = '''
-LspInstallServer
+hook_add = '''
+runtime! dein/settings/vim-lsp.vim
+'''
+hook_post_source = '''
+call system(
+      \ '${XDG_DATA_HOME:-$HOME/.local/share/}vim-lsp-settings/ ' .
+      \ 'servers/pyls-all/venv/bin/pip ' .
+      \ 'install pyls-mypy pyls-isort pyls-black'
+      \ )
 '''
