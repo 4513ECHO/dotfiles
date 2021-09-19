@@ -43,10 +43,6 @@ set matchtime=1
 set matchpairs& matchpairs+=<:>
 source $VIMRUNTIME/macros/matchit.vim
 
-set nowritebackup
-set nobackup
-set noswapfile
-
 set list
 set wrap
 set display=lastline
@@ -57,3 +53,21 @@ set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
 set pumheight=10
 set clipboard=unnamed
 set mouse=a
+
+" buckup settings
+set backup
+set writebackup
+set swapfile
+set updatetime=10000
+let &g:backupdir = g:data_home . '/backup'
+let &g:directory = g:data_home . '/swap'
+call mkdir(&g:backupdir, 'p')
+call mkdir(&g:directory, 'p')
+if has('persistent_undo')
+  set undofile
+  let &g:undodir = g:data_home . '/undo'
+  call mkdir(&g:undodir, 'p')
+endif
+if has('viminfo')
+  execute 'set viminfo+=n' . g:data_home . '/viminfo'
+endif
