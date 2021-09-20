@@ -33,7 +33,7 @@ enable-port-forward () {
 
 colortable () {
   for c in {000..255}; do
-    printf  "\033[38;5;${c}m $c\033[m\n"
+    printf  "\033[38;5;${c}m $c\033[m"
     [[ $(($c%16)) -eq 15 ]] && echo
   done
   echo
@@ -41,7 +41,7 @@ colortable () {
 
 colortable-rich () {
   printcolor () {
-    printf "\033[48;5;%dm%11d \033[m" $1 $1
+    printf "\033[48;5;%dm\033[38;5;251m%9d \033[m" $1 $1
   }
   for r in {0..4}; do
     for b in {0..5}; do

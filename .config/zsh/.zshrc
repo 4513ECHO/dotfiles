@@ -23,5 +23,6 @@ setopt auto_menu
 setopt auto_param_keys
 
 for rc in $ZDOTDIR/.z??*; do
+  [[ "$rc" = */".zshrc" ]] && continue
   source $rc
 done
