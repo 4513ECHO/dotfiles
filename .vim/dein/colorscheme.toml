@@ -7,5 +7,5 @@ hook_add = '''
 set background=dark
 autocmd vimrc VimEnter * nested
       \ colorscheme iceberg
-      \ | hi String guifg=#a7b1a9
+      \ | hi String ctermfg=144 guifg=#a7b1a9
 '''
