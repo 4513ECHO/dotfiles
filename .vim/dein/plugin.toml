@@ -2,14 +2,11 @@
 repo = 'tpope/vim-surround'
 
 [[plugins]]
-repo = 'vimsence/vimsence'
-hook_add = '''
-let g:vimsence_client_id = '807886286462517279'
-'''
-
-[[plugins]]
 repo = 'cohama/lexima.vim'
 on_i = 1
+hook_add = '''
+let g:lexima_accept_pum_with_enter = 1
+'''
 
 [[plugins]]
 repo = 'bronson/vim-trailing-whitespace'

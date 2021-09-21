@@ -2,16 +2,21 @@
 repo = 'Shougo/ddc.vim'
 depends = ['context_filetype.vim', 'denops.vim']
 on_event = 'InsertEnter'
+hook_add = '''
+set shortmess+=c
+set completeopt+=noinsert
+'''
 hook_source = '''
 runtime! dein/settings/ddc.vim
 '''
-
-[[plugins]]
-repo = 'LumaKernel/ddc-file'
-on_source = 'ddc.vim'
+# sources
 
 [[plugins]]
 repo = 'Shougo/ddc-around'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'LumaKernel/ddc-file'
 on_source = 'ddc.vim'
 
 [[plugins]]
@@ -20,12 +25,35 @@ on_source = 'ddc.vim'
 depends = 'vim-lsp'
 
 [[plugins]]
+repo = 'Shougo/neco-vim'
+on_ft = ['vim', 'toml', 'help']
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'LumaKernel/ddc-tabnine'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'matsui54/ddc-buffer'
+on_source = 'ddc.vim'
+
+# matchers
+
+[[plugins]]
 repo = 'Shougo/ddc-matcher_head'
 on_source = 'ddc.vim'
 
 [[plugins]]
+repo = 'Shougo/ddc-matcher_length'
+on_source = 'ddc.vim'
+
+# sorters
+
+[[plugins]]
 repo = 'Shougo/ddc-sorter_rank'
 on_source = 'ddc.vim'
+
+
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
@@ -38,9 +66,8 @@ hook_add = '''
 runtime! dein/settings/vim-lsp.vim
 '''
 hook_post_source = '''
-call system(
-      \ '${XDG_DATA_HOME:-$HOME/.local/share/}vim-lsp-settings/ ' .
-      \ 'servers/pyls-all/venv/bin/pip ' .
-      \ 'install pyls-mypy pyls-isort pyls-black'
-      \ )
+"call system(
+"     \ g:lsp_settings_servers_dir . '/pyls-all/venv/bin/pip ' .
+"     \ 'install pyls-mypy pyls-isort pyls-black'
+"     \ )
 '''
