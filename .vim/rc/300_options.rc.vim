@@ -6,6 +6,7 @@ set fileformats=unix,dos,mac
 set ambiwidth=double
 
 set wildmenu
+set wildmode=longest:list,full
 set history=300
 
 if has('termguicolors')
@@ -41,7 +42,7 @@ set backspace=indent,eol,start
 set showmatch
 set matchtime=1
 set matchpairs& matchpairs+=<:>
-source $VIMRUNTIME/macros/matchit.vim
+packadd! matchit
 
 set list
 set wrap
@@ -49,6 +50,7 @@ set display=lastline
 set t_vb=
 set novisualbell
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
+set hidden
 
 set pumheight=10
 set clipboard=unnamed
