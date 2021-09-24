@@ -1,13 +1,4 @@
-inoremap <silent><expr> <CR>
-      \ pumvisible() ? '<C-y>' : '<CR>'
-inoremap <silent><expr> <C-n>
-      \ pumvisible() ? '<Down>' : ddc#manual_complete()
-inoremap <silent><expr> <C-p>
-      \ pumvisible() ? '<Up>' : '<Nop>'
-inoremap <silent><expr> <BS>
-      \ pumvisible() ? '<C-e>' : '<BS>'
-
-let s:sources = ['around', 'file', 'ddc-vim-lsp', 'buffer', 'tabnine']
+let s:sources = ['around', 'file', 'vim-lsp', 'buffer']
 
 call ddc#custom#patch_global(
       \ 'sources', s:sources
@@ -28,24 +19,39 @@ call ddc#custom#patch_global('sourceOptions', {
       \   'isVolatile': v:true,
       \   'forceCompletionPattern': '\S/\S*',
       \ },
-      \ 'tabnine': {
-      \   'mark': 'TN',
-      \   'maxCardidates': 5,
-      \   'isVolatile': v:true,
-      \ },
-      \ 'ddc-vim-lsp': {'mark': 'lsp'},
+      \ 'vim-lsp': {'mark': 'lsp'},
       \ 'necovim': {'mark': 'vim'},
       \ 'buffer': {'mark': 'B'},
       \ })
 
 call ddc#custom#patch_global('sourceParams', {
-	    \ 'buffer': {'requireSameFiletype': v:false},
-      \ 'tabnine': {'maxNumResults': 10},
+      \ 'around': {'maxSize': 500},
+	    \ 'buffer': {
+      \   'requireSameFiletype': v:false,
+      \   'fromAltBuf': v:true,
 	    \ })
 
 call ddc#custom#patch_filetype(
       \ ['vim'], 'sources',
       \ add(s:sources, 'necovim')
       \ )
+
+call ddc#custom#patch_filetype(
+      \ ['ps1', 'dosbatch', 'autohotkey', 'registry'], {
+      \ 'sourcesOptions': {
+      \   'file': {'forceCompletionPattern': '\S\\\S*'},
+      \ },
+      \ 'sourceParams': {
+      \   'file': {'mode': 'win32'}
+      \ }})
+
+inoremap <silent><expr> <CR>
+      \ pumvisible() ? '<C-y>' : '<CR>'
+inoremap <silent><expr> <C-n>
+      \ pumvisible() ? '<Down>' : ddc#manual_complete()
+inoremap <silent><expr> <C-p>
+      \ pumvisible() ? '<Up>' : '<Nop>'
+inoremap <silent><expr> <BS>
+      \ pumvisible() ? '<C-e>' : '<BS>'
 
 call ddc#enable()

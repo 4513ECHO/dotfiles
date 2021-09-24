@@ -4,7 +4,8 @@ depends = ['context_filetype.vim', 'denops.vim']
 on_event = 'InsertEnter'
 hook_add = '''
 set shortmess+=c
-set completeopt+=noinsert
+set completeopt+=menuone,noinsert
+set isfname-==
 '''
 hook_source = '''
 runtime! dein/settings/ddc.vim
@@ -27,10 +28,6 @@ depends = 'vim-lsp'
 [[plugins]]
 repo = 'Shougo/neco-vim'
 on_ft = ['vim', 'toml', 'help']
-on_source = 'ddc.vim'
-
-[[plugins]]
-repo = 'LumaKernel/ddc-tabnine'
 on_source = 'ddc.vim'
 
 [[plugins]]
