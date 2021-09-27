@@ -11,7 +11,7 @@ endif
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  let s:toml_dir    = expand('~/.vim/dein')
+  let s:toml_dir    = g:config_home .. '/dein'
   let s:init_toml = s:toml_dir . '/init.toml'
   let s:tomls = []
   call add(s:tomls, s:toml_dir . '/plugin.toml')

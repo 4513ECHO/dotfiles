@@ -1,3 +1,5 @@
 if !1 | finish | endif " for vim-tiny and vim-small
 
+set runtimepath^=$XDG_CONFIG_HOME/vim 
+set runtimepath+=$XDG_CONFIG_HOME/vim/after
 runtime! rc/*.rc.vim
