@@ -34,6 +34,7 @@ set ignorecase
 set smartcase
 set hlsearch
 
+set formatoptions-=ro
 set whichwrap=b,s,h,l,<,>,[,],~
 set number
 set cursorline

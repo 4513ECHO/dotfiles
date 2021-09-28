@@ -41,3 +41,7 @@ function! my_functions#has_deno() abort
   call system("deno")
   return v:shell_error == 0 ? v:true : v:false
 endfunction
+
+function! my_functions#set_filetype(pattern, filetype) abort
+  execute 'autocmd vimrc BufRead,BufNewFile' a:pattern 'setfiletype' a:filetype
+endfunction
