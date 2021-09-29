@@ -44,3 +44,12 @@ inoremap <C-l> <Right>
 
 inoremap <Leader>/ \
 cnoremap <Leader>/ \
+
+cabbr w!! w !sudo tee > /dev/null %
+nnoremap [Toggle] <Nop>
+nmap <Leader>t [Toggle]
+nnoremap [Toggle]w :<C-u>setlocal wrap! wrap?<CR>
+nnoremap [Toggle]p :<C-u>setlocal paste! paste?<CR>
+nnoremap S <Nop>
+vnoremap v $
+

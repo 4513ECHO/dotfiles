@@ -1,4 +1,4 @@
-augroup vimrc
+augroup user
   autocmd!
 augroup END
 
@@ -22,7 +22,7 @@ let g:loaded_netrwPlugin       = v:true
 let g:loaded_netrwSettings     = v:true
 let g:loaded_netrwFileHandlers = v:true
 
-command! -nargs=+ SetFileType call my_functions#set_filetype(<f-args>)
+command! -nargs=+ SetFileType call user#set_filetype(<f-args>)
 
 SetFileType *.lark lark
 SetFileType *.grammar grammar
@@ -31,9 +31,9 @@ SetFileType robots.txt robots-txt
 SetFileType *[._]curlrc curlrc
 SetFileType *[._]gitignore gitignore
 
-autocmd vimrc BufReadPost *
+autocmd user BufReadPost *
   \ if line("'\"") > 1 && line("'\"") <= line('$')
   \ | execute "normal! g`\""
   \ |endif
 
-command! SyntaxInfo call my_functions#syntax_info()
+command! SyntaxInfo call user#syntax_info()

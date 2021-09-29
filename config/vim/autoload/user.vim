@@ -33,15 +33,15 @@ function! s:get_syn_info() abort
   return base_result . (linked_result != "" ? " -> " . linked_result : "")
 endfunction
 
-function! my_functions#syntax_info() abort
+function! user#syntax_info() abort
   echo s:get_syn_info()
 endfunction
 
-function! my_functions#has_deno() abort
+function! user#has_deno() abort
   call system("deno")
   return v:shell_error == 0 ? v:true : v:false
 endfunction
 
-function! my_functions#set_filetype(pattern, filetype) abort
-  execute 'autocmd vimrc BufRead,BufNewFile' a:pattern 'setfiletype' a:filetype
+function! user#set_filetype(pattern, filetype) abort
+  execute 'autocmd user BufRead,BufNewFile' a:pattern 'setfiletype' a:filetype
 endfunction

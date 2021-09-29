@@ -8,7 +8,7 @@ call ddc#custom#patch_global('sourceOptions', {
       \ '_': {
       \   'ignoreCase': v:true,
       \   'matchers': ['matcher_head'],
-      \   'sorters': ['sorter_rank']
+      \   'sorters': ['sorter_rank'],
       \ },
       \ 'around': {
       \   'mark': 'A',
@@ -19,17 +19,20 @@ call ddc#custom#patch_global('sourceOptions', {
       \   'isVolatile': v:true,
       \   'forceCompletionPattern': '\S/\S*',
       \ },
-      \ 'vim-lsp': {'mark': 'lsp'},
+      \ 'vim-lsp': {
+      \   'mark': 'lsp',
+      \   'forceCompletionPattern': '\.\w*|:\w*|->\w*',
+      \ },
       \ 'necovim': {'mark': 'vim'},
       \ 'buffer': {'mark': 'B'},
       \ })
 
 call ddc#custom#patch_global('sourceParams', {
       \ 'around': {'maxSize': 500},
-	    \ 'buffer': {
+      \ 'buffer': {
       \   'requireSameFiletype': v:false,
       \   'fromAltBuf': v:true,
-	    \ })
+      \ }})
 
 call ddc#custom#patch_filetype(
       \ ['vim'], 'sources',
@@ -42,7 +45,7 @@ call ddc#custom#patch_filetype(
       \   'file': {'forceCompletionPattern': '\S\\\S*'},
       \ },
       \ 'sourceParams': {
-      \   'file': {'mode': 'win32'}
+      \   'file': {'mode': 'win32'},
       \ }})
 
 inoremap <silent><expr> <CR>

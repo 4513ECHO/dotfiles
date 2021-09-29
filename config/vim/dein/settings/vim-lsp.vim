@@ -13,4 +13,4 @@ let g:lsp_diagnostics_echo_cursor = v:true
 
 nnoremap <buffer> K :LspHover<CR>
 
-autocmd vimrc BufWritePre <buffer> LspDocumentFormatSync
+autocmd user BufWritePre <buffer> LspDocumentFormatSync

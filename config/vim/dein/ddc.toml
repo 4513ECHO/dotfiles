@@ -4,6 +4,7 @@ depends = ['context_filetype.vim', 'denops.vim']
 on_event = 'InsertEnter'
 hook_add = '''
 set shortmess+=c
+set completeopt-=menu
 set completeopt+=menuone,noinsert
 set isfname-==
 '''

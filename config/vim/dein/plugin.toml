@@ -12,10 +12,6 @@ let g:lexima_accept_pum_with_enter = 1
 repo = 'bronson/vim-trailing-whitespace'
 
 [[plugins]]
-repo = 'ConradIrwin/vim-bracketed-paste'
-on_i = 1
-
-[[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 on_cmd = ['help']
 hook_add = '''
