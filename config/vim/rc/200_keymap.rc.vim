@@ -2,11 +2,10 @@ let g:mapleader = ","
 nnoremap ZZ <Nop>
 nnoremap ZQ <Nop>
 nnoremap Q <Nop>
-nnoremap <silent> <Leader>p :<C-u>:set paste!<CR>
 inoremap <Leader><Leader> <ESC>
 vnoremap <Leader><Leader> <ESC>
-nnoremap j gj
-nnoremap k gk
+nnoremap <silent> j gj
+nnoremap <silent> k gk
 nnoremap x "_x
 nnoremap s "_s
 nnoremap Y y$
@@ -41,9 +40,6 @@ inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
-
-inoremap <Leader>/ \
-cnoremap <Leader>/ \
 
 cabbr w!! w !sudo tee > /dev/null %
 nnoremap [Toggle] <Nop>

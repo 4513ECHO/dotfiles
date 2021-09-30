@@ -23,8 +23,8 @@ set showcmd
 set ruler
 
 set expandtab
-set tabstop=2
-set softtabstop=2
+set tabstop=8
+set softtabstop=8
 set autoindent
 set smartindent
 set shiftwidth=2
@@ -62,15 +62,15 @@ set backup
 set writebackup
 set swapfile
 set updatetime=10000
-let &g:backupdir = g:data_home . '/backup'
-let &g:directory = g:data_home . '/swap'
+let &g:backupdir = g:data_home .. '/backup'
+let &g:directory = g:data_home .. '/swap'
 call mkdir(&g:backupdir, 'p')
 call mkdir(&g:directory, 'p')
 if has('persistent_undo')
   set undofile
-  let &g:undodir = g:data_home . '/undo'
+  let &g:undodir = g:data_home .. '/undo'
   call mkdir(&g:undodir, 'p')
 endif
 if has('viminfo')
-  execute 'set viminfo+=n' . g:data_home . '/viminfo'
+  execute 'set viminfo+=n' .. g:data_home .. '/viminfo'
 endif
