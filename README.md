@@ -3,7 +3,7 @@
 
 ## install
 ```
-git clone https://github.com/4513ECHO/dotfiles
+git clone https://github.com/4513ECHO/dotfiles.git
 cd dotfiles
-./install.sh
+make install
 ```
