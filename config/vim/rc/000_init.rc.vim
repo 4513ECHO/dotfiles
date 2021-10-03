@@ -22,6 +22,8 @@ let g:loaded_netrwPlugin       = v:true
 let g:loaded_netrwSettings     = v:true
 let g:loaded_netrwFileHandlers = v:true
 
+command! -nargs=1 Runtime runtime! g:config_home <args>
+command! SyntaxInfo call user#syntax_info()
 command! -nargs=+ SetFileType call user#set_filetype(<f-args>)
 
 SetFileType *.lark lark
@@ -32,8 +34,7 @@ SetFileType *[._]curlrc curlrc
 SetFileType *[._]gitignore gitignore
 
 autocmd user BufReadPost *
-  \ if line("'\"") > 1 && line("'\"") <= line('$')
-  \ | execute "normal! g`\""
-  \ |endif
+      \ if line("'\"") > 1 && line("'\"") <= line('$')
+      \|  execute 'normal! g`\"'
+      \|endif
 
-command! SyntaxInfo call user#syntax_info()

@@ -19,9 +19,9 @@ if dein#load_state(s:dein_dir)
   call add(s:tomls, s:toml_dir .. '/colorscheme.toml')
   call add(s:tomls, s:toml_dir .. '/ddc.toml')
 
-  call dein#load_toml(s:init_toml, {'lazy': 0})
+  call dein#load_toml(s:init_toml, {'lazy': v:false})
   for s:toml in s:tomls
-    call dein#load_toml(s:toml, {'lasy': 1})
+    call dein#load_toml(s:toml, {'lasy': v:true})
   endfor
 
   call dein#end()

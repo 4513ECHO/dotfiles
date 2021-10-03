@@ -2,14 +2,8 @@
 repo = 'Shougo/ddc.vim'
 depends = ['context_filetype.vim', 'denops.vim']
 on_event = 'InsertEnter'
-hook_add = '''
-set shortmess+=c
-set completeopt-=menu
-set completeopt+=menuone,noinsert
-set isfname-==
-'''
-hook_source = '''
-runtime! dein/settings/ddc.vim
+hook_post_source = '''
+Runtime dein/settings/ddc.vim
 '''
 # sources
 
@@ -60,10 +54,8 @@ on_func = 'lsp#enable'
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
 on_source = ['vim-lsp']
-hook_add = '''
-runtime! dein/settings/vim-lsp.vim
-'''
 hook_post_source = '''
+Runtime dein/settings/vim-lsp.vim
 "call system(
 "     \ g:lsp_settings_servers_dir . '/pyls-all/venv/bin/pip ' .
 "     \ 'install pyls-mypy pyls-isort pyls-black'
