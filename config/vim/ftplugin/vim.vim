@@ -1,1 +1,0 @@
-nnoremap <buffer> K K
