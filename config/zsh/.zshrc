@@ -22,7 +22,7 @@ zstyle ':completion:*:default' menu select=2
 setopt auto_menu
 setopt auto_param_keys
 
-for rc in $ZDOTDIR/.z??*; do
+for rc in "$ZDOTDIR/.z??*"; do
   [[ "$rc" = */".zshrc" ]] && continue
-  source $rc
+  source "$rc"
 done
