@@ -46,3 +46,9 @@ endfunction
 function! user#set_filetype(pattern, filetype) abort
   execute 'autocmd user BufRead,BufNewFile' a:pattern 'setfiletype' a:filetype
 endfunction
+
+function! user#remember_cursor() abort
+  if line("'\"") > 1 && line("'\"") <= line('$')
+    execute "normal! g`\""
+  endif
+endfunction
