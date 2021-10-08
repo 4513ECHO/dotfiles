@@ -22,19 +22,23 @@ let g:loaded_netrwPlugin       = v:true
 let g:loaded_netrwSettings     = v:true
 let g:loaded_netrwFileHandlers = v:true
 
+let g:current_colorscheme = 'random'
+let g:colorscheme_list = []
+
 command! -nargs=1 Runtime runtime! g:config_home <args>
-command! SyntaxInfo call user#syntax_info()
+command! -bar RTP echo substitute(&g:runtimepath, ',', "\n", 'g')
+command! -bar SyntaxInfo call user#syntax_info()
+command! -bar RandomColorScheme call user#colorscheme#random()
 command! -nargs=+ SetFileType call user#set_filetype(<f-args>)
 
 SetFileType *.lark lark
-SetFileType *.grammar grammar
-SetFileType grammar.txt grammar
+SetFileType *.grammar,grammar.txt grammar
 SetFileType robots.txt robots-txt
 SetFileType *[._]curlrc curlrc
 SetFileType *[._]gitignore gitignore
 
-autocmd user BufReadPost *
-      \ if line("'\"") > 1 && line("'\"") <= line('$')
-      \|  execute 'normal! g`\"'
-      \|endif
+autocmd user BufReadPost * call user#remember_cursor()
+autocmd user VimEnter * ++nested call user#colorscheme#{g:current_colorscheme}()
 
+autocmd user FileType help nnoremap <buffer> q <C-w>c
+autocmd user VimEnter * if &filetype ==# '' | execute 'nnoremap <buffer> q <C-w>c' | endif

@@ -1,11 +1,94 @@
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+depends = [
+  'iceberg.vim', 'lightline-gruvbox.vim', 'lightline-hybrid.vim',
+  'nord-vim', 'tokyonight-vim', 'falcon', 'snow', 'hydrangea-vim'
+]
+hook_add = '''
+let g:lightline = {
+      \ 'colorscheme': user#colorscheme#lightline(),
+      \ 'active': {
+      \   'right': [
+      \     ['lineinfo'],
+      \     ['percent'],
+      \     ['colorscheme', 'fileformat', 'fileencoding', 'filetype'],
+      \ ]},
+      \ 'component_function': {
+      \   'colorscheme': 'user#lightline#colorscheme',
+      \   'fileformat': 'user#lightline#file_format',
+      \   'fileencoding': 'user#lightline#file_encoding',
+      \ }}
+'''
+
 [[plugins]]
 repo = 'nanotech/jellybeans.vim'
+hook_add = '''
+call add(g:colorscheme_list, 'jellybeans')
+'''
 
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
 hook_add = '''
-set background=dark
-autocmd user VimEnter * nested
-      \ colorscheme iceberg
-      \ | hi String ctermfg=144 guifg=#a7b1a9
+call add(g:colorscheme_list, 'iceberg')
+'''
+
+[[plugins]]
+repo = 'morhetz/gruvbox'
+hook_add = '''
+call add(g:colorscheme_list, 'gruvbox')
+'''
+
+[[plugins]]
+repo = 'shinchu/lightline-gruvbox.vim'
+
+[[plugins]]
+repo = 'rakr/vim-one'
+hook_add = '''
+call add(g:colorscheme_list, 'one')
+'''
+
+[[plugins]]
+repo = 'w0ng/vim-hybrid'
+hook_add = '''
+call add(g:colorscheme_list, 'hybrid')
+'''
+
+[[plugins]]
+repo = 'cocopon/lightline-hybrid.vim'
+
+[[plugins]]
+repo = 'joshdick/onedark.vim'
+hook_add = '''
+call add(g:colorscheme_list, 'onedark')
+'''
+
+[[plugins]]
+repo = 'arcticicestudio/nord-vim'
+hook_add = '''
+call add(g:colorscheme_list, 'nord')
+'''
+
+[[plugins]]
+repo = 'ghifarit53/tokyonight-vim'
+hook_add = '''
+call add(g:colorscheme_list, 'tokyonight')
+'''
+
+[[plugins]]
+repo = 'fenetikm/falcon'
+hook_add = '''
+call add(g:colorscheme_list, 'falcon')
+'''
+
+[[plugins]]
+repo = 'haystackandroid/snow'
+hook_add = '''
+call add(g:colorscheme_list, 'snow')
+'''
+
+[[plugins]]
+repo = 'yuttie/hydrangea-vim'
+hook_add = '''
+call add(g:colorscheme_list, 'hydrangea')
 '''
