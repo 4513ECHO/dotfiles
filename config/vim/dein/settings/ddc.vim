@@ -1,4 +1,4 @@
-let s:sources = ['around', 'file', 'vim-lsp', 'buffer']
+let s:sources = ['file', 'around', 'buffer']
 
 call ddc#custom#patch_global(
       \ 'sources', s:sources
@@ -7,24 +7,29 @@ call ddc#custom#patch_global(
 call ddc#custom#patch_global('sourceOptions', {
       \ '_': {
       \   'ignoreCase': v:true,
-      \   'matchers': ['matcher_head'],
-      \   'sorters': ['sorter_rank'],
+      \   'matchers': ['matcher_fuzzy'],
+      \   'sorters': ['sorter_fuzzy'],
+      \   'converters': ['converter_truncate', 'converter_fuzzy'],
+      \   'maxCandidates': 20,
       \ },
       \ 'around': {
-      \   'mark': 'A',
-      \   'matchers': ['matcher_head', 'matcher_length'],
+      \   'mark': 'ard',
+      \   'minAutoCompleteLength': 3,
+      \   'maxCandidates': 10,
       \ },
       \ 'file': {
-      \   'mark': 'F',
+      \   'mark': 'file',
+      \   'minAutoCompleteLength': 20,
       \   'isVolatile': v:true,
-      \   'forceCompletionPattern': '\S/\S*',
+      \   'forceCompletionPattern': '(?<!http.+)(\f*/\f*)+',
       \ },
       \ 'vim-lsp': {
       \   'mark': 'lsp',
       \   'forceCompletionPattern': '\.\w*|:\w*|->\w*',
       \ },
       \ 'necovim': {'mark': 'vim'},
-      \ 'buffer': {'mark': 'B'},
+      \ 'buffer': {'mark': 'buf'},
+      \ 'cmdline-history': {'mark': 'hist'},
       \ })
 
 call ddc#custom#patch_global('sourceParams', {
@@ -34,27 +39,53 @@ call ddc#custom#patch_global('sourceParams', {
       \   'fromAltBuf': v:true,
       \ }})
 
+call ddc#custom#patch_global('filterParams', {
+      \ 'converter_truncate': {'maxInfoWidth': 30},
+      \ })
+
 call ddc#custom#patch_filetype(
       \ ['vim'], 'sources',
-      \ add(s:sources, 'necovim')
+      \ insert(deepcopy(s:sources), 'necovim')
+      \ )
+
+call ddc#custom#patch_filetype(
+      \ ['python', 'typescript'], 'sources',
+      \ insert(deepcopy(s:sources), 'vim-lsp')
       \ )
 
 call ddc#custom#patch_filetype(
       \ ['ps1', 'dosbatch', 'autohotkey', 'registry'], {
       \ 'sourcesOptions': {
-      \   'file': {'forceCompletionPattern': '\S\\\S*'},
+      \   'file': {'forceCompletionPattern': '(\f*\\\f*)+'},
       \ },
       \ 'sourceParams': {
       \   'file': {'mode': 'win32'},
       \ }})
 
-inoremap <silent><expr> <CR>
-      \ pumvisible() ? '<C-y>' : '<CR>'
+" Use pum.vim
+call ddc#custom#patch_global('autoCompleteEvents', [
+      \ 'InsertEnter', 'TextChangedI', 'TextChangedP',
+      \ 'CmdlineEnter', 'CmdlineChanged',
+      \ ])
+
+call ddc#custom#patch_global('completionMenu', 'pum.vim')
+
+" keymappings
+
 inoremap <silent><expr> <C-n>
-      \ pumvisible() ? '<Down>' : ddc#manual_complete()
-inoremap <silent><expr> <C-p>
-      \ pumvisible() ? '<Up>' : '<Nop>'
+      \ pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>'
+      \ : ddc#manual_complete()
+inoremap <C-p> <Cmd>call pum#map#select_relative(-1)<CR>
 inoremap <silent><expr> <BS>
-      \ pumvisible() ? '<C-e>' : '<BS>'
+     \ pum#visible() ? '<Cmd>call pum#map#cancel()<CR>'
+     \ : lexima#expand('<BS>', 'i')
+inoremap <silent><expr> <CR>
+     \ pum#visible() ? '<Cmd>call pum#map#confirm()<CR>'
+     \ : lexima#expand('<CR>', 'i')
+inoremap <C-y> <Cmd>call pum#map#confirm()<CR>
+inoremap <C-e> <Cmd>call pum#map#cancel()<CR>
 
 call ddc#enable()
+
+nnoremap : <Cmd>call user#ddc#cmdline_pre()<CR>:
+

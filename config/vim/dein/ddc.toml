@@ -1,8 +1,8 @@
 [[plugins]]
 repo = 'Shougo/ddc.vim'
-depends = ['context_filetype.vim', 'denops.vim']
+depends = ['context_filetype.vim', 'denops.vim', 'pum.vim', 'lexima.vim']
 on_event = 'InsertEnter'
-hook_post_source = '''
+hook_source = '''
 Runtime dein/settings/ddc.vim
 '''
 # sources
@@ -29,23 +29,32 @@ on_source = 'ddc.vim'
 repo = 'matsui54/ddc-buffer'
 on_source = 'ddc.vim'
 
-# matchers
+[[plugins]]
+repo = 'Shougo/ddc-cmdline-history'
+on_source = 'ddc.vim'
+
+# filters
 
 [[plugins]]
-repo = 'Shougo/ddc-matcher_head'
+repo = 'tani/ddc-fuzzy'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'Shougo/ddc-matcher_length'
+repo = 'matsui54/ddc-converter_truncate'
 on_source = 'ddc.vim'
 
-# sorters
+
 
 [[plugins]]
-repo = 'Shougo/ddc-sorter_rank'
+repo = 'Shougo/pum.vim'
+
+[[plugins]]
+repo = 'matsui54/denops-popup-preview.vim'
+depends = ['denops.vim']
 on_source = 'ddc.vim'
-
-
+hook_source = '''
+call popup_preview#enable()
+'''
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
@@ -54,7 +63,7 @@ on_func = 'lsp#enable'
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
 on_source = ['vim-lsp']
-hook_post_source = '''
+hook_source = '''
 Runtime dein/settings/vim-lsp.vim
 "call system(
 "     \ g:lsp_settings_servers_dir . '/pyls-all/venv/bin/pip ' .
