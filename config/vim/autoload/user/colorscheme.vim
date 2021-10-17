@@ -9,56 +9,59 @@ function! user#colorscheme#lightline() abort
 endfunction
 
 function! user#colorscheme#random() abort
-  let g:current_colorscheme =  get(g:colorscheme_list, (rand() % len(g:colorscheme_list)))
+  let g:current_colorscheme =
+        \ get(g:colorscheme_list, (rand() % len(g:colorscheme_list)))
+  call user#colorscheme#colorscheme(g:current_colorscheme)
+  return g:current_colorscheme
+endfunction
+
+let s:colorscheme_customize = #{
+      \ iceberg: #{
+      \   highlight: #{
+      \     String: #{ ctermfg: 144, guifg: 0xa7ba9, },
+      \ }},
+      \ gruvbox: #{
+      \   highlight: #{
+      \     Visual: #{ ctermbg: 239, cterm: 'NONE', guibg: 0x565656, gui: 'NONE', },
+      \ }},
+      \ }
+
+function! s:get_customize(colorscheme) abort
+  let customize = get(s:colorscheme_customize, a:colorscheme)
+  if !customize | return | endif
+  let highlight = get(customize, 'highlight')
+  if !empty(highlight)
+    for [group, attr] in items(l:highlight)
+      execute 'hi' group
+    endfor
+  endif
+  let term_ansi = get(customize, 'terminal')
+  if !empty(term_ansi)
+    let g:terminal_ansi_colors = term_ansi
+  endif
+endfunction
+
+function! user#colorscheme#colorscheme(colorscheme) abort
+  if a:colorscheme ==# 'random'
+    call user#colorscheme#random()
+    return g:current_colorscheme
+  endif
+  let g:current_colorscheme = a:colorscheme
   let g:lightline['colorscheme'] = user#colorscheme#lightline()
-  call user#colorscheme#{g:current_colorscheme}()
+  execute 'colorscheme' a:colorscheme
+
+  " customize
+  if a:colorscheme ==# 'iceberg'
+    hi String ctermfg=144 guifg=#a7b1a9
+  elseif a:colorscheme ==# 'gruvbox'
+    hi Visual cterm=NONE ctermbg=239 gui=NONE guibg=#565656
+  " elseif a:colorscheme ==# 'hydrangea'
+  "   hi Constant
+  "   hi Number
+  endif
+
   call lightline#init()
   call lightline#colorscheme()
   return g:current_colorscheme
 endfunction
 
-function! user#colorscheme#jellybeans() abort
-  colorscheme jellybeans
-endfunction
-
-function! user#colorscheme#iceberg() abort
-  colorscheme iceberg
-  hi String ctermfg=144 guifg=#a7b1a9
-endfunction
-
-function! user#colorscheme#gruvbox() abort
-  colorscheme gruvbox
-  hi Visual cterm=NONE ctermbg=239 gui=NONE guibg=#565656
-endfunction
-
-function! user#colorscheme#one() abort
-  colorscheme one
-endfunction
-
-function! user#colorscheme#hybrid() abort
-  colorscheme hybrid
-endfunction
-
-function! user#colorscheme#onedark() abort
-  colorscheme onedark
-endfunction
-
-function! user#colorscheme#nord() abort
-  colorscheme nord
-endfunction
-
-function! user#colorscheme#tokyonight() abort
-  colorscheme tokyonight
-endfunction
-
-function! user#colorscheme#falcon() abort
-  colorscheme falcon
-endfunction
-
-function! user#colorscheme#snow() abort
-  colorscheme snow
-endfunction
-
-function! user#colorscheme#hydrangea() abort
-  colorscheme hydrangea
-endfunction

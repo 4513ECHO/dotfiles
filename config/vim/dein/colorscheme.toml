@@ -3,7 +3,8 @@
 repo = 'itchyny/lightline.vim'
 depends = [
   'iceberg.vim', 'lightline-gruvbox.vim', 'lightline-hybrid.vim',
-  'nord-vim', 'tokyonight-vim', 'falcon', 'snow', 'hydrangea-vim'
+  'tokyonight-vim', 'falcon', 'snow', 'elly.vim',
+  'vim-vitamin-onec', 'rigel',
 ]
 hook_add = '''
 let g:lightline = {
@@ -13,6 +14,10 @@ let g:lightline = {
       \     ['lineinfo'],
       \     ['percent'],
       \     ['colorscheme', 'fileformat', 'fileencoding', 'filetype'],
+      \ ]},
+      \ 'inactive': {
+      \   'left': [
+      \     ['filename', 'modified'],
       \ ]},
       \ 'component_function': {
       \   'colorscheme': 'user#lightline#colorscheme',
@@ -91,4 +96,22 @@ call add(g:colorscheme_list, 'snow')
 repo = 'yuttie/hydrangea-vim'
 hook_add = '''
 call add(g:colorscheme_list, 'hydrangea')
+'''
+
+[[plugins]]
+repo = 'ulwlu/elly.vim'
+hook_add = '''
+call add(g:colorscheme_list, 'elly')
+'''
+
+[[plugins]]
+repo = 'gkapfham/vim-vitamin-onec'
+hook_add = '''
+call add(g:colorscheme_list, 'vitaminonec')
+'''
+
+[[plugins]]
+repo = 'Rigellute/rigel'
+hook_add = '''
+call add(g:colorscheme_list, 'rigel')
 '''
