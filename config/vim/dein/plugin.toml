@@ -1,8 +1,9 @@
 [[plugins]]
 repo = 'cohama/lexima.vim'
 on_event = 'InsertEnter'
-hook_add = '''
-let g:lexima_accept_pum_with_enter = v:true
+hook_source = '''
+let g:lexima_no_default_rules = v:true
+Runtime dein/settings/lexima.vim
 '''
 
 [[plugins]]
@@ -11,18 +12,7 @@ repo = 'bronson/vim-trailing-whitespace'
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 on_cmd = ['help']
-hook_add = '''
-set helplang=ja,en
-set keywordprg=:help
-'''
 type__depth = 1
-
-[[plugins]]
-repo = 'vim-denops/denops.vim'
-on_if = 'executable("deno")'
-
-[[plugins]]
-repo = 'tpope/vim-repeat'
 
 [[plugins]]
 repo = 'osyo-manga/vim-precious'
@@ -30,7 +20,7 @@ depends = ['context_filetype.vim']
 
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
-hook_source = '''
+hook_add = '''
 let g:context_filetype#ignore_patterns = {
       \ 'toml': ['^\s*#\s*'],
       \ }
@@ -43,48 +33,73 @@ on_cmd = ['XtermColorTable']
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 depends = ['vimproc.vim']
+on_cmd = ['QuickRun']
+on_map = { n = '<Plug>(quickrun)' }
 hook_add = '''
-let g:quickrun_config = {
-      \"_" : {
-      \   "runner" : "vimproc",
-      \   "runner/vimproc/updatetime" : 60,
-      \   "outputter/buffer/split" : "botright 8sp",
-      \   "outputter/buffer/close_on_empty" : v:true
+let g:quickrun_config = #{
+      \ _: {
+      \   'runner': 'vimproc',
+      \   'runner/vimproc/updatetime': 60,
+      \   'outputter/buffer/split': 'botright 8sp',
+      \   'outputter/buffer/close_on_empty': v:true,
       \ }}
+autocmd user VimEnter *
+      \ nmap <Leader>r <Plug>(quickrun)
 '''
 
 [[plugins]]
 repo = 'obcat/vim-hitspop'
 hook_add = '''
 let g:hitspop_line = 'winbot'
-let g:hitspop_column = 'winright'
+autocmd VimEnter *
+      \ hi link hitspopErrormsg ErrorMsg
 '''
+
+[[plugins]]
+repo = 'obcat/vim-sclow'
+hook_add = '''
+let g:sclow_hide_full_length = v:true
+'''
+
+[[plugins]]
+repo = 'mattn/benchvimrc-vim'
+on_cmd = ['BenchVimrc']
 
 [[plugins]]
 repo = 'tyru/capture.vim'
 on_cmd = ['Capture']
 hook_add = '''
-autocmd user FileType capture nnoremap <buffer> q <C-w>c
+autocmd user FileType capture
+      \ nnoremap <buffer> q <C-w>q
 '''
 
 [[plugins]]
 repo = 'tyru/caw.vim'
-on_event = 'InsertEnter'
-on_map = '<Plug>(caw'
+on_map = { nx = '<Plug>(caw' }
+hook_add = '''
+autocmd user VimEnter *
+      \ execute 'nmap <Leader>c <Plug>(caw:hatpos:toggle)' |
+      \ xmap <Leader>c <Plug>(caw:hatpos:toggle)
+'''
 
 [[plugins]]
-repo = 'itchyny/lightline.vim'
-depends = ['jellybeans.vim', 'iceberg.vim']
+repo = 'thinca/vim-localrc'
 hook_add = '''
-let g:lightline = {
-      \ 'colorscheme' : 'iceberg'
-      \ }
+let g:localrc_filename = '.vimrc.local'
 '''
 
 [[plugins]]
 repo = 'thinca/vim-scouter'
-on_cmd = ["ScouterM"]
-hook_post_source = '''
-command! ScouterM echo Scouter(g:config_home)
+on_cmd = ['Scouter']
+on_func = ['Scouter']
+hook_add = '''
+command! Scouter echo Scouter(g:config_home)
 '''
 
+[[plugins]]
+repo = 'skanehira/badapple.vim'
+on_cmd = ['BadApple']
+
+[[plugins]]
+repo = 'rbtnn/vim-coloredit'
+on_cmd = ['ColorEdit']

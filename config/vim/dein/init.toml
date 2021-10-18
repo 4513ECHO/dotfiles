@@ -5,3 +5,7 @@ repo = 'Shougo/dein.vim'
 repo = 'Shougo/vimproc.vim'
 build = 'make'
 
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+on_if = 'executable("deno")'
+
