@@ -8,19 +8,24 @@ function! user#ddc#cmdline_pre() abort
   cnoremap <silent><expr> <CR>
        \ pum#visible() ? '<Cmd>call pum#map#confirm()<CR>'
        \ : '<CR>'
-  cnoremap <C-y> <Cmd>call pum#map#confirm()<CR>
   cnoremap <C-e> <Cmd>call pum#map#cancel()<CR>
+  set wildchar=<C-t>
 
-  let s:prev_buffer_config = ddc#custom#get_buffer()
+  let b:prev_buffer_config = ddc#custom#get_buffer()
   call ddc#custom#patch_buffer('sources',
-        \ ['necovim', 'cmdline-history', 'file', 'around'])
-  autocmd user CmdlineLeave * ++once call user#ddc#cmdline_pre()
+        \ ['cmdline', 'cmdline-history', 'around'])
+  call ddc#custom#patch_buffer('keywordPattern', '[0-9a-zA-Z_:]*')
+  call ddc#custom#patch_buffer('sourceOptions', #{
+        \ cmdline: #{
+        \   forceCompletionPattern: '(\f*/\f+)+',
+        \ }})
+  autocmd user User DDCCmdlineLeave ++once call user#ddc#cmdline_post()
   call ddc#enable_cmdline_completion()
   call ddc#enable()
 endfunction
 
 function! user#ddc#cmdline_post() abort
-  call ddc#custom#set_buffer(s:prev_buffer_config)
+  call ddc#custom#set_buffer(b:prev_buffer_config)
   cunmap <Tab>
+  set wildchar=<Tab>
 endfunction
-
