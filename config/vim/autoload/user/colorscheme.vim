@@ -18,21 +18,32 @@ endfunction
 let s:colorscheme_customize = #{
       \ iceberg: #{
       \   highlight: #{
-      \     String: #{ ctermfg: 144, guifg: 0xa7ba9, },
+      \     String: #{ ctermfg: 144, guifg: '#a7b1a9', },
       \ }},
       \ gruvbox: #{
       \   highlight: #{
-      \     Visual: #{ ctermbg: 239, cterm: 'NONE', guibg: 0x565656, gui: 'NONE', },
+      \     Visual: #{ ctermbg: 239, cterm: 'NONE', guibg: '#565656', gui: 'NONE', },
+      \ }},
+      \ hydrangea: #{
+      \   highlight: #{
+      \     Constant: #{ ctermbg: 'NONE', guibg: 'NONE',  },
+      \     Number: #{ ctermbg: 'NONE', guibg: 'NONE',  },
       \ }},
       \ }
 
-function! s:get_customize(colorscheme) abort
+function! s:set_customize(colorscheme) abort
   let customize = get(s:colorscheme_customize, a:colorscheme)
-  if !customize | return | endif
+  if empty(customize)
+    return
+  endif
   let highlight = get(customize, 'highlight')
   if !empty(highlight)
     for [group, attr] in items(l:highlight)
-      execute 'hi' group
+      let attrs = ''
+      for [name, value] in items(attr)
+        let attrs ..= printf('%s=%s ', name, value)
+      endfor
+      execute 'hi' group attrs
     endfor
   endif
   let term_ansi = get(customize, 'terminal')
@@ -49,17 +60,7 @@ function! user#colorscheme#colorscheme(colorscheme) abort
   let g:current_colorscheme = a:colorscheme
   let g:lightline['colorscheme'] = user#colorscheme#lightline()
   execute 'colorscheme' a:colorscheme
-
-  " customize
-  if a:colorscheme ==# 'iceberg'
-    hi String ctermfg=144 guifg=#a7b1a9
-  elseif a:colorscheme ==# 'gruvbox'
-    hi Visual cterm=NONE ctermbg=239 gui=NONE guibg=#565656
-  " elseif a:colorscheme ==# 'hydrangea'
-  "   hi Constant
-  "   hi Number
-  endif
-
+  call s:set_customize(a:colorscheme)
   call lightline#init()
   call lightline#colorscheme()
   return g:current_colorscheme
