@@ -51,7 +51,7 @@ autocmd user VimEnter *
 repo = 'obcat/vim-hitspop'
 hook_add = '''
 let g:hitspop_line = 'winbot'
-autocmd VimEnter *
+autocmd user VimEnter *
       \ hi link hitspopErrormsg ErrorMsg
 '''
 
@@ -103,3 +103,10 @@ on_cmd = ['BadApple']
 [[plugins]]
 repo = 'rbtnn/vim-coloredit'
 on_cmd = ['ColorEdit']
+
+[[plugins]]
+repo = 'powerman/vim-plugin-AnsiEsc'
+on_cmd = ['AnsiEsc']
+hook_add = '''
+let g:loaded_cecutil = v:true
+'''
