@@ -7,23 +7,7 @@ depends = [
   'vim-vitamin-onec', 'rigel',
 ]
 hook_add = '''
-let g:lightline = {
-      \ 'colorscheme': user#colorscheme#lightline(),
-      \ 'active': {
-      \   'right': [
-      \     ['lineinfo'],
-      \     ['percent'],
-      \     ['colorscheme', 'fileformat', 'fileencoding', 'filetype'],
-      \ ]},
-      \ 'inactive': {
-      \   'left': [
-      \     ['filename', 'modified'],
-      \ ]},
-      \ 'component_function': {
-      \   'colorscheme': 'user#lightline#colorscheme',
-      \   'fileformat': 'user#lightline#file_format',
-      \   'fileencoding': 'user#lightline#file_encoding',
-      \ }}
+Runtime dein/settings/lightline.vim
 '''
 
 [[plugins]]
