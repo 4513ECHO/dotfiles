@@ -22,6 +22,8 @@ zstyle ':completion:*:default' menu select=2
 setopt auto_menu
 setopt auto_param_keys
 
+export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --marker='*' --select-1 --exit-0"
+
 for rc in $ZDOTDIR/*.zsh; do
   source "$rc"
 done
