@@ -2,13 +2,17 @@
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 depends = [
-  'iceberg.vim', 'lightline-gruvbox.vim', 'lightline-hybrid.vim',
+  'lightline-lsp', 'iceberg.vim', 'lightline-gruvbox.vim', 'lightline-hybrid.vim',
   'tokyonight-vim', 'falcon', 'snow', 'elly.vim',
   'vim-vitamin-onec', 'rigel',
 ]
 hook_add = '''
 Runtime dein/settings/lightline.vim
 '''
+
+[[plugins]]
+repo = 'halkn/lightline-lsp'
+on_source = ['vim-lsp']
 
 [[plugins]]
 repo = 'nanotech/jellybeans.vim'
