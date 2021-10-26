@@ -1,4 +1,5 @@
 config/vim/colors/*
 config/zsh/.zcompdump
+config/zsh/.zinit/*
 
 !**/.gitkeep
