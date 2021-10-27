@@ -36,25 +36,39 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> gd <Plug>(lsp-definition)
   nmap <buffer> gq <Plug>(lsp-document-format)
   vmap <buffer> gq <Plug>(lsp-document-range-format)
-  nmap <buffer> <C-]> <Plug>(lsp-definition)
+  nmap <buffer> gn <Plug>(lsp-next-diagnostic)
+  nmap <buffer> gp <Plug>(lsp-previous-diagnostic)
 endfunction
 
 function! s:install_deno_lsp() abort
+  let deno_dir = g:lsp_settings_servers_dir .. '/deno'
+  if &filetype !=# 'typescript' || filereadable(deno_dir .. 'loaded_deno')
+    return
+  endif
   let deno =  exepath('deno')
   if deno !=# ''
-    call system(printf('cp %s %s', deno, g:lsp_settings_servers_dir .. '/deno/deno'))
+    call system(printf('cp %s %s/deno', deno, deno_dir))
+    call system('touch %s/loaded_deno', deno_dir)
   endif
 endfunction
 
 function! s:install_pyls_ext() abort
-  let cmd = g:lsp_settings_servers_dir .. '/pyls-all/venv/bin/pip'
-  if executable(cmd)
-    call system(cmd .. 'install pyls-mypy pyls-isort pyls-black')
+  let pyls_dir = g:lsp_settings_servers_dir .. '/pyls-all'
+  if &filetype !=# 'python' || filereadable(pyls_dir .. '/loaded_pyls_ext')
+    return
+  endif
+  let pip = pyls_dir .. '/venv/bin/pip'
+  let pyls_ext = ['pyls-mypy', 'pyls-isort', 'pyls-black']
+  if executable(pip)
+    call term_start(extend([pip, 'install'], pyls_ext), {
+          \ 'cwd': fnamemodify(pip, ':h:h:h'),
+          \ 'term_name': 'install_pyls_ext'})
+    call system(printf('touch %s/loaded_pyls_ext', pyls_dir))
   endif
 endfunction
 
 autocmd user User lsp_buffer_enabled
-      \ call s:on_lsp_buffer_enabled()
-autocmd user VimEnter *
-      \ call s:install_pyls_ext() |
-      \ call s:install_deno_lsp()
+      \ call <SID>on_lsp_buffer_enabled()
+autocmd user User lsp_setup
+      \ call <SID>install_pyls_ext() |
+      \ call <SID>install_deno_lsp()
