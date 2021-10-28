@@ -54,17 +54,7 @@ on_source = 'ddc.vim'
 repo = 'Shougo/ddc-converter_remove_overlap'
 on_source = 'ddc.vim'
 
-
+# popup
 
 [[plugins]]
 repo = 'Shougo/pum.vim'
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
-on_source = ['vim-lsp']
-hook_source = '''
-Runtime dein/settings/vim-lsp.vim
-'''
