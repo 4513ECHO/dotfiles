@@ -82,12 +82,8 @@ inoremap <silent><expr> <C-n>
       \ pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>'
       \ : ddc#manual_complete()
 inoremap <C-p> <Cmd>call pum#map#select_relative(-1)<CR>
-inoremap <silent><expr> <BS>
-     \ pum#visible() ? '<Cmd>call pum#map#cancel()<CR>'
-     \ : lexima#expand('<BS>', 'i')
-inoremap <silent><expr> <CR>
-     \ pum#visible() ? '<Cmd>call pum#map#confirm()<CR>'
-     \ : lexima#expand('<CR>', 'i')
+inoremap <silent><expr> <BS> user#ddc#imap_bs()
+inoremap <silent><expr> <CR> user#ddc#imap_cr()
 inoremap <C-y> <Cmd>call pum#map#confirm()<CR>
 inoremap <C-e> <Cmd>call pum#map#cancel()<CR>
 
