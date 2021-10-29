@@ -1,8 +1,10 @@
 [[plugins]]
 repo = 'cohama/lexima.vim'
 on_event = 'InsertEnter'
-hook_source = '''
+hook_add = '''
 let g:lexima_no_default_rules = v:true
+'''
+hook_source = '''
 Runtime dein/settings/lexima.vim
 '''
 
@@ -34,24 +36,28 @@ on_cmd = ['XtermColorTable']
 repo = 'thinca/vim-quickrun'
 depends = ['vimproc.vim']
 on_cmd = ['QuickRun']
-on_map = { n = '<Plug>(quickrun)' }
 hook_add = '''
-let g:quickrun_config = #{
-      \ _: {
+let g:quickrun_config = {
+      \ '_': {
       \   'runner': 'vimproc',
       \   'runner/vimproc/updatetime': 60,
-      \   'outputter/buffer/split': 'botright 8sp',
+      \   'outputter/buffer/opener': 'botright 10split',
       \   'outputter/buffer/close_on_empty': v:true,
-      \ }}
-autocmd user VimEnter *
-      \ nmap <Leader>r <Plug>(quickrun)
+      \   'hook/time/enable': v:true,
+      \ },
+      \ 'typescript': {
+      \   'type': 'typescript/deno',
+      \ },
+      \ }
+autocmd user FileType quickrun
+      \ nnoremap <buffer> q <C-w>q
 '''
 
 [[plugins]]
 repo = 'obcat/vim-hitspop'
 hook_add = '''
 let g:hitspop_line = 'winbot'
-autocmd user VimEnter *
+autocmd user ColorScheme *
       \ hi link hitspopErrormsg ErrorMsg
 '''
 
@@ -67,10 +73,15 @@ on_cmd = ['BenchVimrc']
 
 [[plugins]]
 repo = 'tyru/capture.vim'
-on_cmd = ['Capture']
+on_cmd = ['Capture', 'CaptureJson']
 hook_add = '''
 autocmd user FileType capture
       \ nnoremap <buffer> q <C-w>q
+
+if executable('jq')
+  command! -bang -bar -nargs=1 -complete=var CaptureJson
+        \ execute 'Capture<bang> echo json_encode(<args>)' | %!jq
+endif
 '''
 
 [[plugins]]
@@ -107,6 +118,6 @@ on_cmd = ['ColorEdit']
 [[plugins]]
 repo = 'powerman/vim-plugin-AnsiEsc'
 on_cmd = ['AnsiEsc']
-hook_add = '''
-let g:loaded_cecutil = v:true
-'''
+
+[[plugins]]
+repo = 'mattn/vim-molder'
