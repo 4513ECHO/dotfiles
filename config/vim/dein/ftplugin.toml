@@ -22,7 +22,9 @@ setlocal expandtab
 setlocal nosmartindent
 '''
 help = '''
-setlocal iskeyword+=:#-
+setlocal iskeyword+=#
+setlocal iskeyword+=:
+setlocal iskeyword+=-
 '''
 
 [[plugins]]

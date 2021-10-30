@@ -5,22 +5,22 @@ if &runtimepath !~# '/dein.vim'
   if !isdirectory(s:dein_repo_dir)
     call system('git clone https://github.com/Shougo/dein.vim' .. ' ' .. s:dein_repo_dir)
   endif
-  execute 'set runtimepath^=' .. fnamemodify(s:dein_repo_dir, ':p')
+  let &runtimepath = fnamemodify(s:dein_repo_dir, ':p') .. ',' .. &runtimepath
 endif
 
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
   let s:toml_dir = g:config_home .. '/dein'
-  let s:init_toml = s:toml_dir .. '/init.toml'
-  let s:tomls = []
-  call add(s:tomls, s:toml_dir .. '/plugin.toml')
-  call add(s:tomls, s:toml_dir .. '/ftplugin.toml')
-  call add(s:tomls, s:toml_dir .. '/colorscheme.toml')
-  call add(s:tomls, s:toml_dir .. '/ddc.toml')
+  let s:nolazy_toml = map(['/init.toml', '/ftplguin.toml'],
+        \ 's:toml_dir .. v:val')
+  let s:tomls = glob(s:toml_dir .. '/*.toml', v:false, v:true)
 
-  call dein#load_toml(s:init_toml, {'lazy': v:false})
   for s:toml in s:tomls
+    if index(s:nolazy_toml, s:toml) != -1
+      call dein#load_toml(s:toml, {'lazy': v:false})
+      continue
+    endif
     call dein#load_toml(s:toml, {'lasy': v:true})
   endfor
 
@@ -33,5 +33,4 @@ if has('vim_starting') && dein#check_install()
 endif
 
 syntax enable
-filetype indent on
-filetype plugin on
+filetype indent plugin on
