@@ -1,53 +1,53 @@
+let s:patch_global = {}
 let s:sources = ['file', 'around', 'buffer']
+let s:sourceOptions = {}
+let s:sourceParams = {}
+let s:filterParams = {}
 
-call ddc#custom#patch_global(
-      \ 'sources', s:sources
-      \ )
-
-call ddc#custom#patch_global('sourceOptions', #{
-      \ _: #{
-      \   ignoreCase: v:true,
-      \   matchers: ['matcher_fuzzy'],
-      \   sorters: ['sorter_fuzzy'],
-      \   converters: ['converter_remove_overlap', 'converter_truncate',
+let s:sourceOptions._ = {
+      \ 'ignoreCase': v:true,
+      \ 'matchers': ['matcher_fuzzy'],
+      \ 'sorters': ['sorter_fuzzy'],
+      \ 'converters': ['converter_remove_overlap', 'converter_truncate',
       \                'converter_fuzzy'],
-      \   maxCandidates: 15,
-      \ },
-      \ around: #{
-      \   mark: 'ard',
-      \   minAutoCompleteLength: 3,
-      \   isVolatile: v:true,
-      \   maxCandidates: 10,
-      \ },
-      \ file: #{
-      \   mark: 'file',
-      \   minAutoCompleteLength: 30,
-      \   isVolatile: v:true,
-      \   forceCompletionPattern: '(\f*/\f*)+',
-      \ },
-      \ vim-lsp: #{
-      \   mark: 'lsp',
-      \   isVolatile: v:true,
-      \   forceCompletionPattern: '\.\w*|:\w*|->\w*',
-      \ },
-      \ necovim: #{mark: 'vim'},
-      \ buffer: #{mark: 'buf'},
-      \ cmdline-history: #{mark: 'hist'},
-      \ cmdline: #{mark: 'cmd'},
-      \ })
+      \ 'maxCandidates': 15,
+      \ }
 
-call ddc#custom#patch_global('sourceParams', #{
-      \ around: #{maxSize: 500},
-      \ buffer: #{
-      \   requireSameFiletype: v:false,
-      \   fromAltBuf: v:true,
-      \ },
-      \ cmdline-history: #{maxSize: 100},
-      \ })
 
-call ddc#custom#patch_global('filterParams', #{
-      \ converter_truncate: #{maxInfoWidth: 30},
-      \ })
+let s:sourceOptions.around = {
+      \ 'mark': 'ard',
+      \ 'minAutoCompleteLength': 3,
+      \ 'isVolatile': v:true,
+      \ 'maxCandidates': 10,
+      \ }
+
+let s:sourceOptions.file = {
+      \ 'mark': 'file',
+      \ 'minAutoCompleteLength': 30,
+      \ 'isVolatile': v:true,
+      \ 'forceCompletionPattern': '(\f*/\f*)+',
+      \ }
+
+let s:sourceOptions['vim-lsp'] = {
+      \ 'mark': 'lsp',
+      \ 'isVolatile': v:true,
+      \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
+      \ }
+
+let s:sourceOptions.necovim = {'mark': 'vim'}
+let s:sourceOptions.buffer = {'mark': 'buf'}
+let s:sourceOptions['cmdline-history'] = {'mark': 'hist'}
+let s:sourceOptions.cmdline = {'mark': 'cmd'}
+let s:sourceOptions.line = {'mark': 'line'}
+
+let s:sourceParams.around = {'maxSize': 500}
+let s:sourceParams.buffer = {
+      \ 'requireSameFiletype': v:false,
+      \ 'fromAltBuf': v:true,
+      \ }
+let s:sourceParams['cmdline-history'] = {'maxSize': 100}
+
+let s:filterParams.converter_truncate = {'maxInfoWidth': 30}
 
 call ddc#custom#patch_filetype(
       \ ['vim'], 'sources',
@@ -55,9 +55,9 @@ call ddc#custom#patch_filetype(
       \ )
 
 call ddc#custom#patch_filetype(
-      \ ['python', 'typescript'], 'sources',
-      \ extendnew(['vim-lsp'], s:sources)
-      \ )
+      \ ['python', 'typescript', 'rust'], #{
+      \ sources: extendnew(['vim-lsp'], s:sources),
+      \ })
 
 call ddc#custom#patch_filetype(
       \ ['ps1', 'dosbatch', 'autohotkey', 'registry'], #{
@@ -68,13 +68,20 @@ call ddc#custom#patch_filetype(
       \   file: #{mode: 'win32'},
       \ }})
 
+let s:patch_global.sources = s:sources
+let s:patch_global.sourceOptions = s:sourceOptions
+let s:patch_global.sourceParams = s:sourceParams
+let s:patch_global.filterParams = s:filterParams
+
 " Use pum.vim
-call ddc#custom#patch_global('autoCompleteEvents', [
+let s:patch_global.autoCompleteEvents = [
       \ 'InsertEnter', 'TextChangedI', 'TextChangedP',
       \ 'CmdlineEnter', 'CmdlineChanged',
-      \ ])
+      \ ]
 
-call ddc#custom#patch_global('completionMenu', 'pum.vim')
+let s:patch_global.completionMenu = 'pum.vim'
+
+call ddc#custom#patch_global(s:patch_global)
 
 " keymappings
 
