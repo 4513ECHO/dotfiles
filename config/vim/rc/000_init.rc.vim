@@ -14,6 +14,8 @@ let g:loaded_gtags             = v:true
 let g:loaded_gtags_cscope      = v:true
 let g:loaded_logiPat           = v:true
 let g:loaded_man               = v:true
+let g:loaded_matchit           = v:true
+let g:loaded_matchparen        = v:true
 let g:loaded_netrw             = v:true
 let g:loaded_netrwFileHandlers = v:true
 let g:loaded_netrwPlugin       = v:true
@@ -33,6 +35,7 @@ let g:current_colorscheme = 'random'
 let g:colorscheme_list = []
 
 command! -nargs=1 Runtime runtime! g:config_home <args>
+command! -nargs=1 SourceConf execute 'source' printf('%s/dein/settings/%s', g:config_home, <args>)
 command! -bar RTP echo substitute(&runtimepath, ',', "\n", 'g')
 command! -bar SyntaxInfo call user#syntax_info()
 command! -bar RandomColorScheme call user#colorscheme#random()
@@ -40,6 +43,7 @@ command! -nargs=1 -bar -complete=customlist,<SID>colorscheme ColorScheme
       \ call user#colorscheme#colorscheme(<q-args>)
 command! -nargs=+ SetFileType call user#set_filetype(<f-args>)
 command! -nargs=1 WWW call <SID>www(<q-args>)
+command! -bar -bang DenoRun call <SID>deno_run(<bang>0)
 
 SetFileType *.lark lark
 SetFileType *.grammar,grammar.txt grammar
@@ -53,7 +57,7 @@ autocmd user VimEnter * ++nested
       \ call user#colorscheme#colorscheme(g:current_colorscheme)
 
 autocmd user FileType help nnoremap <buffer> q <C-w>q
-autocmd user VimEnter * if &filetype ==# '' | execute 'nnoremap <buffer> q <C-w>q' | endif
+autocmd user BufEnter * if &filetype ==# '' | execute 'nnoremap <buffer> q <C-w>q' | endif
 
 function! s:www(word) abort
   execute 'terminal' '++close' '++shell' 'w3m'
@@ -62,4 +66,19 @@ endfunction
 
 function! s:colorscheme(ArgLead, CmdLine, CursorPos) abort
   return filter(g:colorscheme_list, 'v:val =~# a:ArgLead')
+endfunction
+
+function! s:deno_run(no_check) abort
+  if !empty(term_list()) | silent only | endif
+  execute 'terminal ++close deno'
+        \ (expand('%:t') =~
+        \   '^\(.*[._]\)\?test\.\(ts\|tsx\|js\|mjs\|jsx\)$' ? 'test' : 'run')
+        \ '--allow-all --unstable --watch'
+        \ ((a:no_check) ? '--no-check' : '')
+        \ expand('%:p')
+  resize 20
+  stopinsert
+  normal! G
+  setlocal bufhidden=wipe
+  wincmd j
 endfunction
