@@ -2,9 +2,9 @@
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 depends = [
-  'lightline-lsp', 'iceberg.vim', 'lightline-gruvbox.vim', 'lightline-hybrid.vim',
-  'tokyonight-vim', 'falcon', 'snow', 'elly.vim',
-  'vim-vitamin-onec', 'rigel',
+  'lightline-lsp', 'vista.vim', 'iceberg.vim', 'lightline-gruvbox.vim',
+  'lightline-hybrid.vim', 'tokyonight-vim', 'falcon', 'snow', 'elly.vim', 'rigel',
+  'ayu-vim', 'vim-nightfly-guicolors', 'vim-snazzy', 'tender.vim',
 ]
 hook_add = '''
 Runtime dein/settings/lightline.vim
@@ -92,14 +92,38 @@ hook_add = '''
 call add(g:colorscheme_list, 'elly')
 '''
 
-[[plugins]]
-repo = 'gkapfham/vim-vitamin-onec'
-hook_add = '''
-call add(g:colorscheme_list, 'vitaminonec')
-'''
+# [[plugins]]
+# repo = 'gkapfham/vim-vitamin-onec'
+# hook_add = '''
+# call add(g:colorscheme_list, 'vitaminonec')
+# '''
 
 [[plugins]]
 repo = 'Rigellute/rigel'
 hook_add = '''
 call add(g:colorscheme_list, 'rigel')
+'''
+
+[[plugins]]
+repo = 'ayu-theme/ayu-vim'
+hook_add = '''
+call add(g:colorscheme_list, 'ayu')
+'''
+
+[[plugins]]
+repo = 'bluz71/vim-nightfly-guicolors'
+hook_add = '''
+call add(g:colorscheme_list, 'nightfly')
+'''
+
+[[plugins]]
+repo = 'connorholyday/vim-snazzy'
+hook_add = '''
+call add(g:colorscheme_list, 'snazzy')
+'''
+
+[[plugins]]
+repo = 'jacoborus/tender.vim'
+hook_add = '''
+call add(g:colorscheme_list, 'tender')
 '''

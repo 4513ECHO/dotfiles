@@ -28,6 +28,7 @@ let s:colorscheme_customize = #{
       \   highlight: #{
       \     Constant: #{ ctermbg: 'NONE', guibg: 'NONE',  },
       \     Number: #{ ctermbg: 'NONE', guibg: 'NONE',  },
+      \     SpecialKey: #{ ctermbg: 'NONE', guibg: 'NONE',  },
       \ }},
       \ }
 
@@ -53,6 +54,9 @@ function! s:set_customize(colorscheme) abort
 endfunction
 
 function! user#colorscheme#colorscheme(colorscheme) abort
+  if empty(g:colorscheme_list)
+    return 'default'
+  endif
   if a:colorscheme ==# 'random'
     call user#colorscheme#random()
     return g:current_colorscheme

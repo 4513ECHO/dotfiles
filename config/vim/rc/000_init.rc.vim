@@ -31,8 +31,8 @@ let g:loaded_vimballPlugin     = v:true
 let g:loaded_zip               = v:true
 let g:loaded_zipPlugin         = v:true
 
-let g:current_colorscheme = 'random'
-let g:colorscheme_list = []
+let g:current_colorscheme = get(g:, 'current_colorscheme', 'random')
+let g:colorscheme_list = get(g:, 'colorscheme_list', [])
 
 command! -nargs=1 Runtime runtime! g:config_home <args>
 command! -nargs=1 SourceConf execute 'source' printf('%s/dein/settings/%s', g:config_home, <args>)

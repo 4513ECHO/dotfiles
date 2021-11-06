@@ -1,6 +1,6 @@
 let g:lightline = {}
 
-let g:lightline.colorsheme = user#colorscheme#lightline()
+let g:lightline.colorscheme = user#colorscheme#lightline()
 
 let g:lightline.active = {
       \ 'right': [
