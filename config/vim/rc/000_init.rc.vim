@@ -58,6 +58,8 @@ autocmd user VimEnter * ++nested
 
 autocmd user FileType help nnoremap <buffer> q <C-w>q
 autocmd user BufEnter * if &filetype ==# '' | execute 'nnoremap <buffer> q <C-w>q' | endif
+" vim as a pager
+autocmd user StdinReadPost * call user#pager()
 
 function! s:www(word) abort
   execute 'terminal' '++close' '++shell' 'w3m'

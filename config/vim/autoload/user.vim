@@ -52,3 +52,9 @@ function! user#remember_cursor() abort
     execute "normal! g`\""
   endif
 endfunction
+
+function! user#pager() abort
+  setlocal noswapfile buftype=nofile bufhidden=hide
+  setlocal modifiable nomodified readonly
+  nnoremap <buffer> q <C-w>q
+endfunction
