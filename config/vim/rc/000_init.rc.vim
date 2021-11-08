@@ -37,13 +37,12 @@ let g:colorscheme_list = get(g:, 'colorscheme_list', [])
 command! -nargs=1 Runtime runtime! g:config_home <args>
 command! -nargs=1 SourceConf execute 'source' printf('%s/dein/settings/%s', g:config_home, <args>)
 command! -bar RTP echo substitute(&runtimepath, ',', "\n", 'g')
-command! -bar SyntaxInfo call user#syntax_info()
 command! -bar RandomColorScheme call user#colorscheme#random()
-command! -nargs=1 -bar -complete=customlist,<SID>colorscheme ColorScheme
-      \ call user#colorscheme#colorscheme(<q-args>)
+command! -nargs=1 -bar -complete=customlist,user#colorscheme#completion
+      \ ColorScheme call user#colorscheme#colorscheme(<q-args>)
 command! -nargs=+ SetFileType call user#set_filetype(<f-args>)
-command! -nargs=1 WWW call <SID>www(<q-args>)
-command! -bar -bang DenoRun call <SID>deno_run(<bang>0)
+command! -nargs=1 WWW call user#google(<q-args>)
+command! -bar -bang DenoRun call usr#deno_run(<bang>0)
 
 SetFileType *.lark lark
 SetFileType *.grammar,grammar.txt grammar
@@ -56,31 +55,13 @@ autocmd user BufReadPost * call user#remember_cursor()
 autocmd user VimEnter * ++nested
       \ call user#colorscheme#colorscheme(g:current_colorscheme)
 
-autocmd user FileType help nnoremap <buffer> q <C-w>q
-autocmd user BufEnter * if &filetype ==# '' | execute 'nnoremap <buffer> q <C-w>q' | endif
+" echo message vim start up time
+if has('vim_starting')
+  let g:startuptime = reltime()
+  autocmd user VimEnter * call user#startuptime()
+endif
+
+
 " vim as a pager
 autocmd user StdinReadPost * call user#pager()
 
-function! s:www(word) abort
-  execute 'terminal' '++close' '++shell' 'w3m'
-        \ printf('"https://google.com/search?q=%s"', a:word)
-endfunction
-
-function! s:colorscheme(ArgLead, CmdLine, CursorPos) abort
-  return filter(g:colorscheme_list, 'v:val =~# a:ArgLead')
-endfunction
-
-function! s:deno_run(no_check) abort
-  if !empty(term_list()) | silent only | endif
-  execute 'terminal ++close deno'
-        \ (expand('%:t') =~
-        \   '^\(.*[._]\)\?test\.\(ts\|tsx\|js\|mjs\|jsx\)$' ? 'test' : 'run')
-        \ '--allow-all --unstable --watch'
-        \ ((a:no_check) ? '--no-check' : '')
-        \ expand('%:p')
-  resize 20
-  stopinsert
-  normal! G
-  setlocal bufhidden=wipe
-  wincmd j
-endfunction

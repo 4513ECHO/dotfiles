@@ -70,3 +70,8 @@ function! user#colorscheme#colorscheme(colorscheme) abort
   return g:current_colorscheme
 endfunction
 
+function! user#colorscheme#completion(ArgLead, CmdLine, CursorPos) abort
+  return filter(copy(g:colorscheme_list),
+        \ {_, val -> val =~? a:ArgLead})
+endfunction
+

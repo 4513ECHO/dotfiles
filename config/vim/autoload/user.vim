@@ -53,6 +53,32 @@ function! user#remember_cursor() abort
   endif
 endfunction
 
+function! user#google(word) abort
+  execute 'terminal' '++close' '++shell' 'w3m'
+        \ printf('"https://google.com/search?q=%s"', a:word)
+endfunction
+
+function! user#deno_run(no_check) abort
+  execute 'terminal ++close deno'
+        \ (expand('%:t') =~
+        \   '^\(.*[._]\)\?test\.\(ts\|tsx\|js\|mjs\|jsx\)$' ?
+        \   'test' : 'run')
+        \ '--allow-all --unstable --watch'
+        \ ((a:no_check) ? '--no-check' : '')
+        \ expand('%:p')
+  resize 20
+  stopinsert
+  normal! G
+  setlocal bufhidden=wipe
+  wincmd j
+endfunction
+
+function! user#startuptime() abort
+  let g:startuptime = reltime(g:startuptime)
+  redraw
+  echomsg printf('startuptime: %fms', reltimefloat(g:startuptime) * 1000)
+endfunction
+
 function! user#pager() abort
   setlocal noswapfile buftype=nofile bufhidden=hide
   setlocal modifiable nomodified readonly
