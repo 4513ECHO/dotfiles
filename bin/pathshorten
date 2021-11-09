@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [[ -p /dev/stdin ]]; then
+  dir="$(cat -)"
+else
+  dir="$1"
+fi
+
+tildepath="${dir/$HOME/'~'}"
+patharray=(${tildepath//\// })
+
+for ((i=0; i < ${#patharray[@]}; i++)) {
+  if [[ "$(($i+1))" = "${#patharray[@]}" ]]; then
+    printf "${patharray[$i]}"
+    break
+  fi
+  if [[ "${patharray[$i]:0:1}" =~ ^\. ]]; then
+    printf "${patharray[$i]:0:2}/"
+  else
+    printf "${patharray[$i]:0:1}/"
+  fi
+}
