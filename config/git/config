@@ -1,9 +1,10 @@
 [include]
   path = ~/.gitconfig.local
 [core]
-  editor = "vim -c 'set fenc=utf-8'"
+  editor = vim
   quotepath = false
-	pager = LESSCHARSET=utf-8 less
+  # pager = LESSCHARSET=utf-8 less
+  pager = vim -
 [color]
   ui = auto
   diff = auto
@@ -17,10 +18,19 @@
   rebase = false
 [status]
   showUntrackedFiles = all
+[url "git@github.com"]
+  insteadOf = github
+[url "git@github.com:4513ECHO"]
+  insteadOf = 4513ECHO
+[diff]
+  tool = vimdiff
+[difftool]
+  prompt = false
 [alias]
+  alias = !git config --get-regexp '^alias' | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\\t -> \\2/' | cut -c 1-46 | sort
   st = status
   graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
-  gr = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
+  gr = !git graph
   cm = commit
   cmm = commit -m
   co = checkout
@@ -28,4 +38,10 @@
   df = diff
   ps = push
   pl = pull
+  pwd = !pwd
+  here = rev-parse --show-toplevel
+  cl = clone
+  latest = describe --tags --abbrev=0
+  adp = add -p
+  adu = add -u
 

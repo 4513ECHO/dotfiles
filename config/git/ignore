@@ -21,5 +21,8 @@ tags/
 *.log
 *.tmp
 *.bak
+*.bk
+.vimrc.local
+*.zwc
 
 !**.gitkeep

@@ -6,17 +6,20 @@ else
   dir="$1"
 fi
 
-tildepath="${dir/$HOME/'~'}"
-patharray=(${tildepath//\// })
+tildepath="${dir/#$HOME/'~'}"
+read -ra patharray <<< "${tildepath//\// }"
+result=""
 
 for ((i=0; i < ${#patharray[@]}; i++)) {
-  if [[ "$(($i+1))" = "${#patharray[@]}" ]]; then
-    printf "${patharray[$i]}"
+  if [[ "$(("$i"+1))" = "${#patharray[@]}" ]]; then
+    result+="${patharray[$i]}"
     break
   fi
   if [[ "${patharray[$i]:0:1}" =~ ^\. ]]; then
-    printf "${patharray[$i]:0:2}/"
+    result+="${patharray[$i]:0:2}/"
   else
-    printf "${patharray[$i]:0:1}/"
+    result+="${patharray[$i]:0:1}/"
   fi
 }
+
+echo -n "$result"
