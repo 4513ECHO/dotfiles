@@ -21,6 +21,7 @@ auto_venv () {
   fi
 }
 add-zsh-hook chpwd auto_venv
+[[ -n "$TMUX" ]] && auto_venv
 
 enable_agent_forward () {
   if [ -z $SSH_AUTH_SOCK ]; then
@@ -65,7 +66,13 @@ auto_tmux () {
   fi
 }
 
-auto_tmux
+[[ $SHLVL -eq 1 ]] && auto_tmux
+
+rename-pane-pwd () {
+  printf '\033]2;%s\033\\' "$(pathshorten "$PWD")"
+}
+add-zsh-hook chpwd rename-pane-pwd
+[[ -n "$TMUX" ]] && rename-pane-pwd
 
 vim_clean () {
   rm -rf ~/.cache/vim/dein
