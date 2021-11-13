@@ -1,8 +1,8 @@
-if !1 | finish | endif " for vim-tiny and vim-small
+" for vim-tiny and vim-small
+if !1 | finish | endif
 
 let s:config_home = empty($XDG_CONFIG_HOME) ? expand('~/.config/vim') : $XDG_CONFIG_HOME .. '/vim'
-let &g:runtimepath = s:config_home .. ','
-      \ .. &g:runtimepath .. ','
-      \ .. s:config_home .. '/after'
+set runtimepath&
+let &runtimepath = s:config_home .. ',' .. &runtimepath .. ',' .. s:config_home .. '/after'
 
 runtime! s:config_home rc/*.rc.vim
