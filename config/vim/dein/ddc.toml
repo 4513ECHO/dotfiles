@@ -6,7 +6,8 @@ hook_add = '''
 nnoremap : <Cmd>call user#ddc#cmdline_pre()<CR>:
 '''
 hook_source = '''
-Runtime dein/settings/ddc.vim
+" Runtime dein/settings/ddc.vim
+SourceConf ddc.vim
 '''
 # sources
 
@@ -54,7 +55,8 @@ on_source = 'ddc.vim'
 repo = 'Shougo/ddc-converter_remove_overlap'
 on_source = 'ddc.vim'
 
-# popup
+
 
 [[plugins]]
 repo = 'Shougo/pum.vim'
+

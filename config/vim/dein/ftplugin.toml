@@ -8,11 +8,13 @@ let g:rust_bang_comment_leader = v:true
 [ftplugin]
 _ = '''
 setlocal formatoptions-=ro
-setl formatoptions+=mMBl
+setlocal formatoptions+=mMBl
 '''
+
 typescript = '''
 nnoremap <buffer> <Leader><C-r> <Cmd>call denops#server#restart()<CR>
 '''
+
 python = '''
 setlocal softtabstop=4
 setlocal shiftwidth=4
@@ -21,15 +23,18 @@ setlocal smarttab
 setlocal expandtab
 setlocal nosmartindent
 '''
+
 help = '''
 setlocal iskeyword+=#
 setlocal iskeyword+=:
 setlocal iskeyword+=-
+setlocal iskeyword+=+
+nnoremap <buffer> q <C-w>q
 '''
 
 [[plugins]]
 repo = 'cespare/vim-toml'
-on_if = '!has("patch-8.2.3520")'
+if = '!has("patch-8.2.3520")'
 on_ft = ['toml']
 
 [[plugins]]
@@ -43,14 +48,3 @@ on_ft = ['vim', 'css', 'scss', 'sass']
 [[plugins]]
 repo = 'lark-parser/vim-lark-syntax'
 on_ft = ['lark']
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-on_ft = ['python', 'typescript', 'rust']
-
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
-on_source = ['vim-lsp']
-hook_add = '''
-Runtime dein/settings/vim-lsp.vim
-'''

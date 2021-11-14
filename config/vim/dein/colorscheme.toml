@@ -7,7 +7,8 @@ depends = [
   'ayu-vim', 'vim-nightfly-guicolors', 'vim-snazzy', 'tender.vim',
 ]
 hook_add = '''
-Runtime dein/settings/lightline.vim
+" Runtime dein/settings/lightline.vim
+SourceConf lightline.vim
 '''
 
 [[plugins]]
@@ -126,4 +127,16 @@ call add(g:colorscheme_list, 'snazzy')
 repo = 'jacoborus/tender.vim'
 hook_add = '''
 call add(g:colorscheme_list, 'tender')
+'''
+
+[[plugins]]
+repo = 'wadackel/vim-dogrun'
+hook_add = '''
+call add(g:colorscheme_list, 'dogrun')
+'''
+
+[[plugins]]
+repo = 'whatyouhide/vim-gotham'
+hook_add = '''
+call add(g:colorscheme_list, 'gotham')
 '''

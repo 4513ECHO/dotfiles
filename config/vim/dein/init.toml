@@ -2,10 +2,96 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'Shougo/vimproc.vim'
-build = 'make'
+repo = 'vim-denops/denops.vim'
+if = 'executable("deno")'
 
 [[plugins]]
-repo = 'vim-denops/denops.vim'
-on_if = 'executable("deno")'
+repo = 'thinca/vim-localrc'
+hook_add = '''
+let g:localrc_filename = '.vimrc.local'
+'''
+
+[[plugins]]
+repo = 'obcat/vim-sclow'
+hook_add = '''
+let g:sclow_hide_full_length = v:true
+'''
+
+[[plugins]]
+repo = 'obcat/vim-hitspop'
+hook_add = '''
+let g:hitspop_line = 'winbot'
+autocmd user ColorScheme *
+      \ hi link hitspopErrormsg ErrorMsg
+'''
+
+[[plugins]]
+repo = 'osyo-manga/vim-precious'
+depends = ['context_filetype.vim']
+
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+hook_add = '''
+let g:context_filetype#ignore_patterns = {
+      \ 'toml': ['^\s*#\s*'],
+      \ }
+'''
+
+[[plugins]]
+repo = 'rhysd/clever-f.vim'
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]]
+repo = 'mattn/vim-molder'
+hook_add = '''
+autocmd user FileType molder
+      \ nmap <buffer> <C-r> <Plug>(molder-reload)
+'''
+
+[[plugins]]
+repo = 'mattn/vim-molder-operations'
+depends = ['vim-molder']
+
+[[plugins]]
+repo = 'osyo-manga/vim-jplus'
+on_map = { nx = '<Plug>(jplus' }
+hook_add = '''
+nmap J <Plug>(jplus)
+xmap J <Plug>(jplus)
+'''
+
+[[plugins]]
+repo = 'kana/vim-submode'
+hook_add = '''
+" autocmd user VimEnter *
+"      \ SourceConf submode.vim
+SourceConf submode.vim
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+depends = ['vim-lsp-settings']
+on_ft = ['python', 'typescript', 'typescriptreact', 'rust']
+on_func = ['lsp#enable']
+hook_add = '''
+autocmd user BufRead *.py,*.ts,*.tsx,*.rs
+      \ call lsp#enable()
+'''
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+hook_add = '''
+" Runtime dein/settings/vim-lsp.vim
+SourceConf vim-lsp.vim
+'''
+
+# [[plugins]]
+# repo = 'liuchengxu/vista.vim'
+# depends = ['vim-lsp']
+# on_cmd = ['Vista']
+# hook_add = '''
+# let g:vista_default_executive = 'vim_lsp'
+# '''
 

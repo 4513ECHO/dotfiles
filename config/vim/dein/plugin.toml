@@ -1,46 +1,25 @@
 [[plugins]]
 repo = 'cohama/lexima.vim'
-on_event = 'InsertEnter'
+on_event = ['InsertEnter', 'CmdlineEnter']
 hook_add = '''
 let g:lexima_no_default_rules = v:true
 '''
 hook_source = '''
-Runtime dein/settings/lexima.vim
+" Runtime dein/settings/lexima.vim
+SourceConf lexima.vim
 '''
-
-[[plugins]]
-repo = 'bronson/vim-trailing-whitespace'
 
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
-on_cmd = ['help']
 type__depth = 1
 
 [[plugins]]
-repo = 'osyo-manga/vim-precious'
-depends = ['context_filetype.vim']
-
-[[plugins]]
-repo = 'Shougo/context_filetype.vim'
-hook_add = '''
-let g:context_filetype#ignore_patterns = {
-      \ 'toml': ['^\s*#\s*'],
-      \ }
-'''
-
-[[plugins]]
-repo = 'guns/xterm-color-table.vim'
-on_cmd = ['XtermColorTable']
-
-[[plugins]]
 repo = 'thinca/vim-quickrun'
-depends = ['vimproc.vim']
 on_cmd = ['QuickRun']
 hook_add = '''
 let g:quickrun_config = {
       \ '_': {
-      \   'runner': 'vimproc',
-      \   'runner/vimproc/updatetime': 60,
+      \   'runner': 'job',
       \   'outputter/buffer/opener': 'botright 10split',
       \   'outputter/buffer/close_on_empty': v:true,
       \   'hook/time/enable': v:true,
@@ -49,39 +28,25 @@ let g:quickrun_config = {
       \   'type': 'typescript/deno',
       \ },
       \ }
-autocmd user FileType quickrun
-      \ nnoremap <buffer> q <C-w>q
 '''
-
-[[plugins]]
-repo = 'obcat/vim-hitspop'
-hook_add = '''
-let g:hitspop_line = 'winbot'
-autocmd user ColorScheme *
-      \ hi link hitspopErrormsg ErrorMsg
+[plugins.ftplugin]
+quickrun = '''
+nnoremap <buffer> q <C-w>q
 '''
-
-[[plugins]]
-repo = 'obcat/vim-sclow'
-hook_add = '''
-let g:sclow_hide_full_length = v:true
-'''
-
-[[plugins]]
-repo = 'mattn/benchvimrc-vim'
-on_cmd = ['BenchVimrc']
 
 [[plugins]]
 repo = 'tyru/capture.vim'
 on_cmd = ['Capture', 'CaptureJson']
 hook_add = '''
-autocmd user FileType capture
-      \ nnoremap <buffer> q <C-w>q
-
-if executable('jq')
-  command! -bang -bar -nargs=1 -complete=var CaptureJson
-        \ execute 'Capture<bang> echo json_encode(<args>)' | %!jq
-endif
+command! -bang -bar -nargs=1 -complete=var CaptureJson
+      \ execute 'Capture<bang> echo json_encode(<args>)' |
+      \ if &filetype ==# 'capture' |
+      \   execute '%!jq' |
+      \ endif
+'''
+[plugins.ftplugin]
+capture = '''
+nnoremap <buffer> q <C-w>q
 '''
 
 [[plugins]]
@@ -93,11 +58,6 @@ autocmd user VimEnter *
       \ xmap <Leader>c <Plug>(caw:hatpos:toggle)
 '''
 
-[[plugins]]
-repo = 'thinca/vim-localrc'
-hook_add = '''
-let g:localrc_filename = '.vimrc.local'
-'''
 
 [[plugins]]
 repo = 'thinca/vim-scouter'
@@ -108,16 +68,60 @@ command! Scouter echo Scouter(g:config_home)
 '''
 
 [[plugins]]
-repo = 'skanehira/badapple.vim'
-on_cmd = ['BadApple']
+repo = 'guns/xterm-color-table.vim'
+on_cmd = ['XtermColorTable']
 
 [[plugins]]
 repo = 'rbtnn/vim-coloredit'
 on_cmd = ['ColorEdit']
 
 [[plugins]]
+repo = 'thinca/vim-scall'
+on_func = ['S']
+hook_add = '''
+let g:scall_function_name = 'S'
+'''
+
+[[plugins]]
+repo = 'cocopon/colorswatch.vim'
+on_cmd = ['ColorSwatchGenerate']
+
+[[plugins]]
+repo = 'cocopon/inspecthi.vim'
+depends = ['colorswatch.vim']
+on_cmd = ['Inspecthi']
+
+[[plugins]]
+repo = 'junegunn/fzf'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = ['fzf']
+if = 'executable("fzf")'
+
+[[plugins]]
+repo = 'reireias/vim-cheatsheet'
+on_cmd = ['Cheat']
+hook_add = '''
+let g:cheatsheet#cheat_file = g:config_home .. '/doc/cheatsheet.md'
+'''
+
+[[plugins]]
 repo = 'powerman/vim-plugin-AnsiEsc'
 on_cmd = ['AnsiEsc']
 
-[[plugins]]
-repo = 'mattn/vim-molder'
+# [[plugins]]
+# repo = 'kat0h/bufpreview.vim'
+# depends = ['denops.vim']
+# hook_add = '''
+# let g:bufpreview_server_host = '0.0.0.0'
+# let g:bufpreview_server_port = 8888
+# '''
+
+# [[plugins]]
+# repo = 'skanehira/badapple.vim'
+# on_cmd = ['BadApple']
+
+# [[plugins]]
+# repo = 'mattn/benchvimrc-vim'
+# on_cmd = ['BenchVimrc']

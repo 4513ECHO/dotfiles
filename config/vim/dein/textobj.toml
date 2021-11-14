@@ -1,16 +1,17 @@
 [[plugins]]
 repo = 'machakann/vim-sandwich'
 depends = [
-  'vim-repeat', 'vim-textobj-multiblock', 'vim-textobj-entire',
-  'vim-textobj-line', 'vim-textobj-indent', 'textobj-wiw',
+  'vim-repeat', 'vim-textobj-entire', 'vim-textobj-line',
+  'vim-textobj-indent', 'textobj-wiw', 'vim-textobj-continuous-line',
 ]
 hook_add = '''
 autocmd user VimEnter *
-      \ runtime macros/sandwich/keymap/surround.vim
+     \ runtime macros/sandwich/keymap/surround.vim
 '''
 
 [[plugins]]
 repo = 'tpope/vim-repeat'
+on_map = { xno = '<Plug>(Repeat' }
 
 [[plugins]]
 repo = 'kana/vim-textobj-user'
@@ -43,6 +44,5 @@ xmap i_ <Plug>(textobj-wiw-i)
 '''
 
 [[plugins]]
-repo = 'thinca/vim-textobj-comment'
-on_map = { xo = '<Plug>(textobj-comment' }
+repo = 'rhysd/vim-textobj-continuous-line'
 depends = ['vim-textobj-user']
