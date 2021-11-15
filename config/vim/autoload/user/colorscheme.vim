@@ -10,29 +10,34 @@ endfunction
 
 function! user#colorscheme#random() abort
   let g:current_colorscheme =
-        \ get(g:colorscheme_list, (rand() % len(g:colorscheme_list)))
+        \ get(g:colorscheme_list, rand() % len(g:colorscheme_list))
   call user#colorscheme#colorscheme(g:current_colorscheme)
   return g:current_colorscheme
 endfunction
 
-let s:colorscheme_customize = #{
-      \ iceberg: #{
-      \   highlight: #{
-      \     String: #{ ctermfg: 144, guifg: '#a7b1a9', },
+let s:colorscheme_customize = {
+      \ 'iceberg': {
+      \   'highlight': {
+      \     'String': #{ ctermfg: 144, guifg: '#a7b1a9', },
       \ }},
-      \ gruvbox: #{
-      \   highlight: #{
-      \     Visual: #{ ctermbg: 239, cterm: 'NONE', guibg: '#565656', gui: 'NONE', },
+      \ 'gruvbox': {
+      \   'highlight': {
+      \     'Visual': #{ ctermbg: 239, cterm: 'NONE',
+      \                  guibg: '#565656', gui: 'NONE', },
       \ }},
-      \ hydrangea: #{
-      \   highlight: #{
-      \     Constant: #{ ctermbg: 'NONE', guibg: 'NONE',  },
-      \     Number: #{ ctermbg: 'NONE', guibg: 'NONE',  },
-      \     SpecialKey: #{ ctermbg: 'NONE', guibg: 'NONE',  },
+      \ 'hydrangea': {
+      \   'highlight': {
+      \     'Constant': #{ ctermbg: 'NONE', guibg: 'NONE',  },
+      \     'Number': #{ ctermbg: 'NONE', guibg: 'NONE',  },
+      \     'SpecialKey': #{ ctermbg: 'NONE', guibg: 'NONE',  },
+      \ }},
+      \ 'snazzy': {
+      \   'highlight': {
+      \     'Visual': #{ ctermbg: 254, guibg: '#e4e4ee' },
       \ }},
       \ }
 
-function! s:set_customize(colorscheme) abort
+function! user#colorscheme#set_customize(colorscheme) abort
   let customize = get(s:colorscheme_customize, a:colorscheme)
   if empty(customize)
     return
@@ -64,7 +69,7 @@ function! user#colorscheme#colorscheme(colorscheme) abort
   let g:current_colorscheme = a:colorscheme
   let g:lightline['colorscheme'] = user#colorscheme#lightline()
   execute 'colorscheme' a:colorscheme
-  call s:set_customize(a:colorscheme)
+  call user#colorscheme#set_customize(a:colorscheme)
   call lightline#init()
   call lightline#colorscheme()
   return g:current_colorscheme
