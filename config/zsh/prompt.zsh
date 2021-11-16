@@ -1,35 +1,4 @@
-#!usr/bin/env zsh
-
-autoload -Uz colors; colors
-autoload -Uz add-zsh-hook
-autoload -Uz terminfo
-
-terminfo_down_sc=${terminfo[cud1]}${terminfo[cuu1]}${terminfo[sc]}${terminfo[cud1]}
-function left_down_prompt_preexec () {
-  print -rn -- ${terminfo[el]}
-}
-add-zsh-hook preexec left_down_prompt_preexec
-
-function zle-keymap-select zle-line-init zle-line-finish () {
-  local mode
-  case $KEYMAP in
-    main|viins)
-    mode="${fg[cyan]}-- INSERT --${reset_color}"
-    ;;
-  vicmd)
-    mode="${fg[white]}-- NORMAL --${reset_color}"
-    ;;
-  esac
-
-  MODE="%{${terminfo_down_sc}${mode}${terminfo[rc]}%}"
-  zle reset-prompt
-}
-zle -N zle-line-init
-zle -N zle-line-finish
-zle -N zle-keymap-select
-zle -N edit-command-line
-
-function git-prompt () {
+git-prompt () {
   local branchname branch st remote pushed upstream
   branchname=`git symbolic-ref --short HEAD 2> /dev/null`
   if [ -z ${branchname} ]; then
@@ -60,16 +29,16 @@ function git-prompt () {
 }
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-function venv-prompt () {
-  if [ -n "${VIRTUAL_ENV}" ]; then
-    echo "(`basename \"${VIRTUAL_ENV}\"`)"
+venv-prompt () {
+  if [ -n "$VIRTUAL_ENV" ]; then
+    echo "($(basename "$VIRTUAL_ENV"))"
   else
     echo ''
   fi
 }
 
-function precmd () {
-  PROMPT="${MODE}`venv-prompt`%{${fg[green]}%}%n@%m%{${reset_color}%}:%{${fg[blue]}%}%~%{${reset_color}%}%# "
-  RPROMPT="`git-prompt`"
+redraw-prompt () {
+  PROMPT="$(venv-prompt)%F{070}%n@%m%f:%F{075}%~%f%# "
+  RPROMPT="$(git-prompt)"
 }
-
+add-zsh-hook precmd redraw-prompt
