@@ -127,51 +127,14 @@ benchmark () {
   if [[ -n $dump(#qN.mh+24) ]]; then
     compinit -i -d "$dump"
     { rm -rf "$dumpc" && zcompile "$dump" } &!
-      for f in $(ls $ZDOTDIR); do
-        [[ "$f" =~ *.zsh$ ]] && zcompile "$f"
-      done
-      for f in $(find $ZDOTDIR/.zinit -name '*.zsh'); do
-        zcompile "$f"
-      done
   else
     compinit -C -d "$dump"
     { [[ ! -s $dumpc || $dump -nt $dumpc ]] && rm -rf "$dumpc" && zcompile "$dump" } &!
   fi
-}
-
-sticky-shift () {
-  local char result settings
-  typeset -A sticky_table special_table
-  sticky_table=(
-    "'1'" '!' "'2'" '"' "'3'" '#' "'4'" '$' "'5'" '%' "'6'" '&' "'7'" \'
-    "'8'" '(' "'9'" ')' "'-'" '=' "'^'" '~' "'¥'" '|' "'@'" '`' "'['" '{'
-    "';'" '+' "':'" '*' "']'" '}' "','" '<' "'.'" '>' "'/'" '?'
-  )
-  special_table=(
-    "' '" ';'
-  )
-  settings="$(stty -F /dev/tty --save)"
-  stty -F /dev/tty erase undef
-  while :;do
-    IFS="" read -r -k 1 -t 1 char
-    if [[ "$char" =~ [a-z] ]]; then
-      result="$(echo "$char" | tr '[:lower:]' '[:upper:]')"
-      break
-    elif [[ -n "${sticky_table[(i)'$char']}" ]]; then
-      result="${sticky_table['$char']}"
-      break
-    elif [[ -n "${special_table[(i)'$char']}" ]]; then
-      result="${special_table['$char']}"
-      break
-    elif [[ $char == $'\x00' ]]; then
-      break
-    # else # debug
-    #   result="failed: $char"
-    #   break
+  for f in $(find $ZDOTDIR/ -type f -name '*.zsh'); do
+    if [[ ! -f "$f.zwc" ]] || [[ "$f" -nt "$f.zwc" ]]; then
+       zcompile "$f"
     fi
   done
-  stty -F /dev/tty "$settings"
-  LBUFFER="$LBUFFER$result"
 }
-zle -N sticky-shift
-bindkey ";" sticky-shift
+
