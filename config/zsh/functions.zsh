@@ -69,10 +69,31 @@ auto_tmux () {
 [[ $SHLVL -eq 1 ]] && auto_tmux
 
 rename-pane-pwd () {
-  printf '\033]2;%s\033\\' "$(pathshorten "$PWD")"
+  [[ $- == *m* ]] && printf '\033]2;%s\033\\' "$(pathshorten "$PWD")"
 }
 add-zsh-hook chpwd rename-pane-pwd
 [[ -n "$TMUX" ]] && rename-pane-pwd
+
+cd-git-root () {
+  local root
+  root="$(git rev-parce --show-toplevel 2> /dev/null)"
+  [[ -n "$root" ]] && cd "$root"
+  zle accept-line
+}
+zle -N cd-git-root
+bindkey "^Gr" cd-git-root
+
+cd-fzf-git () {
+  local root result
+  root="$(git rev-parce --show-toplevel 2> /dev/null)"
+  result="$(cd "$root" && git ls-files | sed '/^[^\/]*$/d;s:/[^/]*$::' \
+    | uniq | fzf)"
+  zle reset-prompt
+  [[ -n "$result" ]] && cd "$root/$result"
+  zle accept-line
+}
+zle -N cd-fzf-git
+bindkey "^Gd" cd-fzf-git
 
 vim_clean () {
   rm -rf ~/.cache/vim/dein
