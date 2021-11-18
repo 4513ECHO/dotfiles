@@ -82,5 +82,47 @@ endfunction
 function! user#pager() abort
   setlocal noswapfile buftype=nofile bufhidden=hide
   setlocal modifiable nomodified readonly
+  if exists(':AnsiEsc') == 2
+    autocmd user ColorScheme <buffer> ++once AnsiEsc
+    autocmd user ColorScheme <buffer> silent! keepjump keeppatterns
+          \ %substitute/\v^\s+(\e\[%(%(\d;)?\d{1,2})?[mK])*$//ge
+  else
+    silent! keepjump keeppatterns %substitute/\v\e\[%(%(\d;)?\d{1,2})?[mK]//ge
+  endif
   nnoremap <buffer> q <C-w>q
 endfunction
+
+let s:cursorline_lock = 0
+function! user#auto_cursorline(event) abort
+  if a:event ==? 'WinEnter'
+    setlocal cursorline
+    let s:cursorline_lock = 2
+    autocmd user CursorMoved,CursorMovedI * ++once
+          \ call user#auto_cursorline('CursorMoved')
+  elseif a:event ==? 'WinLeave'
+    setlocal nocursorline
+  elseif a:event ==? 'CursorMoved'
+    if s:cursorline_lock
+      if 1 < s:cursorline_lock
+        let s:cursorline_lock = 1
+      else
+        setlocal nocursorline
+        let s:cursorline_lock = 0
+      endif
+    endif
+  elseif a:event ==? 'CursorHold'
+    setlocal cursorline
+    let s:cursorline_lock = 1
+    autocmd user CursorMoved,CursorMovedI * ++once
+          \ call user#auto_cursorline('CursorMoved')
+  endif
+endfunction
+
+function! user#auto_mkdir(dir, force)
+  if !isdirectory(a:dir) && (a:force ||
+        \ input(printf('"%s" does not exist. Create? [y/N]', a:dir))
+        \ =~? '^y\%[es]$')
+    call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
+  endif
+endfunction
+
