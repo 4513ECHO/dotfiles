@@ -1,0 +1,60 @@
+{
+  "taplo-lsp": {
+    "disabled": true
+  },
+  "vim-language-server": {
+    "disabled": true
+  },
+  "pyls-all": {
+    "workspace_config": {
+      "pyls": {
+        "plugins": {
+          "pyls_isort": {
+            "enabled": true
+          },
+          "pyls_mypy": {
+            "enabled": true
+          },
+          "mccabe": {
+            "enabled": false
+          },
+          "pyflakes": {
+            "enabled": false
+          },
+          "jedi_definition": {
+            "follow_imports": true,
+            "follow_builtin_imports": true
+          },
+          "pycodestyle": {
+            "enabled": false
+          },
+          "pyls_black": {
+            "enabled": true
+          }
+        },
+        "configurationSources": [
+          "flake8"
+        ]
+      }
+    }
+  },
+  "yaml-language-server": {
+    "workspace_config": {
+      "yaml": {
+        "schemas": {
+          "https://mattn.github.io/efm-langserver/schema.json": "/efm-langserver/config.yml",
+          "https://mattn.github.io/vim-lsp-settings/schema.json": "vim-lsp-settings.json"
+        },
+        "validate": true,
+        "completion": true,
+        "hover": true
+      }
+    }
+  },
+  "efm-langserver": {
+    "disabled": false
+  },
+  "bash-language-server": {
+    "disabled": true
+  }
+}
