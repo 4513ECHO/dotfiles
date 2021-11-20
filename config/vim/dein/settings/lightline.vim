@@ -18,6 +18,7 @@ let g:lightline.component_function = {
       \ 'colorscheme': 'user#lightline#colorscheme',
       \ 'fileformat': 'user#lightline#file_format',
       \ 'fileencoding': 'user#lightline#file_encoding',
+      \ 'mode': 'user#lightline#mode',
       \ }
 
 let g:lightline.component_expand = {
