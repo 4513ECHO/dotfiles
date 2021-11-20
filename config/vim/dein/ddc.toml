@@ -33,9 +33,9 @@ on_source = 'ddc.vim'
 repo = 'matsui54/ddc-buffer'
 on_source = 'ddc.vim'
 
-[[plugins]]
-repo = 'Shougo/ddc-cmdline-history'
-on_source = 'ddc.vim'
+# [[plugins]]
+# repo = 'Shougo/ddc-cmdline-history'
+# on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/ddc-cmdline'

@@ -36,42 +36,42 @@ let s:sourceOptions['vim-lsp'] = {
 
 let s:sourceOptions.necovim = {'mark': 'vim'}
 let s:sourceOptions.buffer = {'mark': 'buf'}
-let s:sourceOptions['cmdline-history'] = {'mark': 'hist'}
+" let s:sourceOptions['cmdline-history'] = {'mark': 'hist'}
 let s:sourceOptions.cmdline = {'mark': 'cmd'}
-let s:sourceOptions.line = {'mark': 'line'}
 
 let s:sourceParams.around = {'maxSize': 500}
 let s:sourceParams.buffer = {
       \ 'requireSameFiletype': v:false,
       \ 'fromAltBuf': v:true,
       \ }
-let s:sourceParams['cmdline-history'] = {'maxSize': 100}
+" let s:sourceParams['cmdline-history'] = {'maxSize': 100}
 
 let s:filterParams.converter_truncate = {'maxInfoWidth': 30}
 
 call ddc#custom#patch_filetype(
-      \ ['vim'], 'sources',
-      \ extendnew(['necovim'], s:sources)
-      \ )
-
-call ddc#custom#patch_filetype(
-      \ ['python', 'typescript', 'rust'], #{
-      \ sources: extendnew(['vim-lsp'], s:sources),
+      \ ['vim', 'toml'], {
+      \ 'sources': extend(['necovim'], s:sources),
       \ })
 
 call ddc#custom#patch_filetype(
-      \ ['ps1', 'dosbatch', 'autohotkey', 'registry'], #{
-      \ sourcesOptions: #{
-      \   file: #{forceCompletionPattern: '(\f*\\\f*)+'},
+      \ ['python', 'typescript', 'typescriptreact', 'rust'], {
+      \ 'sources': extend(['vim-lsp'], s:sources),
+      \ })
+
+call ddc#custom#patch_filetype(
+      \ ['ps1', 'dosbatch', 'autohotkey', 'registry'], {
+      \ 'sourcesOptions': {
+      \   'file': {'forceCompletionPattern': '(\f*\\\f*)+'},
       \ },
-      \ sourceParams: #{
-      \   file: #{mode: 'win32'},
+      \ 'sourceParams': {
+      \   'file': {'mode': 'win32'},
       \ }})
 
 let s:patch_global.sources = s:sources
 let s:patch_global.sourceOptions = s:sourceOptions
 let s:patch_global.sourceParams = s:sourceParams
 let s:patch_global.filterParams = s:filterParams
+let s:patch_global.backspaceCompletion = v:true
 
 " Use pum.vim
 let s:patch_global.autoCompleteEvents = [
