@@ -35,14 +35,22 @@ let g:current_colorscheme = get(g:, 'current_colorscheme', 'random')
 let g:colorscheme_list = get(g:, 'colorscheme_list', [])
 
 command! -nargs=1 Runtime runtime! g:config_home <args>
-command! -nargs=1 SourceConf execute 'source' printf('%s/dein/settings/%s', g:config_home, <args>)
+command! -nargs=1 SourceConf
+      \ execute 'source' printf('%s/dein/settings/%s',
+      \ g:config_home, <q-args>)
 command! -bar RTP echo substitute(&runtimepath, ',', "\n", 'g')
 command! -bar RandomColorScheme call user#colorscheme#random()
 command! -nargs=1 -bar -complete=customlist,user#colorscheme#completion
       \ ColorScheme call user#colorscheme#colorscheme(<q-args>)
 command! -nargs=+ SetFileType call user#set_filetype(<f-args>)
 command! -nargs=1 WWW call user#google(<q-args>)
-command! -bar -bang DenoRun call usr#deno_run(<bang>0)
+command! -bar -bang DenoRun call user#deno_run(<bang>0)
+command! PopupTerminal
+      \ call popup_create(term_start(
+      \     [&shell], { 'hidden': v:true, 'term_finish': 'close' }
+      \   ), {
+      \   'border': [], 'minwidth': winwidth(0)/2, 'minheight': &lines/2
+      \ })
 
 SetFileType *.lark lark
 SetFileType *.grammar,grammar.txt grammar
@@ -61,7 +69,24 @@ if has('vim_starting')
   autocmd user VimEnter * call user#startuptime()
 endif
 
+autocmd user BufEnter *
+      \ if &filetype ==# '' |
+      \   execute 'nnoremap <buffer> q <C-w>q' |
+      \ endif
 
 " vim as a pager
 autocmd user StdinReadPost * call user#pager()
 
+" enable cursorline in only needing it
+autocmd user CursorHold,CursorHoldI *
+      \ call user#auto_cursorline('CursorHold')
+autocmd user CursorMoved *
+      \ call user#auto_cursorline('CoursorMoved')
+autocmd user WinEnter *
+      \ call user#auto_cursorline('WinEnter')
+autocmd user WinLeave *
+      \ call user#auto_cursorline('WinLeave')
+
+" vim-jp Hack #202
+autocmd user BufWritePre *
+      \ call user#auto_mkdir(expand('<afile>:p:h'), v:cmdbang)

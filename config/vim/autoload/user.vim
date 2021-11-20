@@ -97,8 +97,6 @@ function! user#auto_cursorline(event) abort
   if a:event ==? 'WinEnter'
     setlocal cursorline
     let s:cursorline_lock = 2
-    autocmd user CursorMoved,CursorMovedI * ++once
-          \ call user#auto_cursorline('CursorMoved')
   elseif a:event ==? 'WinLeave'
     setlocal nocursorline
   elseif a:event ==? 'CursorMoved'
@@ -113,8 +111,6 @@ function! user#auto_cursorline(event) abort
   elseif a:event ==? 'CursorHold'
     setlocal cursorline
     let s:cursorline_lock = 1
-    autocmd user CursorMoved,CursorMovedI * ++once
-          \ call user#auto_cursorline('CursorMoved')
   endif
 endfunction
 
