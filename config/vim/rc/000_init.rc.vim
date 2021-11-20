@@ -52,7 +52,7 @@ SetFileType *[._]gitignore,*/git/ignore gitignore
 SetFileType */git/config gitconfig
 
 autocmd user BufReadPost * call user#remember_cursor()
-autocmd user VimEnter * ++nested
+autocmd user VimEnter,ColorSchemePre * ++nested
       \ call user#colorscheme#colorscheme(g:current_colorscheme)
 
 " echo message vim start up time

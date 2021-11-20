@@ -67,9 +67,10 @@ function! user#colorscheme#colorscheme(colorscheme) abort
     return g:current_colorscheme
   endif
   let g:current_colorscheme = a:colorscheme
-  let g:lightline['colorscheme'] = user#colorscheme#lightline()
+  let g:lightline.colorscheme = user#colorscheme#lightline()
+  execute 'autocmd user ColorScheme' a:colorscheme
+        \ printf('call user#colorscheme#set_customize("%s")', a:colorscheme)
   execute 'colorscheme' a:colorscheme
-  call user#colorscheme#set_customize(a:colorscheme)
   call lightline#init()
   call lightline#colorscheme()
   return g:current_colorscheme
