@@ -1,3 +1,6 @@
+
+" ------------------
+" encoding/char
 set encoding=utf-8
 scriptencoding utf-8
 if &modifiable
@@ -7,27 +10,26 @@ set fileencodings=ucs-boms,utf-8,euc-jp,cp932
 set fileformats=unix,dos,mac
 set ambiwidth=double
 
-set shortmess+=cs
-set completeopt=menuone,popup,noinsert,noselect
-set isfname-==
-
-set wildmenu
-set wildmode=longest,full
-set history=200
-
+" ------------------
+" color
+set background=dark
+set synmaxcol=200
 if has('termguicolors')
   set termguicolors
 endif
-
 if !has('gui_running')
   set t_Co=256
 endif
 
+" ------------------
+" stausline
 set laststatus=2
 set noshowmode
 set showcmd
-set ruler
+set noruler
 
+" ------------------
+" indent
 set expandtab
 set tabstop=8
 set softtabstop=8
@@ -35,42 +37,64 @@ set autoindent
 set smartindent
 set shiftwidth=2
 
+" ------------------
+" search
 set incsearch
 set ignorecase
 set smartcase
 set hlsearch
+set report=0
+set nowrapscan
 
-set formatoptions-=ro
-set whichwrap=b,s,h,l,<,>,[,],~
+" ------------------
+" display
 set number
-set cursorline
-set backspace=indent,eol,start
+set nocursorline
+set list
+set nowrap
+set linebreak
+set display=lastline,uhex
+set shortmess+=cs
+set lazyredraw
+set nofoldenable
 
-set helplang=ja,en
-set keywordprg=:help
+set t_vb=
+set novisualbell
+set belloff=all
+
+set listchars=tab:»-,trail:-,extends:»,precedes:«,eol:¬
+set fillchars& fillchars+=diff:/
+
+set pumheight=10
+set helpheight=12
+set cmdheight=2
+
+" ------------------
+" editing
+set backspace=indent,eol,start
+set whichwrap=b,s,h,l,<,>,[,],~
+set hidden
+set confirm
 
 set showmatch
 set matchtime=1
 set matchpairs& matchpairs+=<:>
 
-set background=dark
-set list
-set nowrap
-set display=lastline
-set t_vb=
-set novisualbell
-set listchars=tab:»-,trail:-,extends:»,precedes:«,eol:¬
-set hidden
-set synmaxcol=200
-
-set pumheight=10
-set cmdheight=2
 set clipboard=unnamed
 set mouse=a
 
-set packpath=
+set completeopt=menuone,popup,noinsert,noselect
+set isfname-==
 
-" buckup settings
+" ------------------
+" commandline
+set wildmenu
+set wildmode=longest,full
+set history=200
+set cedit=
+
+" ------------------
+" buckup
 set backup
 set writebackup
 set swapfile
@@ -87,3 +111,14 @@ endif
 if has('viminfo')
   execute 'set viminfo+=n' .. g:data_home .. '/viminfo'
 endif
+
+" ------------------
+" various
+set helplang=ja,en
+set keywordprg=:help
+
+set packpath=
+set ttyfast
+set title
+set autoread
+

@@ -1,17 +1,30 @@
+" mapleader
 let g:mapleader = ","
-noremap <Leader> <Nop>
-nnoremap ZZ <Nop>
-nnoremap ZQ <Nop>
-nnoremap Q <Nop>
+nnoremap <Leader> <Nop>
+xnoremap <Leader> <Nop>
+inoremap <Leader><Space> <Leader>
 inoremap <Leader><Leader> <ESC>
-vnoremap <Leader><Leader> <ESC>
-noremap <silent> j gj
-noremap <silent> k gk
-noremap x "_x
-noremap s "_s
-noremap Y y$
-noremap gj j
-noremap gk k
+xnoremap <Leader><Leader> <ESC>
+
+nnoremap ZZ <Nop>
+nnoremap Q <Nop>
+nnoremap S <Nop>
+
+nnoremap j gj
+xnoremap j gj
+nnoremap k gk
+xnoremap k gk
+nnoremap gj j
+xnoremap gj j
+nnoremap gk k
+xnoremap gk k
+
+nnoremap x "_x
+xnoremap x "_x
+nnoremap s "_s
+xnoremap s "_s
+nnoremap Y y$
+xnoremap Y y$
 
 nnoremap n nzz
 nnoremap N Nzz
@@ -29,26 +42,40 @@ inoremap <Down> <Nop>
 inoremap <Left> <Nop>
 inoremap <Right> <Nop>
 
-noremap <S-h> ^
-noremap <S-l> $
+nnoremap <S-h> <Home>
+nnoremap <S-l> <End>
+xnoremap <S-h> <Home>
+xnoremap <S-l> <End>
 
 nnoremap <C-l> <Cmd>nohlsearch<CR><C-l>
+nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
+nnoremap <Space> <Cmd>update<CR>
+nnoremap ^ <C-^>
 
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
+xnoremap v $
 
-inoremap <Leader>/ \
-cnoremap <Leader>/ \
+" moving
+noremap! <C-h> <Left>
+noremap! <C-j> <Down>
+noremap! <C-k> <Up>
+noremap! <C-l> <Right>
+noremap! <C-a> <Home>
+noremap! <C-e> <End>
 
-cabbr w!! w !sudo tee > /dev/null %
+" paste
+noremap! <C-p> <C-r>*
+
+noremap! <Leader>/ \
+
+cnoremap <C-x> <C-r>=expand('%:p')<CR>
+
+cabbrev w!! w !sudo tee > /dev/null %
+
+" toggle options
 nnoremap [Toggle] <Nop>
 nmap <Leader>t [Toggle]
 nnoremap [Toggle]w <Cmd>setlocal wrap! wrap?<CR>
 nnoremap [Toggle]p <Cmd>setlocal paste! paste?<CR>
 nnoremap [Toggle]c <Cmd>setlocal termguicolors! termguicolors?<CR>
 nnoremap [Toggle]n <Cmd>setlocal relativenumber! relativenumber?<CR>
-noremap S <Nop>
-vnoremap v $
 
