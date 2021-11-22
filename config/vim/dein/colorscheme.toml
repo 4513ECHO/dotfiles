@@ -15,6 +15,10 @@ SourceConf lightline.vim
 repo = 'halkn/lightline-lsp'
 on_source = ['vim-lsp']
 
+# TODO: it doesn't supprt terminal ansi colors
+# https://github.com/nanotech/jellybeans.vim/blob/master/ansi-term-colors.txt
+# https://github.com/akiyosi/jellybeans.vim/blob/master/colors/jellybeans.vim#L658
+# https://github.com/akiyosi/jellybeans.vim
 [[plugins]]
 repo = 'nanotech/jellybeans.vim'
 hook_add = '''
@@ -25,12 +29,24 @@ call add(g:colorscheme_list, 'jellybeans')
 repo = 'cocopon/iceberg.vim'
 hook_add = '''
 call add(g:colorscheme_list, 'iceberg')
+let g:colorscheme_customize.iceberg = {
+      \ 'highlight': {
+      \   'String': #{ ctermfg: 144, guifg: '#a7b1a9', },
+      \ }}
 '''
 
+# TODO: it doesn't supprt terminal ansi colors
+# ttps://github.com/gruvbox-community/gruvbox/blob/master/colors/gruvbox.vim#L340
+# ttps://github.com/gruvbox-community/gruvbox
 [[plugins]]
 repo = 'morhetz/gruvbox'
 hook_add = '''
 call add(g:colorscheme_list, 'gruvbox')
+let g:colorscheme_customize.gruvbox = {
+      \ 'highlight': {
+      \   'Visual': #{ ctermbg: 239, cterm: 'NONE',
+      \                guibg: '#565656', gui: 'NONE', },
+      \ }}
 '''
 
 [[plugins]]
@@ -45,6 +61,7 @@ call add(g:colorscheme_list, 'one')
 [[plugins]]
 repo = 'w0ng/vim-hybrid'
 hook_add = '''
+let g:hybrid_custom_term_colors = v:true
 call add(g:colorscheme_list, 'hybrid')
 '''
 
@@ -79,12 +96,21 @@ call add(g:colorscheme_list, 'falcon')
 repo = 'haystackandroid/snow'
 hook_add = '''
 call add(g:colorscheme_list, 'snow')
+let g:colorscheme_customize.snow = {
+      \ 'lightline': 'snow_dark',
+      \ }
 '''
 
 [[plugins]]
 repo = 'yuttie/hydrangea-vim'
 hook_add = '''
 call add(g:colorscheme_list, 'hydrangea')
+let g:colorscheme_customize.hydrangea = {
+      \ 'highlight': {
+      \   'Constant': #{ ctermbg: 'NONE', guibg: 'NONE',  },
+      \   'Number': #{ ctermbg: 'NONE', guibg: 'NONE',  },
+      \   'SpecialKey': #{ ctermbg: 'NONE', guibg: 'NONE',  },
+      \ }}
 '''
 
 [[plugins]]
@@ -99,6 +125,7 @@ call add(g:colorscheme_list, 'elly')
 # call add(g:colorscheme_list, 'vitaminonec')
 # '''
 
+# TODO: it doesn't supprt terminal ansi colors
 [[plugins]]
 repo = 'Rigellute/rigel'
 hook_add = '''
@@ -121,6 +148,10 @@ call add(g:colorscheme_list, 'nightfly')
 repo = 'connorholyday/vim-snazzy'
 hook_add = '''
 call add(g:colorscheme_list, 'snazzy')
+let g:colorscheme_customize.snazzy = {
+      \ 'highlight': {
+      \   'Visual': #{ ctermbg: 254, guibg: '#e4e4ee' },
+      \ }}
 '''
 
 [[plugins]]
@@ -140,3 +171,4 @@ repo = 'whatyouhide/vim-gotham'
 hook_add = '''
 call add(g:colorscheme_list, 'gotham')
 '''
+

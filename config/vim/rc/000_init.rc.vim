@@ -33,6 +33,7 @@ let g:loaded_zipPlugin         = v:true
 
 let g:current_colorscheme = get(g:, 'current_colorscheme', 'random')
 let g:colorscheme_list = get(g:, 'colorscheme_list', [])
+let g:colorscheme_customize = get(g:, 'colorscheme_customize', {'_': {}})
 
 command! -nargs=1 Runtime runtime! g:config_home <args>
 command! -nargs=1 SourceConf
@@ -60,7 +61,7 @@ SetFileType *[._]gitignore,*/git/ignore gitignore
 SetFileType */git/config gitconfig
 
 autocmd user BufReadPost * call user#remember_cursor()
-autocmd user VimEnter,ColorSchemePre * ++nested
+autocmd user ColorScheme,VimEnter * ++nested
       \ call user#colorscheme#colorscheme(g:current_colorscheme)
 
 " echo message vim start up time
