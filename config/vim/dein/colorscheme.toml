@@ -15,14 +15,15 @@ SourceConf lightline.vim
 repo = 'halkn/lightline-lsp'
 on_source = ['vim-lsp']
 
-# TODO: it doesn't supprt terminal ansi colors
-# https://github.com/nanotech/jellybeans.vim/blob/master/ansi-term-colors.txt
-# https://github.com/akiyosi/jellybeans.vim/blob/master/colors/jellybeans.vim#L658
-# https://github.com/akiyosi/jellybeans.vim
 [[plugins]]
 repo = 'nanotech/jellybeans.vim'
 hook_add = '''
 call add(g:colorscheme_list, 'jellybeans')
+let g:colorscheme_customize.jellybeans = {
+      \ 'terminal': [
+      \   '#151515', '#cf6a4c', '#70b950', '#fad07a', '#8fbfdc', '#c6b6ee', '#89b8c2', '#e8e8d3',
+      \   '#6b7089', '#cf6a4c', '#70b950', '#fad07a', '#8fbfdc', '#c6b6ee', '#89b8c2', '#e8e8d3',
+      \ ]}
 '''
 
 [[plugins]]
@@ -35,18 +36,18 @@ let g:colorscheme_customize.iceberg = {
       \ }}
 '''
 
-# TODO: it doesn't supprt terminal ansi colors
-# ttps://github.com/gruvbox-community/gruvbox/blob/master/colors/gruvbox.vim#L340
-# ttps://github.com/gruvbox-community/gruvbox
 [[plugins]]
 repo = 'morhetz/gruvbox'
 hook_add = '''
 call add(g:colorscheme_list, 'gruvbox')
 let g:colorscheme_customize.gruvbox = {
       \ 'highlight': {
-      \   'Visual': #{ ctermbg: 239, cterm: 'NONE',
-      \                guibg: '#565656', gui: 'NONE', },
-      \ }}
+      \   'Visual': #{ ctermbg: 239, cterm: 'NONE', guibg: '#565656', gui: 'NONE', },
+      \ },
+      \ 'terminal': [
+      \   '#282828', '#cc241d', '#98971a', '#d79921', '#458588', '#b16286', '#689d6a', '#a89984',
+      \   '#928374', '#fb4934', '#b8bb26', '#fabd2f', '#83a598', '#d3869b', '#8ec07c', '#ebdbb2',
+      \ ]}
 '''
 
 [[plugins]]
@@ -61,7 +62,6 @@ call add(g:colorscheme_list, 'one')
 [[plugins]]
 repo = 'w0ng/vim-hybrid'
 hook_add = '''
-let g:hybrid_custom_term_colors = v:true
 call add(g:colorscheme_list, 'hybrid')
 '''
 
@@ -125,11 +125,15 @@ call add(g:colorscheme_list, 'elly')
 # call add(g:colorscheme_list, 'vitaminonec')
 # '''
 
-# TODO: it doesn't supprt terminal ansi colors
 [[plugins]]
 repo = 'Rigellute/rigel'
 hook_add = '''
 call add(g:colorscheme_list, 'rigel')
+let g:colorscheme_customize.rigel = {
+       \ 'terminal': [
+       \   '#00384d', '#c43060', '#7fc06e', '#f08e48', '#1c8bd2', '#c694ff', '#00cccc', '#77929e',
+       \   '#517f8d', '#ff5a67', '#9cf087', '#ffcc1b', '#7eb2dd', '#fb94ff', '#00ffff', '#b7cff9',
+       \ ]}
 '''
 
 [[plugins]]
