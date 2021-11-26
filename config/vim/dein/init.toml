@@ -87,11 +87,25 @@ hook_add = '''
 SourceConf vim-lsp.vim
 '''
 
-# [[plugins]]
-# repo = 'liuchengxu/vista.vim'
-# depends = ['vim-lsp']
-# on_cmd = ['Vista']
-# hook_add = '''
-# let g:vista_default_executive = 'vim_lsp'
-# '''
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+depends = [
+  'lightline-lsp', 'vista.vim', 'iceberg.vim', 'lightline-gruvbox.vim',
+  'lightline-hybrid.vim', 'tokyonight-vim', 'falcon', 'snow', 'elly.vim', 'rigel',
+  'ayu-vim', 'vim-nightfly-guicolors', 'vim-snazzy', 'tender.vim',
+]
+hook_add = '''
+" Runtime dein/settings/lightline.vim
+SourceConf lightline.vim
+'''
+
+[[plugins]]
+repo = 'halkn/lightline-lsp'
+on_source = ['vim-lsp']
+
+[[plugins]]
+repo = 'shinchu/lightline-gruvbox.vim'
+
+[[plugins]]
+repo = 'cocopon/lightline-hybrid.vim'
 

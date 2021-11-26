@@ -1,21 +1,5 @@
 
 [[plugins]]
-repo = 'itchyny/lightline.vim'
-depends = [
-  'lightline-lsp', 'vista.vim', 'iceberg.vim', 'lightline-gruvbox.vim',
-  'lightline-hybrid.vim', 'tokyonight-vim', 'falcon', 'snow', 'elly.vim', 'rigel',
-  'ayu-vim', 'vim-nightfly-guicolors', 'vim-snazzy', 'tender.vim',
-]
-hook_add = '''
-" Runtime dein/settings/lightline.vim
-SourceConf lightline.vim
-'''
-
-[[plugins]]
-repo = 'halkn/lightline-lsp'
-on_source = ['vim-lsp']
-
-[[plugins]]
 repo = 'nanotech/jellybeans.vim'
 hook_add = '''
 call add(g:colorscheme_list, 'jellybeans')
@@ -32,7 +16,7 @@ hook_add = '''
 call add(g:colorscheme_list, 'iceberg')
 let g:colorscheme_customize.iceberg = {
       \ 'highlight': {
-      \   'String': #{ ctermfg: 144, guifg: '#a7b1a9', },
+      \   'String': #{ ctermfg: 144, guifg: '#a7b1a9' },
       \ }}
 '''
 
@@ -42,7 +26,7 @@ hook_add = '''
 call add(g:colorscheme_list, 'gruvbox')
 let g:colorscheme_customize.gruvbox = {
       \ 'highlight': {
-      \   'Visual': #{ ctermbg: 239, cterm: 'NONE', guibg: '#565656', gui: 'NONE', },
+      \   'Visual': #{ ctermbg: 239, cterm: 'NONE', guibg: '#565656', gui: 'NONE' },
       \ },
       \ 'terminal': [
       \   '#282828', '#cc241d', '#98971a', '#d79921', '#458588', '#b16286', '#689d6a', '#a89984',
@@ -50,9 +34,7 @@ let g:colorscheme_customize.gruvbox = {
       \ ]}
 '''
 
-[[plugins]]
-repo = 'shinchu/lightline-gruvbox.vim'
-
+# TODO: fix blue of term ansi color
 [[plugins]]
 repo = 'rakr/vim-one'
 hook_add = '''
@@ -64,9 +46,6 @@ repo = 'w0ng/vim-hybrid'
 hook_add = '''
 call add(g:colorscheme_list, 'hybrid')
 '''
-
-[[plugins]]
-repo = 'cocopon/lightline-hybrid.vim'
 
 [[plugins]]
 repo = 'joshdick/onedark.vim'
@@ -107,9 +86,9 @@ hook_add = '''
 call add(g:colorscheme_list, 'hydrangea')
 let g:colorscheme_customize.hydrangea = {
       \ 'highlight': {
-      \   'Constant': #{ ctermbg: 'NONE', guibg: 'NONE',  },
-      \   'Number': #{ ctermbg: 'NONE', guibg: 'NONE',  },
-      \   'SpecialKey': #{ ctermbg: 'NONE', guibg: 'NONE',  },
+      \   'Constant': #{ ctermbg: 'NONE', guibg: 'NONE' },
+      \   'Number': #{ ctermbg: 'NONE', guibg: 'NONE' },
+      \   'SpecialKey': #{ ctermbg: 'NONE', guibg: 'NONE' },
       \ }}
 '''
 
@@ -155,7 +134,11 @@ call add(g:colorscheme_list, 'snazzy')
 let g:colorscheme_customize.snazzy = {
       \ 'highlight': {
       \   'Visual': #{ ctermbg: 254, guibg: '#e4e4ee' },
-      \ }}
+      \ },
+      \ 'terminal': [
+      \   '#282a36', '#ff5c57', '#5af78e', '#faf99d', '#57c7ff', '#ff6ac1', '#9aedfe', '#f1f1f0',
+      \   '#43454f', '#ff5c57', '#5af78e', '#f3f99d', '#57c7ff', '#ff6ac1', '#9aedfe', '#eff0eb',
+      \ ]}
 '''
 
 [[plugins]]
@@ -175,4 +158,54 @@ repo = 'whatyouhide/vim-gotham'
 hook_add = '''
 call add(g:colorscheme_list, 'gotham')
 '''
+
+[[plugins]]
+repo = 'vim-scripts/wombat256.vim'
+hook_add = '''
+call add(g:colorscheme_list, 'wombat256mod')
+let g:colorscheme_customize.wombat256mod = {
+      \ 'lightline': 'wombat',
+      \ 'highlight': {
+      \   'NonText': #{ ctermfg: 241, ctermbg: 'NONE', guifg: '#857b6f', guibg: 'NONE' },
+      \ }}
+'''
+
+[[plugins]]
+repo = 'tomasr/molokai'
+hook_add = '''
+call add(g:colorscheme_list, 'molokai')
+'''
+
+[[plugins]]
+repo = 'sainnhe/edge'
+hook_add = '''
+call add(g:colorscheme_list, 'edge')
+'''
+
+[[plugins]]
+repo = 'rhysd/vim-color-spring-night'
+hook_add = '''
+call add(g:colorscheme_list, 'spring-night')
+let g:colorscheme_customize['spring-night'] = {
+      \ 'lightline': 'spring_night',
+      \ }
+'''
+
+[[plugins]]
+repo = 'haishanh/night-owl.vim'
+hook_add = '''
+call add(g:colorscheme_list, 'night-owl')
+let g:colorscheme_customize['night-owl'] = {
+      \ 'lightline': 'nightowl',
+      \ }
+'''
+
+# TODO: plugin is supprting lightline.vim, but I can't enable it because v:lua
+#       is only in neovim. I will send repository pull-request...
+# [[plugins]]
+# repo = 'EdenEast/nightfox.nvim'
+# if = 'has("nvim") || has("lua")'
+# hook_add = '''
+# call add(g:colorscheme_list, 'nightfox')
+# '''
 
