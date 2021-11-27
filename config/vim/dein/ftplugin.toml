@@ -42,9 +42,23 @@ repo = 'plasticboy/vim-markdown'
 on_ft = ['markdown']
 
 [[plugins]]
+repo = 'mattn/vim-maketable'
+on_ft = ['markdown']
+on_cmd = ['MakeTable']
+
+[[plugins]]
 repo = 'gko/vim-coloresque'
 on_ft = ['vim', 'css', 'scss', 'sass']
 
 [[plugins]]
 repo = 'lark-parser/vim-lark-syntax'
 on_ft = ['lark']
+
+[[plugins]]
+repo = 'vim-jp/syntax-vim-ex'
+on_ft = ['vim']
+
+[[plugins]]
+repo = 'tmux-plugins/vim-tmux'
+on_ft = ['tmux']
+
