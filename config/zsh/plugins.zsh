@@ -1,3 +1,5 @@
+[[ -n "$MINIMUM_DOTFILES" ]] && return
+
 if [[ ! -f $ZDOTDIR/.zinit/bin/zinit.zsh ]]; then
   print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
   command mkdir -p "$ZDOTDIR/.zinit" && command chmod g-rwX "$ZDOTDIR/.zinit"
@@ -12,10 +14,6 @@ source "$ZDOTDIR/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-
-zinit light-mode for \
-  UncleClapton/z-a-bin-gem-node
-
 zinit wait lucid light-mode for \
   atinit'ZINIT[COMPINIT_OPTS]=-C; zicdreplay' \
   atload'fast-theme forest > /dev/null' \
@@ -26,13 +24,21 @@ zinit wait lucid light-mode for \
     'zsh-users/zsh-autosuggestions' \
   atinit'STICKY_TABLE=jis' \
     '4513echo/zsh-sticky-shift' \
-  sbin'fzf-tmux' pick'bin/fzf-tmux' \
+  as'program' pick'bin/fzf-tmux' \
   multisrc'shell/{completion,key-bindings}.zsh' \
-    'junegunn/fzf'
+    'junegunn/fzf' \
+  asload'_lazyload_settings' \
+    'qoomon/zsh-lazyload'
 
-zinit wait lucid from'github-rel' light-mode for \
-  sbin'fzf' 'junegunn/fzf' \
-  sbin'jq' 'stedolan/jq' \
-  sbin'ghq' 'x-motemen/ghq' \
-  sbin'gh' 'cli/cli'
+zinit ice wait lucid as'completion' cp'git-completion.zsh -> _git'
+zinit snippet https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
 
+_lazyload_settings () {
+  :
+  # lazyload pip -- 'source <(pip completion --zsh)'
+}
+
+# zinit wait lucid from'github-rel' as'null' light-mode for \
+#   sbin 'junegunn/fzf' \
+#   sbin 'stedolan/jq' \
+#   sbin 'x-motemen/ghq' \

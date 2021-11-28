@@ -1,3 +1,5 @@
+# zmodload zsh/zprof && zprof
+
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -18,6 +20,7 @@ export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 
 export EDITOR="vim"
 export PAGER="less"
+export MANPAGER="vim -M +MANPAGER -"
 export LESS="-g -i -M -R -W -z-4 -x4"
 export LESSCHARSET="UTF-8"
 
@@ -30,3 +33,7 @@ export HISTSIZE=1000000
 export SAVEHIST=1000000
 
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+
+export FPATH="$ZDOTDIR/completions:$FPATH"
+
+[[ -f "~/.minimum_dotfiles" ]] && export MINIMUM_DOTFILES=true
