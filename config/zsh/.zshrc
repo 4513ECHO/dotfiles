@@ -1,5 +1,3 @@
-[[ -f "~/.minimum_dotfiles" ]] && export MINIMUM_DOTFILES=true
-
 # 入力したコマンドが存在せず、かつディレクトリ名と一致するなら、ディレクトリに cd する
 setopt auto_cd
 # cd した先のディレクトリをディレクトリスタックに追加する
@@ -22,10 +20,14 @@ zstyle ':completion:*:default' menu select=2
 setopt auto_menu
 setopt auto_param_keys
 
-export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --marker='*' --select-1 --exit-0"
+export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --marker='*' --exit-0"
 
 bindkey -e
 autoload -Uz add-zsh-hook
+
+if [[ -f ~/.minimum_dotfiles ]]; then
+  export MINIMUM_DOTFILES=true
+fi
 
 () {
   for rc in $ZDOTDIR/*.zsh; do
