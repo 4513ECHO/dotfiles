@@ -1,10 +1,5 @@
-autoload -Uz add-zsh-hook
-
-VENV_DIR_NAME="venv"
-SSH_KEY="id_git_rsa"
-AGENT="$HOME/.ssh/agent"
-
 auto_venv () {
+  local VENV_DIR_NAME="venv"
   local activate="$VENV_DIR_NAME/bin/activate"
   if [[ -z "$VIRTUAL_ENV" ]]; then
     if [[ -f $activate ]]; then
@@ -24,49 +19,53 @@ add-zsh-hook chpwd auto_venv
 [[ -n "$TMUX" ]] && auto_venv
 
 enable_agent_forward () {
+  local SSH_KEY="id_git_rsa"
   if [ -z $SSH_AUTH_SOCK ]; then
     eval $(ssh-agent) > /dev/null
   fi
   ssh-add $HOME/.ssh/$SSH_KEY
 }
 
-agent_symlink () {
+export SSH_SYMLINK_SOCK="$HOME/.ssh/agent"
+agent-symlink () {
   if [ -S "$SSH_AUTH_SOCK" ]; then
     case "$SSH_AUTH_SOCK" in
       /tmp/ssh-*/agent.[0-9]* )
-        ln -snf "$SSH_AUTH_SOCK" "$AGENT"
-        export SSH_AUTH_SOCK="$AGENT"
+        ln -snf "$SSH_AUTH_SOCK" "$SSH_SYMLINK_SOCK"
+        export SSH_AUTH_SOCK="$SSH_SYMLINK_SOCK"
       ;;
     esac
-  elif [ -S "$AGENT" ]; then
-    export SSH_AUTH_SOCK="$AGENT"
+  elif [ -S "$SSH_SYMLINK_SOCK" ]; then
+    export SSH_AUTH_SOCK="$SSH_SYMLINK_SOCK"
   fi
 }
 
-agent_symlink
+agent-symlink
 [ -f $HOME/.ssh/$SSH_KEY ] && [ -f $HOME/.ssh/config ] && enable_agent_forward
 
 auto_tmux () {
   local list create_new_session
-  if [[ ! -n $TMUX ]] && [[ $- == *l* ]]; then
-    list="$(tmux list-sessions -F '#S: #{session_windows} windows [#W] at #{pane_current_path}')"
-    if [[ -z "$list" ]]; then
-      tmux new-session -t "$(flower)"
-    fi
-    create_new_session="Create New Session"
-    list="$list\n$create_new_session:"
-    list="$(echo $list | fzf | cut -d: -f1)"
-    if [[ "$list" = "$create_new_session" ]]; then
-      tmux new-session -t "$(flower)"
-    elif [[ -n "$list" ]]; then
-      tmux attach-session -t "$list"
+  if [[ $- == *l* ]]; then
+    if [[ -z "$TMUX" ]]; then
+      list="$(tmux list-sessions -F '#S: #{session_windows} windows [#W] at #{pane_current_path}')"
+      if [[ -z "$list" ]]; then
+        tmux new-session -t "$(flower)"
+      fi
+      create_new_session="Create New Session"
+      list="$list\n$create_new_session:"
+      list="$(echo $list | fzf | cut -d: -f1)"
+      if [[ "$list" = "$create_new_session" ]]; then
+        tmux new-session -t "$(flower)"
+      elif [[ -n "$list" ]]; then
+        tmux attach-session -t "$list"
+      fi
     else
       :
     fi
   fi
 }
 
-[[ $SHLVL -eq 1 ]] && auto_tmux
+[[ $SHLVL -eq 1 ]] && [[ -z "$MINIMUM_DOTFILES" ]] && auto_tmux
 
 rename-pane-pwd () {
   [[ $- == *m* ]] && printf '\033]2;%s\033\\' "$(pathshorten "$PWD")"
@@ -100,6 +99,13 @@ vim_clean () {
   rm -rf ~/.local/share/vim/vim-lsp-settings/
 }
 
+zsh_clean () {
+  rm -rf $ZDOTDIR/.zinit
+  rm -f $ZDOTDIR/*.zwc
+  rm -f $ZDOTDIR/.zcompdump
+  rm -f ~/.cache/zsh/compdump*
+}
+
 benchmark () {
   local tempfile=$(mktemp)
   repeat 10 { time zsh -i -c exit } 2>&1 2>/$tempfile
@@ -118,23 +124,4 @@ benchmark () {
     }' $tempfile)
 }
 
-() {
-  autoload -Uz compinit
-  : ${ZSH_COMPDUMP:=$XDG_CACHE_HOME/zsh/compdump-$(hostname)-$ZSH_VERSION}
-  local dump=$ZSH_COMPDUMP
-  local dumpc=${dump}.zwc
-  # re-check dump file that are older than 24 hours
-  if [[ -n $dump(#qN.mh+24) ]]; then
-    compinit -i -d "$dump"
-    { rm -rf "$dumpc" && zcompile "$dump" } &!
-  else
-    compinit -C -d "$dump"
-    { [[ ! -s $dumpc || $dump -nt $dumpc ]] && rm -rf "$dumpc" && zcompile "$dump" } &!
-  fi
-  for f in $(find $ZDOTDIR/ -type f -name '*.zsh'); do
-    if [[ ! -f "$f.zwc" ]] || [[ "$f" -nt "$f.zwc" ]]; then
-       zcompile "$f"
-    fi
-  done
-}
-
+type _deno > /dev/null || deno completions zsh > $ZDOTDIR/completions/_deno
