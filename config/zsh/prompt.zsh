@@ -36,7 +36,7 @@ zstyle ':vcs_info:*' formats "%F{${prompt_colors[green]}}%u%c(%b)%m%f"
 zstyle ':vcs_info:*' actionformats '%c%y<%a>(%b)%m%f'
 
 # extra vcs_info hooks
-+vi-git-hook-begin () {
+function +vi-git-hook-begin () {
   if [[ "$(command git rev-parse --is-inside-work-tree 2> /dev/null)" \
       != "true" ]]; then
     return 1
@@ -44,7 +44,7 @@ zstyle ':vcs_info:*' actionformats '%c%y<%a>(%b)%m%f'
   return 0
 }
 
-+vi-git-untracked () {
+function +vi-git-untracked () {
   if command git status --porcelain 2> /dev/null \
       | command grep '^??' > /dev/null 2>&1; then
     # hook_com[staged]+="%F{${prompt_colors[yellow]}}?"
@@ -52,7 +52,7 @@ zstyle ':vcs_info:*' actionformats '%c%y<%a>(%b)%m%f'
   fi
 }
 
-+vi-git-unpushed () {
+function +vi-git-unpushed () {
   local branch remote upstream pushed
   branch="$(command git symbolic-ref --short HEAD 2> /dev/null)"
   remote="$(command git config branch.${branch}.remote 2> /dev/null)"
@@ -67,17 +67,18 @@ zstyle ':vcs_info:*' actionformats '%c%y<%a>(%b)%m%f'
 }
 
 # add hook redrawing prompt
-redraw-prompt () {
+function redraw-prompt () {
   PROMPT="$(venv-prompt)%F{${prompt_colors[green]}}%n@%m%f:%F{${prompt_colors[cyan]}}%~%f%# "
   RPROMPT="${vcs_info_msg_0_}"
 }
-redraw-prompt-with-vsc_info () {
+
+function redp-with-vsc_info () {
   vcs_info
   redraw-prompt
 }
 
 if [[ -z "$NO_VSC_INFO" ]]; then
-  add-zsh-hook precmd redraw-prompt-with-vcs_info
+  add-zsh-hook precmd redp-with-vcs_info
 else
   add-zsh-hook precmd redraw-prompt
 fi
