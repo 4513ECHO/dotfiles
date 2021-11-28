@@ -72,7 +72,7 @@ function redraw-prompt () {
   RPROMPT="${vcs_info_msg_0_}"
 }
 
-function redp-with-vsc_info () {
+function redp-with-vcs_info () {
   vcs_info
   redraw-prompt
 }
