@@ -1,4 +1,4 @@
-autoload -Uz vcs_info || NO_VSC_INFO=true
+autoload -Uz vcs_info 2> /dev/null || export NO_VCS_INFO=true
 setopt prompt_subst
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -77,7 +77,7 @@ function redp-with-vcs_info () {
   redraw-prompt
 }
 
-if [[ -z "$NO_VSC_INFO" ]]; then
+if [[ -z "$NO_VCS_INFO" ]]; then
   add-zsh-hook precmd redp-with-vcs_info
 else
   add-zsh-hook precmd redraw-prompt

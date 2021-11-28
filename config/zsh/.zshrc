@@ -1,4 +1,4 @@
-bindkey -v
+[[ -f "~/.minimum_dotfiles" ]] && export MINIMUM_DOTFILES=true
 
 # 入力したコマンドが存在せず、かつディレクトリ名と一致するなら、ディレクトリに cd する
 setopt auto_cd
@@ -16,14 +16,45 @@ setopt hist_ignore_all_dups
 # コマンドがスペースで始まる場合、コマンド履歴に追加しない
 setopt hist_ignore_space
 
+setopt no_beep
+
 zstyle ':completion:*:default' menu select=2
 setopt auto_menu
 setopt auto_param_keys
 
 export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --marker='*' --select-1 --exit-0"
 
-for rc in $ZDOTDIR/*.zsh; do
-  source "$rc"
-done
+bindkey -e
+autoload -Uz add-zsh-hook
 
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+() {
+  for rc in $ZDOTDIR/*.zsh; do
+    source "$rc"
+  done
+}
+
+() {
+  autoload -Uz compinit
+  : ${ZSH_COMPDUMP:=$XDG_CACHE_HOME/zsh/compdump-$(hostname)-$ZSH_VERSION}
+  local dump=$ZSH_COMPDUMP
+  local dumpc=${dump}.zwc
+  # re-check dump file that are older than 24 hours
+  if [[ -n $dump(#qN.mh+24) ]]; then
+    compinit -i -d "$dump"
+    { rm -rf "$dumpc" && zcompile "$dump" } &!
+  else
+    compinit -C -d "$dump"
+    { [[ ! -s $dumpc || $dump -nt $dumpc ]] && rm -rf "$dumpc" && zcompile "$dump" } &!
+  fi
+  for f in $(find $ZDOTDIR/ -type f -name '*.zsh') $ZDOTDIR/.zshrc; do
+    if [[ ! -f "$f.zwc" ]] || [[ "$f" -nt "$f.zwc" ]]; then
+      { zcompile "$f" } &!
+    fi
+  done
+}
+
+export LOADED_ZSHRC=true
+
+if type zprof > /dev/null; then
+  zprof | vim -
+fi

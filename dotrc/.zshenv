@@ -35,5 +35,3 @@ export SAVEHIST=1000000
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 export FPATH="$ZDOTDIR/completions:$FPATH"
-
-[[ -f "~/.minimum_dotfiles" ]] && export MINIMUM_DOTFILES=true
