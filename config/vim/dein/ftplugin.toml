@@ -3,6 +3,10 @@ let g:python_highlight_all = v:true
 let g:awk_is_gawk = v:true
 let g:is_bash = v:true
 let g:rust_bang_comment_leader = v:true
+let g:markdown_fenced_languages = ['ts=typescript']
+
+autocmd user ColorScheme *
+      \ hi link markdownCode Constant
 '''
 
 [ftplugin]
@@ -40,6 +44,11 @@ on_ft = ['toml']
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
 on_ft = ['markdown']
+hook_add = '''
+let g:vim_markdown_math = v:true
+let g:vim_markdown_frontmatter = v:true
+let g:vim_markdown_strikethrough = v:true
+'''
 
 [[plugins]]
 repo = 'mattn/vim-maketable'
