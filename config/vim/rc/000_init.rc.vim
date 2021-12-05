@@ -60,38 +60,73 @@ SetFileType *[._]curlrc curlrc
 SetFileType *[._]gitignore,*/git/ignore gitignore
 SetFileType */git/config gitconfig
 
-autocmd user BufReadPost * call user#remember_cursor()
-
 augroup random_colorscheme
   autocmd!
-  autocmd ColorScheme,VimEnter * ++nested
-        \ call user#colorscheme#colorscheme(g:current_colorscheme)
+  " autocmd ColorScheme,VimEnter * ++nested
+  "      \ call user#colorscheme#colorscheme(g:current_colorscheme)
+  " autocmd VimEnter * ++nested
+  "    \ redraw! | call timer_start(0, { -> user#colorscheme#random() })
+  autocmd VimEnter * ++nested
+       \ call user#colorscheme#random()
+  " autocmd VimEnter * ++nested
+  "     \ colorscheme snow
 augroup END
 
 " echo message vim start up time
 if has('vim_starting')
   let g:startuptime = reltime()
-  autocmd user VimEnter * call user#startuptime()
+  autocmd user VimEnter *
+        \ : let g:startuptime = reltime(g:startuptime)
+        \ | redraw
+        \ | echomsg printf('startuptime: %fms', reltimefloat(g:startuptime) * 1000)
 endif
 
+" restore cursor
+" from `:help restore-cursor`
+autocmd user BufReadPost *
+      \ : if line('''"') > 1 && line('''"') <= line('$')
+      \ |   execute 'normal! g`"'
+      \ | endif
+
 autocmd user BufEnter *
-      \ if &filetype ==# '' |
-      \   execute 'nnoremap <buffer> q <C-w>q' |
-      \ endif
+      \ : if &filetype ==# ''
+      \ |   execute 'nnoremap <buffer> q <C-w>q'
+      \ | endif
 
 " vim as a pager
 autocmd user StdinReadPost * call user#pager()
 
 " enable cursorline in only needing it
+" from https://thinca.hatenablog.com/entry/20090530/1243615055
 autocmd user CursorHold,CursorHoldI *
       \ call user#auto_cursorline('CursorHold')
 autocmd user CursorMoved *
-      \ call user#auto_cursorline('CoursorMoved')
+      \ call user#auto_cursorline('CursorMoved')
 autocmd user WinEnter *
       \ call user#auto_cursorline('WinEnter')
 autocmd user WinLeave *
       \ call user#auto_cursorline('WinLeave')
 
-" vim-jp Hack #202
+" auto make directories
+" from https://vim-jp.org/vim-users-jp/2011/02/20/Hack-202.html
 autocmd user BufWritePre *
       \ call user#auto_mkdir(expand('<afile>:p:h'), v:cmdbang)
+
+if has('nvim')
+  autocmd user TermOpen * startinsert
+endif
+
+" auto disable paste mode
+autocmd user InsertLeave * setlocal nopaste
+
+" auto quickfix opener
+" from https://github.com/monaqa/dotfiles/blob/424b0ab2d7/.config/nvim/scripts/autocmd.vim
+autocmd user QuickFixCmdPost [^l]* cwindow
+autocmd user QuickFixCmdPost l** lwindow
+
+" faster syntax highlight
+autocmd user Syntax *
+      \ : if line('$') > 1000
+      \ |   syntax sync minlines=100
+      \ | endif
+
