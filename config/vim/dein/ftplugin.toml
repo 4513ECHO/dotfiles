@@ -26,6 +26,7 @@ setlocal textwidth=80
 setlocal smarttab
 setlocal expandtab
 setlocal nosmartindent
+inoreabbrev <buffer> improt import
 '''
 
 help = '''
@@ -34,6 +35,33 @@ setlocal iskeyword+=:
 setlocal iskeyword+=-
 setlocal iskeyword+=+
 nnoremap <buffer> q <C-w>q
+'''
+
+dockerfile = '''
+function! s:set_abbrev(instruction) abort
+  execute 'inoreabbrev <expr><buffer>' a:instruction
+        \ printf("(getline('.')[:col('.') - 2] ==# '%s')", a:instruction)
+        \ printf("? '%s' : '%s'", toupper(a:instruction), a:instruction)
+endfunction
+
+call s:set_abbrev('add')
+call s:set_abbrev('cmd')
+call s:set_abbrev('copy')
+call s:set_abbrev('entrypoint')
+call s:set_abbrev('env')
+call s:set_abbrev('expose')
+call s:set_abbrev('from')
+call s:set_abbrev('healthcheck')
+call s:set_abbrev('label')
+call s:set_abbrev('onbuild')
+call s:set_abbrev('run')
+call s:set_abbrev('shell')
+call s:set_abbrev('user')
+call s:set_abbrev('volume')
+call s:set_abbrev('workdir')
+
+inoreabbrev <expr><buffer> as
+      \ (getline('.')[0 : col('.') - 2] =~# '^FROM\s\+.*\s\+') ? 'AS' : 'as'
 '''
 
 [[plugins]]
