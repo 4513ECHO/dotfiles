@@ -35,6 +35,14 @@ let s:sourceOptions['vim-lsp'] = {
       \ }
 
 let s:sourceOptions.necovim = {'mark': 'vim'}
+let s:sourceOptions.skkeleton = {
+      \ 'mark': 'skk',
+      \ 'matchers': ['skkeleton'],
+      \ 'sorters': [],
+      \ 'converters': ['converter_remove_overlap'],
+      \ 'minAutoCompleteLength': 2,
+      \ }
+
 let s:sourceOptions.buffer = {'mark': 'buf'}
 " let s:sourceOptions['cmdline-history'] = {'mark': 'hist'}
 let s:sourceOptions.cmdline = {'mark': 'cmd'}

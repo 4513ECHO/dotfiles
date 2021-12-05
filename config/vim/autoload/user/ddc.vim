@@ -32,6 +32,18 @@ function! user#ddc#cmdline_post() abort
   set wildchar=<Tab>
 endfunction
 
+function! user#ddc#skkeleton_pre() abort
+  let b:skkeleton_enabled = v:true
+  let b:prev_buffer_config = ddc#custom#get_buffer()
+  call ddc#custom#patch_buffer('sources', ['skkeleton'])
+endfunction
+
+function! user#ddc#skkeleton_post() abort
+  call ddc#custom#set_buffer(b:prev_buffer_config)
+  unlet b:skkeleton_enabled
+  unlet b:prev_buffer_config
+endfunction
+
 function! user#ddc#imap_cr() abort
   if pum#visible()
     call pum#map#confirm()

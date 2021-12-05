@@ -41,6 +41,16 @@ on_source = 'ddc.vim'
 repo = 'Shougo/ddc-cmdline'
 on_source = 'ddc.vim'
 
+[[plugins]]
+repo = 'vim-skk/skkeleton'
+depends = ['denops.vim']
+on_source = 'ddc.vim'
+hook_source = '''
+imap <C-u> <Plug>(skkeleton-toggle)
+cmap <C-u> <Plug>(skkeleton-toggle)
+SourceConf skkeleton.vim
+'''
+
 # filters
 
 [[plugins]]
