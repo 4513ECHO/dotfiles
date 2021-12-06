@@ -8,15 +8,12 @@ let s:sourceOptions._ = {
       \ 'ignoreCase': v:true,
       \ 'matchers': ['matcher_fuzzy'],
       \ 'sorters': ['sorter_fuzzy'],
-      \ 'converters': ['converter_remove_overlap', 'converter_truncate',
-      \                'converter_fuzzy'],
+      \ 'converters': ['converter_remove_overlap', 'converter_fuzzy'],
       \ 'maxCandidates': 15,
       \ }
 
-
 let s:sourceOptions.around = {
       \ 'mark': 'ard',
-      \ 'minAutoCompleteLength': 3,
       \ 'isVolatile': v:true,
       \ 'maxCandidates': 10,
       \ }
@@ -34,13 +31,17 @@ let s:sourceOptions['vim-lsp'] = {
       \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
       \ }
 
-let s:sourceOptions.necovim = {'mark': 'vim'}
 let s:sourceOptions.skkeleton = {
       \ 'mark': 'skk',
       \ 'matchers': ['skkeleton'],
       \ 'sorters': [],
       \ 'converters': ['converter_remove_overlap'],
       \ 'minAutoCompleteLength': 2,
+      \ }
+
+let s:sourceOptions.necovim = {
+      \ 'mark': 'vim',
+      \ 'isVolatile': v:true,
       \ }
 
 let s:sourceOptions.buffer = {'mark': 'buf'}
@@ -54,7 +55,7 @@ let s:sourceParams.buffer = {
       \ }
 " let s:sourceParams['cmdline-history'] = {'maxSize': 100}
 
-let s:filterParams.converter_truncate = {'maxInfoWidth': 30}
+" let s:filterParams.converter_truncate = {'maxInfoWidth': 30}
 
 call ddc#custom#patch_filetype(
       \ ['vim', 'toml'], {
@@ -80,6 +81,7 @@ let s:patch_global.sourceOptions = s:sourceOptions
 let s:patch_global.sourceParams = s:sourceParams
 let s:patch_global.filterParams = s:filterParams
 let s:patch_global.backspaceCompletion = v:true
+let s:patch_global.specialBufferCompletion = v:true
 
 " Use pum.vim
 let s:patch_global.autoCompleteEvents = [
@@ -95,11 +97,9 @@ call ddc#custom#patch_global(s:patch_global)
 
 inoremap <silent><expr> <C-n>
       \ pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>'
-      \ : ddc#manual_complete()
+      \ : ddc#map#manual_complete()
 inoremap <C-p> <Cmd>call pum#map#select_relative(-1)<CR>
 inoremap <silent><expr> <BS> user#ddc#imap_bs()
 inoremap <silent><expr> <CR> user#ddc#imap_cr()
-inoremap <C-y> <Cmd>call pum#map#confirm()<CR>
-inoremap <C-e> <Cmd>call pum#map#cancel()<CR>
 
 call ddc#enable()

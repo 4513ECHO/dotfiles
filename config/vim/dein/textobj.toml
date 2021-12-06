@@ -1,12 +1,15 @@
 [[plugins]]
 repo = 'machakann/vim-sandwich'
+# depends = [
+#   'vim-repeat', 'vim-textobj-entire', 'vim-textobj-line',
+#   'vim-textobj-indent', 'textobj-wiw', 'vim-textobj-continuous-line',
+# ]
 depends = [
   'vim-repeat', 'vim-textobj-entire', 'vim-textobj-line',
-  'vim-textobj-indent', 'textobj-wiw', 'vim-textobj-continuous-line',
+  'vim-textobj-wiw', 'vim-textobj-anyblock', 'vim-textobj-between',
 ]
 hook_add = '''
-autocmd user VimEnter *
-     \ runtime macros/sandwich/keymap/surround.vim
+runtime macros/sandwich/keymap/surround.vim
 '''
 
 [[plugins]]
@@ -18,31 +21,41 @@ repo = 'kana/vim-textobj-user'
 
 [[plugins]]
 repo = 'kana/vim-textobj-entire'
-on_map = { xo = '<Plug>(textobj-entire' }
+on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
 
 [[plugins]]
 repo = 'kana/vim-textobj-line'
-on_map = { xo = '<Plug>(textobj-line' }
+on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
 
-[[plugins]]
-repo = 'kana/vim-textobj-indent'
-on_map = { xo = '<Plug>(textobj-indent' }
-depends = ['vim-textobj-user']
+# [[plugins]]
+# repo = 'kana/vim-textobj-indent'
+# on_map = { xo = '<Plug>(textobj-indent' }
+# depends = ['vim-textobj-user']
 
 [[plugins]]
 repo = 'h1mesuke/textobj-wiw'
-on_map = { xo = '<Plug>(textobj-wiw' }
+on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
 hook_add = '''
 let g:textobj_wiw_no_default_key_mappings = v:true
-omap a_ <Plug>(textobj-wiw-a)
-omap i_ <Plug>(textobj-wiw-i)
-xmap a_ <Plug>(textobj-wiw-a)
-xmap i_ <Plug>(textobj-wiw-i)
+omap au <Plug>(textobj-wiw-a)
+omap iu <Plug>(textobj-wiw-i)
+xmap au <Plug>(textobj-wiw-a)
+xmap iu <Plug>(textobj-wiw-i)
 '''
 
 [[plugins]]
-repo = 'rhysd/vim-textobj-continuous-line'
+repo = 'rhysd/vim-textobj-anyblock'
+on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
+
+[[plugins]]
+repo = 'thinca/vim-textobj-between'
+on_map = { xo = '<Plug>' }
+depends = ['vim-textobj-user']
+
+# [[plugins]]
+# repo = 'rhysd/vim-textobj-continuous-line'
+# depends = ['vim-textobj-user']

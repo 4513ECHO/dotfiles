@@ -1,11 +1,14 @@
 [[plugins]]
+repo = 'vim-denops/denops.vim'
+on_func = ['denops#server#start']
+if = 'executable("deno")'
+
+[[plugins]]
 repo = 'Shougo/ddc.vim'
 depends = ['context_filetype.vim', 'denops.vim', 'pum.vim', 'lexima.vim']
 on_event = ['InsertEnter', 'CmdlineEnter']
-hook_add = '''
-nnoremap : <Cmd>call user#ddc#cmdline_pre()<CR>:
-'''
 hook_source = '''
+nnoremap : <Cmd>call user#ddc#cmdline_pre()<CR>:
 " Runtime dein/settings/ddc.vim
 SourceConf ddc.vim
 '''
@@ -21,8 +24,7 @@ on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'shun/ddc-vim-lsp'
-on_source = 'ddc.vim'
-depends = 'vim-lsp'
+on_source = ['ddc.vim', 'vim-lsp']
 
 [[plugins]]
 repo = 'Shougo/neco-vim'
@@ -57,9 +59,9 @@ SourceConf skkeleton.vim
 repo = 'tani/ddc-fuzzy'
 on_source = 'ddc.vim'
 
-[[plugins]]
-repo = 'matsui54/ddc-converter_truncate'
-on_source = 'ddc.vim'
+# [[plugins]]
+# repo = 'matsui54/ddc-converter_truncate'
+# on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/ddc-converter_remove_overlap'

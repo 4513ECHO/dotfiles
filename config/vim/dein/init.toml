@@ -1,9 +1,19 @@
-[[plugins]]
-repo = 'Shougo/dein.vim'
+
+# for testing vim-readme-viewer
 
 [[plugins]]
-repo = 'vim-denops/denops.vim'
-if = 'executable("deno")'
+repo = 'k-takata/minpac'
+
+[[plugins]]
+repo = 'junegunn/vim-plug'
+
+[[plugins]]
+repo = 'wbthomason/packer.nvim'
+
+##############################
+
+[[plugins]]
+repo = 'Shougo/dein.vim'
 
 [[plugins]]
 repo = 'thinca/vim-localrc'
@@ -13,12 +23,14 @@ let g:localrc_filename = '.vimrc.local'
 
 [[plugins]]
 repo = 'obcat/vim-sclow'
+if = '!has("nvim")'
 hook_add = '''
 let g:sclow_hide_full_length = v:true
 '''
 
 [[plugins]]
 repo = 'obcat/vim-hitspop'
+if = '!has("nvim")'
 hook_add = '''
 let g:hitspop_line = 'winbot'
 autocmd user ColorScheme *
@@ -34,15 +46,13 @@ repo = 'Shougo/context_filetype.vim'
 hook_add = '''
 let s:context_filetypes = context_filetype#default_filetypes()
 call remove(s:context_filetypes, 'markdown')
-call extend(s:context_filetypes, {'markdown': [{
-      \ 'start': '^\s*```\s*viml\?',
-      \ 'end': '^\s*```$',
-      \ 'filetype': 'vim',
-      \ }, {
-      \ 'start': '^\s*```\s*\(\h\w*\)',
-      \ 'end': '^\s*```$',
-      \ 'filetype': '\1',
-      \ }]})
+call extend(s:context_filetypes, {'markdown': values(map(
+      \ {'\(\h\w*\)': '\1', 'viml': 'vim'},
+      \ { key, val -> {
+      \   'start': '^\s*```\s*' .. key,
+      \   'end': '^\s*```$',
+      \   'filetype': val,
+      \ } }))})
 let g:context_filetype#filetypes = s:context_filetypes
 let g:context_filetype#ignore_patterns = {
       \ 'toml': ['^\s*#\s*'],
@@ -51,15 +61,20 @@ let g:context_filetype#ignore_patterns = {
 
 [[plugins]]
 repo = 'rhysd/clever-f.vim'
+hook_add = '''
+let g:clever_f_ignore_case = v:true
+let g:clever_f_smart_case = v:true
+let g:clever_f_use_migemo = v:true
+'''
 
 [[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
 
 [[plugins]]
 repo = 'mattn/vim-molder'
-hook_add = '''
-autocmd user FileType molder
-      \ nmap <buffer> <C-r> <Plug>(molder-reload)
+[plugins.ftplugin]
+molder = '''
+nmap <buffer> <C-r> <Plug>(molder-reload)
 '''
 
 [[plugins]]
@@ -77,23 +92,25 @@ xmap J <Plug>(jplus)
 [[plugins]]
 repo = 'kana/vim-submode'
 hook_add = '''
-" autocmd user VimEnter *
-"      \ SourceConf submode.vim
 SourceConf submode.vim
 '''
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
-depends = ['vim-lsp-settings']
-on_ft = ['python', 'typescript', 'typescriptreact', 'rust']
-on_func = ['lsp#enable']
+on_source = ['vim-lsp-settings']
+on_ft = [
+  'python', 'typescript', 'typescriptreact',
+  'rust', 'markdown', 'yaml', 'json',
+]
 hook_add = '''
-autocmd user BufRead *.py,*.ts,*.tsx,*.rs
+autocmd user BufNewFile,BufRead
+      \ *.py,*.ts,*.tsx,*.rs,*.md
       \ call lsp#enable()
 '''
 
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
+depends = ['vim-lsp']
 hook_add = '''
 " Runtime dein/settings/vim-lsp.vim
 SourceConf vim-lsp.vim
@@ -101,11 +118,6 @@ SourceConf vim-lsp.vim
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
-depends = [
-  'lightline-lsp', 'vista.vim', 'iceberg.vim', 'lightline-gruvbox.vim',
-  'lightline-hybrid.vim', 'tokyonight-vim', 'falcon', 'snow', 'elly.vim', 'rigel',
-  'ayu-vim', 'vim-nightfly-guicolors', 'vim-snazzy', 'tender.vim',
-]
 hook_add = '''
 " Runtime dein/settings/lightline.vim
 SourceConf lightline.vim
@@ -113,11 +125,28 @@ SourceConf lightline.vim
 
 [[plugins]]
 repo = 'halkn/lightline-lsp'
-on_source = ['vim-lsp']
+on_source = ['lightline.vim', 'vim-lsp']
 
 [[plugins]]
 repo = 'shinchu/lightline-gruvbox.vim'
 
 [[plugins]]
 repo = 'cocopon/lightline-hybrid.vim'
+
+[[plugins]]
+repo = 'itchyny/vim-highlighturl'
+
+[[plugins]]
+repo = 'christoomey/vim-tmux-navigator'
+hook_add = '''
+let g:tmux_navigator_no_mappings = v:true
+
+nnoremap <C-w>h <Cmd>TmuxNavigateLeft<CR>
+nnoremap <C-w>j <Cmd>TmuxNavigateDown<CR>
+nnoremap <C-w>k <Cmd>TmuxNavigateUp<CR>
+nnoremap <C-w>l <Cmd>TmuxNavigateRight<CR>
+'''
+
+[[plugins]]
+repo = 'markonm/traces.vim'
 
