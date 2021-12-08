@@ -62,6 +62,20 @@ call s:set_abbrev('workdir')
 
 inoreabbrev <expr><buffer> as
       \ (getline('.')[0 : col('.') - 2] =~# '^FROM\s\+.*\s\+') ? 'AS' : 'as'
+
+gitcommit = '''
+let b:caw_oneline_comment = ';'
+" from https://zenn.dev/uochan/articles/2021-12-08-vim-conventional-commits
+function! s:select_type() abort
+  let line = substitute(getline('.'), '^;\s*', '', '')
+  let title = printf('%s: ', substitute(split(line, ';')[0], '\s\+$', '', ''))
+
+  silent! normal! "_dip
+  silent! put! =title
+  silent! startinsert!
+endfunction
+
+nnoremap <buffer> <CR><CR> <Cmd>call <SID>select_type()<CR>
 '''
 
 [[plugins]]
@@ -99,3 +113,6 @@ on_ft = ['vim']
 repo = 'tmux-plugins/vim-tmux'
 on_ft = ['tmux']
 
+[[plugins]]
+repo = 'tpope/vim-git'
+on_ft = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendmail']

@@ -53,6 +53,10 @@ cmap <C-u> <Plug>(skkeleton-toggle)
 SourceConf skkeleton.vim
 '''
 
+[[plugins]]
+repo = 'gamoutatsumi/ddc-emoji'
+on_source = 'ddc.vim'
+
 # filters
 
 [[plugins]]

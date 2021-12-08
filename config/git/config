@@ -1,31 +1,44 @@
 [include]
   path = ~/.gitconfig.local
+
 [core]
   editor = vim
   quotepath = false
   # pager = LESSCHARSET=utf-8 less
   pager = vim -
+  commentChar = ";"
+
 [color]
   ui = auto
   diff = auto
   status = auto
   branch = auto
+
 [help]
   autocorrect = -1
 [push]
   default = simple
+
 [pull]
   rebase = false
+
 [status]
   showUntrackedFiles = all
+
+[commit]
+  template = ~/.config/git/commit_template
+
 [url "git@github.com"]
   insteadOf = github
 [url "git@github.com:4513ECHO"]
   insteadOf = 4513ECHO
+
 [diff]
   tool = vimdiff
+
 [difftool]
   prompt = false
+
 [alias]
   alias = !git config --get-regexp '^alias' | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\\t -> \\2/' | cut -c 1-46 | sort
   st = status
