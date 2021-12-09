@@ -5,7 +5,7 @@ let g:lightline.colorscheme = user#colorscheme#lightline()
 let g:lightline.active = {
       \ 'right': [
       \   ['lsp_errors', 'lsp_warnings', 'lineinfo'],
-      \   ['percent'],
+      \   ['char_counter', 'percent'],
       \   ['colorscheme', 'fileformat', 'fileencoding', 'filetype'],
       \ ]}
 
@@ -19,6 +19,8 @@ let g:lightline.component_function = {
       \ 'fileformat': 'user#lightline#file_format',
       \ 'fileencoding': 'user#lightline#file_encoding',
       \ 'mode': 'user#lightline#mode',
+      \ 'char_counter': 'user#lightline#char_counter',
+      \ 'readonly': 'user#lightline#readonly',
       \ }
 
 let g:lightline.component_expand = {
