@@ -1,5 +1,0 @@
-# vim:ft=zsh
-export LOCALPATH="$HOME/.local/bin"
-export POERTYPATH="$HOME/.poetry/bin"
-export PATH="$CARGO_HOME/bin:$POERTYPATH:$LOCALPATH:$PATH"
-

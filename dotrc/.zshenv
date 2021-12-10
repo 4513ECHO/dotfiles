@@ -16,10 +16,16 @@ export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 export DENO_INSTALL="$XDG_CACHE_HOME/deno"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 
-[[ -f "$ZDOTDIR/.zpath" ]] && source "$ZDOTDIR/.zpath"
+export LOCALPATH="$HOME/.local/bin"
+export POERTYPATH="$HOME/.poetry/bin"
+export PATH="$CARGO_HOME/bin:$GOPATH/bin:$DENO_INSTALL/bin:$POERTYPATH:$LOCALPATH:$PATH"
+
+export CARGO_NET_GIT_FETCH_WITH_CLI=true
+export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --marker='*'"
 
 export EDITOR="vim"
 export PAGER="less"
+export BROWSER="w3m"
 export MANPAGER="vim -M +MANPAGER -"
 export LESS="-g -i -M -R -W -z-4 -x4"
 export LESSCHARSET="UTF-8"

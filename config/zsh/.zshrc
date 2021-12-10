@@ -20,8 +20,6 @@ zstyle ':completion:*:default' menu select=2
 setopt auto_menu
 setopt auto_param_keys
 
-export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --marker='*' --exit-0"
-
 bindkey -e
 autoload -Uz add-zsh-hook
 
