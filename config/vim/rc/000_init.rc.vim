@@ -36,16 +36,28 @@ let g:colorscheme_list = get(g:, 'colorscheme_list', [])
 let g:colorscheme_customize = get(g:, 'colorscheme_customize', {'_': {}})
 
 command! -nargs=1 Runtime runtime! g:config_home <args>
+
 command! -nargs=1 SourceConf
       \ execute 'source' printf('%s/dein/settings/%s',
       \ g:config_home, <q-args>)
+
+" from https://github.com/thinca/config/blob/d92e41cebd/dotfiles/dot.vim/vimrc#L1382
 command! -bar RTP echo substitute(&runtimepath, ',', "\n", 'g')
+
 command! -bar RandomColorScheme call user#colorscheme#random()
+
 command! -nargs=1 -bar -complete=customlist,user#colorscheme#completion
       \ ColorScheme call user#colorscheme#colorscheme(<q-args>)
+
 command! -nargs=+ SetFileType call user#set_filetype(<f-args>)
+
+" from https://qiita.com/gorilla0513/items/11be5413405792337558
 command! -nargs=1 WWW call user#google(<q-args>)
+
+" from https://zenn.dev/kawarimidoll/articles/0ff5d28fa584d6
 command! -bar -bang DenoRun call user#deno_run(<bang>0)
+
+" from https://qiita.com/gorilla0513/items/f59e54606f6f4d7e3514
 command! PopupTerminal
       \ call popup_create(term_start(
       \     [&shell], { 'hidden': v:true, 'term_finish': 'close' }
@@ -53,7 +65,16 @@ command! PopupTerminal
       \   'border': [], 'minwidth': winwidth(0)/2, 'minheight': &lines/2
       \ })
 
-SetFileType *.lark lark
+command! -bar HtmlFormat
+      \ : silent! keepjumps keeppattern substitute+\v\>(\<)@=+>\r+ge
+      \ | silent! keepjumps normal! gg=G¬
+
+" from https://zenn.dev/kato_k/articles/vim-tips-no004
+command! -nargs=? -bar Profile call user#profile(<q-args>)
+
+" TODO: if bang, include untracked file
+command! -nargs=? -bar Todo vimgrep /TODO\ze:/ `git ls-files`
+
 SetFileType *.grammar,grammar.txt grammar
 SetFileType robots.txt robots-txt
 SetFileType *[._]curlrc curlrc
@@ -122,11 +143,16 @@ autocmd user InsertLeave * setlocal nopaste
 " auto quickfix opener
 " from https://github.com/monaqa/dotfiles/blob/424b0ab2d7/.config/nvim/scripts/autocmd.vim
 autocmd user QuickFixCmdPost [^l]* cwindow
-autocmd user QuickFixCmdPost l** lwindow
+autocmd user QuickFixCmdPost l* lwindow
 
 " faster syntax highlight
 autocmd user Syntax *
       \ : if line('$') > 1000
       \ |   syntax sync minlines=100
       \ | endif
+
+autocmd user BufWinEnter *
+     \ : if empty(&buftype) && line('.') > winheight(0) / 3 * 2
+     \ |   execute 'normal! zz' .. repeat("\<C-y>", winheight(0) / 6)
+     \ | endif
 
