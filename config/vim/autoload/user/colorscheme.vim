@@ -11,9 +11,14 @@ function! user#colorscheme#lightline() abort
 endfunction
 
 function! user#colorscheme#random() abort
-  let g:current_colorscheme =
-        \ get(g:colorscheme_list, rand() % len(g:colorscheme_list))
-  call user#colorscheme#colorscheme(g:current_colorscheme)
+  if has('nvim')
+    let randint = str2nr(matchstr(reltimestr(reltime()),
+          \ '\.\@<=\d\+')[1:])
+  else
+    let randint = rand()
+  endif
+  call user#colorscheme#colorscheme(
+        \ get(s:colorscheme_list(), randint % len(s:colorscheme_list())))
 endfunction
 
 function! user#colorscheme#set_customize(colorscheme) abort
@@ -26,6 +31,7 @@ function! user#colorscheme#set_customize(colorscheme) abort
   endif
   let highlight = get(customize, 'highlight')
   if !empty(highlight)
+    " TODO: use hiset() if exists
     for [group, attr] in items(highlight)
       let attrs = ''
       for [name, value] in items(attr)
@@ -34,15 +40,16 @@ function! user#colorscheme#set_customize(colorscheme) abort
       execute 'hi' group attrs
     endfor
   endif
+  " TODO: edit v:colornames if exists
+  let terminal = get(customize, 'terminal')
+  if !empty(terminal)
+    let g:terminal_ansi_colors = terminal
+  endif
   let link = get(customize, 'link')
   if !empty(link)
     for [linked, base] in items(link)
       execute 'hi link' linked base
     endfor
-  endif
-  let terminal = get(customize, 'terminal')
-  if !empty(terminal)
-    let g:terminal_ansi_colors = terminal
   endif
 endfunction
 
@@ -50,21 +57,32 @@ function! user#colorscheme#colorscheme(colorscheme) abort
   if empty(g:colorscheme_list)
     return
   endif
+  let g:current_colorscheme = a:colorscheme
   if a:colorscheme ==# 'random'
     call user#colorscheme#random()
     return
   endif
-  let g:current_colorscheme = a:colorscheme
-  let g:lightline.colorscheme = user#colorscheme#lightline()
   autocmd! random_colorscheme ColorScheme
   execute 'autocmd random_colorscheme ColorScheme' a:colorscheme
         \ printf('call user#colorscheme#set_customize("%s")', a:colorscheme)
+  silent! unlet g:terminal_ansi_colors
   execute 'colorscheme' a:colorscheme
+  " NOTE: `:help lightline-problem-13`
+  let g:lightline.colorscheme = user#colorscheme#lightline()
   call lightline#init()
   call lightline#colorscheme()
+  call lightline#update()
 endfunction
 
 function! user#colorscheme#completion(ArgLead, CmdLine, CursorPos) abort
-  return filter(copy(g:colorscheme_list), {_, val -> val =~? a:ArgLead})
+  if exists('?matchfuzzy')
+    if empty(a:ArgLead)
+      return sort(copy(s:colorscheme_list()))
+    else
+      return matchfuzzy(copy(s:colorscheme_list()), a:ArgLead)
+    endif
+  else
+    return filter(copy(s:colorscheme_list()), {_, val -> val =~? a:ArgLead})
+  endif
 endfunction
 

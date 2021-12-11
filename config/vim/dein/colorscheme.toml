@@ -34,17 +34,26 @@ let g:colorscheme_customize.gruvbox = {
       \ ]}
 '''
 
-# TODO: fix blue of term ansi color
 [[plugins]]
 repo = 'rakr/vim-one'
 hook_add = '''
 call add(g:colorscheme_list, 'one')
+let g:colorscheme_customize.one = {
+      \ 'terminal': [
+      \   '#282c34', '#e06c75', '#98c379', '#e5c07b', '#61afef', '#c678dd', '#56b6c2', '#828997',
+      \   '#5c6370', '#e06c75', '#98c379', '#e5c07b', '#61afef', '#c678dd', '#56b6c2', '#abb2bf',
+      \ ]}
 '''
 
 [[plugins]]
 repo = 'w0ng/vim-hybrid'
 hook_add = '''
 call add(g:colorscheme_list, 'hybrid')
+let g:colorscheme_customize.hybrid = {
+      \ 'terminal': [
+      \   '#1d1f21', '#cc6666', '#b5bd68', '#f0c674', '#81a2be', '#b294bb', '#8abeb7', '#d3d7cf',
+      \   '#707880', '#cc6666', '#b5bd68', '#de955f', '#729fcf', '#b294bb', '#005f5f', '#707880',
+      \ ]}
 '''
 
 [[plugins]]
@@ -80,6 +89,7 @@ let g:colorscheme_customize.snow = {
       \ }
 '''
 
+# NOTE: green and yellow of term ansi color is original
 [[plugins]]
 repo = 'yuttie/hydrangea-vim'
 hook_add = '''
@@ -89,7 +99,11 @@ let g:colorscheme_customize.hydrangea = {
       \   'Constant': #{ ctermbg: 'NONE', guibg: 'NONE' },
       \   'Number': #{ ctermbg: 'NONE', guibg: 'NONE' },
       \   'SpecialKey': #{ ctermbg: 'NONE', guibg: 'NONE' },
-      \ }}
+      \ },
+      \ 'terminal': [
+      \   '#1e222c', '#e91e63', '#9df086', '#fedc1b', '#537dd5', '#c398fe', '#56c7ee', '#586374',
+      \   '#3b4351', '#e91e63', '#9df086', '#fedc1b', '#537dd5', '#fe7ecd', '#56c7ee', '#c3d5ec',
+      \ ]}
 '''
 
 [[plugins]]
@@ -98,6 +112,7 @@ hook_add = '''
 call add(g:colorscheme_list, 'elly')
 '''
 
+# NOTE: maybe it doesn't support lightline.vim expand component
 # [[plugins]]
 # repo = 'gkapfham/vim-vitamin-onec'
 # hook_add = '''
@@ -141,32 +156,54 @@ let g:colorscheme_customize.snazzy = {
       \ ]}
 '''
 
+# NOTE: magenta of term ansi color is original
 [[plugins]]
 repo = 'jacoborus/tender.vim'
 hook_add = '''
 call add(g:colorscheme_list, 'tender')
+let g:colorscheme_customize.tender = {
+      \ 'terminal': [
+      \   '#282828', '#f43753', '#c9d05c', '#ffc24b', '#73cef4', '#fe6ab5', '#b3deef', '#bbbbbb',
+      \   '#444444', '#f43753', '#c9d05c', '#ffc24b', '#73cef4', '#fe6ab5', '#b3deef', '#eeeeee',
+      \ ]}
 '''
 
 [[plugins]]
 repo = 'wadackel/vim-dogrun'
 hook_add = '''
 call add(g:colorscheme_list, 'dogrun')
+let g:colorscheme_customize.dogrun = {
+      \ 'terminal': [
+      \   '#111219', '#c261b6', '#7cbe8c', '#8e8a6f', '#4c89ac', '#6c75cb', '#73c1a9', '#9ea3c0',
+      \   '#545c8c', '#b871b8', '#7cbe8c', '#a8a384', '#589ec6', '#929be5', '#59b6b6', '#9ea3c0',
+      \ ]}
 '''
 
 [[plugins]]
 repo = 'whatyouhide/vim-gotham'
 hook_add = '''
 call add(g:colorscheme_list, 'gotham')
+let g:colorscheme_customize.gotham = {
+      \ 'terminal': [
+      \   '#0c1014', '#c23127', '#2aa889', '#edb443', '#195466', '#4e5166', '#33859E', '#99d1ce',
+      \   '#0c1014', '#c23127', '#2aa889', '#edb443', '#195466', '#4e5166', '#33859E', '#99d1ce',
+      \ ]}
 '''
 
+# TODO: it doesn't support terminal ansi colors
+# https://github.com/DTr4n/windows-terminal-wombat
 [[plugins]]
 repo = 'vim-scripts/wombat256.vim'
 hook_add = '''
 call add(g:colorscheme_list, 'wombat256mod')
 let g:colorscheme_customize.wombat256mod = {
       \ 'lightline': 'wombat',
+      \ 'link': {
+      \   'NonText': 'Normal',
+      \ },
       \ 'highlight': {
       \   'NonText': #{ ctermfg: 241, ctermbg: 'NONE', guifg: '#857b6f', guibg: 'NONE' },
+      \   'CursorLineNr': #{ cterm: 'NONE' },
       \ }}
 '''
 
@@ -174,6 +211,11 @@ let g:colorscheme_customize.wombat256mod = {
 repo = 'tomasr/molokai'
 hook_add = '''
 call add(g:colorscheme_list, 'molokai')
+let g:colorscheme_customize.molokai = {
+      \ 'terminal': [
+      \   '#1b1d1e', '#f92672', '#82b414', '#fd971f', '#268bd2', '#8c54fe', '#56c2d6', '#ccccc6',
+      \   '#505354', '#ff5995', '#b7eb46', '#feed6c', '#62ade3', '#bfa0fe', '#94d8e5', '#f8f8f2',
+      \ ]}
 '''
 
 [[plugins]]
@@ -191,6 +233,7 @@ let g:colorscheme_customize['spring-night'] = {
       \ }
 '''
 
+# TODO: it doesn't support terminal ansi colors
 [[plugins]]
 repo = 'haishanh/night-owl.vim'
 hook_add = '''
@@ -198,6 +241,44 @@ call add(g:colorscheme_list, 'night-owl')
 let g:colorscheme_customize['night-owl'] = {
       \ 'lightline': 'nightowl',
       \ }
+'''
+
+[[plugins]]
+repo = 'lifepillar/vim-solarized8'
+hook_add = '''
+call add(g:colorscheme_list, 'solarized8')
+let g:colorscheme_customize.solarized8 = {
+      \ 'lightline': 'solarized',
+      \ }
+'''
+
+# TODO: it doesn't support terminal ansi colors
+[[plugins]]
+repo = 'fcpg/vim-orbital'
+hook_add = '''
+call add(g:colorscheme_list, 'orbital')
+let g:colorscheme_customize.orbital = {
+      \ 'highlight': {
+      \   'String': #{ ctermbg: 'NONE', guibg: 'NONE' },
+      \ }}
+'''
+
+[[plugins]]
+repo = 'dracula/vim'
+hook_add = '''
+call add(g:colorscheme_list, 'dracula')
+'''
+
+# TODO: it doesn't support terminal ansi colors
+[[plugins]]
+repo = 'cormacrelf/vim-colors-github'
+hook_add = '''
+let g:github_colors_soft = v:true
+call add(g:colorscheme_list, 'github')
+let g:colorscheme_customize.github = {
+      \ 'highlight': {
+      \   'EndOfBuffer': #{ ctermbg: 'NONE', guibg: 'NONE' },
+      \ }}
 '''
 
 # TODO: plugin is supprting lightline.vim, but I can't enable it because v:lua
