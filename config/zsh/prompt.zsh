@@ -1,5 +1,4 @@
 autoload -Uz vcs_info 2> /dev/null || export NO_VCS_INFO=true
-setopt prompt_subst
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 venv-prompt () {

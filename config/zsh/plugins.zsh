@@ -14,6 +14,19 @@ source "$ZDOTDIR/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
+# usage: __zinit_install_completion {repo} {path} {cmd_name} [{config}]
+__zinit_install_completion () {
+  zinit ice wait lucid as'completion' atload"compdef _$3 $3" $4
+  zinit snippet "https://raw.githubusercontent.com/$1/master/$2"
+}
+
+__lazyload_settings () {
+  # lazyload pip -- 'source <(pip completion --zsh)'
+  lazyload deno -- 'deno completions zsh > $ZDOTDIR/completions/_deno'
+  lazyload cargo -- 'rustup completions zsh cargo > $ZDOTDIR/completions/_cargo'
+  lazyload rustup -- 'rustup completions zsh rustup > $ZDOTDIR/completions/_rustup'
+}
+
 zinit wait lucid light-mode for \
   atinit'ZINIT[COMPINIT_OPTS]=-C; zicdreplay' \
   atload'fast-theme forest > /dev/null' \
@@ -27,18 +40,13 @@ zinit wait lucid light-mode for \
   as'program' pick'bin/fzf-tmux' \
   multisrc'shell/{completion,key-bindings}.zsh' \
     'junegunn/fzf' \
-  asload'_lazyload_settings' \
+  asload'__lazyload_settings' \
     'qoomon/zsh-lazyload'
 
-zinit ice wait lucid as'completion' cp'git-completion.zsh -> _git'
-zinit snippet https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
+__zinit_install_completion 'git/git' 'contrib/completion/git-completion.zsh' \
+  'git' 'cp"git-completion.zsh -> _git"'
+__zinit_install_completion 'sharkdp/fd' 'contrib/completion/_fd' 'fd'
+__zinit_install_completion 'BurntSushi/ripgrep' 'complete/_rg' 'rg'
+__zinit_install_completion 'ogham/exa' 'completions/zsh/_exa' 'exa'
+__zinit_install_completion 'x-motemen/ghq' 'misc/zsh/_ghq' 'ghq'
 
-_lazyload_settings () {
-  :
-  # lazyload pip -- 'source <(pip completion --zsh)'
-}
-
-# zinit wait lucid from'github-rel' as'null' light-mode for \
-#   sbin 'junegunn/fzf' \
-#   sbin 'stedolan/jq' \
-#   sbin 'x-motemen/ghq' \
