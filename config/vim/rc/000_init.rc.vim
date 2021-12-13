@@ -156,3 +156,11 @@ autocmd user BufWinEnter *
      \ |   execute 'normal! zz' .. repeat("\<C-y>", winheight(0) / 6)
      \ | endif
 
+" from https://qiita.com/Bakudankun/items/649aa6d8b9eccc1712b5
+" TODO: modify EndOfBuffer
+autocmd user ColorScheme *
+      \ execute 'hi NormalNC guibg='
+      \ .. lightsout#darken(lightsout#get_hl('Normal', 'guibg'), 0.03)
+autocmd user BufWinEnter,WinEnter * setlocal wincolor=
+autocmd user WinLeave * setlocal wincolor=NormalNC
+
