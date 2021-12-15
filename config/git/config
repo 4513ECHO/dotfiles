@@ -4,9 +4,13 @@
 [core]
   editor = vim
   quotepath = false
-  # pager = LESSCHARSET=utf-8 less
-  pager = vim -
   commentChar = ";"
+  # pager = vim -
+
+[pager]
+  diff = diff-highlight | less -R +Gg
+  log = diff-highlight | less -R +Gg
+  show = diff-highlight | less -R +Gg
 
 [color]
   ui = auto
@@ -16,6 +20,10 @@
 
 [help]
   autocorrect = -1
+
+[init]
+  defaultBranch = main
+
 [push]
   default = simple
 
@@ -28,10 +36,9 @@
 [commit]
   template = ~/.config/git/commit_template
 
-[url "git@github.com"]
-  insteadOf = github
-[url "git@github.com:4513ECHO"]
-  insteadOf = 4513ECHO
+[url "git@github.com:"]
+  insteadOf = github:
+  insteadOf = https://github.com/
 
 [diff]
   tool = vimdiff
@@ -40,7 +47,7 @@
   prompt = false
 
 [alias]
-  alias = !git config --get-regexp '^alias' | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\\t -> \\2/' | cut -c 1-46 | sort
+  alias = !git config --get-regexp '^alias' | sed 's:alias\\.\\([^ ]*\\) \\(.*\\):\\1\\\t -> \\2:' | cut -c 1-46 | sort
   st = status
   graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
   gr = !git graph
@@ -52,9 +59,20 @@
   ps = push
   pl = pull
   pwd = !pwd
-  here = rev-parse --show-toplevel
-  cl = clone
+  root = rev-parse --show-toplevel
+  # cl = clone
+  cl = !ghq get
   latest = describe --tags --abbrev=0
   adp = add -p
   adu = add -u
+  dft = difftool
+  dirs = !git ls-files | sed -e '/^[^\\/]*$/d' -e 's:/[^/]*$::' | uniq
+  set-remote = !"f(){ git remote add origin $1; git pull --set-upstream origin ${2:-main}; }; f"
+  all-files = !git ls-files
+  history = reflog
+  unrebase = !git reset --hard "$(git reflog --color | fzf --ansi --preview 'git show {1}' | awk '{print $2}')"
+  untrack = rm --cached
+
+[ghq]
+  root = ~/Develops
 
