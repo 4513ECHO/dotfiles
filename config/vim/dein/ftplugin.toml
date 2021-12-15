@@ -79,6 +79,13 @@ endfunction
 nnoremap <buffer> <CR><CR> <Cmd>call <SID>select_type()<CR>
 '''
 
+toml = '''
+if !empty(filter(getline(1, 4),
+      \ {_, val -> val =~# '^\[\[plugins]]$\|^hook_' }))
+  call dein#toml#syntax()
+endif
+'''
+
 [[plugins]]
 repo = 'cespare/vim-toml'
 if = '!has("patch-8.2.3520")'
