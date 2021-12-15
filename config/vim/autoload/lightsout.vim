@@ -124,7 +124,7 @@ endfunction
 " }}}
 
 function lightsout#get_hl(name, attr) abort
-  let raw = split(execute('hi ' .. a:name), '\n')[0]
+  let raw = substitute(execute('hi ' .. a:name), '\n', '', 'g')
   let result = matchstr(raw, a:attr .. '=\zs[0-9a-fA-F#]\+\ze')
   return result
 endfunction
