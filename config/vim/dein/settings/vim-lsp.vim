@@ -18,6 +18,7 @@ let g:lsp_settings_servers_dir = g:data_home .. '/vim-lsp-settings/servers'
 let g:lsp_settings_filetype_python = 'pyls-all'
 let g:lsp_settings_filetype_typescript = 'deno'
 let g:lsp_settings_filetype_typescriptreact = 'deno'
+let g:lsp_settings_filetype_markdown = 'efm-langserver'
 
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
@@ -40,7 +41,6 @@ function! s:install_deno_lsp() abort
   let deno =  exepath('deno')
   if deno !=# ''
     call system(printf('ln -snf %s %s/deno', deno, deno_dir))
-    " call mkdir(deno_dir, 'p')
     silent! call writefile([''], deno_dir .. '/loaded_deno')
   endif
 endfunction
@@ -56,7 +56,6 @@ function! s:install_pyls_ext() abort
     call term_start(extend([pip, 'install'], pyls_ext), {
           \ 'cwd': fnamemodify(pip, ':h:h:h'),
           \ 'term_name': 'install_pyls_ext'})
-    " call mkdir(pyls_dir)
     silent! call writefile([''], pyls_dir .. '/loaded_pyls_ext')
   endif
 endfunction

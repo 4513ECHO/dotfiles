@@ -1,0 +1,17 @@
+---
+version: 2
+tools:
+  markdown-textlint: &markdown-textlint
+    lint-command: 'npx --no-install textlint -f unix --stdin --stdin-filename ${INPUT}'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %m [%trror/%r]'
+    # format-command: 'npx --no-install textlint --fix --stdin --stdin-filename ${INPUT}'
+    # format-stdin: true
+    root-markers:
+      - .textlintrc
+
+languages:
+  markdown:
+    - <<: *markdown-textlint

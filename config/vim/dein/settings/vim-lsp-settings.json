@@ -52,7 +52,10 @@
     }
   },
   "efm-langserver": {
-    "disabled": false
+    "disabled": false,
+    "allowlist": [
+      "markdown"
+    ]
   },
   "bash-language-server": {
     "disabled": true
