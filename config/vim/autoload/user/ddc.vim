@@ -1,9 +1,11 @@
-function! user#ddc#cmdline_pre() abort
+function! user#ddc#cmdline_pre(mode) abort
   call dein#source('ddc.vim')
   cnoremap <silent><expr> <Tab>
         \ pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>'
-        \ : ddc#manual_complete()
-  cnoremap <C-n> <Cmd>call pum#map#select_relative(+1)<CR>
+        \ : ddc#map#manual_complete()
+  cnoremap <silent><expr> <C-n>
+        \ pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>'
+        \ : ddc#map#manual_complete()
   cnoremap <C-p> <Cmd>call pum#map#select_relative(-1)<CR>
   cnoremap <silent><expr> <CR>
        \ pum#visible() ? '<Cmd>call pum#map#confirm()<CR>'
@@ -11,7 +13,7 @@ function! user#ddc#cmdline_pre() abort
   cnoremap <C-e> <Cmd>call pum#map#cancel()<CR>
   set wildchar=<C-t>
 
-  let b:prev_buffer_config = ddc#custom#get_buffer()
+  let b:_ddc_cmdline_prev_buffer_config = ddc#custom#get_buffer()
   call ddc#custom#patch_buffer(s:patch_buffer)
   autocmd user User DDCCmdlineLeave ++once call user#ddc#cmdline_post()
   call ddc#enable_cmdline_completion()
@@ -20,28 +22,35 @@ endfunction
 
 let s:patch_buffer = {}
 let s:patch_buffer.sources = ['cmdline', 'around']
-let s:patch_buffer.keywordPattern = '[0-9a-zA-Z_:#]*'
+let s:patch_buffer.keywordPattern = '[0-9a-zA-Z_:#-]*'
 let s:patch_buffer.sourceOptions = {
       \ 'cmdline': {
       \   'forceCompletionPattern': '(\f*/\f+)+',
       \ }}
 
 function! user#ddc#cmdline_post() abort
-  call ddc#custom#set_buffer(b:prev_buffer_config)
+  if exists('b:_ddc_cmdline_prev_buffer_config')
+    call ddc#custom#set_buffer(b:_ddc_cmdline_prev_buffer_config)
+    unlet b:_ddc_cmdline_prev_buffer_config
+  endif
   cunmap <Tab>
   set wildchar=<Tab>
 endfunction
 
 function! user#ddc#skkeleton_pre() abort
   let b:skkeleton_enabled = v:true
-  let b:prev_buffer_config = ddc#custom#get_buffer()
+  let b:_ddc_skkeleton_prev_buffer_config = ddc#custom#get_buffer()
   call ddc#custom#patch_buffer('sources', ['skkeleton'])
 endfunction
 
 function! user#ddc#skkeleton_post() abort
-  call ddc#custom#set_buffer(b:prev_buffer_config)
-  unlet b:skkeleton_enabled
-  unlet b:prev_buffer_config
+  if exists('b:skkeleton_enabled')
+    unlet b:skkeleton_enabled
+  endif
+  if exists('b:_ddc_skkeleton_prev_buffer_config')
+    call ddc#custom#set_buffer(b:prev_buffer_config)
+    unlet b:_ddc_skkeleton_prev_buffer_config
+  endif
 endfunction
 
 function! user#ddc#imap_cr() abort

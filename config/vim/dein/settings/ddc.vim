@@ -44,6 +44,12 @@ let s:sourceOptions.necovim = {
       \ 'isVolatile': v:true,
       \ }
 
+let s:sourceOptions.emoji = {
+      \ 'mark': 'emoji',
+      \ 'matchers': ['emoji'],
+      \ 'sorters': [],
+      \ }
+
 let s:sourceOptions.buffer = {'mark': 'buf'}
 " let s:sourceOptions['cmdline-history'] = {'mark': 'hist'}
 let s:sourceOptions.cmdline = {'mark': 'cmd'}
@@ -65,6 +71,12 @@ call ddc#custom#patch_filetype(
 call ddc#custom#patch_filetype(
       \ ['python', 'typescript', 'typescriptreact', 'rust'], {
       \ 'sources': extend(['vim-lsp'], s:sources),
+      \ })
+
+call ddc#custom#patch_filetype(
+      \ ['markdown', 'gitcommit'], {
+      \ 'sources': extend(['emoji'], s:sources),
+      \ 'keywordPattern': '[a-zA-z_:]\k*',
       \ })
 
 call ddc#custom#patch_filetype(
