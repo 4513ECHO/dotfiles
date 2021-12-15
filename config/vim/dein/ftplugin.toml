@@ -79,6 +79,10 @@ endfunction
 nnoremap <buffer> <CR><CR> <Cmd>call <SID>select_type()<CR>
 '''
 
+markdown = '''
+setlocal iskeyword-=`
+'''
+
 toml = '''
 if !empty(filter(getline(1, 4),
       \ {_, val -> val =~# '^\[\[plugins]]$\|^hook_' }))
@@ -95,6 +99,8 @@ on_ft = ['toml']
 repo = 'plasticboy/vim-markdown'
 on_ft = ['markdown']
 hook_add = '''
+let g:vim_markdown_follow_anchor = v:true
+let g:vim_markdown_no_extensions_in_markdown = v:true
 let g:vim_markdown_math = v:true
 let g:vim_markdown_frontmatter = v:true
 let g:vim_markdown_strikethrough = v:true
@@ -103,7 +109,7 @@ let g:vim_markdown_strikethrough = v:true
 [[plugins]]
 repo = 'mattn/vim-maketable'
 on_ft = ['markdown']
-on_cmd = ['MakeTable']
+on_cmd = ['MakeTable', 'UnmakeTable']
 
 [[plugins]]
 repo = 'gko/vim-coloresque'
@@ -124,3 +130,4 @@ on_ft = ['tmux']
 [[plugins]]
 repo = 'tpope/vim-git'
 on_ft = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendmail']
+
