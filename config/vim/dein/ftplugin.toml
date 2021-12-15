@@ -4,6 +4,7 @@ let g:awk_is_gawk = v:true
 let g:is_bash = v:true
 let g:rust_bang_comment_leader = v:true
 let g:markdown_fenced_languages = ['ts=typescript']
+let g:vim_indent_cont = 6
 
 autocmd user ColorScheme *
       \ hi link markdownCode Constant
