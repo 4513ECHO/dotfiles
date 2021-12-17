@@ -6,24 +6,35 @@ inoremap <Leader><Space> <Leader>
 inoremap <Leader><Leader> <ESC>
 xnoremap <Leader><Leader> <ESC>
 
+if has('nvim')
+  tnoremap <Leader><Leader> <C-\><C-n>
+else
+  tnoremap <Leader><Leader> <C-w>N
+endif
+tnoremap <Leader><Space> <Leader>
+
 nnoremap ZZ <Nop>
-nnoremap Q <Nop>
+nnoremap q <Nop>
+nnoremap Q q
 nnoremap S <Nop>
+xnoremap q <Nop>
+xnoremap Q q
+xnoremap S <Nop>
 
 nnoremap j gj
-xnoremap j gj
 nnoremap k gk
-xnoremap k gk
 nnoremap gj j
-xnoremap gj j
 nnoremap gk k
+xnoremap j gj
+xnoremap k gk
+xnoremap gj j
 xnoremap gk k
 
 nnoremap x "_x
-xnoremap x "_x
 nnoremap s "_s
-xnoremap s "_s
 nnoremap Y y$
+xnoremap x "_x
+xnoremap s "_s
 xnoremap Y y$
 
 nnoremap n nzz
@@ -33,26 +44,44 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+xnoremap <Up> <Nop>
+xnoremap <Down> <Nop>
+xnoremap <Left> <Nop>
+xnoremap <Right> <Nop>
 inoremap <Up> <Nop>
 inoremap <Down> <Nop>
 inoremap <Left> <Nop>
 inoremap <Right> <Nop>
 
-nnoremap <S-h> <Home>
+nnoremap <silent><expr> <S-h>
+      \ getline('.')[:col('.') - 1] =~# '^\s*$' ? '^' : '0'
 nnoremap <S-l> <End>
-xnoremap <S-h> <Home>
+xnoremap <silent><expr> <S-h>
+      \ getline('.')[:col('.') - 1] =~# '^\s*$' ? '^' : '0'
 xnoremap <S-l> <End>
 
+nnoremap [Space] <Nop>
+nmap <Space> [Space]
 nnoremap <C-l> <Cmd>nohlsearch<CR><C-l>
-nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
-nnoremap <Space> <Cmd>update<CR>
-nnoremap ^ <C-^>
+nnoremap <Leader><C-r>
+      \ <Cmd>source $MYVIMRC<Bar>nohlsearch<Bar>echomsg 'reloaded!'<CR>
+nnoremap [Space]w <Cmd>update<CR>
+nnoremap [Space]W <Cmd>write<CR>
+nnoremap ^ <C-^><Cmd>edit<CR>
+" nnoremap ^ <C-^>
+nnoremap <silent><expr> <Tab> shiftwidth() .. 'l'
+nnoremap [Space]f <Cmd>edit %:p:h<CR>
 
 xnoremap v $
+xnoremap < <gv
+xnoremap > >gv
+
+inoremap <Leader>z <C-o>zz
+inoremap <Leader>p <Cmd>setlocal paste! paste?<CR>
 
 " moving
 noremap! <C-h> <Left>
@@ -69,7 +98,9 @@ noremap! <Leader>/ \
 
 cnoremap <C-x> <C-r>=expand('%:p')<CR>
 
-cabbrev w!! w !sudo tee > /dev/null %
+cnoreabbrev <expr> w!!
+      \ (getcmdtype() ==# ':' && getcmdline() ==# 'w!!')
+      \ ? 'write !sudo tee > /dev/null %' : 'w!!'
 
 " toggle options
 nnoremap [Toggle] <Nop>

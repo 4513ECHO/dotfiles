@@ -13,7 +13,6 @@ set ambiwidth=double
 " ------------------
 " color
 set background=dark
-set synmaxcol=200
 if has('termguicolors')
   set termguicolors
 endif
@@ -44,7 +43,10 @@ set ignorecase
 set smartcase
 set hlsearch
 set report=0
-set nowrapscan
+if executable('rg')
+  let &grepprg = 'rg --vimgrep --hidden'
+  set grepformat=%f:%l:%c:%m
+endif
 
 " ------------------
 " display
@@ -57,13 +59,15 @@ set display=lastline,uhex
 set shortmess+=cs
 set lazyredraw
 set nofoldenable
+set synmaxcol=200
+set redrawtime=1000
 
 set t_vb=
 set novisualbell
 set belloff=all
 
 set listchars=tab:»-,trail:-,extends:»,precedes:«,eol:¬
-set fillchars& fillchars+=diff:/
+set fillchars& fillchars+=diff:/,eob:.
 
 set pumheight=10
 set helpheight=12
@@ -75,15 +79,19 @@ set backspace=indent,eol,start
 set whichwrap=b,s,h,l,<,>,[,],~
 set hidden
 set confirm
+set timeoutlen=500
 
-set showmatch
-set matchtime=1
+" set showmatch
+" set matchtime=1
 set matchpairs& matchpairs+=<:>
 
 set clipboard=unnamed
 set mouse=a
 
-set completeopt=menuone,popup,noinsert,noselect
+set completeopt=menuone,noinsert,noselect
+if !has('nvim')
+  set completeopt+=popup
+endif
 set isfname-==
 
 " ------------------
@@ -105,8 +113,13 @@ call mkdir(&backupdir, 'p')
 call mkdir(&directory, 'p')
 if has('persistent_undo')
   set undofile
-  let &undodir = g:data_home .. '/undo'
-  call mkdir(&undodir, 'p')
+  if has('nvim')
+    let &undodir = g:data_home .. '/nvimundo'
+    call mkdir(&undodir, 'p')
+  else
+    let &undodir = g:data_home .. '/undo'
+    call mkdir(&undodir, 'p')
+  endif
 endif
 if has('viminfo')
   execute 'set viminfo+=n' .. g:data_home .. '/viminfo'
@@ -121,4 +134,5 @@ set packpath=
 set ttyfast
 set title
 set autoread
+set titlestring=%{user#title_string()}
 
