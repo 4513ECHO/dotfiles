@@ -16,9 +16,23 @@ export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 export DENO_INSTALL="$XDG_CACHE_HOME/deno"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 
-export LOCALPATH="$HOME/.local/bin"
-export POERTYPATH="$HOME/.poetry/bin"
-export PATH="$CARGO_HOME/bin:$GOPATH/bin:$DENO_INSTALL/bin:$POERTYPATH:$LOCALPATH:$PATH"
+typeset -Ux path fpath manpath cdpath
+_path=(
+  $CARGO_HOME/bin(N-/)
+  $GOPATH/bin(N-/)
+  $DENO_INSTALL/bin(N-/)
+  $HOME/.deno/bin(N-/)
+  $HOME/.poetry/bin(N-/)
+  $HOME/.local/bin(N-/)
+  $HOME/bin(N-/)
+  $path
+)
+path=(${(R)_path%/[@]})
+_fpath=(
+  $ZDOTDIR/completions(N-/)
+  $fpath
+)
+fpath=(${(R)_fpath%/[@]})
 
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --marker='*'"
@@ -39,5 +53,3 @@ export HISTSIZE=1000000
 export SAVEHIST=1000000
 
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
-
-export FPATH="$ZDOTDIR/completions:$FPATH"
