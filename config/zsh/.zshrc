@@ -31,6 +31,10 @@ fi
   done
 }
 
+export SSH_FORWARD_KEY="$HOME/.ssh/id_git_rsa"
+export SSH_SYMLINK_SOCK="$HOME/.ssh/agent"
+[[ -f "$SSH_FORWARD_KEY" ]] && enable-agent-forward
+
 export LOADED_ZSHRC=true
 
 if type zprof > /dev/null; then

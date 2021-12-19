@@ -16,17 +16,14 @@ auto_venv () {
   fi
 }
 add-zsh-hook chpwd auto_venv
-[[ -n "$TMUX" ]] && auto_venv
 
-enable_agent_forward () {
-  local SSH_KEY="id_git_rsa"
-  if [ -z $SSH_AUTH_SOCK ]; then
-    eval $(ssh-agent) > /dev/null
+enable-agent-forward () {
+  if [[ -z "$SSH_AUTH_SOCK" ]]; then
+    eval "$(ssh-agent)" > /dev/null
   fi
-  ssh-add $HOME/.ssh/$SSH_KEY
+  ssh-add "$SSH_FORWARD_KEY"
 }
 
-export SSH_SYMLINK_SOCK="$HOME/.ssh/agent"
 agent-symlink () {
   if [ -S "$SSH_AUTH_SOCK" ]; then
     case "$SSH_AUTH_SOCK" in
@@ -39,9 +36,6 @@ agent-symlink () {
     export SSH_AUTH_SOCK="$SSH_SYMLINK_SOCK"
   fi
 }
-
-agent-symlink
-[ -f $HOME/.ssh/$SSH_KEY ] && [ -f $HOME/.ssh/config ] && enable_agent_forward
 
 auto_tmux () {
   local list create_new_session
