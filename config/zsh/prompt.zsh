@@ -1,7 +1,8 @@
-autoload -Uz vcs_info 2> /dev/null || export NO_VCS_INFO=true
+autoload -Uz vcs_info
+[[ $- == *i* ]] || return
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-venv-prompt () {
+function venv-prompt () {
   if [ -n "$VIRTUAL_ENV" ]; then
     echo "($(basename "$VIRTUAL_ENV"))"
   else
@@ -11,7 +12,7 @@ venv-prompt () {
 
 # use term ansi prompt_colors when using vim
 typeset -gA prompt_colors
-if [[ -n "$VIM" ]]; then
+if [[ -n "$VIM_TERMINAL" ]]; then
   prompt_colors[red]=001
   prompt_colors[green]=002
   prompt_colors[yellow]=003
@@ -71,13 +72,13 @@ function redraw-prompt () {
   RPROMPT="${vcs_info_msg_0_}"
 }
 
-function redp-with-vcs_info () {
+function redraw-prompt-with-vcs_info () {
   vcs_info
   redraw-prompt
 }
 
-if [[ -z "$NO_VCS_INFO" ]]; then
-  add-zsh-hook precmd redp-with-vcs_info
+if vcs_info 2> /dev/null; then
+  add-zsh-hook precmd redraw-prompt-with-vcs_info
 else
   add-zsh-hook precmd redraw-prompt
 fi
