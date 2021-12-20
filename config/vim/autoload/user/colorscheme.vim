@@ -94,3 +94,95 @@ function! user#colorscheme#completion(ArgLead, CmdLine, CursorPos) abort
   endif
 endfunction
 
+" NOTE: it is require vim v8.2.3578 or later.
+function! user#colorscheme#hl_compile() abort
+  let result = []
+  let ignored_hlgroup = [
+        \ 'cssColor', 'perl', 'php', 'purescript', 'netrw', 'molder',
+        \ 'Lightline', 'ALE', 'NERDTree', 'agit', 'QuickScope', 'Quickmenu',
+        \ 'WhichKey', 'BufTabLine', 'Startify', 'Signature', 'IndentGuide',
+        \ 'hitspop', 'Dirvish', 'Signify', 'Vista', 'Tagbar', 'Vimwiki',
+        \ 'CtrlP', 'denite', 'Lf_hl', 'Syntastic', 'Neomake', 'Coc', 'plug',
+        \ 'Fern', 'cmakeKW', 'haskell', 'scala', 'moon', 'java', 'xml',
+        \ 'pandoc', 'Sneak', 'EasyMotion', 'scss', 'sass', 'cpp', 'cucumber',
+        \ ]
+  let default_links = {
+        \ 'String': 'Constant',
+        \ 'Character': 'Constant',
+        \ 'Number': 'Constant',
+        \ 'Boolean': 'Constant',
+        \ 'Float': 'Number',
+        \ 'Function': 'Identifier',
+        \ 'Conditional': 'Statement',
+        \ 'Repeat': 'Statement',
+        \ 'Label': 'Statement',
+        \ 'Operator': 'Statement',
+        \ 'Keyword': 'Statement',
+        \ 'Exception': 'Statement',
+        \ 'Include': 'PreProc',
+        \ 'Define': 'PreProc',
+        \ 'Macro': 'PreProc',
+        \ 'PreCondit': 'PreProc',
+        \ 'StorageClass': 'Type',
+        \ 'Structure': 'Type',
+        \ 'Typedef': 'Type',
+        \ 'SpecialChar': 'Special',
+        \ 'Tag': 'Special',
+        \ 'Delimiter': 'Special',
+        \ 'SpecialComment': 'Special',
+        \ 'Debug': 'Special',
+        \ }
+  for entry in hlget()
+    if get(entry, 'cleared', v:false) | continue |  endif
+    if match(entry.name, join(ignored_hlgroup, '\|')) != -1 | continue | endif
+    let cmd = ['hi']
+    if !empty(get(entry, 'linksto'))
+      if get(default_links, entry.name, '') ==# entry.linksto
+        continue
+      endif
+      if get(entry, 'default', v:false)
+        call extend(cmd, ['def', 'link', entry.name, entry.linksto])
+      else
+        call extend(cmd, ['link', entry.name, entry.linksto])
+      endif
+      call add(result, join(cmd))
+      continue
+    endif
+    call add(cmd, entry.name)
+    let attrs = [
+          \ 'cterm', 'ctermbg', 'ctermfg',
+          \ 'font', 'gui', 'guibg', 'guifg', 'guisp',
+          \ 'start', 'stop', 'term'
+          \ ]
+    for attr in attrs
+      if !empty(get(entry, attr))
+        if type(entry[attr]) == v:t_dict
+          let value = join(keys(entry[attr]), ',')
+        else
+          let value = entry[attr]
+        endif
+        call add(cmd, printf('%s=%s', attr, value))
+      endif
+    endfor
+    call add(result, join(cmd))
+  endfor
+  return result
+endfunction
+
+function! user#colorscheme#compile() abort
+  let cmds = user#colorscheme#hl_compile()
+  let header = [
+        \ 'hi clear',
+        \ 'if exists(''syntax_on'')',
+        \ '  sy reset',
+        \ 'end',
+        \ 'let g:colors_name = ' .. string(g:colors_name),
+        \ ]
+  let result = extend(header, cmds)
+  let file = printf('%s/colors/%s.vim', g:config_home, g:colors_name)
+  if !filereadable(file)
+    call writefile(result, file)
+  endif
+  return join(result, "\n")
+endfunction
+
