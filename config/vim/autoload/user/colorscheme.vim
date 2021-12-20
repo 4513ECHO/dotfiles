@@ -10,6 +10,14 @@ function! user#colorscheme#lightline() abort
   return g:current_colorscheme
 endfunction
 
+function! s:colorscheme_list() abort
+  let keys = keys(g:colorscheme_customize)
+  if has_key(g:colorscheme_customize, '_')
+    call filter(keys, { _, val -> val !~# '_' })
+  endif
+  return extend(keys, g:colorscheme_list, 'keep')
+endfunction
+
 function! user#colorscheme#random() abort
   if has('nvim')
     let randint = str2nr(matchstr(reltimestr(reltime()),
@@ -54,7 +62,7 @@ function! user#colorscheme#set_customize(colorscheme) abort
 endfunction
 
 function! user#colorscheme#colorscheme(colorscheme) abort
-  if empty(g:colorscheme_list)
+  if empty(s:colorscheme_list())
     return
   endif
   let g:current_colorscheme = a:colorscheme
