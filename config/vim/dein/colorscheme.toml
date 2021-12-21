@@ -20,6 +20,7 @@ let g:colorscheme_customize.iceberg = {
       \ }}
 '''
 
+# TODO: hl-Visual will be same as hl-CursorLine
 [[plugins]]
 repo = 'morhetz/gruvbox'
 hook_add = '''
@@ -281,8 +282,8 @@ let g:colorscheme_customize.github = {
       \ }}
 '''
 
-# TODO: plugin is supprting lightline.vim, but I can't enable it because v:lua
-#       is only in neovim. I will send repository pull-request...
+# TODO: this plugin is supprting lightline.vim, but I can't enable it because
+#       v:lua is only in neovim. I will send the repository pull-request...
 # [[plugins]]
 # repo = 'EdenEast/nightfox.nvim'
 # if = 'has("nvim") || has("lua")'

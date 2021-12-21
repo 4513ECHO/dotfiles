@@ -171,6 +171,7 @@ endfunction
 
 function! user#colorscheme#compile() abort
   let cmds = user#colorscheme#hl_compile()
+  " TODO: g:terminal_ansi_colors
   let header = [
         \ 'hi clear',
         \ 'if exists(''syntax_on'')',

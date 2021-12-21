@@ -72,8 +72,8 @@ command! -bar HtmlFormat
 " from https://zenn.dev/kato_k/articles/vim-tips-no004
 command! -nargs=? -bar Profile call user#profile(<q-args>)
 
-" TODO: if bang, include untracked file
-command! -nargs=? -bar Todo vimgrep /TODO\ze:/ `git ls-files`
+" TODO: if bang is exists, include untracked file
+command! -bar -bang TodoList vimgrep 'TODO\ze:' `git ls-files`
 
 SetFileType *.grammar,grammar.txt grammar
 SetFileType robots.txt robots-txt
@@ -157,7 +157,7 @@ autocmd user BufWinEnter *
      \ | endif
 
 " from https://qiita.com/Bakudankun/items/649aa6d8b9eccc1712b5
-" TODO: modify EndOfBuffer
+" TODO: modify the color of EndOfBuffer
 autocmd user ColorScheme *
       \ execute 'hi NormalNC guibg='
       \ .. lightsout#darken(lightsout#get_hl('Normal', 'guibg'), 0.03)
