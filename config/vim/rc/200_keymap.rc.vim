@@ -72,13 +72,15 @@ nnoremap <Leader><C-r>
 nnoremap [Space]w <Cmd>update<CR>
 nnoremap [Space]W <Cmd>write<CR>
 nnoremap ^ <C-^><Cmd>edit<CR>
-" nnoremap ^ <C-^>
 nnoremap <silent><expr> <Tab> shiftwidth() .. 'l'
 nnoremap [Space]f <Cmd>edit %:p:h<CR>
 
 xnoremap v $
+xnoremap <Space> t<Space>
 xnoremap < <gv
 xnoremap > >gv
+onoremap v $
+onoremap <Space> t<Space>
 
 inoremap <Leader>z <C-o>zz
 inoremap <Leader>p <Cmd>setlocal paste! paste?<CR>

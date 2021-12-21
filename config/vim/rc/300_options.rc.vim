@@ -11,13 +11,15 @@ set fileformats=unix,dos,mac
 set ambiwidth=double
 
 " ------------------
-" color
+" color/sequence
 set background=dark
 if has('termguicolors')
   set termguicolors
 endif
 if !has('gui_running')
   set t_Co=256
+  let &t_Cs = "\e[4:3m"
+  let &t_Ce = "\e[4:0m"
 endif
 
 " ------------------
@@ -44,7 +46,7 @@ set smartcase
 set hlsearch
 set report=0
 if executable('rg')
-  let &grepprg = 'rg --vimgrep --hidden'
+  let &grepprg = 'rg --vimgrep --hidden --sort path'
   set grepformat=%f:%l:%c:%m
 endif
 
@@ -67,7 +69,9 @@ set novisualbell
 set belloff=all
 
 set listchars=tab:»-,trail:-,extends:»,precedes:«,eol:¬
-set fillchars& fillchars+=diff:/,eob:.
+if exists('+fillchars')
+  set fillchars& fillchars+=diff:/,eob:.
+endif
 
 set pumheight=10
 set helpheight=12
