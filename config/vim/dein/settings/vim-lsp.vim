@@ -19,6 +19,9 @@ let g:lsp_settings_filetype_python = 'pyls-all'
 let g:lsp_settings_filetype_typescript = 'deno'
 let g:lsp_settings_filetype_typescriptreact = 'deno'
 let g:lsp_settings_filetype_markdown = 'efm-langserver'
+let g:lsp_settings_filetype_json = 'efm-langserver'
+let g:lsp_settings_filetype_sh = 'efm-langserver'
+let g:lsp_settings_filetype_yaml = 'yaml-language-server'
 
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete

@@ -42,7 +42,7 @@
     "workspace_config": {
       "yaml": {
         "schemas": {
-          "https://mattn.github.io/efm-langserver/schema.json": "/efm-langserver/config.yml",
+          "https://mattn.github.io/efm-langserver/schema.json": "/efm-langserver/config.yaml",
           "https://mattn.github.io/vim-lsp-settings/schema.json": "vim-lsp-settings.json"
         },
         "validate": true,
@@ -54,7 +54,9 @@
   "efm-langserver": {
     "disabled": false,
     "allowlist": [
-      "markdown"
+      "markdown",
+      "sh",
+      "json"
     ]
   },
   "bash-language-server": {
