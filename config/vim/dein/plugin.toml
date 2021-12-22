@@ -51,7 +51,7 @@ nnoremap <buffer> q <C-w>q
 
 [[plugins]]
 repo = 'tyru/caw.vim'
-on_map = { nx = '<Plug>(caw' }
+on_map = { nx = '<Plug>' }
 hook_add = '''
 nmap <silent> <Leader>c <Plug>(caw:hatpos:toggle)
 xmap <silent> <Leader>c <Plug>(caw:hatpos:toggle)
@@ -80,7 +80,7 @@ on_cmd = ['AnsiEsc']
 
 [[plugins]]
 repo = 'haya14busa/vim-edgemotion'
-on_map = { nx = '<Plug>(edgemotion' }
+on_map = { nx = '<Plug>' }
 hook_add = '''
 nmap <C-j> <Plug>(edgemotion-j)
 nmap <C-k> <Plug>(edgemotion-k)

@@ -31,7 +31,7 @@ depends = ['vim-textobj-user']
 
 # [[plugins]]
 # repo = 'kana/vim-textobj-indent'
-# on_map = { xo = '<Plug>(textobj-indent' }
+# on_map = { xo = '<Plug>' }
 # depends = ['vim-textobj-user']
 
 [[plugins]]
@@ -59,3 +59,4 @@ depends = ['vim-textobj-user']
 # [[plugins]]
 # repo = 'rhysd/vim-textobj-continuous-line'
 # depends = ['vim-textobj-user']
+
