@@ -88,18 +88,39 @@ xmap <C-j> <Plug>(edgemotion-j)
 xmap <C-k> <Plug>(edgemotion-k)
 '''
 
-# [[plugins]]
-# repo = 'junegunn/fzf'
-# if = 'executable("fzf")'
+[[plugins]]
+repo = 'junegunn/fzf'
+merged = 0
+if = 'executable("fzf")'
 
-# [[plugins]]
-# repo = 'junegunn/fzf.vim'
-# depends = ['fzf']
-# if = 'executable("fzf")'
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = ['fzf']
+if = 'executable("fzf")'
 
-# [[plugins]]
-# repo = 'guns/xterm-color-table.vim'
-# on_cmd = ['XtermColorTable']
+[[plugins]]
+repo = 'guns/xterm-color-table.vim'
+on_cmd = ['XtermColorTable']
+
+[[plugins]]
+repo = '4513echo/vim-readme-viewer'
+on_cmd = ['DeinReadme']
+hook_add = '''
+let g:readme_viewer#plugin_manager = 'dein.vim'
+'''
+
+[[plugins]]
+repo = 'wsdjeg/dein-ui.vim'
+on_cmd = ['DeinUpdate']
+[plugins.ftplugin]
+SpaceVimPlugManager = '''
+let s:dein_update_timer = timer_start(10, { -> execute('normal! G') }, {'repeat': -1})
+autocmd user BufLeave * ++once call timer_stop(s:dein_update_timer)
+'''
+
+[[plugins]]
+repo = 'tweekmonster/startuptime.vim'
+on_cmd = ['StartupTime']
 
 # [[plugins]]
 # repo = 'pocke/keycast.vim'
@@ -110,18 +131,18 @@ xmap <C-k> <Plug>(edgemotion-k)
 # [[plugins]]
 # repo = 'pocke/vanner'
 
-# [[plugins]]
-# repo = 'thinca/vim-scouter'
-# on_cmd = ['Scouter']
-# on_func = ['Scouter']
-# hook_add = '''
-# command! Scouter echo Scouter(g:config_home)
-# '''
+[[plugins]]
+repo = 'thinca/vim-scouter'
+on_cmd = ['Scouter']
+on_func = ['Scouter']
+hook_add = '''
+command! Scouter echo Scouter(g:config_home)
+'''
 
-# [[plugins]]
-# repo = 'rbtnn/vim-coloredit'
-# if = '!has("nvim")'
-# on_cmd = ['ColorEdit']
+[[plugins]]
+repo = 'rbtnn/vim-coloredit'
+if = '!has("nvim")'
+on_cmd = ['ColorEdit']
 
 # [[plugins]]
 # repo = 'reireias/vim-cheatsheet'
@@ -143,6 +164,35 @@ xmap <C-k> <Plug>(edgemotion-k)
 # if = '!has("nvim")'
 # on_cmd = ['BadApple']
 
-# [[plugins]]
-# repo = 'mattn/benchvimrc-vim'
-# on_cmd = ['BenchVimrc']
+[[plugins]]
+repo = 'mattn/benchvimrc-vim'
+on_cmd = ['BenchVimrc']
+
+[[plugins]]
+repo = 'dhruvasagar/vim-zoom'
+on_map = { n = '<Plug>' }
+hook_add = '''
+let g:zoom#statustext = 'zoomed'
+nmap <C-w>z <Plug>(zoom-toggle)
+'''
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+on_map = { nx = '<Plug>(openbrowser' }
+on_cmd = ['OpenBrowser', 'OpenBrowserSearch', 'OpenBrowserSmartSearch']
+hook_add = '''
+nmap gx <Plug>(openbrowser-smart-search)
+xmap gx <Plug>(openbrowser-smart-search)
+let g:openbrowser_browser_commands = [{
+      \ 'name': 'w3m',
+      \ 'args': 'tmux-w3m {uri} open-browser',
+      \ }]
+'''
+
+[[plugins]]
+repo = 'tweekmonster/helpful.vim'
+on_cmd = ['HelpfulVersion']
+
+[[plugins]]
+repo = 'thinca/vim-prettyprint'
+on_cmd = ['PP', 'PrettyPrint']
