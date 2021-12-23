@@ -88,7 +88,24 @@ cd-fzf-git () {
 zle -N cd-fzf-git
 bindkey "^Gd" cd-fzf-git
 
-vim_clean () {
+accept-line-ext () {
+  if [[ -z "$BUFFER" ]]; then
+    printf '\033[1A'
+    zle accept-line
+    return
+  fi
+  zle _expand_alias
+  zle accept-line
+}
+zle -N accept-line-ext
+bindkey "^M" accept-line-ext
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS=(
+  accept-line-ext
+  history-beginning-search-backword-end
+  history-beginning-search-forward-end
+)
+
+vim-clean () {
   rm -rf ~/.cache/vim/dein
   rm -rf ~/.local/share/vim/vim-lsp-settings/
 }

@@ -19,9 +19,9 @@ if [[ -n "$VIM_TERMINAL" ]]; then
   prompt_colors[cyan]=006
 else
   prompt_colors[red]=161
-  prompt_colors[green]=070
-  prompt_colors[yellow]=228
-  prompt_colors[cyan]=075
+  prompt_colors[green]=154
+  prompt_colors[yellow]=226
+  prompt_colors[cyan]=081
 fi
 
 # use vcs_info
@@ -68,7 +68,8 @@ function +vi-git-unpushed () {
 
 # add hook redrawing prompt
 function redraw-prompt () {
-  PROMPT="$(venv-prompt)%F{${prompt_colors[green]}}%n@%m%f:%F{${prompt_colors[cyan]}}%~%f%# "
+  PROMPT="$(venv-prompt)%F{${prompt_colors[green]}}%n%B@%b%U%m%u%f%B:%b%F{${prompt_colors[cyan]}}%~%f
+%B>%b "
   RPROMPT="${vcs_info_msg_0_}"
 }
 
@@ -82,3 +83,4 @@ if vcs_info 2> /dev/null; then
 else
   add-zsh-hook precmd redraw-prompt
 fi
+
