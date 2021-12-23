@@ -134,5 +134,3 @@ benchmark () {
       print sum/NR, max
     }' $tempfile)
 }
-
-type _deno > /dev/null || deno completions zsh > $ZDOTDIR/completions/_deno
