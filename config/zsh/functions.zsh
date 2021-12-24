@@ -66,24 +66,48 @@ add-zsh-hook chpwd rename-pane-pwd
 
 cd-git-root () {
   local root
-  root="$(git rev-parce --show-toplevel 2> /dev/null)"
+  root="$(git rev-parse --show-toplevel 2> /dev/null)"
   [[ -n "$root" ]] && cd "$root"
   zle accept-line
 }
 zle -N cd-git-root
 bindkey "^Gr" cd-git-root
 
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end
+
 cd-fzf-git () {
   local root result
-  root="$(git rev-parce --show-toplevel 2> /dev/null)"
-  result="$(cd "$root" && git ls-files | sed '/^[^\/]*$/d;s:/[^/]*$::' \
-    | uniq | fzf)"
+  root="$(git rev-parse --show-toplevel 2> /dev/null)"
+  [[ -z "$root" ]] && return
+  result="$(cd "$root" && git ls-files 2> /dev/null \
+    | sed '/^[^\/]*$/d;s:/[^/]*$::' \
+    | uniq | fzf --preview \
+    "exa -T -a --git-ignore --group-directories-first --color=always $root/{}")"
+  root=
   zle reset-prompt
-  [[ -n "$result" ]] && cd "$root/$result"
+  [[ -n "$result" ]] && cd "$(git rev-parse --show-toplevel)/$result"
   zle accept-line
 }
 zle -N cd-fzf-git
 bindkey "^Gd" cd-fzf-git
+
+cd-fzf-ghq () {
+  local root result preview_cmd
+  root="$(ghq root)"
+  preview_cmd="test -f $root/{}/README.md \
+    && bat --force-colorization --style=header,grid \$_ \
+    || echo 'This repostory does not have README.md'"
+  result="$(ghq list | fzf --preview "$preview_cmd")"
+  zle reset-prompt
+  [[ -n "$result" ]] && cd "$root/$result"
+  zle accept-line
+}
+zle -N cd-fzf-ghq
+bindkey "^Gh" cd-fzf-ghq
 
 accept-line-ext () {
   if [[ -z "$BUFFER" ]]; then
