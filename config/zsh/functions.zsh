@@ -59,13 +59,10 @@ auto_tmux () {
   fi
 }
 
-[[ $SHLVL -eq 1 ]] && [[ -z "$MINIMUM_DOTFILES" ]] && auto_tmux
-
 rename-pane-pwd () {
   [[ $- == *m* ]] && printf '\033]2;%s\033\\' "$(pathshorten "$PWD")"
 }
 add-zsh-hook chpwd rename-pane-pwd
-[[ -n "$TMUX" ]] && rename-pane-pwd
 
 cd-git-root () {
   local root

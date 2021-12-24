@@ -34,6 +34,23 @@ fi
 export SSH_FORWARD_KEY="$HOME/.ssh/id_git_ed25519"
 export SSH_SYMLINK_SOCK="$HOME/.ssh/agent"
 [[ -f "$SSH_FORWARD_KEY" ]] && enable-agent-forward
+[[ -z "$MINIMUM_DOTFILES" ]] && agent-symlink
+[[ $SHLVL -eq 1 ]] && [[ -z "$MINIMUM_DOTFILES" ]] \
+  && [[ -z "$LOADED_ZSHRC" ]] && auto_tmux
+if [[ -n "$TMUX" ]]; then
+  auto_venv
+  rename-pane-pwd
+fi
+
+if type dircolors > /dev/null; then
+  eval "$(dircolors $ZDOTDIR/dircolors)"
+fi
+
+if type fd > /dev/null; then
+  export FZF_DEFAULT_COMMAND="fd --type f --follow --hidden --exclude '.git'"
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND="fd --type d --follow --hidden --exclude '.git'"
+fi
 
 export LOADED_ZSHRC=true
 
