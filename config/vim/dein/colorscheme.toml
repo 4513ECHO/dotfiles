@@ -20,14 +20,13 @@ let g:colorscheme_customize.iceberg = {
       \ }}
 '''
 
-# TODO: hl-Visual will be same as hl-CursorLine
 [[plugins]]
 repo = 'morhetz/gruvbox'
 hook_add = '''
 call add(g:colorscheme_list, 'gruvbox')
 let g:colorscheme_customize.gruvbox = {
       \ 'highlight': {
-      \   'Visual': #{ ctermbg: 239, cterm: 'NONE', guibg: '#565656', gui: 'NONE' },
+      \   'Visual': #{ ctermbg: 237, cterm: 'NONE', guibg: '#3c3836', gui: 'NONE' },
       \ },
       \ 'terminal': [
       \   '#282828', '#cc241d', '#98971a', '#d79921', '#458588', '#b16286', '#689d6a', '#a89984',
@@ -222,6 +221,7 @@ let g:colorscheme_customize.molokai = {
 [[plugins]]
 repo = 'sainnhe/edge'
 hook_add = '''
+let g:edge_better_performance = v:true
 call add(g:colorscheme_list, 'edge')
 '''
 
@@ -234,14 +234,16 @@ let g:colorscheme_customize['spring-night'] = {
       \ }
 '''
 
-# TODO: it doesn't support terminal ansi colors
 [[plugins]]
 repo = 'haishanh/night-owl.vim'
 hook_add = '''
 call add(g:colorscheme_list, 'night-owl')
 let g:colorscheme_customize['night-owl'] = {
       \ 'lightline': 'nightowl',
-      \ }
+      \ 'terminal': [
+      \   '#011627', '#ff5874', '#addb67', '#f78c6c', '#82aaff', '#c792ea', '#7fdbca', '#aaaaaa',
+      \   '#637777', '#ff5874', '#addb67', '#f78c6c', '#82aaff', '#c792ea', '#7fdbca', '#d6deeb',
+      \ ]}
 '''
 
 [[plugins]]
@@ -266,6 +268,7 @@ let g:colorscheme_customize.orbital = {
 
 [[plugins]]
 repo = 'dracula/vim'
+name = 'dracula'
 hook_add = '''
 call add(g:colorscheme_list, 'dracula')
 '''
@@ -280,6 +283,29 @@ let g:colorscheme_customize.github = {
       \ 'highlight': {
       \   'EndOfBuffer': #{ ctermbg: 'NONE', guibg: 'NONE' },
       \ }}
+'''
+
+[[plugins]]
+repo = 'srcery-colors/srcery-vim'
+hook_add = '''
+call add(g:colorscheme_list, 'srcery')
+let g:colorscheme_customize.srcery = {
+      \ 'highlight': {
+      \   'Visual': #{
+      \     ctermbg: 236, guibg: '#303030',
+      \     term: 'NONE', cterm: 'NONE', gui: 'NONE',
+      \ }}}
+'''
+
+[[plugins]]
+repo = 'pineapplegiant/spaceduck'
+hook_add = '''
+call add(g:colorscheme_list, 'spaceduck')
+let g:colorscheme_customize.spaceduck = {
+      \ 'terminal': [
+      \   '#0f111b', '#e33400', '#5ccc96', '#b3a1e6', '#00a3cc', '#ce6f8f', '#7a5ccc', '#686f9a',
+      \   '#686f9a', '#e33400', '#5ccc96', '#b3a1e6', '#00a3cc', '#ce6f8f', '#7a5ccc', '#ecf0c1',
+      \ ]}
 '''
 
 # TODO: this plugin is supprting lightline.vim, but I can't enable it because
