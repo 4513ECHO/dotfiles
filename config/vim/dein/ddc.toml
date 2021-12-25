@@ -10,11 +10,12 @@ on_event = ['InsertEnter']
 hook_add = '''
 " autocmd user CmdlineEnter : call user#ddc#cmdline_pre('<afile>')
 " autocmd user CmdlineEnter / call user#ddc#cmdline_pre()
-nnoremap : <Cmd>call user#ddc#cmdline_pre('')<CR>:
+nnoremap : <Cmd>call timer_start(1, { -> user#ddc#cmdline_pre('') })<CR>:
 '''
 hook_source = '''
 Runtime dein/settings/ddc.vim
 '''
+
 # sources
 
 [[plugins]]
@@ -38,9 +39,9 @@ on_source = 'ddc.vim'
 repo = 'matsui54/ddc-buffer'
 on_source = 'ddc.vim'
 
-# [[plugins]]
-# repo = 'Shougo/ddc-cmdline-history'
-# on_source = 'ddc.vim'
+[[plugins]]
+repo = 'Shougo/ddc-cmdline-history'
+on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/ddc-cmdline'
@@ -60,15 +61,19 @@ repo = 'gamoutatsumi/ddc-emoji'
 on_ft = ['markdown', 'gitcommit']
 on_source = 'ddc.vim'
 
+[[plugins]]
+repo = 'delphinus/ddc-tmux'
+on_source = 'ddc.vim'
+
 # filters
 
 [[plugins]]
 repo = 'tani/ddc-fuzzy'
 on_source = 'ddc.vim'
 
-# [[plugins]]
-# repo = 'matsui54/ddc-converter_truncate'
-# on_source = 'ddc.vim'
+[[plugins]]
+repo = 'matsui54/ddc-converter_truncate'
+on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/ddc-converter_remove_overlap'

@@ -1,4 +1,7 @@
 function! user#ddc#cmdline_pre(mode) abort
+  if g:denops#disabled
+    return
+  endif
   call dein#source('ddc.vim')
   cnoremap <silent><expr> <Tab>
         \ pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>'

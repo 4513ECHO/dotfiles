@@ -8,29 +8,28 @@ let s:sourceOptions._ = {
       \ 'ignoreCase': v:true,
       \ 'matchers': ['matcher_fuzzy'],
       \ 'sorters': ['sorter_fuzzy'],
-      \ 'converters': ['converter_remove_overlap', 'converter_fuzzy'],
+      \ 'converters': [
+      \   'converter_remove_overlap', 'converter_truncate',
+      \   'converter_fuzzy'
+      \ ],
       \ 'maxCandidates': 15,
       \ }
-
 let s:sourceOptions.around = {
       \ 'mark': 'ard',
       \ 'isVolatile': v:true,
       \ 'maxCandidates': 10,
       \ }
-
 let s:sourceOptions.file = {
       \ 'mark': 'file',
       \ 'minAutoCompleteLength': 30,
       \ 'isVolatile': v:true,
       \ 'forceCompletionPattern': '(\f*/\f*)+',
       \ }
-
 let s:sourceOptions['vim-lsp'] = {
       \ 'mark': 'lsp',
       \ 'isVolatile': v:true,
       \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
       \ }
-
 let s:sourceOptions.skkeleton = {
       \ 'mark': 'skk',
       \ 'matchers': ['skkeleton'],
@@ -38,30 +37,35 @@ let s:sourceOptions.skkeleton = {
       \ 'converters': ['converter_remove_overlap'],
       \ 'minAutoCompleteLength': 2,
       \ }
-
 let s:sourceOptions.necovim = {
       \ 'mark': 'vim',
       \ 'isVolatile': v:true,
       \ }
-
 let s:sourceOptions.emoji = {
       \ 'mark': 'emoji',
       \ 'matchers': ['emoji'],
       \ 'sorters': [],
       \ }
-
+let s:sourceOptions['cmdline-history'] = {
+      \ 'mark': 'hist',
+      \ 'maxCandidates': 5,
+      \ }
 let s:sourceOptions.buffer = {'mark': 'buf'}
-" let s:sourceOptions['cmdline-history'] = {'mark': 'hist'}
 let s:sourceOptions.cmdline = {'mark': 'cmd'}
+let s:sourceOptions.tmux = {'mark': 'tmux'}
 
 let s:sourceParams.around = {'maxSize': 500}
 let s:sourceParams.buffer = {
       \ 'requireSameFiletype': v:false,
       \ 'fromAltBuf': v:true,
       \ }
-" let s:sourceParams['cmdline-history'] = {'maxSize': 100}
+let s:sourceParams['cmdline-history'] = {'maxSize': 100}
+let s:sourceParams.tmux = {
+      \ 'currentWinOnly': v:true,
+      \ 'excludeCurrentPane': v:true,
+      \ }
 
-" let s:filterParams.converter_truncate = {'maxInfoWidth': 30}
+let s:filterParams.converter_truncate = {'maxInfoWidth': 30}
 
 call ddc#custom#patch_filetype(
       \ ['vim', 'toml'], {
@@ -72,13 +76,11 @@ call ddc#custom#patch_filetype(
       \ ['python', 'typescript', 'typescriptreact', 'rust'], {
       \ 'sources': extend(['vim-lsp'], s:sources),
       \ })
-
 call ddc#custom#patch_filetype(
       \ ['markdown', 'gitcommit'], {
       \ 'sources': extend(['emoji'], s:sources),
       \ 'keywordPattern': '[a-zA-z_:]\k*',
       \ })
-
 call ddc#custom#patch_filetype(
       \ ['ps1', 'dosbatch', 'autohotkey', 'registry'], {
       \ 'sourcesOptions': {
@@ -100,7 +102,6 @@ let s:patch_global.autoCompleteEvents = [
       \ 'InsertEnter', 'TextChangedI', 'TextChangedP',
       \ 'CmdlineEnter', 'CmdlineChanged',
       \ ]
-
 let s:patch_global.completionMenu = 'pum.vim'
 
 call ddc#custom#patch_global(s:patch_global)
