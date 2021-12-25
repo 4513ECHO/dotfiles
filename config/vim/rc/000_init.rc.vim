@@ -49,8 +49,6 @@ command! -bar RandomColorScheme call user#colorscheme#random()
 command! -nargs=1 -bar -complete=customlist,user#colorscheme#completion
       \ ColorScheme call user#colorscheme#colorscheme(<q-args>)
 
-command! -nargs=+ SetFileType call user#set_filetype(<f-args>)
-
 " from https://qiita.com/gorilla0513/items/11be5413405792337558
 command! -nargs=1 WWW call user#google(<q-args>)
 
@@ -74,12 +72,6 @@ command! -nargs=? -bar Profile call user#profile(<q-args>)
 
 " TODO: if bang is exists, include untracked file
 command! -bar -bang TodoList vimgrep 'TODO\ze:' `git ls-files`
-
-SetFileType *.grammar,grammar.txt grammar
-SetFileType robots.txt robots-txt
-SetFileType *[._]curlrc curlrc
-SetFileType *[._]gitignore,*/git/ignore gitignore
-SetFileType */git/config gitconfig
 
 augroup random_colorscheme
   autocmd!

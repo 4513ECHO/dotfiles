@@ -1,8 +1,3 @@
-function! user#set_filetype(pattern, filetype) abort
-  execute 'autocmd user BufRead,BufNewFile' a:pattern
-        \ 'setfiletype' a:filetype
-endfunction
-
 function! user#title_string() abort
   if &buftype ==# 'help'
     let dirname = 'help'
