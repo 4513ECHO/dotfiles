@@ -149,6 +149,21 @@ autocmd user BufWinEnter *
 autocmd user ColorScheme *
       \ execute 'hi NormalNC guibg='
       \ .. lightsout#darken(lightsout#get_hl('Normal', 'guibg'), 0.03)
-autocmd user BufWinEnter,WinEnter * setlocal wincolor=
-autocmd user WinLeave * setlocal wincolor=NormalNC
+if !has('nvim')
+  autocmd user BufWinEnter,WinEnter * setlocal wincolor=
+  autocmd user WinLeave * setlocal wincolor=NormalNC
+endif
 
+" from https://github.com/yuki-yano/dotfiles/blob/11bfe29f07/.vimrc#L696
+autocmd user FocusGained * checktime
+
+" from https://github.com/kuuote/dotvim/blob/46760385c2/conf/rc/autocmd.vim#L5
+function! s:chmod(file) abort
+  let perm = getfperm(a:file)
+  let newperm = printf("%sx%sx%sx", perm[0:1], perm[3:4], perm[6:7])
+  if perm != newperm
+    call setfperm(a:file, newperm)
+  endif
+endfunction
+
+autocmd user BufWritePost * if getline(1) =~# "^#!" | call s:chmod(expand("<afile>")) | endif
