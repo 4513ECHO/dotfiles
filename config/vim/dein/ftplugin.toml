@@ -72,6 +72,7 @@ nnoremap <buffer> q <C-w>q
 gitcommit = '''
 let b:caw_oneline_comment = ';'
 " from https://zenn.dev/uochan/articles/2021-12-08-vim-conventional-commits
+" TODO: use trim()
 function! s:select_type() abort
   let line = substitute(getline('.'), '^;\s*', '', '')
   let title = printf('%s: ', substitute(split(line, ';')[0], '\s\+$', '', ''))

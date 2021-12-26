@@ -1,10 +1,7 @@
-
-" TODO: use `g:lightline.component_visible_condition`
 function! user#lightline#colorscheme() abort
   return winwidth(0) > 70 ? g:current_colorscheme : ''
 endfunction
 
-" TODO: use `g:lightline.component_visible_condition`
 function! user#lightline#file_format() abort
   if &fileformat !=# 'unix' && winwidth(0) > 70
     return &fileformat
@@ -12,7 +9,6 @@ function! user#lightline#file_format() abort
   return ''
 endfunction
 
-" TODO: use `g:lightline.component_visible_condition`
 function! user#lightline#file_encoding() abort
   if &fileencoding !=# 'utf-8' && winwidth(0) > 70
     return &fileencoding
@@ -41,7 +37,6 @@ function! user#lightline#char_counter() abort
   return ''
 endfunction
 
-" TODO: use `g:lightline.component_visible_condition`
 function! user#lightline#readonly() abort
   if &readonly && &filetype !~# 'help' && winwidth(0) > 70
     return 'RO'

@@ -1,3 +1,4 @@
+" from https://thinca.hatenablog.com/entry/20110903/1314982646
 if &buftype ==# 'help'
   finish
 endif

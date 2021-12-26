@@ -150,6 +150,7 @@ autocmd user BufWinEnter *
 
 " from https://qiita.com/Bakudankun/items/649aa6d8b9eccc1712b5
 " TODO: modify the color of EndOfBuffer
+" NOTE: I'm working in progress that making plugin...
 autocmd user ColorScheme *
       \ execute 'hi NormalNC guibg='
       \ .. lightsout#darken(lightsout#get_hl('Normal', 'guibg'), 0.03)
