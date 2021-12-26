@@ -4,5 +4,17 @@ if !1 | finish | endif
 let s:config_home = empty($XDG_CONFIG_HOME) ? expand('~/.config/vim') : $XDG_CONFIG_HOME .. '/vim'
 set runtimepath&
 let &runtimepath = s:config_home .. ',' .. &runtimepath .. ',' .. s:config_home .. '/after'
+let $MYVIMRC = expand('<sfile>:p')
 
-runtime! s:config_home rc/*.rc.vim
+function! s:source_vimrc(vimrc) abort
+  execute 'source' fnamemodify(printf('%s/rc/%s.rc.vim',
+        \ s:config_home, a:vimrc), 'p')
+endfunction
+
+" TODO: remove digits of filenames
+call s:source_vimrc('000_init')
+call s:source_vimrc('200_keymap')
+call s:source_vimrc('300_options')
+call s:source_vimrc('100_dein')
+
+set secure
