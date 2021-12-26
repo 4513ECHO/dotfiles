@@ -2,9 +2,12 @@ augroup user
   autocmd!
 augroup END
 
-let g:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache/vim') : $XDG_CACHE_HOME .. '/vim'
-let g:config_home = empty($XDG_CONFIG_HOME) ? expand('~/.config/vim') : $XDG_CONFIG_HOME .. '/vim'
-let g:data_home = empty($XDG_DATA_HOME) ? expand('~/.local/share/vim') : $XDG_DATA_HOME .. '/vim'
+let g:cache_home = empty($XDG_CACHE_HOME) ?
+      \ expand('~/.cache/vim') : $XDG_CACHE_HOME .. '/vim'
+let g:config_home = empty($XDG_CONFIG_HOME) ?
+      \ expand('~/.config/vim') : $XDG_CONFIG_HOME .. '/vim'
+let g:data_home = empty($XDG_DATA_HOME) ?
+      \ expand('~/.local/share/vim') : $XDG_DATA_HOME .. '/vim'
 
 let g:loaded_2html_plugin      = v:true
 let g:loaded_getscript         = v:true
@@ -36,10 +39,6 @@ let g:colorscheme_list = get(g:, 'colorscheme_list', [])
 let g:colorscheme_customize = get(g:, 'colorscheme_customize', {'_': {}})
 
 command! -nargs=1 Runtime runtime! g:config_home <args>
-
-command! -nargs=1 SourceConf
-      \ execute 'source' printf('%s/dein/settings/%s',
-      \ g:config_home, <q-args>)
 
 " from https://github.com/thinca/config/blob/d92e41cebd/dotfiles/dot.vim/vimrc#L1382
 command! -bar RTP echo substitute(&runtimepath, ',', "\n", 'g')
@@ -77,12 +76,8 @@ augroup random_colorscheme
   autocmd!
   " autocmd ColorScheme,VimEnter * ++nested
   "      \ call user#colorscheme#colorscheme(g:current_colorscheme)
-  " autocmd VimEnter * ++nested
-  "    \ redraw! | call timer_start(0, { -> user#colorscheme#random() })
   autocmd VimEnter * ++nested
-       \ call user#colorscheme#random()
-  " autocmd VimEnter * ++nested
-  "     \ colorscheme snow
+     \ call user#colorscheme#random()
 augroup END
 
 " echo message vim start up time
@@ -144,9 +139,9 @@ autocmd user Syntax *
       \ | endif
 
 autocmd user BufWinEnter *
-     \ : if empty(&buftype) && line('.') > winheight(0) / 3 * 2
-     \ |   execute 'normal! zz' .. repeat("\<C-y>", winheight(0) / 6)
-     \ | endif
+      \ : if empty(&buftype) && line('.') > winheight(0) / 3 * 2
+      \ |   execute 'normal! zz' .. repeat("\<C-y>", winheight(0) / 6)
+      \ | endif
 
 " from https://qiita.com/Bakudankun/items/649aa6d8b9eccc1712b5
 " TODO: modify the color of EndOfBuffer

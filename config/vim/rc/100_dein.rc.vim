@@ -52,4 +52,3 @@ syntax enable
 " call timer_start(0, { -> execute('syntax enable') })
 filetype indent plugin on
 
-call user#colorscheme#random()
