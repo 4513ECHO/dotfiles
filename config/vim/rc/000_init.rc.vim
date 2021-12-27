@@ -72,6 +72,10 @@ command! -nargs=? -bar Profile call user#profile(<q-args>)
 " TODO: if bang is exists, include untracked file
 command! -bar -bang TodoList vimgrep 'TODO\ze:' `git ls-files`
 
+if filereadable(expand('~/.vimrc_secret'))
+  source ~/.vimrc_secret
+endif
+
 augroup random_colorscheme
   autocmd!
   " autocmd ColorScheme,VimEnter * ++nested
