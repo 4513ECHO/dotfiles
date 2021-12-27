@@ -33,6 +33,7 @@ repo = 'obcat/vim-hitspop'
 if = '!has("nvim")'
 hook_add = '''
 let g:hitspop_line = 'winbot'
+let g:hitspop_timeout = 2000
 autocmd user ColorScheme *
       \ hi link hitspopErrormsg ErrorMsg
 '''
@@ -62,18 +63,27 @@ let g:context_filetype#ignore_patterns = {
 [[plugins]]
 repo = 'rhysd/clever-f.vim'
 hook_add = '''
+let g:clever_f_across_no_line = v:true
 let g:clever_f_ignore_case = v:true
 let g:clever_f_smart_case = v:true
 let g:clever_f_use_migemo = v:true
+let g:clever_f_chars_match_any_signs = ';'
+let g:clever_f_timeout_ms = 2000
+autocmd user ColorScheme *
+      \ hi def CleverFDefaultLabel guifg=red guibg=NONE gui=bold,underline
 '''
 
 [[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
+hook_add = '''
+let g:extra_whitespace_ignored_filetypes = ['diff', 'help', 'capture']
+'''
 
 [[plugins]]
 repo = 'mattn/vim-molder'
 [plugins.ftplugin]
 molder = '''
+nnoremap <buffer> q <C-w>q
 nmap <buffer> <C-r> <Plug>(molder-reload)
 '''
 
@@ -83,10 +93,23 @@ depends = ['vim-molder']
 
 [[plugins]]
 repo = 'osyo-manga/vim-jplus'
-on_map = { nx = '<Plug>(jplus' }
+on_map = { nx = '<Plug>' }
 hook_add = '''
-nmap J <Plug>(jplus)
-xmap J <Plug>(jplus)
+nmap J <Plug>(jplus-getchar)<Space>
+xmap J <Plug>(jplus-getchar)<Space>
+nmap gJ <Plug>(jplus)
+xmap gJ <Plug>(jplus)
+let g:jplus#config = {
+      \ '_': {
+      \   'delimiter': '',
+      \   'right_matchstr_pattern': '^\s*#\s*\zs.*\|'
+      \                          .. '\s*\zs.*',
+      \ },
+      \ 'vim': {
+      \   'right_matchstr_pattern': '^\s*\\\s*\zs.*\|'
+      \                          .. '^\s*"\s*\zs.*\|'
+      \                          .. '\s*\zs.*',
+      \ }}
 '''
 
 [[plugins]]
@@ -140,7 +163,6 @@ repo = 'itchyny/vim-highlighturl'
 repo = 'christoomey/vim-tmux-navigator'
 hook_add = '''
 let g:tmux_navigator_no_mappings = v:true
-
 nnoremap <C-w>h <Cmd>TmuxNavigateLeft<CR>
 nnoremap <C-w>j <Cmd>TmuxNavigateDown<CR>
 nnoremap <C-w>k <Cmd>TmuxNavigateUp<CR>
@@ -149,6 +171,33 @@ nnoremap <C-w>l <Cmd>TmuxNavigateRight<CR>
 
 [[plugins]]
 repo = 'markonm/traces.vim'
+hook_add = '''
+let g:traces_normal_preview = v:true
+'''
+
+[[plugins]]
+repo = 'itchyny/vim-parenmatch'
+hook_add = '''
+" TODO: send PR to the repository to use instead 'hi def Group' instead of 'hi Group'
+" autocmd user ColorScheme * hi link ParenMatch MatchParen
+'''
+
+[[plugins]]
+repo = 'machakann/vim-highlightedyank'
+hook_add = '''
+let g:highlightedyank_highlight_duration = 100
+'''
+
+# TODO: use :SclowDisable before to decrease flickering
+[[plugins]]
+repo = 'yuttie/comfortable-motion.vim'
+hook_add = '''
+let g:comfortable_motion_no_default_key_mappings = 1
+nnoremap <silent> <C-d> <Cmd>call comfortable_motion#flick(winheight(0) * 2)<CR>
+nnoremap <silent> <C-u> <Cmd>call comfortable_motion#flick(winheight(0) * -2)<CR>
+nnoremap <silent> <C-f> <Cmd>call comfortable_motion#flick(winheight(0) * 4)<CR>
+nnoremap <silent> <C-b> <Cmd>call comfortable_motion#flick(winheight(0) * -4)<CR>
+'''
 
 # TODO: send PR to use `hi def` instead of `hlexists()`
 [[plugins]]
