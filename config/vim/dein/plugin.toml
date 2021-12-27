@@ -196,3 +196,29 @@ on_cmd = ['HelpfulVersion']
 [[plugins]]
 repo = 'thinca/vim-prettyprint'
 on_cmd = ['PP', 'PrettyPrint']
+
+[[plugins]]
+repo = 'haya14busa/is.vim'
+depends = ['vim-asterisk']
+on_map = { nx = '<Plug>' }
+hook_add = '''
+let g:is#do_default_mappings = v:false
+nmap n  <Plug>(is-n)zz
+nmap N  <Plug>(is-N)zz
+nmap *  <Plug>(asterisk-z*)<Plug>(is-nohl-1)zz
+xmap *  <Plug>(asterisk-z*)<Plug>(is-nohl-1)zz
+nmap #  <Plug>(asterisk-z#)<Plug>(is-nohl-1)zz
+xmap #  <Plug>(asterisk-z#)<Plug>(is-nohl-1)zz
+nmap g* <Plug>(asterisk-gz*)<Plug>(is-nohl-1)zz
+xmap g* <Plug>(asterisk-gz*)<Plug>(is-nohl-1)zz
+nmap g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)zz
+xmap g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)zz
+'''
+
+[[plugins]]
+repo = 'haya14busa/vim-asterisk'
+on_map = { nx = '<Plug>' }
+hook_add = '''
+let g:asterisk#keeppos = v:true
+'''
+

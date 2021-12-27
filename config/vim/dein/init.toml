@@ -150,3 +150,14 @@ nnoremap <C-w>l <Cmd>TmuxNavigateRight<CR>
 [[plugins]]
 repo = 'markonm/traces.vim'
 
+# TODO: send PR to use `hi def` instead of `hlexists()`
+[[plugins]]
+repo = 'hrsh7th/vim-seak'
+hook_add = '''
+let g:seak_enabled = v:true
+let g:seak_marks = split('ASDFHJKL', '.\zs')
+let g:seak_auto_accept = v:true
+autocmd user ColorScheme *
+      \ hi def SeakChar gui=bold,underline guifg=Red guibg=NONE
+'''
+
