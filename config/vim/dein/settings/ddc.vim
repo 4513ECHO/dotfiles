@@ -1,5 +1,5 @@
 let s:patch_global = {}
-let s:sources = ['file', 'around', 'buffer']
+let s:sources = ['file', 'around', 'tmux', 'buffer']
 let s:sourceOptions = {}
 let s:sourceParams = {}
 let s:filterParams = {}
