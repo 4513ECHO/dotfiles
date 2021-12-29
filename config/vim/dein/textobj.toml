@@ -1,15 +1,50 @@
 [[plugins]]
 repo = 'machakann/vim-sandwich'
-# depends = [
-#   'vim-repeat', 'vim-textobj-entire', 'vim-textobj-line',
-#   'vim-textobj-indent', 'textobj-wiw', 'vim-textobj-continuous-line',
-# ]
 depends = [
   'vim-repeat', 'vim-textobj-entire', 'vim-textobj-line',
   'vim-textobj-wiw', 'vim-textobj-anyblock', 'vim-textobj-between',
+  'vim-textobj-functioncall',
 ]
 hook_add = '''
 runtime macros/sandwich/keymap/surround.vim
+let g:operator#sandwich#options = #{ add: #{ char: #{ skip_space: v:true } } }
+let g:sandwich#recipes = exists('g:sandwich#recipes')
+      \ ? deepcopy(g:sandwich#recipes) : deepcopy(g:sandwich#default_recipes)
+" form https://github.com/yuki-yano/dotfiles/blob/8840dc3a90/.vimrc#L2899
+let g:sandwich#recipes += [
+      \ {
+      \   'buns': ['${', '}'],
+      \   'input': ['$'],
+      \   'filetype': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
+      \ },
+      \ {
+      \   'buns': ['#{', '}'],
+      \   'input': ['#'],
+      \   'filetype': ['vim', 'ruby', 'eruby'],
+      \ },
+      \ {
+      \   'buns': ['InputGenerics()', '">"'],
+      \   'expr': v:true,
+      \   'cursor': 'inner_tail',
+      \   'kind': ['add', 'replace'],
+      \   'action': ['add'],
+      \   'input': ['g'],
+      \ },
+      \ {
+      \   'external': ['i<', "\<Plug>(textobj-functioncall-generics-a)"],
+      \   'noremap': v:false,
+      \   'kind': ['delete', 'replace', 'query'],
+      \   'input': ['g'],
+      \ },
+      \ ]
+
+function! InputGenerics() abort
+  let genericsname = input('Generics Name: ', '')
+  if genericsname ==# ''
+    throw 'OperatorSandwichCancel'
+  endif
+  return genericsname . '<'
+endfunction
 '''
 
 [[plugins]]
@@ -55,8 +90,46 @@ depends = ['vim-textobj-user']
 repo = 'thinca/vim-textobj-between'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
+hook_add = '''
+let g:textobj_between_no_default_key_mappings = v:true
+omap ao <Plug>(textobj-between-a)
+omap io <Plug>(textobj-between-i)
+xmap ao <Plug>(textobj-between-a)
+xmap io <Plug>(textobj-between-i)
+'''
 
-# [[plugins]]
-# repo = 'rhysd/vim-textobj-continuous-line'
-# depends = ['vim-textobj-user']
+[[plugins]]
+repo = 'machakann/vim-textobj-functioncall'
+on_map = { xo = '<Plug>' }
+on_func = ['textobj#functioncall#i', 'textobj#functioncall#ip']
+depends = ['vim-textobj-user']
+hook_add = '''
+" from https://github.com/yuki-yano/dotfiles/blob/8840dc3a90/.vimrc#L2953
+let g:textobj_functioncall_no_default_key_mappings = v:true
 
+let g:textobj_functioncall_patterns = [{
+      \ 'header' : '\<\%(\h\k*\.\)*\h\k*',
+      \ 'bra'    : '(',
+      \ 'ket'    : ')',
+      \ 'footer' : '',
+      \ }]
+omap <silent> af <Plug>(textobj-functioncall-i)
+omap <silent> if <Plug>(textobj-functioncall-innerparen-i)
+xmap <silent> af <Plug>(textobj-functioncall-i)
+xmap <silent> if <Plug>(textobj-functioncall-innerparen-i)
+
+let g:textobj_functioncall_generics_patterns = [{
+      \ 'header' : '\<\h\k*',
+      \ 'bra'    : '<',
+      \ 'ket'    : '>',
+      \ 'footer' : '',
+      \ }]
+onoremap <silent> <Plug>(textobj-functioncall-generics-a) :<C-u>call textobj#functioncall#i('o', g:textobj_functioncall_generics_patterns)<CR>
+onoremap <silent> <Plug>(textobj-functioncall-generics-i) :<C-u>call textobj#functioncall#ip('o', g:textobj_functioncall_generics_patterns)<CR>
+xnoremap <silent> <Plug>(textobj-functioncall-generics-a) :<C-u>call textobj#functioncall#i('x', g:textobj_functioncall_generics_patterns)<CR>
+xnoremap <silent> <Plug>(textobj-functioncall-generics-i) :<C-u>call textobj#functioncall#ip('x', g:textobj_functioncall_generics_patterns)<CR>
+omap <silent> ag <Plug>(textobj-functioncall-generics-a)
+omap <silent> ig <Plug>(textobj-functioncall-generics-i)
+xmap <silent> ag <Plug>(textobj-functioncall-generics-a)
+xmap <silent> ig <Plug>(textobj-functioncall-generics-i)
+'''
