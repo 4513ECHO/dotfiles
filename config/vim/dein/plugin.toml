@@ -91,12 +91,22 @@ xmap <C-k> <Plug>(edgemotion-k)
 [[plugins]]
 repo = 'junegunn/fzf'
 merged = 0
+on_cmd = ['FZF']
 if = 'executable("fzf")'
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
 depends = ['fzf']
+on_cmd = [
+  'FzfFiles', 'FzfGFiles', 'FzfBuffers', 'FzfColors', 'FzfAg', 'FzfRg',
+  'FzfLines', 'FzfBLines', 'FzfTags', 'FzfBTags', 'FzfMarks', 'FzfWindows',
+  'FzfLocate', 'FzfHistory', 'FzfSnippets', 'FzfCommits', 'FzfBCommits',
+  'FzfCommands', 'FzfMaps', 'FzfHelptags', 'FzfFiletypes',
+]
 if = 'executable("fzf")'
+hook_add = '''
+let g:fzf_command_prefix = 'Fzf'
+'''
 
 [[plugins]]
 repo = 'guns/xterm-color-table.vim'
