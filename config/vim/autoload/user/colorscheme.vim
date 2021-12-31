@@ -10,20 +10,34 @@ function! user#colorscheme#lightline() abort
   return g:current_colorscheme
 endfunction
 
+function! user#colorscheme#add(plugin, ...) abort
+  if a:0 > 0
+    let name = a:1
+  else
+    let name = substitute(
+          \ fnamemodify(a:plugin, ':r'),
+          \ '\v\c^n?vim[_-]|colors?[_-]|[_-]n?vim$', '', 'g')
+  endif
+  let g:colorscheme_customize[name] =
+        \ get(g:colorscheme_customize, name, {})
+  let g:colorscheme_customize[name].plugin = a:plugin
+  let g:colorscheme_customize[name].name = name
+endfunction
+
 function! s:colorscheme_list() abort
   let keys = keys(g:colorscheme_customize)
   if has_key(g:colorscheme_customize, '_')
     call filter(keys, { _, val -> val !~# '_' })
   endif
-  return extend(keys, g:colorscheme_list, 'keep')
+  return keys
 endfunction
 
 function! user#colorscheme#random() abort
-  if has('nvim')
+  if exists('?rand')
+    let randint = rand()
+  else
     let randint = str2nr(matchstr(reltimestr(reltime()),
           \ '\.\@<=\d\+')[1:])
-  else
-    let randint = rand()
   endif
   call user#colorscheme#colorscheme(
         \ get(s:colorscheme_list(), randint % len(s:colorscheme_list())))

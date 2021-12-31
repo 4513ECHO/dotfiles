@@ -2,7 +2,7 @@
 [[plugins]]
 repo = 'nanotech/jellybeans.vim'
 hook_add = '''
-call add(g:colorscheme_list, 'jellybeans')
+call user#colorscheme#add('jellybeans.vim')
 let g:colorscheme_customize.jellybeans = {
       \ 'terminal': [
       \   '#151515', '#cf6a4c', '#70b950', '#fad07a', '#8fbfdc', '#c6b6ee', '#89b8c2', '#e8e8d3',
@@ -13,7 +13,7 @@ let g:colorscheme_customize.jellybeans = {
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
 hook_add = '''
-call add(g:colorscheme_list, 'iceberg')
+call user#colorscheme#add('iceberg.vim')
 let g:colorscheme_customize.iceberg = {
       \ 'highlight': {
       \   'String': #{ ctermfg: 144, guifg: '#a7b1a9' },
@@ -23,7 +23,7 @@ let g:colorscheme_customize.iceberg = {
 [[plugins]]
 repo = 'morhetz/gruvbox'
 hook_add = '''
-call add(g:colorscheme_list, 'gruvbox')
+call user#colorscheme#add('gruvbox')
 let g:colorscheme_customize.gruvbox = {
       \ 'highlight': {
       \   'Visual': #{ ctermbg: 237, cterm: 'NONE', guibg: '#3c3836', gui: 'NONE' },
@@ -37,7 +37,7 @@ let g:colorscheme_customize.gruvbox = {
 [[plugins]]
 repo = 'rakr/vim-one'
 hook_add = '''
-call add(g:colorscheme_list, 'one')
+call user#colorscheme#add('vim-one')
 let g:colorscheme_customize.one = {
       \ 'terminal': [
       \   '#282c34', '#e06c75', '#98c379', '#e5c07b', '#61afef', '#c678dd', '#56b6c2', '#828997',
@@ -48,7 +48,7 @@ let g:colorscheme_customize.one = {
 [[plugins]]
 repo = 'w0ng/vim-hybrid'
 hook_add = '''
-call add(g:colorscheme_list, 'hybrid')
+call user#colorscheme#add('vim-hybrid')
 let g:colorscheme_customize.hybrid = {
       \ 'terminal': [
       \   '#1d1f21', '#cc6666', '#b5bd68', '#f0c674', '#81a2be', '#b294bb', '#8abeb7', '#d3d7cf',
@@ -59,31 +59,31 @@ let g:colorscheme_customize.hybrid = {
 [[plugins]]
 repo = 'joshdick/onedark.vim'
 hook_add = '''
-call add(g:colorscheme_list, 'onedark')
+call user#colorscheme#add('onedark.vim')
 '''
 
 [[plugins]]
 repo = 'arcticicestudio/nord-vim'
 hook_add = '''
-call add(g:colorscheme_list, 'nord')
+call user#colorscheme#add('nord-vim')
 '''
 
 [[plugins]]
 repo = 'ghifarit53/tokyonight-vim'
 hook_add = '''
-call add(g:colorscheme_list, 'tokyonight')
+call user#colorscheme#add('tokyonight-vim')
 '''
 
 [[plugins]]
 repo = 'fenetikm/falcon'
 hook_add = '''
-call add(g:colorscheme_list, 'falcon')
+call user#colorscheme#add('falcon')
 '''
 
 [[plugins]]
 repo = 'haystackandroid/snow'
 hook_add = '''
-call add(g:colorscheme_list, 'snow')
+call user#colorscheme#add('snow')
 let g:colorscheme_customize.snow = {
       \ 'lightline': 'snow_dark',
       \ }
@@ -93,7 +93,7 @@ let g:colorscheme_customize.snow = {
 [[plugins]]
 repo = 'yuttie/hydrangea-vim'
 hook_add = '''
-call add(g:colorscheme_list, 'hydrangea')
+call user#colorscheme#add('hydrangea-vim')
 let g:colorscheme_customize.hydrangea = {
       \ 'highlight': {
       \   'Constant': #{ ctermbg: 'NONE', guibg: 'NONE' },
@@ -109,20 +109,20 @@ let g:colorscheme_customize.hydrangea = {
 [[plugins]]
 repo = 'ulwlu/elly.vim'
 hook_add = '''
-call add(g:colorscheme_list, 'elly')
+call user#colorscheme#add('elly.vim')
 '''
 
 # NOTE: maybe it doesn't support lightline.vim expand component
 # [[plugins]]
-# repo = 'gkapfham/vim-vitamin-onec'
+# repo = 'gkapfham/vim-vitamin-onec''
 # hook_add = '''
-# call add(g:colorscheme_list, 'vitaminonec')
+# call user#colorscheme#add(g:dein#plugin.name, 'vitaminonec')
 # '''
 
 [[plugins]]
 repo = 'Rigellute/rigel'
 hook_add = '''
-call add(g:colorscheme_list, 'rigel')
+call user#colorscheme#add('rigel')
 let g:colorscheme_customize.rigel = {
        \ 'terminal': [
        \   '#00384d', '#c43060', '#7fc06e', '#f08e48', '#1c8bd2', '#c694ff', '#00cccc', '#77929e',
@@ -133,19 +133,19 @@ let g:colorscheme_customize.rigel = {
 [[plugins]]
 repo = 'ayu-theme/ayu-vim'
 hook_add = '''
-call add(g:colorscheme_list, 'ayu')
+call user#colorscheme#add('ayu-vim')
 '''
 
 [[plugins]]
 repo = 'bluz71/vim-nightfly-guicolors'
 hook_add = '''
-call add(g:colorscheme_list, 'nightfly')
+call user#colorscheme#add('vim-nightfly-guicolors', 'nightfly')
 '''
 
 [[plugins]]
 repo = 'connorholyday/vim-snazzy'
 hook_add = '''
-call add(g:colorscheme_list, 'snazzy')
+call user#colorscheme#add('vim-snazzy')
 let g:colorscheme_customize.snazzy = {
       \ 'highlight': {
       \   'Visual': #{ ctermbg: 254, guibg: '#e4e4ee' },
@@ -160,7 +160,7 @@ let g:colorscheme_customize.snazzy = {
 [[plugins]]
 repo = 'jacoborus/tender.vim'
 hook_add = '''
-call add(g:colorscheme_list, 'tender')
+call user#colorscheme#add('tender.vim')
 let g:colorscheme_customize.tender = {
       \ 'terminal': [
       \   '#282828', '#f43753', '#c9d05c', '#ffc24b', '#73cef4', '#fe6ab5', '#b3deef', '#bbbbbb',
@@ -171,7 +171,7 @@ let g:colorscheme_customize.tender = {
 [[plugins]]
 repo = 'wadackel/vim-dogrun'
 hook_add = '''
-call add(g:colorscheme_list, 'dogrun')
+call user#colorscheme#add('vim-dogrun')
 let g:colorscheme_customize.dogrun = {
       \ 'terminal': [
       \   '#111219', '#c261b6', '#7cbe8c', '#8e8a6f', '#4c89ac', '#6c75cb', '#73c1a9', '#9ea3c0',
@@ -182,7 +182,7 @@ let g:colorscheme_customize.dogrun = {
 [[plugins]]
 repo = 'whatyouhide/vim-gotham'
 hook_add = '''
-call add(g:colorscheme_list, 'gotham')
+call user#colorscheme#add('vim-gotham')
 let g:colorscheme_customize.gotham = {
       \ 'terminal': [
       \   '#0c1014', '#c23127', '#2aa889', '#edb443', '#195466', '#4e5166', '#33859E', '#99d1ce',
@@ -191,11 +191,11 @@ let g:colorscheme_customize.gotham = {
 '''
 
 # TODO: it doesn't support terminal ansi colors
-# https://github.com/DTr4n/windows-terminal-wombat
+# https://github.com/DTr4n/windows-terminal-wombat'
 [[plugins]]
 repo = 'vim-scripts/wombat256.vim'
 hook_add = '''
-call add(g:colorscheme_list, 'wombat256mod')
+call user#colorscheme#add('wombat256.vim', 'wombat256mod')
 let g:colorscheme_customize.wombat256mod = {
       \ 'lightline': 'wombat',
       \ 'link': {
@@ -210,7 +210,7 @@ let g:colorscheme_customize.wombat256mod = {
 [[plugins]]
 repo = 'tomasr/molokai'
 hook_add = '''
-call add(g:colorscheme_list, 'molokai')
+call user#colorscheme#add('molokai')
 let g:colorscheme_customize.molokai = {
       \ 'terminal': [
       \   '#1b1d1e', '#f92672', '#82b414', '#fd971f', '#268bd2', '#8c54fe', '#56c2d6', '#ccccc6',
@@ -222,13 +222,13 @@ let g:colorscheme_customize.molokai = {
 repo = 'sainnhe/edge'
 hook_add = '''
 let g:edge_better_performance = v:true
-call add(g:colorscheme_list, 'edge')
+call user#colorscheme#add('edge')
 '''
 
 [[plugins]]
 repo = 'rhysd/vim-color-spring-night'
 hook_add = '''
-call add(g:colorscheme_list, 'spring-night')
+call user#colorscheme#add('vim-color-spring-night')
 let g:colorscheme_customize['spring-night'] = {
       \ 'lightline': 'spring_night',
       \ }
@@ -237,7 +237,7 @@ let g:colorscheme_customize['spring-night'] = {
 [[plugins]]
 repo = 'haishanh/night-owl.vim'
 hook_add = '''
-call add(g:colorscheme_list, 'night-owl')
+call user#colorscheme#add('night-owl.vim')
 let g:colorscheme_customize['night-owl'] = {
       \ 'lightline': 'nightowl',
       \ 'terminal': [
@@ -249,7 +249,7 @@ let g:colorscheme_customize['night-owl'] = {
 [[plugins]]
 repo = 'lifepillar/vim-solarized8'
 hook_add = '''
-call add(g:colorscheme_list, 'solarized8')
+call user#colorscheme#add('vim-solarized8')
 let g:colorscheme_customize.solarized8 = {
       \ 'lightline': 'solarized',
       \ }
@@ -259,7 +259,7 @@ let g:colorscheme_customize.solarized8 = {
 [[plugins]]
 repo = 'fcpg/vim-orbital'
 hook_add = '''
-call add(g:colorscheme_list, 'orbital')
+call user#colorscheme#add('vim-orbital')
 let g:colorscheme_customize.orbital = {
       \ 'highlight': {
       \   'String': #{ ctermbg: 'NONE', guibg: 'NONE' },
@@ -270,7 +270,7 @@ let g:colorscheme_customize.orbital = {
 repo = 'dracula/vim'
 name = 'dracula'
 hook_add = '''
-call add(g:colorscheme_list, 'dracula')
+call user#colorscheme#add('dracula')
 '''
 
 # TODO: it doesn't support terminal ansi colors
@@ -278,7 +278,7 @@ call add(g:colorscheme_list, 'dracula')
 repo = 'cormacrelf/vim-colors-github'
 hook_add = '''
 let g:github_colors_soft = v:true
-call add(g:colorscheme_list, 'github')
+call user#colorscheme#add('vim-colors-github')
 let g:colorscheme_customize.github = {
       \ 'highlight': {
       \   'EndOfBuffer': #{ ctermbg: 'NONE', guibg: 'NONE' },
@@ -288,7 +288,7 @@ let g:colorscheme_customize.github = {
 [[plugins]]
 repo = 'srcery-colors/srcery-vim'
 hook_add = '''
-call add(g:colorscheme_list, 'srcery')
+call user#colorscheme#add('srcery-vim')
 let g:colorscheme_customize.srcery = {
       \ 'highlight': {
       \   'Visual': #{
@@ -300,12 +300,48 @@ let g:colorscheme_customize.srcery = {
 [[plugins]]
 repo = 'pineapplegiant/spaceduck'
 hook_add = '''
-call add(g:colorscheme_list, 'spaceduck')
+call user#colorscheme#add('spaceduck')
 let g:colorscheme_customize.spaceduck = {
       \ 'terminal': [
       \   '#0f111b', '#e33400', '#5ccc96', '#b3a1e6', '#00a3cc', '#ce6f8f', '#7a5ccc', '#686f9a',
       \   '#686f9a', '#e33400', '#5ccc96', '#b3a1e6', '#00a3cc', '#ce6f8f', '#7a5ccc', '#ecf0c1',
       \ ]}
+'''
+
+[[plugins]]
+repo = 'mvanderkamp/cocoa.vim'
+hook_add = '''
+call user#colorscheme#add('cocoa.vim')
+'''
+
+[[plugins]]
+repo = 'franbach/miramare'
+hook_add = '''
+call user#colorscheme#add('miramare')
+'''
+
+[[plugins]]
+repo = 'drewtempelmeyer/palenight.vim'
+hook_add = '''
+call user#colorscheme#add('palenight.vim')
+'''
+
+[[plugins]]
+repo = 'sonph/onehalf'
+rtp = 'vim'
+hook_add = '''
+call user#colorscheme#add('onehalf', 'onehalfdark')
+let g:colorscheme_customize.onehalfdark = {
+     \ 'terminal': [
+     \   '#282c34', '#e06c75', '#98c379', '#e5c07b', '#61afef', '#c678dd', '#56b6c2', '#dcdfe4',
+     \   '#282c34', '#e06c75', '#98c379', '#e5c07b', '#61afef', '#c678dd', '#56b6c2', '#dcdfe4',
+     \ ]}
+'''
+
+[[plugins]]
+repo = 'romainl/Apprentice'
+hook_add = '''
+call user#colorscheme#add('Apprentice', 'apprentice')
 '''
 
 # TODO: this plugin is supprting lightline.vim, but I can't enable it because
@@ -314,6 +350,6 @@ let g:colorscheme_customize.spaceduck = {
 # repo = 'EdenEast/nightfox.nvim'
 # if = 'has("nvim") || has("lua")'
 # hook_add = '''
-# call add(g:colorscheme_list, 'nightfox')
+# call user#colorscheme#add(g:dein#plugin.name)
 # '''
 
