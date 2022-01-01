@@ -3,12 +3,14 @@ let s:dein_repo_dir = s:dein_dir .. '/repos/github.com/Shougo/dein.vim'
 
 if &runtimepath !~# s:dein_repo_dir
   if !isdirectory(s:dein_repo_dir)
-    call system(printf('git clone https://github.com/Shougo/dein.vim %s',
+    call system(printf('git clone --depth 1'
+          \ .. 'https://github.com/Shougo/dein.vim %s',
           \ s:dein_repo_dir))
   endif
   execute 'set runtimepath^=' .. s:dein_repo_dir
 endif
 
+let g:dein#types#git#clone_depth = 1
 let g:dein#auto_recache = v:true
 let g:dein#lazy_rplugins = v:true
 let g:dein#install_check_diff = v:true
