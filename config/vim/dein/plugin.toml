@@ -37,11 +37,12 @@ nnoremap <buffer> q <C-w>q
 [[plugins]]
 repo = 'tyru/capture.vim'
 on_cmd = ['Capture', 'CaptureJson']
-hook_add = '''
+hook_source = '''
 command! -bang -bar -nargs=1 -complete=var CaptureJson
       \ : execute 'Capture<bang> echo json_encode(<args>)'
       \ | if &filetype ==# 'capture'
       \ |   execute '%!jq'
+      \ |   setfiletype json
       \ | endif
 '''
 [plugins.ftplugin]
