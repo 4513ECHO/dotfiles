@@ -1,12 +1,24 @@
 function! user#title_string() abort
+  let f = expand('%:t')
+  let d = pathshorten(expand('%:~:h'))
+  let r = pathshorten(fnamemodify(getcwd(), ':~'))
   if &buftype ==# 'help'
-    let dirname = 'help'
+    let [dir, file] = ['help', f]
   elseif &buftype ==# 'terminal'
-    let dirname = 'terminal'
+    let [dir, file] = ['terminal', f]
+  elseif &buftype ==# 'nofile'
+    if &filetype ==# 'molder'
+      let [dir, file] = [d, f]
+    else
+      let [dir, file] = [r, bufname()]
+    endif
+  elseif &buftype ==# 'quickfix'
+    let [dir, file] = [r, 'QuickFix']
   else
-    let dirname = pathshorten(expand(('%:~:h')))
+    let [dir, file] = [(!empty(d) ? d : r), f]
   endif
-  return printf('%s (%s) - VIM', expand('%:t'), dirname)
+  return printf('%s (%s) - %s', file, dir,
+        \ has('nvim') ? 'NVIM' : 'VIM')
 endfunction
 
 let s:cursorline_lock = 0
@@ -33,15 +45,21 @@ endfunction
 
 function! user#pager() abort
   setlocal noswapfile buftype=nofile bufhidden=hide
-  setlocal modifiable nomodified readonly
+  setlocal modifiable nomodified readonly nonumber synmaxcol&
   if exists(':AnsiEsc') == 2
-    autocmd user ColorScheme * ++once AnsiEsc
+    autocmd user VimEnter * ++once
+          \ : execute 'AnsiEsc'
+          \ | silent! keepjump keeppatterns
+          \ | %substitute/\v\e\[%(%(\d+;)?\d{1,2})?[mK]//ge
+          \ | filetype detect
   else
-    silent! keepjump keeppatterns %substitute/\v\e\[%(%(\d;)?\d{1,2})?[mK]//ge
+    silent! keepjump keeppatterns %substitute/\v\e\[%(%(\d+;)?\d{1,2})?[mK]//ge
+    filetype detect
   endif
   nnoremap <buffer> q <C-w>q
   normal! gg
 endfunction
+
 function! user#google(word) abort
   execute 'terminal' '++close' '++shell' 'w3m'
         \ printf('"https://google.com/search?q=%s"', a:word)
@@ -61,7 +79,6 @@ function! user#deno_run(no_check) abort
   execute 'topleft terminal ++close ++rows=12'
         \ 'deno' subcmd opts expand('%:p')
   setlocal bufhidden=wipe
-  autocmd BufEnter <buffer> if winnr('$') | quit! | endif
   wincmd j
 endfunction
 
