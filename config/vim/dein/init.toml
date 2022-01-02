@@ -161,6 +161,7 @@ repo = 'itchyny/vim-highlighturl'
 
 [[plugins]]
 repo = 'christoomey/vim-tmux-navigator'
+if = '!has("gui_running")'
 hook_add = '''
 let g:tmux_navigator_no_mappings = v:true
 nnoremap <C-w>h <Cmd>TmuxNavigateLeft<CR>
@@ -209,4 +210,17 @@ let g:seak_auto_accept = v:true
 autocmd user ColorScheme *
       \ hi def SeakChar gui=bold,underline guifg=Red guibg=NONE
 '''
+
+[[plugins]]
+repo = 'tmux-plugins/vim-tmux-focus-events'
+if = '!has("gui_running") && !has("patch-8.2.2345") && !has("nvim")'
+
+# NOTE: clipboard connections
+# -> : can modify clipboard
+# vim <-.      .-> iPadOS(iSH)
+#  \     \    /
+#   `---> tmux
+[[plugins]]
+repo = 'roxma/vim-tmux-clipboard'
+if = '!has("gui_running")'
 
