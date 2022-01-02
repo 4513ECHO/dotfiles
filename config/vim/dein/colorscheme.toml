@@ -344,6 +344,51 @@ hook_add = '''
 call user#colorscheme#add('Apprentice', 'apprentice')
 '''
 
+# Thank mityu very much!
+# TODO: original theme for lightline
+[[plugins]]
+repo = 'https://raw.githubusercontent.com/mityu/dotfiles/master/dot_vim/runtime/colors/reliquiae.vim'
+script_type = 'colors'
+type = 'raw'
+hook_add = '''
+call user#colorscheme#add('reliquiae.vim')
+let g:colorscheme_customize.reliquiae = {
+      \ 'lightline': 'ayu',
+      \ }
+'''
+
+# Thank Shougo very much!
+# TODO: original theme for lightline and terminal
+[[plugins]]
+repo = 'https://raw.githubusercontent.com/Shougo/shougo-s-github/master/vim/colors/candy.vim'
+script_type = 'colors'
+type = 'raw'
+hook_add = '''
+call user#colorscheme#add('candy.vim')
+let  g:colorscheme_customize.candy = {
+      \ 'lightline': 'default',
+      \ }
+'''
+
+[[plugins]]
+repo = 'KabbAmine/yowish.vim'
+hook_add = '''
+call user#colorscheme#add('yowish.vim')
+let g:yowish = {
+      \ 'ctrlp': v:false,
+      \ 'unite': v:false,
+      \ 'nerdtree': v:false,
+      \ 'agit': v:false,
+      \ 'signjk': v:false,
+      \ }
+'''
+
+[[plugins]]
+repo = 'lighthaus-theme/vim-lighthaus'
+hook_add = '''
+call user#colorscheme#add('vim-lighthaus')
+'''
+
 # TODO: this plugin is supprting lightline.vim, but I can't enable it because
 #       v:lua is only in neovim. I will send the repository pull-request...
 # [[plugins]]
