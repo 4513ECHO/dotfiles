@@ -24,6 +24,14 @@ function! user#colorscheme#add(plugin, ...) abort
   let g:colorscheme_customize[name].name = name
 endfunction
 
+function! user#colorscheme#custom(colorscheme, options) abort
+  if has_key(g:colorscheme_customize, a:colorscheme)
+    call extend(g:colorscheme_customize[a:colorscheme], a:options)
+  else
+    let g:colorscheme_customize[a:colorscheme] = a:options
+  endif
+endfunction
+
 function! s:colorscheme_list() abort
   let keys = keys(g:colorscheme_customize)
   if has_key(g:colorscheme_customize, '_')
