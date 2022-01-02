@@ -115,7 +115,7 @@ let g:jplus#config = {
 [[plugins]]
 repo = 'kana/vim-submode'
 hook_add = '''
-SourceConf submode.vim
+Runtime dein/settings/submode.vim
 '''
 
 [[plugins]]
@@ -135,15 +135,13 @@ autocmd user BufNewFile,BufRead
 repo = 'mattn/vim-lsp-settings'
 depends = ['vim-lsp']
 hook_add = '''
-" Runtime dein/settings/vim-lsp.vim
-SourceConf vim-lsp.vim
+Runtime dein/settings/vim-lsp.vim
 '''
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = '''
-" Runtime dein/settings/lightline.vim
-SourceConf lightline.vim
+Runtime dein/settings/lightline.vim
 '''
 
 [[plugins]]

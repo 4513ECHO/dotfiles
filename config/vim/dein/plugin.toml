@@ -4,9 +4,7 @@ on_event = ['InsertEnter', 'CmdlineEnter']
 rev = 'dev'
 hook_source = '''
 let g:lexima_no_default_rules = v:true
-" Runtime dein/settings/lexima.vim
-" autocmd user FileType * SourceConf lexima.vim
-SourceConf lexima.vim
+Runtime dein/settings/lexima.vim
 '''
 
 [[plugins]]
