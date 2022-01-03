@@ -3,17 +3,12 @@ function! user#ddc#cmdline_pre(mode) abort
     return
   endif
   call dein#source('ddc.vim')
-  cnoremap <silent><expr> <Tab>
-        \ pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>'
-        \ : ddc#map#manual_complete()
-  cnoremap <silent><expr> <C-n>
-        \ pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>'
-        \ : ddc#map#manual_complete()
-  cnoremap <C-p> <Cmd>call pum#map#select_relative(-1)<CR>
-  cnoremap <silent><expr> <CR>
-       \ pum#visible() ? '<Cmd>call pum#map#confirm()<CR>'
-       \ : '<CR>'
-  cnoremap <C-e> <Cmd>call pum#map#cancel()<CR>
+  call user#ddc#define_map('c', '<Tab>', 'pum#map#select_relative(+1)',
+        \ 'ddc#map#manual_complete()')
+  call user#ddc#define_map('c', '<C-n>', 'pum#map#select_relative(+1)', '<Down>')
+  call user#ddc#define_map('c', '<C-p>', 'pum#map#select_relative(-1)', '<Up>')
+  call user#ddc#define_map('c', '<CR>',  'pum#map#confirm()', '<CR>')
+  " call user#ddc#define_map('c', '<BS>',  'pum#map#cancel()',  '<BS>')
   set wildchar=<C-t>
 
   let b:_ddc_cmdline_prev_buffer_config = ddc#custom#get_buffer()
@@ -30,6 +25,14 @@ let s:patch_buffer.sourceOptions = {
       \ 'cmdline': {
       \   'forceCompletionPattern': '(\f*/\f+)+',
       \ }}
+
+function! user#ddc#define_map(mode, lhs, rhs_func, rhs_nopum) abort
+  execute printf(
+        \ '%snoremap <silent><expr> %s ' ..
+        \ 'pum#visible() ? ''<Cmd>call %s<CR>'' : ''%s''',
+        \ a:mode, a:lhs, a:rhs_func, a:rhs_nopum
+        \ )
+endfunction
 
 function! user#ddc#cmdline_post() abort
   if exists('b:_ddc_cmdline_prev_buffer_config')

@@ -85,16 +85,22 @@ onoremap <Space> t<Space>
 inoremap <Leader>z <C-o>zz
 inoremap <Leader>p <Cmd>setlocal paste! paste?<CR>
 
-" moving
-noremap! <C-h> <Left>
-noremap! <C-j> <Down>
-noremap! <C-k> <Up>
-noremap! <C-l> <Right>
+" emacs-like insert/cmdline mode mapping {{{
 noremap! <C-a> <Home>
 noremap! <C-e> <End>
 
-" paste
-noremap! <C-p> <C-r>*
+noremap! <C-b> <Left>
+noremap! <C-n> <Down>
+noremap! <C-p> <Up>
+noremap! <C-f> <Right>
+
+noremap! <C-d> <Del>
+inoremap <C-k> <C-o>D
+cnoremap <expr> <C-k>
+     \ repeat("\<Del>", strchars(getcmdline()[getcmdpos() - 1:]))
+
+noremap! <C-y> <C-r>*
+" }}}
 
 noremap! <Leader>/ \
 

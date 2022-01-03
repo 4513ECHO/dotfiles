@@ -108,10 +108,8 @@ call ddc#custom#patch_global(s:patch_global)
 
 " keymappings
 
-inoremap <silent><expr> <C-n>
-      \ pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>'
-      \ : ddc#map#manual_complete()
-inoremap <C-p> <Cmd>call pum#map#select_relative(-1)<CR>
+call user#ddc#define_map('i', '<C-n>', 'pum#map#select_relative(+1)', '<Down>')
+call user#ddc#define_map('i', '<C-p>', 'pum#map#select_relative(-1)', '<Up>')
 inoremap <silent><expr> <BS> user#ddc#imap_bs()
 inoremap <silent><expr> <CR> user#ddc#imap_cr()
 
