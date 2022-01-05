@@ -102,7 +102,7 @@ cnoremap <expr> <C-k>
 noremap! <C-y> <C-r>*
 " }}}
 
-noremap! <Leader>/ \
+noremap! ¥ <Bslash>
 
 cnoremap <C-x> <C-r>=expand('%:p')<CR>
 

@@ -126,6 +126,12 @@ ZSH_AUTOSUGGEST_CLEAR_WIDGETS=(
   history-beginning-search-forward-end
 )
 
+insert-bslash () {
+  zle -U '\'
+}
+zle -N insert-bslash
+bindkey "¥" insert-bslash
+
 vim-clean () {
   rm -rf ~/.cache/vim/dein
   rm -rf ~/.local/share/vim/vim-lsp-settings/
