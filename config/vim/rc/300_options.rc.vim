@@ -139,4 +139,5 @@ set ttyfast
 set title
 set autoread
 set titlestring=%{user#title_string()}
+set diffopt=internal,filler,vertical,algorithm:histogram,indent-heuristic
 

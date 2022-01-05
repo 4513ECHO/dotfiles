@@ -35,6 +35,7 @@
 
 [commit]
   template = ~/.config/git/commit_template
+  verbose = true
 
 [url "git@github.com:"]
   insteadOf = github:
@@ -42,6 +43,8 @@
 
 [diff]
   tool = vimdiff
+  algorithm = histogram
+  colorMoved = dimmed-zebra
 
 [difftool]
   prompt = false
