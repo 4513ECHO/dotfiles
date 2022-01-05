@@ -61,8 +61,7 @@ endfunction
 
 function! user#ddc#imap_cr() abort
   if pum#visible()
-    call pum#map#confirm()
-    return ''
+    return "\<Cmd>call pum#map#confirm()\<CR>"
   else
     return lexima#expand('<CR>', 'i')
   endif
@@ -70,8 +69,7 @@ endfunction
 
 function! user#ddc#imap_bs() abort
   if pum#visible()
-    call pum#map#cancel()
-    return ''
+    return "\<Cmd>call pum#map#cancel()\<CR>"
   else
     return lexima#expand('<BS>', 'i')
   endif
