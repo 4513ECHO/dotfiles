@@ -63,6 +63,7 @@ let s:sourceParams['cmdline-history'] = {'maxSize': 100}
 let s:sourceParams.tmux = {
       \ 'currentWinOnly': v:true,
       \ 'excludeCurrentPane': v:true,
+      \ 'kindFormat': '#{pane_index}.#{pane_current_command}',
       \ }
 
 let s:filterParams.converter_truncate = {'maxInfoWidth': 30}
