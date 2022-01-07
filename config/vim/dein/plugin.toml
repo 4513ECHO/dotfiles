@@ -51,9 +51,13 @@ nnoremap <buffer> q <C-w>q
 [[plugins]]
 repo = 'tyru/caw.vim'
 on_map = { nx = '<Plug>' }
+depends = ['vim-operator-user']
 hook_add = '''
-nmap <silent> <Leader>c <Plug>(caw:hatpos:toggle)
-xmap <silent> <Leader>c <Plug>(caw:hatpos:toggle)
+let g:caw_operator_keymappings = v:true
+let g:caw_no_default_keymappings = v:true
+nmap <silent> m  <Plug>(caw:hatpos:toggle:operator)
+nmap <silent> mm <Plug>(caw:hatpos:toggle)
+xmap <silent> m  <Plug>(caw:hatpos:toggle:operator)
 '''
 
 

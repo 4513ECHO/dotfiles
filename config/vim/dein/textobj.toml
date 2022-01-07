@@ -55,6 +55,9 @@ on_map = { xno = '<Plug>(Repeat' }
 repo = 'kana/vim-textobj-user'
 
 [[plugins]]
+repo = 'kana/vim-operator-user'
+
+[[plugins]]
 repo = 'kana/vim-textobj-entire'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
