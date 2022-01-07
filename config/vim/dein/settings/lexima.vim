@@ -93,3 +93,33 @@ call map(s:rules, { filetype, rules -> map(rules,
       \ { _, val -> s:add_rule(filetype, val) },
       \ ) })
 
+" from https://github.com/yuki-yano/dotfiles/blob/9bfee6c807/.vimrc#L3335
+function! s:lexima_alter_command(original, altanative) abort
+  let input_space = '<C-w>' .. a:altanative .. '<Space>'
+  let input_cr    = '<C-w>' .. a:altanative .. '<CR>'
+
+  let rule = {
+        \ 'mode': ':',
+        \ 'at': '^\(''<,''>\)\?' .. a:original .. '\%#',
+        \ }
+
+  call lexima#add_rule(extend(rule, { 'char': '<Space>', 'input': input_space }))
+  call lexima#add_rule(extend(rule, { 'char': '<CR>',    'input': input_cr    }))
+endfunction
+
+command! -nargs=+ LeximaAlterCommand call <SID>lexima_alter_command(<f-args>)
+
+LeximaAlterCommand hg\%[rep]                    helpgrep
+LeximaAlterCommand bon\%[ew]                    botright<Space>new
+LeximaAlterCommand cap\%[ture]                  Capture
+LeximaAlterCommand capturej\%[son]              CaptureJson
+LeximaAlterCommand capj\%[son]                  CaptureJson
+LeximaAlterCommand quic\%[krun]                 QuickRun
+LeximaAlterCommand qr\%[un]                     QuickRun
+LeximaAlterCommand fixw\%[hitespace]            FixWhitespace
+LeximaAlterCommand dei\%[nreadme]               DeinReadme
+LeximaAlterCommand readm\%[e]                   DeinReadme
+LeximaAlterCommand colo\%[rscheme]              ColorScheme
+LeximaAlterCommand ra\%[ndomcolorscheme]        RandomColorScheme
+LeximaAlterCommand todo\%[list]                 TodoList
+
