@@ -115,18 +115,17 @@ let &backupdir = g:data_home .. '/backup'
 let &directory = g:data_home .. '/swap'
 call mkdir(&backupdir, 'p')
 call mkdir(&directory, 'p')
-if has('persistent_undo')
-  set undofile
-  if has('nvim')
-    let &undodir = g:data_home .. '/nvimundo'
-    call mkdir(&undodir, 'p')
-  else
-    let &undodir = g:data_home .. '/undo'
-    call mkdir(&undodir, 'p')
-  endif
+set undofile
+if has('nvim')
+  let &undodir = g:data_home .. '/nvimundo'
+  call mkdir(&undodir, 'p')
+else
+  let &undodir = g:data_home .. '/undo'
+  call mkdir(&undodir, 'p')
 endif
-if has('viminfo')
-  execute 'set viminfo+=n' .. g:data_home .. '/viminfo'
+" TODO: use shada instead in neovim
+if !has('nvim')
+  let &viminfofile = g:data_home .. '/viminfo'
 endif
 
 " ------------------
