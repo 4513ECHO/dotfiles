@@ -18,10 +18,10 @@ let s:rules._ += [
 
 " from https://github.com/yuki-yano/dotfiles/blob/11bfe29f07/.vimrc#L2848
 let s:rules._ += [
-      \ { 'char': ';', 'at': '(.*\%#)$',   'input': '<Right>;' },
-      \ { 'char': ';', 'at': '^\s*\%#)$',  'input': '<Right>;' },
-      \ { 'char': ';', 'at': '(.*\%#\}$',  'input': '<Right>;' },
-      \ { 'char': ';', 'at': '^\s*\%#\}$', 'input': '<Right>;' },
+      \ { 'char': ';', 'at': '(.*\%#)$',   'leave': ')', 'input': ';' },
+      \ { 'char': ';', 'at': '^\s*\%#)$',  'leave': ')', 'input': ';' },
+      \ { 'char': ';', 'at': '(.*\%#\}$',  'leave': '}', 'input': ';' },
+      \ { 'char': ';', 'at': '^\s*\%#\}$', 'leave': '}', 'input': ';' },
       \ ]
 
 " python
@@ -36,13 +36,13 @@ let s:rules.python += [
 let s:rules.help = []
 let s:rules.help += [
       \ { 'char': '*',     'input': '*',    'input_after': '*' },
-      \ { 'char': '*',     'at': '\%#\*',   'leave': 1 },
-      \ { 'char': '<BS>',  'at': '|\%#|',   'delete': 1 },
-      \ { 'char': '<BS>',  'at': '\*\%#\*', 'delete': 1 },
-      \ { 'char': '<Bar>', 'at': '\%#|',    'leave': 1 },
+      \ { 'char': '*',     'at': '\%#\*',   'leave':  '*' },
+      \ { 'char': '<BS>',  'at': '|\%#|',   'delete': '|' },
+      \ { 'char': '<BS>',  'at': '\*\%#\*', 'delete': '*' },
+      \ { 'char': '<Bar>', 'at': '\%#|',    'leave':  '|' },
       \ { 'char': '<Bar>', 'input': '|',    'input_after': '|' },
-      \ { 'char': '<Tab>', 'at': '\%#|',    'leave': 1 },
-      \ { 'char': '<Tab>', 'at': '\%#\*',   'leave': 1 },
+      \ { 'char': '<Tab>', 'at': '\%#|',    'leave':  '|' },
+      \ { 'char': '<Tab>', 'at': '\%#\*',   'leave':  '*' },
       \ ]
 
 " toml
@@ -73,25 +73,43 @@ let s:rules.vim += [
       \ { 'char': '<CR>', 'at': '\[\%#$',  'input': s:vim_input_bslash(), 'input_after': '<CR><Bslash> \]' },
       \ ]
 
-" call lexima#add_rule({'char': '>', 'at': '\%#)', 'input': ') => {',
-"      \ 'delete':  1, 'input_after':  '}', 'filetype':
-"      \ ['typescript', 'typescriptreact', 'javascript', 'javascriptreact']})
+" markdown
+let s:rules.markdown = []
+" smart itemize indent
+let s:rules.markdown += [
+      \ { 'char': '<Tab>', 'at': '^\s*[-*]\s*\%#$', 'input': '<Home><Space><Space><End>' },
+      \ { 'char': '<BS>',  'at': '^\s*[-*]\s*\%#$', 'input': '<Home><Del><Del><End>'     },
+      \ ]
+" smart checkbox
+let s:rules.markdown += [
+      \ { 'char': '[', 'at': '^\s*[-*]\s*\%#$',      'input': '[<Space>]'                 },
+      \ { 'char': 'x', 'at': '^\s*[-*]\s*\[ \]\%#$', 'input': '<Left><BS>x<Right><Space>' },
+      \ ]
 
-" call lexima#add_rule({'char': '<BS>', 'at': '<\%#>', 'delete': 1,
-"      \ 'filetype': ['typesctipt', 'typescriptreact', 'vim', 'html']})
+" typescript
+let s:rules.typescript = []
+let s:rules.typescript += [
+     \ { 'char': '>', 'at': '([a-zA-Z, ]*>\%#)', 'delete': ')', 'input': '<BS>) => {', 'input_after': '}' },
+     \ ]
+let s:rules.typescriptreact = copy(s:rules.typescript)
 
-function! s:add_rule(filetype, rule) abort
-  if a:filetype !=# '_'
-    let base = { 'filetype': a:filetype }
-  else
-    let base = {}
-  endif
-  call lexima#add_rule(extend(base, a:rule))
+function! s:debug() abort
+  return string(s:rules)
 endfunction
 
-call map(s:rules, { filetype, rules -> map(rules,
-      \ { _, val -> s:add_rule(filetype, val) },
-      \ ) })
+function! s:lexima_init() abort
+  for [filetype, rules] in items(s:rules)
+    for val in rules
+      if filetype !=# '_'  && type(filetype) == v:t_string
+        let base = { 'filetype': filetype }
+      else
+        let base = {}
+      endif
+      call lexima#add_rule(extend(base, val))
+    endfor
+  endfor
+endfunction
+call s:lexima_init()
 
 " from https://github.com/yuki-yano/dotfiles/blob/9bfee6c807/.vimrc#L3335
 function! s:lexima_alter_command(original, altanative) abort
