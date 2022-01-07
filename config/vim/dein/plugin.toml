@@ -36,7 +36,8 @@ nnoremap <buffer> q <C-w>q
 repo = 'tyru/capture.vim'
 on_cmd = ['Capture', 'CaptureJson']
 hook_source = '''
-command! -bang -bar -nargs=1 -complete=var CaptureJson
+command! -bang -bar -nargs=1 -complete=expression
+      \ CaptureJson
       \ : execute 'Capture<bang> echo json_encode(<args>)'
       \ | if &filetype ==# 'capture'
       \ |   execute '%!jq'
