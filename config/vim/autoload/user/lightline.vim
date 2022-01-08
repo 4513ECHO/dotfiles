@@ -16,12 +16,24 @@ function! user#lightline#file_encoding() abort
   return ''
 endfunction
 
+" from https://github.com/thinca/config/blob/4b02d5abcb/dotfiles/dot.vim/vimrc#L2263
+let s:skkeleton_modes = {
+      \ 'hira': 'あ',
+      \ 'kata': 'ア',
+      \ 'hankata': 'ｧｱ',
+      \ 'zenkaku': 'ａ',
+      \ }
+
 function! user#lightline#mode() abort
   if !empty(submode#current())
     return 'SUB:' .. submode#current()
-  elseif get(b:, 'skkeleton_enabled', v:false) && !empty(skkeleton#mode())
-    " TODO: make skkeleton modes table
-    return printf('%s(%s)', lightline#mode(), skkeleton#mode())
+  elseif get(b:, 'skkeleton_enabled', v:false)
+    let skk_mode = skkeleton#mode()
+    if !empty(skk_mode)
+      return printf(
+            \ %s[%s]', lightline#mode(),
+            \ get(s:skkeleton_modes, skk_mode, skk_mode))
+    endif
   endif
   return lightline#mode()
 endfunction
