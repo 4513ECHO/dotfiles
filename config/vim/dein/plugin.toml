@@ -1,11 +1,18 @@
 [[plugins]]
 repo = 'cohama/lexima.vim'
 on_event = ['InsertEnter', 'CmdlineEnter']
-rev = 'dev'
-hook_source = '''
+hook_add = '''
 let g:lexima_no_default_rules = v:true
+let g:lexima_ctrlh_as_backspace = v:true
+'''
+hook_source = '''
 Runtime dein/settings/lexima.vim
 '''
+
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+on_func = ['denops#server#start']
+if = 'executable("deno")'
 
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
@@ -61,6 +68,52 @@ nmap <silent> mm <Plug>(caw:hatpos:toggle)
 xmap <silent> m  <Plug>(caw:hatpos:toggle:operator)
 '''
 
+[[plugins]]
+repo = 'rhysd/clever-f.vim'
+on_map = { nxo = '<Plug>' }
+hook_add = '''
+nmap F <Plug>(clever-f-F)
+nmap T <Plug>(clever-f-T)
+nmap f <Plug>(clever-f-f)
+nmap t <Plug>(clever-f-t)
+omap F <Plug>(clever-f-F)
+omap T <Plug>(clever-f-T)
+omap f <Plug>(clever-f-f)
+omap t <Plug>(clever-f-t)
+xmap F <Plug>(clever-f-F)
+xmap T <Plug>(clever-f-T)
+xmap f <Plug>(clever-f-f)
+xmap t <Plug>(clever-f-t)
+let g:clever_f_across_no_line = v:true
+let g:clever_f_ignore_case = v:true
+let g:clever_f_smart_case = v:true
+let g:clever_f_use_migemo = v:true
+let g:clever_f_chars_match_any_signs = ';'
+let g:clever_f_timeout_ms = 5000
+autocmd user ColorScheme *
+      \ hi def CleverFDefaultLabel guifg=red guibg=NONE gui=bold,underline
+'''
+
+[[plugins]]
+repo = 'osyo-manga/vim-jplus'
+on_map = { nx = '<Plug>' }
+hook_add = '''
+nmap J  <Plug>(jplus-getchar)<Space>
+xmap J  <Plug>(jplus-getchar)<Space>
+nmap gJ <Plug>(jplus)
+xmap gJ <Plug>(jplus)
+let g:jplus#config = {
+      \ '_': {
+      \   'delimiter': '',
+      \   'right_matchstr_pattern': '^\s*#\s*\zs.*\|'
+      \                          .. '\s*\zs.*',
+      \ },
+      \ 'vim': {
+      \   'right_matchstr_pattern': '^\s*\\\s*\zs.*\|'
+      \                          .. '^\s*"\s*\zs.*\|'
+      \                          .. '\s*\zs.*',
+      \ }}
+'''
 
 [[plugins]]
 repo = 'thinca/vim-scall'
@@ -123,14 +176,15 @@ hook_add = '''
 let g:readme_viewer#plugin_manager = 'dein.vim'
 '''
 
-[[plugins]]
-repo = 'wsdjeg/dein-ui.vim'
-on_cmd = ['DeinUpdate']
-[plugins.ftplugin]
-SpaceVimPlugManager = '''
-let s:dein_update_timer = timer_start(10, { -> execute('normal! G') }, {'repeat': -1})
-autocmd user BufLeave * ++once call timer_stop(s:dein_update_timer)
-'''
+# TODO: dein#get_updates_log() is broken
+# [[plugins]]
+# repo = 'wsdjeg/dein-ui.vim'
+# on_cmd = ['DeinUpdate']
+# [plugins.ftplugin]
+# SpaceVimPlugManager = '''
+# let s:dein_update_timer = timer_start(10, { -> execute('normal! G') }, {'repeat': -1})
+# autocmd user BufLeave * ++once call timer_stop(s:dein_update_timer)
+# '''
 
 [[plugins]]
 repo = 'tweekmonster/startuptime.vim'
@@ -168,6 +222,8 @@ on_cmd = ['ColorEdit']
 # [[plugins]]
 # repo = 'kat0h/bufpreview.vim'
 # depends = ['denops.vim']
+# on_ft = ['markdown']
+# on_cmd = ['PreviewMarkdown', 'PreviewMarkdownClose', 'PreviewMarkdownToggle']
 # hook_add = '''
 # let g:bufpreview_server_host = '0.0.0.0'
 # let g:bufpreview_server_port = 8888
@@ -217,16 +273,33 @@ depends = ['vim-asterisk']
 on_map = { nx = '<Plug>' }
 hook_add = '''
 let g:is#do_default_mappings = v:false
-nmap n  <Plug>(is-n)zz
-nmap N  <Plug>(is-N)zz
-nmap *  <Plug>(asterisk-z*)<Plug>(is-nohl-1)zz
-xmap *  <Plug>(asterisk-z*)<Plug>(is-nohl-1)zz
-nmap #  <Plug>(asterisk-z#)<Plug>(is-nohl-1)zz
-xmap #  <Plug>(asterisk-z#)<Plug>(is-nohl-1)zz
-nmap g* <Plug>(asterisk-gz*)<Plug>(is-nohl-1)zz
-xmap g* <Plug>(asterisk-gz*)<Plug>(is-nohl-1)zz
-nmap g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)zz
-xmap g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)zz
+'''
+
+[[plugins]]
+repo = 'christoomey/vim-tmux-navigator'
+if = '!has("gui_running")'
+on_cmd = [
+  'TmuxNavigateLeft', 'TmuxNavigateDown',
+  'TmuxNavigateUp', 'TmuxNavigateRight',
+]
+hook_add = '''
+let g:tmux_navigator_no_mappings = v:true
+nnoremap <C-w>h <Cmd>TmuxNavigateLeft<CR>
+nnoremap <C-w>j <Cmd>TmuxNavigateDown<CR>
+nnoremap <C-w>k <Cmd>TmuxNavigateUp<CR>
+nnoremap <C-w>l <Cmd>TmuxNavigateRight<CR>
+'''
+
+# TODO: use :SclowDisable before to decrease flickering
+[[plugins]]
+repo = 'yuttie/comfortable-motion.vim'
+on_func = 'comfortable_motion#flick'
+hook_add = '''
+let g:comfortable_motion_no_default_key_mappings = 1
+nnoremap <silent> <C-d> <Cmd>call comfortable_motion#flick(winheight(0) * 2)<CR>
+nnoremap <silent> <C-u> <Cmd>call comfortable_motion#flick(winheight(0) * -2)<CR>
+nnoremap <silent> <C-f> <Cmd>call comfortable_motion#flick(winheight(0) * 4)<CR>
+nnoremap <silent> <C-b> <Cmd>call comfortable_motion#flick(winheight(0) * -4)<CR>
 '''
 
 [[plugins]]
@@ -234,5 +307,41 @@ repo = 'haya14busa/vim-asterisk'
 on_map = { nx = '<Plug>' }
 hook_add = '''
 let g:asterisk#keeppos = v:true
+nmap *  <Plug>(asterisk-z*)zz
+nmap #  <Plug>(asterisk-z#)zz
+nmap g* <Plug>(asterisk-gz*)zz
+nmap g# <Plug>(asterisk-gz#)zz
+xmap *  <Plug>(asterisk-z*)zz
+xmap #  <Plug>(asterisk-z#)zz
+xmap g* <Plug>(asterisk-gz*)zz
+xmap g# <Plug>(asterisk-gz#)zz
+'''
+
+[[plugins]]
+repo = 'kana/vim-niceblock'
+on_map = { x = '<Plug>' }
+hook_add = '''
+xmap I  <Plug>(niceblock-I)
+xmap gI <Plug>(niceblock-gI)
+xmap A  <Plug>(niceblock-A)
+'''
+
+[[plugins]]
+repo = 'machakann/vim-highlightedundo'
+if = 'executable("diff")'
+on_map = { n = '<Plug>' }
+hook_add = '''
+nmap u     <Plug>(highlightedundo-undo)
+nmap <C-r> <Plug>(highlightedundo-redo)
+nmap U     <Plug>(highlightedundo-Undo)
+nmap g-    <Plug>(highlightedundo-gminus)
+nmap g+    <Plug>(highlightedundo-gplus)
+'''
+
+[[plugins]]
+repo = 'markonm/traces.vim'
+on_event = ['CmdlineEnter', 'CmdwinEnter']
+hook_add = '''
+let g:traces_normal_preview = v:true
 '''
 

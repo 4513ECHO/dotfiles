@@ -61,19 +61,6 @@ let g:context_filetype#ignore_patterns = {
 '''
 
 [[plugins]]
-repo = 'rhysd/clever-f.vim'
-hook_add = '''
-let g:clever_f_across_no_line = v:true
-let g:clever_f_ignore_case = v:true
-let g:clever_f_smart_case = v:true
-let g:clever_f_use_migemo = v:true
-let g:clever_f_chars_match_any_signs = ';'
-let g:clever_f_timeout_ms = 2000
-autocmd user ColorScheme *
-      \ hi def CleverFDefaultLabel guifg=red guibg=NONE gui=bold,underline
-'''
-
-[[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
 hook_add = '''
 let g:extra_whitespace_ignored_filetypes = ['diff', 'help', 'capture']
@@ -90,27 +77,6 @@ nmap <buffer> <C-r> <Plug>(molder-reload)
 [[plugins]]
 repo = 'mattn/vim-molder-operations'
 depends = ['vim-molder']
-
-[[plugins]]
-repo = 'osyo-manga/vim-jplus'
-on_map = { nx = '<Plug>' }
-hook_add = '''
-nmap J <Plug>(jplus-getchar)<Space>
-xmap J <Plug>(jplus-getchar)<Space>
-nmap gJ <Plug>(jplus)
-xmap gJ <Plug>(jplus)
-let g:jplus#config = {
-      \ '_': {
-      \   'delimiter': '',
-      \   'right_matchstr_pattern': '^\s*#\s*\zs.*\|'
-      \                          .. '\s*\zs.*',
-      \ },
-      \ 'vim': {
-      \   'right_matchstr_pattern': '^\s*\\\s*\zs.*\|'
-      \                          .. '^\s*"\s*\zs.*\|'
-      \                          .. '\s*\zs.*',
-      \ }}
-'''
 
 [[plugins]]
 repo = 'kana/vim-submode'
@@ -156,23 +122,6 @@ repo = 'cocopon/lightline-hybrid.vim'
 
 [[plugins]]
 repo = 'itchyny/vim-highlighturl'
-
-[[plugins]]
-repo = 'christoomey/vim-tmux-navigator'
-if = '!has("gui_running")'
-hook_add = '''
-let g:tmux_navigator_no_mappings = v:true
-nnoremap <C-w>h <Cmd>TmuxNavigateLeft<CR>
-nnoremap <C-w>j <Cmd>TmuxNavigateDown<CR>
-nnoremap <C-w>k <Cmd>TmuxNavigateUp<CR>
-nnoremap <C-w>l <Cmd>TmuxNavigateRight<CR>
-'''
-
-[[plugins]]
-repo = 'markonm/traces.vim'
-hook_add = '''
-let g:traces_normal_preview = v:true
-'''
 
 [[plugins]]
 repo = 'itchyny/vim-parenmatch'

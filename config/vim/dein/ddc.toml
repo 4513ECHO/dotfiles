@@ -1,9 +1,4 @@
 [[plugins]]
-repo = 'vim-denops/denops.vim'
-on_func = ['denops#server#start']
-if = 'executable("deno")'
-
-[[plugins]]
 repo = 'Shougo/ddc.vim'
 depends = ['context_filetype.vim', 'denops.vim', 'pum.vim', 'lexima.vim']
 on_event = ['InsertEnter']
