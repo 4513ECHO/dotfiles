@@ -31,7 +31,7 @@ function! user#lightline#mode() abort
     let skk_mode = skkeleton#mode()
     if !empty(skk_mode)
       return printf(
-            \ %s[%s]', lightline#mode(),
+            \ '%s[%s]', lightline#mode(),
             \ get(s:skkeleton_modes, skk_mode, skk_mode))
     endif
   endif
