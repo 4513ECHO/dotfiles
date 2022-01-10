@@ -47,9 +47,9 @@ function! InputGenerics() abort
 endfunction
 '''
 
-[[plugins]]
-repo = 'tpope/vim-repeat'
-on_map = { xno = '<Plug>(Repeat' }
+# [[plugins]]
+# repo = 'tpope/vim-repeat'
+# on_map = { xno = '<Plug>(Repeat' }
 
 [[plugins]]
 repo = 'kana/vim-textobj-user'

@@ -277,7 +277,6 @@ call user#colorscheme#add('dracula')
 [[plugins]]
 repo = 'cormacrelf/vim-colors-github'
 hook_add = '''
-let g:github_colors_soft = v:true
 call user#colorscheme#add('vim-colors-github')
 call user#colorscheme#custom('github', {
       \ 'highlight': {
@@ -358,17 +357,17 @@ call user#colorscheme#custom('reliquiae', {
 '''
 
 # Thank Shougo very much!
-# TODO: original theme for lightline and terminal
-[[plugins]]
-repo = 'https://raw.githubusercontent.com/Shougo/shougo-s-github/master/vim/colors/candy.vim'
-script_type = 'colors'
-type = 'raw'
-hook_add = '''
-call user#colorscheme#add('candy.vim')
-call user#colorscheme#custom('candy', {
-      \ 'lightline': 'default',
-      \ })
-'''
+# NONTODO: original theme for lightline and terminal
+# [[plugins]]
+# repo = 'https://raw.githubusercontent.com/Shougo/shougo-s-github/master/vim/colors/candy.vim'
+# script_type = 'colors'
+# type = 'raw'
+# hook_add = '''
+# call user#colorscheme#add('candy.vim')
+# call user#colorscheme#custom('candy', {
+#       \ 'lightline': 'default',
+#       \ })
+# '''
 
 [[plugins]]
 repo = 'KabbAmine/yowish.vim'

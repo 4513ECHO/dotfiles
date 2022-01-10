@@ -89,11 +89,11 @@ repo = 'prabirshrestha/vim-lsp'
 on_source = ['vim-lsp-settings']
 on_ft = [
   'python', 'typescript', 'typescriptreact',
-  'rust', 'markdown', 'yaml', 'json',
+  'rust', 'markdown', 'yaml', 'json', 'sh',
 ]
 hook_add = '''
 autocmd user BufNewFile,BufRead
-      \ *.py,*.ts,*.tsx,*.rs,*.md
+      \ *.py,*.ts,*.tsx,*.rs,*.md,*.yml,*.yaml,*.json,*.sh
       \ call lsp#enable()
 '''
 
@@ -106,6 +106,10 @@ Runtime dein/settings/vim-lsp.vim
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
+depends = [
+  'lightline-gruvbox.vim', 'lightline-hybrid.vim',
+  'lightine-lsp',
+]
 hook_add = '''
 Runtime dein/settings/lightline.vim
 '''
@@ -136,38 +140,54 @@ hook_add = '''
 let g:highlightedyank_highlight_duration = 100
 '''
 
-# TODO: use :SclowDisable before to decrease flickering
-[[plugins]]
-repo = 'yuttie/comfortable-motion.vim'
-hook_add = '''
-let g:comfortable_motion_no_default_key_mappings = 1
-nnoremap <silent> <C-d> <Cmd>call comfortable_motion#flick(winheight(0) * 2)<CR>
-nnoremap <silent> <C-u> <Cmd>call comfortable_motion#flick(winheight(0) * -2)<CR>
-nnoremap <silent> <C-f> <Cmd>call comfortable_motion#flick(winheight(0) * 4)<CR>
-nnoremap <silent> <C-b> <Cmd>call comfortable_motion#flick(winheight(0) * -4)<CR>
-'''
-
-# TODO: send PR to use `hi def` instead of `hlexists()`
-[[plugins]]
-repo = 'hrsh7th/vim-seak'
-hook_add = '''
-let g:seak_enabled = v:true
-let g:seak_marks = split('ASDFHJKL', '.\zs')
-let g:seak_auto_accept = v:true
-autocmd user ColorScheme *
-      \ hi def SeakChar gui=bold,underline guifg=Red guibg=NONE
-'''
-
 [[plugins]]
 repo = 'tmux-plugins/vim-tmux-focus-events'
 if = '!has("gui_running") && !has("patch-8.2.2345") && !has("nvim")'
 
-# NOTE: clipboard connections
-# -> : can modify clipboard
-# vim <-.      .-> iPadOS(iSH)
-#  \     \    /
-#   `---> tmux
 [[plugins]]
 repo = 'roxma/vim-tmux-clipboard'
 if = '!has("gui_running")'
+
+[[plugins]]
+repo = 'ojroques/vim-oscyank'
+if = '!has("gui_running")'
+hook_add = '''
+autocmd user TextYankPost *
+      \ : if v:event.regname ==# 'p'
+      \ |   execute 'OSCYankReg "'
+      \ | endif
+'''
+
+[[plugins]]
+repo = 'ap/vim-css-color'
+
+[[plugins]]
+repo = 'hrsh7th/vim-searchx'
+hook_add = '''
+let g:searchx = {
+      \ 'auto_accept': v:true,
+      \ 'markers': split('ASDFGHJKL', '.\zs'),
+      \ 'scrolltime': 500,
+      \ 'scrolloff': &scrolloff,
+      \ }
+function! g:searchx.convert(input) abort
+  if a:input !~# '\k'
+    return '\V' .. a:input
+  endif
+  return join(split(a:input, '\s\+'), '.\{-}')
+endfunction
+
+autocmd user User SearchxLeave call searchx#clear()
+
+nnoremap ? <Cmd>call searchx#start({ 'dir': v:false })<CR>
+" <Cmd>autocmd user CursorMoved * ++once call searchx#clear()<CR>
+nnoremap / <Cmd>call searchx#start({ 'dir': v:true })<CR>
+xnoremap ? <Cmd>call searchx#start({ 'dir': v:false })<CR>
+xnoremap / <Cmd>call searchx#start({ 'dir': v:true })<CR>
+
+nnoremap N <Cmd>call searchx#prev_dir()<CR>zz
+nnoremap n <Cmd>call searchx#next_dir()<CR>zz
+xnoremap N <Cmd>call searchx#prev_dir()<CR>zz
+xnoremap n <Cmd>call searchx#next_dir()<CR>zz
+'''
 

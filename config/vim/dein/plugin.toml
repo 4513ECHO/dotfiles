@@ -159,10 +159,17 @@ on_cmd = [
   'FzfLines', 'FzfBLines', 'FzfTags', 'FzfBTags', 'FzfMarks', 'FzfWindows',
   'FzfLocate', 'FzfHistory', 'FzfSnippets', 'FzfCommits', 'FzfBCommits',
   'FzfCommands', 'FzfMaps', 'FzfHelptags', 'FzfFiletypes',
+  'FzfColorScheme',
 ]
 if = 'executable("fzf")'
 hook_add = '''
 let g:fzf_command_prefix = 'Fzf'
+'''
+hook_source = '''
+command! -bar FzfColorScheme call fzf#run(fzf#wrap({
+      \ 'source': filter(keys(g:colorscheme_customize), { _, val -> val !=# '_' }),
+      \ 'sink': { arg -> user#colorscheme#colorscheme(arg) },
+      \ }))
 '''
 
 [[plugins]]
@@ -255,7 +262,7 @@ nmap gx <Plug>(openbrowser-smart-search)
 xmap gx <Plug>(openbrowser-smart-search)
 let g:openbrowser_browser_commands = [{
       \ 'name': 'w3m',
-      \ 'args': 'tmux-w3m {uri} open-browser',
+      \ 'args': 'tmux-w3m {uri} -t open-browser',
       \ }]
 '''
 

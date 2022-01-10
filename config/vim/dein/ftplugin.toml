@@ -16,10 +16,6 @@ setlocal formatoptions-=ro
 setlocal formatoptions+=mMBl
 '''
 
-typescript = '''
-nnoremap <buffer> <Leader><C-r> <Cmd>call denops#server#restart()<CR>
-'''
-
 python = '''
 setlocal softtabstop=4
 setlocal shiftwidth=4
@@ -105,7 +101,7 @@ endif
 
 [[plugins]]
 repo = 'cespare/vim-toml'
-if = '!has("patch-8.2.3520")'
+if = '!has("patch-8.2.3520") && !has("nvim")'
 on_ft = ['toml']
 
 [[plugins]]
@@ -155,4 +151,9 @@ nnoremap <buffer> r <Cmd>Qfreplace<CR>
 qfreplace = '''
 nnoremap <buffer> q <C-w>q
 '''
+
+[[plugins]]
+repo = 'rhysd/vim-fixjson'
+on_ft = ['json']
+on_cmd = ['FixJson']
 
