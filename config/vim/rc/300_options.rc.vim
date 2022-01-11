@@ -36,6 +36,7 @@ set tabstop=8
 set softtabstop=8
 set autoindent
 set smartindent
+set indentkeys& indentkeys-=!^F
 set shiftwidth=2
 
 " ------------------
@@ -58,7 +59,7 @@ set list
 set nowrap
 set linebreak
 set display=lastline,uhex
-set shortmess+=cs
+set shortmess+=acs
 set lazyredraw
 set nofoldenable
 set synmaxcol=200
@@ -85,8 +86,6 @@ set hidden
 set confirm
 set timeoutlen=500
 
-" set showmatch
-" set matchtime=1
 set matchpairs& matchpairs+=<:>
 
 set clipboard=unnamed
@@ -138,5 +137,6 @@ set ttyfast
 set title
 set autoread
 set titlestring=%{user#title_string()}
+set tildeop
 set diffopt=internal,filler,vertical,algorithm:histogram,indent-heuristic
 

@@ -3,8 +3,9 @@ let g:mapleader = ","
 nnoremap <Leader> <Nop>
 xnoremap <Leader> <Nop>
 inoremap <Leader><Space> <Leader>
-inoremap <Leader><Leader> <ESC>
-xnoremap <Leader><Leader> <ESC>
+" NOTE: enable remap because of lexima.vim
+imap <silent> <Leader><Leader> <Esc>
+xnoremap <Leader><Leader> <Esc>
 
 if has('nvim')
   tnoremap <Leader><Leader> <C-\><C-n>
@@ -75,7 +76,7 @@ nnoremap ^ <C-^><Cmd>edit<CR>
 nnoremap <silent><expr> <Tab> shiftwidth() .. 'l'
 nnoremap [Space]f <Cmd>edit %:p:h<CR>
 
-xnoremap v $
+xnoremap v $h
 xnoremap <Space> t<Space>
 xnoremap < <gv
 xnoremap > >gv

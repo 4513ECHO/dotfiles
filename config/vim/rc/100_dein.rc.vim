@@ -43,7 +43,7 @@ if has('vim_starting') && dein#check_install()
   call dein#install()
 endif
 
-if getcwd() =~# expand('~/Develops/github.com')
+if getcwd() =~# expand('~/Develops/')
   let s:git_root = expand(system('git rev-parse --show-toplevel'))
   execute 'set runtimepath^=' .. s:git_root
   if isdirectory(s:git_root .. '/after')
@@ -51,7 +51,9 @@ if getcwd() =~# expand('~/Develops/github.com')
   endif
 endif
 
-syntax enable
-" call timer_start(0, { -> execute('syntax enable') })
-filetype indent plugin on
+if !has('nvim')
+  syntax enable
+  " call timer_start(0, { -> execute('syntax enable') })
+  filetype indent plugin on
+endif
 

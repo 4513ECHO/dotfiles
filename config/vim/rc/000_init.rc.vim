@@ -35,7 +35,6 @@ let g:loaded_zip               = v:true
 let g:loaded_zipPlugin         = v:true
 
 let g:current_colorscheme = get(g:, 'current_colorscheme', 'random')
-let g:colorscheme_list = get(g:, 'colorscheme_list', [])
 let g:colorscheme_customize = get(g:, 'colorscheme_customize', {'_': {}})
 
 command! -nargs=1 Runtime runtime! g:config_home <args>
