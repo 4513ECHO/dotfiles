@@ -28,11 +28,12 @@ if dein#min#load_state(s:dein_dir)
   call s:load_toml('init.toml', v:false)
   call s:load_toml('colorscheme.toml', v:false)
   call s:load_toml('textobj.toml', v:false)
+  call s:load_toml('ftplugin.toml', v:true)
+  call s:load_toml('plugin.toml', v:true)
   if !g:denops#disabled
     call s:load_toml('ddc.toml', v:true)
+    call s:load_toml('ddu.toml', v:true)
   endif
-  call s:load_toml('plugin.toml', v:true)
-  call s:load_toml('ftplugin.toml', v:true)
 
   call dein#end()
   call dein#save_state()
