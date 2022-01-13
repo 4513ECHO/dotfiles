@@ -3,10 +3,10 @@ let s:globalJisyo = s:skk_dir .. '/SKK-JISYO.L'
 
 if !filereadable(s:globalJisyo)
   echomsg 'Installing skk global jisyo ...'
-  let gzipfile = s:globalJisyo .. '.gz'
-  call system('curl -fLo ' .. gzipfile .. ' --create-dirs '
+  let s:gzipfile = s:globalJisyo .. '.gz'
+  call system('curl -fLo ' .. s:gzipfile .. ' --create-dirs '
         \ .. 'https://skk-dev.github.io/dict/SKK-JISYO.L.gz')
-  call system('gzip -d ' .. gzipfile)
+  call system('gzip -d ' .. s:gzipfile)
 endif
 
 call skkeleton#config({
@@ -18,13 +18,14 @@ call skkeleton#config({
 
 call skkeleton#register_kanatable('rom', {
       \ ',,': 'escape',
-      \ ",\<Space>": ['、', ''],
-      \ '~': ['〜', ''],
+      \ ';':  'henkanPoint',
+      \ '~':         ['〜',     ''],
+      \ '...':       ['…',     ''],
+      \ ",\<Space>": ['、',     ''],
       \ "z\<Space>": ["\u3000", ''],
-      \ '...': ['…', ''],
-      \ ".\<Space>": ['。', ''],
-      \ "(\<Space>": ['（', ''],
-      \ ")\<Space>": ['）', ''],
+      \ ".\<Space>": ['。',     ''],
+      \ "(\<Space>": ['（',     ''],
+      \ ")\<Space>": ['）',     ''],
       \ })
 
 " from https://github.com/thinca/config/blob/5413e42a18/dotfiles/dot.vim/vimrc#L2289
