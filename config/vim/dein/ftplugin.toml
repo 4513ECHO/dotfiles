@@ -34,6 +34,7 @@ setlocal iskeyword+=:
 setlocal iskeyword+=-
 setlocal iskeyword+=+
 nnoremap <buffer> q <C-w>q
+nnoremap <buffer> <CR> <C-]>
 nnoremap <buffer><silent><expr> [Toggle]l
       \ expand('%:e') ==# 'jax'
       \ ? printf('<Cmd>help %s@en<CR>', expand('<cword>'))
