@@ -24,6 +24,13 @@ let s:rules._ += [
       \ { 'char': ';', 'at': '^\s*\%#\}$', 'leave': '}', 'input': ';' },
       \ ]
 
+let s:rules._ += [
+      \ { 'char': '<',     'at': '\<\h\w*\%#', 'input_after': '>' },
+      \ { 'char': '<BS>',  'at': '<\%#>',    'delete': '>'      },
+      \ { 'char': '>',     'at': '\%#>',     'leave': '>'       },
+      \ { 'char': '<Tab>', 'at': '\%#\s*>',  'leave': '>'       },
+      \ ]
+
 " python
 let s:rules.python = []
 let s:rules.python += [
@@ -129,15 +136,19 @@ command! -nargs=+ LeximaAlterCommand call <SID>lexima_alter_command(<f-args>)
 
 LeximaAlterCommand hg\%[rep]                    helpgrep
 LeximaAlterCommand bon\%[ew]                    botright<Space>new
+LeximaAlterCommand hea\%[lthcheck]              checkhealth
 LeximaAlterCommand cap\%[ture]                  Capture
 LeximaAlterCommand capturej\%[son]              CaptureJson
 LeximaAlterCommand capj\%[son]                  CaptureJson
 LeximaAlterCommand quic\%[krun]                 QuickRun
 LeximaAlterCommand qr\%[un]                     QuickRun
 LeximaAlterCommand fixw\%[hitespace]            FixWhitespace
+LeximaAlterCommand dd\%[u]                      Ddu
 LeximaAlterCommand dei\%[nreadme]               DeinReadme
 LeximaAlterCommand readm\%[e]                   DeinReadme
 LeximaAlterCommand colo\%[rscheme]              ColorScheme
 LeximaAlterCommand ra\%[ndomcolorscheme]        RandomColorScheme
 LeximaAlterCommand todo\%[list]                 TodoList
+LeximaAlterCommand mi\%[ninote]                 MiniNote
+LeximaAlterCommand not\%[e]                     MiniNote
 
