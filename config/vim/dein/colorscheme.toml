@@ -344,7 +344,6 @@ call user#colorscheme#add('Apprentice', 'apprentice')
 '''
 
 # Thank mityu very much!
-# TODO: original theme for lightline
 [[plugins]]
 repo = 'https://raw.githubusercontent.com/mityu/dotfiles/master/dot_vim/runtime/colors/reliquiae.vim'
 script_type = 'colors'
@@ -352,7 +351,7 @@ type = 'raw'
 hook_add = '''
 call user#colorscheme#add('reliquiae.vim')
 call user#colorscheme#custom('reliquiae', {
-      \ 'lightline': 'ayu',
+      \ 'lightline': 'mini',
       \ })
 '''
 
@@ -365,7 +364,7 @@ call user#colorscheme#custom('reliquiae', {
 # hook_add = '''
 # call user#colorscheme#add('candy.vim')
 # call user#colorscheme#custom('candy', {
-#       \ 'lightline': 'default',
+#       \ 'lightline': 'mini',
 #       \ })
 # '''
 

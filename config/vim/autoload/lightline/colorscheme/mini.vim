@@ -1,0 +1,26 @@
+let s:bg = ['#262626', 235]
+let s:fg = ['#d0d0d0', 252]
+let s:red = ['#ffaf87', 216]
+let s:blue = ['#87afff', 111]
+let s:green = ['#afff87', 156]
+let s:yellow = ['']
+
+let s:p = { 'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
+let s:p.normal.info    = [ [ s:blue, s:bg ] ]
+let s:p.normal.error   = [ [ s:red, s:bg ] ]
+let s:p.normal.warning = [ [ s:red, s:bg ] ]
+let s:p.normal.right   = [ [ s:fg, s:bg ], [ s:fg, s:bg ] ]
+let s:p.normal.middle  = [ [ s:fg, s:bg ] ]
+let s:p.inactive.left   = [ [ s:fg, s:bg ], [ s:fg, s:bg ] ]
+let s:p.inactive.right  = [ [ s:fg, s:bg ], [ s:fg, s:bg ] ]
+let s:p.inactive.middle = [ [ s:fg, s:bg ] ]
+let s:p.normal.left  = [ [ s:fg, s:bg, 'bold' ], [ s:fg, s:bg ] ]
+let s:p.insert.left  = [ [ s:blue, s:bg, 'bold' ], [ s:fg, s:bg ] ]
+let s:p.replace.left = [ [ s:red, s:bg, 'bold' ], [ s:fg, s:bg ] ]
+let s:p.visual.left  = [ [ s:green, s:bg, 'bold' ], [ s:fg, s:bg ] ]
+let s:p.tabline.left   = [ [ s:fg, s:bg ] ]
+let s:p.tabline.tabsel = [ [ s:fg, s:bg ] ]
+let s:p.tabline.middle = [ [ s:fg, s:bg ] ]
+let s:p.tabline.right  = [ [ s:fg, s:bg ] ]
+
+let g:lightline#colorscheme#mini#palette = lightline#colorscheme#flatten(s:p)
