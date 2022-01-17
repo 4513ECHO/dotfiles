@@ -45,7 +45,7 @@ on_cmd = ['Capture', 'CaptureJson']
 hook_source = '''
 command! -bang -bar -nargs=1 -complete=expression
       \ CaptureJson
-      \ : execute 'Capture<bang> echo json_encode(<args>)'
+      \ : execute 'Capture<bang> echo json_encode(' <q-args> ')'
       \ | if &filetype ==# 'capture'
       \ |   execute '%!jq'
       \ |   setfiletype json
