@@ -61,11 +61,23 @@ repo = 'kana/vim-operator-user'
 repo = 'kana/vim-textobj-entire'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
+hook_add = '''
+omap ae <Plug>(textobj-entire-a)
+omap ie <Plug>(textobj-entire-i)
+xmap ae <Plug>(textobj-entire-a)
+xmap ie <Plug>(textobj-entire-i)
+'''
 
 [[plugins]]
 repo = 'kana/vim-textobj-line'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
+hook_add = '''
+omap al <Plug>(textobj-line-a)
+omap il <Plug>(textobj-line-i)
+xmap al <Plug>(textobj-line-a)
+xmap il <Plug>(textobj-line-i)
+'''
 
 # [[plugins]]
 # repo = 'kana/vim-textobj-indent'
@@ -73,7 +85,7 @@ depends = ['vim-textobj-user']
 # depends = ['vim-textobj-user']
 
 [[plugins]]
-repo = 'h1mesuke/textobj-wiw'
+repo = 'rhysd/vim-textobj-wiw'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
 hook_add = '''
@@ -88,6 +100,12 @@ xmap iu <Plug>(textobj-wiw-i)
 repo = 'rhysd/vim-textobj-anyblock'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
+hook_add = '''
+omap ab <Plug>(textobj-anyblock-a)
+omap ib <Plug>(textobj-anyblock-i)
+xmap ab <Plug>(textobj-anyblock-a)
+xmap ib <Plug>(textobj-anyblock-i)
+'''
 
 [[plugins]]
 repo = 'thinca/vim-textobj-between'
