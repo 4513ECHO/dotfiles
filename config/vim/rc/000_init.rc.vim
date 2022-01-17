@@ -71,6 +71,10 @@ command! -nargs=? -bar Profile call user#profile(<q-args>)
 " TODO: if bang is exists, include untracked file
 command! -bar -bang TodoList vimgrep 'TODO\ze:' `git ls-files`
 
+command! -nargs=? -bar -complete=filetype MiniNote
+      \ : botright new
+      \ | setlocal bufhidden=wipe filetype=<args>
+
 if filereadable(expand('~/.vimrc_secret'))
   source ~/.vimrc_secret
 endif
