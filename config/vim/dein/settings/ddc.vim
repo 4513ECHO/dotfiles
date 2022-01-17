@@ -94,6 +94,10 @@ call ddc#custom#patch_filetype(
       \ 'sourceParams': {
       \   'file': {'mode': 'win32'},
       \ }})
+call ddc#custom#patch_filetype(
+      \ ['ddu-std-filter'], {
+      \ 'sources': [],
+      \ })
 
 let s:patch_global.sources = s:sources
 let s:patch_global.sourceOptions = s:sourceOptions
