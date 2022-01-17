@@ -105,6 +105,19 @@ Runtime dein/settings/vim-lsp.vim
 '''
 
 [[plugins]]
+repo = 'hrsh7th/vim-vsnip'
+hook_add = '''
+let g:vsnip_snippet_dir = g:config_home .. '/snippets'
+imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+autocmd user User PumCompleteDone
+      \ call vsnip_integ#on_complete_done(g:pum#completed_item)
+'''
+
+[[plugins]]
+repo = 'rafamadriz/friendly-snippets'
+
+[[plugins]]
 repo = 'itchyny/lightline.vim'
 depends = [
   'lightline-gruvbox.vim', 'lightline-hybrid.vim',

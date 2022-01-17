@@ -1,5 +1,5 @@
 let s:patch_global = {}
-let s:sources = ['file', 'around', 'tmux', 'buffer']
+let s:sources = ['file', 'around', 'vsnip', 'tmux', 'buffer']
 let s:sourceOptions = {}
 let s:sourceParams = {}
 let s:filterParams = {}
@@ -12,12 +12,12 @@ let s:sourceOptions._ = {
       \   'converter_remove_overlap', 'converter_truncate',
       \   'converter_fuzzy'
       \ ],
-      \ 'maxCandidates': 15,
+      \ 'maxCandidates': 10,
       \ }
 let s:sourceOptions.around = {
       \ 'mark': 'ard',
       \ 'isVolatile': v:true,
-      \ 'maxCandidates': 10,
+      \ 'maxCandidates': 8,
       \ }
 let s:sourceOptions.file = {
       \ 'mark': 'file',
@@ -40,6 +40,7 @@ let s:sourceOptions.skkeleton = {
 let s:sourceOptions.necovim = {
       \ 'mark': 'vim',
       \ 'isVolatile': v:true,
+      \ 'maxCandidates': 8,
       \ }
 let s:sourceOptions.emoji = {
       \ 'mark': 'emoji',
@@ -49,6 +50,10 @@ let s:sourceOptions.emoji = {
 let s:sourceOptions['cmdline-history'] = {
       \ 'mark': 'hist',
       \ 'maxCandidates': 5,
+      \ }
+let s:sourceOptions.vsnip = {
+      \ 'mark': 'snip',
+      \ 'dup': v:true,
       \ }
 let s:sourceOptions.buffer = {'mark': 'buf'}
 let s:sourceOptions.cmdline = {'mark': 'cmd'}
@@ -72,7 +77,6 @@ call ddc#custom#patch_filetype(
       \ ['vim', 'toml'], {
       \ 'sources': extend(['necovim'], s:sources),
       \ })
-
 call ddc#custom#patch_filetype(
       \ ['python', 'typescript', 'typescriptreact', 'rust'], {
       \ 'sources': extend(['vim-lsp'], s:sources),

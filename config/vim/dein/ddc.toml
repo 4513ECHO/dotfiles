@@ -61,6 +61,10 @@ on_source = 'ddc.vim'
 repo = 'delphinus/ddc-tmux'
 on_source = 'ddc.vim'
 
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip-integ'
+on_source = ['ddc.vim', 'vim-vsnip']
+
 # filters
 
 [[plugins]]
