@@ -3,12 +3,13 @@ function! user#ddc#cmdline_pre(mode) abort
     return
   endif
   call dein#source('ddc.vim')
-  call user#ddc#define_map('c', '<Tab>', 'pum#map#select_relative(+1)',
-        \ 'ddc#map#manual_complete()')
+  cnoremap <expr> <Tab> pum#visible()
+        \ ? '<Cmd>call pum#map#select_relative(+1)<CR>'
+        \ : ddc#map#manual_complete()
   call user#ddc#define_map('c', '<C-n>', 'pum#map#select_relative(+1)', '<Down>')
   call user#ddc#define_map('c', '<C-p>', 'pum#map#select_relative(-1)', '<Up>')
   call user#ddc#define_map('c', '<CR>',  'pum#map#confirm()', '<CR>')
-  " call user#ddc#define_map('c', '<BS>',  'pum#map#cancel()',  '<BS>')
+  call user#ddc#define_map('c', '<BS>',  'pum#map#cancel()',  '<BS>')
   set wildchar=<C-t>
 
   let b:_ddc_cmdline_prev_buffer_config = ddc#custom#get_buffer()
@@ -26,12 +27,10 @@ let s:patch_buffer.sourceOptions = {
       \   'forceCompletionPattern': '(\f*/\f+)+',
       \ }}
 
-function! user#ddc#define_map(mode, lhs, rhs_func, rhs_nopum) abort
-  execute printf(
-        \ '%snoremap <silent><expr> %s ' ..
-        \ 'pum#visible() ? ''<Cmd>call %s<CR>'' : ''%s''',
-        \ a:mode, a:lhs, a:rhs_func, a:rhs_nopum
-        \ )
+function! user#ddc#define_map(mode, lhs, func, rhs) abort
+  let cmd = '%snoremap <expr> %s ' ..
+        \ 'pum#visible() ? ''<Cmd>call %s<CR>'' : ''%s'''
+  execute printf(cmd, a:mode, a:lhs, a:func, a:rhs)
 endfunction
 
 function! user#ddc#cmdline_post() abort
@@ -39,7 +38,7 @@ function! user#ddc#cmdline_post() abort
     call ddc#custom#set_buffer(b:_ddc_cmdline_prev_buffer_config)
     unlet b:_ddc_cmdline_prev_buffer_config
   endif
-  cunmap <Tab>
+  silent! cunmap <Tab>
   set wildchar=<Tab>
 endfunction
 
