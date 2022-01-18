@@ -70,6 +70,7 @@ set novisualbell
 set belloff=all
 
 set listchars=tab:»-,trail:-,extends:»,precedes:«,eol:¬
+let &showbreak = '> '
 if exists('+fillchars')
   set fillchars& fillchars+=diff:/,eob:.
 endif
@@ -128,15 +129,19 @@ if !has('nvim')
 endif
 
 " ------------------
+" title
+set title
+set titlestring=%{user#title_string()}
+let &titleold = pathshorten(fnamemodify(getcwd(), ':~'))
+
+" ------------------
 " various
 set helplang=ja,en
 set keywordprg=:help
 
 set packpath=
 set ttyfast
-set title
 set autoread
-set titlestring=%{user#title_string()}
 set tildeop
 set diffopt=internal,filler,vertical,algorithm:histogram,indent-heuristic
 
