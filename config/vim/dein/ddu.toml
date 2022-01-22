@@ -3,7 +3,15 @@ repo = 'Shougo/ddu.vim'
 depends = ['denops.vim']
 hook_source = '''
 let s:patch_global = {}
+let s:sourceOptions = {}
+
 let s:patch_global.ui = 'std'
+let s:sourceOptions._ = {
+      \ 'ignoreCase': v:true,
+      \ 'matchers': ['matcher_substring'],
+      \ }
+let s:patch_global.sourceOptions = s:sourceOptions
+
 call ddu#custom#patch_global(s:patch_global)
 '''
 
@@ -11,12 +19,71 @@ call ddu#custom#patch_global(s:patch_global)
 ddu-std = '''
 nnoremap <silent><buffer> <CR>
       \ <Cmd>call ddu#ui#std#do_map('doAction')<CR>
-nnoremap <silent><buffer> <Tab>
+nnoremap <silent><buffer> <Space>
       \ <Cmd>call ddu#ui#std#do_map('toggleSelectItem')<CR>
+nnoremap <silent><buffer> i
+      \ <Cmd>call ddu#ui#std#do_map('openFilterWindow')<CR>
+nnoremap <silent><buffer> q
+      \ <Cmd>call ddu#ui#std#do_map('quit')<CR>
+'''
+
+ddu-std-filter = '''
+inoremap <silent><buffer> <CR>
+      \ <Esc><Cmd>close<CR>
+nnoremap <silent><buffer> <CR>
+      \ <Cmd>close<CR>
 '''
 
 [[plugins]]
 repo = 'Shougo/ddu-commands.vim'
 depends = ['ddu.vim']
 on_cmd = ['Ddu']
+
+# UI
+
+[[plugins]]
+repo = 'Shougo/ddu-ui-std'
+on_source = 'ddu.vim'
+
+# sources
+
+[[plugins]]
+repo = 'Shougo/ddu-source-file'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'Shougo/ddu-source-file_rec'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'Shougo/ddu-source-file_old'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'Shougo/ddu-source-line'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = '4513echo/ddu-source-colorscheme'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'shun/ddu-source-buffer'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'shun/ddu-source-rg'
+on_source = 'ddu.vim'
+
+# filters
+
+[[plugins]]
+repo = 'Shougo/ddu-filter-matcher_substring'
+on_source = 'ddu.vim'
+
+# kinds
+
+[[plugins]]
+repo = 'Shougo/ddu-kind-file'
+on_source = 'ddu.vim'
 
