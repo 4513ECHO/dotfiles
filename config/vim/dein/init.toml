@@ -1,24 +1,3 @@
-
-[[plugins]]
-repo = 'Shougo/dein.vim'
-
-[[plugins]]
-repo = 'thinca/vim-localrc'
-hook_add = '''
-let g:localrc_filename = '.vimrc.local'
-'''
-
-[[plugins]]
-repo = 'obcat/vim-sclow'
-if = '!has("nvim")'
-hook_add = '''
-let g:sclow_hide_full_length = v:true
-'''
-
-[[plugins]]
-repo = 'osyo-manga/vim-precious'
-depends = ['context_filetype.vim']
-
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
 hook_add = '''
@@ -38,92 +17,23 @@ let g:context_filetype#ignore_patterns = {
 '''
 
 [[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'ap/vim-css-color'
+
+[[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
 hook_add = '''
 let g:extra_whitespace_ignored_filetypes = ['diff', 'help', 'capture']
 '''
 
 [[plugins]]
-repo = 'mattn/vim-molder'
-[plugins.ftplugin]
-molder = '''
-nnoremap <buffer> q <C-w>q
-nmap <buffer> <C-r> <Plug>(molder-reload)
-'''
-
-[[plugins]]
-repo = 'mattn/vim-molder-operations'
-depends = ['vim-molder']
-
-[[plugins]]
-repo = 'kana/vim-submode'
-hook_add = '''
-Runtime dein/settings/submode.vim
-'''
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-on_source = ['vim-lsp-settings']
-on_ft = [
-  'python', 'typescript', 'typescriptreact',
-  'rust', 'markdown', 'yaml', 'json', 'sh',
-]
-hook_add = '''
-autocmd user BufNewFile,BufRead
-      \ *.py,*.ts,*.tsx,*.rs,*.md,*.yml,*.yaml,*.json,*.sh
-      \ call lsp#enable()
-'''
-
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
-depends = ['vim-lsp']
-hook_add = '''
-Runtime dein/settings/vim-lsp.vim
-'''
-
-[[plugins]]
-repo = 'rafamadriz/friendly-snippets'
-
-[[plugins]]
-repo = 'itchyny/lightline.vim'
-depends = [
-  'lightline-gruvbox.vim', 'lightline-hybrid.vim',
-  'lightine-lsp',
-]
-hook_add = '''
-Runtime dein/settings/lightline.vim
-'''
+repo = 'cocopon/lightline-hybrid.vim'
 
 [[plugins]]
 repo = 'halkn/lightline-lsp'
 on_source = ['lightline.vim', 'vim-lsp']
-
-[[plugins]]
-repo = 'shinchu/lightline-gruvbox.vim'
-
-[[plugins]]
-repo = 'cocopon/lightline-hybrid.vim'
-
-[[plugins]]
-repo = 'itchyny/vim-highlighturl'
-
-[[plugins]]
-repo = 'itchyny/vim-parenmatch'
-hook_add = '''
-" TODO: send PR to the repository to use instead 'hi def Group' instead of 'hi Group'
-" autocmd user ColorScheme * hi link ParenMatch MatchParen
-'''
-
-[[plugins]]
-repo = 'tmux-plugins/vim-tmux-focus-events'
-if = '!has("gui_running") && !has("patch-8.2.2345") && !has("nvim")'
-
-[[plugins]]
-repo = 'roxma/vim-tmux-clipboard'
-if = '!has("gui_running")'
-
-[[plugins]]
-repo = 'ap/vim-css-color'
 
 [[plugins]]
 repo = 'hrsh7th/vim-searchx'
@@ -155,3 +65,91 @@ xnoremap N <Cmd>call searchx#prev_dir()<CR>zz
 xnoremap n <Cmd>call searchx#next_dir()<CR>zz
 '''
 
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+depends = [
+  'lightline-gruvbox.vim', 'lightline-hybrid.vim',
+  'lightine-lsp',
+]
+hook_add = '''
+Runtime dein/settings/lightline.vim
+'''
+
+[[plugins]]
+repo = 'itchyny/vim-highlighturl'
+
+[[plugins]]
+repo = 'itchyny/vim-parenmatch'
+hook_add = '''
+" TODO: send PR to the repository to use instead 'hi def Group' instead of 'hi Group'
+" autocmd user ColorScheme * hi link ParenMatch MatchParen
+'''
+
+[[plugins]]
+repo = 'kana/vim-submode'
+hook_add = '''
+Runtime dein/settings/submode.vim
+'''
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+depends = ['vim-lsp']
+hook_add = '''
+Runtime dein/settings/vim-lsp.vim
+'''
+
+[[plugins]]
+repo = 'mattn/vim-molder'
+[plugins.ftplugin]
+molder = '''
+nnoremap <buffer> q <C-w>q
+nmap <buffer> <C-r> <Plug>(molder-reload)
+'''
+
+[[plugins]]
+repo = 'mattn/vim-molder-operations'
+depends = ['vim-molder']
+
+[[plugins]]
+repo = 'obcat/vim-sclow'
+if = '!has("nvim")'
+hook_add = '''
+let g:sclow_hide_full_length = v:true
+'''
+
+[[plugins]]
+repo = 'osyo-manga/vim-precious'
+depends = ['context_filetype.vim']
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+on_source = ['vim-lsp-settings']
+on_ft = [
+  'python', 'typescript', 'typescriptreact',
+  'rust', 'markdown', 'yaml', 'json', 'sh',
+]
+hook_add = '''
+autocmd user BufNewFile,BufRead
+      \ *.py,*.ts,*.tsx,*.rs,*.md,*.yml,*.yaml,*.json,*.sh
+      \ call lsp#enable()
+'''
+
+[[plugins]]
+repo = 'rafamadriz/friendly-snippets'
+
+[[plugins]]
+repo = 'roxma/vim-tmux-clipboard'
+if = '!has("gui_running")'
+
+[[plugins]]
+repo = 'shinchu/lightline-gruvbox.vim'
+
+[[plugins]]
+repo = 'thinca/vim-localrc'
+hook_add = '''
+let g:localrc_filename = '.vimrc.local'
+'''
+
+[[plugins]]
+repo = 'tmux-plugins/vim-tmux-focus-events'
+if = '!has("gui_running") && !has("patch-8.2.2345") && !has("nvim")'

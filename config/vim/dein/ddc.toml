@@ -14,24 +14,15 @@ Runtime dein/settings/ddc.vim
 # sources
 
 [[plugins]]
-repo = 'Shougo/ddc-around'
-on_source = 'ddc.vim'
-
-[[plugins]]
 repo = 'LumaKernel/ddc-file'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'shun/ddc-vim-lsp'
-on_source = ['ddc.vim', 'vim-lsp']
-
-[[plugins]]
-repo = 'Shougo/neco-vim'
-on_ft = ['vim', 'toml', 'help']
+repo = 'Shougo/ddc-around'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'matsui54/ddc-buffer'
+repo = 'Shougo/ddc-cmdline'
 on_source = 'ddc.vim'
 
 [[plugins]]
@@ -39,8 +30,31 @@ repo = 'Shougo/ddc-cmdline-history'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'Shougo/ddc-cmdline'
+repo = 'Shougo/neco-vim'
+on_ft = ['vim', 'toml', 'help']
 on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'delphinus/ddc-tmux'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'gamoutatsumi/ddc-emoji'
+on_ft = ['markdown', 'gitcommit']
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip-integ'
+on_source = ['ddc.vim', 'vim-vsnip']
+
+[[plugins]]
+repo = 'matsui54/ddc-buffer'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'shun/ddc-vim-lsp'
+on_source = ['ddc.vim', 'vim-lsp']
+
 
 [[plugins]]
 repo = 'vim-skk/skkeleton'
@@ -51,24 +65,10 @@ hook_source = '''
 map! <C-j> <Plug>(skkeleton-toggle)
 Runtime dein/settings/skkeleton.vim
 '''
-
-[[plugins]]
-repo = 'gamoutatsumi/ddc-emoji'
-on_ft = ['markdown', 'gitcommit']
-on_source = 'ddc.vim'
-
-[[plugins]]
-repo = 'delphinus/ddc-tmux'
-on_source = 'ddc.vim'
-
-[[plugins]]
-repo = 'hrsh7th/vim-vsnip-integ'
-on_source = ['ddc.vim', 'vim-vsnip']
-
 # filters
 
 [[plugins]]
-repo = 'tani/ddc-fuzzy'
+repo = 'Shougo/ddc-converter_remove_overlap'
 on_source = 'ddc.vim'
 
 [[plugins]]
@@ -76,7 +76,7 @@ repo = 'matsui54/ddc-converter_truncate'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'Shougo/ddc-converter_remove_overlap'
+repo = 'tani/ddc-fuzzy'
 on_source = 'ddc.vim'
 
 # popup windows

@@ -52,10 +52,15 @@ endfunction
 # on_map = { xno = '<Plug>(Repeat' }
 
 [[plugins]]
-repo = 'kana/vim-textobj-user'
+repo = 'kana/vim-operator-user'
 
 [[plugins]]
-repo = 'kana/vim-operator-user'
+repo = 'kana/vim-textobj-user'
+
+# [[plugins]]
+# repo = 'kana/vim-textobj-indent'
+# on_map = { xo = '<Plug>' }
+# depends = ['vim-textobj-user']
 
 [[plugins]]
 repo = 'kana/vim-textobj-entire'
@@ -77,46 +82,6 @@ omap al <Plug>(textobj-line-a)
 omap il <Plug>(textobj-line-i)
 xmap al <Plug>(textobj-line-a)
 xmap il <Plug>(textobj-line-i)
-'''
-
-# [[plugins]]
-# repo = 'kana/vim-textobj-indent'
-# on_map = { xo = '<Plug>' }
-# depends = ['vim-textobj-user']
-
-[[plugins]]
-repo = 'rhysd/vim-textobj-wiw'
-on_map = { xo = '<Plug>' }
-depends = ['vim-textobj-user']
-hook_add = '''
-let g:textobj_wiw_no_default_key_mappings = v:true
-omap au <Plug>(textobj-wiw-a)
-omap iu <Plug>(textobj-wiw-i)
-xmap au <Plug>(textobj-wiw-a)
-xmap iu <Plug>(textobj-wiw-i)
-'''
-
-[[plugins]]
-repo = 'rhysd/vim-textobj-anyblock'
-on_map = { xo = '<Plug>' }
-depends = ['vim-textobj-user']
-hook_add = '''
-omap ab <Plug>(textobj-anyblock-a)
-omap ib <Plug>(textobj-anyblock-i)
-xmap ab <Plug>(textobj-anyblock-a)
-xmap ib <Plug>(textobj-anyblock-i)
-'''
-
-[[plugins]]
-repo = 'thinca/vim-textobj-between'
-on_map = { xo = '<Plug>' }
-depends = ['vim-textobj-user']
-hook_add = '''
-let g:textobj_between_no_default_key_mappings = v:true
-omap ao <Plug>(textobj-between-a)
-omap io <Plug>(textobj-between-i)
-xmap ao <Plug>(textobj-between-a)
-xmap io <Plug>(textobj-between-i)
 '''
 
 [[plugins]]
@@ -153,4 +118,39 @@ omap <silent> ag <Plug>(textobj-functioncall-generics-a)
 omap <silent> ig <Plug>(textobj-functioncall-generics-i)
 xmap <silent> ag <Plug>(textobj-functioncall-generics-a)
 xmap <silent> ig <Plug>(textobj-functioncall-generics-i)
+'''
+
+[[plugins]]
+repo = 'rhysd/vim-textobj-anyblock'
+on_map = { xo = '<Plug>' }
+depends = ['vim-textobj-user']
+hook_add = '''
+omap ab <Plug>(textobj-anyblock-a)
+omap ib <Plug>(textobj-anyblock-i)
+xmap ab <Plug>(textobj-anyblock-a)
+xmap ib <Plug>(textobj-anyblock-i)
+'''
+
+[[plugins]]
+repo = 'rhysd/vim-textobj-wiw'
+on_map = { xo = '<Plug>' }
+depends = ['vim-textobj-user']
+hook_add = '''
+let g:textobj_wiw_no_default_key_mappings = v:true
+omap au <Plug>(textobj-wiw-a)
+omap iu <Plug>(textobj-wiw-i)
+xmap au <Plug>(textobj-wiw-a)
+xmap iu <Plug>(textobj-wiw-i)
+'''
+
+[[plugins]]
+repo = 'thinca/vim-textobj-between'
+on_map = { xo = '<Plug>' }
+depends = ['vim-textobj-user']
+hook_add = '''
+let g:textobj_between_no_default_key_mappings = v:true
+omap ao <Plug>(textobj-between-a)
+omap io <Plug>(textobj-between-i)
+xmap ao <Plug>(textobj-between-a)
+xmap io <Plug>(textobj-between-i)
 '''

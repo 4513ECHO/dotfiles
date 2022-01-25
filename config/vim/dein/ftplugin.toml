@@ -16,31 +16,6 @@ setlocal formatoptions-=ro
 setlocal formatoptions+=mMBl
 '''
 
-python = '''
-setlocal softtabstop=4
-setlocal shiftwidth=4
-setlocal textwidth=80
-setlocal smarttab
-setlocal nosmartindent
-inoreabbrev <expr><buffer> improt
-      \ (getline('.')[:col('.') - 2] =~# 'from\s\+.*\s\+' <Bar><Bar>
-      \  getline('.')[:col('.') - 2] ==# 'improt')
-      \ ? 'import' : 'improt'
-'''
-
-help = '''
-setlocal iskeyword+=#
-setlocal iskeyword+=:
-setlocal iskeyword+=-
-setlocal iskeyword+=+
-nnoremap <buffer> q <C-w>q
-nnoremap <buffer> <CR> <C-]>
-nnoremap <buffer><silent><expr> [Toggle]l
-      \ expand('%:e') ==# 'jax'
-      \ ? printf('<Cmd>help %s@en<CR>', expand('<cword>'))
-      \ : printf('<Cmd>help %s@ja<CR>', expand('<cword>'))
-'''
-
 dockerfile = '''
 function! s:set_abbrev(instruction) abort
   execute 'inoreabbrev <expr><buffer>' a:instruction
@@ -68,14 +43,6 @@ inoreabbrev <expr><buffer> as
       \ (getline('.')[:col('.') - 2] =~# '^FROM\s\+.*\s\+') ? 'AS' : 'as'
 '''
 
-qf = '''
-setlocal nowrap
-setlocal numberwidth=2
-nnoremap <buffer> q <C-w>q
-" from https://github.com/mityu/dotfiles/blob/f5cb5f9a92/dot_vim/runtime/ftplugin/qf.vim#L6
-nnoremap <buffer> o <CR>zz<C-w>p
-'''
-
 gitcommit = '''
 let b:caw_oneline_comment = ';'
 " from https://zenn.dev/uochan/articles/2021-12-08-vim-conventional-commits
@@ -90,9 +57,42 @@ endfunction
 nnoremap <buffer> <CR><CR> <Cmd>call <SID>select_type()<CR>
 '''
 
+help = '''
+setlocal iskeyword+=#
+setlocal iskeyword+=:
+setlocal iskeyword+=-
+setlocal iskeyword+=+
+nnoremap <buffer> q <C-w>q
+nnoremap <buffer> <CR> <C-]>
+nnoremap <buffer><silent><expr> [Toggle]l
+      \ expand('%:e') ==# 'jax'
+      \ ? printf('<Cmd>help %s@en<CR>', expand('<cword>'))
+      \ : printf('<Cmd>help %s@ja<CR>', expand('<cword>'))
+'''
+
 markdown = '''
 setlocal iskeyword-=`
 setlocal iskeyword-=[
+'''
+
+python = '''
+setlocal softtabstop=4
+setlocal shiftwidth=4
+setlocal textwidth=80
+setlocal smarttab
+setlocal nosmartindent
+inoreabbrev <expr><buffer> improt
+      \ (getline('.')[:col('.') - 2] =~# 'from\s\+.*\s\+' <Bar><Bar>
+      \  getline('.')[:col('.') - 2] ==# 'improt')
+      \ ? 'import' : 'improt'
+'''
+
+qf = '''
+setlocal nowrap
+setlocal numberwidth=2
+nnoremap <buffer> q <C-w>q
+" from https://github.com/mityu/dotfiles/blob/f5cb5f9a92/dot_vim/runtime/ftplugin/qf.vim#L6
+nnoremap <buffer> o <CR>zz<C-w>p
 '''
 
 toml = '''
@@ -101,11 +101,29 @@ if !has('nvim') && !empty(filter(getline(1, 4),
   call dein#toml#syntax()
 endif
 '''
+[[plugins]]
+# repo = 'jparise/vim-graphql'
+repo = '4513echo/vim-graphql'
+rev = 'typescript-comment'
+on_ft = ['graphql', 'typescript', 'typescriptreact']
 
 [[plugins]]
 repo = 'cespare/vim-toml'
 if = '!has("patch-8.2.3520") && !has("nvim")'
 on_ft = ['toml']
+
+[[plugins]]
+repo = 'gko/vim-coloresque'
+on_ft = ['vim', 'css', 'scss', 'sass']
+
+[[plugins]]
+repo = 'lark-parser/vim-lark-syntax'
+on_ft = ['lark']
+
+[[plugins]]
+repo = 'mattn/vim-maketable'
+on_ft = ['markdown']
+on_cmd = ['MakeTable', 'UnmakeTable']
 
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
@@ -120,35 +138,9 @@ let g:vim_markdown_strikethrough = v:true
 '''
 
 [[plugins]]
-repo = 'mattn/vim-maketable'
-on_ft = ['markdown']
-on_cmd = ['MakeTable', 'UnmakeTable']
-
-[[plugins]]
-repo = 'gko/vim-coloresque'
-on_ft = ['vim', 'css', 'scss', 'sass']
-
-[[plugins]]
-repo = 'lark-parser/vim-lark-syntax'
-on_ft = ['lark']
-
-[[plugins]]
-repo = 'vim-jp/syntax-vim-ex'
-on_ft = ['vim']
-
-[[plugins]]
-repo = 'tmux-plugins/vim-tmux'
-on_ft = ['tmux']
-
-[[plugins]]
-repo = 'tpope/vim-git'
-on_ft = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendmail']
-
-[[plugins]]
-# repo = 'jparise/vim-graphql'
-repo = '4513echo/vim-graphql'
-rev = 'typescript-comment'
-on_ft = ['graphql', 'typescript', 'typescriptreact']
+repo = 'rhysd/vim-fixjson'
+on_ft = ['json']
+on_cmd = ['FixJson']
 
 [[plugins]]
 repo = 'thinca/vim-qfreplace'
@@ -163,7 +155,14 @@ nnoremap <buffer> q <C-w>q
 '''
 
 [[plugins]]
-repo = 'rhysd/vim-fixjson'
-on_ft = ['json']
-on_cmd = ['FixJson']
+repo = 'tmux-plugins/vim-tmux'
+on_ft = ['tmux']
+
+[[plugins]]
+repo = 'tpope/vim-git'
+on_ft = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendmail']
+
+[[plugins]]
+repo = 'vim-jp/syntax-vim-ex'
+on_ft = ['vim']
 

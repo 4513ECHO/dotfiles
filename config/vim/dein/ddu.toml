@@ -46,36 +46,6 @@ on_cmd = ['Ddu']
 repo = 'Shougo/ddu-ui-std'
 on_source = 'ddu.vim'
 
-# sources
-
-[[plugins]]
-repo = 'Shougo/ddu-source-file'
-on_source = 'ddu.vim'
-
-[[plugins]]
-repo = 'Shougo/ddu-source-file_rec'
-on_source = 'ddu.vim'
-
-[[plugins]]
-repo = 'Shougo/ddu-source-file_old'
-on_source = 'ddu.vim'
-
-[[plugins]]
-repo = 'Shougo/ddu-source-line'
-on_source = 'ddu.vim'
-
-[[plugins]]
-repo = '4513echo/ddu-source-colorscheme'
-on_source = 'ddu.vim'
-
-[[plugins]]
-repo = 'shun/ddu-source-buffer'
-on_source = 'ddu.vim'
-
-[[plugins]]
-repo = 'shun/ddu-source-rg'
-on_source = 'ddu.vim'
-
 # filters
 
 [[plugins]]
@@ -90,5 +60,35 @@ on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'Shougo/ddu-kind-file'
+on_source = 'ddu.vim'
+
+# sources
+
+[[plugins]]
+repo = '4513echo/ddu-source-colorscheme'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'Shougo/ddu-source-file'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'Shougo/ddu-source-file_old'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'Shougo/ddu-source-file_rec'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'Shougo/ddu-source-line'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'shun/ddu-source-buffer'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'shun/ddu-source-rg'
 on_source = 'ddu.vim'
 

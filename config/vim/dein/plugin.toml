@@ -1,4 +1,36 @@
 [[plugins]]
+repo = '4513echo/vim-readme-viewer'
+on_cmd = ['DeinReadme']
+on_source = 'ddu.vim'
+hook_add = '''
+let g:readme_viewer#plugin_manager = 'dein.vim'
+'''
+
+[[plugins]]
+repo = 'christoomey/vim-tmux-navigator'
+if = '!has("gui_running")'
+on_cmd = [
+  'TmuxNavigateLeft', 'TmuxNavigateDown',
+  'TmuxNavigateUp', 'TmuxNavigateRight',
+]
+hook_add = '''
+let g:tmux_navigator_no_mappings = v:true
+nnoremap <C-w>h <Cmd>TmuxNavigateLeft<CR>
+nnoremap <C-w>j <Cmd>TmuxNavigateDown<CR>
+nnoremap <C-w>k <Cmd>TmuxNavigateUp<CR>
+nnoremap <C-w>l <Cmd>TmuxNavigateRight<CR>
+'''
+
+[[plugins]]
+repo = 'cocopon/colorswatch.vim'
+on_cmd = ['ColorSwatchGenerate']
+
+[[plugins]]
+repo = 'cocopon/inspecthi.vim'
+depends = ['colorswatch.vim']
+on_cmd = ['Inspecthi']
+
+[[plugins]]
 repo = 'cohama/lexima.vim'
 on_event = ['InsertEnter', 'CmdlineEnter']
 hook_add = '''
@@ -10,13 +42,209 @@ Runtime dein/settings/lexima.vim
 '''
 
 [[plugins]]
-repo = 'vim-denops/denops.vim'
-on_func = ['denops#server#start']
-if = 'executable("deno")'
+repo = 'dhruvasagar/vim-zoom'
+on_map = { n = '<Plug>' }
+hook_add = '''
+let g:zoom#statustext = 'zoomed'
+nmap <C-w>z <Plug>(zoom-toggle)
+'''
 
 [[plugins]]
-repo = 'vim-jp/vimdoc-ja'
-type__depth = 1
+repo = 'guns/xterm-color-table.vim'
+on_cmd = ['XtermColorTable']
+
+[[plugins]]
+repo = 'haya14busa/is.vim'
+depends = ['vim-asterisk']
+on_map = { nx = '<Plug>' }
+hook_add = '''
+let g:is#do_default_mappings = v:false
+'''
+
+[[plugins]]
+repo = 'haya14busa/vim-asterisk'
+on_map = { nx = '<Plug>' }
+hook_add = '''
+let g:asterisk#keeppos = v:true
+nmap *  <Plug>(asterisk-z*)zz
+nmap #  <Plug>(asterisk-z#)zz
+nmap g* <Plug>(asterisk-gz*)zz
+nmap g# <Plug>(asterisk-gz#)zz
+xmap *  <Plug>(asterisk-z*)zz
+xmap #  <Plug>(asterisk-z#)zz
+xmap g* <Plug>(asterisk-gz*)zz
+xmap g# <Plug>(asterisk-gz#)zz
+'''
+
+[[plugins]]
+repo = 'haya14busa/vim-edgemotion'
+on_map = { nx = '<Plug>' }
+hook_add = '''
+nmap <C-j> <Plug>(edgemotion-j)
+nmap <C-k> <Plug>(edgemotion-k)
+xmap <C-j> <Plug>(edgemotion-j)
+xmap <C-k> <Plug>(edgemotion-k)
+'''
+
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip'
+on_event = ['InsertEnter']
+on_source = 'ddc.vim'
+hook_add = '''
+let g:vsnip_snippet_dir = g:config_home .. '/snippets'
+imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+autocmd user User PumCompleteDone
+      \ call vsnip_integ#on_complete_done(g:pum#completed_item)
+'''
+
+[[plugins]]
+repo = 'junegunn/fzf'
+merged = 0
+on_cmd = ['FZF']
+if = 'executable("fzf")'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = ['fzf']
+on_cmd = [
+  'FzfFiles', 'FzfGFiles', 'FzfBuffers', 'FzfColors', 'FzfAg', 'FzfRg',
+  'FzfLines', 'FzfBLines', 'FzfTags', 'FzfBTags', 'FzfMarks', 'FzfWindows',
+  'FzfLocate', 'FzfHistory', 'FzfSnippets', 'FzfCommits', 'FzfBCommits',
+  'FzfCommands', 'FzfMaps', 'FzfHelptags', 'FzfFiletypes',
+  'FzfColorScheme',
+]
+if = 'executable("fzf")'
+hook_add = '''
+let g:fzf_command_prefix = 'Fzf'
+'''
+hook_source = '''
+command! -bar FzfColorScheme call fzf#run(fzf#wrap({
+      \ 'source': filter(keys(g:colorscheme_customize), { _, val -> val !=# '_' }),
+      \ 'sink': { arg -> user#colorscheme#colorscheme(arg) },
+      \ }))
+'''
+
+[[plugins]]
+repo = 'kana/vim-niceblock'
+on_map = { x = '<Plug>' }
+hook_add = '''
+xmap I  <Plug>(niceblock-I)
+xmap gI <Plug>(niceblock-gI)
+xmap A  <Plug>(niceblock-A)
+'''
+
+[[plugins]]
+repo = 'machakann/vim-highlightedundo'
+if = 'executable("diff")'
+on_map = { n = '<Plug>' }
+hook_add = '''
+nmap u     <Plug>(highlightedundo-undo)
+nmap <C-r> <Plug>(highlightedundo-redo)
+nmap U     <Plug>(highlightedundo-Undo)
+nmap g-    <Plug>(highlightedundo-gminus)
+nmap g+    <Plug>(highlightedundo-gplus)
+'''
+
+[[plugins]]
+repo = 'machakann/vim-highlightedyank'
+on_map = { nxo = '<Plug>' }
+on_event = ['TextYankPost']
+hook_add = '''
+let g:highlightedyank_highlight_duration = 100
+'''
+
+[[plugins]]
+repo = 'markonm/traces.vim'
+on_event = ['CmdlineEnter', 'CmdwinEnter']
+hook_add = '''
+let g:traces_normal_preview = v:true
+'''
+
+[[plugins]]
+repo = 'mattn/benchvimrc-vim'
+on_cmd = ['BenchVimrc']
+
+[[plugins]]
+repo = 'obcat/vim-hitspop'
+if = '!has("nvim")'
+on_event = ['CmdlineLeave', 'CmdwinLeave']
+hook_add = '''
+let g:hitspop_line = 'winbot'
+let g:hitspop_timeout = 2000
+autocmd user ColorScheme *
+      \ hi link hitspopErrormsg ErrorMsg
+'''
+
+[[plugins]]
+repo = 'ojroques/vim-oscyank'
+if = '!has("gui_running")'
+on_cmd = ['OSCYank', 'OSCYankReg']
+on_event = ['TextYankPost']
+hook_add = '''
+autocmd user TextYankPost *
+      \ : if v:event.regname ==# 'p'
+      \ |   execute 'OSCYankReg "'
+      \ | endif
+'''
+
+[[plugins]]
+repo = 'osyo-manga/vim-jplus'
+on_map = { nx = '<Plug>' }
+hook_add = '''
+nmap J  <Plug>(jplus-getchar)<Space>
+xmap J  <Plug>(jplus-getchar)<Space>
+nmap gJ <Plug>(jplus)
+xmap gJ <Plug>(jplus)
+let g:jplus#config = {
+      \ '_': {
+      \   'delimiter': '',
+      \   'right_matchstr_pattern': '^\s*#\s*\zs.*\|\s*\zs.*',
+      \   'left_matchstr_pattern': '^.\{-}\%(\ze\s*\\$\|$\)',
+      \ },
+      \ 'vim': {
+      \   'right_matchstr_pattern': '^\s*\\\s*\zs.*\|^\s*"\s*\zs.*\|\s*\zs.*',
+      \ }}
+'''
+
+[[plugins]]
+repo = 'powerman/vim-plugin-AnsiEsc'
+on_cmd = ['AnsiEsc']
+
+[[plugins]]
+repo = 'rbtnn/vim-coloredit'
+if = '!has("nvim")'
+on_cmd = ['ColorEdit']
+
+[[plugins]]
+repo = 'rhysd/clever-f.vim'
+on_map = { nxo = '<Plug>' }
+hook_add = '''
+nmap F <Plug>(clever-f-F)
+nmap T <Plug>(clever-f-T)
+nmap f <Plug>(clever-f-f)
+nmap t <Plug>(clever-f-t)
+omap F <Plug>(clever-f-F)
+omap T <Plug>(clever-f-T)
+omap f <Plug>(clever-f-f)
+omap t <Plug>(clever-f-t)
+xmap F <Plug>(clever-f-F)
+xmap T <Plug>(clever-f-T)
+xmap f <Plug>(clever-f-f)
+xmap t <Plug>(clever-f-t)
+let g:clever_f_across_no_line = v:true
+let g:clever_f_ignore_case = v:true
+let g:clever_f_smart_case = v:true
+let g:clever_f_use_migemo = v:true
+let g:clever_f_chars_match_any_signs = ';'
+let g:clever_f_timeout_ms = 5000
+autocmd user ColorScheme *
+      \ hi def CleverFDefaultLabel guifg=red guibg=NONE gui=bold,underline
+'''
+
+[[plugins]]
+repo = 'thinca/vim-prettyprint'
+on_cmd = ['PP', 'PrettyPrint']
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
@@ -38,6 +266,29 @@ let g:quickrun_config = {
 quickrun = '''
 nnoremap <buffer> q <C-w>q
 '''
+
+[[plugins]]
+repo = 'thinca/vim-scall'
+on_func = ['S']
+hook_add = '''
+let g:scall_function_name = 'S'
+'''
+
+[[plugins]]
+repo = 'thinca/vim-scouter'
+on_cmd = ['Scouter']
+on_func = ['Scouter']
+hook_add = '''
+command! Scouter echo Scouter(g:config_home)
+'''
+
+[[plugins]]
+repo = 'tweekmonster/helpful.vim'
+on_cmd = ['HelpfulVersion']
+
+[[plugins]]
+repo = 'tweekmonster/startuptime.vim'
+on_cmd = ['StartupTime']
 
 [[plugins]]
 repo = 'tyru/capture.vim'
@@ -69,190 +320,6 @@ xmap <silent> m  <Plug>(caw:hatpos:toggle:operator)
 '''
 
 [[plugins]]
-repo = 'rhysd/clever-f.vim'
-on_map = { nxo = '<Plug>' }
-hook_add = '''
-nmap F <Plug>(clever-f-F)
-nmap T <Plug>(clever-f-T)
-nmap f <Plug>(clever-f-f)
-nmap t <Plug>(clever-f-t)
-omap F <Plug>(clever-f-F)
-omap T <Plug>(clever-f-T)
-omap f <Plug>(clever-f-f)
-omap t <Plug>(clever-f-t)
-xmap F <Plug>(clever-f-F)
-xmap T <Plug>(clever-f-T)
-xmap f <Plug>(clever-f-f)
-xmap t <Plug>(clever-f-t)
-let g:clever_f_across_no_line = v:true
-let g:clever_f_ignore_case = v:true
-let g:clever_f_smart_case = v:true
-let g:clever_f_use_migemo = v:true
-let g:clever_f_chars_match_any_signs = ';'
-let g:clever_f_timeout_ms = 5000
-autocmd user ColorScheme *
-      \ hi def CleverFDefaultLabel guifg=red guibg=NONE gui=bold,underline
-'''
-
-[[plugins]]
-repo = 'osyo-manga/vim-jplus'
-on_map = { nx = '<Plug>' }
-hook_add = '''
-nmap J  <Plug>(jplus-getchar)<Space>
-xmap J  <Plug>(jplus-getchar)<Space>
-nmap gJ <Plug>(jplus)
-xmap gJ <Plug>(jplus)
-let g:jplus#config = {
-      \ '_': {
-      \   'delimiter': '',
-      \   'right_matchstr_pattern': '^\s*#\s*\zs.*\|\s*\zs.*',
-      \   'left_matchstr_pattern': '^.\{-}\%(\ze\s*\\$\|$\)',
-      \ },
-      \ 'vim': {
-      \   'right_matchstr_pattern': '^\s*\\\s*\zs.*\|^\s*"\s*\zs.*\|\s*\zs.*',
-      \ }}
-'''
-
-[[plugins]]
-repo = 'thinca/vim-scall'
-on_func = ['S']
-hook_add = '''
-let g:scall_function_name = 'S'
-'''
-
-[[plugins]]
-repo = 'cocopon/colorswatch.vim'
-on_cmd = ['ColorSwatchGenerate']
-
-[[plugins]]
-repo = 'cocopon/inspecthi.vim'
-depends = ['colorswatch.vim']
-on_cmd = ['Inspecthi']
-
-[[plugins]]
-repo = 'powerman/vim-plugin-AnsiEsc'
-on_cmd = ['AnsiEsc']
-
-[[plugins]]
-repo = 'haya14busa/vim-edgemotion'
-on_map = { nx = '<Plug>' }
-hook_add = '''
-nmap <C-j> <Plug>(edgemotion-j)
-nmap <C-k> <Plug>(edgemotion-k)
-xmap <C-j> <Plug>(edgemotion-j)
-xmap <C-k> <Plug>(edgemotion-k)
-'''
-
-[[plugins]]
-repo = 'junegunn/fzf'
-merged = 0
-on_cmd = ['FZF']
-if = 'executable("fzf")'
-
-[[plugins]]
-repo = 'junegunn/fzf.vim'
-depends = ['fzf']
-on_cmd = [
-  'FzfFiles', 'FzfGFiles', 'FzfBuffers', 'FzfColors', 'FzfAg', 'FzfRg',
-  'FzfLines', 'FzfBLines', 'FzfTags', 'FzfBTags', 'FzfMarks', 'FzfWindows',
-  'FzfLocate', 'FzfHistory', 'FzfSnippets', 'FzfCommits', 'FzfBCommits',
-  'FzfCommands', 'FzfMaps', 'FzfHelptags', 'FzfFiletypes',
-  'FzfColorScheme',
-]
-if = 'executable("fzf")'
-hook_add = '''
-let g:fzf_command_prefix = 'Fzf'
-'''
-hook_source = '''
-command! -bar FzfColorScheme call fzf#run(fzf#wrap({
-      \ 'source': filter(keys(g:colorscheme_customize), { _, val -> val !=# '_' }),
-      \ 'sink': { arg -> user#colorscheme#colorscheme(arg) },
-      \ }))
-'''
-
-[[plugins]]
-repo = 'guns/xterm-color-table.vim'
-on_cmd = ['XtermColorTable']
-
-[[plugins]]
-repo = '4513echo/vim-readme-viewer'
-on_cmd = ['DeinReadme']
-on_source = 'ddu.vim'
-hook_add = '''
-let g:readme_viewer#plugin_manager = 'dein.vim'
-'''
-
-# TODO: dein#get_updates_log() is broken
-# [[plugins]]
-# repo = 'wsdjeg/dein-ui.vim'
-# on_cmd = ['DeinUpdate']
-# [plugins.ftplugin]
-# SpaceVimPlugManager = '''
-# let s:dein_update_timer = timer_start(10, { -> execute('normal! G') }, {'repeat': -1})
-# autocmd user BufLeave * ++once call timer_stop(s:dein_update_timer)
-# '''
-
-[[plugins]]
-repo = 'tweekmonster/startuptime.vim'
-on_cmd = ['StartupTime']
-
-# [[plugins]]
-# repo = 'pocke/keycast.vim'
-# if = '!has("nvim")'
-# on_cmd = ['KeycastStart', 'KeycastStop']
-# depends = ['vanner']
-
-# [[plugins]]
-# repo = 'pocke/vanner'
-
-[[plugins]]
-repo = 'thinca/vim-scouter'
-on_cmd = ['Scouter']
-on_func = ['Scouter']
-hook_add = '''
-command! Scouter echo Scouter(g:config_home)
-'''
-
-[[plugins]]
-repo = 'rbtnn/vim-coloredit'
-if = '!has("nvim")'
-on_cmd = ['ColorEdit']
-
-# [[plugins]]
-# repo = 'reireias/vim-cheatsheet'
-# on_cmd = ['Cheat']
-# hook_add = '''
-# let g:cheatsheet#cheat_file = g:config_home .. '/doc/cheatsheet.md'
-# '''
-
-# [[plugins]]
-# repo = 'kat0h/bufpreview.vim'
-# depends = ['denops.vim']
-# on_ft = ['markdown']
-# on_cmd = ['PreviewMarkdown', 'PreviewMarkdownClose', 'PreviewMarkdownToggle']
-# hook_add = '''
-# let g:bufpreview_server_host = '0.0.0.0'
-# let g:bufpreview_server_port = 8888
-# '''
-
-# [[plugins]]
-# repo = 'skanehira/badapple.vim'
-# if = '!has("nvim")'
-# on_cmd = ['BadApple']
-
-[[plugins]]
-repo = 'mattn/benchvimrc-vim'
-on_cmd = ['BenchVimrc']
-
-[[plugins]]
-repo = 'dhruvasagar/vim-zoom'
-on_map = { n = '<Plug>' }
-hook_add = '''
-let g:zoom#statustext = 'zoomed'
-nmap <C-w>z <Plug>(zoom-toggle)
-'''
-
-[[plugins]]
 repo = 'tyru/open-browser.vim'
 on_map = { nx = '<Plug>(openbrowser' }
 on_cmd = ['OpenBrowser', 'OpenBrowserSearch', 'OpenBrowserSmartSearch']
@@ -266,35 +333,13 @@ let g:openbrowser_browser_commands = [{
 '''
 
 [[plugins]]
-repo = 'tweekmonster/helpful.vim'
-on_cmd = ['HelpfulVersion']
+repo = 'vim-denops/denops.vim'
+on_func = ['denops#server#start']
+if = 'executable("deno")'
 
 [[plugins]]
-repo = 'thinca/vim-prettyprint'
-on_cmd = ['PP', 'PrettyPrint']
-
-[[plugins]]
-repo = 'haya14busa/is.vim'
-depends = ['vim-asterisk']
-on_map = { nx = '<Plug>' }
-hook_add = '''
-let g:is#do_default_mappings = v:false
-'''
-
-[[plugins]]
-repo = 'christoomey/vim-tmux-navigator'
-if = '!has("gui_running")'
-on_cmd = [
-  'TmuxNavigateLeft', 'TmuxNavigateDown',
-  'TmuxNavigateUp', 'TmuxNavigateRight',
-]
-hook_add = '''
-let g:tmux_navigator_no_mappings = v:true
-nnoremap <C-w>h <Cmd>TmuxNavigateLeft<CR>
-nnoremap <C-w>j <Cmd>TmuxNavigateDown<CR>
-nnoremap <C-w>k <Cmd>TmuxNavigateUp<CR>
-nnoremap <C-w>l <Cmd>TmuxNavigateRight<CR>
-'''
+repo = 'vim-jp/vimdoc-ja'
+type__depth = 1
 
 # TODO: use :SclowDisable before to decrease flickering
 [[plugins]]
@@ -308,89 +353,44 @@ nnoremap <silent> <C-f> <Cmd>call comfortable_motion#flick(winheight(0) * 4)<CR>
 nnoremap <silent> <C-b> <Cmd>call comfortable_motion#flick(winheight(0) * -4)<CR>
 '''
 
-[[plugins]]
-repo = 'haya14busa/vim-asterisk'
-on_map = { nx = '<Plug>' }
-hook_add = '''
-let g:asterisk#keeppos = v:true
-nmap *  <Plug>(asterisk-z*)zz
-nmap #  <Plug>(asterisk-z#)zz
-nmap g* <Plug>(asterisk-gz*)zz
-nmap g# <Plug>(asterisk-gz#)zz
-xmap *  <Plug>(asterisk-z*)zz
-xmap #  <Plug>(asterisk-z#)zz
-xmap g* <Plug>(asterisk-gz*)zz
-xmap g# <Plug>(asterisk-gz#)zz
-'''
+# TODO: dein#get_updates_log() is broken
+# [[plugins]]
+# repo = 'wsdjeg/dein-ui.vim'
+# on_cmd = ['DeinUpdate']
+# [plugins.ftplugin]
+# SpaceVimPlugManager = '''
+# let s:dein_update_timer = timer_start(10, { -> execute('normal! G') }, {'repeat': -1})
+# autocmd user BufLeave * ++once call timer_stop(s:dein_update_timer)
+# '''
 
-[[plugins]]
-repo = 'kana/vim-niceblock'
-on_map = { x = '<Plug>' }
-hook_add = '''
-xmap I  <Plug>(niceblock-I)
-xmap gI <Plug>(niceblock-gI)
-xmap A  <Plug>(niceblock-A)
-'''
+# [[plugins]]
+# repo = 'kat0h/bufpreview.vim'
+# depends = ['denops.vim']
+# on_ft = ['markdown']
+# on_cmd = ['PreviewMarkdown', 'PreviewMarkdownClose', 'PreviewMarkdownToggle']
+# hook_add = '''
+# let g:bufpreview_server_host = '0.0.0.0'
+# let g:bufpreview_server_port = 8888
+# '''
 
-[[plugins]]
-repo = 'machakann/vim-highlightedundo'
-if = 'executable("diff")'
-on_map = { n = '<Plug>' }
-hook_add = '''
-nmap u     <Plug>(highlightedundo-undo)
-nmap <C-r> <Plug>(highlightedundo-redo)
-nmap U     <Plug>(highlightedundo-Undo)
-nmap g-    <Plug>(highlightedundo-gminus)
-nmap g+    <Plug>(highlightedundo-gplus)
-'''
+# [[plugins]]
+# repo = 'pocke/keycast.vim'
+# if = '!has("nvim")'
+# on_cmd = ['KeycastStart', 'KeycastStop']
+# depends = ['vanner']
 
-[[plugins]]
-repo = 'markonm/traces.vim'
-on_event = ['CmdlineEnter', 'CmdwinEnter']
-hook_add = '''
-let g:traces_normal_preview = v:true
-'''
+# [[plugins]]
+# repo = 'pocke/vanner'
 
-[[plugins]]
-repo = 'hrsh7th/vim-vsnip'
-on_event = ['InsertEnter']
-on_source = 'ddc.vim'
-hook_add = '''
-let g:vsnip_snippet_dir = g:config_home .. '/snippets'
-imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-autocmd user User PumCompleteDone
-      \ call vsnip_integ#on_complete_done(g:pum#completed_item)
-'''
+# [[plugins]]
+# repo = 'reireias/vim-cheatsheet'
+# on_cmd = ['Cheat']
+# hook_add = '''
+# let g:cheatsheet#cheat_file = g:config_home .. '/doc/cheatsheet.md'
+# '''
 
-[[plugins]]
-repo = 'machakann/vim-highlightedyank'
-on_map = { nxo = '<Plug>' }
-on_event = ['TextYankPost']
-hook_add = '''
-let g:highlightedyank_highlight_duration = 100
-'''
-
-[[plugins]]
-repo = 'ojroques/vim-oscyank'
-if = '!has("gui_running")'
-on_cmd = ['OSCYank', 'OSCYankReg']
-on_event = ['TextYankPost']
-hook_add = '''
-autocmd user TextYankPost *
-      \ : if v:event.regname ==# 'p'
-      \ |   execute 'OSCYankReg "'
-      \ | endif
-'''
-
-[[plugins]]
-repo = 'obcat/vim-hitspop'
-if = '!has("nvim")'
-on_event = ['CmdlineLeave', 'CmdwinLeave']
-hook_add = '''
-let g:hitspop_line = 'winbot'
-let g:hitspop_timeout = 2000
-autocmd user ColorScheme *
-      \ hi link hitspopErrormsg ErrorMsg
-'''
+# [[plugins]]
+# repo = 'skanehira/badapple.vim'
+# if = '!has("nvim")'
+# on_cmd = ['BadApple']
 
