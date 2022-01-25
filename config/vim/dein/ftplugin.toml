@@ -69,6 +69,8 @@ inoreabbrev <expr><buffer> as
 '''
 
 qf = '''
+setlocal nowrap
+setlocal numberwidth=2
 nnoremap <buffer> q <C-w>q
 " from https://github.com/mityu/dotfiles/blob/f5cb5f9a92/dot_vim/runtime/ftplugin/qf.vim#L6
 nnoremap <buffer> o <CR>zz<C-w>p
@@ -94,8 +96,8 @@ setlocal iskeyword-=[
 '''
 
 toml = '''
-if !empty(filter(getline(1, 4),
-      \ {_, val -> val =~# '^\[\[plugins]]$\|^hook_' }))
+if !has('nvim') && !empty(filter(getline(1, 4),
+      \ { _, val -> val =~# '\V\^\([[plugins]]\|hook_\)' }))
   call dein#toml#syntax()
 endif
 '''
@@ -109,6 +111,7 @@ on_ft = ['toml']
 repo = 'plasticboy/vim-markdown'
 on_ft = ['markdown']
 hook_add = '''
+let g:vim_markdown_no_default_key_mappings = v:true
 let g:vim_markdown_follow_anchor = v:true
 let g:vim_markdown_no_extensions_in_markdown = v:true
 let g:vim_markdown_math = v:true
@@ -140,6 +143,12 @@ on_ft = ['tmux']
 [[plugins]]
 repo = 'tpope/vim-git'
 on_ft = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendmail']
+
+[[plugins]]
+# repo = 'jparise/vim-graphql'
+repo = '4513echo/vim-graphql'
+rev = 'typescript-comment'
+on_ft = ['graphql', 'typescript', 'typescriptreact']
 
 [[plugins]]
 repo = 'thinca/vim-qfreplace'

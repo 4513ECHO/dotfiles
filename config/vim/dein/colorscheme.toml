@@ -387,6 +387,44 @@ hook_add = '''
 call user#colorscheme#add('vim-lighthaus')
 '''
 
+[[plugins]]
+repo = '4513echo/vim-colors-hatsunemiku'
+hook_add = '''
+call user#colorscheme#add('vim-colors-hatsunemiku')
+" call user#colorscheme#add('vim-colors-hatsunemiku', 'hatsunemiku_light')
+'''
+
+# TODO: it doesn't support terminal ansi colors
+# TODO: 'list' colors
+[[plugins]]
+repo = 'FrenzyExists/aquarium-vim'
+hook_add = '''
+call user#colorscheme#add('aquarium-vim')
+'''
+
+[[plugins]]
+repo = 'habamax/vim-gruvbit'
+hook_add = '''
+call user#colorscheme#add('vim-gruvbit')
+'''
+
+[[plugins]]
+repo = 'challenger-deep-theme/vim'
+name = 'challenger-deep-theme'
+hook_add = '''
+call user#colorscheme#add('challenger-deep-theme', 'challenger_deep')
+'''
+
+[[plugins]]
+repo = 'mhartington/oceanic-next'
+hook_add = '''
+call user#colorscheme#add('oceanic-next', 'OceanicNext')
+call user#colorscheme#custom('OceanicNext', {
+      \ 'lightline': 'oceanicnext',
+      \ })
+'''
+
+
 # TODO: this plugin is supprting lightline.vim, but I can't enable it because
 #       v:lua is only in neovim. I will send the repository pull-request...
 # [[plugins]]

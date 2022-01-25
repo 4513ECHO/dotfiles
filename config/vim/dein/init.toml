@@ -1,17 +1,4 @@
 
-# for testing vim-readme-viewer
-
-[[plugins]]
-repo = 'k-takata/minpac'
-
-[[plugins]]
-repo = 'junegunn/vim-plug'
-
-[[plugins]]
-repo = 'wbthomason/packer.nvim'
-
-##############################
-
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
@@ -26,16 +13,6 @@ repo = 'obcat/vim-sclow'
 if = '!has("nvim")'
 hook_add = '''
 let g:sclow_hide_full_length = v:true
-'''
-
-[[plugins]]
-repo = 'obcat/vim-hitspop'
-if = '!has("nvim")'
-hook_add = '''
-let g:hitspop_line = 'winbot'
-let g:hitspop_timeout = 2000
-autocmd user ColorScheme *
-      \ hi link hitspopErrormsg ErrorMsg
 '''
 
 [[plugins]]
@@ -105,16 +82,6 @@ Runtime dein/settings/vim-lsp.vim
 '''
 
 [[plugins]]
-repo = 'hrsh7th/vim-vsnip'
-hook_add = '''
-let g:vsnip_snippet_dir = g:config_home .. '/snippets'
-imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-autocmd user User PumCompleteDone
-      \ call vsnip_integ#on_complete_done(g:pum#completed_item)
-'''
-
-[[plugins]]
 repo = 'rafamadriz/friendly-snippets'
 
 [[plugins]]
@@ -148,28 +115,12 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'machakann/vim-highlightedyank'
-hook_add = '''
-let g:highlightedyank_highlight_duration = 100
-'''
-
-[[plugins]]
 repo = 'tmux-plugins/vim-tmux-focus-events'
 if = '!has("gui_running") && !has("patch-8.2.2345") && !has("nvim")'
 
 [[plugins]]
 repo = 'roxma/vim-tmux-clipboard'
 if = '!has("gui_running")'
-
-[[plugins]]
-repo = 'ojroques/vim-oscyank'
-if = '!has("gui_running")'
-hook_add = '''
-autocmd user TextYankPost *
-      \ : if v:event.regname ==# 'p'
-      \ |   execute 'OSCYankReg "'
-      \ | endif
-'''
 
 [[plugins]]
 repo = 'ap/vim-css-color'

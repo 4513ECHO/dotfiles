@@ -7,6 +7,7 @@ let g:lsp_fold_enabled = v:false
 let g:lsp_document_code_action_signs_enabled = v:false
 let g:lsp_diagnostics_highlights_insert_mode_enabled = v:false
 let g:lsp_diagnostics_signs_insert_mode_enabled = v:false
+let g:lsp_document_highlight_enabled = v:false
 
 let g:lsp_diagnostics_signs_error = {'text': '✗'}
 let g:lsp_diagnostics_signs_warning = {'text': '‼'}
@@ -27,7 +28,9 @@ function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal tagfunc=lsp#tagfunc
   setlocal signcolumn=number
-  nmap <buffer> K <Plug>(lsp-hover)
+  if index(['vim', 'yaml', 'markdown', 'sh', 'json'], &filetype) == -1
+    nmap <buffer> K <Plug>(lsp-hover)
+  endif
   nmap <buffer> gr <Plug>(lsp-rename)
   nmap <buffer> gd <Plug>(lsp-definition)
   nmap <buffer> gq <Plug>(lsp-document-format)

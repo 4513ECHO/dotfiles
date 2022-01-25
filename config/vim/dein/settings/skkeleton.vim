@@ -26,6 +26,7 @@ call skkeleton#register_kanatable('rom', {
       \ ".\<Space>": ['。',     ''],
       \ "(\<Space>": ['（',     ''],
       \ ")\<Space>": ['）',     ''],
+      \ "/\<Space>": ['・',     ''],
       \ })
 
 " from https://github.com/thinca/config/blob/5413e42a18/dotfiles/dot.vim/vimrc#L2289

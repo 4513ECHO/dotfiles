@@ -105,13 +105,11 @@ xmap gJ <Plug>(jplus)
 let g:jplus#config = {
       \ '_': {
       \   'delimiter': '',
-      \   'right_matchstr_pattern': '^\s*#\s*\zs.*\|'
-      \                          .. '\s*\zs.*',
+      \   'right_matchstr_pattern': '^\s*#\s*\zs.*\|\s*\zs.*',
+      \   'left_matchstr_pattern': '^.\{-}\%(\ze\s*\\$\|$\)',
       \ },
       \ 'vim': {
-      \   'right_matchstr_pattern': '^\s*\\\s*\zs.*\|'
-      \                          .. '^\s*"\s*\zs.*\|'
-      \                          .. '\s*\zs.*',
+      \   'right_matchstr_pattern': '^\s*\\\s*\zs.*\|^\s*"\s*\zs.*\|\s*\zs.*',
       \ }}
 '''
 
@@ -351,5 +349,48 @@ repo = 'markonm/traces.vim'
 on_event = ['CmdlineEnter', 'CmdwinEnter']
 hook_add = '''
 let g:traces_normal_preview = v:true
+'''
+
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip'
+on_event = ['InsertEnter']
+on_source = 'ddc.vim'
+hook_add = '''
+let g:vsnip_snippet_dir = g:config_home .. '/snippets'
+imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+autocmd user User PumCompleteDone
+      \ call vsnip_integ#on_complete_done(g:pum#completed_item)
+'''
+
+[[plugins]]
+repo = 'machakann/vim-highlightedyank'
+on_map = { nxo = '<Plug>' }
+on_event = ['TextYankPost']
+hook_add = '''
+let g:highlightedyank_highlight_duration = 100
+'''
+
+[[plugins]]
+repo = 'ojroques/vim-oscyank'
+if = '!has("gui_running")'
+on_cmd = ['OSCYank', 'OSCYankReg']
+on_event = ['TextYankPost']
+hook_add = '''
+autocmd user TextYankPost *
+      \ : if v:event.regname ==# 'p'
+      \ |   execute 'OSCYankReg "'
+      \ | endif
+'''
+
+[[plugins]]
+repo = 'obcat/vim-hitspop'
+if = '!has("nvim")'
+on_event = ['CmdlineLeave', 'CmdwinLeave']
+hook_add = '''
+let g:hitspop_line = 'winbot'
+let g:hitspop_timeout = 2000
+autocmd user ColorScheme *
+      \ hi link hitspopErrormsg ErrorMsg
 '''
 

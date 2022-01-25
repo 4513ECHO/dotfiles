@@ -32,9 +32,3 @@ call submode#map('join-x', 'nx', '', 'h', 'h')
 call submode#map('join-x', 'nx', '', 'j', 'gj')
 call submode#map('join-x', 'nx', '', 'k', 'k')
 call submode#map('join-x', 'nx', '', 'l', 'gl')
-
-" undo/redo
-call submode#enter_with('undo/redo', 'n', '', 'g+', 'g+')
-call submode#enter_with('undo/redo', 'n', '', 'g-', 'g-')
-call submode#map('undo/redo', 'n', '', '+', 'g+')
-call submode#map('undo/redo', 'n', '', '-', 'g-')

@@ -8,8 +8,9 @@ let s:sourceOptions = {}
 let s:patch_global.ui = 'std'
 let s:sourceOptions._ = {
       \ 'ignoreCase': v:true,
-      \ 'matchers': ['matcher_substring'],
+      \ 'matchers': ['matcher_fzf'],
       \ }
+      "\ 'matchers': ['matcher_substring'],
 let s:patch_global.sourceOptions = s:sourceOptions
 
 call ddu#custom#patch_global(s:patch_global)
@@ -79,6 +80,10 @@ on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'Shougo/ddu-filter-matcher_substring'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'yuki-yano/ddu-filter-fzf'
 on_source = 'ddu.vim'
 
 # kinds

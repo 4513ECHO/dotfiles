@@ -16,19 +16,11 @@ let s:rules._ += [
       \ { 'char': '<Tab>', 'at': '\%#\s*''', 'leave': '''' },
       \ ]
 
-" from https://github.com/yuki-yano/dotfiles/blob/11bfe29f07/.vimrc#L2848
-let s:rules._ += [
-      \ { 'char': ';', 'at': '(.*\%#)$',   'leave': ')', 'input': ';' },
-      \ { 'char': ';', 'at': '^\s*\%#)$',  'leave': ')', 'input': ';' },
-      \ { 'char': ';', 'at': '(.*\%#\}$',  'leave': '}', 'input': ';' },
-      \ { 'char': ';', 'at': '^\s*\%#\}$', 'leave': '}', 'input': ';' },
-      \ ]
-
 let s:rules._ += [
       \ { 'char': '<',     'at': '\<\h\w*\%#', 'input_after': '>' },
-      \ { 'char': '<BS>',  'at': '<\%#>',    'delete': '>'      },
-      \ { 'char': '>',     'at': '\%#>',     'leave': '>'       },
-      \ { 'char': '<Tab>', 'at': '\%#\s*>',  'leave': '>'       },
+      \ { 'char': '<BS>',  'at': '<\%#>',      'delete': '>'      },
+      \ { 'char': '>',     'at': '\%#>',       'leave': '>'       },
+      \ { 'char': '<Tab>', 'at': '\%#\s*>',    'leave': '>'       },
       \ ]
 
 " python
@@ -88,10 +80,10 @@ let s:rules.markdown += [
       \ { 'char': '<BS>',  'at': '^\s*[-*]\s*\%#$', 'input': '<Home><Del><Del><End>'     },
       \ ]
 " smart checkbox
-let s:rules.markdown += [
-      \ { 'char': '[', 'at': '^\s*[-*]\s*\%#$',      'input': '[<Space>]'                 },
-      \ { 'char': 'x', 'at': '^\s*[-*]\s*\[ \]\%#$', 'input': '<Left><BS>x<Right><Space>' },
-      \ ]
+" let s:rules.markdown += [
+"      \ { 'char': '[', 'at': '^\s*[-*]\s*\%#$',      'input': '[<Space>]'                 },
+"      \ { 'char': 'x', 'at': '^\s*[-*]\s*\[ \]\%#$', 'input': '<Left><BS>x<Right><Space>' },
+"      \ ]
 
 " typescript
 let s:rules.typescript = []
