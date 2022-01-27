@@ -32,6 +32,12 @@ let g:extra_whitespace_ignored_filetypes = ['diff', 'help', 'capture']
 repo = 'cocopon/lightline-hybrid.vim'
 
 [[plugins]]
+repo = 'delphinus/vim-auto-cursorline'
+hook_add = '''
+let g:auto_cursorline_wait_ms = 4000
+'''
+
+[[plugins]]
 repo = 'halkn/lightline-lsp'
 on_source = ['lightline.vim', 'vim-lsp']
 

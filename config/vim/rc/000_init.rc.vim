@@ -111,17 +111,6 @@ autocmd user BufEnter *
 " vim as a pager
 autocmd user StdinReadPost * call user#pager()
 
-" enable cursorline in only needing it
-" from https://thinca.hatenablog.com/entry/20090530/1243615055
-autocmd user CursorHold,CursorHoldI *
-      \ call user#auto_cursorline('CursorHold')
-autocmd user CursorMoved *
-      \ call user#auto_cursorline('CursorMoved')
-autocmd user WinEnter *
-      \ call user#auto_cursorline('WinEnter')
-autocmd user WinLeave *
-      \ call user#auto_cursorline('WinLeave')
-
 " auto make directories
 " from https://vim-jp.org/vim-users-jp/2011/02/20/Hack-202.html
 autocmd user BufWritePre *

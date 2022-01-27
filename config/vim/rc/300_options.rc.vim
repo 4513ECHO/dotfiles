@@ -110,7 +110,7 @@ set cedit=
 set backup
 set writebackup
 set swapfile
-set updatetime=10000
+set updatetime=200
 let &backupdir = g:data_home .. '/backup'
 let &directory = g:data_home .. '/swap'
 call mkdir(&backupdir, 'p')
