@@ -9,7 +9,8 @@ set  -g status-style fg=colour252,bg=colour235
 set  -g status-left-length 35
 set  -g status-left "Session: #{session_name}"
 
-set  -g status-right "#[dim][%m/%d(%a) %H:%M:%S]#[default]"
+set  -g status-right \
+    "#[dim]#(cut -d' ' -f1 /proc/loadavg) [%m/%d(%a) %H:%M:%S]#[default]"
 
 # window status
 setw -g window-status-format "#{window_index}: #{window_name}"
@@ -33,4 +34,4 @@ set  -g pane-active-border-style fg=colour246
 # clock
 set  -g display-panes-active-colour colour246
 set  -g display-panes-colour colour239
-setw -g clock-mode-style fg=colour246,24
+setw -g clock-mode-colour colour246

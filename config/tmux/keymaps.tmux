@@ -3,6 +3,7 @@
 # prefix key
 set -g prefix C-q
 unbind C-b
+bind C-q send-prefix
 
 bind c new-window -c '#{pane_current_path}'
 bind v split-window -h -c '#{pane_current_path}'
@@ -22,7 +23,7 @@ bind r source-file ~/.config/tmux/tmux.conf \
     \; refresh-client \
     \; display-message "Reloaded tmux.conf"
 bind w choose-tree -Z
-# bind '=' select-layout tiled
+bind '=' select-layout tiled
 
 # copy mode
 bind C-v copy-mode
