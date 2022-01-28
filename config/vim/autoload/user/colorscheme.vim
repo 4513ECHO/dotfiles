@@ -33,11 +33,7 @@ function! user#colorscheme#custom(colorscheme, options) abort
 endfunction
 
 function! s:colorscheme_list() abort
-  let keys = keys(g:colorscheme_customize)
-  if has_key(g:colorscheme_customize, '_')
-    call filter(keys, { _, val -> val !~# '_' })
-  endif
-  return keys
+  return filter(keys(g:colorscheme_customize), { _, val -> val !=# '_' })
 endfunction
 
 function! user#colorscheme#random() abort
@@ -73,18 +69,35 @@ function! user#colorscheme#set_customize(colorscheme) abort
   " TODO: edit v:colornames if exists
   let terminal = get(customize, 'terminal')
   if !empty(terminal)
-    let g:terminal_ansi_colors = terminal
+    if has('nvim')
+      for i in range(16)
+        let g:terminal_color_{i} = terminal[i]
+      endfor
+    else
+      let g:terminal_ansi_colors = terminal
+    endif
+  elseif !has('nvim') && exists('g:terminal_color_0')
+    let g:terminal_ansi_colors = []
+    for i in range(16)
+      call add(g:terminal_ansi_colors, g:terminal_color_{i})
+    endfor
+  elseif has('nvim') && exists('g:terminal_ansi_colors')
+    for i in range(16)
+      let g:terminal_color_{i} = g:terminal_ansi_colors[i]
+    endfor
+    let g:terminal_color_foreground = g:terminal_color_15
+    let g:terminal_color_background = g:terminal_color_0
   endif
   let link = get(customize, 'link')
   if !empty(link)
     for [linked, base] in items(link)
-      execute 'hi link' linked base
+      execute 'hi! link' linked base
     endfor
   endif
 endfunction
 
 function! user#colorscheme#colorscheme(colorscheme) abort
-  if empty(s:colorscheme_list())
+  if empty(s:colorscheme_list()) || get(g:, 'colors_name', '') ==# a:colorscheme
     return
   endif
   let g:current_colorscheme = a:colorscheme
@@ -95,6 +108,11 @@ function! user#colorscheme#colorscheme(colorscheme) abort
   autocmd! random_colorscheme ColorScheme
   execute 'autocmd random_colorscheme ColorScheme' a:colorscheme
         \ printf('call user#colorscheme#set_customize("%s")', a:colorscheme)
+  for i in range(16)
+    silent! unlet g:terminal_color_{i}
+  endfor
+  silent! unlet g:terminal_color_foreground
+  silent! unlet g:terminal_color_background
   silent! unlet g:terminal_ansi_colors
   execute 'colorscheme' a:colorscheme
   " NOTE: `:help lightline-problem-13`

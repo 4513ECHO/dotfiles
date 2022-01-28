@@ -1,3 +1,10 @@
+[[plugins]]
+repo = '4513echo/vim-colors-hatsunemiku'
+hook_add = '''
+call user#colorscheme#add('vim-colors-hatsunemiku')
+" call user#colorscheme#add('vim-colors-hatsunemiku', 'hatsunemiku_light')
+'''
+
 # TODO: it doesn't support terminal ansi colors
 [[plugins]]
 repo = 'cormacrelf/vim-colors-github'
@@ -21,10 +28,13 @@ call user#colorscheme#custom('orbital', {
 '''
 
 [[plugins]]
-repo = '4513echo/vim-colors-hatsunemiku'
+repo = 'felipec/vim-felipec'
 hook_add = '''
-call user#colorscheme#add('vim-colors-hatsunemiku')
-" call user#colorscheme#add('vim-colors-hatsunemiku', 'hatsunemiku_light')
+call user#colorscheme#add('vim-felipec')
+call user#colorscheme#custom('felipec', {
+      \ 'highlight': {
+      \   'NonText': #{ ctermbg: 'NONE', guibg: 'NONE' },
+      \ }})
 '''
 
 [[plugins]]
@@ -44,11 +54,6 @@ let g:yowish = {
 repo = 'Rigellute/rigel'
 hook_add = '''
 call user#colorscheme#add('rigel')
-call user#colorscheme#custom('rigel', {
-       \ 'terminal': [
-       \   '#00384d', '#c43060', '#7fc06e', '#f08e48', '#1c8bd2', '#c694ff', '#00cccc', '#77929e',
-       \   '#517f8d', '#ff5a67', '#9cf087', '#ffcc1b', '#7eb2dd', '#fb94ff', '#00ffff', '#b7cff9',
-       \ ]})
 '''
 
 [[plugins]]
@@ -93,11 +98,7 @@ call user#colorscheme#add('vim-snazzy')
 call user#colorscheme#custom('snazzy', {
       \ 'highlight': {
       \   'Visual': #{ ctermbg: 254, guibg: '#e4e4ee' },
-      \ },
-      \ 'terminal': [
-      \   '#282a36', '#ff5c57', '#5af78e', '#faf99d', '#57c7ff', '#ff6ac1', '#9aedfe', '#f1f1f0',
-      \   '#43454f', '#ff5c57', '#5af78e', '#f3f99d', '#57c7ff', '#ff6ac1', '#9aedfe', '#eff0eb',
-      \ ]})
+      \ }})
 '''
 
 [[plugins]]
@@ -143,10 +144,7 @@ hook_add = '''
 call user#colorscheme#add('night-owl.vim')
 call user#colorscheme#custom('night-owl', {
       \ 'lightline': 'nightowl',
-      \ 'terminal': [
-      \   '#011627', '#ff5874', '#addb67', '#f78c6c', '#82aaff', '#c792ea', '#7fdbca', '#aaaaaa',
-      \   '#637777', '#ff5874', '#addb67', '#f78c6c', '#82aaff', '#c792ea', '#7fdbca', '#d6deeb',
-      \ ]})
+      \ })
 '''
 
 [[plugins]]
@@ -158,10 +156,23 @@ call user#colorscheme#custom('snow', {
       \ })
 '''
 
+# NOTE: magenta of term ansi color is original
+[[plugins]]
+repo = 'jacoborus/tender.vim'
+hook_add = '''
+call user#colorscheme#add('tender.vim')
+'''
+
 [[plugins]]
 repo = 'joshdick/onedark.vim'
 hook_add = '''
 call user#colorscheme#add('onedark.vim')
+'''
+
+[[plugins]]
+repo = 'kyoh86/momiji'
+hook_add = '''
+call user#colorscheme#add('momiji')
 '''
 
 [[plugins]]
@@ -223,11 +234,6 @@ call user#colorscheme#custom('jellybeans', {
 repo = 'pineapplegiant/spaceduck'
 hook_add = '''
 call user#colorscheme#add('spaceduck')
-call user#colorscheme#custom('spaceduck', {
-      \ 'terminal': [
-      \   '#0f111b', '#e33400', '#5ccc96', '#b3a1e6', '#00a3cc', '#ce6f8f', '#7a5ccc', '#686f9a',
-      \   '#686f9a', '#e33400', '#5ccc96', '#b3a1e6', '#00a3cc', '#ce6f8f', '#7a5ccc', '#ecf0c1',
-      \ ]})
 '''
 
 [[plugins]]
@@ -330,11 +336,6 @@ call user#colorscheme#custom('dogrun', {
 repo = 'whatyouhide/vim-gotham'
 hook_add = '''
 call user#colorscheme#add('vim-gotham')
-call user#colorscheme#custom('gotham', {
-      \ 'terminal': [
-      \   '#0c1014', '#c23127', '#2aa889', '#edb443', '#195466', '#4e5166', '#33859E', '#99d1ce',
-      \   '#0c1014', '#c23127', '#2aa889', '#edb443', '#195466', '#4e5166', '#33859E', '#99d1ce',
-      \ ]})
 '''
 
 # NOTE: green and yellow of term ansi color is original
@@ -354,18 +355,6 @@ call user#colorscheme#custom('hydrangea', {
       \ ]})
 '''
 
-# NOTE: magenta of term ansi color is original
-[[plugins]]
-repo = 'jacoborus/tender.vim'
-hook_add = '''
-call user#colorscheme#add('tender.vim')
-call user#colorscheme#custom('tender', {
-      \ 'terminal': [
-      \   '#282828', '#f43753', '#c9d05c', '#ffc24b', '#73cef4', '#fe6ab5', '#b3deef', '#bbbbbb',
-      \   '#444444', '#f43753', '#c9d05c', '#ffc24b', '#73cef4', '#fe6ab5', '#b3deef', '#eeeeee',
-      \ ]})
-'''
-
 # NOTE: maybe it doesn't support lightline.vim expand component
 # [[plugins]]
 # repo = 'gkapfham/vim-vitamin-onec''
@@ -374,11 +363,14 @@ call user#colorscheme#custom('tender', {
 # '''
 
 # TODO: it doesn't support terminal ansi colors
-# TODO: 'list' colors
 [[plugins]]
 repo = 'FrenzyExists/aquarium-vim'
 hook_add = '''
 call user#colorscheme#add('aquarium-vim')
+call user#colorscheme#custom('aquarium', {
+      \ 'link': {
+      \   'NonText': 'Comment',
+      \ }})
 '''
 
 # TODO: it doesn't support terminal ansi colors
@@ -390,10 +382,9 @@ call user#colorscheme#add('wombat256.vim', 'wombat256mod')
 call user#colorscheme#custom('wombat256mod', {
       \ 'lightline': 'wombat',
       \ 'link': {
-      \   'NonText': 'Normal',
+      \   'NonText': 'Comment',
       \ },
       \ 'highlight': {
-      \   'NonText': #{ ctermfg: 241, ctermbg: 'NONE', guifg: '#857b6f', guibg: 'NONE' },
       \   'CursorLineNr': #{ cterm: 'NONE' },
       \ }})
 '''
@@ -411,7 +402,6 @@ call user#colorscheme#custom('reliquiae', {
 '''
 
 # Thank Shougo very much!
-# NONTODO: original theme for lightline and terminal
 # [[plugins]]
 # repo = 'https://raw.githubusercontent.com/Shougo/shougo-s-github/master/vim/colors/candy.vim'
 # script_type = 'colors'
