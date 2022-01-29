@@ -1,6 +1,7 @@
 [[plugins]]
 repo = 'Shougo/ddu.vim'
 depends = ['denops.vim']
+# on_source = ['denops.vim']
 hook_source = '''
 let s:patch_global = {}
 let s:sourceOptions = {}
@@ -19,13 +20,15 @@ call ddu#custom#patch_global(s:patch_global)
 [plugins.ftplugin]
 ddu-std = '''
 nnoremap <silent><buffer> <CR>
-      \ <Cmd>call ddu#ui#std#do_map('doAction')<CR>
+      \ <Cmd>call ddu#ui#std#do_action('itemAction')<CR>
 nnoremap <silent><buffer> <Space>
-      \ <Cmd>call ddu#ui#std#do_map('toggleSelectItem')<CR>
+      \ <Cmd>call ddu#ui#std#do_action('toggleSelectItem')<CR>
 nnoremap <silent><buffer> i
-      \ <Cmd>call ddu#ui#std#do_map('openFilterWindow')<CR>
+      \ <Cmd>call ddu#ui#std#do_action('openFilterWindow')<CR>
+nnoremap <silent><buffer> <C-l>
+      \ <Cmd>call ddu#ui#std#do_action('refreshItems')<CR>
 nnoremap <silent><buffer> q
-      \ <Cmd>call ddu#ui#std#do_map('quit')<CR>
+      \ <Cmd>call ddu#ui#std#do_action('quit')<CR>
 '''
 
 ddu-std-filter = '''

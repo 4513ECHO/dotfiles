@@ -2,6 +2,7 @@
 repo = 'Shougo/ddc.vim'
 depends = ['context_filetype.vim', 'denops.vim', 'pum.vim', 'lexima.vim']
 on_event = ['InsertEnter']
+# on_source = ['denops.vim']
 hook_add = '''
 " autocmd user CmdlineEnter : call user#ddc#cmdline_pre('<afile>')
 " autocmd user CmdlineEnter / call user#ddc#cmdline_pre()
