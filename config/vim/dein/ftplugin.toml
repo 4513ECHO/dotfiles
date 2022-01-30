@@ -5,9 +5,6 @@ let g:is_bash = v:true
 let g:rust_bang_comment_leader = v:true
 let g:markdown_fenced_languages = ['ts=typescript']
 let g:vim_indent_cont = 6
-
-autocmd user ColorScheme *
-      \ hi link markdownCode Constant
 '''
 
 [ftplugin]
@@ -73,6 +70,10 @@ nnoremap <buffer><silent><expr> [Toggle]l
 markdown = '''
 setlocal iskeyword-=`
 setlocal iskeyword-=[
+
+hi link markdownCode Constant
+autocmd user ColorScheme *
+      \ hi link markdownCode Constant
 '''
 
 python = '''
@@ -115,6 +116,10 @@ repo = 'gko/vim-coloresque'
 on_ft = ['vim', 'css', 'scss', 'sass']
 
 [[plugins]]
+repo = 'jceb/vim-hier'
+on_ft = ['qf']
+
+[[plugins]]
 repo = 'lambdalisue/qfloc.vim'
 on_ft = ['qf']
 
@@ -143,6 +148,21 @@ let g:vim_markdown_strikethrough = v:true
 repo = 'rhysd/vim-fixjson'
 on_ft = ['json']
 on_cmd = ['FixJson']
+
+[[plugins]]
+repo = 'rhysd/vim-gfm-syntax'
+on_ft = ['markdown']
+[plugins.ftplugin]
+markdown = '''
+syn cluster mkdNonListItem add=@githubFlavoredMarkdown
+syn cluster mkdNonListItemBlock add=@githubFlavoredMarkdown
+syn cluster githubFlavoredMarkdown contains=githubFlavoredMarkdownCode,
+      \githubFlavoredMarkdownMention,githubFlavoredMarkdownStrikethrough,
+      \githubFlavoredMarkdownEmoji,githubFlavoredMarkdownTableDelimiter,
+      \githubFlavoredMarkdownTableAligner,githubFlavoredMarkdownTableBorder,
+      \githubFlavoredMarkdownIssueNumber,githubFlavoredMarkdownCheckBoxBracket,
+      \githubFlavoredMarkdownCheckBoxX
+'''
 
 [[plugins]]
 repo = 'thinca/vim-qfreplace'
