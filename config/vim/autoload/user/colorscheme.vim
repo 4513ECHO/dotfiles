@@ -79,7 +79,7 @@ function! user#colorscheme#set_customize(colorscheme) abort
   elseif !has('nvim') && exists('g:terminal_color_0')
     let g:terminal_ansi_colors = []
     for i in range(16)
-      call add(g:terminal_ansi_colors, g:terminal_color_{i})
+      silent! call add(g:terminal_ansi_colors, g:terminal_color_{i})
     endfor
   elseif has('nvim') && exists('g:terminal_ansi_colors')
     for i in range(16)

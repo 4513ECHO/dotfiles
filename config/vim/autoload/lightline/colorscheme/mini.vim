@@ -1,9 +1,8 @@
 let s:bg = ['#262626', 235]
 let s:fg = ['#d0d0d0', 252]
-let s:red = ['#ffaf87', 216]
-let s:blue = ['#87afff', 111]
-let s:green = ['#afff87', 156]
-let s:yellow = ['']
+let s:red = ['#c06b40', 216]
+let s:blue = ['#406bc0', 111]
+let s:green = ['#6bc040', 156]
 
 let s:p = { 'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 let s:p.normal.info    = [ [ s:blue, s:bg ] ]

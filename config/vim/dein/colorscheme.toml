@@ -16,6 +16,13 @@ call user#colorscheme#custom('github', {
       \ }})
 '''
 
+[[plugins]]
+repo = 'embark-theme/vim'
+name = 'embark-theme'
+hook_add = '''
+call user#colorscheme#add('embark-theme', 'embark')
+'''
+
 # TODO: it doesn't support terminal ansi colors
 [[plugins]]
 repo = 'fcpg/vim-orbital'
@@ -267,6 +274,17 @@ repo = 'sainnhe/edge'
 hook_add = '''
 let g:edge_better_performance = v:true
 call user#colorscheme#add('edge')
+'''
+
+[[plugins]]
+repo = 'savq/melange'
+hook_add = '''
+call user#colorscheme#add('melange')
+call user#colorscheme#custom('melange', {
+      \ 'lightline': 'mini',
+      \ 'highlight': {
+      \   'CursorLineNr': #{ cterm: 'NONE' },
+      \ }})
 '''
 
 [[plugins]]
