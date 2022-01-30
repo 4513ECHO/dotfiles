@@ -92,10 +92,6 @@ let s:rules.typescript += [
      \ ]
 let s:rules.typescriptreact = copy(s:rules.typescript)
 
-function! s:debug() abort
-  return string(s:rules)
-endfunction
-
 function! s:lexima_init() abort
   for [filetype, rules] in items(s:rules)
     for val in rules

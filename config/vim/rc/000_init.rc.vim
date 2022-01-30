@@ -65,9 +65,6 @@ command! -bar HtmlFormat
       \ : silent! keepjumps keeppattern substitute+\v\>(\<)@=+>\r+ge
       \ | silent! keepjumps normal! gg=G¬
 
-" from https://zenn.dev/kato_k/articles/vim-tips-no004
-command! -nargs=? -bar Profile call user#profile(<q-args>)
-
 " TODO: if bang is exists, include untracked file
 command! -bar -bang TodoList vimgrep 'TODO\ze:' `git ls-files`
 

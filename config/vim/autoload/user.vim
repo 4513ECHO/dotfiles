@@ -68,23 +68,3 @@ function! user#auto_mkdir(dir, force) abort
   endif
 endfunction
 
-function! user#profile(file) abort
-  if !empty(a:file)
-    let file = a:file
-  else
-    let fileformat = fnamemodify(g:config_home .. '/profile_%s.log', 'p')
-    let lnum = 1
-    let file = printf(fileformat, lnum)
-    while filereadable(file)
-      let file = printf(fileformat, lnum)
-      let lnum = lnum + 1
-    endwhile
-  endif
-  execute 'profile start' file
-  profile func *
-  profile file *
-  source $MYVIMRC
-  echomsg 'Profiling to:' file
-  exit
-endfunction
-
