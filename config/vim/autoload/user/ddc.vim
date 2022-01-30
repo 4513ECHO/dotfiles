@@ -53,7 +53,7 @@ function! user#ddc#skkeleton_post() abort
     unlet b:skkeleton_enabled
   endif
   if exists('b:_ddc_skkeleton_prev_buffer_config')
-    call ddc#custom#set_buffer(b:prev_buffer_config)
+    call ddc#custom#set_buffer(b:_ddc_skkeleton_prev_buffer_config)
     unlet b:_ddc_skkeleton_prev_buffer_config
   endif
 endfunction
