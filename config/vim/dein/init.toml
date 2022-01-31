@@ -42,36 +42,6 @@ repo = 'halkn/lightline-lsp'
 on_source = ['lightline.vim', 'vim-lsp']
 
 [[plugins]]
-repo = 'hrsh7th/vim-searchx'
-hook_add = '''
-let g:searchx = {
-      \ 'auto_accept': v:true,
-      \ 'markers': split('ASDFGHJKL', '.\zs'),
-      \ 'scrolltime': 500,
-      \ 'scrolloff': &scrolloff,
-      \ }
-function! g:searchx.convert(input) abort
-  if a:input !~# '\k'
-    return '\V' .. a:input
-  endif
-  return join(split(a:input, '\s\+'), '.\{-}')
-endfunction
-
-autocmd user User SearchxLeave call searchx#clear()
-
-nnoremap ? <Cmd>call searchx#start({ 'dir': v:false })<CR>
-" <Cmd>autocmd user CursorMoved * ++once call searchx#clear()<CR>
-nnoremap / <Cmd>call searchx#start({ 'dir': v:true })<CR>
-xnoremap ? <Cmd>call searchx#start({ 'dir': v:false })<CR>
-xnoremap / <Cmd>call searchx#start({ 'dir': v:true })<CR>
-
-nnoremap N <Cmd>call searchx#prev_dir()<CR>zz
-nnoremap n <Cmd>call searchx#next_dir()<CR>zz
-xnoremap N <Cmd>call searchx#prev_dir()<CR>zz
-xnoremap n <Cmd>call searchx#next_dir()<CR>zz
-'''
-
-[[plugins]]
 repo = 'itchyny/lightline.vim'
 depends = [
   'lightline-gruvbox.vim', 'lightline-hybrid.vim',

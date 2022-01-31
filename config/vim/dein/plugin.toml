@@ -54,12 +54,6 @@ repo = 'guns/xterm-color-table.vim'
 on_cmd = ['XtermColorTable']
 
 [[plugins]]
-repo = 'haya14busa/is.vim'
-depends = ['vim-asterisk']
-on_map = { nx = '<Plug>' }
-hook_add = '''
-let g:is#do_default_mappings = v:false
-'''
 
 [[plugins]]
 repo = 'haya14busa/vim-asterisk'
@@ -84,6 +78,40 @@ nmap <C-j> <Plug>(edgemotion-j)
 nmap <C-k> <Plug>(edgemotion-k)
 xmap <C-j> <Plug>(edgemotion-j)
 xmap <C-k> <Plug>(edgemotion-k)
+'''
+
+[[plugins]]
+repo = 'hrsh7th/vim-searchx'
+on_func = ['searchx#start', 'searchx#prev_dir', 'searchx#next_dir']
+hook_add = '''
+let g:searchx = {}
+let g:searchx.auto_accept = v:true
+let g:searchx.markers = split('ASDFGHJKLQWERTYUIOP', '.\zs')
+let g:searchx.nohlsearch = {
+      \ 'jump': v:true,
+      \ }
+let g:searchx.scrolltime = 500
+let g:searchx.scrolloff = &scrolloff
+
+function! g:searchx.convert(input) abort
+  if a:input !~# '\k'
+    return '\V' .. a:input
+  endif
+  return join(split(a:input, '\s\+'), '.\{-}')
+endfunction
+
+autocmd user User SearchxLeave call searchx#clear()
+autocmd user User SearchxAccept normal! zzzv
+
+nnoremap ? <Cmd>call searchx#start({ 'dir': 0 })<CR>
+nnoremap / <Cmd>call searchx#start({ 'dir': 1 })<CR>
+xnoremap ? <Cmd>call searchx#start({ 'dir': 0 })<CR>
+xnoremap / <Cmd>call searchx#start({ 'dir': 1 })<CR>
+
+nnoremap N <Cmd>call searchx#prev_dir()<CR>zzzv
+nnoremap n <Cmd>call searchx#next_dir()<CR>zzzv
+xnoremap N <Cmd>call searchx#prev_dir()<CR>zzzv
+xnoremap n <Cmd>call searchx#next_dir()<CR>zzzv
 '''
 
 [[plugins]]
