@@ -1,0 +1,35 @@
+{
+  "function": {
+    "body": [
+      "function! ${1:name}($2) abort",
+      "\t$0",
+      "endfunction"
+    ],
+    "description": "vim function",
+    "prefix": [
+      "function"
+    ]
+  },
+  "augroup": {
+    "body": [
+      "augroup ${1:group}",
+      "\tautocmd!",
+      "\t$0",
+      "augroup END"
+    ],
+    "description": "autocmd group definition",
+    "prefix": [
+      "augroup"
+    ]
+  },
+  "unsilent": {
+    "body": [
+      "unsilent echomsg string($0)"
+    ],
+    "description": "debug stuff",
+    "prefix": [
+      "echomsg",
+      "unsilent"
+    ]
+  }
+}
