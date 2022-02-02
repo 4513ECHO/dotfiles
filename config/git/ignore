@@ -5,6 +5,7 @@ venv/
 
 # vim
 [._]*s[a-v][a-z]
+!*.json
 !*.svg
 [._]*.sw[a-p]
 [._]s[a-rt-v][a-z]

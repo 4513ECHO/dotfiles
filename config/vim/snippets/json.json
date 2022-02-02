@@ -2,7 +2,9 @@
   "snippet": {
     "body": [
       "\"${1:name}\": {",
-      "\t\"body\": [\"$0\"],",
+      "\t\"body\": [",
+      "\t\t\"$0\"",
+      "\t],",
       "\t\"description\": \"${3:description}\",",
       "\t\"prefix\": [",
       "\t\t\"$1\"",

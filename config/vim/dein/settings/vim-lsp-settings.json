@@ -1,65 +1,65 @@
 {
+  "bash-language-server": {
+    "disabled": true
+  },
+  "efm-langserver": {
+    "allowlist": [
+      "markdown",
+      "sh",
+      "json"
+    ],
+    "disabled": false
+  },
+  "pyls-all": {
+    "workspace_config": {
+      "pyls": {
+        "configurationSources": [
+          "flake8"
+        ],
+        "plugins": {
+          "jedi_definition": {
+            "follow_builtin_imports": true,
+            "follow_imports": true
+          },
+          "mccabe": {
+            "enabled": false
+          },
+          "pycodestyle": {
+            "enabled": false
+          },
+          "pyflakes": {
+            "enabled": false
+          },
+          "pyls_black": {
+            "enabled": true
+          },
+          "pyls_isort": {
+            "enabled": true
+          },
+          "pyls_mypy": {
+            "enabled": true
+          }
+        }
+      }
+    }
+  },
   "taplo-lsp": {
     "disabled": true
   },
   "vim-language-server": {
     "disabled": true
   },
-  "pyls-all": {
-    "workspace_config": {
-      "pyls": {
-        "plugins": {
-          "pyls_isort": {
-            "enabled": true
-          },
-          "pyls_mypy": {
-            "enabled": true
-          },
-          "mccabe": {
-            "enabled": false
-          },
-          "pyflakes": {
-            "enabled": false
-          },
-          "jedi_definition": {
-            "follow_imports": true,
-            "follow_builtin_imports": true
-          },
-          "pycodestyle": {
-            "enabled": false
-          },
-          "pyls_black": {
-            "enabled": true
-          }
-        },
-        "configurationSources": [
-          "flake8"
-        ]
-      }
-    }
-  },
   "yaml-language-server": {
     "workspace_config": {
       "yaml": {
+        "completion": true,
+        "hover": true,
         "schemas": {
           "https://mattn.github.io/efm-langserver/schema.json": "/efm-langserver/config.yaml",
           "https://mattn.github.io/vim-lsp-settings/schema.json": "vim-lsp-settings.json"
         },
-        "validate": true,
-        "completion": true,
-        "hover": true
+        "validate": true
       }
     }
-  },
-  "efm-langserver": {
-    "disabled": false,
-    "allowlist": [
-      "markdown",
-      "sh",
-      "json"
-    ]
-  },
-  "bash-language-server": {
-    "disabled": true
   }
 }

@@ -1,0 +1,16 @@
+{
+  "test": {
+    "body": [
+      "tabstop: $0 ${1:default value}",
+      "\t${2:nested ${3:placeholder} $4 text}",
+      "choice placeholder: ${5|hoge,fuga,piyo|}",
+      "built-in variables: $TM_SELECTED_TEXT $HOGE",
+      "vim script expression: ${VIM:1 + 2}",
+      "uuid ${VIM:system('python -c \"import uuid, sys;sys.stdout.write(str(uuid.uuid4()))\"')}"
+    ],
+    "description": "snippet highlight test",
+    "prefix": [
+      "test"
+    ]
+  }
+}
