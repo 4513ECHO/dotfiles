@@ -280,21 +280,39 @@ on_cmd = ['PP', 'PrettyPrint']
 repo = 'thinca/vim-quickrun'
 on_cmd = ['QuickRun']
 hook_add = '''
+nnoremap <silent><expr> <C-c>
+      \ quickrun#session#exists()
+      \ ? '<Cmd>call quickrun#session#sweep()<CR>'
+      \ : '<C-c>'
 let g:quickrun_config = {
       \ '_': {
-      \   'runner': 'job',
-      \   'outputter/buffer/opener': 'botright 10split',
+      \   'hook/time/enable': v:false,
       \   'outputter/buffer/close_on_empty': v:true,
-      \   'hook/time/enable': v:true,
+      \   'outputter/buffer/opener': 'botright 10split',
+      \   'runner': has('nvim') ? 'system' : 'job',
+      \   'runner/terminal/opener': 'botright 10split',
       \ },
       \ 'typescript': {
-      \   'type': 'typescript/deno',
+      \   'type': 'mine/deno',
+      \ },
+      \ 'sh': {
+      \   'runner': 'terminal',
+      \ },
+      \ 'zsh': {
+      \   'runner': 'terminal',
+      \ },
+      \ 'mine/deno': {
+      \   'cmdopt': '--no-check --allow-all --unstable',
+      \   'command': 'deno',
+      \   'exec': 'NO_COLOR=1 %c run %o %s %a',
+      \   'tempfile': '%{tempname()}.ts',
       \ },
       \ }
 '''
 [plugins.ftplugin]
 quickrun = '''
 nnoremap <buffer> q <C-w>q
+nnoremap <buffer> <C-c> <Cmd>call quickrun#session#sweep()<CR>
 '''
 
 [[plugins]]
