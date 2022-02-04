@@ -38,17 +38,38 @@ let g:auto_cursorline_wait_ms = 4000
 '''
 
 [[plugins]]
-repo = 'halkn/lightline-lsp'
-on_source = ['lightline.vim', 'vim-lsp']
-
-[[plugins]]
 repo = 'itchyny/lightline.vim'
 depends = [
   'lightline-gruvbox.vim', 'lightline-hybrid.vim',
-  'lightine-lsp',
 ]
 hook_add = '''
-Runtime dein/settings/lightline.vim
+let g:lightline = {}
+let g:lightline.colorscheme = user#colorscheme#lightline()
+let g:lightline.active = {
+      \ 'right': [
+      \   ['lsp_errors', 'lsp_warnings', 'lineinfo'],
+      \   ['percent'],
+      \   ['colorscheme', 'fileformat', 'fileencoding', 'filetype'],
+      \ ]}
+let g:lightline.inactive = {
+      \ 'left': [
+      \   ['filename', 'modified'],
+      \ ]}
+let g:lightline.component_function = {
+      \ 'colorscheme': 'user#lightline#colorscheme',
+      \ 'fileformat': 'user#lightline#file_format',
+      \ 'fileencoding': 'user#lightline#file_encoding',
+      \ 'mode': 'user#lightline#mode',
+      \ 'readonly': 'user#lightline#readonly',
+      \ }
+let g:lightline.component_expand = {
+      \ 'lsp_errors': 'lightline_lsp#errors',
+      \ 'lsp_warnings': 'lightline_lsp#warnings',
+      \ }
+let g:lightline.component_type = {
+      \ 'lsp_errors': 'error',
+      \ 'lsp_warnings': 'warning',
+      \ }
 '''
 
 [[plugins]]

@@ -54,6 +54,8 @@ repo = 'guns/xterm-color-table.vim'
 on_cmd = ['XtermColorTable']
 
 [[plugins]]
+repo = 'halkn/lightline-lsp'
+on_func = ['lightline_lsp#errors', 'lightline_lsp#ok', 'lightline_lsp#warnings']
 
 [[plugins]]
 repo = 'haya14busa/vim-asterisk'

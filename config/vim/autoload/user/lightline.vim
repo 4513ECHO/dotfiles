@@ -26,7 +26,7 @@ let s:skkeleton_modes = {
 
 function! user#lightline#mode() abort
   if !empty(submode#current())
-    return 'SUB:' .. submode#current()
+    " return 'SUB:' .. submode#current()
   elseif get(b:, 'skkeleton_enabled', v:false)
     let skk_mode = skkeleton#mode()
     if !empty(skk_mode)
@@ -36,17 +36,6 @@ function! user#lightline#mode() abort
     endif
   endif
   return lightline#mode()
-endfunction
-
-function! user#lightline#char_counter() abort
-  if get(b:, 'skkeleton_enabled', v:false) && winwidth(0) > 70
-    let wordcount = wordcount()
-    if has_key(wordcount, 'visual_chars')
-      return wordcount.visual_chars .. 'C'
-    endif
-    return wordcount.chars .. 'C'
-  endif
-  return ''
 endfunction
 
 function! user#lightline#readonly() abort
