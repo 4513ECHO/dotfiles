@@ -84,7 +84,7 @@ call ddc#custom#patch_filetype(
 call ddc#custom#patch_filetype(
       \ ['markdown', 'gitcommit'], {
       \ 'sources': extend(['emoji'], s:sources),
-      \ 'keywordPattern': '[a-zA-z_:]\k*',
+      \ 'keywordPattern': '[a-zA-Z_:]\k*',
       \ })
 call ddc#custom#patch_filetype(
       \ ['ps1', 'dosbatch', 'autohotkey', 'registry'], {

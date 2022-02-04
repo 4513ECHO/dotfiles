@@ -68,9 +68,6 @@ nnoremap <buffer><silent><expr> [Toggle]l
 '''
 
 markdown = '''
-setlocal iskeyword-=`
-setlocal iskeyword-=[
-
 hi link markdownCode Constant
 autocmd user ColorScheme *
       \ hi link markdownCode Constant
