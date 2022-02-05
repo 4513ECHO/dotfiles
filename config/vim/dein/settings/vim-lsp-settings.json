@@ -10,6 +10,24 @@
     ],
     "disabled": false
   },
+  "json-languageserver": {
+    "workspace_config": {
+      "json": {
+        "format": {
+          "enable": true
+        },
+        "schemas": [
+          {
+            "fileMatch": [
+              "deno.json",
+              "deno.jsonc"
+            ],
+            "url": "https://deno.land/x/deno/cli/schemas/config-file.v1.json"
+          }
+        ]
+      }
+    }
+  },
   "pyls-all": {
     "workspace_config": {
       "pyls": {
@@ -55,8 +73,7 @@
         "completion": true,
         "hover": true,
         "schemas": {
-          "https://mattn.github.io/efm-langserver/schema.json": "/efm-langserver/config.yaml",
-          "https://mattn.github.io/vim-lsp-settings/schema.json": "vim-lsp-settings.json"
+          "https://mattn.github.io/efm-langserver/schema.json": "/efm-langserver/config.yaml"
         },
         "validate": true
       }

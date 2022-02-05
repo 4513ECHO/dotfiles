@@ -20,7 +20,7 @@ let g:lsp_settings_filetype_python = 'pyls-all'
 let g:lsp_settings_filetype_typescript = 'deno'
 let g:lsp_settings_filetype_typescriptreact = 'deno'
 let g:lsp_settings_filetype_markdown = 'efm-langserver'
-let g:lsp_settings_filetype_json = 'efm-langserver'
+let g:lsp_settings_filetype_json = ['json-languageserver', 'efm-langserver']
 let g:lsp_settings_filetype_sh = 'efm-langserver'
 let g:lsp_settings_filetype_yaml = 'yaml-language-server'
 
@@ -66,8 +66,10 @@ function! s:install_pyls_ext() abort
   endif
 endfunction
 
+autocmd user BufWritePre *.json LspDocumentFormatSync --server=efm-langserver
+
 autocmd user User lsp_buffer_enabled
       \ call <SID>on_lsp_buffer_enabled()
 autocmd user User lsp_setup
-      \ call <SID>install_pyls_ext() |
-      \ call <SID>install_deno_lsp()
+      \ : call <SID>install_pyls_ext()
+      \ | call <SID>install_deno_lsp()
