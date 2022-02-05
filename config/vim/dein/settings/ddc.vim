@@ -23,7 +23,7 @@ let s:sourceOptions.file = {
       \ 'mark': 'file',
       \ 'minAutoCompleteLength': 30,
       \ 'isVolatile': v:true,
-      \ 'forceCompletionPattern': '(\f*/\f*)+',
+      \ 'forceCompletionPattern': '\S/\S*',
       \ }
 let s:sourceOptions['vim-lsp'] = {
       \ 'mark': 'lsp',
@@ -50,10 +50,17 @@ let s:sourceOptions.emoji = {
 let s:sourceOptions['cmdline-history'] = {
       \ 'mark': 'hist',
       \ 'maxCandidates': 5,
+      \ 'sorters': [],
       \ }
 let s:sourceOptions.vsnip = {
       \ 'mark': 'snip',
       \ 'dup': v:true,
+      \ }
+let s:sourceOptions.zsh = {
+      \ 'mark': 'zsh',
+      \ 'isVolatile': v:true,
+      \ 'forceCompletionPattern': '\S/\S*',
+      \ 'maxCandidates': 8,
       \ }
 let s:sourceOptions.buffer = {'mark': 'buf'}
 let s:sourceOptions.cmdline = {'mark': 'cmd'}
@@ -78,7 +85,7 @@ call ddc#custom#patch_filetype(
       \ 'sources': extend(['necovim'], s:sources),
       \ })
 call ddc#custom#patch_filetype(
-      \ ['python', 'typescript', 'typescriptreact', 'rust'], {
+      \ ['python', 'typescript', 'typescriptreact', 'rust', 'yaml'], {
       \ 'sources': extend(['vim-lsp'], s:sources),
       \ })
 call ddc#custom#patch_filetype(
@@ -89,7 +96,7 @@ call ddc#custom#patch_filetype(
 call ddc#custom#patch_filetype(
       \ ['ps1', 'dosbatch', 'autohotkey', 'registry'], {
       \ 'sourcesOptions': {
-      \   'file': {'forceCompletionPattern': '(\f*\\\f*)+'},
+      \   'file': {'forceCompletionPattern': '\S\\\S*'},
       \ },
       \ 'sourceParams': {
       \   'file': {'mode': 'win32'},
@@ -97,6 +104,10 @@ call ddc#custom#patch_filetype(
 call ddc#custom#patch_filetype(
       \ ['ddu-std-filter'], {
       \ 'sources': [],
+      \ })
+call ddc#custom#patch_filetype(
+      \ ['sh', 'zsh'], {
+      \ 'sources': extend(['zsh'], s:sources),
       \ })
 
 let s:patch_global.sources = s:sources

@@ -132,11 +132,13 @@ LeximaAlterCommand quic\%[krun]                 QuickRun
 LeximaAlterCommand qr\%[un]                     QuickRun
 LeximaAlterCommand fixw\%[hitespace]            FixWhitespace
 LeximaAlterCommand dd\%[u]                      Ddu
-LeximaAlterCommand dei\%[nreadme]               DeinReadme
+LeximaAlterCommand dei\%[n]                     Dein
+LeximaAlterCommand deinr\%[eadme]               DeinReadme
 LeximaAlterCommand readm\%[e]                   DeinReadme
 LeximaAlterCommand colo\%[rscheme]              ColorScheme
 LeximaAlterCommand ra\%[ndomcolorscheme]        RandomColorScheme
 LeximaAlterCommand todo\%[list]                 TodoList
 LeximaAlterCommand mi\%[ninote]                 MiniNote
 LeximaAlterCommand not\%[e]                     MiniNote
+LeximaAlterCommand deinu\%[pdatemine]           DeinUpdateMine
 

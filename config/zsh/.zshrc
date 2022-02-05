@@ -11,6 +11,8 @@ fi
   done
 }
 
+[[ $- == *l* ]] || return
+
 () {
   autoload -Uz compinit
   : ${ZSH_COMPDUMP:=$XDG_CACHE_HOME/zsh/compdump-$(hostname)-$ZSH_VERSION}
@@ -24,7 +26,7 @@ fi
     compinit -C -d "$dump"
     { [[ ! -s $dumpc || $dump -nt $dumpc ]] && rm -rf "$dumpc" && zcompile "$dump" } &!
   fi
-  for f in $(find $ZDOTDIR/ -type f -name '*.zsh') $ZDOTDIR/.zshrc; do
+  for f in $(find $ZDOTDIR/ -type f -name '*.zsh') $ZDOTDIR/.zshrc $HOME/.zshenv; do
     if [[ ! -f "$f.zwc" ]] || [[ "$f" -nt "$f.zwc" ]]; then
       { zcompile "$f" } &!
     fi
@@ -35,6 +37,7 @@ export SSH_FORWARD_KEY="$HOME/.ssh/id_git_ed25519"
 export SSH_SYMLINK_SOCK="$HOME/.ssh/agent"
 [[ -f "$SSH_FORWARD_KEY" ]] && enable-agent-forward
 [[ -z "$MINIMUM_DOTFILES" ]] && agent-symlink
+# TODO: if zprof is exists, don't execute auto_tmux
 [[ $SHLVL -eq 1 ]] && [[ -z "$MINIMUM_DOTFILES" ]] \
   && [[ -z "$LOADED_ZSHRC" ]] && auto_tmux
 if [[ -n "$TMUX" ]]; then
@@ -43,9 +46,10 @@ if [[ -n "$TMUX" ]]; then
 fi
 
 if type dircolors > /dev/null; then
-  eval "$(dircolors $ZDOTDIR/dircolors)"
+  eval "$(dircolors -b $ZDOTDIR/dircolors)"
 fi
 
+export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --marker='*'"
 if type fd > /dev/null; then
   export FZF_DEFAULT_COMMAND="fd --type f --follow --hidden --exclude '.git'"
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -55,5 +59,5 @@ fi
 export LOADED_ZSHRC=true
 
 if type zprof > /dev/null; then
-  zprof | vim -
+  zprof | less
 fi

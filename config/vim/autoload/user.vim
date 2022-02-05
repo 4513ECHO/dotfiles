@@ -17,13 +17,16 @@ function! user#title_string() abort
   else
     let [dir, file] = [(!empty(d) ? d : r), f]
   endif
-  return printf('%s (%s) - %s', file, dir,
-        \ has('nvim') ? 'NVIM' : 'VIM')
+  return printf('%s (%s) - %s', file, dir, toupper(v:progname))
 endfunction
 
 function! user#pager() abort
+  setlocal nolist nonumber synmaxcol&
+  if index(v:argv, '+MANPAGER') != -1
+    return
+  endif
   setlocal noswapfile buftype=nofile bufhidden=hide
-  setlocal modifiable nomodified readonly nonumber synmaxcol&
+  setlocal modifiable nomodified readonly
   if exists(':AnsiEsc') == 2
     autocmd user VimEnter * ++once
           \ : execute 'AnsiEsc'

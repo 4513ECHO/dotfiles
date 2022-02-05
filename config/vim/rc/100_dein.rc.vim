@@ -1,3 +1,4 @@
+" TODO: use '~/.cache/dein' instead because neovim
 let s:dein_dir = g:cache_home .. '/dein'
 let s:dein_repo_dir = s:dein_dir .. '/repos/github.com/Shougo/dein.vim'
 
@@ -41,6 +42,10 @@ endif
 
 if has('vim_starting') && dein#check_install()
   call dein#install()
+  if exists('g:dein#install_github_api_token')
+        \ && !empty(g:dein#install_github_api_token)
+    call dein#check_update(v:true)
+  endif
 endif
 
 if getcwd() =~# expand('~/Develops/')

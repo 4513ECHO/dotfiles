@@ -14,6 +14,8 @@ else
 endif
 tnoremap <Leader><Space> <Leader>
 
+" disable dengerous/annoying mapping
+" NOTE: ZQ is useful when cmdline is broken
 nnoremap ZZ <Nop>
 nnoremap q <Nop>
 nnoremap Q q
@@ -21,6 +23,11 @@ nnoremap S <Nop>
 xnoremap q <Nop>
 xnoremap Q q
 xnoremap S <Nop>
+
+" disable tmux prefix key
+nnoremap <C-q> <Nop>
+xnoremap <C-q> <Nop>
+noremap! <C-q> <Nop>
 
 nnoremap j gj
 nnoremap k gk
@@ -45,6 +52,7 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
+" disable arrow keys
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
 nnoremap <Left> <Nop>
@@ -58,12 +66,16 @@ inoremap <Down> <Nop>
 inoremap <Left> <Nop>
 inoremap <Right> <Nop>
 
+" better aliases of <Home>/<End>
 nnoremap <silent><expr> <S-h>
-      \ getline('.')[:col('.') - 1] =~# '^\s*$' ? '^' : '0'
+      \ getline('.')[:col('.') - 2] =~# '^\s*$' ? '0' : '^'
 nnoremap <S-l> <End>
 xnoremap <silent><expr> <S-h>
-      \ getline('.')[:col('.') - 1] =~# '^\s*$' ? '^' : '0'
+      \ getline('.')[:col('.') - 2] =~# '^\s*$' ? '0' : '^'
 xnoremap <S-l> <End>
+
+inoremap <C-u> <C-g>u<C-u>
+inoremap <C-w> <C-g>u<C-w>
 
 nnoremap [Space] <Nop>
 nmap <Space> [Space]
@@ -73,15 +85,17 @@ nnoremap <Leader><C-r>
 nnoremap [Space]w <Cmd>update<CR>
 nnoremap [Space]W <Cmd>write<CR>
 nnoremap ^ <C-^><Cmd>edit<CR>
-nnoremap <silent><expr> <Tab> shiftwidth() .. 'l'
 nnoremap [Space]f <Cmd>edit %:p:h<CR>
+" nmap o A<CR>
 
 xnoremap v $h
 xnoremap <Space> t<Space>
+xnoremap ) t)
 xnoremap < <gv
 xnoremap > >gv
 onoremap v $
 onoremap <Space> t<Space>
+onoremap ) t)
 
 inoremap <Leader>z <C-o>zz
 inoremap <Leader>p <Cmd>setlocal paste! paste?<CR>
@@ -105,6 +119,7 @@ noremap! <C-y> <C-r>*
 
 noremap! ¥ <Bslash>
 
+" insert current file fullpath
 cnoremap <C-x> <C-r>=expand('%:p')<CR>
 
 cnoreabbrev <expr> w!!

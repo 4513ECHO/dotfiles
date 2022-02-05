@@ -1,5 +1,7 @@
 [[ -n "$MINIMUM_DOTFILES" ]] && return
 
+[[ $- == *l* ]] || return
+
 if [[ ! -f $ZDOTDIR/.zinit/bin/zinit.zsh ]]; then
   print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
   command mkdir -p "$ZDOTDIR/.zinit" && command chmod g-rwX "$ZDOTDIR/.zinit"
@@ -22,9 +24,19 @@ __zinit_install_completion () {
 
 __lazyload_settings () {
   # lazyload pip -- 'source <(pip completion --zsh)'
-  lazyload deno -- 'deno completions zsh > $ZDOTDIR/completions/_deno'
-  lazyload cargo -- 'rustup completions zsh cargo > $ZDOTDIR/completions/_cargo'
-  lazyload rustup -- 'rustup completions zsh rustup > $ZDOTDIR/completions/_rustup'
+  __gen_completion_file deno   deno completions zsh
+  __gen_completion_file cargo  rustup completions zsh cargo
+  __gen_completion_file rustup rustup completions zsh rustup
+  echo __gen_completion_file deno   deno completions zsh
+  echo __gen_completion_file cargo  rustup completions zsh cargo
+  echo __gen_completion_file rustup rustup completions zsh rustup
+}
+
+__gen_completion_file () {
+  local cmd="$1"
+  shift
+  eval "$@" > "$ZDOTDIR/completions/_$cmd"
+  compdef "_$cmd" "$cmd" || echo "compdef $cmd failed"
 }
 
 zinit wait lucid light-mode for \

@@ -7,6 +7,13 @@ let g:readme_viewer#plugin_manager = 'dein.vim'
 '''
 
 [[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+on_event = ['InsertLeave']
+hook_add = '''
+let g:extra_whitespace_ignored_filetypes = ['diff', 'help', 'capture']
+'''
+
+[[plugins]]
 repo = 'christoomey/vim-tmux-navigator'
 if = '!has("gui_running")'
 on_cmd = [
@@ -56,6 +63,10 @@ on_cmd = ['XtermColorTable']
 [[plugins]]
 repo = 'halkn/lightline-lsp'
 on_func = ['lightline_lsp#errors', 'lightline_lsp#ok', 'lightline_lsp#warnings']
+
+[[plugins]]
+repo = 'haya14busa/dein-command.vim'
+on_cmd = ['Dein']
 
 [[plugins]]
 repo = 'haya14busa/vim-asterisk'
@@ -130,7 +141,7 @@ autocmd user User PumCompleteDone
 
 [[plugins]]
 repo = 'junegunn/fzf'
-merged = 0
+merged = false
 on_cmd = ['FZF']
 if = 'executable("fzf")'
 
@@ -165,6 +176,10 @@ xmap A  <Plug>(niceblock-A)
 '''
 
 [[plugins]]
+repo = 'lambdalisue/vim-manpager'
+on_cmd = ['MANPAGER', 'Man']
+
+[[plugins]]
 repo = 'machakann/vim-highlightedundo'
 if = 'executable("diff")'
 on_map = { n = '<Plug>' }
@@ -194,6 +209,11 @@ let g:traces_normal_preview = v:true
 [[plugins]]
 repo = 'mattn/benchvimrc-vim'
 on_cmd = ['BenchVimrc']
+
+[[plugins]]
+repo = 'mattn/vim-sl'
+# on_event = ['CmdUndefined']
+on_func = ['sl#animate']
 
 [[plugins]]
 repo = 'obcat/vim-hitspop'
@@ -240,6 +260,10 @@ let g:jplus#config = {
 [[plugins]]
 repo = 'powerman/vim-plugin-AnsiEsc'
 on_cmd = ['AnsiEsc']
+hook_add = '''
+let g:no_ansiesc_menu = v:true
+let g:no_cecutil_maps = v:true
+'''
 
 [[plugins]]
 repo = 'rbtnn/vim-coloredit'
@@ -362,9 +386,9 @@ depends = ['vim-operator-user']
 hook_add = '''
 let g:caw_operator_keymappings = v:true
 let g:caw_no_default_keymappings = v:true
-nmap <silent> m  <Plug>(caw:hatpos:toggle:operator)
-nmap <silent> mm <Plug>(caw:hatpos:toggle)
-xmap <silent> m  <Plug>(caw:hatpos:toggle:operator)
+nmap <silent> ;; <Plug>(caw:hatpos:toggle)
+nmap <silent> ;  <Plug>(caw:hatpos:toggle:operator)
+xmap <silent> ;  <Plug>(caw:hatpos:toggle:operator)
 '''
 
 [[plugins]]
@@ -382,7 +406,7 @@ let g:openbrowser_browser_commands = [{
 
 [[plugins]]
 repo = 'vim-denops/denops.vim'
-on_func = ['denops#server#start']
+on_event = ['FocusLost', 'CursorHold']
 if = 'executable("deno")'
 
 [[plugins]]

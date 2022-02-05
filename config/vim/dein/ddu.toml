@@ -5,15 +5,35 @@ depends = ['denops.vim']
 hook_source = '''
 let s:patch_global = {}
 let s:sourceOptions = {}
+let s:sourceParams = {}
+let s:kindOptions = {}
 
 let s:patch_global.ui = 'std'
 let s:sourceOptions._ = {
       \ 'ignoreCase': v:true,
       \ 'matchers': ['matcher_fzf'],
       \ }
-      "\ 'matchers': ['matcher_substring'],
-let s:patch_global.sourceOptions = s:sourceOptions
 
+let s:sourceParams.file_external = {
+      \ 'cmd': ['git', 'ls-files', '-co', '--exclude-standard'],
+      \ }
+
+let s:kindOptions.file = {
+      \ 'defaultAction': 'open',
+      \ }
+let s:kindOptions.readme_viewer = {
+      \ 'defaultAction': 'open',
+      \ }
+let s:kindOptions.colorscheme = {
+      \ 'defaultAction': 'set',
+      \ }
+let s:kindOptions.help = {
+      \ 'defaultAction': 'open',
+      \ }
+
+let s:patch_global.sourceOptions = s:sourceOptions
+let s:sourceOptions.sourceParams = s:sourceParams
+let s:patch_global.kindOptions = s:kindOptions
 call ddu#custom#patch_global(s:patch_global)
 '''
 
@@ -72,6 +92,10 @@ repo = '4513echo/ddu-source-colorscheme'
 on_source = 'ddu.vim'
 
 [[plugins]]
+repo = '4513echo/ddu-source-ghq'
+on_source = 'ddu.vim'
+
+[[plugins]]
 repo = 'Shougo/ddu-source-file'
 on_source = 'ddu.vim'
 
@@ -85,6 +109,14 @@ on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'Shougo/ddu-source-line'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'matsui54/ddu-source-file_external'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'matsui54/ddu-source-help'
 on_source = 'ddu.vim'
 
 [[plugins]]

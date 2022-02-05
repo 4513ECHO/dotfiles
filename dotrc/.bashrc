@@ -32,9 +32,6 @@ alias ls="ls -a --color=auto"
 alias dev="cd ~/Develops"
 alias dot="cd ~/dotfiles"
 
-alias vimconf="$EDITOR ~/.vimrc"
-alias bashconf="$EDITOR ~/.bashrc"
-
 alias c="clear"
 alias g="git"
 alias herokulogin="heroku login --interactive"

@@ -1,5 +1,10 @@
+# vim
 config/vim/colors/*
-config/zsh/.zcompdump
+
+# zsh
+config/zsh/.zcompdump*
 config/zsh/.zinit/*
+config/zsh/completions/*
+config/zsh/.zcompcache/*
 
 !**/.gitkeep

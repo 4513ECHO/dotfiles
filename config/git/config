@@ -1,3 +1,7 @@
+[user]
+  name = 4513ECHO
+  email = 4513echo@gmail.com
+
 [include]
   path = ~/.gitconfig.local
 
@@ -17,9 +21,6 @@
   diff = auto
   status = auto
   branch = auto
-
-[help]
-  autocorrect = -1
 
 [init]
   defaultBranch = main
@@ -75,7 +76,11 @@
   history = reflog
   unrebase = !git reset --hard "$(git reflog --color | fzf --ansi --preview 'git show {1}' | awk '{print $2}')"
   untrack = rm --cached
+  unstage = restore --staged
+  uncommit = reset --soft HEAD^
+  hash = rev-parse --short HEAD
 
 [ghq]
+  root = ~/.cache/vim/dein/repos
   root = ~/Develops
 

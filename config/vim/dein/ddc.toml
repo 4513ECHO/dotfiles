@@ -31,8 +31,11 @@ repo = 'Shougo/ddc-cmdline-history'
 on_source = 'ddc.vim'
 
 [[plugins]]
+repo = 'Shougo/ddc-zsh'
+on_source = 'ddc.vim'
+
+[[plugins]]
 repo = 'Shougo/neco-vim'
-on_ft = ['vim', 'toml', 'help']
 on_source = 'ddc.vim'
 
 [[plugins]]
@@ -41,7 +44,6 @@ on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'gamoutatsumi/ddc-emoji'
-on_ft = ['markdown', 'gitcommit']
 on_source = 'ddc.vim'
 
 [[plugins]]
@@ -55,7 +57,6 @@ on_source = 'ddc.vim'
 [[plugins]]
 repo = 'shun/ddc-vim-lsp'
 on_source = ['ddc.vim', 'vim-lsp']
-
 
 [[plugins]]
 repo = 'vim-skk/skkeleton'

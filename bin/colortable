@@ -33,8 +33,19 @@ colortable_rich () {
   done
 }
 
+colortable_system () {
+  local c
+  for c in {0..15}; do
+    printf '\033[48;5;%dm  \033[m' "$c"
+    [[ $(("$c"%8)) -eq 7 ]] && echo
+  done
+  echo
+}
+
 if [[ "$1" = "rich" ]]; then
   colortable_rich
+elif [[ "$1" = "system" ]]; then
+  colortable_system
 else
   colortable
 fi

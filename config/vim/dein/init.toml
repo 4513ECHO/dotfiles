@@ -23,12 +23,6 @@ repo = 'Shougo/dein.vim'
 repo = 'ap/vim-css-color'
 
 [[plugins]]
-repo = 'bronson/vim-trailing-whitespace'
-hook_add = '''
-let g:extra_whitespace_ignored_filetypes = ['diff', 'help', 'capture']
-'''
-
-[[plugins]]
 repo = 'cocopon/lightline-hybrid.vim'
 
 [[plugins]]
@@ -87,6 +81,10 @@ repo = 'kana/vim-submode'
 hook_add = '''
 Runtime dein/settings/submode.vim
 '''
+
+[[plugins]]
+repo = 'lambdalisue/guise.vim'
+depends = ['denops.vim']
 
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
@@ -150,3 +148,4 @@ let g:localrc_filename = '.vimrc.local'
 [[plugins]]
 repo = 'tmux-plugins/vim-tmux-focus-events'
 if = '!has("gui_running") && !has("patch-8.2.2345") && !has("nvim")'
+

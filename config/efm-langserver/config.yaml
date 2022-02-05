@@ -1,5 +1,6 @@
 ---
 version: 2
+lint-debounce: 1s
 tools:
   markdown-textlint: &markdown-textlint
     lint-command: 'npx --no-install textlint -f unix --stdin --stdin-filename ${INPUT}'
@@ -7,11 +8,42 @@ tools:
     lint-stdin: true
     lint-formats:
       - '%f:%l:%c: %m [%trror/%r]'
-    # format-command: 'npx --no-install textlint --fix --stdin --stdin-filename ${INPUT}'
-    # format-stdin: true
     root-markers:
       - .textlintrc
+      - .textlintrc.json
+      - .textlintrc.yaml
+      - .textlintrc.yml
+
+  markdown-markdownlint: &markdown-markdownlint
+    lint-command: 'npx --no-install markdownlint -s'
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l %m'
+      - '%f:%l:%c %m'
+      - '%f: %l: %m'
+
+  sh-shellcheck: &sh-shellcheck
+    lint-command: 'shellcheck -f gcc -x'
+    lint-formats:
+      - '%f:%l:%c: %trror: %m'
+      - '%f:%l:%c: %tarning: %m'
+      - '%f:%l:%c: %tote: %m'
+
+  sh-shfmt: &sh-shfmt
+    format-command: 'shfmt -ci -s -bn'
+    format-stdin: true
+
+  json-jq: &json-jq
+    lint-command: 'jq .'
 
 languages:
   markdown:
     - <<: *markdown-textlint
+    - <<: *markdown-markdownlint
+
+  sh:
+    - <<: *sh-shellcheck
+    - <<: *sh-shfmt
+
+  json:
+    - <<: *json-jq

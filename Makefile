@@ -6,6 +6,14 @@ BINFILE := $(wildcard $(realpath $(DOTPATH)/bin)/*)
 .DEFAULT_GOAL := help
 .PHONY := help init deploy update install clean destroy
 
+# TODO: copy config/zsh/.zshenv to HOME
+
+define TEMPLATE
+	@$(foreach val, $(DOTRC), $(shell $(1) $(abspath $(val)) $(HOME)/$(notdir $(val));))
+	@$(foreach val, $(CONFIGHOME), $(shell $(1) $(abspath $(val)) $(HOME)/.config/$(notdir $(val));))
+	@$(foreach val, $(BINFILE), $(shell $(1) $(abspath $(val)) $(HOME)/.local/bin/$(notdir $(val));))
+endef
+
 all:
 
 help:
@@ -14,7 +22,7 @@ help:
 	@echo "init: "
 
 init:
-	@/bin/sh -c  $(DOTPATH)/etc/init.sh
+	/bin/sh -c  $(DOTPATH)/etc/init.sh
 
 deploy:
 	@$(foreach val, $(DOTRC), ln -sfnv $(abspath $(val)) $(HOME)/$(notdir $(val));)
@@ -32,6 +40,6 @@ clean:
 	@$(foreach val, $(BINFILE), test -f $(HOME)/.local/bin/$(notdir $(val)) && rm -v $(HOME)/.local/bin/$(notdir $(val)) ||:;)
 
 destroy: clean
-	@rm -r $(DOTPATH)
-	@rm -r $(HOME)/.cache/*
-	@rm -r $(HOME)/.local/share/*
+	rm -r $(DOTPATH)
+	rm -r $(HOME)/.cache/*
+	rm -r $(HOME)/.local/share/*

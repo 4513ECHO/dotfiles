@@ -47,7 +47,7 @@ set smartcase
 set hlsearch
 set report=0
 if executable('rg')
-  let &grepprg = 'rg --vimgrep --hidden --sort path'
+  let &grepprg = 'rg --vimgrep --hidden --sort=path'
   set grepformat=%f:%l:%c:%m
 endif
 
@@ -69,11 +69,9 @@ set t_vb=
 set novisualbell
 set belloff=all
 
-set listchars=tab:»-,trail:-,extends:»,precedes:«,eol:¬
-let &showbreak = '> '
-if exists('+fillchars')
-  set fillchars& fillchars+=diff:/,eob:.
-endif
+set listchars=tab:»-,trail:-,extends:»,precedes:«,eol:¬,nbsp:%
+let &showbreak = '» '
+set fillchars& fillchars+=diff:/,eob:.
 
 set pumheight=10
 set helpheight=12
@@ -86,22 +84,23 @@ set whichwrap=b,s,h,l,<,>,[,],~
 set hidden
 set confirm
 set timeoutlen=500
-
 set matchpairs& matchpairs+=<:>
+set nrformats-=octal
 
-set clipboard=unnamed
+" set clipboard=unnamed
 set mouse=a
 
 set completeopt=menuone,noinsert,noselect
 if !has('nvim')
   set completeopt+=popup
 endif
-set isfname-==
+set isfname& isfname-== isfname+=@-@
 
 " ------------------
 " commandline
 set wildmenu
 set wildmode=longest,full
+set wildignorecase
 set history=200
 set cedit=
 
@@ -110,7 +109,7 @@ set cedit=
 set backup
 set writebackup
 set swapfile
-set updatetime=200
+set updatetime=100
 let &backupdir = g:data_home .. '/backup'
 let &directory = g:data_home .. '/swap'
 call mkdir(&backupdir, 'p')

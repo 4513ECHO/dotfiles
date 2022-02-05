@@ -276,6 +276,7 @@ let g:edge_better_performance = v:true
 call user#colorscheme#add('edge')
 '''
 
+# TODO: it doesn't support terminal ansi colors
 [[plugins]]
 repo = 'savq/melange'
 hook_add = '''
@@ -285,6 +286,13 @@ call user#colorscheme#custom('melange', {
       \ 'highlight': {
       \   'CursorLineNr': #{ cterm: 'NONE' },
       \ }})
+'''
+
+# TODO: it doesn't support terminal ansi colors
+[[plugins]]
+repo = 'severij/vadelma'
+hook_add = '''
+call user#colorscheme#add('vadelma')
 '''
 
 [[plugins]]
@@ -320,6 +328,16 @@ call user#colorscheme#custom('molokai', {
       \   '#1b1d1e', '#f92672', '#82b414', '#fd971f', '#268bd2', '#8c54fe', '#56c2d6', '#ccccc6',
       \   '#505354', '#ff5995', '#b7eb46', '#feed6c', '#62ade3', '#bfa0fe', '#94d8e5', '#f8f8f2',
       \ ]})
+'''
+
+# TODO: it doesn't support terminal ansi colors
+[[plugins]]
+repo = 'tyrannicaltoucan/vim-deep-space'
+hook_add = '''
+call user#colorscheme#add('vim-deep-space')
+call user#colorscheme#custom('deep-space', {
+      \ 'lightline': 'deepspace',
+      \ })
 '''
 
 [[plugins]]

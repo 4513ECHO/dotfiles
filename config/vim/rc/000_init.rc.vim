@@ -37,6 +37,14 @@ let g:loaded_zipPlugin         = v:true
 let g:current_colorscheme = get(g:, 'current_colorscheme', 'random')
 let g:colorscheme_customize = get(g:, 'colorscheme_customize', {'_': {}})
 
+if has('nvim')
+  let g:python3_host_prog = stdpath('data') .. '/venv/bin/python'
+  if filereadable(g:python3_host_prog)
+    call system('python3 -m venv ' .. stdpath('data') .. '/venv')
+    call system(stdpath('data') .. '/venv/bin/pip install pynvim neovim')
+  endif
+endif
+
 command! -nargs=1 Runtime runtime! g:config_home <args>
 
 " from https://github.com/thinca/config/blob/d92e41cebd/dotfiles/dot.vim/vimrc#L1382
@@ -44,7 +52,9 @@ command! -bar RTP echo substitute(&runtimepath, ',', "\n", 'g')
 
 command! -bar RandomColorScheme call user#colorscheme#random()
 
-command! -nargs=1 -bar -complete=customlist,user#colorscheme#completion
+" TODO: -nargs=? (like original :colorscheme)
+" TODO: if bang is exists, reload current colorscheme
+command! -nargs=? -bar -bang -complete=customlist,user#colorscheme#completion
       \ ColorScheme call user#colorscheme#colorscheme(<q-args>)
 
 " from https://qiita.com/gorilla0513/items/11be5413405792337558
@@ -69,8 +79,12 @@ command! -bar HtmlFormat
 command! -bar -bang TodoList vimgrep 'TODO\ze:' `git ls-files`
 
 command! -nargs=? -bar -complete=filetype MiniNote
-      \ : botright new
+      \ : execute (empty(<q-mods>) ? 'botright' : <q-mods>) 'new'
       \ | setlocal bufhidden=wipe filetype=<args>
+
+command! -bar DeinUpdateMine
+      \ call dein#update(keys(filter(copy(dein#get()),
+      \ { key, val -> val.repo =~? '^4513ECHO/' })))
 
 if filereadable(expand('~/.vimrc_secret'))
   source ~/.vimrc_secret
@@ -115,6 +129,7 @@ autocmd user BufWritePre *
 
 if has('nvim')
   autocmd user TermOpen * startinsert
+  autocmd user TermOpen * setlocal nonumber
 endif
 
 " auto disable paste mode

@@ -17,7 +17,7 @@ export DENO_INSTALL="$XDG_CACHE_HOME/deno"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 
 typeset -Ux path fpath manpath cdpath
-_path=(
+path=(
   $CARGO_HOME/bin(N-/)
   $GOPATH/bin(N-/)
   $DENO_INSTALL/bin(N-/)
@@ -27,12 +27,12 @@ _path=(
   $HOME/bin(N-/)
   $path
 )
-path=(${(R)_path%/[@]})
-_fpath=(
+path=(${(R)path%/})
+fpath=(
   $ZDOTDIR/completions(N-/)
   $fpath
 )
-fpath=(${(R)_fpath%/[@]})
+fpath=(${(R)fpath%/})
 
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --marker='*'"
@@ -49,7 +49,9 @@ export LC_TIME="en_US.UTF-8"
 export TZ="Asia/Tokyo"
 
 export HISTFILE="$XDG_CACHE_HOME/zsh/history"
-export HISTSIZE=1000000
-export SAVEHIST=1000000
+export HISTSIZE=10000
+export SAVEHIST=10000
 
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+
+# echo "sourced ${0:A}"

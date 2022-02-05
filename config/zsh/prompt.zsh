@@ -12,7 +12,7 @@ function venv-prompt () {
 
 # use term ansi prompt_colors when using vim
 typeset -gA prompt_colors
-if [[ -n "$VIM_TERMINAL" ]]; then
+if [[ -n "$VIM" ]]; then
   prompt_colors[red]=001
   prompt_colors[green]=002
   prompt_colors[yellow]=003
@@ -55,10 +55,10 @@ function +vi-git-untracked () {
 function +vi-git-unpushed () {
   local branch remote upstream pushed
   branch="$(command git symbolic-ref --short HEAD 2> /dev/null)"
-  remote="$(command git config branch.${branch}.remote 2> /dev/null)"
+  remote="$(command git config branch.$branch.remote 2> /dev/null)"
   if [[ -n "$remote" ]]; then
     upstream="$remote/$branch"
-    if [[ -n `git log ${upstream}..${branchname}`  ]]; then
+    if [[ -n "$(command git log $upstream..)" ]]; then
       hook_com[misc]+="%F{${prompt_colors[red]}}[up]"
     else
       hook_com[misc]+="%F{${prompt_colors[green]}}[up]"
@@ -69,7 +69,7 @@ function +vi-git-unpushed () {
 # add hook redrawing prompt
 function redraw-prompt () {
   PROMPT="$(venv-prompt)%F{${prompt_colors[green]}}%n%B@%b%U%m%u%f%B:%b%F{${prompt_colors[cyan]}}%~%f
-%B>%b "
+%B%#❯%b "
   RPROMPT="${vcs_info_msg_0_}"
 }
 

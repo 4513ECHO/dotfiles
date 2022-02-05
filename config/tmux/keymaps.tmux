@@ -24,6 +24,7 @@ bind r source-file ~/.config/tmux/tmux.conf \
     \; display-message "Reloaded tmux.conf"
 bind w choose-tree -Z
 bind '=' select-layout tiled
+bind i run-shell -b '~/dotfiles/bin/tmux-input'
 
 # copy mode
 bind C-v copy-mode
