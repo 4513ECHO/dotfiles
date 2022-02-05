@@ -1,15 +1,4 @@
 {
-  "function": {
-    "body": [
-      "function! ${1:name}($2) abort",
-      "\t$0",
-      "endfunction"
-    ],
-    "description": "vim function",
-    "prefix": [
-      "function"
-    ]
-  },
   "augroup": {
     "body": [
       "augroup ${1:group}",
@@ -20,6 +9,28 @@
     "description": "autocmd group definition",
     "prefix": [
       "augroup"
+    ]
+  },
+  "echohl": {
+    "body": [
+      "echohl ${1:ErrorMsg}",
+      "${2:echomsg} $0",
+      "echohl NONE"
+    ],
+    "description": "echohl command",
+    "prefix": [
+      "echohl"
+    ]
+  },
+  "function": {
+    "body": [
+      "function! ${1:name}($2) abort",
+      "\t$0",
+      "endfunction"
+    ],
+    "description": "vim function",
+    "prefix": [
+      "function"
     ]
   },
   "unsilent": {

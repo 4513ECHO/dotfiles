@@ -1,0 +1,35 @@
+{
+  "ftplugin": {
+    "body": [
+      "[plugins.ftplugin]",
+      "${1:filetype} = '''",
+      "$0",
+      "'''"
+    ],
+    "description": "dein ftplugin definition",
+    "prefix": [
+      "ftplugin"
+    ]
+  },
+  "hook": {
+    "body": [
+      "hook_${1:add} = '''",
+      "$0",
+      "'''"
+    ],
+    "description": "dein hook definition",
+    "prefix": [
+      "hook"
+    ]
+  },
+  "plugins": {
+    "body": [
+      "[[plugins]]",
+      "repo = '$1'"
+    ],
+    "description": "dein plugin definition",
+    "prefix": [
+      "plugins"
+    ]
+  }
+}
