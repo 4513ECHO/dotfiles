@@ -59,12 +59,27 @@ setlocal iskeyword+=#
 setlocal iskeyword+=:
 setlocal iskeyword+=-
 setlocal iskeyword+=+
+
 nnoremap <buffer> q <C-w>q
 nnoremap <buffer> <CR> <C-]>zv
+xnoremap <buffer> <CR> <C-]>zv
 nnoremap <buffer><silent><expr> [Toggle]l
       \ expand('%:e') ==# 'jax'
       \ ? printf('<Cmd>help %s@en<CR>', expand('<cword>'))
       \ : printf('<Cmd>help %s@ja<CR>', expand('<cword>'))
+
+let s:tag_pattern = join([
+      \ '\\\@<!|[#-)!+-~]\+|', '\*[#-)!+-~]\+\*\s', '\*[#-)!+-~]\+\*$',
+      \ "'[a-z]\\{2,\\}'", "'t_..'",
+      \ '<[-a-zA-Z0-9_]\+>', '<[SCM]-.>',
+      \ 'CTRL-.', 'CTRL-SHIFT-.', 'CTRL-Break', 'CTRL-PageUp', 'CTRL-PageDown',
+      \ 'CTRL-Insert', 'CTRL-Del', 'CTRL-{char}',
+      \ ], '\|')
+function! s:move_link(dir) abort
+  call search(s:tag_pattern, a:dir ? 'sW' : 'bsW', 0, 500)
+endfunction
+nnoremap <buffer> <C-n> <Cmd>call <SID>move_link(1)<CR>
+nnoremap <buffer> <C-p> <Cmd>call <SID>move_link(0)<CR>
 '''
 
 markdown = '''
