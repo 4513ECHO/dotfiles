@@ -37,8 +37,11 @@ function! s:colorscheme_list() abort
 endfunction
 
 function! user#colorscheme#random() abort
-  if exists('?rand')
+  if exists('*rand')
     let randint = rand()
+  elseif has('nvim')
+    lua math.randomseed(os.time())
+    let randint = luaeval('math.random(1000)')
   else
     let randint = str2nr(matchstr(reltimestr(reltime()),
           \ '\.\@<=\d\+')[1:])
