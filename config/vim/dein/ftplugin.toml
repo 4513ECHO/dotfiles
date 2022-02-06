@@ -103,7 +103,7 @@ inoreabbrev <expr><buffer> improt
 qf = '''
 setlocal nowrap
 setlocal numberwidth=2
-nnoremap <buffer> q <C-w>q
+nnoremap <buffer> q <Cmd>cclose<CR>
 '''
 
 toml = '''
@@ -130,12 +130,20 @@ on_ft = ['vim', 'css', 'scss', 'sass']
 [[plugins]]
 repo = 'jceb/vim-hier'
 on_ft = ['qf']
+on_cmd = ['HierClean', 'HierStart', 'HierStop', 'HierUpdate']
+[plugins.ftplugin]
+qf = '''
+nnoremap <buffer> q <Cmd>cclose<CR><Cmd>HierStop<CR>
+'''
 
 [[plugins]]
 repo = 'lambdalisue/qfloc.vim'
 on_ft = ['qf']
 hook_add = '''
 let g:qfloc_disable_default_mappings = v:true
+" NOTE: I can't toggle qfloc sign/hover.
+let g:qfloc_disable_sign = v:true
+let g:qfloc_disable_hover = v:true
 nmap <expr> ]c &diff ? ']c' : '<Plug>(qfloc-cnext)'
 nmap <expr> [c &diff ? '[c' : '<Plug>(qfloc-cprevious)'
 nmap ]l <Plug>(qfloc-lnext)
