@@ -39,9 +39,12 @@ let g:colorscheme_customize = get(g:, 'colorscheme_customize', {'_': {}})
 
 if has('nvim')
   let g:python3_host_prog = stdpath('data') .. '/venv/bin/python'
-  if filereadable(g:python3_host_prog)
-    call system('python3 -m venv ' .. stdpath('data') .. '/venv')
-    call system(stdpath('data') .. '/venv/bin/pip install pynvim neovim')
+  if !filereadable(stdpath('data') .. '/venv/installed')
+    call timer_start(10, { ->
+          \ system('python3 -m venv ' .. stdpath('data') .. '/venv') })
+    call timer_start(10, { ->
+          \ system(stdpath('data') .. '/venv/bin/pip install pynvim neovim') })
+    call writefile([''], stdpath('data') .. '/venv/installed')
   endif
 endif
 
