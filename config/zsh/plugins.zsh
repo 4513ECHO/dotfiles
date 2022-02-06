@@ -27,16 +27,13 @@ __lazyload_settings () {
   __gen_completion_file deno   deno completions zsh
   __gen_completion_file cargo  rustup completions zsh cargo
   __gen_completion_file rustup rustup completions zsh rustup
-  echo __gen_completion_file deno   deno completions zsh
-  echo __gen_completion_file cargo  rustup completions zsh cargo
-  echo __gen_completion_file rustup rustup completions zsh rustup
 }
 
 __gen_completion_file () {
   local cmd="$1"
   shift
   eval "$@" > "$ZDOTDIR/completions/_$cmd"
-  compdef "_$cmd" "$cmd" || echo "compdef $cmd failed"
+  compdef "_$cmd" "$cmd"
 }
 
 zinit wait lucid light-mode for \

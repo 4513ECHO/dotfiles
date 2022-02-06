@@ -107,16 +107,13 @@ zle -N cd-fzf-git
 bindkey "^Gd" cd-fzf-git
 
 cd-fzf-ghq () {
-  local root result preview_cmd
-  # root="$(ghq root)"
-  # preview_cmd="(test -f $(ghq list --full-path {} | head -1)/README.md \
-  #   && bat --force-colorization --style=header,grid \$_ \
-  #   || echo 'This repostory does not have README.md' ) | head -200"
-  # result="$(ghq list | fzf --preview "$preview_cmd")"
-  # TODO: use --full-path with fzf
-  result="$(ghq list | uniq | fzf)"
+  local result preview_cmd
+  preview_cmd="(test -f {}/README.md \
+    && bat --force-colorization --style=header,grid \$_ \
+    || echo 'This repostory does not have README.md' ) | head -200"
+  result="$(ghq list --full-path | fzf --preview "$preview_cmd")"
   zle reset-prompt
-  [[ -n "$result" ]] && cd "$(ghq list --full-path "$result" | sort -r | head -1)"
+  [[ -n "$result" ]] && cd "$result"
   zle accept-line
 }
 zle -N cd-fzf-ghq
@@ -169,11 +166,6 @@ diff-highlight () {
       ~/.local/bin/
   fi
   command diff-highlight
-}
-
-github-raw-url () {
-  echo "$1" | \
-    sed -e 's|https://github.com|https://raw.githubusercontent.com|;s|/blob/|/|'
 }
 
 :q () {:}

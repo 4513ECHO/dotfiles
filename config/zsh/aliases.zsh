@@ -13,7 +13,7 @@ if type exa > /dev/null; then
   alias tree="exa --tree --group-directories-first --git-ignore --ignore-glob .git"
 else
   alias ls="ls -a --color=auto"
-  alias tree="tree -I '\.git|venv|node_modules'"
+  alias tree="tree -I '\.git|venv|node_modules|__pycache__'"
 fi
 
 alias c="clear"
@@ -24,11 +24,5 @@ alias herokulogin="heroku login --interactive"
 alias reload="source $ZDOTDIR/.zshrc"
 alias rm="rm -i"
 alias mkdir="mkdir -p"
-# alias pytree="tree -aI 'venv|__pycache__|\.git'"
-# alias python="${commands[python]:-"python3"}"
 alias q=" exit"
-
-# fzf shortcut
-alias -g Ga='$(git status -s | fzf --multi --preview '"'"'git diff --color=always {2}'"'"' | awk '"'"'{print $2}'"'"')'
-alias -g D='~/Develops/$(ls -A  ~/Develops | fzf)'
 
