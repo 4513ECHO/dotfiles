@@ -126,7 +126,7 @@ function! user#colorscheme#colorscheme(colorscheme) abort
 endfunction
 
 function! user#colorscheme#completion(ArgLead, CmdLine, CursorPos) abort
-  if exists('?matchfuzzy')
+  if exists('*matchfuzzy')
     if empty(a:ArgLead)
       return sort(copy(s:colorscheme_list()))
     else
