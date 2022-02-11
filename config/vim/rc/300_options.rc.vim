@@ -59,7 +59,10 @@ set list
 set nowrap
 set linebreak
 set display=lastline,uhex
-set shortmess+=acs
+if has('nvim')
+  set display+=msgsep
+endif
+set shortmess+=ascF
 set lazyredraw
 set nofoldenable
 set synmaxcol=200
@@ -72,10 +75,17 @@ set belloff=all
 set listchars=tab:»-,trail:-,extends:»,precedes:«,eol:¬,nbsp:%
 let &showbreak = '» '
 set fillchars& fillchars+=diff:/,eob:.
+if has('nvim')
+  set fillchars+=msgsep:\|
+endif
 
 set pumheight=10
 set helpheight=12
 set cmdheight=2
+if has('nvim')
+  set pumblend=10
+  set winblend=10
+endif
 
 " ------------------
 " editing
@@ -86,6 +96,7 @@ set confirm
 set timeoutlen=500
 set matchpairs& matchpairs+=<:>
 set nrformats-=octal
+set nojoinspaces
 
 " set clipboard=unnamed
 set mouse=a
@@ -100,6 +111,10 @@ set isfname& isfname-== isfname+=@-@
 " commandline
 set wildmenu
 set wildmode=longest,full
+set wildoptions=tagfile
+if has('nvim') || has('patch-8.2.4325')
+  set wildoptions=pum
+endif
 set wildignorecase
 set history=200
 set cedit=
@@ -115,14 +130,10 @@ let &directory = g:data_home .. '/swap'
 call mkdir(&backupdir, 'p')
 call mkdir(&directory, 'p')
 set undofile
-if has('nvim')
-  let &undodir = g:data_home .. '/nvimundo'
-  call mkdir(&undodir, 'p')
-else
+if !has('nvim')
   let &undodir = g:data_home .. '/undo'
   call mkdir(&undodir, 'p')
 endif
-" TODO: use shada instead in neovim
 if !has('nvim')
   let &viminfofile = g:data_home .. '/viminfo'
 endif
@@ -143,4 +154,6 @@ set ttyfast
 set autoread
 set tildeop
 set diffopt=internal,filler,vertical,algorithm:histogram,indent-heuristic
+set nofsync
+set nolangremap
 
