@@ -55,10 +55,8 @@ command! -bar RTP echo substitute(&runtimepath, ',', "\n", 'g')
 
 command! -bar RandomColorScheme call user#colorscheme#random()
 
-" TODO: -nargs=? (like original :colorscheme)
-" TODO: if bang is exists, reload current colorscheme
 command! -nargs=? -bar -bang -complete=customlist,user#colorscheme#completion
-      \ ColorScheme call user#colorscheme#colorscheme(<q-args>)
+      \ ColorScheme call user#colorscheme#command(<q-args>, <bang>0)
 
 " from https://qiita.com/gorilla0513/items/11be5413405792337558
 command! -nargs=1 WWW call user#google(<q-args>)

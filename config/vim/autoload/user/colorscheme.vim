@@ -46,8 +46,9 @@ function! user#colorscheme#random() abort
     let randint = str2nr(matchstr(reltimestr(reltime()),
           \ '\.\@<=\d\+')[1:])
   endif
-  call user#colorscheme#colorscheme(
-        \ get(s:colorscheme_list(), randint % len(s:colorscheme_list())))
+  call user#colorscheme#command(
+        \ get(s:colorscheme_list(), randint % len(s:colorscheme_list())),
+        \ v:false)
 endfunction
 
 function! user#colorscheme#set_customize(colorscheme) abort
@@ -99,25 +100,33 @@ function! user#colorscheme#set_customize(colorscheme) abort
   endif
 endfunction
 
-function! user#colorscheme#colorscheme(colorscheme) abort
-  if empty(s:colorscheme_list()) || get(g:, 'colors_name', '') ==# a:colorscheme
+function! user#colorscheme#command(colorscheme, ...) abort
+  let reload = a:0 > 0 ? a:1 : v:false
+  if empty(s:colorscheme_list())
     return
   endif
-  let g:current_colorscheme = a:colorscheme
-  if a:colorscheme ==# 'random'
+  if reload
+    let colorscheme = g:current_colorscheme
+  else
+    let colorscheme = a:colorscheme
+  endif
+  if empty(colorscheme) && !reload
+    echo g:current_colorscheme
+    return
+  endif
+  if colorscheme ==# 'random'
     call user#colorscheme#random()
     return
   endif
-  autocmd! random_colorscheme ColorScheme
-  execute 'autocmd random_colorscheme ColorScheme' a:colorscheme
-        \ printf('call user#colorscheme#set_customize("%s")', a:colorscheme)
   for i in range(16)
     silent! unlet g:terminal_color_{i}
   endfor
   silent! unlet g:terminal_color_foreground
   silent! unlet g:terminal_color_background
   silent! unlet g:terminal_ansi_colors
-  execute 'colorscheme' a:colorscheme
+  execute 'colorscheme' colorscheme
+  call user#colorscheme#set_customize(colorscheme)
+  let g:current_colorscheme = colorscheme
   " NOTE: `:help lightline-problem-13`
   let g:lightline.colorscheme = user#colorscheme#lightline()
   call lightline#init()
