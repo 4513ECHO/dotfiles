@@ -16,6 +16,17 @@ function! user#lightline#file_encoding() abort
   return ''
 endfunction
 
+function! user#lightline#filename() abort
+  if winwidth(0) > 50
+    let filename = fnamemodify(bufname(), ':t')
+    if empty(filename)
+      return '[No name]'
+    endif
+    return filename
+  endif
+  return ''
+endfunction
+
 " from https://github.com/thinca/config/blob/4b02d5abcb/dotfiles/dot.vim/vimrc#L2263
 let s:skkeleton_modes = {
       \ 'hira': 'あ',

@@ -153,7 +153,7 @@ on_cmd = [
   'FzfLines', 'FzfBLines', 'FzfTags', 'FzfBTags', 'FzfMarks', 'FzfWindows',
   'FzfLocate', 'FzfHistory', 'FzfSnippets', 'FzfCommits', 'FzfBCommits',
   'FzfCommands', 'FzfMaps', 'FzfHelptags', 'FzfFiletypes',
-  'FzfColorScheme',
+  'FzfColorScheme', 'FzfGhq'
 ]
 if = 'executable("fzf")'
 hook_add = '''
@@ -163,6 +163,14 @@ hook_source = '''
 command! -bar FzfColorScheme call fzf#run(fzf#wrap({
       \ 'source': filter(keys(g:colorscheme_customize), { _, val -> val !=# '_' }),
       \ 'sink': { arg -> user#colorscheme#colorscheme(arg) },
+      \ }))
+command! -bar FzfReadme call fzf#run(fzf#wrap({
+      \ 'source': keys(readme_viewer#get()),
+      \ 'sink': { arg -> readme_viewer#open(arg, '') },
+      \ }))
+command! -bar FzfGhq call fzf#run(fzf#wrap({
+      \ 'source': 'ghq list --full-path',
+      \ 'sink': 'edit',
       \ }))
 '''
 
@@ -180,6 +188,11 @@ repo = 'lambdalisue/vim-manpager'
 on_cmd = ['MANPAGER', 'Man']
 
 [[plugins]]
+repo = 'lambdalisue/vim-quickrun-neovim-job'
+if = 'has("nvim")'
+on_source = ['vim-quickrun']
+
+[[plugins]]
 repo = 'machakann/vim-highlightedundo'
 if = 'executable("diff")'
 on_map = { n = '<Plug>' }
@@ -193,6 +206,7 @@ nmap g+    <Plug>(highlightedundo-gplus)
 
 [[plugins]]
 repo = 'machakann/vim-highlightedyank'
+if = '!has("nvim")'
 on_map = { nxo = '<Plug>' }
 on_event = ['TextYankPost']
 hook_add = '''
@@ -313,7 +327,7 @@ let g:quickrun_config = {
       \   'hook/time/enable': v:false,
       \   'outputter/buffer/close_on_empty': v:true,
       \   'outputter/buffer/opener': 'botright 10split',
-      \   'runner': has('nvim') ? 'system' : 'job',
+      \   'runner': has('nvim') ? 'neovim_job' : 'job',
       \   'runner/terminal/opener': 'botright 10split',
       \ },
       \ 'typescript': {
@@ -325,10 +339,21 @@ let g:quickrun_config = {
       \ 'zsh': {
       \   'runner': 'terminal',
       \ },
+      \ 'json': {
+      \   'command': 'gojq',
+      \   'exec': 'cat %s | %c %o %a',
+      \ },
       \ 'mine/deno': {
       \   'cmdopt': '--no-check --allow-all --unstable',
       \   'command': 'deno',
       \   'exec': 'NO_COLOR=1 %c run %o %s %a',
+      \   'tempfile': '%{tempname()}.ts',
+      \ },
+      \ 'mine/deno_terminal': {
+      \   'cmdopt': '--no-check --allow-all --unstable',
+      \   'command': 'deno',
+      \   'exec': '%c run %o %s %a',
+      \   'runner': 'terminal',
       \   'tempfile': '%{tempname()}.ts',
       \ },
       \ }
@@ -370,7 +395,7 @@ command! -bang -bar -nargs=1 -complete=expression
       \ CaptureJson
       \ : execute 'Capture<bang> echo json_encode(' <q-args> ')'
       \ | if &filetype ==# 'capture'
-      \ |   execute '%!jq'
+      \ |   execute '%!gojq'
       \ |   setfiletype json
       \ | endif
 '''

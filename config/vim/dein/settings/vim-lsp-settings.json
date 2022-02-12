@@ -1,4 +1,63 @@
 {
+  "*": {
+    "config": {
+      "symbol_kinds": {
+        "1": "File",
+        "2": "Module",
+        "3": "NameSpace",
+        "4": "Package",
+        "5": "Class",
+        "6": "Method",
+        "7": "Property",
+        "8": "Field",
+        "9": "Constructor",
+        "10": "Enum",
+        "11": "Interface",
+        "12": "Function",
+        "13": "Variable",
+        "14": "Constant",
+        "15": "String",
+        "16": "Number",
+        "17": "Boolean",
+        "18": "Array",
+        "19": "Object",
+        "20": "Key",
+        "21": "Null",
+        "22": "Member",
+        "23": "Structure",
+        "24": "Event",
+        "25": "Operator",
+        "26": "Parameter"
+      },
+      "completion_item_kinds": {
+        "1": "Text",
+        "2": "Method",
+        "3": "Func",
+        "4": "Construct",
+        "5": "Field",
+        "6": "Var",
+        "7": "Class",
+        "8": "Interf",
+        "9": "Module",
+        "10": "Prop",
+        "11": "Unit",
+        "12": "Value",
+        "13": "Enum",
+        "14": "Keyword",
+        "15": "Snip",
+        "16": "Color",
+        "17": "File",
+        "18": "Refer",
+        "19": "Folder",
+        "20": "Member",
+        "21": "Const",
+        "22": "Struct",
+        "23": "Event",
+        "24": "Operat",
+        "25": "Param"
+      }
+    }
+  },
   "bash-language-server": {
     "disabled": true
   },

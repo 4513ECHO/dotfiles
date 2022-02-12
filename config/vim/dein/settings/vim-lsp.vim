@@ -23,6 +23,8 @@ let g:lsp_settings_filetype_markdown = 'efm-langserver'
 let g:lsp_settings_filetype_json = ['json-languageserver', 'efm-langserver']
 let g:lsp_settings_filetype_sh = 'efm-langserver'
 let g:lsp_settings_filetype_yaml = 'yaml-language-server'
+" NOTE: no binary for linux-arm64
+" let g:lsp_settings_filetype_lua = 'sumneko-lua-language-server'
 
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete

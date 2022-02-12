@@ -53,6 +53,7 @@ let g:lightline.component_function = {
       \ 'colorscheme': 'user#lightline#colorscheme',
       \ 'fileformat': 'user#lightline#file_format',
       \ 'fileencoding': 'user#lightline#file_encoding',
+      \ 'filename': 'user#lightline#filename',
       \ 'mode': 'user#lightline#mode',
       \ 'readonly': 'user#lightline#readonly',
       \ }
@@ -121,11 +122,11 @@ repo = 'prabirshrestha/vim-lsp'
 on_source = ['vim-lsp-settings']
 on_ft = [
   'python', 'typescript', 'typescriptreact',
-  'rust', 'markdown', 'yaml', 'json', 'sh',
+  'rust', 'markdown', 'yaml', 'json', 'sh', 'lua'
 ]
 hook_add = '''
 autocmd user BufNewFile,BufRead
-      \ *.py,*.ts,*.tsx,*.rs,*.md,*.yml,*.yaml,*.json,*.sh
+      \ *.py,*.ts,*.tsx,*.rs,*.md,*.yml,*.yaml,*.json,*.sh,*.lua
       \ call lsp#enable()
 '''
 

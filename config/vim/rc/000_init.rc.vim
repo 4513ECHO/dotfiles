@@ -2,6 +2,7 @@ augroup user
   autocmd!
 augroup END
 
+" TODO: use config/nvim instead of config/vim
 let g:cache_home = empty($XDG_CACHE_HOME) ?
       \ expand('~/.cache/vim') : $XDG_CACHE_HOME .. '/vim'
 let g:config_home = empty($XDG_CONFIG_HOME) ?
@@ -36,6 +37,23 @@ let g:loaded_zipPlugin         = v:true
 
 let g:current_colorscheme = get(g:, 'current_colorscheme', 'random')
 let g:colorscheme_customize = get(g:, 'colorscheme_customize', {'_': {}})
+
+augroup random_colorscheme
+  autocmd!
+  " autocmd ColorScheme,VimEnter * ++nested
+  "      \ call user#colorscheme#colorscheme(g:current_colorscheme)
+  autocmd VimEnter * ++nested
+     \ call user#colorscheme#random()
+augroup END
+
+" echo message vim start up time
+if has('vim_starting')
+  let g:startuptime = reltime()
+  autocmd user VimEnter *
+        \ : let g:startuptime = reltime(g:startuptime)
+        \ | redraw
+        \ | echomsg printf('startuptime: %fms', reltimefloat(g:startuptime) * 1000)
+endif
 
 if has('nvim')
   let g:python3_host_prog = stdpath('data') .. '/venv/bin/python'
@@ -91,23 +109,6 @@ if filereadable(expand('~/.vimrc_secret'))
   source ~/.vimrc_secret
 endif
 
-augroup random_colorscheme
-  autocmd!
-  " autocmd ColorScheme,VimEnter * ++nested
-  "      \ call user#colorscheme#colorscheme(g:current_colorscheme)
-  autocmd VimEnter * ++nested
-     \ call user#colorscheme#random()
-augroup END
-
-" echo message vim start up time
-if has('vim_starting')
-  let g:startuptime = reltime()
-  autocmd user VimEnter *
-        \ : let g:startuptime = reltime(g:startuptime)
-        \ | redraw
-        \ | echomsg printf('startuptime: %fms', reltimefloat(g:startuptime) * 1000)
-endif
-
 " restore cursor
 " from `:help restore-cursor`
 autocmd user BufReadPost *
@@ -156,8 +157,10 @@ autocmd user BufWinEnter *
 " TODO: modify the color of EndOfBuffer
 " NOTE: I'm working in progress that making plugin...
 autocmd user ColorScheme *
-      \ execute 'hi NormalNC guibg='
-      \ .. lightsout#darken(lightsout#get_hl('Normal', 'guibg'), 0.03)
+      \ : if !hlexists('NormalNC')
+      \ |   execute 'hi NormalNC guibg='
+      \   .. lightsout#darken(lightsout#get_hl('Normal', 'guibg'), 0.03)
+      \ | endif
 if !has('nvim')
   autocmd user BufWinEnter,WinEnter * setlocal wincolor=
   autocmd user WinLeave * setlocal wincolor=NormalNC
@@ -175,4 +178,12 @@ function! s:chmod(file) abort
   endif
 endfunction
 
-autocmd user BufWritePost * if getline(1) =~# "^#!" | call s:chmod(expand("<afile>")) | endif
+autocmd user BufWritePost *
+      \ : if getline(1) =~# "^#!"
+      \ |   call s:chmod(expand("<afile>"))
+      \ | endif
+
+if has('nvim')
+  autocmd user TextYankPost *
+        \ silent! lua vim.highlight.on_yank { timeout = 150 }
+endif
