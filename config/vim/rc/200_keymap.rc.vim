@@ -79,7 +79,7 @@ inoremap <C-w> <C-g>u<C-w>
 
 nnoremap [Space] <Nop>
 nmap <Space> [Space]
-nnoremap <C-l> <Cmd>nohlsearch<CR><C-l>
+nnoremap <C-l> <Cmd>nohlsearch<Bar>diffupdate<CR><C-l>
 nnoremap <Leader><C-r>
       \ <Cmd>source $MYVIMRC<Bar>nohlsearch<Bar>echomsg 'reloaded!'<CR>
 nnoremap [Space]w <Cmd>update<CR>
@@ -87,6 +87,10 @@ nnoremap [Space]W <Cmd>write<CR>
 nnoremap ^ <C-^><Cmd>edit<CR>
 nnoremap [Space]f <Cmd>edit %:p:h<CR>
 " nmap o A<CR>
+" from https://github.com/pesblog/dots-base/blob/a0762b8ffe/home/.vimrc#L140
+nnoremap <expr> gp '`[' .. strpart(getregtype(), 0, 1) .. '`]'
+" from https://baqamore.hatenablog.com/entry/2016/07/07/201856
+xnoremap <expr> p 'pgv"' .. v:register .. 'ygv<Esc>'
 
 xnoremap v $h
 xnoremap <Space> t<Space>
