@@ -113,8 +113,8 @@ function! g:searchx.convert(input) abort
   return join(split(a:input, '\s\+'), '.\{-}')
 endfunction
 
-autocmd user User SearchxLeave call searchx#clear()
-autocmd user User SearchxAccept normal! zzzv
+autocmd vimrc User SearchxLeave call searchx#clear()
+autocmd vimrc User SearchxAccept normal! zzzv
 
 nnoremap ? <Cmd>call searchx#start({ 'dir': 0 })<CR>
 nnoremap / <Cmd>call searchx#start({ 'dir': 1 })<CR>
@@ -135,7 +135,7 @@ hook_add = '''
 let g:vsnip_snippet_dir = g:config_home .. '/snippets'
 imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-autocmd user User PumCompleteDone
+autocmd vimrc User PumCompleteDone
       \ call vsnip_integ#on_complete_done(g:pum#completed_item)
 '''
 
@@ -236,7 +236,7 @@ on_event = ['CmdlineLeave', 'CmdwinLeave']
 hook_add = '''
 let g:hitspop_line = 'winbot'
 let g:hitspop_timeout = 2000
-autocmd user ColorScheme *
+autocmd vimrc ColorScheme *
       \ hi link hitspopErrormsg ErrorMsg
 '''
 
@@ -246,7 +246,7 @@ if = '!has("gui_running")'
 on_cmd = ['OSCYank', 'OSCYankReg']
 on_event = ['TextYankPost']
 hook_add = '''
-autocmd user TextYankPost *
+autocmd vimrc TextYankPost *
       \ : if v:event.regname ==# 'p'
       \ |   execute 'OSCYankReg "'
       \ | endif
@@ -306,7 +306,7 @@ let g:clever_f_smart_case = v:true
 let g:clever_f_use_migemo = v:true
 let g:clever_f_chars_match_any_signs = ';'
 let g:clever_f_timeout_ms = 5000
-autocmd user ColorScheme *
+autocmd vimrc ColorScheme *
       \ hi def CleverFDefaultLabel guifg=red guibg=NONE gui=bold,underline
 '''
 
@@ -457,7 +457,7 @@ nnoremap <silent> <C-b> <Cmd>call comfortable_motion#flick(winheight(0) * -4)<CR
 # [plugins.ftplugin]
 # SpaceVimPlugManager = '''
 # let s:dein_update_timer = timer_start(10, { -> execute('normal! G') }, {'repeat': -1})
-# autocmd user BufLeave * ++once call timer_stop(s:dein_update_timer)
+# autocmd vimrc BufLeave * ++once call timer_stop(s:dein_update_timer)
 # '''
 
 # [[plugins]]

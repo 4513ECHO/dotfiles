@@ -74,7 +74,7 @@ repo = 'itchyny/vim-highlighturl'
 repo = 'itchyny/vim-parenmatch'
 hook_add = '''
 " TODO: send PR to the repository to use instead 'hi def Group' instead of 'hi Group'
-" autocmd user ColorScheme * hi link ParenMatch MatchParen
+" autocmd vimrc ColorScheme * hi link ParenMatch MatchParen
 '''
 
 [[plugins]]
@@ -125,7 +125,7 @@ on_ft = [
   'rust', 'markdown', 'yaml', 'json', 'sh', 'lua'
 ]
 hook_add = '''
-autocmd user BufNewFile,BufRead
+autocmd vimrc BufNewFile,BufRead
       \ *.py,*.ts,*.tsx,*.rs,*.md,*.yml,*.yaml,*.json,*.sh,*.lua
       \ call lsp#enable()
 '''

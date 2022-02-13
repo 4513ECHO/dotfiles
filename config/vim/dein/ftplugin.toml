@@ -84,7 +84,7 @@ nnoremap <buffer> <C-p> <Cmd>call <SID>move_link(0)<CR>
 
 markdown = '''
 hi link markdownCode Constant
-autocmd user ColorScheme *
+autocmd vimrc ColorScheme *
       \ hi link markdownCode Constant
 '''
 

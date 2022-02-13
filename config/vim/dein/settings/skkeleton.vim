@@ -38,13 +38,13 @@ function s:skkeleton_disable_post_unix() abort
   silent !echo -ne '\e]12;\#FFFFFF\a'
 endfunction
 
-autocmd user User skkeleton-enable-pre call user#ddc#skkeleton_pre()
-autocmd user User skkeleton-disable-pre call user#ddc#skkeleton_post()
+autocmd vimrc User skkeleton-enable-pre call user#ddc#skkeleton_pre()
+autocmd vimrc User skkeleton-disable-pre call user#ddc#skkeleton_post()
 if !has('gui_running') && has('unix')
-  autocmd user User skkeleton-enable-pre call <SID>skkeleton_enable_pre_unix()
-  autocmd user User skkeleton-disable-post call <SID>skkeleton_disable_post_unix()
+  autocmd vimrc User skkeleton-enable-pre call <SID>skkeleton_enable_pre_unix()
+  autocmd vimrc User skkeleton-disable-post call <SID>skkeleton_disable_post_unix()
 endif
 if exists('*lightline#update')
-  autocmd user User skkeleton-enable-post call lightline#update()
-  autocmd user User skkeleton-mode-changed call lightline#update()
+  autocmd vimrc User skkeleton-enable-post call lightline#update()
+  autocmd vimrc User skkeleton-mode-changed call lightline#update()
 endif

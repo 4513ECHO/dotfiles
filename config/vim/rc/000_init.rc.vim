@@ -1,4 +1,4 @@
-augroup user
+augroup vimrc
   autocmd!
 augroup END
 
@@ -49,7 +49,7 @@ augroup END
 " echo message vim start up time
 if has('vim_starting')
   let g:startuptime = reltime()
-  autocmd user VimEnter *
+  autocmd vimrc VimEnter *
         \ : let g:startuptime = reltime(g:startuptime)
         \ | redraw
         \ | echomsg printf('startuptime: %fms', reltimefloat(g:startuptime) * 1000)
@@ -111,44 +111,44 @@ endif
 
 " restore cursor
 " from `:help restore-cursor`
-autocmd user BufReadPost *
+autocmd vimrc BufReadPost *
       \ : if line('''"') > 1 && line('''"') <= line('$')
       \ |   execute 'normal! g`"'
       \ | endif
 
-autocmd user BufEnter *
+autocmd vimrc BufEnter *
       \ : if &filetype ==# ''
       \ |   execute 'nnoremap <buffer> q <C-w>q'
       \ | endif
 
 " vim as a pager
-autocmd user StdinReadPost * call user#pager()
+autocmd vimrc StdinReadPost * call user#pager()
 
 " auto make directories
 " from https://vim-jp.org/vim-users-jp/2011/02/20/Hack-202.html
-autocmd user BufWritePre *
+autocmd vimrc BufWritePre *
       \ call user#auto_mkdir(expand('<afile>:p:h'), v:cmdbang)
 
 if has('nvim')
-  autocmd user TermOpen * startinsert
-  autocmd user TermOpen * setlocal nonumber
+  autocmd vimrc TermOpen * startinsert
+  autocmd vimrc TermOpen * setlocal nonumber
 endif
 
 " auto disable paste mode
-autocmd user InsertLeave * setlocal nopaste
+autocmd vimrc InsertLeave * setlocal nopaste
 
 " auto quickfix opener
 " from https://github.com/monaqa/dotfiles/blob/424b0ab2d7/.config/nvim/scripts/autocmd.vim
-autocmd user QuickFixCmdPost [^l]* cwindow
-autocmd user QuickFixCmdPost l* lwindow
+autocmd vimrc QuickFixCmdPost [^l]* cwindow
+autocmd vimrc QuickFixCmdPost l* lwindow
 
 " faster syntax highlight
-autocmd user Syntax *
+autocmd vimrc Syntax *
       \ : if line('$') > 1000
       \ |   syntax sync minlines=100
       \ | endif
 
-autocmd user BufWinEnter *
+autocmd vimrc BufWinEnter *
       \ : if empty(&buftype) && line('.') > winheight(0) / 3 * 2
       \ |   execute 'normal! zz' .. repeat("\<C-y>", winheight(0) / 6)
       \ | endif
@@ -156,18 +156,18 @@ autocmd user BufWinEnter *
 " from https://qiita.com/Bakudankun/items/649aa6d8b9eccc1712b5
 " TODO: modify the color of EndOfBuffer
 " NOTE: I'm working in progress that making plugin...
-autocmd user ColorScheme *
+autocmd vimrc ColorScheme *
       \ : if !hlexists('NormalNC')
       \ |   execute 'hi NormalNC guibg='
       \   .. lightsout#darken(lightsout#get_hl('Normal', 'guibg'), 0.03)
       \ | endif
 if !has('nvim')
-  autocmd user BufWinEnter,WinEnter * setlocal wincolor=
-  autocmd user WinLeave * setlocal wincolor=NormalNC
+  autocmd vimrc BufWinEnter,WinEnter * setlocal wincolor=
+  autocmd vimrc WinLeave * setlocal wincolor=NormalNC
 endif
 
 " from https://github.com/yuki-yano/dotfiles/blob/11bfe29f07/.vimrc#L696
-autocmd user FocusGained * checktime
+autocmd vimrc FocusGained * checktime
 
 " from https://github.com/kuuote/dotvim/blob/46760385c2/conf/rc/autocmd.vim#L5
 function! s:chmod(file) abort
@@ -178,12 +178,12 @@ function! s:chmod(file) abort
   endif
 endfunction
 
-autocmd user BufWritePost *
+autocmd vimrc BufWritePost *
       \ : if getline(1) =~# "^#!"
       \ |   call s:chmod(expand("<afile>"))
       \ | endif
 
 if has('nvim')
-  autocmd user TextYankPost *
+  autocmd vimrc TextYankPost *
         \ silent! lua vim.highlight.on_yank { timeout = 150 }
 endif

@@ -15,7 +15,7 @@ if has('conceal')
   hi link helpBacktick Special
   hi link helpStar Special
   hi link helpIgnore Special
-  autocmd user ColorScheme <buffer>
+  autocmd vimrc ColorScheme <buffer>
         \ : hi link helpBar Special
         \ | hi link helpBacktick Special
         \ | hi link helpStar Special

@@ -68,10 +68,10 @@ function! s:install_pyls_ext() abort
   endif
 endfunction
 
-autocmd user BufWritePre *.json LspDocumentFormatSync --server=efm-langserver
+autocmd vimrc BufWritePre *.json LspDocumentFormatSync --server=efm-langserver
 
-autocmd user User lsp_buffer_enabled
+autocmd vimrc User lsp_buffer_enabled
       \ call <SID>on_lsp_buffer_enabled()
-autocmd user User lsp_setup
+autocmd vimrc User lsp_setup
       \ : call <SID>install_pyls_ext()
       \ | call <SID>install_deno_lsp()

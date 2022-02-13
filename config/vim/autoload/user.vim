@@ -28,7 +28,7 @@ function! user#pager() abort
   setlocal noswapfile buftype=nofile bufhidden=hide
   setlocal modifiable nomodified readonly
   if exists(':AnsiEsc') == 2
-    autocmd user VimEnter * ++once
+    autocmd vimrc VimEnter * ++once
           \ : execute 'AnsiEsc'
           \ | silent! keepjump keeppatterns
           \ | %substitute/\v\e\[%(%(\d+;)?\d{1,2})?[mK]//ge

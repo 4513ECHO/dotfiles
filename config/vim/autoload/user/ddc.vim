@@ -14,7 +14,7 @@ function! user#ddc#cmdline_pre(mode) abort
 
   let b:_ddc_cmdline_prev_buffer_config = ddc#custom#get_buffer()
   call ddc#custom#patch_buffer(s:patch_buffer)
-  autocmd user User DDCCmdlineLeave ++once call user#ddc#cmdline_post()
+  autocmd vimrc User DDCCmdlineLeave ++once call user#ddc#cmdline_post()
   call ddc#enable_cmdline_completion()
   call ddc#enable()
 endfunction
