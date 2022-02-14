@@ -1,12 +1,17 @@
-" TODO: use '~/.cache/dein' instead because neovim
-let s:dein_dir = g:cache_home .. '/dein'
+let s:dein_dir = (has('nvim') ? stdpath('cache') : g:cache_home) .. '/dein'
 let s:dein_repo_dir = s:dein_dir .. '/repos/github.com/Shougo/dein.vim'
 
 if &runtimepath !~# s:dein_repo_dir
   if !isdirectory(s:dein_repo_dir)
-    call system(printf('git clone --depth 1'
+    call system(printf('git clone --depth 1 '
           \ .. 'https://github.com/Shougo/dein.vim %s',
           \ s:dein_repo_dir))
+    if v:shell_error != 0
+      echohl ErrorMsg
+      echomsg 'Could not install dein.vim to' s:dein_repo_dir
+      echohl NONE
+      finish
+    endif
   endif
   execute 'set runtimepath^=' .. s:dein_repo_dir
 endif
