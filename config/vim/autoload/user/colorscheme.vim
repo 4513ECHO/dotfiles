@@ -46,8 +46,9 @@ function! user#colorscheme#random() abort
     let randint = str2nr(matchstr(reltimestr(reltime()),
           \ '\.\@<=\d\+')[1:])
   endif
+  let list = s:colorscheme_list()
   call user#colorscheme#command(
-        \ get(s:colorscheme_list(), randint % len(s:colorscheme_list())),
+        \ get(list, randint % len(list)),
         \ v:false)
 endfunction
 
@@ -135,14 +136,15 @@ function! user#colorscheme#command(colorscheme, ...) abort
 endfunction
 
 function! user#colorscheme#completion(ArgLead, CmdLine, CursorPos) abort
+  let list = s:colorscheme_list()
   if exists('*matchfuzzy')
     if empty(a:ArgLead)
-      return sort(copy(s:colorscheme_list()))
+      return sort(copy(list))
     else
-      return matchfuzzy(copy(s:colorscheme_list()), a:ArgLead)
+      return matchfuzzy(copy(list), a:ArgLead)
     endif
   else
-    return filter(copy(s:colorscheme_list()), {_, val -> val =~? a:ArgLead})
+    return filter(copy(list), {_, val -> val =~? a:ArgLead})
   endif
 endfunction
 
