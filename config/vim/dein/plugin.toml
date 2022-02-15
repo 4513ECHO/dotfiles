@@ -343,7 +343,10 @@ let g:quickrun_config = {
       \ },
       \ 'json': {
       \   'command': 'gojq',
-      \   'exec': 'cat %s | %c %o %a',
+      \   'exec': '%c %o %a < %s',
+      \ },
+      \ 'lua': {
+      \   'type': 'lua/vim',
       \ },
       \ 'mine/deno': {
       \   'cmdopt': '--no-check --allow-all --unstable',
