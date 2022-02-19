@@ -34,7 +34,7 @@ let s:sourceOptions.skkeleton = {
       \ 'mark': 'skk',
       \ 'matchers': ['skkeleton'],
       \ 'sorters': [],
-      \ 'converters': ['converter_remove_overlap'],
+      \ 'converters': [],
       \ 'minAutoCompleteLength': 2,
       \ }
 let s:sourceOptions.necovim = {

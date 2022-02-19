@@ -18,7 +18,6 @@ call skkeleton#config({
 
 call skkeleton#register_kanatable('rom', {
       \ ',,': 'escape',
-      \ ';':  'henkanPoint',
       \ '~':         ['〜',     ''],
       \ '...':       ['…',     ''],
       \ ",\<Space>": ['、',     ''],
