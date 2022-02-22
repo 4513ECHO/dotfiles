@@ -20,6 +20,7 @@ let g:dein#types#git#clone_depth = 1
 let g:dein#auto_recache = v:true
 let g:dein#lazy_rplugins = v:true
 let g:dein#install_check_diff = v:true
+let g:dein#install_progress_type = 'floating'
 let g:denops#disabled = !executable('deno')
 
 function! s:load_toml(filename, lazy) abort
@@ -54,16 +55,13 @@ if has('vim_starting') && dein#check_install()
 endif
 
 if getcwd() =~# expand('~/Develops/github.com/4513echo/')
-  let s:git_root = expand(system('git rev-parse --show-toplevel'))
+  let s:git_root = system('git rev-parse --show-toplevel')
   execute 'set runtimepath^=' .. s:git_root
   if isdirectory(s:git_root .. '/after')
     execute 'set runtimepath+=' .. s:git_root .. '/after'
   endif
 endif
 
-if !has('nvim')
-  syntax enable
-  " call timer_start(0, { -> execute('syntax enable') })
-  filetype indent plugin on
-endif
+syntax enable
+filetype indent plugin on
 
