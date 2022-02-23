@@ -13,7 +13,7 @@ function! user#ddc#cmdline_pre(mode) abort
 
   let b:_ddc_cmdline_prev_buffer_config = ddc#custom#get_buffer()
   call ddc#custom#patch_buffer(get(s:patch_buffer, a:mode, {}))
-  autocmd vimrc User DDCCmdlineLeave ++once call user#ddc#cmdline_post()
+  autocmd vimrc User DDCCmdlineLeave call user#ddc#cmdline_post()
   call ddc#enable_cmdline_completion()
   call ddc#enable()
 endfunction
@@ -40,6 +40,7 @@ endfunction
 function! user#ddc#cmdline_post() abort
   if exists('b:_ddc_cmdline_prev_buffer_config')
     call ddc#custom#set_buffer(b:_ddc_cmdline_prev_buffer_config)
+    unlet b:_ddc_cmdline_prev_buffer_config
   endif
   silent! cunmap <Tab>
   set wildchar&
@@ -57,6 +58,7 @@ function! user#ddc#skkeleton_post() abort
   endif
   if exists('b:_ddc_skkeleton_prev_buffer_config')
     call ddc#custom#set_buffer(b:_ddc_skkeleton_prev_buffer_config)
+    unlet b:_ddc_skkeleton_prev_buffer_config
   endif
 endfunction
 
