@@ -2,7 +2,6 @@
 repo = 'Shougo/ddc.vim'
 depends = ['context_filetype.vim', 'denops.vim', 'pum.vim', 'lexima.vim']
 on_event = ['InsertEnter']
-# on_source = ['denops.vim']
 hook_add = '''
 nnoremap :
       \ <Cmd>call timer_start(10, { -> user#ddc#cmdline_pre(':') })<CR>:
@@ -47,7 +46,8 @@ on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'hrsh7th/vim-vsnip-integ'
-on_source = ['ddc.vim', 'vim-vsnip']
+depends = ['vim-vsnip']
+on_source = ['ddc.vim']
 
 [[plugins]]
 repo = 'matsui54/ddc-buffer'
@@ -62,10 +62,10 @@ repo = 'vim-skk/skkeleton'
 depends = ['denops.vim']
 on_source = 'ddc.vim'
 hook_source = '''
-" map! <C-u> <Plug>(skkeleton-toggle)
 map! <C-j> <Plug>(skkeleton-toggle)
 Runtime dein/settings/skkeleton.vim
 '''
+
 # filters
 
 [[plugins]]
