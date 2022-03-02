@@ -13,18 +13,23 @@ function! user#ddc#cmdline_pre(mode) abort
   set wildchar=<C-t>
 
   let b:_ddc_cmdline_prev_buffer_config = ddc#custom#get_buffer()
-  call ddc#custom#patch_buffer(s:patch_buffer)
+  call ddc#custom#patch_buffer(get(s:patch_buffer, a:mode, {}))
   autocmd vimrc User DDCCmdlineLeave ++once call user#ddc#cmdline_post()
   call ddc#enable_cmdline_completion()
   call ddc#enable()
 endfunction
 
-let s:patch_buffer = {}
-let s:patch_buffer.sources = ['cmdline', 'around']
-let s:patch_buffer.keywordPattern = '[0-9a-zA-Z_:#-]*'
-let s:patch_buffer.sourceOptions = {
+let s:patch_buffer = {':': {}, '/': {}}
+let s:patch_buffer[':'].sources = ['cmdline', 'around']
+let s:patch_buffer[':'].keywordPattern = '[0-9a-zA-Z_:#-]*'
+let s:patch_buffer[':'].sourceOptions = {
       \ 'cmdline': {
       \   'forceCompletionPattern': '(\f*/\f+)+',
+      \ }}
+let s:patch_buffer['/'].sources = ['around']
+let s:patch_buffer['/'].sourceOptions = {
+      \ 'around': {
+      \   'minAutoCompleteLength': 1,
       \ }}
 
 function! user#ddc#define_map(mode, lhs, func, rhs) abort

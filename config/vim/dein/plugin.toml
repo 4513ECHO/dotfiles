@@ -113,6 +113,8 @@ function! g:searchx.convert(input) abort
   return join(split(a:input, '\s\+'), '.\{-}')
 endfunction
 
+autocmd vimrc User SearchxEnter
+      \ call timer_start(10, { -> user#ddc#cmdline_pre('/') })
 autocmd vimrc User SearchxLeave call searchx#clear()
 autocmd vimrc User SearchxAccept normal! zzzv
 

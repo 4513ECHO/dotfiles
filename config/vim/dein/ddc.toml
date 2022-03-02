@@ -4,9 +4,8 @@ depends = ['context_filetype.vim', 'denops.vim', 'pum.vim', 'lexima.vim']
 on_event = ['InsertEnter']
 # on_source = ['denops.vim']
 hook_add = '''
-" autocmd user CmdlineEnter : call user#ddc#cmdline_pre('<afile>')
-" autocmd user CmdlineEnter / call user#ddc#cmdline_pre()
-nnoremap : <Cmd>call timer_start(1, { -> user#ddc#cmdline_pre('') })<CR>:
+nnoremap :
+      \ <Cmd>call timer_start(10, { -> user#ddc#cmdline_pre(':') })<CR>:
 '''
 hook_source = '''
 Runtime dein/settings/ddc.vim
