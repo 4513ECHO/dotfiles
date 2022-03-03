@@ -282,6 +282,11 @@ let g:no_cecutil_maps = v:true
 '''
 
 [[plugins]]
+repo = 'statiolake/vim-quickrun-runner-nvimterm'
+if = 'has("nvim")'
+on_source = ['vim-quickrun']
+
+[[plugins]]
 repo = 'rbtnn/vim-coloredit'
 if = '!has("nvim")'
 on_cmd = ['ColorEdit']
@@ -328,18 +333,19 @@ let g:quickrun_config = {
       \ '_': {
       \   'hook/time/enable': v:false,
       \   'outputter/buffer/close_on_empty': v:true,
-      \   'outputter/buffer/opener': 'botright 10split',
+      \   'outputter/buffer/opener': 'botright 10new',
       \   'runner': has('nvim') ? 'neovim_job' : 'job',
-      \   'runner/terminal/opener': 'botright 10split',
+      \   'runner/nvimterm/opener': 'botright 10new',
+      \   'runner/terminal/opener': 'botright 10new',
       \ },
       \ 'typescript': {
       \   'type': 'mine/deno',
       \ },
       \ 'sh': {
-      \   'runner': 'terminal',
+      \   'runner': has('nvim') ? 'nvimterm' : 'terminal',
       \ },
       \ 'zsh': {
-      \   'runner': 'terminal',
+      \   'runner': has('nvim') ? 'nvimterm' : 'terminal',
       \ },
       \ 'json': {
       \   'command': 'gojq',
@@ -358,7 +364,7 @@ let g:quickrun_config = {
       \   'cmdopt': '--no-check --allow-all --unstable',
       \   'command': 'deno',
       \   'exec': '%c run %o %s %a',
-      \   'runner': 'terminal',
+      \   'runner': has('nvim') ? 'nvimterm' : 'terminal',
       \   'tempfile': '%{tempname()}.ts',
       \ },
       \ }
