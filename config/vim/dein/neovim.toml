@@ -1,0 +1,54 @@
+
+# [[plugins]]
+# repo = 'EdenEast/nightfox.nvim'
+# hook_add = '''
+# call user#colorscheme#add('nightfox.nvim')
+# '''
+
+[[plugins]]
+repo = 'nathom/filetype.nvim'
+hook_add = '''
+let g:did_load_filetypes = v:true
+'''
+
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+lazy = true
+depends = ['playground']
+on_event = ['BufRead']
+hook_post_update = 'TSUpdate'
+hook_source = '''
+lua << EOF
+require("nvim-treesitter.configs").setup {
+  ensure_installed = {
+    "lua",
+    "markdown",
+    "python",
+    "query",
+    "rust",
+    "toml",
+    "typescript",
+    "vim",
+    "yaml",
+  },
+  highlight = {
+    enable = true,
+  },
+  playground = {
+    enable = true,
+  },
+  query_linter = {
+    enable = true,
+  },
+}
+EOF
+'''
+[plugins.ftplugin]
+tsplayground = '''
+nnoremap <buffer> q <C-w>q
+'''
+
+[[plugins]]
+repo = 'nvim-treesitter/playground'
+lazy = true
+

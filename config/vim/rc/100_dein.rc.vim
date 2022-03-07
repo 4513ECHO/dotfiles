@@ -41,6 +41,9 @@ if dein#min#load_state(s:dein_dir)
     call s:load_toml('ddc.toml', v:true)
     call s:load_toml('ddu.toml', v:true)
   endif
+  if has('nvim')
+    call s:load_toml('neovim.toml', v:false)
+  endif
 
   call dein#end()
   call dein#save_state()
