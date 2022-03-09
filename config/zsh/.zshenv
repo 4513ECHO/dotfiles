@@ -22,7 +22,6 @@ path=(
   $GOPATH/bin(N-/)
   $DENO_INSTALL/bin(N-/)
   $HOME/.deno/bin(N-/)
-  $HOME/.poetry/bin(N-/)
   $HOME/.local/bin(N-/)
   $HOME/bin(N-/)
   $path
@@ -35,7 +34,6 @@ fpath=(
 fpath=(${(R)fpath%/})
 
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
-export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --marker='*'"
 
 export EDITOR="vim"
 export PAGER="less"
@@ -54,4 +52,3 @@ export SAVEHIST=10000
 
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
-# echo "sourced ${0:A}"

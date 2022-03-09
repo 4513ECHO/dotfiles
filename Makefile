@@ -8,12 +8,6 @@ BINFILE := $(wildcard $(realpath $(DOTPATH)/bin)/*)
 
 # TODO: copy config/zsh/.zshenv to HOME
 
-define TEMPLATE
-	@$(foreach val, $(DOTRC), $(shell $(1) $(abspath $(val)) $(HOME)/$(notdir $(val));))
-	@$(foreach val, $(CONFIGHOME), $(shell $(1) $(abspath $(val)) $(HOME)/.config/$(notdir $(val));))
-	@$(foreach val, $(BINFILE), $(shell $(1) $(abspath $(val)) $(HOME)/.local/bin/$(notdir $(val));))
-endef
-
 all:
 
 help:
@@ -28,6 +22,7 @@ deploy:
 	@$(foreach val, $(DOTRC), ln -sfnv $(abspath $(val)) $(HOME)/$(notdir $(val));)
 	@$(foreach val, $(CONFIGHOME), ln -sfnv $(abspath $(val)) $(HOME)/.config/$(notdir $(val));)
 	@$(foreach val, $(BINFILE), ln -sfnv $(abspath $(val)) $(HOME)/.local/bin/$(notdir $(val));)
+	@ln -sfnv $(realpath $(DOTPATH)/config)/zsh/.zshenv $(HOME)/.zshenv
 
 update:
 	git pull origin main
@@ -38,6 +33,7 @@ clean:
 	@$(foreach val, $(DOTRC), test -f $(HOME)/$(notdir $(val)) && rm -v $(HOME)/$(notdir $(val)) ||:;)
 	@$(foreach val, $(CONFIGHOME), test -f $(HOME)/.config/$(notdir $(val)) && rm -v $(HOME)/.config/$(notdir $(val)) ||:;)
 	@$(foreach val, $(BINFILE), test -f $(HOME)/.local/bin/$(notdir $(val)) && rm -v $(HOME)/.local/bin/$(notdir $(val)) ||:;)
+	@rm -v $(HOME)/.zshenv
 
 destroy: clean
 	rm -r $(DOTPATH)
