@@ -1,0 +1,126 @@
+---
+packages:
+
+# init: a
+- type: github_release
+  repo_owner: Aloxaf
+  repo_name: silicon
+  asset: 'silicon-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz'
+  supported_if: GOOS == "amd64"
+  description: Create beautiful image of your source code
+  replacements:
+    darwin: apple-darwin
+    windows: pc-windows-gnu
+    linux: unknown-linux-gnu
+
+# init: d
+- type: github_release
+  repo_owner: dandavison
+  repo_name: delta
+  asset: 'delta-{{.Version}}-{{.Arch}}-{{.OS}}.{{.Format}}'
+  description: A syntax-highlighting pager for git
+  format: tar.gz
+  format_overrides:
+  - goos: windows
+    format: zip
+  replacements:
+    darwin: apple-darwin
+    linux: unknown-linux-gnu  # TODO
+    arm64: aarch64
+    amd64: x86_64
+  files:
+  - name: delta
+    src: 'delta-{{.Version}}-{{.Arch}}-{{.OS}}/delta'
+
+# init: h
+- type: github_release
+  repo_owner: high-moctane
+  repo_name: nextword
+  asset: 'nextword_{{trimV .Version}}_{{.OS}}_{{.Arch}}.tar.gz'
+  description: Predict next English words
+
+# init: j
+- type: github_content
+  repo_owner: junegunn
+  repo_name: fzf
+  name: junegunn/fzf/bin/fzf-tmux
+  path: bin/fzf-tmux
+  description: fzf-tmux is a bash script that opens fzf in a tmux pane
+  files:
+    - name: fzf-tmux
+
+# init: k
+- type: github_release
+  repo_owner: ko1nksm
+  repo_name: getoptions
+  asset: getoptions
+  description: An elegant option/argument parser for shell scripts (full support for bash and all POSIX shells)
+
+# init: l
+
+# init: m
+- type: github_release
+  repo_owner: microsoft
+  repo_name: ripgrep-prebuilt
+  asset: 'ripgrep-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz'
+  description: Builds ripgrep on Azure Pipelines for multiple platforms and makes the binaries available as Github releases
+  replacements:
+    darwin: apple-darwin
+    windows: pc-windows-msvc
+    linux: unknown-linux-gnu  # TODO:
+    arm64: aarch64
+    amd64: x86_64
+  files:
+  - name: rg
+
+# init: n
+- name: nodejs/node
+  type: http
+  rosetta2: true
+  url: 'https://nodejs.org/dist/{{.Version}}/node-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz'
+  link: https://nodejs.org/
+  description: Node.js JavaScript runtime
+  replacements:
+    amd64: x64
+  files:
+  - name: corepack
+    src: 'node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/corepack'
+  - name: node
+    src: 'node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/node'
+  - name: npm
+    src: 'node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/npm'
+  - name: npx
+    src: 'node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/npx'
+
+# init: s
+- type: github_release
+  repo_owner: sharkdp
+  repo_name: pastel
+  asset: 'pastel-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz'
+  description: A command-line tool to generate, analyze, convert and manipulate colors
+  replacements:
+    darwin: apple-darwin
+    windows: pc-windows-msvc
+    linux: unknown-linux-gnu  # TODO:
+    arm64: aarch64
+    amd64: x86_64
+  files:
+  - name: pastel
+    src: 'pastel-{{.Version}}-{{.Arch}}-{{.OS}}/pastel'
+
+# init: t
+- type: github_content
+  repo_owner: thinca
+  repo_name: ciw
+  path: bin/ciw
+  description: A wrapper to install cli binary from language associated package manager
+- type: github_release
+  repo_owner: tomnomnom
+  repo_name: gron  # NOTE: only pre-release
+  asset: 'gron-{{.OS}}-{{.Arch}}-{{trimV .Version}}.{{.Format}}'
+  description: Make JSON greppable!
+  format: tgz
+  format_overrides:
+  - goos: windows
+    format: zip
+
