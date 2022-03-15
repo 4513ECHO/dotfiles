@@ -1,0 +1,11 @@
+{
+  "set": {
+    "body": [
+      "set -ue -o pipefail"
+    ],
+    "description": "set command",
+    "prefix": [
+      "set"
+    ]
+  }
+}

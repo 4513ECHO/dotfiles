@@ -1,4 +1,26 @@
 {
+  "ddc": {
+    "body": [
+      "[[plugins]]",
+      "repo = '$1'",
+      "on_source = 'ddc.vim'"
+    ],
+    "description": "ddc plugin definition",
+    "prefix": [
+      "ddc"
+    ]
+  },
+  "ddu": {
+    "body": [
+      "[[plugins]]",
+      "repo = '$1'",
+      "on_source = 'ddu.vim'"
+    ],
+    "description": "ddu plugin definition",
+    "prefix": [
+      "ddu"
+    ]
+  },
   "ftplugin": {
     "body": [
       "[plugins.ftplugin]",

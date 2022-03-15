@@ -1,7 +1,9 @@
 {
   "contents": {
     "body": [
-      "Introduction\t\t\t\t\t\t|${1:help}-introduction|",
+      "CONTENTS\t\t\t\t\t\t*${1:plugin}-contents*",
+      "",
+      "Introduction\t\t\t\t\t\t|$1-introduction|",
       "Interface\t\t\t\t\t\t|$1-interface|",
       "About\t\t\t\t\t\t\t|$1-about|"
     ],
@@ -10,13 +12,13 @@
       "contents"
     ]
   },
-  "lastchange": {
+  "lastc": {
     "body": [
       "Last change: ${VIM:strftime('%Y %b %d')}"
     ],
     "description": "last changed date",
     "prefix": [
-      "lastchange"
+      "lastc"
     ]
   },
   "modeline": {
