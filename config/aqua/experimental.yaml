@@ -13,6 +13,10 @@ packages:
     windows: pc-windows-gnu
     linux: unknown-linux-gnu
 
+# init: b
+
+# init: c
+
 # init: d
 - type: github_release
   repo_owner: dandavison
@@ -25,12 +29,18 @@ packages:
     format: zip
   replacements:
     darwin: apple-darwin
-    linux: unknown-linux-gnu  # TODO
+    linux: unknown-linux-gnu  # TODO:
     arm64: aarch64
     amd64: x86_64
   files:
   - name: delta
     src: 'delta-{{.Version}}-{{.Arch}}-{{.OS}}/delta'
+
+# init: e
+
+# init: f
+
+# init: g
 
 # init: h
 - type: github_release
@@ -38,8 +48,21 @@ packages:
   repo_name: nextword
   asset: 'nextword_{{trimV .Version}}_{{.OS}}_{{.Arch}}.tar.gz'
   description: Predict next English words
+- type: github_content
+  repo_owner: holman
+  repo_name: spark
+  path: spark
+  description: ▁▂▃▅▂▇ in your shell
 
 # init: j
+- type: github_content
+  repo_owner: JosefZIla
+  repo_name: bash2048
+  path: bash2048.sh
+  description: Bash implementation of 2048 game
+  format: raw
+  files:
+    - name: bash2048.sh
 - type: github_content
   repo_owner: junegunn
   repo_name: fzf
@@ -57,6 +80,16 @@ packages:
   description: An elegant option/argument parser for shell scripts (full support for bash and all POSIX shells)
 
 # init: l
+- type: github_release
+  repo_owner: lotabout
+  repo_name: skim
+  asset: 'skim-{{.Version}}-x86_64-{{.OS}}.tar.gz'
+  description: Fuzzy Finder in rust!
+  replacements:
+    darwin: apple-darwin
+    linux: unknown-linux-musl # TODO:
+  files:
+    - name: sk
 
 # init: m
 - type: github_release
@@ -107,6 +140,10 @@ packages:
   files:
   - name: pastel
     src: 'pastel-{{.Version}}-{{.Arch}}-{{.OS}}/pastel'
+- type: github_release
+  repo_owner: sheepla
+  repo_name: fzwiki
+  asset: 'fzwiki_{{trimV .Version}}_{{.OS}}_{{.Arch}}.tar.gz'
 
 # init: t
 - type: github_content
