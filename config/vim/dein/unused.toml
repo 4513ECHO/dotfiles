@@ -1,0 +1,70 @@
+
+[[plugins]]
+repo = 'kat0h/bufpreview.vim'
+depends = ['denops.vim']
+on_cmd = ['PreviewMarkdown', 'PreviewMarkdownClose', 'PreviewMarkdownToggle']
+on_ft = ['markdown']
+hook_add = '''
+let g:bufpreview_server_host = '0.0.0.0'
+let g:bufpreview_server_port = 8888
+'''
+
+[[plugins]]
+repo = 'lambdalisue/qfloc.vim'
+on_ft = ['qf']
+hook_add = '''
+let g:qfloc_disable_default_mappings = v:true
+" NOTE: I can't toggle qfloc sign/hover.
+let g:qfloc_disable_sign = v:true
+let g:qfloc_disable_hover = v:true
+nmap <expr> ]c &diff ? ']c' : '<Plug>(qfloc-cnext)'
+nmap <expr> [c &diff ? '[c' : '<Plug>(qfloc-cprevious)'
+nmap ]l <Plug>(qfloc-lnext)
+nmap [l <Plug>(qfloc-lprevious)
+'''
+[plugins.ftplugin]
+qf = '''
+nmap <buffer> j <Plug>(qfloc-j)
+nmap <buffer> k <Plug>(qfloc-k)
+nmap <buffer> s <Plug>(qfloc-sbuffer)
+nmap <buffer> p <Plug>(qfloc-preview)
+nmap <buffer> o <Plug>(qfloc-preview)
+nmap <buffer> u <Plug>(qfloc-undo)
+nmap <buffer> dd <Plug>(qfloc-delete)
+xmap <buffer> d  <Plug>(qfloc-delete)
+'''
+
+[[plugins]]
+repo = 'pocke/keycast.vim'
+depends = ['vanner']
+if = '!has("nvim")'
+on_cmd = ['KeycastStart', 'KeycastStop']
+
+[[plugins]]
+repo = 'pocke/vanner'
+
+[[plugins]]
+repo = 'reireias/vim-cheatsheet'
+on_cmd = ['Cheat']
+hook_add = '''
+let g:cheatsheet#cheat_file = g:config_home .. '/doc/cheatsheet.md'
+'''
+
+[[plugins]]
+repo = 'rhysd/vim-fixjson'
+on_ft = ['json']
+on_cmd = ['FixJson']
+
+[[plugins]]
+repo = 'skanehira/badapple.vim'
+if = '!has("nvim")'
+on_cmd = ['BadApple']
+
+[[plugins]]
+repo = 'wsdjeg/dein-ui.vim'
+on_cmd = ['DeinUpdate']
+[plugins.ftplugin]
+SpaceVimPlugManager = '''
+autocmd vimrc TextChanged <buffer> normal! G
+'''
+
