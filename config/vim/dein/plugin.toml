@@ -186,6 +186,42 @@ xmap A  <Plug>(niceblock-A)
 '''
 
 [[plugins]]
+repo = 'kana/vim-submode'
+on_map = { nx = [
+  '<C-w>+', '<C-w>-', '<C-w>>', '<C-w><',
+  'zl', 'zh', 'zL', 'zH', 'zj', 'zk',
+] }
+hook_add = '''
+let g:submode_always_show_submode = v:true
+let g:submode_keep_leaving_key = v:true
+'''
+hook_source = '''
+" resize window
+call submode#enter_with('winsize', 'n', '', '<C-w>>', '<C-w>>')
+call submode#enter_with('winsize', 'n', '', '<C-w><', '<C-w><')
+call submode#enter_with('winsize', 'n', '', '<C-w>+', '<C-w>+')
+call submode#enter_with('winsize', 'n', '', '<C-w>-', '<C-w>-')
+call submode#map('winsize', 'n', '', '>', '<C-w>>')
+call submode#map('winsize', 'n', '', '<', '<C-w><')
+call submode#map('winsize', 'n', '', '+', '<C-w>+')
+call submode#map('winsize', 'n', '', '-', '<C-w>-')
+
+" scroll but cursor doesn't move
+call submode#enter_with('nomove', 'nx', '', 'zl', 'zl')
+call submode#enter_with('nomove', 'nx', '', 'zh', 'zh')
+call submode#enter_with('nomove', 'nx', '', 'zL', 'zL')
+call submode#enter_with('nomove', 'nx', '', 'zH', 'zH')
+call submode#enter_with('nomove', 'nx', '', 'zj', '<C-e>')
+call submode#enter_with('nomove', 'nx', '', 'zk', '<C-y>')
+call submode#map('nomove', 'nx', '', 'l', 'zl')
+call submode#map('nomove', 'nx', '', 'h', 'zh')
+call submode#map('nomove', 'nx', '', 'L', 'zL')
+call submode#map('nomove', 'nx', '', 'H', 'zH')
+call submode#map('nomove', 'nx', '', 'j', '<C-e>')
+call submode#map('nomove', 'nx', '', 'k', '<C-y>')
+'''
+
+[[plugins]]
 repo = 'lambdalisue/vim-manpager'
 on_cmd = ['MANPAGER', 'Man']
 

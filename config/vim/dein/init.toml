@@ -78,12 +78,6 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'kana/vim-submode'
-hook_add = '''
-Runtime dein/settings/submode.vim
-'''
-
-[[plugins]]
 repo = 'lambdalisue/guise.vim'
 depends = ['denops.vim']
 
