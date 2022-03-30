@@ -3,8 +3,8 @@ set -eu
 DOTPATH="${DOTFILES:-$HOME/dotfiles}"
 URL="${URL:-https://github.com/4513ECHO/dotfiles}"
 HEADER="${HEADER:-https://raw.githubusercontent.com/4513ECHO/dotfiles/main/header}"
-abort() { echo "failed: $*" 1>&2; exit 1; }
-[ -d "$DOTPATH" ] &&failed "$DOTPATH has already existed."
+failed() { echo "failed: $*" 1>&2; exit 1; }
+[ -d "$DOTPATH" ] && failed "$DOTPATH has already existed."
 printf '\e[1m'
 curl -fsSL "$HEADER"
 printf '\e[m'

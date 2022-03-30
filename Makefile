@@ -21,7 +21,7 @@ init: ## Initialize enviroment settings
 	@mkdir -pv ~/.cache
 
 .PHONY: deploy
-deploy: ## Create symlinks to home directory
+deploy: ## Create symlinks to actual directories
 	@$(foreach val, $(DOTRC), $(LN) $(abspath $(val)) $(HOME)/$(notdir $(val));)
 	@$(foreach val, $(CONFIGHOME), $(LN) $(abspath $(val)) $(HOME)/.config/$(notdir $(val));)
 	@$(foreach val, $(BINFILE), $(LN) $(abspath $(val)) $(HOME)/.local/bin/$(notdir $(val));)
@@ -35,7 +35,7 @@ update: ## Fetch all changes from remote repository
 install: update init deploy pipx aqua rust ## Initialize and deploy dotfiles
 
 .PHONY: clean
-clean: ## Remove symlinks from home directory
+clean: ## Remove symlinks from actual directories
 	@$(foreach val, $(DOTRC), test -f $(HOME)/$(notdir $(val)) && $(RM) $(HOME)/$(notdir $(val)) ||:;)
 	@$(foreach val, $(CONFIGHOME), test -f $(HOME)/.config/$(notdir $(val)) && $(RM) $(HOME)/.config/$(notdir $(val)) ||:;)
 	@$(foreach val, $(BINFILE), test -f $(HOME)/.local/bin/$(notdir $(val)) && $(RM) $(HOME)/.local/bin/$(notdir $(val)) ||:;)
