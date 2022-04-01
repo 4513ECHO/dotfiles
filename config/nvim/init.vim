@@ -1,14 +1,10 @@
-" for vim-tiny and vim-small
-if !1 | finish | endif
-
-let s:config_home = empty($XDG_CONFIG_HOME) ? expand('~/.config/vim') : $XDG_CONFIG_HOME .. '/vim'
+let s:config_home = empty($XDG_CONFIG_HOME) ? expand('~/.config/nvim') : $XDG_CONFIG_HOME .. '/nvim'
 set runtimepath&
 let &runtimepath = s:config_home .. ',' .. &runtimepath .. ',' .. s:config_home .. '/after'
 let $MYVIMRC = expand('<sfile>:p')
 
 function! s:source_vimrc(vimrc) abort
-  execute 'source' fnamemodify(printf('%s/rc/%s.rc.vim',
-        \ s:config_home, a:vimrc), 'p')
+  execute 'source' printf('%s/rc/%s.rc.vim', s:config_home, a:vimrc)
 endfunction
 
 " TODO: remove digits of filenames

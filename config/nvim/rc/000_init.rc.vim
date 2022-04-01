@@ -4,11 +4,11 @@ augroup END
 
 " TODO: use config/nvim instead of config/vim
 let g:cache_home = empty($XDG_CACHE_HOME) ?
-      \ expand('~/.cache/vim') : $XDG_CACHE_HOME .. '/vim'
+      \ expand('~/.cache/nvim') : $XDG_CACHE_HOME .. '/nvim'
 let g:config_home = empty($XDG_CONFIG_HOME) ?
-      \ expand('~/.config/vim') : $XDG_CONFIG_HOME .. '/vim'
+      \ expand('~/.config/nvim') : $XDG_CONFIG_HOME .. '/nvim'
 let g:data_home = empty($XDG_DATA_HOME) ?
-      \ expand('~/.local/share/vim') : $XDG_DATA_HOME .. '/vim'
+      \ expand('~/.local/share/nvim') : $XDG_DATA_HOME .. '/nvim'
 
 let g:loaded_2html_plugin      = v:true
 let g:loaded_getscript         = v:true
