@@ -3,62 +3,60 @@
 # https://aquaproj.github.io/
 registries:
 - type: standard
-  ref: v1.10.0 # renovate: depName=aquaproj/aqua-registry
+  ref: v2.0.0 # renovate: depName=aquaproj/aqua-registry
 - name: local
   type: local
   path: experimental.yaml
 
 packages:
 - name: aquaproj/aqua-installer@v1.0.0
-- name: b4b4r07/afx@v0.1.19
+- name: b4b4r07/afx@v0.1.20
 # - name: BurntSushi/ripgrep@13.0.0 # NOTE: use microsoft/ripgrep-prebuilt instead
 - name: cli/cli@v2.6.0
-- name: denoland/deno@v1.20.1
+- name: dandavison/delta@0.12.1
+- name: denoland/deno@v1.20.4
 - name: ekalinin/github-markdown-toc@0.8.0
 - name: fsaintjacques/semver-tool@3.3.0
 - name: golang/go@1.18
   # - name: harelba/q@v3.1.6 # NOTE: no release fomr arm64
-- name: itchyny/gojq@v0.12.6
+- name: itchyny/gojq@v0.12.7
 - name: itchyny/mmv@v0.1.4
 - name: junegunn/fzf@0.29.0
+- name: kdabir/has@v1.4.0
 - name: koalaman/shellcheck@v0.8.0
-- name: LukeChannings/deno-arm64@v1.20.1
+- name: LukeChannings/deno-arm64@v1.20.4
 - name: mattn/gof@v0.0.10
-- name: mikefarah/yq@v4.23.1
+- name: mikefarah/yq@v4.24.2
 - name: mvdan/sh@v3.4.3
 - name: nektos/act@v0.2.26
 # - name: ogham/exa@v0.10.1 # NOTE: no release for arm64
-- name: rhysd/actionlint@v1.6.9
-- name: sharkdp/bat@v0.19.0
+- name: rhysd/actionlint@v1.6.10
+- name: sharkdp/bat@v0.20.0
 - name: sharkdp/fd@v8.3.2
-- name: TomWright/dasel@v1.24.0
+- name: sheepla/fzwiki@v0.0.9
+- name: sheepla/qiitaz@v0.0.5
+- name: tomnomnom/gron@v0.6.1
+- name: TomWright/dasel@v1.24.1
 # - name: x-motemen/ghq@v1.2.1 # NOTE: no release for arm64
 - name: XAMPPRocky/tokei@v12.1.2
 
 # local registry
-- name: dandavison/delta@0.12.0
-  registry: local
 - name: high-moctane/nextword@v0.0.5
-  registry: local
-- name: junegunn/fzf/bin/fzf-tmux@0.29.0
-  registry: local
-- name: microsoft/ripgrep-prebuilt@v13.0.0-4
-  registry: local
-- name: sharkdp/pastel@v0.8.1
-  registry: local
-- name: tomnomnom/gron@v0.6.1
-  registry: local
-- name: ko1nksm/getoptions@v3.3.0
-  registry: local
-- name: thinca/ciw@master
-  registry: local
-- name: nodejs/node@v17.7.1
   registry: local
 - name: holman/spark@master
   registry: local
-- name: sheepla/fzwiki@v0.0.9
-  registry: local
-# - name: lotabout/skim@v0.9.4
-#   registry: local
 - name: JosefZIla/bash2048@master
   registry: local
+- name: junegunn/fzf/bin/fzf-tmux@0.29.0
+  registry: local
+- name: ko1nksm/getoptions@v3.3.0
+  registry: local
+- name: microsoft/ripgrep-prebuilt@v13.0.0-4
+  registry: local
+- name: nodejs/node@v17.7.1
+  registry: local
+- name: sharkdp/pastel@v0.8.1
+  registry: local
+- name: thinca/ciw@master
+  registry: local
+

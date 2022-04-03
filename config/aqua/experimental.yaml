@@ -6,35 +6,20 @@ packages:
   repo_owner: Aloxaf
   repo_name: silicon
   asset: 'silicon-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz'
-  supported_if: GOOS == "amd64"
+  rosetta2: true
+  supported_if: not (GOOS == "linux" and GOARCH == "arm64")
   description: Create beautiful image of your source code
   replacements:
     darwin: apple-darwin
     windows: pc-windows-gnu
     linux: unknown-linux-gnu
+    amd64: x86_64
 
 # init: b
 
 # init: c
 
 # init: d
-- type: github_release
-  repo_owner: dandavison
-  repo_name: delta
-  asset: 'delta-{{.Version}}-{{.Arch}}-{{.OS}}.{{.Format}}'
-  description: A syntax-highlighting pager for git
-  format: tar.gz
-  format_overrides:
-  - goos: windows
-    format: zip
-  replacements:
-    darwin: apple-darwin
-    linux: unknown-linux-gnu  # TODO:
-    arm64: aarch64
-    amd64: x86_64
-  files:
-  - name: delta
-    src: 'delta-{{.Version}}-{{.Arch}}-{{.OS}}/delta'
 
 # init: e
 
@@ -62,7 +47,7 @@ packages:
   description: Bash implementation of 2048 game
   format: raw
   files:
-    - name: bash2048.sh
+  - name: bash2048.sh
 - type: github_content
   repo_owner: junegunn
   repo_name: fzf
@@ -70,7 +55,7 @@ packages:
   path: bin/fzf-tmux
   description: fzf-tmux is a bash script that opens fzf in a tmux pane
   files:
-    - name: fzf-tmux
+  - name: fzf-tmux
 
 # init: k
 - type: github_release
@@ -80,16 +65,6 @@ packages:
   description: An elegant option/argument parser for shell scripts (full support for bash and all POSIX shells)
 
 # init: l
-- type: github_release
-  repo_owner: lotabout
-  repo_name: skim
-  asset: 'skim-{{.Version}}-x86_64-{{.OS}}.tar.gz'
-  description: Fuzzy Finder in rust!
-  replacements:
-    darwin: apple-darwin
-    linux: unknown-linux-musl # TODO:
-  files:
-    - name: sk
 
 # init: m
 - type: github_release
@@ -100,7 +75,7 @@ packages:
   replacements:
     darwin: apple-darwin
     windows: pc-windows-msvc
-    linux: unknown-linux-gnu  # TODO:
+    linux: unknown-linux-musl
     arm64: aarch64
     amd64: x86_64
   files:
@@ -125,25 +100,71 @@ packages:
   - name: npx
     src: 'node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/npx'
 
+# init: o
+
+# init: p
+- type: github_release
+  repo_owner: pen-lang
+  repo_name: pen
+  asset: 'pen-{{trimV .Version}}-{{.Arch}}-{.OS}.tar.xz'
+  rosetta2: true
+  supported_if: not (GOOS == "linux" and GOARCH == "arm64")
+  replacements:
+    darwin: apple-darwin
+    linux: unknown-linux-gnu
+    amd64: x86_64
+  files:
+  - name: pen
+    src: target/release/pen
+
+# init: q
+
+# init: r
+- type: http
+  name: rust-lang/rust
+  url: 'https://static.rust-lang.org/dist/rust-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz'
+  link: https://rust-lang.org/
+  description: hoge
+  replacements:
+    darwin: apple-darwin
+    linux: unknown-linux-musl
+    freebsd: unknown-freebsd
+    netbsd: unknown-netbsd
+    amd64: x64_64
+    arm64: aarch64
+    386: i686
+  files:
+  - src: rustc
+    name: 'hoge/rustc'
+
 # init: s
 - type: github_release
   repo_owner: sharkdp
   repo_name: pastel
-  asset: 'pastel-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz'
+  asset: 'pastel-{{.Version}}-{{.Arch}}-{{.OS}}.{{.Format}}'
   description: A command-line tool to generate, analyze, convert and manipulate colors
+  format: tar.gz
   replacements:
     darwin: apple-darwin
     windows: pc-windows-msvc
-    linux: unknown-linux-gnu  # TODO:
+    linux: unknown-linux-musl
     arm64: aarch64
     amd64: x86_64
+  overrides:
+  - goos: linux
+    goarch: arm64
+    replacements:
+      linux: unknown-linux-gnu
+  - goos: windows
+    format: zip
   files:
   - name: pastel
     src: 'pastel-{{.Version}}-{{.Arch}}-{{.OS}}/pastel'
-- type: github_release
+- type: github_content
   repo_owner: sheepla
-  repo_name: fzwiki
-  asset: 'fzwiki_{{trimV .Version}}_{{.OS}}_{{.Arch}}.tar.gz'
+  repo_name: fzpac
+  path: fzpac
+  description: Arch Linux package finder with fzf
 
 # init: t
 - type: github_content
@@ -151,13 +172,4 @@ packages:
   repo_name: ciw
   path: bin/ciw
   description: A wrapper to install cli binary from language associated package manager
-- type: github_release
-  repo_owner: tomnomnom
-  repo_name: gron  # NOTE: only pre-release
-  asset: 'gron-{{.OS}}-{{.Arch}}-{{trimV .Version}}.{{.Format}}'
-  description: Make JSON greppable!
-  format: tgz
-  format_overrides:
-  - goos: windows
-    format: zip
 
