@@ -81,12 +81,6 @@ hook_add = '''
 repo = 'lambdalisue/guise.vim'
 depends = ['denops.vim']
 
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
-depends = ['vim-lsp']
-hook_add = '''
-Runtime dein/settings/vim-lsp.vim
-'''
 
 [[plugins]]
 repo = 'mattn/vim-molder'
@@ -120,18 +114,7 @@ let g:sclow_hide_full_length = v:true
 [[plugins]]
 repo = 'osyo-manga/vim-precious'
 depends = ['context_filetype.vim']
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-on_source = ['vim-lsp-settings']
-on_ft = [
-  'python', 'typescript', 'typescriptreact',
-  'rust', 'markdown', 'yaml', 'json', 'sh', 'lua'
-]
 hook_add = '''
-autocmd vimrc BufNewFile,BufRead
-      \ *.py,*.ts,*.tsx,*.rs,*.md,*.yml,*.yaml,*.json,*.sh,*.lua
-      \ call lsp#enable()
 '''
 
 [[plugins]]

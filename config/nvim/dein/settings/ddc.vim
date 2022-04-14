@@ -78,14 +78,22 @@ let s:sourceParams.tmux = {
       \ 'kindFormat': '#{pane_index}.#{pane_current_command}',
       \ }
 
-let s:filterParams.converter_truncate = {'maxInfoWidth': 30}
+let s:filterParams.converter_truncate = {
+      \ 'maxAbbrWidth': 40,
+      \ 'maxInfoWidth': 40,
+      \ 'maxKindWidth': 20,
+      \ 'maxMenuWidth': 20,
+      \ 'ellipsis': '...',
+      \ }
 
 call ddc#custom#patch_filetype(
       \ ['vim', 'toml'], {
       \ 'sources': extend(['necovim'], s:sources),
       \ })
 call ddc#custom#patch_filetype(
-      \ ['python', 'typescript', 'typescriptreact', 'rust', 'yaml', 'lua'], {
+      \ ['python', 'typescript', 'typescriptreact', 'rust',
+      \  'yaml', 'lua', 'toml',
+      \ ], {
       \ 'sources': extend(['vim-lsp'], s:sources),
       \ })
 call ddc#custom#patch_filetype(

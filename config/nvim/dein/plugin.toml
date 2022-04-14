@@ -268,6 +268,21 @@ repo = 'mattn/vim-sl'
 on_func = ['sl#animate']
 
 [[plugins]]
+repo = 'mattn/vim-lsp-settings'
+depends = ['vim-lsp']
+on_ft = [
+  'python', 'typescript', 'typescriptreact',
+  'rust', 'markdown', 'yaml', 'json', 'sh', 'lua',
+  'toml',
+]
+hook_add = '''
+Runtime dein/settings/vim-lsp.vim
+'''
+hook_source = '''
+call lsp#enable()
+'''
+
+[[plugins]]
 repo = 'obcat/vim-hitspop'
 if = '!has("nvim")'
 on_event = ['CmdlineLeave', 'CmdwinLeave']
@@ -316,6 +331,9 @@ hook_add = '''
 let g:no_ansiesc_menu = v:true
 let g:no_cecutil_maps = v:true
 '''
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
 
 [[plugins]]
 repo = 'statiolake/vim-quickrun-runner-nvimterm'
