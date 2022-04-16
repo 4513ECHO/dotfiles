@@ -480,6 +480,10 @@ nmap <silent> ;; <Plug>(caw:hatpos:toggle)
 nmap <silent> ;  <Plug>(caw:hatpos:toggle:operator)
 xmap <silent> ;  <Plug>(caw:hatpos:toggle:operator)
 '''
+[plugins.ftplugin]
+gitcommit = '''
+let b:caw_oneline_comment = ';'
+'''
 
 [[plugins]]
 repo = 'tyru/open-browser.vim'

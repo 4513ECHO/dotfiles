@@ -41,7 +41,6 @@ inoreabbrev <expr><buffer> as
 '''
 
 gitcommit = '''
-let b:caw_oneline_comment = ';'
 " from https://zenn.dev/uochan/articles/2021-12-08-vim-conventional-commits
 function! s:select_type() abort
   let title = printf('%s: ', trim(split(getline('.'), ';')[0]))
@@ -50,8 +49,11 @@ function! s:select_type() abort
   silent! put! =title
   silent! startinsert!
 endfunction
-
 nnoremap <buffer> <CR><CR> <Cmd>call <SID>select_type()<CR>
+'''
+
+gitrebase = '''
+nnoremap <buffer> <CR> <Cmd>Cycle<CR>
 '''
 
 help = '''
@@ -104,6 +106,14 @@ qf = '''
 setlocal nowrap
 setlocal numberwidth=2
 nnoremap <buffer> q <Cmd>cclose<CR>
+nnoremap <buffer><expr> j line('.') == line('$') ? 'gg' : 'j'
+nnoremap <buffer><expr> k line('.') == 1 ? 'K' : 'k'
+" from https://github.com/mityu/dotfiles/blob/f5cb5f9a92/dot_vim/runtime/ftplugin/qf.vim#L6
+nnoremap <buffer> o <CR>zz<C-w>p
+nnoremap <buffer> p <CR>zz<C-w>p
+" from https://github.com/kuuote/dotvim/blob/9c7ba6307c/ftplugin/qf.vim#L1
+nnoremap <buffer> j j <CR>zz<C-w>b
+nnoremap <buffer> k k <CR>zz<C-w>b
 '''
 
 toml = '''
@@ -112,23 +122,30 @@ if !has('nvim') && !empty(filter(getline(1, 4),
   call dein#toml#syntax()
 endif
 '''
-[[plugins]]
+
+zsh = '''
+setlocal iskeyword+=-
+'''
+
+# [[plugins]]
 # repo = 'jparise/vim-graphql'
-repo = '4513echo/vim-graphql'
-rev = 'typescript-comment'
-on_ft = ['graphql', 'typescript', 'typescriptreact']
+# repo = '4513echo/vim-graphql'
+# rev = 'typescript-comment'
+# on_ft = ['graphql', 'typescript', 'typescriptreact']
+
+[[plugins]]
+repo = 'bfrg/vim-jq'
+merge_ftdetect = true
+on_ft = ['jq']
 
 [[plugins]]
 repo = 'cespare/vim-toml'
 if = '!has("patch-8.2.3520") && !has("nvim")'
+merge_ftdetect = true
 on_ft = ['toml']
 
 [[plugins]]
-repo = 'gko/vim-coloresque'
-on_ft = ['vim', 'css', 'scss', 'sass']
-
-[[plugins]]
-repo = 'jceb/vim-hier'
+repo = 'cohama/vim-hier'
 on_ft = ['qf']
 on_cmd = ['HierClean', 'HierStart', 'HierStop', 'HierUpdate']
 [plugins.ftplugin]
@@ -145,12 +162,18 @@ on_ft = ['vim', 'css', 'scss', 'sass']
 
 [[plugins]]
 repo = 'lark-parser/vim-lark-syntax'
+merge_ftdetect = true
 on_ft = ['lark']
 
 [[plugins]]
 repo = 'mattn/vim-maketable'
 on_ft = ['markdown']
 on_cmd = ['MakeTable', 'UnmakeTable']
+
+[[plugins]]
+repo = 'MTDL9/vim-log-highlighting'
+merge_ftdetect = true
+on_ft = ['log']
 
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
@@ -165,9 +188,8 @@ let g:vim_markdown_strikethrough = v:true
 '''
 
 [[plugins]]
-repo = 'rhysd/vim-fixjson'
-on_ft = ['json']
-on_cmd = ['FixJson']
+repo = 'rbtnn/vim-vimscript_indentexpr'
+on_ft = ['vim']
 
 [[plugins]]
 repo = 'rhysd/vim-gfm-syntax'
@@ -198,13 +220,16 @@ nnoremap <buffer> q <C-w>q
 
 [[plugins]]
 repo = 'tmux-plugins/vim-tmux'
+merge_ftdetect = true
 on_ft = ['tmux']
 
 [[plugins]]
 repo = 'tpope/vim-git'
+merge_ftdetect = true
 on_ft = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendmail']
 
 [[plugins]]
 repo = 'vim-jp/syntax-vim-ex'
 on_ft = ['vim']
+
 
