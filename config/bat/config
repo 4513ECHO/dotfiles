@@ -1,0 +1,17 @@
+# Set the theme to "Midnight.hybrid"
+# NOTE: theme is from https://github.com/avvyas/theme-midnight
+--theme="Midnight.hybrid"
+
+# Show line numbers,Git modifications and file header (but no grid)
+# --style="numbers,changes,header"
+
+# Use italic text on the terminal (not supported on all terminals)
+--italic-text=always
+
+# Use ".gitignore"-style highlighting for ".ignore" files
+--map-syntax ".ignore:Git Ignore"
+
+# Show non-printable characters like space, tab or newline
+# --show-all
+
+# vim:ft=conf

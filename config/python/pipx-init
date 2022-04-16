@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -eu
+
+stdin() {
+  cmd="$1"
+  shift
+  while read -r stdin; do
+    "$cmd" "$@" "$stdin"
+  done
+}
+
+json="$(dirname "$0")/pipx.json"
+
+if [ "$#" -ge 1 ]; then
+  if [ "$1" = 'gen' ]; then
+    pipx list --json \
+      | gojq '.venvs | { inject: map_values(.metadata.injected_packages | keys | select(.[])), install: keys }'
+  else
+    exit 1
+  fi
+else
+  gojq -r '.install[]' < "$json" \
+    | stdin printf 'pipx install %s\n' \
+    | stdin eval
+  gojq -r '.inject | to_entries | map([.key, .value] | flatten | join(" "))[]' < "$json" \
+    | stdin printf 'pipx inject %s\n' \
+    | stdin eval
+fi

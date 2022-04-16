@@ -6,15 +6,41 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-export VIMINIT="source ${XDG_CONFIG_HOME:-$HOME/.config}/vim/vimrc"
 export HISTFILE="$XDG_DATA_HOME/zsh/history"
-export CARGO_HOME="$XDG_DATA_HOME/cargo"
+
+## docker ##
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+
+## go ##
 export GOPATH="$XDG_DATA_HOME/go"
-export LESSKEY="$XDG_CONFIG_HOME/less/lesskey"
-export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
+
+## deno ##
 export DENO_INSTALL="$XDG_CACHE_HOME/deno"
+export DENO_INSTALL_ROOT="$DENO_INSTALL"
+
+## rust ##
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+
+## aqua ##
+export AQUA_CONFIG="$XDG_CONFIG_HOME/aqua/aqua.yaml"
+export AQUA_ROOT_DIR="$XDG_DATA_HOME/aquaproj-aqua"
+
+## python ##
+export PIPX_HOME="$XDG_DATA_HOME/pipx"
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"
+
+## ripgrep ##
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
+
+## WGET ##
+export WGETRC="$XDG_CONFIG_HOME/wgetrc"
+
+## npm ##
+export NPM_CACHE_DIR="$XDG_CACHE_HOME/npm"
+export NPM_CONFIG_DIR="$XDG_CONFIG_HOME/npm"
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+export NPM_DATA_DIR="$XDG_DATA_HOME/npm"
 
 typeset -Ux path fpath manpath cdpath
 path=(
@@ -23,6 +49,7 @@ path=(
   $DENO_INSTALL/bin(N-/)
   $HOME/.deno/bin(N-/)
   $HOME/.local/bin(N-/)
+  $AQUA_ROOT_DIR/bin(N-/)
   $HOME/bin(N-/)
   $path
 )
@@ -35,16 +62,16 @@ fpath=(${(R)fpath%/})
 
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 
-export EDITOR="vim"
-export PAGER="less"
-export BROWSER="w3m"
-export MANPAGER="vim -M +MANPAGER -"
-export LESS="-g -i -M -R -W -z-4 -x4"
-export LESSCHARSET="UTF-8"
+export EDITOR='vim'
+export PAGER='less'
+export BROWSER='w3m'
+export MANPAGER='vim -M +MANPAGER -'
+export LESS='-giMRW -z-4 -x4'
+export LESSCHARSET='UTF-8'
 
-export LANG="ja_JP.UTF-8"
-export LC_TIME="en_US.UTF-8"
-export TZ="Asia/Tokyo"
+export LANG='ja_JP.UTF-8'
+export LC_TIME='en_US.UTF-8'
+export TZ='Asia/Tokyo'
 
 export HISTFILE="$XDG_CACHE_HOME/zsh/history"
 export HISTSIZE=10000
