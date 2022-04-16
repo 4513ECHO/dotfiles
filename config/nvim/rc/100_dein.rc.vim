@@ -1,4 +1,4 @@
-let s:dein_dir = (has('nvim') ? stdpath('cache') : g:cache_home) .. '/dein'
+let s:dein_dir = (has('nvim') ? g:cache_home : g:vim_cache_home) .. '/dein'
 let s:dein_repo_dir = s:dein_dir .. '/repos/github.com/Shougo/dein.vim'
 
 if &runtimepath !~# s:dein_repo_dir
@@ -21,6 +21,7 @@ let g:dein#auto_recache = v:true
 let g:dein#lazy_rplugins = v:true
 let g:dein#install_check_diff = v:true
 let g:dein#install_progress_type = 'floating'
+let g:dein#auto_remote_plugins = v:false
 let g:denops#disabled = !executable('deno')
 
 function! s:load_toml(filename, lazy) abort
@@ -34,7 +35,7 @@ if dein#min#load_state(s:dein_dir)
 
   call s:load_toml('init.toml', v:false)
   call s:load_toml('colorscheme.toml', v:false)
-  call s:load_toml('textobj.toml', v:false)
+  call s:load_toml('textobj.toml', v:true)
   call s:load_toml('ftplugin.toml', v:true)
   call s:load_toml('plugin.toml', v:true)
   if !g:denops#disabled

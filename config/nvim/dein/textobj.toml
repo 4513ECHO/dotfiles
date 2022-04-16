@@ -1,21 +1,54 @@
 [[plugins]]
 repo = 'machakann/vim-sandwich'
 depends = [
-  'vim-repeat', 'vim-textobj-entire', 'vim-textobj-line',
+  'vim-textobj-entire', 'vim-textobj-line',
   'vim-textobj-wiw', 'vim-textobj-anyblock', 'vim-textobj-between',
   'vim-textobj-functioncall',
 ]
+on_map = { xno = '<Plug>', n = '<Plug>(operator-sandwich' }
 hook_add = '''
-runtime macros/sandwich/keymap/surround.vim
-let g:operator#sandwich#options = #{ add: #{ char: #{ skip_space: v:true } } }
-let g:sandwich#recipes = exists('g:sandwich#recipes')
-      \ ? deepcopy(g:sandwich#recipes) : deepcopy(g:sandwich#default_recipes)
+let g:sandwich_no_default_key_mappings = v:true
+let g:operator_sandwich_no_default_key_mappings = v:true
+let g:textobj_sandwich_no_default_key_mappings = v:true
+
+" vim-surround like mappings
+nmap ys <Plug>(sandwich-add)
+onoremap <SID>line :normal! ^vg_<CR>
+nmap <silent> yss <Plug>(sandwich-add)<SID>line
+onoremap <SID>gul g_
+nmap <silent> yS <Plug>(sandwich-add)<SID>gul
+nmap ds <Plug>(sandwich-delete)
+nmap dss <Plug>(sandwich-delete-auto)
+nmap cs <Plug>(sandwich-replace)
+nmap css <Plug>(sandwich-replace-auto)
+xmap S <Plug>(sandwich-add)
+nmap . <Plug>(operator-sandwich-dot)
+
+let g:sandwich#magicchar#f#patterns = [{
+      \ 'header' : '\<\%(\h\k*\.\)*\h\k*',
+      \ 'bra'    : '(',
+      \ 'ket'    : ')',
+      \ 'footer' : '',
+      \ }]
+'''
+hook_source = '''
+call operator#sandwich#set('add', 'char', 'skip_space', 1)
+let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
 " form https://github.com/yuki-yano/dotfiles/blob/8840dc3a90/.vimrc#L2899
 let g:sandwich#recipes += [
       \ {
       \   'buns': ['${', '}'],
       \   'input': ['$'],
-      \   'filetype': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
+      \   'filetype': [
+      \     'javascript', 'javascriptreact', 'typescript', 'typescriptreact',
+      \   ],
+      \ },
+      \ {
+      \   'buns': ['$(', ')'],
+      \   'input': ['$'],
+      \   'filetype': [
+      \     'sh', 'zsh',
+      \   ],
       \ },
       \ {
       \   'buns': ['#{', '}'],
@@ -43,13 +76,9 @@ function! InputGenerics() abort
   if genericsname ==# ''
     throw 'OperatorSandwichCancel'
   endif
-  return genericsname . '<'
+  return genericsname .. '<'
 endfunction
 '''
-
-# [[plugins]]
-# repo = 'tpope/vim-repeat'
-# on_map = { xno = '<Plug>(Repeat' }
 
 [[plugins]]
 repo = 'kana/vim-operator-user'
@@ -141,6 +170,25 @@ omap au <Plug>(textobj-wiw-a)
 omap iu <Plug>(textobj-wiw-i)
 xmap au <Plug>(textobj-wiw-a)
 xmap iu <Plug>(textobj-wiw-i)
+'''
+
+[[plugins]]
+repo = 'terryma/vim-expand-region'
+on_map = { nx = '<Plug>' }
+hook_add = '''
+nmap + <Plug>(expand_region_expand)
+nmap - <Plug>(expand_region_shrink)
+xmap + <Plug>(expand_region_expand)
+xmap - <Plug>(expand_region_shrink)
+let g:expand_region_text_objects = {
+      \ 'iu': 0,
+      \ 'iw': 0,
+      \ 'ib': 1,
+      \ 'af': 1,
+      \ 'il': 0,
+      \ 'ip': 0,
+      \ 'ie': 0,
+      \ }
 '''
 
 [[plugins]]
