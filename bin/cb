@@ -1,0 +1,32 @@
+#!/bin/sh
+# based on:
+# https://github.com/jimrobinson/osc52
+# https://github.com/jkc-sw/toclip
+
+set -ue
+
+if [ $# -gt 0 ]; then
+  input="$*"
+else
+  input="$(cat /dev/stdin)"
+fi
+
+if [ -z "$input" ]; then
+  echo 'No value to copy to clipboard' 1>&2
+  exit 1
+fi
+
+wrap_tmux() {
+  printf "\ePtmux;\e%s\e\\" "$*"
+}
+
+wrap_osc52() {
+  printf '\e]52;c;%s\a' "$(printf '%s' "$*" | head -c 74994 | base64 | tr -d '\r\n')"
+}
+
+if [ -n "${TMUX:-}" ]; then
+  TMUX_TTY="$(tmux list-panes -F '#{pane_active} #{pane_tty}' | awk '$1 == "1" { print $2; exit; }')"
+  wrap_tmux "$(wrap_osc52 "$input")" > "$TMUX_TTY"
+else
+  wrap_osc52 "$input" > /dev/tty
+fi

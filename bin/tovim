@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# from https://vim-jp.org/blog/2015/10/15/tovim-on-shell-command-pipes.html
+set -ue -o pipefail
+
+tmpfile="$(mktemp)"
+trap 'rm $tmpfile' ERR
+
+if [[ -p "/dev/stdin" ]]; then
+  cat - > "$tmpfile"
+fi
+vim "$tmpfile" < /dev/tty > /dev/tty
+cat "$tmpfile"
+rm "$tmpfile"

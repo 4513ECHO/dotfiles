@@ -1,25 +1,27 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-if [[ -p /dev/stdin ]]; then
-  dir="$(cat -)"
+set -ue -o pipefail
+
+if [[ $# -gt 0 ]]; then
+  dir="$*"
 else
-  dir="$1"
+  dir="$(cat /dev/stdin)"
 fi
 
 tildepath="${dir/#$HOME/'~'}"
 read -ra patharray <<< "${tildepath//\// }"
-result=""
+result=''
 
-for ((i=0; i < ${#patharray[@]}; i++)) {
-  if [[ "$(("$i"+1))" = "${#patharray[@]}" ]]; then
+for ((i = 0; i < ${#patharray[@]}; i++)); do
+  if [[ "$(("$i" + 1))" == "${#patharray[@]}" ]]; then
     result+="${patharray[$i]}"
     break
   fi
-  if [[ "${patharray[$i]:0:1}" =~ ^\. ]]; then
+  if [[ ${patharray[$i]:0:1} =~ ^\. ]]; then
     result+="${patharray[$i]:0:2}/"
   else
     result+="${patharray[$i]:0:1}/"
   fi
-}
+done
 
 echo -n "$result"

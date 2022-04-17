@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# rgif -- Ripgrep interactive with fzf
+# It requires fzf 0.30.0+, Ripgrep, bat
+# from https://github.com/junegunn/fzf/blob/3c868d79/ADVANCED.md#switching-between-ripgrep-mode-and-fzf-mode
+
+set -ue -o pipefail
+
+# Switch between Ripgrep launcher mode (CTRL-R) and fzf filtering mode (CTRL-F)
+RG_CMD='rg --column --line-number --no-heading --color=always --smart-case'
+INITIAL_QUERY="$*"
+
+FZF_DEFAULT_COMMAND="$RG_CMD $(printf '%q' "$INITIAL_QUERY")" \
+  fzf --ansi \
+  --color "hl:-1:underline,hl+:-1:underline:reverse" \
+  --disabled --query "$INITIAL_QUERY" \
+  --bind "change:reload:sleep 0.1; $RG_CMD {q} || :" \
+  --bind "ctrl-f:unbind(change,ctrl-f)+change-prompt(fzf> )+enable-search+clear-query+rebind(ctrl-r)" \
+  --bind "ctrl-r:unbind(ctrl-r)+change-prompt(Ripgrep> )+disable-search+reload($RG_CMD {q} || :)+rebind(change,ctrl-f)" \
+  --prompt 'Ripgrep> ' \
+  --delimiter : \
+  --header '╱ CTRL-R (Ripgrep mode) ╱ CTRL-F (fzf mode) ╱' \
+  --preview 'bat --color=always {1} --highlight-line {2}' \
+  --preview-window 'up,60%,border-bottom,+{2}+3/3,~3'

@@ -1,51 +1,68 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
+set -ue -o pipefail
 
-colortable () {
+colortable() {
   local c
   for c in {0..255}; do
-    printf '\033[38;5;%dm %03d\033[m' "$c" "$c"
-    [[ $(("$c"%16)) -eq 15 ]] && echo
+    printf '\e[38;5;%dm %03d\e[m' "$c" "$c"
+    [[ $(("$c" % 16)) -eq 15 ]] && echo
   done
   echo
 }
 
-printcolor () {
-  printf "\033[48;5;%dm\033[38;5;250m%6d \033[m" "$1" "$1"
+printcolor() {
+  printf '\e[48;5;%dm\e[38;5;250m%6d \e[m' "$1" "$1"
 }
 
-colortable_rich () {
+colortable_rich() {
   local r b g
   for r in {0..4}; do
     for b in {0..5}; do
-      printcolor $(("$r"*36+5*6+"$b"+16))
+      printcolor $(("$r" * 36 + 5 * 6 + "$b" + 16))
     done
     echo
   done
   for g in {0..5}; do
     for b in {0..5}; do
-      printcolor $((5*36+30-"$g"*6+"$b"+16))
+      printcolor $((5 * 36 + 30 - "$g" * 6 + "$b" + 16))
     done
     for r in {1..5}; do
-      printcolor $((180-"$r"*36+30-"$g"*6+5+16))
+      printcolor $((180 - "$r" * 36 + 30 - "$g" * 6 + 5 + 16))
     done
     echo
   done
 }
 
-colortable_system () {
+colortable_system() {
   local c
   for c in {0..15}; do
-    printf '\033[48;5;%dm  \033[m' "$c"
-    [[ $(("$c"%8)) -eq 7 ]] && echo
+    printf '\e[48;5;%dm  \e[m' "$c"
+    [[ $(("$c" % 8)) -eq 7 ]] && echo
   done
   echo
 }
 
-if [[ "$1" = "rich" ]]; then
-  colortable_rich
-elif [[ "$1" = "system" ]]; then
-  colortable_system
-else
-  colortable
-fi
+colortable_text() {
+  printf '\e[0m 0 Normal\e[m\n'
+  printf '\e[1m 1 Bold\e[m\n'
+  printf '\e[2m 2 Dim\e[m\n'
+  printf '\e[3m 3 Italic\e[m\n'
+  printf '\e[4m 4 Underline\e[m\n'
+  printf '\e[5m 5 Blink\e[m\n'
+  printf '\e[6m 6 Quick Blink\e[m\n'
+  printf '\e[7m 7 Reverse\e[m\n'
+  printf '\e[8m 8 Hidden\e[m(Hidden)\n'
+  printf '\e[9m 9 Strikethrough\e[m\n'
+}
+
+case "$*" in
+  rich) colortable_rich ;;
+  system) colortable_system ;;
+  text) colortable_text ;;
+  '') colortable ;;
+  *)
+    echo "Invalid arguments: $*" 1>&2
+    exit 1
+    ;;
+esac

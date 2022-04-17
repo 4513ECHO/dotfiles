@@ -1,0 +1,2 @@
+#!/bin/sh
+exec dasel -r toml -w json | gojq "$@"
