@@ -1,37 +1,27 @@
+function! user#colorscheme#get() abort
+  if exists('s:cache')
+    return s:cache
+  endif
+  let s:cache = {}
+  for plugins in values(filter(copy(dein#get()),
+        \ { _, v -> has_key(v, 'colorschemes') }))
+    for colorscheme in plugins.colorschemes
+      " let s:cache[colorscheme.name] = extend(colorscheme, { 'plugin': plugins.name })
+      let s:cache[colorscheme.name] = colorscheme
+    endfor
+  endfor
+  return s:cache
+endfunction
+
 function! user#colorscheme#lightline() abort
   if g:current_colorscheme ==# 'random'
     return 'default'
   endif
-  let custom_name = get(get(g:colorscheme_customize,
-        \ g:current_colorscheme, {}), 'lightline')
-  if !empty(custom_name)
-    return custom_name
-  endif
-  return g:current_colorscheme
-endfunction
-
-" user#colorscheme#register({name} [, {option} [, {cond}]])
-function! user#colorscheme#register(name, ...) abort
-  let option = get(a:000, 0, {})
-  let cond = get(a:000, 1, v:true)
-  let name = has_key(option, 'name')
-        \ ? option.name
-        \ : substitute(fnamemodify(a:name, ':r'),
-        \   '\v\c^n?vim[_-]|colors?[_-]|[_-]n?vim$', '', 'g')
-  if !cond
-    return
-  endif
-  if has_key(g:colorscheme_customize, name)
-    call extend(g:colorscheme_customize[name], option)
-  else
-    let g:colorscheme_customize[name] = option
-  endif
-  let g:colorscheme_customize[name].plugin = a:name
-  let g:colorscheme_customize[name].name = name
-endfunction
-
-function! s:colorscheme_list() abort
-  return filter(keys(g:colorscheme_customize), { _, val -> val !=# '_' })
+  let custom_name = get(get(user#colorscheme#get(),
+       \ g:current_colorscheme, {}), 'lightline')
+  return empty(custom_name)
+        \ ? g:current_colorscheme
+        \ : custom_name
 endfunction
 
 function! user#colorscheme#random() abort
@@ -44,17 +34,14 @@ function! user#colorscheme#random() abort
     let randint = str2nr(matchstr(reltimestr(reltime()),
           \ '\.\@<=\d\+')[1:])
   endif
-  let list = s:colorscheme_list()
+  let list = keys(user#colorscheme#get())
   call user#colorscheme#command(
         \ get(list, randint % len(list)),
         \ v:false)
 endfunction
 
 function! user#colorscheme#set_customize(colorscheme) abort
-  if a:colorscheme !=# '_'
-    call user#colorscheme#set_customize('_')
-  endif
-  let customize = get(g:colorscheme_customize, a:colorscheme)
+  let customize = get(user#colorscheme#get(), a:colorscheme)
   if empty(customize)
     return
   endif
@@ -72,13 +59,13 @@ function! user#colorscheme#set_customize(colorscheme) abort
   " TODO: edit v:colornames if exists
   let terminal = get(customize, 'terminal')
   if !empty(terminal)
-    if has('nvim')
-      for i in range(16)
-        let g:terminal_color_{i} = terminal[i]
-      endfor
-    else
-      let g:terminal_ansi_colors = terminal
-    endif
+    call s:set_terminal_colors(
+          \ type(terminal) == v:t_string && terminal ==# 'mini'
+          \ ? [
+          \ '#282c34', '#e06c75', '#98c379', '#e5c07b', '#61afef', '#c678dd', '#56b6c2', '#5c6370',
+          \ '#3e4452', '#e06c75', '#98c379', '#e5c07b', '#61afef', '#c678dd', '#56b6c2', '#abb2bf']
+          \ : terminal
+          \ )
   elseif !has('nvim') && exists('g:terminal_color_0')
     let g:terminal_ansi_colors = []
     for i in range(16)
@@ -88,8 +75,6 @@ function! user#colorscheme#set_customize(colorscheme) abort
     for i in range(16)
       let g:terminal_color_{i} = g:terminal_ansi_colors[i]
     endfor
-    let g:terminal_color_foreground = g:terminal_color_15
-    let g:terminal_color_background = g:terminal_color_0
   endif
   let link = get(customize, 'link')
   if !empty(link)
@@ -99,16 +84,24 @@ function! user#colorscheme#set_customize(colorscheme) abort
   endif
 endfunction
 
+function! s:set_terminal_colors(list) abort
+  if has('nvim')
+    for i in range(16)
+      let g:terminal_color_{i} = a:list[i]
+    endfor
+  else
+    let g:terminal_ansi_colors = a:list
+  endif
+endfunction
+
 function! user#colorscheme#command(colorscheme, ...) abort
-  let reload = a:0 > 0 ? a:1 : v:false
-  if empty(s:colorscheme_list())
+  let reload = get(a:000, 0, v:false)
+  if empty(user#colorscheme#get())
     return
   endif
-  if reload
-    let colorscheme = g:current_colorscheme
-  else
-    let colorscheme = a:colorscheme
-  endif
+  let colorscheme = reload
+        \ ? g:current_colorscheme
+        \ : a:colorscheme
   if empty(colorscheme) && !reload
     echo g:current_colorscheme
     return
@@ -126,6 +119,9 @@ function! user#colorscheme#command(colorscheme, ...) abort
   execute 'colorscheme' colorscheme
   call user#colorscheme#set_customize(colorscheme)
   let g:current_colorscheme = colorscheme
+  if !exists('g:lightline')
+    return
+  endif
   " NOTE: `:help lightline-problem-13`
   let g:lightline.colorscheme = user#colorscheme#lightline()
   call lightline#init()
@@ -134,7 +130,7 @@ function! user#colorscheme#command(colorscheme, ...) abort
 endfunction
 
 function! user#colorscheme#completion(ArgLead, CmdLine, CursorPos) abort
-  let list = s:colorscheme_list()
+  let list = keys(user#colorscheme#get())
   if exists('*matchfuzzy')
     if empty(a:ArgLead)
       return sort(copy(list))
@@ -144,98 +140,5 @@ function! user#colorscheme#completion(ArgLead, CmdLine, CursorPos) abort
   else
     return filter(copy(list), {_, val -> val =~? a:ArgLead})
   endif
-endfunction
-
-" NOTE: it is require vim v8.2.3578 or later.
-function! user#colorscheme#hl_compile() abort
-  let result = []
-  let ignored_hlgroup = [
-        \ 'cssColor', 'perl', 'php', 'purescript', 'netrw', 'molder',
-        \ 'Lightline', 'ALE', 'NERDTree', 'agit', 'QuickScope', 'Quickmenu',
-        \ 'WhichKey', 'BufTabLine', 'Startify', 'Signature', 'IndentGuide',
-        \ 'hitspop', 'Dirvish', 'Signify', 'Vista', 'Tagbar', 'Vimwiki',
-        \ 'CtrlP', 'denite', 'Lf_hl', 'Syntastic', 'Neomake', 'Coc', 'plug',
-        \ 'Fern', 'cmakeKW', 'haskell', 'scala', 'moon', 'java', 'xml',
-        \ 'pandoc', 'Sneak', 'EasyMotion', 'scss', 'sass', 'cpp', 'cucumber',
-        \ ]
-  let default_links = {
-        \ 'String': 'Constant',
-        \ 'Character': 'Constant',
-        \ 'Number': 'Constant',
-        \ 'Boolean': 'Constant',
-        \ 'Float': 'Number',
-        \ 'Function': 'Identifier',
-        \ 'Conditional': 'Statement',
-        \ 'Repeat': 'Statement',
-        \ 'Label': 'Statement',
-        \ 'Operator': 'Statement',
-        \ 'Keyword': 'Statement',
-        \ 'Exception': 'Statement',
-        \ 'Include': 'PreProc',
-        \ 'Define': 'PreProc',
-        \ 'Macro': 'PreProc',
-        \ 'PreCondit': 'PreProc',
-        \ 'StorageClass': 'Type',
-        \ 'Structure': 'Type',
-        \ 'Typedef': 'Type',
-        \ 'SpecialChar': 'Special',
-        \ 'Tag': 'Special',
-        \ 'Delimiter': 'Special',
-        \ 'SpecialComment': 'Special',
-        \ 'Debug': 'Special',
-        \ }
-  for entry in hlget()
-    if get(entry, 'cleared', v:false) | continue |  endif
-    if match(entry.name, join(ignored_hlgroup, '\|')) != -1 | continue | endif
-    let cmd = ['hi']
-    if !empty(get(entry, 'linksto'))
-      if get(default_links, entry.name, '') ==# entry.linksto
-        continue
-      endif
-      if get(entry, 'default', v:false)
-        call extend(cmd, ['def', 'link', entry.name, entry.linksto])
-      else
-        call extend(cmd, ['link', entry.name, entry.linksto])
-      endif
-      call add(result, join(cmd))
-      continue
-    endif
-    call add(cmd, entry.name)
-    let attrs = [
-          \ 'cterm', 'ctermbg', 'ctermfg',
-          \ 'font', 'gui', 'guibg', 'guifg', 'guisp',
-          \ 'start', 'stop', 'term'
-          \ ]
-    for attr in attrs
-      if !empty(get(entry, attr))
-        if type(entry[attr]) == v:t_dict
-          let value = join(keys(entry[attr]), ',')
-        else
-          let value = entry[attr]
-        endif
-        call add(cmd, printf('%s=%s', attr, value))
-      endif
-    endfor
-    call add(result, join(cmd))
-  endfor
-  return result
-endfunction
-
-function! user#colorscheme#compile() abort
-  let cmds = user#colorscheme#hl_compile()
-  " TODO: add g:terminal_ansi_colors
-  let header = [
-        \ 'hi clear',
-        \ 'if exists(''syntax_on'')',
-        \ '  sy reset',
-        \ 'end',
-        \ 'let g:colors_name = ' .. string(g:colors_name),
-        \ ]
-  let result = extend(header, cmds)
-  let file = printf('%s/colors/%s.vim', g:config_home, g:colors_name)
-  if !filereadable(file)
-    call writefile(result, file)
-  endif
-  return join(result, "\n")
 endfunction
 
