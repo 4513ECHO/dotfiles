@@ -62,8 +62,8 @@ function! user#colorscheme#set_customize(colorscheme) abort
     call s:set_terminal_colors(
           \ type(terminal) == v:t_string && terminal ==# 'mini'
           \ ? [
-          \ '#282c34', '#e06c75', '#98c379', '#e5c07b', '#61afef', '#c678dd', '#56b6c2', '#5c6370',
-          \ '#3e4452', '#e06c75', '#98c379', '#e5c07b', '#61afef', '#c678dd', '#56b6c2', '#abb2bf']
+          \ '#1d1f21', '#cc6666', '#b5bd68', '#f0c674', '#81a2be', '#b294bb', '#8abeb7', '#d3d7cf',
+          \ '#707880', '#cc6666', '#b5bd68', '#de955f', '#729fcf', '#b294bb', '#005f5f', '#707880']
           \ : terminal
           \ )
   elseif !has('nvim') && exists('g:terminal_color_0')

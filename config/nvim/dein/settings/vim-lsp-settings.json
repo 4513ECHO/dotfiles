@@ -164,7 +164,8 @@
         },
         "schema": {
           "associations": {
-            "^(.*(/|\\\\)dein(/|\\\\).*\\.toml)$": "`'file://'.expand('~/Develops/github.com/4513ECHO/taplo/schemas/dein.toml.json')`"
+            "unused^(.*(/|\\\\)dein(/|\\\\).*\\.toml)$": "`'file://'.expand('~/Develops/github.com/4513ECHO/taplo/schemas/dein.toml.json')`",
+            "^(.*(/|\\\\)dein(/|\\\\).*\\.toml)$": "`'file://'.expand('~/.config/nvim/dein/settings/dein.toml.json')`"
           },
           "enabled": true,
           "repositoryEnabled": true,
