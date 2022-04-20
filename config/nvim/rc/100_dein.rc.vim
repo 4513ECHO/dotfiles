@@ -22,6 +22,7 @@ let g:dein#lazy_rplugins = v:true
 let g:dein#install_check_diff = v:true
 let g:dein#install_progress_type = 'floating'
 let g:dein#auto_remote_plugins = v:false
+let g:dein#enable_notification = v:true
 let g:denops#disabled = !executable('deno')
 
 function! s:load_toml(filename, lazy) abort

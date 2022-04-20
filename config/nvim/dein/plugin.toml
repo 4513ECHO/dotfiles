@@ -283,6 +283,10 @@ call lsp#enable()
 '''
 
 [[plugins]]
+repo = 'mattn/vim-notification'
+if = '!has("nvim")'
+
+[[plugins]]
 repo = 'obcat/vim-hitspop'
 if = '!has("nvim")'
 on_event = ['CmdlineLeave', 'CmdwinLeave']

@@ -71,3 +71,26 @@ function! user#auto_mkdir(dir, force) abort
   endif
 endfunction
 
+function! user#notify(msg, ...) abort
+  let title = get(a:000, 0, '')
+  if has('nvim')
+    if dein#util#_luacheck('notify')
+      call luaeval('require("notify")(_A.msg, "info",'
+            \ .. '{ title=_A.title })',
+            \ { 'msg': a:msg, 'title': title })
+    else
+      call nvim_notify(a:msg, 1, {})
+    endif
+  else
+    if dein#is_available('vim-notification') || exists('g:loaded_notification')
+      call notification#show({
+            \ 'text': a:msg,
+            \ 'title': title,
+            \ })
+    else
+      call popup_notification(a:msg, {
+            \ 'title': title,
+            \ })
+    endif
+  endif
+endfunction

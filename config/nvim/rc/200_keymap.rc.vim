@@ -18,11 +18,13 @@ tnoremap <Leader><Space> <Leader>
 " NOTE: ZQ is useful when cmdline is broken
 nnoremap ZZ <Nop>
 nnoremap q <Nop>
-nnoremap Q q
 nnoremap S <Nop>
 xnoremap q <Nop>
-xnoremap Q q
 xnoremap S <Nop>
+
+nnoremap <expr> Q empty(reg_recording())
+      \ ? 'qq' .. '<Cmd>call user#notify("register recording started")<CR>'
+      \ : 'q' .. '<Cmd>call user#notify("register recording finished")<CR>'
 
 " disable tmux prefix key
 nnoremap <C-q> <Nop>
