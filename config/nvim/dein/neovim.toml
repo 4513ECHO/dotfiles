@@ -1,9 +1,21 @@
 
-# [[plugins]]
-# repo = 'EdenEast/nightfox.nvim'
-# hook_add = '''
-# call user#colorscheme#add('nightfox.nvim')
-# '''
+[[plugins]]
+repo = 'folke/lua-dev.nvim'
+
+[[plugins]]
+repo = 'kevinhwang91/nvim-hlslens'
+lazy = true
+on_lua = ['hlslens']
+hook_add = '''
+function! s:search_changed() abort
+  lua require('hlslens').disable()
+  lua require('hlslens').enable()
+  lua require('hlslens').start(true)
+endfunction
+autocmd vimrc User SearchxEnter lua require('hlslens').start(true)
+autocmd vimrc User SearchxCancel lua require('hlslens').disable()
+autocmd vimrc User SearchxInputChanged call <SID>search_changed()
+'''
 
 [[plugins]]
 repo = 'nathom/filetype.nvim'
@@ -16,32 +28,10 @@ repo = 'nvim-treesitter/nvim-treesitter'
 lazy = true
 depends = ['playground']
 on_event = ['BufRead']
+merge_ftdetect = true
 hook_post_update = 'TSUpdate'
 hook_source = '''
-lua << EOF
-require("nvim-treesitter.configs").setup {
-  ensure_installed = {
-    "lua",
-    "markdown",
-    "python",
-    "query",
-    "rust",
-    "toml",
-    "typescript",
-    "vim",
-    "yaml",
-  },
-  highlight = {
-    enable = true,
-  },
-  playground = {
-    enable = true,
-  },
-  query_linter = {
-    enable = true,
-  },
-}
-EOF
+lua require('vimrc.plugin.treesitter')
 '''
 [plugins.ftplugin]
 tsplayground = '''
@@ -51,4 +41,28 @@ nnoremap <buffer> q <C-w>q
 [[plugins]]
 repo = 'nvim-treesitter/playground'
 lazy = true
+
+[[plugins]]
+repo = 'petertriho/nvim-scrollbar'
+lazy = true
+on_lua = ['scrollbar', 'scrollbar.utils', 'scrollbar.handlers']
+hook_add = '''
+autocmd vimrc ColorScheme *
+      \ lua require('scrollbar.utils').set_highlights()
+autocmd vimrc WinEnter,WinScrolled,VimResized,FocusGained *
+      \ lua require('scrollbar.handlers').show();require('scrollbar').render()
+autocmd vimrc User lsp_diagnostics_updated
+      \ lua require('scrollbar.handlers').show();require('scrollbar').render()
+'''
+hook_source = '''
+lua require('vimrc.plugin.scrollbar')
+'''
+
+[[plugins]]
+repo = 'rcarriga/nvim-notify'
+lazy = true
+on_lua = ['notify']
+hook_source = '''
+lua require('vimrc.plugin.notify')
+'''
 

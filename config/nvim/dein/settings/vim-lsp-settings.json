@@ -145,7 +145,7 @@
           "enable": true
         },
         "workspace": {
-          "library": "`has('nvim') ? keys(v:lua.require('vimrc.plugin').lua_library()) : []`",
+          "library": "`has('nvim') ? keys(v:lua.require('vimrc.plugin.lsp')) : []`",
           "useGitignore": true
         }
       }
