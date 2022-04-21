@@ -6,15 +6,17 @@
   path = ~/.gitconfig.local
 
 [core]
-  editor = vim
+  # editor = vim
+  editor = nvim
   quotepath = false
   commentChar = ";"
   # pager = vim -
+  hooksPath = ~/.config/git/hooks
 
 [pager]
-  diff = diff-highlight | less -R +Gg
-  log = diff-highlight | less -R +Gg
-  show = diff-highlight | less -R +Gg
+  diff = gitdiff.sh | less -R
+  log = gitdiff.sh| less -R
+  show = gitdiff.sh| less -R
 
 [color]
   ui = auto
@@ -40,47 +42,57 @@
 
 [url "git@github.com:"]
   insteadOf = github:
-  insteadOf = https://github.com/
+  pushInsteadOf = https://github.com/
 
 [diff]
   tool = vimdiff
   algorithm = histogram
+  compactionHeuristic = true
   colorMoved = dimmed-zebra
+  colorMovedWS = allow-indentation-change
 
 [difftool]
   prompt = false
 
 [alias]
-  alias = !git config --get-regexp '^alias' | sed 's:alias\\.\\([^ ]*\\) \\(.*\\):\\1\\\t -> \\2:' | cut -c 1-46 | sort
-  st = status
-  graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
-  gr = !git graph
+  ### command abbrev ###
+  adn = add -N
+  adp = add -p
+  adu = add -u
+  br = branch
+  # cl = clone
+  cl = !ghq get
   cm = commit
   cmm = commit -m
   co = checkout
-  br = branch
   df = diff
-  ps = push
+  dft = difftool
   pl = pull
+  ps = push
+  st = status
+  shorts = status -s -b
+  ### feature shortcut ###
+  all-files = !git ls-files
+  alias = !git config --get-regexp "^alias" | sed 's:alias\\.\\([^ ]*\\) \\(.*\\):\\1\\\t -> \\2:' | cut -c 1-46 | sort
+  color = !git -c color.status=always
+  defaultBranch = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@refs/remotes/origin/@@'
+  dirs = !git ls-files | sed -e "/^[^\\/]*$/d" -e "s:/[^/]*$::" | uniq
+  graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
+  hash = rev-parse --short HEAD
+  history = reflog
+  latest = describe --tags --abbrev=0
+  upstream = !git pull upstream "$(git defaultBranch)"
   pwd = !pwd
   root = rev-parse --show-toplevel
-  # cl = clone
-  cl = !ghq get
-  latest = describe --tags --abbrev=0
-  adp = add -p
-  adu = add -u
-  dft = difftool
-  dirs = !git ls-files | sed -e '/^[^\\/]*$/d' -e 's:/[^/]*$::' | uniq
-  set-remote = !"f(){ git remote add origin $1; git pull --set-upstream origin ${2:-main}; }; f"
-  all-files = !git ls-files
-  history = reflog
-  unrebase = !git reset --hard "$(git reflog --color | fzf --ansi --preview 'git show {1}' | awk '{print $2}')"
-  untrack = rm --cached
-  unstage = restore --staged
   uncommit = reset --soft HEAD^
-  hash = rev-parse --short HEAD
+  unstage = restore --staged
+  untrack = rm --cached
+  set-remote = !"f(){ \
+    git remote add origin $1; \
+    git pull --set-upstream origin ${2:-main}; \
+  };f"
 
 [ghq]
-  root = ~/.cache/vim/dein/repos
   root = ~/Develops
 
+# vim:ft=gitconfig

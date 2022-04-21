@@ -2,6 +2,10 @@
 
 set -eu
 
+if [ -n "${GITDIFF:-}" ]; then
+  "$GITDIFF" "$@"
+  exit $?
+fi
 if command -v delta > /dev/null 2>&1; then
   delta "$@"
 elif command -v diff-highlight > /dev/null 2>&1; then
