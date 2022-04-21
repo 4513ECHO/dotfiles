@@ -243,15 +243,6 @@ nmap g+    <Plug>(highlightedundo-gplus)
 '''
 
 [[plugins]]
-repo = 'machakann/vim-highlightedyank'
-if = '!has("nvim")'
-on_map = { nxo = '<Plug>' }
-on_event = ['TextYankPost']
-hook_add = '''
-let g:highlightedyank_highlight_duration = 100
-'''
-
-[[plugins]]
 repo = 'markonm/traces.vim'
 on_event = ['CmdlineEnter', 'CmdwinEnter']
 hook_add = '''
@@ -282,20 +273,6 @@ hook_source = '''
 call lsp#enable()
 '''
 
-[[plugins]]
-repo = 'mattn/vim-notification'
-if = '!has("nvim")'
-
-[[plugins]]
-repo = 'obcat/vim-hitspop'
-if = '!has("nvim")'
-on_event = ['CmdlineLeave', 'CmdwinLeave']
-hook_add = '''
-let g:hitspop_line = 'winbot'
-let g:hitspop_timeout = 2000
-autocmd vimrc ColorScheme *
-      \ hi link hitspopErrormsg ErrorMsg
-'''
 
 [[plugins]]
 repo = 'ojroques/vim-oscyank'
@@ -343,11 +320,6 @@ repo = 'prabirshrestha/vim-lsp'
 repo = 'statiolake/vim-quickrun-runner-nvimterm'
 if = 'has("nvim")'
 on_source = ['vim-quickrun']
-
-[[plugins]]
-repo = 'rbtnn/vim-coloredit'
-if = '!has("nvim")'
-on_cmd = ['ColorEdit']
 
 [[plugins]]
 repo = 'rhysd/clever-f.vim'

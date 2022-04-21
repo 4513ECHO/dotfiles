@@ -104,12 +104,6 @@ nmap <silent><buffer> dd <Plug>(molder-operations-delete)
 nmap <silent><buffer> r  <Plug>(molder-operations-rename)
 '''
 
-[[plugins]]
-repo = 'obcat/vim-sclow'
-if = '!has("nvim")'
-hook_add = '''
-let g:sclow_hide_full_length = v:true
-'''
 
 [[plugins]]
 repo = 'osyo-manga/vim-precious'

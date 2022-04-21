@@ -1,0 +1,38 @@
+
+[[plugins]]
+repo = 'machakann/vim-highlightedyank'
+lazy = true
+on_map = { nxo = '<Plug>' }
+on_event = ['TextYankPost']
+hook_add = '''
+let g:highlightedyank_highlight_duration = 100
+'''
+
+[[plugins]]
+repo = 'mattn/vim-notification'
+lazy = true
+
+[[plugins]]
+repo = 'obcat/vim-hitspop'
+lazy = true
+on_event = ['CmdlineLeave', 'CmdwinLeave']
+on_func = ['hitspop#main']
+hook_add = '''
+let g:hitspop_line = 'winbot'
+let g:hitspop_timeout = 2000
+autocmd vimrc ColorScheme *
+      \ hi link hitspopErrormsg ErrorMsg
+autocmd vimrc User SearchxInputChanged call hitspop#main()
+'''
+
+[[plugins]]
+repo = 'obcat/vim-sclow'
+hook_add = '''
+let g:sclow_hide_full_length = v:true
+'''
+
+[[plugins]]
+repo = 'rbtnn/vim-coloredit'
+lazy = true
+on_cmd = ['ColorEdit']
+

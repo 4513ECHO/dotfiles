@@ -45,6 +45,8 @@ if dein#min#load_state(s:dein_dir)
   endif
   if has('nvim')
     call s:load_toml('neovim.toml', v:false)
+  else
+    call s:load_toml('vim.toml', v:false)
   endif
 
   call dein#end()
