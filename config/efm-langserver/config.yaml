@@ -1,49 +1,96 @@
 ---
 version: 2
-lint-debounce: 1s
+lint-debounce: 0.5s
+root-markers:
+  - .git/
+  - .git
 tools:
-  markdown-textlint: &markdown-textlint
+  textlint-lint: &textlint-lint
+    prefix: textlint
     lint-command: 'npx --no-install textlint -f unix --stdin --stdin-filename ${INPUT}'
     lint-ignore-exit-code: true
     lint-stdin: true
     lint-formats:
       - '%f:%l:%c: %m [%trror/%r]'
+      - '%f:%l:%c: 【%r】 %m'
+      - '%E%f:%l:%c: %m'
+      - '%Z%m [%trror/%r]'
+      - '%C%m'
     root-markers:
       - .textlintrc
       - .textlintrc.json
       - .textlintrc.yaml
       - .textlintrc.yml
+    commands:
+      - title: 'textlint fix'
+        command: npx
+        arguments:
+          - '--no-install'
+          - 'textlint'
+          - '--fix'
+          - '${INPUT}'
 
-  markdown-markdownlint: &markdown-markdownlint
-    lint-command: 'npx --no-install markdownlint -s'
+  markdownlint-lint: &markdownlint-lint
+    prefix: markdownlint
+    lint-command: 'npx --no-install markdownlint --stdin'
     lint-stdin: true
     lint-formats:
-      - '%f:%l %m'
-      - '%f:%l:%c %m'
-      - '%f: %l: %m'
+      - '%f:%l:%c MD%n/%*[^ ] %m'
+      - '%f:%l MD%n/%*[^ ] %m'
+    commands:
+      - title: 'markdownlint fix'
+        command: markdownlint
+        arguments:
+          - '--fix'
+          - '${INPUT}'
 
-  sh-shellcheck: &sh-shellcheck
-    lint-command: 'shellcheck -f gcc -x'
-    lint-formats:
-      - '%f:%l:%c: %trror: %m'
-      - '%f:%l:%c: %tarning: %m'
-      - '%f:%l:%c: %tote: %m'
+  # jq-format: &jq-format
+  #   format-command: 'jq .'
+  #   format-stdin: true
 
-  sh-shfmt: &sh-shfmt
-    format-command: 'shfmt -ci -s -bn'
+  fixjson-format: &fixjson-format
+    format-command: 'fixjson'
     format-stdin: true
 
-  json-jq: &json-jq
-    lint-command: 'jq .'
+  stylua-format: &stylua-format
+    format-command: 'stylua --config-path $XDG_CONFIG_HOME/stylua/stylua.toml -'
+    format-stdin: true
+
+  shellcheck-lint: &shellcheck-lint
+    prefix: shellcheck
+    lint-command: 'shellcheck -f gcc -x -'
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %t%*[^:]: %m [SC%n]'
+
+  shfmt-format: &shfmt-format
+    format-command: 'shfmt -s -ln bash -i 2 -bn -ci -sr'
+    format-stdin: true
+
+  vint-lint: &vint-lint
+    prefix: vint
+    lint-command: 'vint --enable-neovim --style-problem --stdin-display-name ${INPUT} -'
+    lint-stdin: true
 
 languages:
   markdown:
-    - <<: *markdown-textlint
-    - <<: *markdown-markdownlint
+    - <<: *textlint-lint
+    - <<: *markdownlint-lint
 
   sh:
-    - <<: *sh-shellcheck
-    - <<: *sh-shfmt
+    - <<: *shellcheck-lint
+    - <<: *shfmt-format
+
+  lua:
+    - <<: *stylua-format
 
   json:
-    - <<: *json-jq
+    # - <<: *jq-format
+    - <<: *fixjson-format
+
+  vim:
+    - <<: *vint-lint
+
+  zsh:
+    - <<: *shfmt-format
+

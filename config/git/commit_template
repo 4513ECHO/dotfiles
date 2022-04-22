@@ -1,20 +1,22 @@
-; ✨ feat      ; :sparkles:      new feature
-; 🐛 fix       ; :bug:           bug fix
-; 💥 breaking  ; :boom:          breaking change
-; 📦 deps      ; :package:       dependencies
-; 📖 docs      ; :book:          documentation
-; 🔨 refactor  ; :hammer:        refactoring code
-; 👕 style     ; :shirt:         linting/formatting code
-; 🚧 working   ; :construction:  working in progress
+; build    ; Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+; chore    ; Changes to the build process or auxiliary tools and libraries such as documentation generation
+; ci       ; Changes to our CI configuration files and scripts (examples: CircleCi, SauceLabs)
+; docs     ; Documentation only changes
+; feat     ; A new feature
+; fix      ; A bug fix
+; perf     ; A code change that improves performance
+; refactor ; A code change that neither fixes a bug nor adds a feature
+; test     ; Adding missing tests or correcting existing tests
 
 ; [optional body]
 
 ; [optional footer(s)]
-
+; BREAKING CHANGE: <breaking change summary>
+; DEPRECATED: <what is deprecated>
 
 ; ==========
 ; Conventional Commits
 ; - https://www.conventionalcommits.org/ja/v1.0.0/
-; Git Commit message Emoji
-; - https://gist.github.com/parmentf/035de27d6ed1dce0b36a
+; Commit Message Guidelines
+; - https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit
 ; vim:ft=gitcommit

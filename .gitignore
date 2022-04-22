@@ -1,5 +1,5 @@
 # vim
-config/vim/colors/*
+config/nvim/colors/*
 
 # zsh
 config/zsh/.zcompdump*
@@ -7,4 +7,8 @@ config/zsh/.zinit/*
 config/zsh/completions/*
 config/zsh/.zcompcache/*
 
+# gh
+config/gh/hosts.yml
+
 !**/.gitkeep
+# vim:ft=gitignore

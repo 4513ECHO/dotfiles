@@ -1,12 +1,11 @@
+# shellcheck shell=bash
+
 HISTCONTROL=ignoreboth
-
-shopt -s histappend
-
 HISTSIZE=1000
 HISTFILESIZE=2000
 
+shopt -s histappend
 shopt -s checkwinsize
-
 shopt -s globstar
 
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -21,20 +20,16 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-export EDITOR="vim"
+export EDITOR='nvim'
 
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
 alias ls="ls -a --color=auto"
-
-alias dev="cd ~/Develops"
 alias dot="cd ~/dotfiles"
-
 alias c="clear"
 alias g="git"
-alias herokulogin="heroku login --interactive"
 alias reload="source ~/.bashrc"
 alias rm="rm -i"
 alias q="exit"
