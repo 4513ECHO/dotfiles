@@ -150,6 +150,15 @@ xmap <silent> ig <Plug>(textobj-functioncall-generics-i)
 '''
 
 [[plugins]]
+repo = 'osyo-manga/vim-textobj-context'
+on_map = { xo = '<Plug>' }
+depends = ['vim-textobj-user']
+hook_add = '''
+omap ix <Plug>(textobj-context-i)
+xmap ix <Plug>(textobj-context-i)
+'''
+
+[[plugins]]
 repo = 'rhysd/vim-textobj-anyblock'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']

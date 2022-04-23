@@ -348,6 +348,28 @@ autocmd vimrc ColorScheme *
 '''
 
 [[plugins]]
+repo = 'thinca/vim-partedit'
+depends = ['context_filetype.vim']
+on_cmd = ['Partedit', 'ParteditEnd']
+on_func = ['partedit#start']
+hook_add = '''
+let g:partedit#opener = 'split'
+function! s:operator_partedit() abort
+  let context = context_filetype#get()
+  if context.range == [[0, 0], [0, 0]]
+    echohl WarningMsg
+    echomsg 'Context is not found'
+    echohl NONE
+    return
+  endif
+  call partedit#start(context.range[0][0], context.range[1][0],
+        \ {'filetype': context.filetype})
+  nnoremap <buffer> q <Cmd>ParteditEnd<CR>
+endfunction
+nnoremap <C-x><C-x> <Cmd>call <SID>operator_partedit()<CR>
+'''
+
+[[plugins]]
 repo = 'thinca/vim-prettyprint'
 on_cmd = ['PP', 'PrettyPrint']
 
