@@ -43,6 +43,8 @@ on_event = ['InsertEnter', 'CmdlineEnter']
 hook_add = '''
 let g:lexima_no_default_rules = v:true
 let g:lexima_ctrlh_as_backspace = v:true
+" NOTE: vim v8.2.4504 broke compatibility around <Esc> keys. (fixed by v8.2.4551)
+" let g:lexima_map_escape = ''
 '''
 hook_source = '''
 Runtime dein/settings/lexima.vim

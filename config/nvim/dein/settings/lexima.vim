@@ -27,28 +27,28 @@ let s:rules._ += [
 let s:rules.python = []
 let s:rules.python += [
       \ { 'char': '_',     'at': '\W\+_\%#', 'input': '_',        'input_after': '__' },
-      \ { 'char': '<BS>',  'at': '__\%#__',  'input': '<BS><BS>', 'delete': 2 },
-      \ { 'char': '<Tab>', 'at': '\%#__',                         'leave': 2 },
+      \ { 'char': '<BS>',  'at': '__\%#__',  'input': '<BS><BS>', 'delete': 2         },
+      \ { 'char': '<Tab>', 'at': '\%#__',                         'leave': 2          },
       \ ]
 
 " help
 let s:rules.help = []
 let s:rules.help += [
       \ { 'char': '*',     'input': '*',    'input_after': '*' },
-      \ { 'char': '*',     'at': '\%#\*',   'leave':  '*' },
-      \ { 'char': '<BS>',  'at': '|\%#|',   'delete': '|' },
-      \ { 'char': '<BS>',  'at': '\*\%#\*', 'delete': '*' },
-      \ { 'char': '<Bar>', 'at': '\%#|',    'leave':  '|' },
+      \ { 'char': '*',     'at': '\%#\*',   'leave':  '*'      },
+      \ { 'char': '<BS>',  'at': '|\%#|',   'delete': '|'      },
+      \ { 'char': '<BS>',  'at': '\*\%#\*', 'delete': '*'      },
+      \ { 'char': '<Bar>', 'at': '\%#|',    'leave':  '|'      },
       \ { 'char': '<Bar>', 'input': '|',    'input_after': '|' },
-      \ { 'char': '<Tab>', 'at': '\%#|',    'leave':  '|' },
-      \ { 'char': '<Tab>', 'at': '\%#\*',   'leave':  '*' },
+      \ { 'char': '<Tab>', 'at': '\%#|',    'leave':  '|'      },
+      \ { 'char': '<Tab>', 'at': '\%#\*',   'leave':  '*'      },
       \ ]
 
 " toml
-" NOTE: it is using vim's bug. see also vim-jp/issues#1380
 let s:rules.toml = []
 let s:rules.toml += [
-      \ { 'char': '<CR>', 'at': "'''\\n\\_^\\%#'''", 'input': '<C-o>zz"_D', 'input_after': '<CR>' },
+      \ { 'char': '<CR>', 'at': "=\\s*'''\\%#'''$", 'input': '<CR>', 'input_after': '<CR>' },
+      \ { 'char': '<CR>', 'at': '=\s*"""\%#"""$',   'input': '<CR>', 'input_after': '<CR>' },
       \ ]
 
 " vim
@@ -58,8 +58,8 @@ function! s:vim_input_bslash() abort
   let disable_smartindent_string = '<C-o>:setlocal indentkeys-=o<CR>a'
         \ .. '%s<C-o>:setlocal indentkeys+=o<CR>a'
   return printf(disable_smartindent_string,
-        \ printf(base, repeat('<Space>', g:vim_indent_cont))
-        \ )
+        \ printf(base, repeat('<Space>', g:vim_indent_cont),
+        \ ))
 endfunction
 
 let s:rules.vim = []
@@ -78,19 +78,56 @@ let s:rules.markdown = []
 let s:rules.markdown += [
       \ { 'char': '<Tab>', 'at': '^\s*[-*]\s*\%#$', 'input': '<Home><Space><Space><End>' },
       \ { 'char': '<BS>',  'at': '^\s*[-*]\s*\%#$', 'input': '<Home><Del><Del><End>'     },
+      \ { 'char': '-',     'at': '^\s*\%#$',        'input': '-<Space>',                 },
+      \ { 'char': '*',     'at': '^\s*\%#$',        'input': '*<Space>',                 },
       \ ]
 " smart checkbox
-" let s:rules.markdown += [
-"      \ { 'char': '[', 'at': '^\s*[-*]\s*\%#$',      'input': '[<Space>]'                 },
-"      \ { 'char': 'x', 'at': '^\s*[-*]\s*\[ \]\%#$', 'input': '<Left><BS>x<Right><Space>' },
-"      \ ]
+let s:rules.markdown += [
+      \ { 'char': '<Space>', 'at': '^\s*[-*]\s*\[\%#\]$', 'input': '<Space><Right>'  },
+      \ { 'char': 'x',       'at': '^\s*[-*]\s*\[\%#\]$', 'input': 'x<Right>'        },
+      \ ]
+" smart bold, italic and strikethrough
+let s:rules.markdown += [
+      \ { 'char': '*',     'input': '*',    'input_after': '*' },
+      \ { 'char': '~',     'input': '~',    'input_after': '~' },
+      \ { 'char': '<Tab>', 'at': '\%#\*',   'leave':  '*'      },
+      \ { 'char': '<Tab>', 'at': '\%#\~',   'leave':  '~'      },
+      \ ]
 
 " typescript
 let s:rules.typescript = []
 let s:rules.typescript += [
-     \ { 'char': '>', 'at': '([a-zA-Z, ]*>\%#)', 'delete': ')', 'input': '<BS>) => {', 'input_after': '}' },
-     \ ]
+      \ { 'char': '>', 'at': '([a-zA-Z, ]*>\%#)', 'delete': ')', 'input': '<BS>) => {', 'input_after': '}' },
+      \ ]
 let s:rules.typescriptreact = copy(s:rules.typescript)
+
+" lua
+" from https://github.com/cohama/lexima.vim/issues/107
+function! s:make_rule(at, end, filetype, syntax)
+  return {
+        \ 'char': '<CR>',
+        \ 'input': '<CR>',
+        \ 'input_after': '<CR>' .. a:end,
+        \ 'at': a:at,
+        \ 'except': '\C\v^(\s*)\S.*%#\n%(%(\s*|\1\s.+)\n)*\1' .. a:end,
+        \ 'filetype': a:filetype,
+        \ 'syntax': a:syntax,
+        \ }
+endfunction
+
+let s:rules.lua = []
+let s:rules.lua += [
+      \ s:make_rule('\%(^\s*--.*\)\@<!\<function\>\%(.*\<end\>\)\@!.*\%#', 'end', 'lua', []),
+      \ s:make_rule('\%(^\s*--.*\)\@<!\<do\s*\%#', 'end', 'lua', []),
+      \ s:make_rule('\%(^\s*--.*\)\@<!\<then\s*\%#', 'end', 'lua', []),
+      \ ]
+
+" sh
+let s:rules.sh = []
+let s:rules.sh += [
+      \ { 'char': '<Tab>', 'at': '\%#\s\]\]', 'leave': 3 },
+      \ ]
+let s:rules.zsh = copy(s:rules.sh)
 
 function! s:lexima_init() abort
   for [filetype, rules] in items(s:rules)
@@ -108,16 +145,14 @@ call s:lexima_init()
 
 " from https://github.com/yuki-yano/dotfiles/blob/9bfee6c807/.vimrc#L3335
 function! s:lexima_alter_command(original, altanative) abort
-  let input_space = '<C-w>' .. a:altanative .. '<Space>'
-  let input_cr    = '<C-w>' .. a:altanative .. '<CR>'
-
-  let rule = {
-        \ 'mode': ':',
-        \ 'at': '^\(''<,''>\)\?' .. a:original .. '\%#',
-        \ }
-
-  call lexima#add_rule(extend(rule, { 'char': '<Space>', 'input': input_space }))
-  call lexima#add_rule(extend(rule, { 'char': '<CR>',    'input': input_cr    }))
+  for char in ['<CR>', '<Space>', '!']
+    call lexima#add_rule({
+          \ 'char': char,
+          \ 'mode': ':',
+          \ 'at': '^\(''<,''>\)\?' .. a:original .. '\%#',
+          \ 'input': '<C-w>' .. a:altanative ..  char,
+          \ })
+  endfor
 endfunction
 
 command! -nargs=+ LeximaAlterCommand call <SID>lexima_alter_command(<f-args>)
@@ -135,6 +170,9 @@ LeximaAlterCommand dd\%[u]                      Ddu
 LeximaAlterCommand dei\%[n]                     Dein
 LeximaAlterCommand deinr\%[eadme]               DeinReadme
 LeximaAlterCommand readm\%[e]                   DeinReadme
+LeximaAlterCommand helpfu\%[lversion]           HelpfulVersion
+LeximaAlterCommand tsp\%[laygroundtoggle]       TSPlaygroundToggle
+LeximaAlterCommand tsh\%[ighlightcaptureundercursor]    TSHighlightCaptureUnderCursor
 LeximaAlterCommand colo\%[rscheme]              ColorScheme
 LeximaAlterCommand ra\%[ndomcolorscheme]        RandomColorScheme
 LeximaAlterCommand todo\%[list]                 TodoList
