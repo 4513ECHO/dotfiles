@@ -8,7 +8,9 @@ if &modifiable
 endif
 set fileencodings=ucs-boms,utf-8,euc-jp,cp932
 set fileformats=unix,dos,mac
-set ambiwidth=double
+" NOTE: setcellwidths() does not exist in neovim
+" set ambiwidth=double
+set ambiwidth=single
 
 " ------------------
 " color/sequence
@@ -25,6 +27,9 @@ endif
 " ------------------
 " stausline
 set laststatus=2
+if has('nvim')
+  set laststatus=3
+endif
 set noshowmode
 set showcmd
 set noruler
@@ -67,6 +72,10 @@ set lazyredraw
 set nofoldenable
 set synmaxcol=200
 set redrawtime=1000
+set signcolumn=number
+
+set sidescroll=1
+set sidescrolloff=2
 
 set t_vb=
 set novisualbell
@@ -74,7 +83,7 @@ set belloff=all
 
 set listchars=tab:»-,trail:-,extends:»,precedes:«,eol:¬,nbsp:%
 let &showbreak = '» '
-set fillchars& fillchars+=diff:/,eob:.
+set fillchars& fillchars+=stl:\ ,stlnc:\ ,diff:/,eob:.
 if has('nvim')
   set fillchars+=msgsep:\|
 endif
@@ -83,8 +92,8 @@ set pumheight=10
 set helpheight=12
 set cmdheight=2
 if has('nvim')
-  set pumblend=10
-  set winblend=10
+  set pumblend=20
+  set winblend=20
 endif
 
 " ------------------
@@ -97,9 +106,13 @@ set timeoutlen=500
 set matchpairs& matchpairs+=<:>
 set nrformats-=octal
 set nojoinspaces
+set virtualedit=block
 
 " set clipboard=unnamed
 set mouse=a
+if !has('nvim')
+  set scrollfocus
+endif
 
 set completeopt=menuone,noinsert,noselect
 if !has('nvim')
@@ -113,10 +126,13 @@ set wildmenu
 set wildmode=longest,full
 set wildoptions=tagfile
 if has('nvim') || has('patch-8.2.4325')
-  set wildoptions=pum
+  set wildoptions+=pum
+endif
+if has('patch-8.2.4463')
+  set wildoptions+=fuzzy
 endif
 set wildignorecase
-set history=200
+set history=400
 set cedit=
 
 " ------------------
@@ -125,17 +141,15 @@ set backup
 set writebackup
 set swapfile
 set updatetime=100
-let &backupdir = g:data_home .. '/backup'
-let &directory = g:data_home .. '/swap'
+let &backupdir = g:data_home .. '/backup//'
+let &directory = g:data_home .. '/swap//'
 call mkdir(&backupdir, 'p')
 call mkdir(&directory, 'p')
 set undofile
 if !has('nvim')
-  let &undodir = g:data_home .. '/undo'
+  let &undodir = g:vim_data_home .. '/undo'
   call mkdir(&undodir, 'p')
-endif
-if !has('nvim')
-  let &viminfofile = g:data_home .. '/viminfo'
+  let &viminfofile = g:vim_data_home .. '/viminfo'
 endif
 
 " ------------------
