@@ -2,38 +2,16 @@ augroup vimrc
   autocmd!
 augroup END
 
-" TODO: use config/nvim instead of config/vim
 let g:cache_home = empty($XDG_CACHE_HOME) ?
       \ expand('~/.cache/nvim') : $XDG_CACHE_HOME .. '/nvim'
 let g:config_home = empty($XDG_CONFIG_HOME) ?
       \ expand('~/.config/nvim') : $XDG_CONFIG_HOME .. '/nvim'
 let g:data_home = empty($XDG_DATA_HOME) ?
       \ expand('~/.local/share/nvim') : $XDG_DATA_HOME .. '/nvim'
-
-let g:loaded_2html_plugin      = v:true
-let g:loaded_getscript         = v:true
-let g:loaded_getscriptPlugin   = v:true
-let g:loaded_gzip              = v:true
-let g:loaded_gtags             = v:true
-let g:loaded_gtags_cscope      = v:true
-let g:loaded_logiPat           = v:true
-let g:loaded_man               = v:true
-let g:loaded_matchit           = v:true
-let g:loaded_matchparen        = v:true
-let g:loaded_netrw             = v:true
-let g:loaded_netrwFileHandlers = v:true
-let g:loaded_netrwPlugin       = v:true
-let g:loaded_netrwSettings     = v:true
-let g:loaded_rrhelper          = v:true
-let g:loaded_shada_plugin      = v:true
-let g:loaded_spellfile_plugin  = v:true
-let g:loaded_tar               = v:true
-let g:loaded_tarPlugin         = v:true
-let g:loaded_tutor_mode_plugin = v:true
-let g:loaded_vimball           = v:true
-let g:loaded_vimballPlugin     = v:true
-let g:loaded_zip               = v:true
-let g:loaded_zipPlugin         = v:true
+let g:vim_cache_home = empty($XDG_CACHE_HOME) ?
+      \ expand('~/.cache/vim') : $XDG_CACHE_HOME .. '/vim'
+let g:vim_data_home = empty($XDG_DATA_HOME) ?
+      \ expand('~/.local/share/vim') : $XDG_DATA_HOME .. '/vim'
 
 let g:current_colorscheme = get(g:, 'current_colorscheme', 'random')
 let g:colorscheme_customize = get(g:, 'colorscheme_customize', {'_': {}})
@@ -47,6 +25,7 @@ augroup random_colorscheme
 augroup END
 
 " echo message vim start up time
+" https://github.com/lighttiger2505/.dotfiles/blob/6d0d4b8392/.vimrc#L11
 if has('vim_starting')
   let g:startuptime = reltime()
   autocmd vimrc VimEnter *
@@ -55,16 +34,17 @@ if has('vim_starting')
         \ | echomsg printf('startuptime: %fms', reltimefloat(g:startuptime) * 1000)
 endif
 
-if has('nvim')
-  let g:python3_host_prog = stdpath('data') .. '/venv/bin/python'
-  if !filereadable(stdpath('data') .. '/venv/installed')
-    call timer_start(10, { ->
-          \ system('python3 -m venv ' .. stdpath('data') .. '/venv') })
-    call timer_start(10, { ->
-          \ system(stdpath('data') .. '/venv/bin/pip install pynvim neovim') })
-    call writefile([''], stdpath('data') .. '/venv/installed')
-  endif
-endif
+" if has('nvim')
+"   let g:python3_host_prog = stdpath('data') .. '/venv/bin/python'
+"   if !filereadable(stdpath('data') .. '/venv/installed')
+"     call mkdir(stdpath('data') .. '/venv', 'p')
+"     call timer_start(10, { ->
+"          \ system('python3 -m venv ' .. stdpath('data') .. '/venv') })
+"     call timer_start(10, { ->
+"          \ system(stdpath('data') .. '/venv/bin/pip install pynvim neovim') })
+"     call writefile([''], stdpath('data') .. '/venv/installed')
+"   endif
+" endif
 
 command! -nargs=1 Runtime runtime! g:config_home <args>
 
@@ -79,9 +59,6 @@ command! -nargs=? -bar -bang -complete=customlist,user#colorscheme#completion
 " from https://qiita.com/gorilla0513/items/11be5413405792337558
 command! -nargs=1 WWW call user#google(<q-args>)
 
-" from https://zenn.dev/kawarimidoll/articles/0ff5d28fa584d6
-command! -bar -bang DenoRun call user#deno_run(<bang>0)
-
 " from https://qiita.com/gorilla0513/items/f59e54606f6f4d7e3514
 command! PopupTerminal
       \ call popup_create(term_start(
@@ -92,10 +69,9 @@ command! PopupTerminal
 
 command! -bar HtmlFormat
       \ : silent! keepjumps keeppattern substitute+\v\>(\<)@=+>\r+ge
-      \ | silent! keepjumps normal! gg=G¬
+      \ | silent! keepjumps normal! gg=G
 
-" TODO: if bang is exists, include untracked file
-command! -bar -bang TodoList vimgrep 'TODO\ze:' `git ls-files`
+command! -bar -bang TodoList vimgrep '\vTODO\ze%(\(.{-}\))?:' `git ls-files`
 
 command! -nargs=? -bar -complete=filetype MiniNote
       \ : execute (empty(<q-mods>) ? 'botright' : <q-mods>) 'new'
@@ -104,6 +80,13 @@ command! -nargs=? -bar -complete=filetype MiniNote
 command! -bar DeinUpdateMine
       \ call dein#update(keys(filter(copy(dein#get()),
       \ { key, val -> val.repo =~? '^4513ECHO/' })))
+
+" from `:help :DiffOrig`
+command! -bar DiffOrig
+      \ : vertical new | setlocal buftype=nofile | r ++edit # | 0d_
+      \ | diffthis | wincmd p | diffthis
+
+command! -nargs=1 Doautocmd doautocmd <nomodeline> User <args>
 
 if filereadable(expand('~/.vimrc_secret'))
   source ~/.vimrc_secret

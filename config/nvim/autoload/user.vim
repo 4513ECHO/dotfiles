@@ -22,13 +22,11 @@ endfunction
 
 function! user#pager() abort
   setlocal nolist nonumber synmaxcol&
-  if index(v:argv, '+MANPAGER') != -1
-    return
-  endif
-  setlocal noswapfile buftype=nofile bufhidden=hide
+  setlocal noswapfile buftype=nofile
   setlocal modifiable nomodified readonly
+  let b:undo_ftplugin = 'setlocal list number synmaxcol<'
   if exists(':AnsiEsc') == 2
-    autocmd vimrc VimEnter * ++once
+    autocmd vimrc VimEnter *
           \ : execute 'AnsiEsc'
           \ | silent! keepjump keeppatterns
           \ | %substitute/\v\e\[%(%(\d+;)?\d{1,2})?[mK]//ge
@@ -37,30 +35,12 @@ function! user#pager() abort
     silent! keepjump keeppatterns %substitute/\v\e\[%(%(\d+;)?\d{1,2})?[mK]//ge
     filetype detect
   endif
-  nnoremap <buffer> q <C-w>q
   normal! gg
 endfunction
 
 function! user#google(word) abort
   execute 'terminal' '++close' '++shell' 'w3m'
         \ printf('"https://google.com/search?q=%s"', a:word)
-endfunction
-
-function! user#deno_run(no_check) abort
-  if &filetype !~# 'typescript'
-    echoerr 'Execute this command in typescript file buffer'
-    return
-  endif
-  let subcmd =  expand('%:t') =~# '\v^(.*[._])?test\.(ts|tsx|js|jsx|mjs|jsx)$'
-        \ ? 'test': 'run'
-  let opts = '--allow-all --unstable --watch'
-  if a:no_check
-    let opts ..= ' --no-check'
-  endif
-  execute 'topleft terminal ++close ++rows=12'
-        \ 'deno' subcmd opts expand('%:p')
-  setlocal bufhidden=wipe
-  wincmd j
 endfunction
 
 function! user#auto_mkdir(dir, force) abort
