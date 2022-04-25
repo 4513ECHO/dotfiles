@@ -3,8 +3,15 @@ repo = 'Shougo/ddc.vim'
 depends = ['context_filetype.vim', 'denops.vim', 'pum.vim', 'lexima.vim']
 on_event = ['InsertEnter']
 hook_add = '''
-nnoremap :
-      \ <Cmd>call timer_start(10, { -> user#ddc#cmdline_pre(':') })<CR>:
+nnoremap : <Cmd>call timer_start(10, { -> user#ddc#cmdline_pre(':') })<CR>:
+xnoremap : <Cmd>call timer_start(10, { -> user#ddc#cmdline_pre(':') })<CR>:
+" emulate `:help ins-completion`
+inoremap <silent><expr> <C-x><C-n> ddc#map#manual_complete('around')
+inoremap <silent><expr> <C-x><C-f> ddc#map#manual_complete('file')
+inoremap <silent><expr> <C-x><C-d> ddc#map#manual_complete('vim-lsp')
+inoremap <silent><expr> <C-x><C-v> ddc#map#manual_complete('cmdline')
+inoremap <silent><expr> <C-x><C-u> ddc#map#manual_complete()
+inoremap <silent><expr> <C-x><C-o> ddc#map#manual_complete('omni')
 '''
 hook_source = '''
 Runtime dein/settings/ddc.vim
@@ -26,6 +33,10 @@ on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/ddc-cmdline-history'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-omni'
 on_source = 'ddc.vim'
 
 [[plugins]]
@@ -60,9 +71,11 @@ on_source = ['ddc.vim', 'vim-lsp']
 [[plugins]]
 repo = 'vim-skk/skkeleton'
 depends = ['denops.vim']
-on_source = 'ddc.vim'
-hook_source = '''
+on_map = { ic = '<Plug>' }
+hook_add = '''
 map! <C-j> <Plug>(skkeleton-toggle)
+'''
+hook_source = '''
 Runtime dein/settings/skkeleton.vim
 '''
 
@@ -99,7 +112,7 @@ repo = 'matsui54/denops-signature_help'
 depends = ['denops.vim']
 on_source = 'ddc.vim'
 hook_source = '''
-call signature_help#enable()
 let g:lsp_signature_help_enabled = v:false
+call signature_help#enable()
 '''
 

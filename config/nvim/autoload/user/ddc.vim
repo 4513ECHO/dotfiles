@@ -2,20 +2,20 @@ function! user#ddc#cmdline_pre(mode) abort
   if g:denops#disabled
     return
   endif
-  cnoremap <expr> <Tab> pum#visible()
-        \ ? '<Cmd>call pum#map#select_relative(+1)<CR>'
-        \ : ddc#map#manual_complete()
+  call user#ddc#define_map('c', '<Tab>', 'pum#map#select_relative(+1)',
+        \ 'ddc#map#manual_complete()', v:true)
   call user#ddc#define_map('c', '<C-n>', 'pum#map#select_relative(+1)', '<Down>')
   call user#ddc#define_map('c', '<C-p>', 'pum#map#select_relative(-1)', '<Up>')
-  call user#ddc#define_map('c', '<CR>',  'pum#map#confirm()', '<CR>')
   call user#ddc#define_map('c', '<BS>',  'pum#map#cancel()',  '<BS>')
+  call user#ddc#define_map('c', '<CR>', 'pum#map#confirm()',
+        \ 'lexima#expand(''<lt>CR>'', '':'')', v:true)
   set wildchar=<C-l>
 
   let b:_ddc_cmdline_prev_buffer_config = ddc#custom#get_buffer()
   call ddc#custom#patch_buffer(get(s:patch_buffer, a:mode, {}))
-  autocmd vimrc User DDCCmdlineLeave call user#ddc#cmdline_post()
+  autocmd vimrc User DDCCmdlineLeave ++once call user#ddc#cmdline_post()
+  autocmd vimrc InsertEnter <buffer> ++once call user#ddc#cmdline_post()
   call ddc#enable_cmdline_completion()
-  call ddc#enable()
 endfunction
 
 let s:patch_buffer = {':': {}, '/': {}}
@@ -23,7 +23,7 @@ let s:patch_buffer[':'].sources = ['cmdline', 'around']
 let s:patch_buffer[':'].keywordPattern = '[0-9a-zA-Z_:#-]*'
 let s:patch_buffer[':'].sourceOptions = {
       \ 'cmdline': {
-      \   'forceCompletionPattern': '(\f*/\f+)+',
+      \   'forceCompletionPattern': '[\w@:~._-]/[\w@:~._-]*',
       \ }}
 let s:patch_buffer['/'].sources = ['around']
 let s:patch_buffer['/'].sourceOptions = {
@@ -31,10 +31,11 @@ let s:patch_buffer['/'].sourceOptions = {
       \   'minAutoCompleteLength': 1,
       \ }}
 
-function! user#ddc#define_map(mode, lhs, func, rhs) abort
+function! user#ddc#define_map(mode, lhs, func, rhs, ...) abort
+  let rhs = get(a:000, 0, v:false) ? a:rhs : "'" .. a:rhs .. "'"
   let cmd = '%snoremap <expr> %s ' ..
-        \ 'pum#visible() ? ''<Cmd>call %s<CR>'' : ''%s'''
-  execute printf(cmd, a:mode, a:lhs, a:func, a:rhs)
+        \ 'pum#visible() ? ''<Cmd>call %s<CR>'' : %s'
+  execute printf(cmd, a:mode, a:lhs, a:func, rhs)
 endfunction
 
 function! user#ddc#cmdline_post() abort
@@ -43,6 +44,7 @@ function! user#ddc#cmdline_post() abort
     unlet b:_ddc_cmdline_prev_buffer_config
   endif
   silent! cunmap <Tab>
+  silent! cunmap <BS>
   set wildchar&
 endfunction
 

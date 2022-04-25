@@ -9,26 +9,27 @@ let s:sourceOptions._ = {
       \ 'matchers': ['matcher_fuzzy'],
       \ 'sorters': ['sorter_fuzzy'],
       \ 'converters': [
-      \   'converter_remove_overlap', 'converter_truncate',
-      \   'converter_fuzzy'
+      \   'converter_remove_overlap',
+      \   'converter_truncate',
+      \   'converter_fuzzy',
       \ ],
-      \ 'maxCandidates': 10,
+      \ 'maxItems': 10,
       \ }
 let s:sourceOptions.around = {
       \ 'mark': 'ard',
       \ 'isVolatile': v:true,
-      \ 'maxCandidates': 8,
+      \ 'maxItems': 8,
       \ }
 let s:sourceOptions.file = {
       \ 'mark': 'file',
       \ 'minAutoCompleteLength': 30,
       \ 'isVolatile': v:true,
-      \ 'forceCompletionPattern': '\S/\S*',
+      \ 'forceCompletionPattern': '[\w@:~._-]/[\w@:~._-]*',
       \ }
 let s:sourceOptions['vim-lsp'] = {
       \ 'mark': 'lsp',
       \ 'isVolatile': v:true,
-      \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
+      \ 'forceCompletionPattern': '\.|:\s*|->\s*',
       \ }
 let s:sourceOptions.skkeleton = {
       \ 'mark': 'skk',
@@ -40,7 +41,7 @@ let s:sourceOptions.skkeleton = {
 let s:sourceOptions.necovim = {
       \ 'mark': 'vim',
       \ 'isVolatile': v:true,
-      \ 'maxCandidates': 8,
+      \ 'maxItems': 8,
       \ }
 let s:sourceOptions.emoji = {
       \ 'mark': 'emoji',
@@ -49,7 +50,7 @@ let s:sourceOptions.emoji = {
       \ }
 let s:sourceOptions['cmdline-history'] = {
       \ 'mark': 'hist',
-      \ 'maxCandidates': 5,
+      \ 'maxItems': 5,
       \ 'sorters': [],
       \ }
 let s:sourceOptions.vsnip = {
@@ -59,17 +60,19 @@ let s:sourceOptions.vsnip = {
 let s:sourceOptions.zsh = {
       \ 'mark': 'zsh',
       \ 'isVolatile': v:true,
-      \ 'forceCompletionPattern': '\S/\S*',
-      \ 'maxCandidates': 8,
+      \ 'forceCompletionPattern': '[\w@:~._-]/[\w@:~._-]*',
+      \ 'maxItems': 8,
       \ }
 let s:sourceOptions.buffer = {'mark': 'buf'}
 let s:sourceOptions.cmdline = {'mark': 'cmd'}
 let s:sourceOptions.tmux = {'mark': 'tmux'}
+let s:sourceOptions.omni = {'mark': 'omni'}
 
 let s:sourceParams.around = {'maxSize': 500}
 let s:sourceParams.buffer = {
       \ 'requireSameFiletype': v:false,
       \ 'fromAltBuf': v:true,
+      \ 'bufNameStyle': 'basename',
       \ }
 let s:sourceParams['cmdline-history'] = {'maxSize': 100}
 let s:sourceParams.tmux = {
@@ -77,13 +80,16 @@ let s:sourceParams.tmux = {
       \ 'excludeCurrentPane': v:true,
       \ 'kindFormat': '#{pane_index}.#{pane_current_command}',
       \ }
+let s:sourceParams['vim-lsp'] = {
+      \ 'ignoreCompleteProvider': v:true,
+      \ }
 
 let s:filterParams.converter_truncate = {
       \ 'maxAbbrWidth': 40,
       \ 'maxInfoWidth': 40,
       \ 'maxKindWidth': 20,
       \ 'maxMenuWidth': 20,
-      \ 'ellipsis': '...',
+      \ 'ellipsis': '..',
       \ }
 
 call ddc#custom#patch_filetype(
@@ -104,13 +110,13 @@ call ddc#custom#patch_filetype(
 call ddc#custom#patch_filetype(
       \ ['ps1', 'dosbatch', 'autohotkey', 'registry'], {
       \ 'sourcesOptions': {
-      \   'file': {'forceCompletionPattern': '\S\\\S*'},
+      \   'file': {'forceCompletionPattern': '[\w@:~._-]\\[\w@:~._-*'},
       \ },
       \ 'sourceParams': {
       \   'file': {'mode': 'win32'},
       \ }})
 call ddc#custom#patch_filetype(
-      \ ['ddu-std-filter'], {
+      \ ['ddu-ff-filter'], {
       \ 'sources': [],
       \ })
 call ddc#custom#patch_filetype(
