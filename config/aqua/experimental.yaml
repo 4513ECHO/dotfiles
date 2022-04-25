@@ -22,22 +22,23 @@ packages:
 # init: d
 
 # init: e
+- type: github_release
+  repo_owner: elixir-lang
+  repo_name: elixir
+  description: Elixir is a dynamic, functional language designed for building scalable and maintainable applications
 
 # init: f
 
 # init: g
 
 # init: h
-- type: github_release
-  repo_owner: high-moctane
-  repo_name: nextword
-  asset: 'nextword_{{trimV .Version}}_{{.OS}}_{{.Arch}}.tar.gz'
-  description: Predict next English words
 - type: github_content
   repo_owner: holman
   repo_name: spark
   path: spark
   description: ▁▂▃▅▂▇ in your shell
+
+# init: i
 
 # init: j
 - type: github_content
@@ -68,6 +69,18 @@ packages:
 
 # init: m
 - type: github_release
+  repo_owner: mgdm
+  repo_name: htmlq
+  asset: 'htmlq-{{.Arch}}-{{.OS}}.{{.Format}}'
+  supported_if: not (GOOS == "linux" and GOARCH == "arm64")
+  description: Like jq, but for HTML
+  replacements:
+    amd64: x86_64
+  format: tar.gz
+  overrides:
+  - goos: windows
+    format: zip
+- type: github_release
   repo_owner: microsoft
   repo_name: ripgrep-prebuilt
   asset: 'ripgrep-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz'
@@ -84,6 +97,8 @@ packages:
 # init: n
 - name: nodejs/node
   type: http
+  repo_owner: nodejs
+  repo_name: node
   rosetta2: true
   url: 'https://nodejs.org/dist/{{.Version}}/node-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz'
   link: https://nodejs.org/
@@ -109,6 +124,7 @@ packages:
   asset: 'pen-{{trimV .Version}}-{{.Arch}}-{.OS}.tar.xz'
   rosetta2: true
   supported_if: not (GOOS == "linux" and GOARCH == "arm64")
+  description: The programming language for scalable software development
   replacements:
     darwin: apple-darwin
     linux: unknown-linux-gnu
@@ -120,29 +136,145 @@ packages:
 # init: q
 
 # init: r
+- type: github_release
+  repo_owner: rhysd
+  repo_name: hgrep
+  asset: 'hgrep-{{.Version}}-{{.Arch}}-{{.OS}}.zip'
+  supported_if: not (GOOS == "linux" and GOARCH == "arm64")
+  description: Grep with human-friendly search results
+  replacements:
+    darwin: apple-darwin
+    linux: unknown-linux-musl
+    windows: pc-windows-msvc
+    arm64: aarch64
+    amd64: x86_64
+  files:
+  - name: hgrep
+    src: 'hgrep-{{.Version}}-{{.Arch}}-{{.OS}}/hgrep'
+  version_constraint: 'semver("< 0.2.5")'
+  version_overrides:
+  - version_constraint: 'semver(">= 0.2.5")'
+    supported_if: 'true'
+    overrides:
+    - goos: linux
+      goarch: arm64
+      replacements:
+        linux: unknown-linux-gnu
 - type: http
-  name: rust-lang/rust
+  repo_owner: rust-lang
+  repo_name: rust
   url: 'https://static.rust-lang.org/dist/rust-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz'
-  link: https://rust-lang.org/
-  description: hoge
+  description: Empowering everyone to build reliable and efficient software
   replacements:
     darwin: apple-darwin
     linux: unknown-linux-musl
     freebsd: unknown-freebsd
     netbsd: unknown-netbsd
-    amd64: x64_64
+    amd64: x86_64
     arm64: aarch64
     386: i686
   files:
-  - src: rustc
-    name: 'hoge/rustc'
+  - name: cargo
+    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/cargo/bin/cargo'
+  - name: clippy-driver
+    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/clippy-preview/bin/clippy-driver'
+  - name: cargo-clippy
+    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/clippy-preview/bin/cargo-clippy'
+  - name: rls
+    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/rls-preview/bin/rls'
+  - name: rust-demangler
+    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/rust-demangler-preview/bin/rust-demangler'
+  - name: rustdoc
+    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rustdoc'
+  - name: rust-lldb
+    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rust-lldb'
+  - name: rustc
+    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rustc'
+  - name: rust-gdbgui
+    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rust-gdbgui'
+  - name: rust-gdb
+    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rust-gdb'
+  - name: rustfmt
+    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustfmt-preview/bin/rustfmt'
+  - name: cargo-fmt
+    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustfmt-preview/bin/cargo-fmt'
 
 # init: s
+- type: github_release
+  repo_owner: sharkdp
+  repo_name: diskus
+  asset: 'diskus-{{.Version}}-{{.Arch}}-{{.OS}}.{{.Format}}'
+  description: A command-line benchmarking tool
+  rosetta2: true
+  format: tar.gz
+  replacements:
+    darwin: apple-darwiin
+    windows: pc-windows-msvc
+    linux: unknown-linux-musl
+    arm64: aarch64
+    amd64: x86_64
+  overrides:
+  - goos: linux
+    goarch: arm64
+    replacements:
+      linux: unknown-linux-gnu
+  - goos: windows
+    format: zip
+  files:
+  - name: diskus
+    src: 'diskus-{{.Version}}-{{.Arch}}-{{.OS}}/diskus'
+- type: github_release
+  repo_owner: sharkdp
+  repo_name: hexyl
+  asset: 'hexyl-{{.Version}}-{{.Arch}}-{{.OS}}.{{.Format}}'
+  description: A command-line hex viewer
+  rosetta2: true
+  format: tar.gz
+  replacements:
+    darwin: apple-darwiin
+    windows: pc-windows-msvc
+    linux: unknown-linux-musl
+    arm64: aarch64
+    amd64: x86_64
+  overrides:
+  - goos: linux
+    goarch: arm64
+    replacements:
+      linux: unknown-linux-gnu
+  - goos: windows
+    format: zip
+  files:
+  - name: hexyl
+    src: 'hexyl-{{.Version}}-{{.Arch}}-{{.OS}}/hexyl'
+- type: github_release
+  repo_owner: sharkdp
+  repo_name: hyperfine
+  asset: 'hyperfine-{{.Version}}-{{.Arch}}-{{.OS}}.{{.Format}}'
+  description: A command-line benchmarking tool
+  rosetta2: true
+  format: tar.gz
+  replacements:
+    darwin: apple-darwiin
+    windows: pc-windows-msvc
+    linux: unknown-linux-musl
+    arm64: aarch64
+    amd64: x86_64
+  overrides:
+  - goos: linux
+    goarch: arm64
+    replacements:
+      linux: unknown-linux-gnu
+  - goos: windows
+    format: zip
+  files:
+  - name: hyperfine
+    src: 'hyperfine-{{.Version}}-{{.Arch}}-{{.OS}}/hyperfine'
 - type: github_release
   repo_owner: sharkdp
   repo_name: pastel
   asset: 'pastel-{{.Version}}-{{.Arch}}-{{.OS}}.{{.Format}}'
   description: A command-line tool to generate, analyze, convert and manipulate colors
+  rosetta2: true
   format: tar.gz
   replacements:
     darwin: apple-darwin
@@ -172,4 +304,17 @@ packages:
   repo_name: ciw
   path: bin/ciw
   description: A wrapper to install cli binary from language associated package manager
+
+# init: u
+
+# init: v
+
+# init: w
+
+# init: x
+
+# init: y
+
+# init: z
+
 

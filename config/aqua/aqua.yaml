@@ -3,57 +3,74 @@
 # https://aquaproj.github.io/
 registries:
 - type: standard
-  ref: v2.0.0 # renovate: depName=aquaproj/aqua-registry
+  ref: v2.8.1 # renovate: depName=aquaproj/aqua-registry
 - name: local
   type: local
   path: experimental.yaml
 
 packages:
 - name: aquaproj/aqua-installer@v1.0.0
-- name: b4b4r07/afx@v0.1.20
+- name: b4b4r07/afx@v0.1.21
 # - name: BurntSushi/ripgrep@13.0.0 # NOTE: use microsoft/ripgrep-prebuilt instead
-- name: cli/cli@v2.6.0
+- name: cli/cli@v2.8.0
+# - name: crate-ci/typos@v1.5.0 # NOTE: no release fomr arm64
 - name: dandavison/delta@0.12.1
-- name: denoland/deno@v1.20.4
+# - name: denoland/deno@v1.21.0
+- name: dotenv-linter/dotenv-linter@v3.2.0
 - name: ekalinin/github-markdown-toc@0.8.0
 - name: fsaintjacques/semver-tool@3.3.0
 - name: golang/go@1.18
-  # - name: harelba/q@v3.1.6 # NOTE: no release fomr arm64
+# - name: harelba/q@v3.1.6 # NOTE: no release fomr arm64
+- name: high-moctane/nextword@v0.0.5
 - name: itchyny/gojq@v0.12.7
 - name: itchyny/mmv@v0.1.4
-- name: junegunn/fzf@0.29.0
+- name: junegunn/fzf@0.30.0
 - name: kdabir/has@v1.4.0
 - name: koalaman/shellcheck@v0.8.0
-- name: LukeChannings/deno-arm64@v1.20.4
-- name: mattn/gof@v0.0.10
-- name: mikefarah/yq@v4.24.2
+- name: LukeChannings/deno-arm64@v1.21.0
+# - name: mattn/gof@v0.0.10 # NOTE: no release for arm64
+- name: mikefarah/yq@v4.24.5
 - name: mvdan/sh@v3.4.3
 - name: nektos/act@v0.2.26
+# - name: neovim/neovim@v0.7.0 # NOTE: no release for arm64
 # - name: ogham/exa@v0.10.1 # NOTE: no release for arm64
 - name: rhysd/actionlint@v1.6.10
+# - name: rust-lang/rust@1.60.0
 - name: sharkdp/bat@v0.20.0
 - name: sharkdp/fd@v8.3.2
 - name: sheepla/fzwiki@v0.0.9
-- name: sheepla/qiitaz@v0.0.5
+- name: sheepla/qiitaz@v0.0.6-alpha
+- name: sumneko/lua-language-server@3.2.1
 - name: tomnomnom/gron@v0.6.1
-- name: TomWright/dasel@v1.24.1
+- name: TomWright/dasel@v1.24.3
 # - name: x-motemen/ghq@v1.2.1 # NOTE: no release for arm64
 - name: XAMPPRocky/tokei@v12.1.2
+- name: ziglang/zig@0.9.1
 
 # local registry
-- name: high-moctane/nextword@v0.0.5
-  registry: local
+# - name: elixir-lang/elixir@v1.13.3
+#   registry: local
 - name: holman/spark@master
   registry: local
 - name: JosefZIla/bash2048@master
   registry: local
-- name: junegunn/fzf/bin/fzf-tmux@0.29.0
+- name: junegunn/fzf/bin/fzf-tmux@0.30.0
   registry: local
 - name: ko1nksm/getoptions@v3.3.0
   registry: local
 - name: microsoft/ripgrep-prebuilt@v13.0.0-4
   registry: local
-- name: nodejs/node@v17.7.1
+- name: nodejs/node@v18.0.0
+  registry: local
+- name: rhysd/hgrep@v0.2.5
+  registry: local
+- name: rust-lang/rust@1.60.0
+  registry: local
+- name: sharkdp/diskus@v0.7.0
+  registry: local
+- name: sharkdp/hexyl@v0.9.0
+  registry: local
+- name: sharkdp/hyperfine@v1.13.0
   registry: local
 - name: sharkdp/pastel@v0.8.1
   registry: local
