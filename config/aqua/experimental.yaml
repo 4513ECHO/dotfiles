@@ -1,320 +1,201 @@
 ---
 packages:
+  # init: a
+  - type: github_release
+    repo_owner: Aloxaf
+    repo_name: silicon
+    asset: "silicon-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz"
+    rosetta2: true
+    supported_if: not (GOOS == "linux" and GOARCH == "arm64")
+    description: Create beautiful image of your source code
+    replacements:
+      darwin: apple-darwin
+      windows: pc-windows-gnu
+      linux: unknown-linux-gnu
+      amd64: x86_64
 
-# init: a
-- type: github_release
-  repo_owner: Aloxaf
-  repo_name: silicon
-  asset: 'silicon-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz'
-  rosetta2: true
-  supported_if: not (GOOS == "linux" and GOARCH == "arm64")
-  description: Create beautiful image of your source code
-  replacements:
-    darwin: apple-darwin
-    windows: pc-windows-gnu
-    linux: unknown-linux-gnu
-    amd64: x86_64
+  # init: b
 
-# init: b
+  # init: c
 
-# init: c
+  # init: d
 
-# init: d
+  # init: e
+  - type: github_release
+    repo_owner: elixir-lang
+    repo_name: elixir
+    description: Elixir is a dynamic, functional language designed for building scalable and maintainable applications
 
-# init: e
-- type: github_release
-  repo_owner: elixir-lang
-  repo_name: elixir
-  description: Elixir is a dynamic, functional language designed for building scalable and maintainable applications
+  # init: f
 
-# init: f
+  # init: g
 
-# init: g
+  # init: h
+  - type: github_content
+    repo_owner: holman
+    repo_name: spark
+    path: spark
+    description: ▁▂▃▅▂▇ in your shell
 
-# init: h
-- type: github_content
-  repo_owner: holman
-  repo_name: spark
-  path: spark
-  description: ▁▂▃▅▂▇ in your shell
+  # init: i
 
-# init: i
+  # init: j
+  - type: github_content
+    repo_owner: JosefZIla
+    repo_name: bash2048
+    path: bash2048.sh
+    description: Bash implementation of 2048 game
+    format: raw
+    files:
+      - name: bash2048.sh
+  - type: github_content
+    repo_owner: junegunn
+    repo_name: fzf
+    name: junegunn/fzf/bin/fzf-tmux
+    path: bin/fzf-tmux
+    description: fzf-tmux is a bash script that opens fzf in a tmux pane
+    files:
+      - name: fzf-tmux
 
-# init: j
-- type: github_content
-  repo_owner: JosefZIla
-  repo_name: bash2048
-  path: bash2048.sh
-  description: Bash implementation of 2048 game
-  format: raw
-  files:
-  - name: bash2048.sh
-- type: github_content
-  repo_owner: junegunn
-  repo_name: fzf
-  name: junegunn/fzf/bin/fzf-tmux
-  path: bin/fzf-tmux
-  description: fzf-tmux is a bash script that opens fzf in a tmux pane
-  files:
-  - name: fzf-tmux
+  # init: k
+  - type: github_release
+    repo_owner: ko1nksm
+    repo_name: getoptions
+    asset: getoptions
+    description: An elegant option/argument parser for shell scripts (full support for bash and all POSIX shells)
 
-# init: k
-- type: github_release
-  repo_owner: ko1nksm
-  repo_name: getoptions
-  asset: getoptions
-  description: An elegant option/argument parser for shell scripts (full support for bash and all POSIX shells)
+  # init: l
 
-# init: l
-
-# init: m
-- type: github_release
-  repo_owner: mgdm
-  repo_name: htmlq
-  asset: 'htmlq-{{.Arch}}-{{.OS}}.{{.Format}}'
-  supported_if: not (GOOS == "linux" and GOARCH == "arm64")
-  description: Like jq, but for HTML
-  replacements:
-    amd64: x86_64
-  format: tar.gz
-  overrides:
-  - goos: windows
-    format: zip
-- type: github_release
-  repo_owner: microsoft
-  repo_name: ripgrep-prebuilt
-  asset: 'ripgrep-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz'
-  description: Builds ripgrep on Azure Pipelines for multiple platforms and makes the binaries available as Github releases
-  replacements:
-    darwin: apple-darwin
-    windows: pc-windows-msvc
-    linux: unknown-linux-musl
-    arm64: aarch64
-    amd64: x86_64
-  files:
-  - name: rg
-
-# init: n
-- name: nodejs/node
-  type: http
-  repo_owner: nodejs
-  repo_name: node
-  rosetta2: true
-  url: 'https://nodejs.org/dist/{{.Version}}/node-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz'
-  link: https://nodejs.org/
-  description: Node.js JavaScript runtime
-  replacements:
-    amd64: x64
-  files:
-  - name: corepack
-    src: 'node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/corepack'
-  - name: node
-    src: 'node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/node'
-  - name: npm
-    src: 'node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/npm'
-  - name: npx
-    src: 'node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/npx'
-
-# init: o
-
-# init: p
-- type: github_release
-  repo_owner: pen-lang
-  repo_name: pen
-  asset: 'pen-{{trimV .Version}}-{{.Arch}}-{.OS}.tar.xz'
-  rosetta2: true
-  supported_if: not (GOOS == "linux" and GOARCH == "arm64")
-  description: The programming language for scalable software development
-  replacements:
-    darwin: apple-darwin
-    linux: unknown-linux-gnu
-    amd64: x86_64
-  files:
-  - name: pen
-    src: target/release/pen
-
-# init: q
-
-# init: r
-- type: github_release
-  repo_owner: rhysd
-  repo_name: hgrep
-  asset: 'hgrep-{{.Version}}-{{.Arch}}-{{.OS}}.zip'
-  supported_if: not (GOOS == "linux" and GOARCH == "arm64")
-  description: Grep with human-friendly search results
-  replacements:
-    darwin: apple-darwin
-    linux: unknown-linux-musl
-    windows: pc-windows-msvc
-    arm64: aarch64
-    amd64: x86_64
-  files:
-  - name: hgrep
-    src: 'hgrep-{{.Version}}-{{.Arch}}-{{.OS}}/hgrep'
-  version_constraint: 'semver("< 0.2.5")'
-  version_overrides:
-  - version_constraint: 'semver(">= 0.2.5")'
-    supported_if: 'true'
+  # init: m
+  - type: github_release
+    repo_owner: mgdm
+    repo_name: htmlq
+    asset: "htmlq-{{.Arch}}-{{.OS}}.{{.Format}}"
+    supported_if: not (GOOS == "linux" and GOARCH == "arm64")
+    description: Like jq, but for HTML
+    replacements:
+      amd64: x86_64
+    format: tar.gz
     overrides:
-    - goos: linux
-      goarch: arm64
-      replacements:
-        linux: unknown-linux-gnu
-- type: http
-  repo_owner: rust-lang
-  repo_name: rust
-  url: 'https://static.rust-lang.org/dist/rust-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz'
-  description: Empowering everyone to build reliable and efficient software
-  replacements:
-    darwin: apple-darwin
-    linux: unknown-linux-musl
-    freebsd: unknown-freebsd
-    netbsd: unknown-netbsd
-    amd64: x86_64
-    arm64: aarch64
-    386: i686
-  files:
-  - name: cargo
-    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/cargo/bin/cargo'
-  - name: clippy-driver
-    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/clippy-preview/bin/clippy-driver'
-  - name: cargo-clippy
-    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/clippy-preview/bin/cargo-clippy'
-  - name: rls
-    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/rls-preview/bin/rls'
-  - name: rust-demangler
-    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/rust-demangler-preview/bin/rust-demangler'
-  - name: rustdoc
-    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rustdoc'
-  - name: rust-lldb
-    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rust-lldb'
-  - name: rustc
-    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rustc'
-  - name: rust-gdbgui
-    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rust-gdbgui'
-  - name: rust-gdb
-    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rust-gdb'
-  - name: rustfmt
-    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustfmt-preview/bin/rustfmt'
-  - name: cargo-fmt
-    src: 'rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustfmt-preview/bin/cargo-fmt'
-
-# init: s
-- type: github_release
-  repo_owner: sharkdp
-  repo_name: diskus
-  asset: 'diskus-{{.Version}}-{{.Arch}}-{{.OS}}.{{.Format}}'
-  description: A command-line benchmarking tool
-  rosetta2: true
-  format: tar.gz
-  replacements:
-    darwin: apple-darwiin
-    windows: pc-windows-msvc
-    linux: unknown-linux-musl
-    arm64: aarch64
-    amd64: x86_64
-  overrides:
-  - goos: linux
-    goarch: arm64
+      - goos: windows
+        format: zip
+  - type: github_release
+    repo_owner: microsoft
+    repo_name: ripgrep-prebuilt
+    asset: "ripgrep-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz"
+    description: Builds ripgrep on Azure Pipelines for multiple platforms and makes the binaries available as Github releases
     replacements:
-      linux: unknown-linux-gnu
-  - goos: windows
-    format: zip
-  files:
-  - name: diskus
-    src: 'diskus-{{.Version}}-{{.Arch}}-{{.OS}}/diskus'
-- type: github_release
-  repo_owner: sharkdp
-  repo_name: hexyl
-  asset: 'hexyl-{{.Version}}-{{.Arch}}-{{.OS}}.{{.Format}}'
-  description: A command-line hex viewer
-  rosetta2: true
-  format: tar.gz
-  replacements:
-    darwin: apple-darwiin
-    windows: pc-windows-msvc
-    linux: unknown-linux-musl
-    arm64: aarch64
-    amd64: x86_64
-  overrides:
-  - goos: linux
-    goarch: arm64
+      darwin: apple-darwin
+      windows: pc-windows-msvc
+      linux: unknown-linux-musl
+      arm64: aarch64
+      amd64: x86_64
+    files:
+      - name: rg
+
+  # init: n
+  - name: nodejs/node
+    type: http
+    repo_owner: nodejs
+    repo_name: node
+    rosetta2: true
+    url: "https://nodejs.org/dist/{{.Version}}/node-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz"
+    link: https://nodejs.org/
+    description: Node.js JavaScript runtime
     replacements:
-      linux: unknown-linux-gnu
-  - goos: windows
-    format: zip
-  files:
-  - name: hexyl
-    src: 'hexyl-{{.Version}}-{{.Arch}}-{{.OS}}/hexyl'
-- type: github_release
-  repo_owner: sharkdp
-  repo_name: hyperfine
-  asset: 'hyperfine-{{.Version}}-{{.Arch}}-{{.OS}}.{{.Format}}'
-  description: A command-line benchmarking tool
-  rosetta2: true
-  format: tar.gz
-  replacements:
-    darwin: apple-darwiin
-    windows: pc-windows-msvc
-    linux: unknown-linux-musl
-    arm64: aarch64
-    amd64: x86_64
-  overrides:
-  - goos: linux
-    goarch: arm64
+      amd64: x64
+    files:
+      - name: corepack
+        src: "node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/corepack"
+      - name: node
+        src: "node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/node"
+      - name: npm
+        src: "node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/npm"
+      - name: npx
+        src: "node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/npx"
+
+  # init: o
+
+  # init: p
+  - type: github_release
+    repo_owner: pen-lang
+    repo_name: pen
+    asset: "pen-{{trimV .Version}}-{{.Arch}}-{.OS}.tar.xz"
+    rosetta2: true
+    supported_if: not (GOOS == "linux" and GOARCH == "arm64")
+    description: The programming language for scalable software development
     replacements:
+      darwin: apple-darwin
       linux: unknown-linux-gnu
-  - goos: windows
-    format: zip
-  files:
-  - name: hyperfine
-    src: 'hyperfine-{{.Version}}-{{.Arch}}-{{.OS}}/hyperfine'
-- type: github_release
-  repo_owner: sharkdp
-  repo_name: pastel
-  asset: 'pastel-{{.Version}}-{{.Arch}}-{{.OS}}.{{.Format}}'
-  description: A command-line tool to generate, analyze, convert and manipulate colors
-  rosetta2: true
-  format: tar.gz
-  replacements:
-    darwin: apple-darwin
-    windows: pc-windows-msvc
-    linux: unknown-linux-musl
-    arm64: aarch64
-    amd64: x86_64
-  overrides:
-  - goos: linux
-    goarch: arm64
+      amd64: x86_64
+    files:
+      - name: pen
+        src: target/release/pen
+
+  # init: q
+
+  # init: r
+  - type: http
+    repo_owner: rust-lang
+    repo_name: rust
+    url: "https://static.rust-lang.org/dist/rust-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz"
+    description: Empowering everyone to build reliable and efficient software
     replacements:
-      linux: unknown-linux-gnu
-  - goos: windows
-    format: zip
-  files:
-  - name: pastel
-    src: 'pastel-{{.Version}}-{{.Arch}}-{{.OS}}/pastel'
-- type: github_content
-  repo_owner: sheepla
-  repo_name: fzpac
-  path: fzpac
-  description: Arch Linux package finder with fzf
+      darwin: apple-darwin
+      linux: unknown-linux-musl
+      freebsd: unknown-freebsd
+      netbsd: unknown-netbsd
+      amd64: x86_64
+      arm64: aarch64
+      386: i686
+    files:
+      - name: cargo
+        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/cargo/bin/cargo"
+      - name: clippy-driver
+        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/clippy-preview/bin/clippy-driver"
+      - name: cargo-clippy
+        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/clippy-preview/bin/cargo-clippy"
+      - name: rls
+        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rls-preview/bin/rls"
+      - name: rust-demangler
+        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rust-demangler-preview/bin/rust-demangler"
+      - name: rustdoc
+        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rustdoc"
+      - name: rust-lldb
+        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rust-lldb"
+      - name: rustc
+        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rustc"
+      - name: rust-gdbgui
+        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rust-gdbgui"
+      - name: rust-gdb
+        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rust-gdb"
+      - name: rustfmt
+        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustfmt-preview/bin/rustfmt"
+      - name: cargo-fmt
+        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustfmt-preview/bin/cargo-fmt"
 
-# init: t
-- type: github_content
-  repo_owner: thinca
-  repo_name: ciw
-  path: bin/ciw
-  description: A wrapper to install cli binary from language associated package manager
+  # init: s
+  - type: github_content
+    repo_owner: sheepla
+    repo_name: fzpac
+    path: fzpac
+    description: Arch Linux package finder with fzf
 
-# init: u
+  # init: t
+  - type: github_content
+    repo_owner: thinca
+    repo_name: ciw
+    path: bin/ciw
+    description: A wrapper to install cli binary from language associated package manager
 
-# init: v
+  # init: u
 
-# init: w
+  # init: v
 
-# init: x
+  # init: w
 
-# init: y
+  # init: x
 
-# init: z
+  # init: y
 
-
+  # init: z
