@@ -2,13 +2,10 @@ function! user#ddc#cmdline_pre(mode) abort
   if g:denops#disabled
     return
   endif
+  " NOTE: I have to define map each time because I sometimes use default
+  " cmdline completion with `g:`
   call user#ddc#define_map('c', '<Tab>', 'pum#map#select_relative(+1)',
         \ 'ddc#map#manual_complete()', v:true)
-  call user#ddc#define_map('c', '<C-n>', 'pum#map#select_relative(+1)', '<Down>')
-  call user#ddc#define_map('c', '<C-p>', 'pum#map#select_relative(-1)', '<Up>')
-  call user#ddc#define_map('c', '<BS>',  'pum#map#cancel()',  '<BS>')
-  call user#ddc#define_map('c', '<CR>', 'pum#map#confirm()',
-        \ 'lexima#expand(''<lt>CR>'', '':'')', v:true)
   set wildchar=<C-l>
 
   let b:_ddc_cmdline_prev_buffer_config = ddc#custom#get_buffer()
@@ -44,14 +41,16 @@ function! user#ddc#cmdline_post() abort
     unlet b:_ddc_cmdline_prev_buffer_config
   endif
   silent! cunmap <Tab>
-  silent! cunmap <BS>
   set wildchar&
 endfunction
 
 function! user#ddc#skkeleton_pre() abort
   let b:skkeleton_enabled = v:true
   let b:_ddc_skkeleton_prev_buffer_config = ddc#custom#get_buffer()
-  call ddc#custom#patch_buffer({'sources': ['skkeleton']})
+  call ddc#custom#patch_buffer({
+       \ 'sources': ['skkeleton'],
+       \ 'completionMenu': 'native',
+       \ })
 endfunction
 
 function! user#ddc#skkeleton_post() abort

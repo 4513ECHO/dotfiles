@@ -5,19 +5,25 @@ on_event = ['InsertEnter']
 hook_add = '''
 nnoremap : <Cmd>call timer_start(10, { -> user#ddc#cmdline_pre(':') })<CR>:
 xnoremap : <Cmd>call timer_start(10, { -> user#ddc#cmdline_pre(':') })<CR>:
-" emulate `:help ins-completion`
+" emulate default mappings (see `:help ins-completion`)
+inoremap <silent><expr> <C-x><C-l> ddc#map#manual_complete('line')
 inoremap <silent><expr> <C-x><C-n> ddc#map#manual_complete('around')
 inoremap <silent><expr> <C-x><C-f> ddc#map#manual_complete('file')
 inoremap <silent><expr> <C-x><C-d> ddc#map#manual_complete('vim-lsp')
 inoremap <silent><expr> <C-x><C-v> ddc#map#manual_complete('cmdline')
 inoremap <silent><expr> <C-x><C-u> ddc#map#manual_complete()
 inoremap <silent><expr> <C-x><C-o> ddc#map#manual_complete('omni')
+inoremap <silent><expr> <C-x><C-s> ddc#map#manual_complete('nextword')
 '''
 hook_source = '''
 Runtime dein/settings/ddc.vim
 '''
 
 # sources
+
+[[plugins]]
+repo = '4513echo/ddc-github'
+on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'LumaKernel/ddc-file'
@@ -33,6 +39,14 @@ on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/ddc-cmdline-history'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-line'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-nextword'
 on_source = 'ddc.vim'
 
 [[plugins]]
