@@ -32,7 +32,8 @@ update: ## Fetch all changes from remote repository
 	git pull origin main
 
 .PHONY: install
-install: update init deploy pipx aqua rust ## Initialize and deploy dotfiles
+install: update init deploy ## Initialize and deploy dotfiles
+	@exec "$$SHELL" -l
 
 .PHONY: clean
 clean: ## Remove symlinks from actual directories
@@ -62,6 +63,7 @@ aqua: ## Install and initialize aqua enviroments
 .PHONY: rust
 rust: ## Install and initialize rust enviroments
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
+	-rustup toolchain install nightly
 
 .PHONY: go
 go: ## Install and initialize golang enviroments
