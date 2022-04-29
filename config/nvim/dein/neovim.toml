@@ -7,14 +7,7 @@ repo = 'kevinhwang91/nvim-hlslens'
 lazy = true
 on_lua = ['hlslens']
 hook_add = '''
-function! s:search_changed() abort
-  lua require('hlslens').disable()
-  lua require('hlslens').enable()
-  lua require('hlslens').start(true)
-endfunction
-autocmd vimrc User SearchxEnter lua require('hlslens').start(true)
-autocmd vimrc User SearchxCancel lua require('hlslens').disable()
-autocmd vimrc User SearchxInputChanged call <SID>search_changed()
+lua require('vimrc.plugin.hlslens').hook_add()
 '''
 
 [[plugins]]
@@ -47,15 +40,10 @@ repo = 'petertriho/nvim-scrollbar'
 lazy = true
 on_lua = ['scrollbar', 'scrollbar.utils', 'scrollbar.handlers']
 hook_add = '''
-autocmd vimrc ColorScheme *
-      \ lua require('scrollbar.utils').set_highlights()
-autocmd vimrc WinEnter,WinScrolled,VimResized,FocusGained *
-      \ lua require('scrollbar.handlers').show();require('scrollbar').render()
-autocmd vimrc User lsp_diagnostics_updated
-      \ lua require('scrollbar.handlers').show();require('scrollbar').render()
+lua require('vimrc.plugin.scrollbar').hook_add()
 '''
 hook_source = '''
-lua require('vimrc.plugin.scrollbar')
+lua require('vimrc.plugin.scrollbar').hook_source()
 '''
 
 [[plugins]]

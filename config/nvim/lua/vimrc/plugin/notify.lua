@@ -1,8 +1,8 @@
-vim.notify = require("notify")
+vim.notify = require "notify"
 
 require("notify").setup {
   stages = "slide",
-  background_color = 'NormalFloat',
+  background_color = "NormalFloat",
   minimum_width = 30,
   icons = {
     ERROR = "✗",

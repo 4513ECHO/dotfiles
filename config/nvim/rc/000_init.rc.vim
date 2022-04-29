@@ -92,16 +92,15 @@ if filereadable(expand('~/.vimrc_secret'))
   source ~/.vimrc_secret
 endif
 
+if has('nvim')
+  lua require('vimrc.autocmd')
+endif
+
 " restore cursor
 " from `:help restore-cursor`
 autocmd vimrc BufReadPost *
       \ : if line('''"') > 1 && line('''"') <= line('$')
       \ |   execute 'normal! g`"'
-      \ | endif
-
-autocmd vimrc BufEnter *
-      \ : if &filetype ==# ''
-      \ |   execute 'nnoremap <buffer> q <C-w>q'
       \ | endif
 
 " vim as a pager
@@ -111,11 +110,6 @@ autocmd vimrc StdinReadPost * call user#pager()
 " from https://vim-jp.org/vim-users-jp/2011/02/20/Hack-202.html
 autocmd vimrc BufWritePre *
       \ call user#auto_mkdir(expand('<afile>:p:h'), v:cmdbang)
-
-if has('nvim')
-  autocmd vimrc TermOpen * startinsert
-  autocmd vimrc TermOpen * setlocal nonumber
-endif
 
 " auto disable paste mode
 autocmd vimrc InsertLeave * setlocal nopaste
@@ -166,7 +160,3 @@ autocmd vimrc BufWritePost *
       \ |   call s:chmod(expand("<afile>"))
       \ | endif
 
-if has('nvim')
-  autocmd vimrc TextYankPost *
-        \ silent! lua vim.highlight.on_yank { timeout = 150 }
-endif
