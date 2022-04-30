@@ -1,7 +1,7 @@
 # What protocol to use when performing git operations. Supported values: ssh, https
 git_protocol: https
 # What editor gh should run when creating issues, pull requests, etc. If blank, will refer to environment.
-editor:
+editor: nvim
 # When to interactively prompt. This is a global config that cannot be overridden by hostname. Supported values: enabled, disabled
 prompt: enabled
 # A pager program to send command output to, e.g. "less". Set the value to "cat" to disable the pager.
@@ -10,9 +10,20 @@ pager:
 aliases:
   co: pr checkout
   assets: release list
+  aqua: |
+    gh repo view --json owner --json name --json description --template
+    "- type: github_release
+      repo_owner: {{.owner.login}}
+      repo_name: {{.name}}
+      description: {{.description}}
+    "
+  current: repo view --json nameWithOwner --jq '.nameWithOwner'
+  defaultBranch: repo view --json defaultBranchRef --jq '.defaultBranchRef.name'
+  description: repo view --json description --jq '.description'
   fork: repo fork
-  get: '!ghq get'
+  get: '!f(){ ghq get $1; };f'
   starred: api --paginate /user/starred --jq 'map(.full_name)[]'
+  upstream: repo view --json url --jq '.url'
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.

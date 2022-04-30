@@ -44,6 +44,24 @@ tools:
           - '--fix'
           - '${INPUT}'
 
+  commitlint-lint: &commitlint-lint
+    prefix: commitlint
+    lint-command: 'npx --no-install commitlint -c false'
+    lint-stdin: true
+    lint-formats:
+      - '%t%*[^ ] %m'
+    root-markers:
+      - .commitlintrc
+      - .commitlintrc.json
+      - .commitlintrc.yaml
+      - .commitlintrc.yml
+      - .commitlintrc.js
+      - .commitlintrc.cjs
+      - .commitlintrc.ts
+      - commitlint.config.js
+      - commitlint.config.cjs
+      - commitlint.config.ts
+
   # jq-format: &jq-format
   #   format-command: 'jq .'
   #   format-stdin: true
@@ -67,6 +85,24 @@ tools:
     format-command: 'shfmt -s -ln bash -i 2 -bn -ci -sr'
     format-stdin: true
 
+  yamllint-lint: &yamllint-lint
+    prefix: yamllint
+    lint-command: 'yamllint --strict --format parsable ${INPUT}'
+    lint-stdin: false
+    lint-formats:
+      - '%f:%l:%c: [%t%*[a-z]] %m'
+    env:
+      - 'PYTHONIOENCODING=UTF-8'
+
+  actionlint-lint: &actionlint-lint
+    prefix: actionlint
+    lint-command: "bash -c \"[[ '${INPUT}' =~ \\\\.github/workflows/ ]]\" && actionlint -oneline -no-color -"
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %m'
+    root-markers:
+      - .github
+
   vint-lint: &vint-lint
     prefix: vint
     lint-command: 'vint --enable-neovim --style-problem --stdin-display-name ${INPUT} -'
@@ -76,6 +112,9 @@ languages:
   markdown:
     - <<: *textlint-lint
     - <<: *markdownlint-lint
+
+  gitcommit:
+    - <<: *commitlint-lint
 
   sh:
     - <<: *shellcheck-lint
@@ -90,6 +129,10 @@ languages:
 
   vim:
     - <<: *vint-lint
+
+  yaml:
+    - <<: *yamllint-lint
+    - <<: *actionlint-lint
 
   zsh:
     - <<: *shfmt-format
