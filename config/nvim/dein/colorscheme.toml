@@ -7,54 +7,6 @@ name = 'hatsunemiku'
 # name = 'hatsunemiku_light'
 
 [[plugins]]
-repo = 'cormacrelf/vim-colors-github'
-[[plugins.colorschemes]]
-name = 'github'
-[plugins.colorschemes.highlight]
-EndOfBuffer = { ctermfg = 'NONE', guibg = 'NONE' }
-
-[[plugins]]
-repo = 'embark-theme/vim'
-name = 'embark-theme'
-[[plugins.colorschemes]]
-name = 'embark'
-
-[[plugins]]
-repo = 'fcpg/vim-orbital'
-[[plugins.colorschemes]]
-name = 'orbital'
-terminal = 'mini'
-[plugins.colorschemes.highlight]
-String = { ctermbg = 'NONE', guibg = 'NONE' }
-
-[[plugins]]
-repo = 'felipec/vim-felipec'
-[[plugins.colorschemes]]
-name = 'felipec'
-[plugins.colorschemes.highlight]
-NonText = { ctermbg = 'NONE', guibg = 'NONE' }
-
-[[plugins]]
-repo = 'KabbAmine/yowish.vim'
-hook_add = '''
-let g:yowish = {
-      \ 'ctrlp': v:false,
-      \ 'unite': v:false,
-      \ 'nerdtree': v:false,
-      \ 'agit': v:false,
-      \ 'signjk': v:false,
-      \ }
-'''
-[[plugins.colorschemes]]
-name = 'yowish'
-terminal = 'mini'
-
-[[plugins]]
-repo = 'Rigellute/rigel'
-[[plugins.colorschemes]]
-name = 'rigel'
-
-[[plugins]]
 repo = 'arcticicestudio/nord-vim'
 [[plugins.colorschemes]]
 name = 'nord'
@@ -90,6 +42,13 @@ name = 'snazzy'
 String = { ctermfg = 254, guifg = '#e4e4ee' }
 
 [[plugins]]
+repo = 'cormacrelf/vim-colors-github'
+[[plugins.colorschemes]]
+name = 'github'
+[plugins.colorschemes.highlight]
+EndOfBuffer = { ctermfg = 'NONE', guibg = 'NONE' }
+
+[[plugins]]
 repo = 'dracula/vim'
 name = 'dracula'
 [[plugins.colorschemes]]
@@ -99,6 +58,43 @@ name = 'dracula'
 repo = 'drewtempelmeyer/palenight.vim'
 [[plugins.colorschemes]]
 name = 'palenight'
+
+[[plugins]]
+repo = 'EdenEast/nightfox.nvim'
+# if = 'has("nvim")'
+[[plugins.colorschemes]]
+name = 'nightfox'
+[[plugins.colorschemes]]
+name = 'duskfox'
+[[plugins.colorschemes]]
+name = 'nordfox'
+[[plugins.colorschemes]]
+name = 'terafox'
+# [[plugins.colorschemes]]
+# name = 'dawnfox'
+# [[plugins.colorschemes]]
+# name = 'dayfox'
+
+[[plugins]]
+repo = 'embark-theme/vim'
+name = 'embark-theme'
+[[plugins.colorschemes]]
+name = 'embark'
+
+[[plugins]]
+repo = 'fcpg/vim-orbital'
+[[plugins.colorschemes]]
+name = 'orbital'
+terminal = 'mini'
+[plugins.colorschemes.highlight]
+String = { ctermbg = 'NONE', guibg = 'NONE' }
+
+[[plugins]]
+repo = 'felipec/vim-felipec'
+[[plugins.colorschemes]]
+name = 'felipec'
+[plugins.colorschemes.highlight]
+NonText = { ctermbg = 'NONE', guibg = 'NONE' }
 
 [[plugins]]
 repo = 'fenetikm/falcon'
@@ -111,9 +107,23 @@ repo = 'franbach/miramare'
 name = 'miramare'
 
 [[plugins]]
+repo = 'FrenzyExists/aquarium-vim'
+[[plugins.colorschemes]]
+name = 'aquarium'
+terminal = 'mini'
+[plugins.colorschemes.link]
+NonText = 'Comment'
+
+[[plugins]]
 repo = 'ghifarit53/tokyonight-vim'
 [[plugins.colorschemes]]
 name = 'tokyonight'
+
+[[plugins]]
+repo = 'gkapfham/vim-vitamin-onec'
+[[plugins.colorschemes]]
+name = 'vitaminonec'
+lightline = 'mini'
 
 [[plugins]]
 repo = 'habamax/vim-gruvbit'
@@ -139,6 +149,30 @@ name = 'stellarized'
 lightline = 'stellarized_dark'
 
 [[plugins]]
+repo = 'haxibami/urara.vim'
+[[plugins.colorschemes]]
+name = 'urara'
+
+# Thank mityu very much!
+[[plugins]]
+repo = 'https://raw.githubusercontent.com/mityu/dotfiles/master/dot_vim/runtime/colors/reliquiae.vim'
+script_type = 'colors'
+type = 'raw'
+[[plugins.colorschemes]]
+name = 'reliquiae'
+lightline = 'mini'
+
+# Thank Shougo very much!
+[[plugins]]
+repo = 'https://raw.githubusercontent.com/Shougo/shougo-s-github/master/vim/colors/candy.vim'
+script_type = 'colors'
+type = 'raw'
+[[plugins.colorschemes]]
+name = 'candy'
+lightline = 'mini'
+terminal = 'mini'
+
+[[plugins]]
 repo = 'jacoborus/tender.vim'
 [[plugins.colorschemes]]
 name = 'tender'
@@ -147,6 +181,23 @@ name = 'tender'
 repo = 'joshdick/onedark.vim'
 [[plugins.colorschemes]]
 name = 'onedark'
+
+[[plugins]]
+repo = 'KabbAmine/yowish.vim'
+hook_add = '''
+let g:yowish = {
+      \ 'ctrlp': v:false,
+      \ 'unite': v:false,
+      \ 'nerdtree': v:false,
+      \ 'agit': v:false,
+      \ 'signjk': v:false,
+      \ }
+'''
+[[plugins.colorschemes]]
+name = 'yowish'
+terminal = 'mini'
+[plugins.colorschemes.link]
+Directory = 'Statement'
 
 [[plugins]]
 repo = 'karoliskoncevicius/sacredforest-vim'
@@ -232,6 +283,11 @@ name = 'spring-night'
 lightline = 'spring_night'
 
 [[plugins]]
+repo = 'Rigellute/rigel'
+[[plugins.colorschemes]]
+name = 'rigel'
+
+[[plugins]]
 repo = 'romainl/Apprentice'
 [[plugins.colorschemes]]
 name = 'apprentice'
@@ -286,6 +342,11 @@ name = 'srcery'
 Visual = { ctermbg = 236, guibg = '#303030', term = 'NONE', cterm = 'NONE', gui = 'NONE' }
 
 [[plugins]]
+repo = 'tobi-wan-kenobi/zengarden'
+[[plugins.colorschemes]]
+name = 'zengarden'
+
+[[plugins]]
 repo = 'tomasr/molokai'
 [[plugins.colorschemes]]
 name = 'molokai'
@@ -305,6 +366,18 @@ terminal = 'mini'
 repo = 'ulwlu/elly.vim'
 [[plugins.colorschemes]]
 name = 'elly'
+
+# TODO: try https://github.com/DTr4n/windows-terminal-wombat'
+[[plugins]]
+repo = 'vim-scripts/wombat256.vim'
+[[plugins.colorschemes]]
+name = 'wombat256mod'
+lightline = 'wombat'
+terminal = 'mini'
+[plugins.colorschemes.link]
+NonText = 'Comment'
+[plugins.colorschemes.highlight]
+CursorLineNr = { cterm = 'NONE' }
 
 [[plugins]]
 repo = 'w0ng/vim-hybrid'
@@ -342,62 +415,4 @@ terminal = [
 Constant = { ctermbg = 'NONE', guibg = 'NONE' }
 Number = { ctermbg = 'NONE', guibg = 'NONE' }
 SpecialKey = { ctermbg = 'NONE', guibg = 'NONE' }
-
-# NOTE: maybe it doesn't support lightline.vim expand component
-# [[plugins]]
-# repo = 'gkapfham/vim-vitamin-onec''
-# hook_add = '''
-# call user#colorscheme#register('vim-vitamin-onec', {
-#       \ 'name': 'vitaminonec',
-#       \ })
-# '''
-
-[[plugins]]
-repo = 'FrenzyExists/aquarium-vim'
-[[plugins.colorschemes]]
-name = 'aquarium'
-terminal = 'mini'
-[plugins.colorschemes.link]
-NonText = 'Comment'
-
-# TODO: try https://github.com/DTr4n/windows-terminal-wombat'
-[[plugins]]
-repo = 'vim-scripts/wombat256.vim'
-[[plugins.colorschemes]]
-name = 'wombat256mod'
-lightline = 'wombat'
-terminal = 'mini'
-[plugins.colorschemes.link]
-NonText = 'Comment'
-[plugins.colorschemes.highlight]
-CursorLineNr = { cterm = 'NONE' }
-
-# Thank mityu very much!
-[[plugins]]
-repo = 'https://raw.githubusercontent.com/mityu/dotfiles/master/dot_vim/runtime/colors/reliquiae.vim'
-script_type = 'colors'
-type = 'raw'
-[[plugins.colorschemes]]
-name = 'reliquiae'
-lightline = 'mini'
-
-# Thank Shougo very much!
-# [[plugins]]
-# repo = 'https://raw.githubusercontent.com/Shougo/shougo-s-github/master/vim/colors/candy.vim'
-# script_type = 'colors'
-# type = 'raw'
-# hook_add = '''
-# call user#colorscheme#register('candy.vim', {
-#       \ 'lightline': 'mini',
-#       \ })
-# '''
-
-# TODO: this plugin is supprting lightline.vim, but I can't enable it because
-#       v:lua is only in neovim. I will send the repository pull-request...
-# [[plugins]]
-# repo = 'EdenEast/nightfox.nvim'
-# if = 'has("nvim")'
-# hook_add = '''
-# call user#colorscheme#register('nightfox.nvim', {}, has('nvim'))
-# '''
 

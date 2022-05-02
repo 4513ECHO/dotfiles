@@ -164,9 +164,9 @@ hook_add = '''
 let g:fzf_command_prefix = 'Fzf'
 '''
 hook_source = '''
-command! -bar FzfColorScheme call fzf#run(fzf#wrap({
-      \ 'source': filter(keys(g:colorscheme_customize), { _, val -> val !=# '_' }),
-      \ 'sink': { arg -> user#colorscheme#colorscheme(arg) },
+command! -bar FzfColors call fzf#run(fzf#wrap({
+      \ 'source': keys(user#colorscheme#get()),
+      \ 'sink': { arg -> user#colorscheme#command(arg) },
       \ }))
 command! -bar FzfReadme call fzf#run(fzf#wrap({
       \ 'source': keys(readme_viewer#get()),

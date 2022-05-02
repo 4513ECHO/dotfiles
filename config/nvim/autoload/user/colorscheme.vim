@@ -1,10 +1,14 @@
-function! user#colorscheme#get() abort
-  if exists('s:cache')
+function! user#colorscheme#get(...) abort
+  let update = get(a:000, 0, v:false)
+  if exists('s:cache') && !update
     return s:cache
   endif
   let s:cache = {}
   for plugins in values(filter(copy(dein#get()),
         \ { _, v -> has_key(v, 'colorschemes') }))
+    if has_key(plugins, 'if') && !eval(plugins.if)
+      continue
+    endif
     for colorscheme in plugins.colorschemes
       " let s:cache[colorscheme.name] = extend(colorscheme, { 'plugin': plugins.name })
       let s:cache[colorscheme.name] = colorscheme
@@ -37,7 +41,7 @@ function! user#colorscheme#random() abort
   let list = keys(user#colorscheme#get())
   call user#colorscheme#command(
         \ get(list, randint % len(list)),
-        \ v:false)
+        \ )
 endfunction
 
 function! user#colorscheme#set_customize(colorscheme) abort
