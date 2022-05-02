@@ -1,24 +1,13 @@
 {
-  "ddc": {
+  "colorschemes": {
     "body": [
-      "[[plugins]]",
-      "repo = '$1'",
-      "on_source = 'ddc.vim'"
+      "[[plugins.colorschemes]]",
+      "name = '$1'"
     ],
-    "description": "ddc plugin definition",
+    "description": "colorscheme plugin definition",
     "prefix": [
-      "ddc"
-    ]
-  },
-  "ddu": {
-    "body": [
-      "[[plugins]]",
-      "repo = '$1'",
-      "on_source = 'ddu.vim'"
-    ],
-    "description": "ddu plugin definition",
-    "prefix": [
-      "ddu"
+      "color",
+      "colorschemes"
     ]
   },
   "ftplugin": {
@@ -42,6 +31,15 @@
     "description": "dein hook definition",
     "prefix": [
       "hook"
+    ]
+  },
+  "on": {
+    "body": [
+      "on_${1:cmd} = ['$0']"
+    ],
+    "description": "dein on_* option definition",
+    "prefix": [
+      "on"
     ]
   },
   "plugins": {

@@ -1,0 +1,35 @@
+*{{_expr_:expand('%:p:t')}}*			{{_input_:title}}
+
+Author: {{_input_:author}}
+License: {{_input_:license}}
+URL: {{_input_:url}}
+Last change: {{_expr_:strftime('%Y %b %d')}}
+
+==============================================================================
+CONTENTS						*{{_expr_:expand('%:t:r')}}-contents*
+
+Introduction						|{{_expr_:expand('%:t:r')}}-introduction|
+Interface						|{{_expr_:expand('%:t:r')}}-interface|
+About							|{{_expr_:expand('%:t:r')}}-about|
+
+==============================================================================
+INTRODUCTION						*{{_expr_:expand('%:t:r')}}-introduction*
+
+*{{_expr_:expand('%:t:r')}}*
+
+==============================================================================
+INTERFACE						*{{_expr_:expand('%:t:r')}}-interface*
+
+------------------------------------------------------------------------------
+{{_cursor_}}
+
+==============================================================================
+ABOUT							*{{_expr_:expand('%:t:r')}}-about*
+
+|{{_expr_:expand('%:t:r')}}| is developed by Hibiki(4513ECHO) and licensed under the
+{{_input_:license}}. Visit the project page for the latest version:
+
+	{{_input_:url}}
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:noet:fen:

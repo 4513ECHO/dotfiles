@@ -39,7 +39,6 @@
     ],
     "description": "debug stuff",
     "prefix": [
-      "echomsg",
       "unsilent"
     ]
   }

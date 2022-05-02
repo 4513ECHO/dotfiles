@@ -275,6 +275,26 @@ hook_source = '''
 call lsp#enable()
 '''
 
+[[plugins]]
+repo = 'mattn/vim-sonictemplate'
+on_cmd = ['Template']
+on_map = { n = '<Plug>' }
+hook_add = '''
+let g:sonictemplate_vim_template_dir = [
+      \ g:config_home .. '/template',
+      \ ]
+let g:sonictemplate_vim_vars = {
+      \ '_': {
+      \   'author': 'Hibiki',
+      \ },
+      \ 'help': {
+      \   'author': 'Hibiki <4513echo@gmail.com>'
+      \ },
+      \ }
+let g:sonictemplate_postfix_key = ''
+nmap <C-x>T <Plug>(sonictemplate)
+nmap <C-x><C-t> <Plug>(sonictemplate-intelligent)
+'''
 
 [[plugins]]
 repo = 'ojroques/vim-oscyank'

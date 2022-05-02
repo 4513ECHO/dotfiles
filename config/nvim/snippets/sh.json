@@ -3,7 +3,7 @@
     "body": [
       "set -ue -o pipefail"
     ],
-    "description": "set command",
+    "description": "bash set statement",
     "prefix": [
       "set"
     ]
