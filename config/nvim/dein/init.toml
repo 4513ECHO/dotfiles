@@ -29,6 +29,13 @@ repo = 'delphinus/vim-auto-cursorline'
 hook_add = '''
 let g:auto_cursorline_wait_ms = 4000
 '''
+[plugins.ftplugin]
+ddu-ff = '''
+let b:auto_cursorline_disabled = v:true
+'''
+ddu-ff-filter = '''
+let b:auto_cursorline_disabled = v:true
+'''
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
@@ -39,6 +46,10 @@ hook_add = '''
 let g:lightline = {}
 let g:lightline.colorscheme = user#colorscheme#lightline()
 let g:lightline.active = {
+      \ 'left': [
+      \   ['mode', 'paste'],
+      \   ['readonly', 'filename', 'modified', 'ddu'],
+      \ ],
       \ 'right': [
       \   ['lsp_errors', 'lsp_warnings', 'lineinfo'],
       \   ['percent'],
@@ -50,6 +61,7 @@ let g:lightline.inactive = {
       \ ]}
 let g:lightline.component_function = {
       \ 'colorscheme': 'user#lightline#colorscheme',
+      \ 'ddu': 'user#lightline#ddu',
       \ 'fileformat': 'user#lightline#file_format',
       \ 'fileencoding': 'user#lightline#file_encoding',
       \ 'filename': 'user#lightline#filename',

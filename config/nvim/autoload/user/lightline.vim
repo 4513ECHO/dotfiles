@@ -17,7 +17,9 @@ function! user#lightline#file_encoding() abort
 endfunction
 
 function! user#lightline#filename() abort
-  if winwidth(0) > 50
+  if &filetype =~# '^ddu'
+    return ''
+  elseif winwidth(0) > 50
     let filename = fnamemodify(bufname(), ':t')
     if empty(filename)
       return '[No name]'
@@ -54,4 +56,22 @@ function! user#lightline#readonly() abort
     return 'RO'
   endif
   return ''
+endfunction
+
+function! user#lightline#ddu() abort
+  if &filetype !~# '^ddu'
+    return ''
+  endif
+  let winid = &filetype =~# 'filter'
+        \ ? get(g:, 'ddu#ui#ff#_filter_parent_winid', 0)
+        \ : win_getid()
+  let [_, winnr] = win_id2tabwin(winid)
+  let status = getwinvar(winnr, 'ddu_ui_ff_status', {})
+  if empty(status)
+    return ''
+  endif
+  return trim(printf('[ddu-%s] %d/%d/%d %s',
+        \ status.name,
+        \ line('.', winid), line('$', winid), status.maxItems,
+        \ status.done ? '' : '[async]'))
 endfunction

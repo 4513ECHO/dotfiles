@@ -37,6 +37,14 @@ function M.hook_add()
 end
 
 function M.hook_source()
+  require("scrollbar.config").set {
+    excluded_filetypes = {
+      "ddu-ff",
+      "ddu-ff-filter",
+      "fzf",
+    },
+  }
+  require("scrollbar.utils").set_commands()
   require("scrollbar.handlers.diagnostic").setup()
   require("scrollbar.handlers.search").setup()
 
