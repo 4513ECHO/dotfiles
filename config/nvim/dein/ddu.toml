@@ -2,6 +2,15 @@
 repo = 'Shougo/ddu.vim'
 depends = ['denops.vim']
 hook_add = '''
+let g:launcher_config.ddu = {
+      \ 'char': 'd',
+      \ 'run': { -> ddu#start({'sources': [{'name': 'source'}]}) },
+      \ }
+" let g:launcher_config.update = {
+"      \ 'char': 'u',
+"      \ 'run': { -> ddu#start({'sources': [{'name': 'dein_update'}]}) },
+"      \ }
+nnoremap <Leader>r <Cmd>Ddu -resume<CR>
 inoremap <C-x><C-e> <Cmd>Ddu emoji -ui-param-startFilter<CR>
 '''
 hook_source = '''
@@ -110,6 +119,10 @@ on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'Bakudankun/ddu-source-package'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'kuuote/ddu-source-mr'
 on_source = 'ddu.vim'
 
 [[plugins]]

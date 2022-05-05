@@ -14,15 +14,15 @@ let g:vim_data_home = empty($XDG_DATA_HOME) ?
       \ expand('~/.local/share/vim') : $XDG_DATA_HOME .. '/vim'
 
 let g:current_colorscheme = get(g:, 'current_colorscheme', 'random')
-let g:colorscheme_customize = get(g:, 'colorscheme_customize', {'_': {}})
 
-augroup random_colorscheme
-  autocmd!
-  " autocmd ColorScheme,VimEnter * ++nested
-  "      \ call user#colorscheme#colorscheme(g:current_colorscheme)
-  autocmd VimEnter * ++nested
-     \ call user#colorscheme#random()
-augroup END
+let g:launcher_config = get(g:, 'launcher_config', {})
+nnoremap <C-s> <Cmd>call user#launcher#select()<CR>
+let g:launcher_config.color = {
+      \ 'char': 'r',
+      \ 'run': 'RandomColorScheme',
+      \ }
+
+autocmd vimrc VimEnter * ++nested call user#colorscheme#random()
 
 " echo message vim start up time
 " https://github.com/lighttiger2505/.dotfiles/blob/6d0d4b8392/.vimrc#L11

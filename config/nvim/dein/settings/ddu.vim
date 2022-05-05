@@ -8,8 +8,9 @@ let s:actionOptions = {}
 
 call ddu#custom#alias('source', 'color', 'custom-list')
 call ddu#custom#alias('source', 'file_git', 'file_external')
+call ddu#custom#alias('source', 'mrr', 'mr')
+call ddu#custom#alias('source', 'mrw', 'mr')
 
-let s:patch_global.ui = 'ff'
 let s:sourceOptions._ = {
       \ 'ignoreCase': v:true,
       \ 'matchers': ['matcher_fzf'],
@@ -36,6 +37,8 @@ let s:sourceParams.color = {
       \   { arg -> user#colorscheme#command(arg) }
       \ ),
       \ }
+let s:sourceParams.mrr = {'kind': 'mrr'}
+let s:sourceParams.mrw = {'kind': 'mrw'}
 
 let s:filterParams.matcher_fzf = {
       \ 'highlightMatched': 'Search',
@@ -81,6 +84,7 @@ let s:kindOptions['custom-list'] = {'defaultAction': 'callback'}
 let s:actionOptions.echo = {'quit': v:false}
 let s:actionOptions.echoDiff = {'quit': v:false}
 
+let s:patch_global.ui = 'ff'
 let s:patch_global.sourceOptions = s:sourceOptions
 let s:patch_global.sourceParams = s:sourceParams
 let s:patch_global.filterParams = s:filterParams

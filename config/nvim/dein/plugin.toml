@@ -147,7 +147,6 @@ autocmd vimrc User PumCompleteDone
 repo = 'junegunn/fzf'
 merged = false
 on_cmd = ['FZF']
-if = 'executable("fzf")'
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
@@ -157,11 +156,14 @@ on_cmd = [
   'FzfLines', 'FzfBLines', 'FzfTags', 'FzfBTags', 'FzfMarks', 'FzfWindows',
   'FzfLocate', 'FzfHistory', 'FzfSnippets', 'FzfCommits', 'FzfBCommits',
   'FzfCommands', 'FzfMaps', 'FzfHelptags', 'FzfFiletypes',
-  'FzfColorScheme', 'FzfGhq'
+  'FzfGhq', 'FzfDein', 'FzFActions', 'FzfMru',
 ]
-if = 'executable("fzf")'
 hook_add = '''
 let g:fzf_command_prefix = 'Fzf'
+let g:launcher_config.fzf = {
+      \ 'char': 'f',
+      \ 'run': 'FzFActions',
+      \ }
 '''
 hook_source = '''
 command! -bar FzfColors call fzf#run(fzf#wrap({
@@ -174,6 +176,19 @@ command! -bar FzfReadme call fzf#run(fzf#wrap({
       \ }))
 command! -bar FzfGhq call fzf#run(fzf#wrap({
       \ 'source': 'ghq list --full-path',
+      \ 'sink': 'edit',
+      \ }))
+command! -bar FzfDein call fzf#run(fzf#wrap({
+      \ 'source': keys(dein#get()),
+      \ 'sink': { arg -> execute('edit ' .. dein#get(arg).path) },
+      \ }))
+command! -bar FzFActions call fzf#run(fzf#wrap({
+      \ 'source': map(split(execute('command Fzf'), "\n")[1:],
+      \   { _, val -> matchstr(val, '\<Fzf\a\+\>') }),
+      \ 'sink': { arg -> execute(arg) },
+      \ }))
+command! -bar FzfMru call fzf#run(fzf#wrap({
+      \ 'source': mr#mru#list(),
       \ 'sink': 'edit',
       \ }))
 '''
