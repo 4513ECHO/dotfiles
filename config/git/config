@@ -4,6 +4,7 @@
 
 [include]
   path = ~/.gitconfig.local
+  path = ./delta.gitconfig
 
 [core]
   # editor = vim
@@ -15,8 +16,8 @@
 
 [pager]
   diff = gitdiff.sh | less -R
-  log = gitdiff.sh| less -R
-  show = gitdiff.sh| less -R
+  log = gitdiff.sh | less -R
+  show = gitdiff.sh | less -R
 
 [color]
   ui = auto
@@ -54,6 +55,9 @@
 [difftool]
   prompt = false
 
+[merge]
+  conflictstyle = diff3
+
 [alias]
   ### command abbrev ###
   adn = add -N
@@ -65,12 +69,14 @@
   cm = commit
   cmm = commit -m
   co = checkout
+  com = !git checkout $(git defaultBranch)
   df = diff
   dft = difftool
   pl = pull
   ps = push
-  st = status
   shorts = status -s -b
+  st = status
+  stat = diff --stat
   ### feature shortcut ###
   all-files = !git ls-files
   alias = !git config --get-regexp "^alias" | sed 's:alias\\.\\([^ ]*\\) \\(.*\\):\\1\\\t -> \\2:' | cut -c 1-46 | sort

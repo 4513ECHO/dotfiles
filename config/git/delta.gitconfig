@@ -1,0 +1,33 @@
+[interactive]
+  diffFilter = delta --color-only --features=interactive\\ hybrid
+
+[diff]
+  colorMoved = default
+
+[delta]
+  features = decorations hybrid
+
+[delta "interactive"]
+  keep-plus-minus-markers = false
+
+[delta "decorations"]
+  navigate = true
+
+[delta "hybrid"]
+  # author: https://github.com/4513ECHO
+  # original theme is from https://github.com/w0ng/vim-hybrid
+  # syntax-theme is from https://github.com/avvyas/theme-midnight
+  syntax-theme = Midnight.hybrid
+  dark = true
+  true-color = always
+  plus-style = syntax "#5f875f"
+  minus-style = syntax "#cc6666"
+  line-numbers = true
+  line-numbers-plus-style = "#5f875f"
+  line-numbers-minus-style = "#cc6666"
+  file-added-label = [+]
+  file-copied-label = [C]
+  file-modified-label = [M]
+  file-removed-label = [-]
+  file-renamed-label = [R]
+  tabs = 8
