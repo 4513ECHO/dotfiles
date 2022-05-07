@@ -6,20 +6,25 @@ endif
 setlocal list tabstop=8 shiftwidth=8 softtabstop=8
 setlocal noexpandtab textwidth=78
 
+function! s:set_highlight(group) abort
+  for group in ['helpBar', 'helpBacktick', 'helpStar', 'helpIgnore']
+    execute 'hi link' group a:group
+  endfor
+endfunction
+
 if exists('+colorcolumn')
   setlocal colorcolumn=+1
 endif
 if has('conceal')
   setlocal conceallevel=0
-  hi link helpBar Special
-  hi link helpBacktick Special
-  hi link helpStar Special
-  hi link helpIgnore Special
-  autocmd vimrc ColorScheme <buffer>
-        \ : hi link helpBar Special
-        \ | hi link helpBacktick Special
-        \ | hi link helpStar Special
-        \ | hi link helpIgnore Special
+  call s:set_highlight('Special')
+  augroup vimrc_help
+    autocmd!
+    autocmd BufUnload <buffer>
+          \ : call <SID>set_highlight('Ignore')
+          \ | autocmd! vimrc_help
+    autocmd ColorScheme * call <SID>set_highlight('Special')
+  augroup END
 endif
 
 nnoremap <buffer> q <Nop>
