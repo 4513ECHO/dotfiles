@@ -4,7 +4,6 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias -- -="cd -"
 
-alias dev="cd ~/Develops"
 alias dot="cd ~/dotfiles"
 
 if type exa > /dev/null; then
@@ -20,7 +19,6 @@ alias c="clear"
 alias g="git"
 alias globalip="curl -q globalip.me"
 alias grep="grep --color=auto"
-alias herokulogin="heroku login --interactive"
 alias reload="source $ZDOTDIR/.zshrc"
 alias rm="rm -i"
 alias mkdir="mkdir -p"

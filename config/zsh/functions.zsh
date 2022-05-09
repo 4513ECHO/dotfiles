@@ -2,20 +2,29 @@ auto_venv () {
   local VENV_DIR_NAME="venv"
   local activate="$VENV_DIR_NAME/bin/activate"
   if [[ -z "$VIRTUAL_ENV" ]]; then
-    if [[ -f $activate ]]; then
-      source $activate
+    if [[ -f "$activate" ]]; then
+      source "$activate"
     fi
   else
     local parentdir="$(dirname $VIRTUAL_ENV)"
     if [[ "$PWD"/ != "$parentdir"/* ]]; then
       deactivate
-      if [[ -f $activate ]]; then
-        source $activate
+      if [[ -f "$activate" ]]; then
+        source "$activate"
       fi
     fi
   fi
 }
 add-zsh-hook chpwd auto_venv
+
+zshaddhistory () {
+  local line="${1%%$'\n'}"
+  local cmd="${line%% *}"
+  # [[ "$cmd" != "exit" ]] && \
+  #   [[ "$cmd" != "rm" ]] && \
+  #   [[ "$(command -v "$cmd")" != "" ]]
+  [[ "$cmd" != "exit" ]]
+}
 
 enable-agent-forward () {
   if [[ -z "$SSH_AUTH_SOCK" ]]; then
@@ -28,12 +37,12 @@ agent-symlink () {
   if [ -S "$SSH_AUTH_SOCK" ]; then
     case "$SSH_AUTH_SOCK" in
       /tmp/ssh-*/agent.[0-9]* )
-        ln -snf "$SSH_AUTH_SOCK" "$SSH_SYMLINK_SOCK"
-        export SSH_AUTH_SOCK="$SSH_SYMLINK_SOCK"
+        ln -snf "$SSH_AUTH_SOCK" "$HOME/.ssh/agent"
+        export SSH_AUTH_SOCK="$HOME/.ssh/agent"
       ;;
     esac
-  elif [ -S "$SSH_SYMLINK_SOCK" ]; then
-    export SSH_AUTH_SOCK="$SSH_SYMLINK_SOCK"
+  elif [ -S "$HOME/.ssh/agent" ]; then
+    export SSH_AUTH_SOCK="$HOME/.ssh/agent"
   fi
 }
 
@@ -69,22 +78,23 @@ add-zsh-hook chpwd rename-pane-pwd
 cd-git-root () {
   local root
   root="$(git rev-parse --show-toplevel 2> /dev/null)"
-  [[ -n "$root" ]] && cd "$root"
+  [[ -z "$root" ]] && return
+  BUFFER="cd $root"
   zle accept-line
 }
 zle -N cd-git-root
-bindkey "^Gr" cd-git-root
+bindkey '^Gr' cd-git-root
 
 autoload -Uz history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
-bindkey "^P" history-beginning-search-backward-end
-bindkey "^N" history-beginning-search-forward-end
+bindkey '^P' history-beginning-search-backward-end
+bindkey '^N' history-beginning-search-forward-end
 
 autoload -Uz edit-command-line
 zle -N edit-command-line
-bindkey "^X^E" edit-command-line
-bindkey "^Xe" edit-command-line
+bindkey '^X^E' edit-command-line
+bindkey '^Xe' edit-command-line
 
 autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
@@ -100,24 +110,35 @@ cd-fzf-git () {
       --color=always $root/{} | head -200")"
   root=
   zle reset-prompt
-  [[ -n "$result" ]] && cd "$(git rev-parse --show-toplevel)/$result"
+  [[ -z "$result" ]] && return
+  BUFFER="cd $(git rev-parse --show-toplevel)/$result"
   zle accept-line
 }
 zle -N cd-fzf-git
-bindkey "^Gd" cd-fzf-git
+bindkey '^Gd' cd-fzf-git
 
 cd-fzf-ghq () {
-  local result preview_cmd
-  preview_cmd="(test -f {}/README.md \
-    && bat --force-colorization --style=header,grid \$_ \
-    || echo 'This repostory does not have README.md' ) | head -200"
-  result="$(ghq list --full-path | fzf --preview "$preview_cmd")"
+  local result match
+  result="$(ghq list | fzf)"
   zle reset-prompt
-  [[ -n "$result" ]] && cd "$result"
+  [[ -n "$result" ]] && match="$(ghq list --full-path --exact "$result")"
+  [[ -z "$match" ]] && return
+  BUFFER="cd $match"
   zle accept-line
 }
 zle -N cd-fzf-ghq
-bindkey "^Gh" cd-fzf-ghq
+bindkey '^Gh' cd-fzf-ghq
+
+dein-json () {
+  sed 's@\({\|,\)\(\w\+\):@\1"\2":@g' \
+    < "$XDG_CACHE_HOME/nvim/dein/cache_nvim"
+}
+
+cd-fzf-dein () {
+  local plugin
+  plugin="$(dein-json | gojq -r '.[0] | keys | .[]' | fzf)"
+  cd "$(dein-json | gojq -r ".[0].[\"$plugin\"].path")"
+}
 
 accept-line-ext () {
   if [[ -z "$BUFFER" ]]; then
@@ -129,7 +150,7 @@ accept-line-ext () {
   zle accept-line
 }
 zle -N accept-line-ext
-bindkey "^M" accept-line-ext
+bindkey '^M' accept-line-ext
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS=(
   accept-line-ext
   history-beginning-search-backword-end
@@ -140,32 +161,13 @@ insert-bslash () {
   zle -U '\'
 }
 zle -N insert-bslash
-bindkey "¥" insert-bslash
-
-vim-clean () {
-  rm -rf ~/.cache/vim/dein
-  # rm -rf ~/.local/share/vim/vim-lsp-settings/
-}
+bindkey '¥' insert-bslash
 
 zsh-clean () {
-  rm -rf $ZDOTDIR/.zinit
   rm -f $ZDOTDIR/*.zwc
   rm -f $ZDOTDIR/.zcompdump.*
   rm -f ~/.cache/zsh/compdump*
-}
-
-deno-install-arm64 () {
-  curl -fsSL https://noxifoxi.github.io/deno_install-arm64/install.sh | sh
-  cp -f ~/.cache/deno/bin/deno ~/.local/bin
-  deno --version
-}
-
-diff-highlight () {
-  if [[ ! -f ~/.local/bin/diff-highlight ]]; then
-    sudo ln -sf /usr/share/doc/git/contrib/diff-highlight/diff-highlight \
-      ~/.local/bin/
-  fi
-  command diff-highlight
+  rm -rf $XDG_CACHE_HOME/zpm
 }
 
 :q () {:}
@@ -174,10 +176,10 @@ diff-highlight () {
 
 benchmark () {
   local tempfile=$(mktemp)
-  repeat 10 { time zsh -i -c exit } 2>&1 2>/$tempfile
+  repeat ${1:-10} { time zsh -i -c exit } 2>&1 2>$tempfile
   printf 'average: %ss maximum: %ss\n' $(awk \
    '{
-      secs[NR] = substr($1, 1, 4)
+      secs[NR] = $7
       if (secs[NR] >= max) {
         max = secs[NR]
       }
@@ -189,4 +191,3 @@ benchmark () {
       print sum/NR, max
     }' $tempfile)
 }
-

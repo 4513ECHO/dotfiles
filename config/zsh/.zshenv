@@ -62,7 +62,7 @@ fpath=(${(R)fpath%/})
 
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 
-export EDITOR='vim'
+export EDITOR='nvim'
 export PAGER='less'
 export BROWSER='w3m'
 export MANPAGER='vim -M +MANPAGER -'
