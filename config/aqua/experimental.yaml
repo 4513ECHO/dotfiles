@@ -1,18 +1,6 @@
 ---
 packages:
   # init: a
-  - type: github_release
-    repo_owner: Aloxaf
-    repo_name: silicon
-    asset: "silicon-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz"
-    rosetta2: true
-    supported_if: not (GOOS == "linux" and GOARCH == "arm64")
-    description: Create beautiful image of your source code
-    replacements:
-      darwin: apple-darwin
-      windows: pc-windows-gnu
-      linux: unknown-linux-gnu
-      amd64: x86_64
 
   # init: b
 
@@ -29,8 +17,34 @@ packages:
   # init: f
 
   # init: g
+  - type: github_release
+    repo_owner: guptarohit
+    repo_name: asciigraph
+    asset: 'asciigraph_{{trimV .Version}}_{{.OS}}_{{.Arch}}.{{.Format}}'
+    description: Go package to make lightweight ASCII line graph ╭┈╯ in command line apps with no other dependencies
+    format: tar.gz
+    replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      amd64: x86_64
+      arm: armv6
+      386: i386
 
   # init: h
+  - type: github_release
+    repo_owner: high-moctane
+    repo_name: mocword
+    asset: 'mocword-{{.Arch}}-{{.OS}}'
+    replacements:
+      darwin: unknown-apple-darwin
+      linux: unknown-linux-musl
+      amd64: x86_64
+      arm64: aarch64
+    version_constraint: 'semver(">= 0.2.0")'
+    version_overrides:
+      - version_constraint: 'semver("< 0.2.0")'
+        supported_if: not (GOOS == "linux" and GOARCH == "arm64")
   - type: github_content
     repo_owner: holman
     repo_name: spark
@@ -135,6 +149,14 @@ packages:
   # init: q
 
   # init: r
+  - type: github_release
+    repo_owner: rhysd
+    repo_name: vim-startuptime
+    asset: "vim-startuptime_{{trimV .Version}}_{{.OS}}_{{.Arch}}.{{.Format}}"
+    format: tar.gz
+    overrides:
+      - goos: windows
+        format: zip
   - type: http
     repo_owner: rust-lang
     repo_name: rust
@@ -191,6 +213,22 @@ packages:
   # init: u
 
   # init: v
+  - type: github_release
+    repo_owner: vishaltelangre
+    repo_name: ff
+    asset: 'find-files-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz'
+    description: Find files (ff) by name, fast!
+    rosetta2: true
+    replacements:
+      darwin: apple-darwin
+      linux: unknown-linux-musl
+      arm64: aarch64
+      amd64: x86_64
+    overrides:
+      - goos: linux
+        goarch: arm64
+        replacements:
+          linux: unknown-linux-gnu
 
   # init: w
 

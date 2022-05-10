@@ -3,19 +3,20 @@
 # https://aquaproj.github.io/
 registries:
   - type: standard
-    ref: v2.10.0 # renovate: depName=aquaproj/aqua-registry
+    ref: v2.13.0 # renovate: depName=aquaproj/aqua-registry
   - name: local
     type: local
     path: experimental.yaml
 
 packages:
+  - name: antonmedv/fx@22.0.10
   - name: aquaproj/aqua-installer@v1.0.0
   - name: b4b4r07/afx@v0.1.21
   # - name: BurntSushi/ripgrep@13.0.0 # NOTE: use microsoft/ripgrep-prebuilt instead
-  - name: cli/cli@v2.8.0
-  # - name: crate-ci/typos@v1.5.0 # NOTE: no release fomr arm64
+  - name: cli/cli@v2.9.0
+  # - name: crate-ci/typos@v1.7.3 # NOTE: no release fomr arm64
   - name: dandavison/delta@0.12.1
-  # - name: denoland/deno@v1.21.0
+  # - name: denoland/deno@v1.21.1
   - name: dotenv-linter/dotenv-linter@v3.2.0
   - name: ekalinin/github-markdown-toc@0.8.0
   - name: fsaintjacques/semver-tool@3.3.0
@@ -27,9 +28,9 @@ packages:
   - name: junegunn/fzf@0.30.0
   - name: kdabir/has@v1.4.0
   - name: koalaman/shellcheck@v0.8.0
-  - name: LukeChannings/deno-arm64@v1.21.0
+  - name: LukeChannings/deno-arm64@v1.21.1
   # - name: mattn/gof@v0.0.10 # NOTE: no release for arm64
-  - name: mikefarah/yq@v4.24.5
+  - name: mikefarah/yq@v4.25.1
   - name: mvdan/sh@v3.4.3
   - name: nektos/act@v0.2.26
   # - name: neovim/neovim@v0.7.0 # NOTE: no release for arm64
@@ -45,8 +46,8 @@ packages:
   - name: sharkdp/hyperfine@v1.13.0
   - name: sharkdp/pastel@v0.8.1
   - name: sheepla/fzwiki@v0.0.9
-  - name: sheepla/qiitaz@v0.0.6-alpha
-  - name: sumneko/lua-language-server@3.2.1
+  - name: sheepla/qiitaz@v0.1.0
+  - name: sumneko/lua-language-server@3.2.2
   - name: tomnomnom/gron@v0.6.1
   - name: TomWright/dasel@v1.24.3
   # - name: x-motemen/ghq@v1.2.1 # NOTE: no release for arm64
@@ -68,7 +69,17 @@ packages:
     registry: local
   - name: nodejs/node@v18.0.0
     registry: local
+  - name: rhysd/vim-startuptime@v1.2.0
+    registry: local
   - name: rust-lang/rust@1.60.0
     registry: local
   - name: thinca/ciw@master
+    registry: local
+  - name: guptarohit/asciigraph@v0.5.3
+    registry: local
+  - name: vishaltelangre/ff@v0.1.8
+    registry: local
+  - name: mgdm/htmlq@v0.4.0
+    registry: local
+  - name: high-moctane/mocword@v0.2.0
     registry: local
