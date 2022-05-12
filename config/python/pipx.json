@@ -1,24 +1,26 @@
 {
-  "install": [
-    "black",
-    "flake8",
-    "isort",
-    "jc",
-    "mypy",
-    "pip-chill",
-    "poetry",
-    "pycowsay",
-    "python-language-server[all]",
-    "term2048",
-    "toml-sort",
-    "vim-vint",
-    "yamllint"
-  ],
   "inject": {
     "python-language-server": [
       "pyls-black",
       "pyls-isort",
       "pyls-mypy"
     ]
-  }
+  },
+  "install": [
+    "black",
+    "ddgr",
+    "flake8",
+    "httpie",
+    "isort",
+    "jc",
+    "mypy",
+    "pip-chill",
+    "poetry",
+    "pycowsay",
+    "python-language-server",
+    "term2048",
+    "toml-sort",
+    "vim-vint",
+    "yamllint"
+  ]
 }
