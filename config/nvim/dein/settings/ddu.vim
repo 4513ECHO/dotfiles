@@ -15,15 +15,8 @@ let s:sourceOptions._ = {
       \ 'ignoreCase': v:true,
       \ 'matchers': ['matcher_fzf'],
       \ }
-let s:sourceOptions.file_old = {
-      \ 'matchers': ['matcher_fzf', 'matcher_hidden'],
-      \ }
-let s:sourceOptions.file_external = {
-      \ 'matchers': ['matcher_fzf', 'matcher_hidden'],
-      \ }
-let s:sourceOptions.dein_update = {
-      \ 'matchers': ['matcher_dein_update'],
-      \ }
+let s:sourceOptions.dein_update = {'matchers': ['matcher_dein_update']}
+let s:sourceOptions.file = {'defaultAction': 'narrow'}
 
 let s:sourceParams.ghq = {
       \ 'display': 'relative',
@@ -68,6 +61,32 @@ autocmd vimrc TextChangedI,CursorMoved ddu*
       \ |   call lightline#update()
       \ | endif
 
+call ddu#custom#patch_local('file_rec', {
+      \ 'sources': [{
+      \   'name': 'file_rec',
+      \ }],
+      \ 'uiParams': {'ff': {
+      \   'autoAction': {
+      \     'name': 'preview',
+      \   },
+      \   'previewHeight': &lines / 2,
+      \   'previewVertical': v:true,
+      \   'previewWidth': &columns / 3,
+      \   'winWidth': &columns / 3,
+      \ }},
+      \ })
+call ddu#custom#patch_local('rg_live', {
+      \ 'volatile': v:true,
+      \ 'sources': [{
+      \   'name': 'rg',
+      \   'options': {'matchers': []},
+      \ }],
+      \ 'uiParams': {'ff': {
+      \   'ignoreEmpty': v:false,
+      \   'autoResize': v:false,
+      \ }},
+      \ })
+
 let s:kindOptions.action = {'defaultAction': 'do'}
 let s:kindOptions.colorscheme = {'defaultAction': 'set'}
 let s:kindOptions.command_history = {'defaultAction': 'edit'}
@@ -80,6 +99,7 @@ let s:kindOptions.source = {'defaultAction': 'execute'}
 let s:kindOptions.url = {'defaultAction': 'open'}
 let s:kindOptions.word = {'defaultAction': 'append'}
 let s:kindOptions['custom-list'] = {'defaultAction': 'callback'}
+let s:kindOptions['ui-select'] = {'defaultAction': 'execute'}
 
 let s:actionOptions.echo = {'quit': v:false}
 let s:actionOptions.echoDiff = {'quit': v:false}
