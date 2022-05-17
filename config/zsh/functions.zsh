@@ -1,21 +1,25 @@
-auto_venv () {
-  local VENV_DIR_NAME="venv"
-  local activate="$VENV_DIR_NAME/bin/activate"
-  if [[ -z "$VIRTUAL_ENV" ]]; then
-    if [[ -f "$activate" ]]; then
-      source "$activate"
-    fi
-  else
-    local parentdir="$(dirname $VIRTUAL_ENV)"
-    if [[ "$PWD"/ != "$parentdir"/* ]]; then
-      deactivate
+hook::venv() {
+  local venv_dir_name=('venv' '.venv')
+  local dir activate parentdir
+  for dir in "${venv_dir_name[@]}"; do
+    activate="$dir/bin/activate"
+    if [[ -z "$VIRTUAL_ENV" ]]; then
       if [[ -f "$activate" ]]; then
         source "$activate"
+        break
+      fi
+    else
+      parentdir="$(dirname "$VIRTUAL_ENV")"
+      if [[ "$PWD"/ != "$parentdir"/* ]]; then
+        deactivate
+      elif [[ -f "$activate" ]]; then
+        source "$activate"
+        break
       fi
     fi
-  fi
+  done
 }
-add-zsh-hook chpwd auto_venv
+add-zsh-hook chpwd hook::venv
 
 zshaddhistory () {
   local line="${1%%$'\n'}"
