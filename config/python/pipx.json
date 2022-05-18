@@ -1,9 +1,9 @@
 {
   "inject": {
-    "python-language-server": [
-      "pyls-black",
+    "python-lsp-server": [
       "pyls-isort",
-      "pyls-mypy"
+      "pylsp-mypy",
+      "python-lsp-black"
     ]
   },
   "install": [
@@ -17,7 +17,8 @@
     "pip-chill",
     "poetry",
     "pycowsay",
-    "python-language-server",
+    "pyproject-flake8",
+    "python-lsp-server[all]",
     "term2048",
     "toml-sort",
     "vim-vint",

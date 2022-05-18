@@ -40,7 +40,7 @@ let g:lsp_diagnostics_virtual_text_prefix = " ‣ "
 let g:lsp_log_file = g:data_home .. '/vim-lsp.log'
 
 let g:lsp_settings_servers_dir = g:data_home .. '/vim-lsp-settings/servers'
-let g:lsp_settings_filetype_python = 'pyls-all'
+let g:lsp_settings_filetype_python = 'pylsp-all'
 let g:lsp_settings_filetype_typescript = 'deno'
 let g:lsp_settings_filetype_typescriptreact = 'deno'
 let g:lsp_settings_filetype_markdown = 'efm-langserver'
@@ -68,24 +68,7 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> gp <Plug>(lsp-previous-diagnostic)
 endfunction
 
-function! s:install_pyls_ext() abort
-  let pyls_dir = g:lsp_settings_servers_dir .. '/pyls-all'
-  if &filetype !=# 'python' || filereadable(pyls_dir .. '/loaded_pyls_ext')
-    return
-  endif
-  let pip = pyls_dir .. '/venv/bin/pip'
-  let pyls_ext = ['pyls-mypy', 'pyls-isort', 'pyls-black']
-  if executable(pip)
-    call term_start(extend([pip, 'install'], pyls_ext), {
-          \ 'cwd': fnamemodify(pip, ':h:h:h'),
-          \ 'term_name': 'install_pyls_ext'})
-    silent! call writefile([''], pyls_dir .. '/loaded_pyls_ext')
-  endif
-endfunction
-
 autocmd vimrc BufWritePre *.json LspDocumentFormatSync --server=efm-langserver
 
 autocmd vimrc User lsp_buffer_enabled
       \ call <SID>on_lsp_buffer_enabled()
-" autocmd vimrc User lsp_setup
-"      \ : call <SID>install_pyls_ext()

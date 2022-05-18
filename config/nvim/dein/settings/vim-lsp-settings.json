@@ -88,16 +88,22 @@
       }
     }
   },
-  "pyls-all": {
+  "pylsp-all": {
+    "cmd": [
+      "pylsp"
+    ],
     "workspace_config": {
-      "pyls": {
+      "pylsp": {
         "configurationSources": [
           "flake8"
         ],
         "plugins": {
-          "jedi_definition": {
-            "follow_builtin_imports": true,
-            "follow_imports": true
+          "black": {
+            "enabled": true
+          },
+          "flake8": {
+            "enabled": true,
+            "executable": "pflake8"
           },
           "mccabe": {
             "enabled": false
@@ -108,13 +114,10 @@
           "pyflakes": {
             "enabled": false
           },
-          "pyls_black": {
-            "enabled": true
-          },
           "pyls_isort": {
             "enabled": true
           },
-          "pyls_mypy": {
+          "pylsp_mypy": {
             "enabled": true
           }
         }

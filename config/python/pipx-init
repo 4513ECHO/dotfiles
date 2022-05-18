@@ -15,7 +15,7 @@ json="$(dirname "$0")/pipx.json"
 if [ "$#" -ge 1 ]; then
   if [ "$1" = 'gen' ]; then
     pipx list --json \
-      | gojq '.venvs | { inject: map_values(.metadata.injected_packages | keys | select(.[])), install: keys }'
+      | gojq '.venvs | map_values(.metadata) | { inject: map_values(.injected_packages | keys | select(.[])), install: map(.main_package.package_or_url) }'
   else
     exit 1
   fi
