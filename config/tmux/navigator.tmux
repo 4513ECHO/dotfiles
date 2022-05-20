@@ -12,13 +12,38 @@ bind -T navigator j if-shell "$is_vim" "send-keys C-w j" "select-pane -D"
 bind -T navigator k if-shell "$is_vim" "send-keys C-w k" "select-pane -U"
 bind -T navigator l if-shell "$is_vim" "send-keys C-w l" "select-pane -R"
 
-bind -T navigator C-w send-keys C-w
+# NOTE: echo {'!'..'}'}
+bind -T navigator '!' send-keys C-w '!'
+bind -T navigator '"' send-keys C-w '"'
+bind -T navigator '#' send-keys C-w '#'
+bind -T navigator '$' send-keys C-w '$'
+bind -T navigator '%' send-keys C-w '%'
+bind -T navigator '&' send-keys C-w '&'
+bind -T navigator "'" send-keys C-w "'"
+bind -T navigator '(' send-keys C-w '('
+bind -T navigator ')' send-keys C-w ')'
+bind -T navigator '*' send-keys C-w '*'
 bind -T navigator '+' send-keys C-w '+'
+bind -T navigator ',' send-keys C-w ','
 bind -T navigator '-' send-keys C-w '-'
+bind -T navigator '.' send-keys C-w '.'
+bind -T navigator '/' send-keys C-w '/'
+bind -T navigator '0' send-keys C-w '0'
+bind -T navigator '1' send-keys C-w '1'
+bind -T navigator '2' send-keys C-w '2'
+bind -T navigator '3' send-keys C-w '3'
+bind -T navigator '4' send-keys C-w '4'
+bind -T navigator '5' send-keys C-w '5'
+bind -T navigator '6' send-keys C-w '6'
+bind -T navigator '7' send-keys C-w '7'
+bind -T navigator '8' send-keys C-w '8'
+bind -T navigator '9' send-keys C-w '9'
 bind -T navigator ':' send-keys C-w ':'
+bind -T navigator ';' send-keys C-w ';'
 bind -T navigator '<' send-keys C-w '<'
 bind -T navigator '=' send-keys C-w '='
 bind -T navigator '>' send-keys C-w '>'
+bind -T navigator '?' send-keys C-w '?'
 bind -T navigator '@' send-keys C-w '@'
 bind -T navigator A send-keys C-w A
 bind -T navigator B send-keys C-w B
@@ -46,9 +71,12 @@ bind -T navigator W send-keys C-w W
 bind -T navigator X send-keys C-w X
 bind -T navigator Y send-keys C-w Y
 bind -T navigator Z send-keys C-w Z
+bind -T navigator '[' send-keys C-w '['
+bind -T navigator '\' send-keys C-w '\'
 bind -T navigator ']' send-keys C-w ']'
 bind -T navigator '^' send-keys C-w '^'
 bind -T navigator '_' send-keys C-w '_'
+bind -T navigator '`' send-keys C-w '`'
 bind -T navigator a send-keys C-w a
 bind -T navigator b send-keys C-w b
 bind -T navigator c send-keys C-w c
@@ -56,11 +84,11 @@ bind -T navigator d send-keys C-w d
 bind -T navigator e send-keys C-w e
 bind -T navigator f send-keys C-w f
 bind -T navigator g send-keys C-w g
-# bind-key -T navigator h send-keys C-w h
+# bind -T navigator h send-keys C-w h
 bind -T navigator i send-keys C-w i
-# bind-key -T navigator j send-keys C-w j
-# bind-key -T navigator k send-keys C-w k
-# bind-key -T navigator l send-keys C-w l
+# bind -T navigator j send-keys C-w j
+# bind -T navigator k send-keys C-w k
+# bind -T navigator l send-keys C-w l
 bind -T navigator m send-keys C-w m
 bind -T navigator n send-keys C-w n
 bind -T navigator o send-keys C-w o
@@ -75,9 +103,7 @@ bind -T navigator w send-keys C-w w
 bind -T navigator x send-keys C-w x
 bind -T navigator y send-keys C-w y
 bind -T navigator z send-keys C-w z
-bind -T navigator '|' send-keys C-w '|'
 bind -T navigator '{' send-keys C-w '{'
+bind -T navigator '|' send-keys C-w '|'
 bind -T navigator '}' send-keys C-w '}'
-bind -T navigator '[' send-keys C-w '['
-bind -T navigator ']' send-keys C-w ']'
 

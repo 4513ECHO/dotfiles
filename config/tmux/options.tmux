@@ -21,6 +21,7 @@ set  -g  base-index 1
 set  -g  pane-base-index 1
 set  -g  focus-events on
 set  -g  status-keys emacs
+set  -sg set-clipboard on
 
 # hooks
 # set-hook -g cilent-resized 'select-layout tiled'
