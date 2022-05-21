@@ -6,6 +6,7 @@ is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
     | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
 
 bind -n C-w switch-client -T navigator
+bind -T navigator C-w send-keys C-w
 
 bind -T navigator h if-shell "$is_vim" "send-keys C-w h" "select-pane -L"
 bind -T navigator j if-shell "$is_vim" "send-keys C-w j" "select-pane -D"
@@ -107,3 +108,29 @@ bind -T navigator '{' send-keys C-w '{'
 bind -T navigator '|' send-keys C-w '|'
 bind -T navigator '}' send-keys C-w '}'
 
+bind -T navigator C-a send-keys C-w C-a
+bind -T navigator C-b send-keys C-w C-b
+bind -T navigator C-c send-keys C-w C-c
+bind -T navigator C-d send-keys C-w C-d
+bind -T navigator C-e send-keys C-w C-e
+bind -T navigator C-f send-keys C-w C-f
+bind -T navigator C-g send-keys C-w C-g
+bind -T navigator C-h send-keys C-w C-h
+bind -T navigator C-i send-keys C-w C-i
+bind -T navigator C-j send-keys C-w C-j
+bind -T navigator C-k send-keys C-w C-k
+bind -T navigator C-l send-keys C-w C-l
+bind -T navigator C-m send-keys C-w C-m
+bind -T navigator C-n send-keys C-w C-N
+bind -T navigator C-o send-keys C-w C-o
+bind -T navigator C-p send-keys C-w C-p
+bind -T navigator C-q send-keys C-w C-q
+bind -T navigator C-r send-keys C-w C-r
+bind -T navigator C-s send-keys C-w C-s
+bind -T navigator C-t send-keys C-w C-t
+bind -T navigator C-u send-keys C-w C-u
+bind -T navigator C-v send-keys C-w C-v
+# bind -T navigator C-w send-keys C-w C-w
+bind -T navigator C-x send-keys C-w C-x
+bind -T navigator C-y send-keys C-w C-y
+bind -T navigator C-z send-keys C-w C-z
