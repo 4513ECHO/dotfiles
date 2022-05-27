@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+# shellcheck source=/dev/null
+. "$(dirname "$0")/_utils"
+
+set -ue -o pipefail
+
+if git rev-parse --verify HEAD > /dev/null; then
+  against='HEAD'
+else
+  # Initial commit: diff against an empty tree object
+  against="$(git hash-object -t tree /dev/null)"
+fi
+
+check 'Check vim help files'
+if git diff-index --cached --name-only "$against" \
+  | grep 'doc/.\+\.\(txt\|jax\)$' > /dev/null; then
+  git -c color.status=always status --short 'doc/*.txt' 'doc/*.jax'
+  if ! git diff-index --unified=0 --cached "$against" \
+    | grep '^+Last change:' > /dev/null && grep 'Hibiki\|4513[Ee][Cc][Hh][Oo]' > /dev/null \
+    < "$(git diff-index --cached --name-only "$against" \
+      | grep 'doc.\+\.\(txt\|jax\)$')"; then
+    error '"Last change" section was not updated'
+  fi
+fi
+check_end
+
+check 'Check deno fmt'
+ext='\.\(ts\|js\|tsx\|jsx\)$'
+if git diff-index --cached --name-only "$against" | grep "$ext" > /dev/null; then
+  # shellcheck disable=2046
+  deno fmt --check -- $(git diff-index --cached --name-only "$against" | grep "$ext")
+fi
+check_end
+
+check 'Check deno lint'
+ext='\.\(ts\|js\|tsx\|jsx\)$'
+if git diff-index --cached --name-only "$against" | grep "$ext" > /dev/null; then
+  # shellcheck disable=2046
+  deno lint -- $(git diff-index --cached --name-only "$against" | grep "$ext")
+fi
+check_end
+
+check 'Check stylua'
+if git diff-index --cached --name-only "$against" \
+  | grep '\.lua$' > /dev/null && [[ -x stylua ]] \
+  && { [[ -f stylua.toml ]] || [[ -f .stylua.toml ]]; }; then
+  # shellcheck disable=2046
+  stylua --check -- $(git diff-index --cached --name-only "$against" | grep '\.lua$')
+fi
+check_end
