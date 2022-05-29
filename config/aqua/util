@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -ue
+
+script="$(dirname "$0")/util.jq"
+
+case $1 in
+  gen*)
+    shift
+    $script --arg type gen < ./aqua.yaml \
+      | while read -r package; do
+        case $* in
+          -e | --exec)
+            sleep 0.5
+            aqua generate "$package"
+            ;;
+          *)
+            echo "$package"
+            ;;
+        esac
+      done
+    ;;
+  desc*)
+    $script --arg type description < ./experimental.yaml
+    ;;
+esac

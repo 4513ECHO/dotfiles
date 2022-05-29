@@ -3,20 +3,20 @@
 # https://aquaproj.github.io/
 registries:
   - type: standard
-    ref: v2.14.0 # renovate: depName=aquaproj/aqua-registry
+    ref: v2.17.1 # renovate: depName=aquaproj/aqua-registry
   - name: local
     type: local
     path: experimental.yaml
 
 packages:
-  - name: antonmedv/fx@22.0.10
+  - name: antonmedv/fx@24.0.0
   - name: aquaproj/aqua-installer@v1.0.0
-  - name: b4b4r07/afx@v0.1.21
+  - name: b4b4r07/afx@v0.1.24
   # - name: BurntSushi/ripgrep@13.0.0 # NOTE: use microsoft/ripgrep-prebuilt instead
-  - name: cli/cli@v2.10.1
+  - name: cli/cli@v2.11.3
   # - name: crate-ci/typos@v1.7.3 # NOTE: no release fomr arm64
-  - name: dandavison/delta@0.12.1
-  # - name: denoland/deno@v1.21.2
+  - name: dandavison/delta@0.13.0
+  # - name: denoland/deno@v1.22.1
   - name: dotenv-linter/dotenv-linter@v3.2.0
   - name: ekalinin/github-markdown-toc@0.8.0
   - name: fsaintjacques/semver-tool@3.3.0
@@ -28,27 +28,27 @@ packages:
   - name: junegunn/fzf@0.30.0
   - name: kdabir/has@v1.4.0
   - name: koalaman/shellcheck@v0.8.0
-  - name: LukeChannings/deno-arm64@v1.21.2
+  - name: LukeChannings/deno-arm64@v1.22.1
   # - name: mattn/gof@v0.0.10 # NOTE: no release for arm64
-  - name: mikefarah/yq@v4.25.1
-  - name: mvdan/sh@v3.4.3
+  - name: mikefarah/yq@v4.25.2
+  - name: mvdan/sh@v3.5.0
   - name: nektos/act@v0.2.26
   # - name: neovim/neovim@v0.7.0 # NOTE: no release for arm64
   # - name: ogham/exa@v0.10.1 # NOTE: no release for arm64
-  - name: rhysd/actionlint@v1.6.10
-  - name: rhysd/hgrep@v0.2.5
+  - name: rhysd/actionlint@v1.6.13
+  - name: rhysd/hgrep@v0.2.6
   # - name: rust-lang/rust@1.60.0
   # - name: sahilm/yamldiff@0.1.0 # NOTE: no release for arm64
-  - name: sharkdp/bat@v0.20.0
+  - name: sharkdp/bat@v0.21.0
   - name: sharkdp/diskus@v0.7.0
-  - name: sharkdp/fd@v8.3.2
-  - name: sharkdp/hexyl@v0.9.0
-  - name: sharkdp/hyperfine@v1.13.0
+  - name: sharkdp/fd@v8.4.0
+  - name: sharkdp/hexyl@v0.10.0
+  - name: sharkdp/hyperfine@v1.14.0
   - name: sharkdp/pastel@v0.8.1
   - name: sheepla/fzwiki@v0.0.9
-  - name: sheepla/qiitaz@v0.1.0
-  - name: sumneko/lua-language-server@3.2.2
-  - name: tomnomnom/gron@v0.6.1
+  - name: sheepla/qiitaz@v0.1.1-alpha
+  - name: sumneko/lua-language-server@3.2.4
+  - name: tomnomnom/gron@v0.7.1
   - name: TomWright/dasel@v1.24.3
   # - name: x-motemen/ghq@v1.2.1 # NOTE: no release for arm64
   - name: XAMPPRocky/tokei@v12.1.2

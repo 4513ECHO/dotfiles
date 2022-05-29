@@ -36,6 +36,7 @@ packages:
     repo_owner: high-moctane
     repo_name: mocword
     asset: 'mocword-{{.Arch}}-{{.OS}}'
+    description: Predict next words (｀･ω･´)
     replacements:
       darwin: unknown-apple-darwin
       linux: unknown-linux-musl
@@ -153,6 +154,7 @@ packages:
     repo_owner: rhysd
     repo_name: vim-startuptime
     asset: "vim-startuptime_{{trimV .Version}}_{{.OS}}_{{.Arch}}.{{.Format}}"
+    description: A small Go program for better `vim --startuptime` alternative
     format: tar.gz
     overrides:
       - goos: windows
