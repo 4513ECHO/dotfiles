@@ -15,6 +15,9 @@ name = 'nord'
 repo = 'ayu-theme/ayu-vim'
 [[plugins.colorschemes]]
 name = 'ayu'
+[plugins.colorschemes.highlight]
+# NOTE: Remove term/cterm/gui attrs
+SignifySignDelete = { ctermfg = 12, ctermbg = 6, guifg = '#0000ff', guibg = '#008080' }
 
 [[plugins]]
 repo = 'bluz71/vim-nightfly-guicolors'
@@ -38,8 +41,6 @@ String = { ctermfg = 144, guifg = '#a7b1a9' }
 repo = 'connorholyday/vim-snazzy'
 [[plugins.colorschemes]]
 name = 'snazzy'
-[plugins.colorschemes.highlight]
-String = { ctermfg = 254, guifg = '#e4e4ee' }
 
 [[plugins]]
 repo = 'cormacrelf/vim-colors-github'
@@ -61,7 +62,6 @@ name = 'palenight'
 
 [[plugins]]
 repo = 'EdenEast/nightfox.nvim'
-# if = 'has("nvim")'
 [[plugins.colorschemes]]
 name = 'nightfox'
 [[plugins.colorschemes]]
@@ -113,6 +113,9 @@ name = 'aquarium'
 terminal = 'mini'
 [plugins.colorschemes.link]
 NonText = 'Comment'
+[plugins.colorschemes.highlight]
+# NOTE: Remove term/cterm/gui attrs
+SignifySignDelete = { ctermfg = 12, ctermbg = 6, guifg = '#ebb9b9', guibg = '#20202a' }
 
 [[plugins]]
 repo = 'ghifarit53/tokyonight-vim'
@@ -124,6 +127,11 @@ repo = 'gkapfham/vim-vitamin-onec'
 [[plugins.colorschemes]]
 name = 'vitaminonec'
 lightline = 'mini'
+[plugins.colorschemes.highlight]
+# NOTE: Remove term/cterm/gui attrs
+SignifySignAdd = { ctermfg = 64, ctermbg = 234, guifg = '#5f8700', guibg = '#1c1c1d' }
+SignifySignChange = { ctermfg = 110, ctermbg = 234, guifg = '#87afd7', guibg = '#1c1c1d' }
+SignifySignDelete = { ctermfg = 167, ctermbg = 234, guifg = '#d75f5f', guibg = '#1c1c1d' }
 
 [[plugins]]
 repo = 'habamax/vim-gruvbit'
@@ -184,15 +192,6 @@ name = 'onedark'
 
 [[plugins]]
 repo = 'KabbAmine/yowish.vim'
-hook_add = '''
-let g:yowish = {
-      \ 'ctrlp': v:false,
-      \ 'unite': v:false,
-      \ 'nerdtree': v:false,
-      \ 'agit': v:false,
-      \ 'signjk': v:false,
-      \ }
-'''
 [[plugins.colorschemes]]
 name = 'yowish'
 terminal = 'mini'
@@ -214,6 +213,9 @@ repo = 'lifepillar/vim-solarized8'
 [[plugins.colorschemes]]
 name = 'solarized8'
 lightline = 'solarized'
+[plugins.colorschemes.highlight]
+# NOTE: Remove term/cterm/gui attrs
+SignifySignDelete = { ctermfg = 160, ctermbg = 236, guifg = '#dc322f', guibg = '#073642' }
 
 [[plugins]]
 repo = 'lighthaus-theme/vim-lighthaus'
@@ -255,6 +257,11 @@ terminal = [
 repo = 'phanviet/vim-monokai-pro'
 [[plugins.colorschemes]]
 name = 'monokai_pro'
+[plugins.colorschemes.highlight]
+# NOTE: Remove term/cterm/gui attrs
+SignifySignAdd = { ctermfg = 231, ctermbg = 64, guifg = '#fcfcfa', guibg = '#47840e' }
+SignifySignDelete = { ctermfg = 88, guifg = '#8c0809' }
+SignifySignChange = { ctermfg = 231, ctermbg = 23, guifg = '#fcfcfa', guibg = '#273a5b' }
 
 [[plugins]]
 repo = 'pineapplegiant/spaceduck'
@@ -286,6 +293,9 @@ lightline = 'spring_night'
 repo = 'Rigellute/rigel'
 [[plugins.colorschemes]]
 name = 'rigel'
+[plugins.colorschemes.highlight]
+# NOTE: Remove term/cterm/gui attrs
+SignifySignChange = { ctermfg = 44, ctermbg = 235, guifg = '#00cccc', guibg = '#002635' }
 
 [[plugins]]
 repo = 'romainl/Apprentice'
@@ -354,6 +364,9 @@ terminal = [
   '#1b1d1e', '#f92672', '#82b414', '#fd971f', '#268bd2', '#8c54fe', '#56c2d6', '#ccccc6',
   '#505354', '#ff5995', '#b7eb46', '#feed6c', '#62ade3', '#bfa0fe', '#94d8e5', '#f8f8f2',
 ]
+[plugins.colorschemes.highlight]
+# NOTE: Remove term/cterm/gui attrs
+SignifySignDelete = { ctermfg = 162, ctermbg = 5, guifg = '#960050', guibg = '#1e0010' }
 
 [[plugins]]
 repo = 'tyrannicaltoucan/vim-deep-space'
@@ -396,6 +409,11 @@ terminal = [
   '#111219', '#c261b6', '#7cbe8c', '#8e8a6f', '#4c89ac', '#6c75cb', '#73c1a9', '#9ea3c0',
   '#545c8c', '#b871b8', '#7cbe8c', '#a8a384', '#589ec6', '#929be5', '#59b6b6', '#9ea3c0',
 ]
+[plugins.colorschemes.highlight]
+# NOTE: Remove term/cterm/gui attrs
+SignifySignAdd = { ctermbg = 237, guibg = '#1c394b' }
+SignifySignChange = { ctermbg = 23, guibg = '#26463b' }
+SignifySignDelete = { ctermfg = 189, ctermbg = 96, guifg = '#d2d9ff', guibg = '#5e3e5e' }
 
 [[plugins]]
 repo = 'whatyouhide/vim-gotham'
