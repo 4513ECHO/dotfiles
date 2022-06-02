@@ -54,11 +54,13 @@ let g:lightline.active = {
       \   ['lsp_errors', 'lsp_warnings', 'lineinfo'],
       \   ['percent'],
       \   ['colorscheme', 'fileformat', 'fileencoding', 'filetype'],
-      \ ]}
+      \ ],
+      \ }
 let g:lightline.inactive = {
       \ 'left': [
       \   ['filename', 'modified'],
-      \ ]}
+      \ ],
+      \ }
 let g:lightline.component_function = {
       \ 'colorscheme': 'user#lightline#colorscheme',
       \ 'ddu': 'user#lightline#ddu',
@@ -67,6 +69,10 @@ let g:lightline.component_function = {
       \ 'filename': 'user#lightline#filename',
       \ 'mode': 'user#lightline#mode',
       \ 'readonly': 'user#lightline#readonly',
+      \ 'modified': 'user#lightline#modified',
+      \ }
+let g:lightline.component = {
+      \ 'lineinfo': '%3l:%-2v',
       \ }
 let g:lightline.component_expand = {
       \ 'lsp_errors': 'lightline_lsp#errors',
