@@ -1,3 +1,19 @@
+[[plugins]]
+repo = 'ap/vim-css-color'
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+if = '!has("patch-8.2.3520") && !has("nvim")'
+merge_ftdetect = true
+on_ft = ['toml']
+
+[[plugins]]
+repo = 'dhruvasagar/vim-zoom'
+on_map = { n = '<Plug>' }
+hook_add = '''
+let g:zoom#statustext = 'zoomed'
+nmap <C-w>z <Plug>(zoom-toggle)
+'''
 
 [[plugins]]
 repo = 'kat0h/bufpreview.vim'
@@ -8,6 +24,10 @@ hook_add = '''
 let g:bufpreview_server_host = '0.0.0.0'
 let g:bufpreview_server_port = 8888
 '''
+
+[[plugins]]
+repo = 'lambdalisue/vim-manpager'
+on_cmd = ['MANPAGER', 'Man']
 
 [[plugins]]
 repo = 'lambdalisue/qfloc.vim'
@@ -35,6 +55,35 @@ xmap <buffer> d  <Plug>(qfloc-delete)
 '''
 
 [[plugins]]
+repo = 'mattn/benchvimrc-vim'
+on_cmd = ['BenchVimrc']
+
+[[plugins]]
+repo = 'mattn/vim-sl'
+on_event = ['CmdUndefined']
+on_func = ['sl#animate']
+
+[[plugins]]
+repo = 'osyo-manga/vim-precious'
+depends = ['context_filetype.vim']
+hook_add = '''
+let g:precious_enable_switchers = {
+      \ '*': {
+      \   'setfiletype': 0,
+      \ },
+      \ 'markdown': {
+      \   'setfiletype': 1,
+      \ },
+      \ 'toml': {
+      \   'setfiletype': 1,
+      \ },
+      \ 'vim': {
+      \   'setfiletype': 1,
+      \ },
+      \ }
+'''
+
+[[plugins]]
 repo = 'pocke/keycast.vim'
 depends = ['vanner']
 if = '!has("nvim")'
@@ -59,6 +108,33 @@ on_cmd = ['FixJson']
 repo = 'skanehira/badapple.vim'
 if = '!has("nvim")'
 on_cmd = ['BadApple']
+
+[[plugins]]
+repo = 'thinca/vim-scall'
+on_func = ['S']
+hook_add = '''
+let g:scall_function_name = 'S'
+'''
+
+[[plugins]]
+repo = 'thinca/vim-scouter'
+on_cmd = ['Scouter']
+on_func = ['Scouter']
+hook_add = '''
+command! Scouter echo Scouter(g:config_home)
+'''
+
+[[plugins]]
+repo = 'tmux-plugins/vim-tmux-focus-events'
+if = '!has("gui_running") && !has("patch-8.2.2345") && !has("nvim")'
+
+[[plugins]]
+repo = 'tpope/vim-repeat'
+on_map = { xno = '<Plug>(Repeat' }
+
+[[plugins]]
+repo = 'tweekmonster/startuptime.vim'
+on_cmd = ['StartupTime']
 
 [[plugins]]
 repo = 'wsdjeg/dein-ui.vim'

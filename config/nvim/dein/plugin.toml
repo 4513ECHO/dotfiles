@@ -51,14 +51,6 @@ Runtime dein/settings/lexima.vim
 '''
 
 [[plugins]]
-repo = 'dhruvasagar/vim-zoom'
-on_map = { n = '<Plug>' }
-hook_add = '''
-let g:zoom#statustext = 'zoomed'
-nmap <C-w>z <Plug>(zoom-toggle)
-'''
-
-[[plugins]]
 repo = 'guns/xterm-color-table.vim'
 on_cmd = ['XtermColorTable']
 
@@ -238,9 +230,6 @@ call submode#map('nomove', 'nx', '', 'j', '<C-e>')
 call submode#map('nomove', 'nx', '', 'k', '<C-y>')
 '''
 
-[[plugins]]
-repo = 'lambdalisue/vim-manpager'
-on_cmd = ['MANPAGER', 'Man']
 
 [[plugins]]
 repo = 'lambdalisue/vim-quickrun-neovim-job'
@@ -265,15 +254,6 @@ on_event = ['CmdlineEnter', 'CmdwinEnter']
 hook_add = '''
 let g:traces_normal_preview = v:true
 '''
-
-[[plugins]]
-repo = 'mattn/benchvimrc-vim'
-on_cmd = ['BenchVimrc']
-
-[[plugins]]
-repo = 'mattn/vim-sl'
-# on_event = ['CmdUndefined']
-on_func = ['sl#animate']
 
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
@@ -465,27 +445,8 @@ nnoremap <buffer> <C-c> <Cmd>call quickrun#session#sweep()<CR>
 '''
 
 [[plugins]]
-repo = 'thinca/vim-scall'
-on_func = ['S']
-hook_add = '''
-let g:scall_function_name = 'S'
-'''
-
-[[plugins]]
-repo = 'thinca/vim-scouter'
-on_cmd = ['Scouter']
-on_func = ['Scouter']
-hook_add = '''
-command! Scouter echo Scouter(g:config_home)
-'''
-
-[[plugins]]
 repo = 'tweekmonster/helpful.vim'
 on_cmd = ['HelpfulVersion']
-
-[[plugins]]
-repo = 'tweekmonster/startuptime.vim'
-on_cmd = ['StartupTime']
 
 [[plugins]]
 repo = 'tyru/capture.vim'

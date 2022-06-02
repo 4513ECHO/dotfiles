@@ -229,22 +229,11 @@ zsh = '''
 setlocal iskeyword+=-
 '''
 
-# [[plugins]]
-# repo = 'jparise/vim-graphql'
-# repo = '4513echo/vim-graphql'
-# rev = 'typescript-comment'
-# on_ft = ['graphql', 'typescript', 'typescriptreact']
 
 [[plugins]]
 repo = 'bfrg/vim-jq'
 merge_ftdetect = true
 on_ft = ['jq']
-
-[[plugins]]
-repo = 'cespare/vim-toml'
-if = '!has("patch-8.2.3520") && !has("nvim")'
-merge_ftdetect = true
-on_ft = ['toml']
 
 [[plugins]]
 repo = 'cohama/vim-hier'

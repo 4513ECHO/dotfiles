@@ -19,9 +19,6 @@ let g:context_filetype#ignore_patterns = {
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'ap/vim-css-color'
-
-[[plugins]]
 repo = 'cocopon/lightline-hybrid.vim'
 
 [[plugins]]
@@ -137,7 +134,4 @@ hook_add = '''
 let g:localrc_filename = '.vimrc.local'
 '''
 
-[[plugins]]
-repo = 'tmux-plugins/vim-tmux-focus-events'
-if = '!has("gui_running") && !has("patch-8.2.2345") && !has("nvim")'
 
