@@ -5,8 +5,8 @@ function! user#ddc#cmdline_pre(mode) abort
   " NOTE: I have to define map each time because I sometimes use default
   " cmdline completion with `g:`
   call user#ddc#define_map('c', '<Tab>', 'pum#map#select_relative(+1)',
-        \ 'ddc#map#manual_complete()', v:true)
-  set wildchar=<C-l>
+       \ 'ddc#map#manual_complete()', v:true)
+  set wildcharm=<C-l>
 
   let b:_ddc_cmdline_prev_buffer_config = ddc#custom#get_buffer()
   call ddc#custom#patch_buffer(get(s:patch_buffer, a:mode, {}))
@@ -16,13 +16,13 @@ function! user#ddc#cmdline_pre(mode) abort
 endfunction
 
 let s:patch_buffer = {':': {}, '/': {}}
-let s:patch_buffer[':'].sources = ['cmdline', 'around']
+let s:patch_buffer[':'].cmdlineSources = ['cmdline', 'around']
 let s:patch_buffer[':'].keywordPattern = '[0-9a-zA-Z_:#-]*'
 let s:patch_buffer[':'].sourceOptions = {
       \ 'cmdline': {
       \   'forceCompletionPattern': '[\w@:~._-]/[\w@:~._-]*',
       \ }}
-let s:patch_buffer['/'].sources = ['around']
+let s:patch_buffer['/'].cmdlineSources = ['around']
 let s:patch_buffer['/'].sourceOptions = {
       \ 'around': {
       \   'minAutoCompleteLength': 1,
@@ -41,7 +41,7 @@ function! user#ddc#cmdline_post() abort
     unlet b:_ddc_cmdline_prev_buffer_config
   endif
   silent! cunmap <Tab>
-  set wildchar&
+  set wildcharm&
 endfunction
 
 function! user#ddc#skkeleton_pre() abort

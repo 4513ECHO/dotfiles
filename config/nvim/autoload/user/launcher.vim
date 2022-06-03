@@ -21,12 +21,10 @@ function! user#launcher#run(launcher) abort
     return
   endif
   let launcher = values(a:launcher)[0]
-  if get(launcher, 'nested', v:false)
-    call user#launcher#select(launcher.run)
-    return
-  endif
   let Run = launcher.run
-  if type(Run) == v:t_func
+  if get(launcher, 'nested', v:false) && type(Run) == v:t_dict
+    call user#launcher#select(Run)
+  elseif type(Run) == v:t_func
     call call(Run, [])
   elseif type(Run) == v:t_string
     execute Run

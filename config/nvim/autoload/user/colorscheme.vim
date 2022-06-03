@@ -115,11 +115,11 @@ function! user#colorscheme#command(colorscheme, ...) abort
     return
   endif
   for i in range(16)
-    silent! unlet g:terminal_color_{i}
+    unlet! g:terminal_color_{i}
   endfor
-  silent! unlet g:terminal_color_foreground
-  silent! unlet g:terminal_color_background
-  silent! unlet g:terminal_ansi_colors
+  unlet! g:terminal_color_foreground
+  unlet! g:terminal_color_background
+  unlet! g:terminal_ansi_colors
   execute 'colorscheme' colorscheme
   call user#colorscheme#set_customize(colorscheme)
   let g:current_colorscheme = colorscheme

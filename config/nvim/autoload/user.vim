@@ -38,9 +38,14 @@ function! user#pager() abort
   normal! gg
 endfunction
 
-function! user#google(word) abort
-  execute 'terminal' '++close' '++shell' 'w3m'
-        \ printf('"https://google.com/search?q=%s"', a:word)
+function! user#google(query) abort
+  let cmd = ['w3m', printf('https://google.com/search?q=%s', a:query)]
+  if has('nvim')
+    new
+    call termopen(cmd)
+  else
+    call term_start(cmd, {'term_finish': 'close'})
+  endif
 endfunction
 
 function! user#auto_mkdir(dir, force) abort
