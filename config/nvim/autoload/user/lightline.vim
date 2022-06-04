@@ -36,7 +36,7 @@ let s:skkeleton_modes = {
 function! user#lightline#mode() abort
   if !empty(submode#current())
     let mode = ['Sub', submode#current()]
-  elseif skkeleton#is_enabled()
+  elseif exists('*skkeleton#is_enabled') && skkeleton#is_enabled()
     let skk_mode = skkeleton#mode()
     let mode = [lightline#mode(), get(s:skkeleton_modes, skk_mode, skk_mode)]
   else
