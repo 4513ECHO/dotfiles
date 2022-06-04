@@ -238,7 +238,6 @@ on_source = ['vim-quickrun']
 
 [[plugins]]
 repo = 'machakann/vim-highlightedundo'
-if = 'executable("diff")'
 on_map = { n = '<Plug>' }
 hook_add = '''
 nmap u     <Plug>(highlightedundo-undo)
@@ -246,13 +245,6 @@ nmap <C-r> <Plug>(highlightedundo-redo)
 nmap U     <Plug>(highlightedundo-Undo)
 nmap g-    <Plug>(highlightedundo-gminus)
 nmap g+    <Plug>(highlightedundo-gplus)
-'''
-
-[[plugins]]
-repo = 'markonm/traces.vim'
-on_event = ['CmdlineEnter', 'CmdwinEnter']
-hook_add = '''
-let g:traces_normal_preview = v:true
 '''
 
 [[plugins]]

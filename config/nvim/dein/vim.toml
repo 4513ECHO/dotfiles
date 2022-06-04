@@ -9,6 +9,13 @@ let g:highlightedyank_highlight_duration = 100
 '''
 
 [[plugins]]
+repo = 'markonm/traces.vim'
+on_event = ['CmdlineEnter', 'CmdwinEnter']
+hook_add = '''
+let g:traces_normal_preview = v:true
+'''
+
+[[plugins]]
 repo = 'mattn/vim-notification'
 lazy = true
 
@@ -19,6 +26,7 @@ on_event = ['CmdlineLeave', 'CmdwinLeave']
 on_func = ['hitspop#main']
 hook_add = '''
 let g:hitspop_line = 'winbot'
+let g:hitspop_column = 'winleft'
 let g:hitspop_timeout = 2000
 autocmd vimrc ColorScheme *
       \ hi link hitspopErrormsg ErrorMsg
