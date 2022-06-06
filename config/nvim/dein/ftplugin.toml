@@ -205,17 +205,19 @@ inoreabbrev <expr><buffer> improt
 '''
 
 qf = '''
-setlocal nowrap
+setlocal nowrap nolist
 setlocal numberwidth=2
-nnoremap <buffer> q <Cmd>cclose<CR>
+nnoremap <buffer><expr> q getwininfo(win_getid())[0].loclist
+      \ ? '<Cmd>lclose<CR>'
+      \ : '<Cmd>cclose<CR>'
 nnoremap <buffer><expr> j line('.') == line('$') ? 'gg' : 'j'
-nnoremap <buffer><expr> k line('.') == 1 ? 'K' : 'k'
+nnoremap <buffer><expr> k line('.') == 1 ? 'G' : 'k'
 " from https://github.com/mityu/dotfiles/blob/f5cb5f9a92/dot_vim/runtime/ftplugin/qf.vim#L6
 nnoremap <buffer> o <CR>zz<C-w>p
 nnoremap <buffer> p <CR>zz<C-w>p
 " from https://github.com/kuuote/dotvim/blob/9c7ba6307c/ftplugin/qf.vim#L1
-nnoremap <buffer> j j <CR>zz<C-w>b
-nnoremap <buffer> k k <CR>zz<C-w>b
+nnoremap <buffer> j j<CR>zz<C-w>p
+nnoremap <buffer> k k<CR>zz<C-w>p
 '''
 
 toml = '''
@@ -250,6 +252,10 @@ autocmd vimrc WinClosed <buffer>
 [[plugins]]
 repo = 'gko/vim-coloresque'
 on_ft = ['vim', 'css', 'scss', 'sass']
+
+[[plugins]]
+repo = 'itchyny/vim-qfedit'
+on_ft = ['qf']
 
 [[plugins]]
 repo = 'lark-parser/vim-lark-syntax'
