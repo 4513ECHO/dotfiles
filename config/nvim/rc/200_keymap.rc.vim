@@ -47,12 +47,12 @@ xnoremap x "_x
 xnoremap s "_s
 xnoremap Y y$
 
-nnoremap n nzzzv
-nnoremap N Nzzzv
-nnoremap * *zzzv
-nnoremap # #zzzv
-nnoremap g* g*zzzv
-nnoremap g# g#zzzv
+nnoremap n nzzzv<Cmd>Doautocmd VimrcSearched<CR>
+nnoremap N Nzzzv<Cmd>Doautocmd VimrcSearched<CR>
+nnoremap * *zzzv<Cmd>Doautocmd VimrcSearched<CR>
+nnoremap # #zzzv<Cmd>Doautocmd VimrcSearched<CR>
+nnoremap g* g*zzzv<Cmd>Doautocmd VimrcSearched<CR>
+nnoremap g# g#zzzv<Cmd>Doautocmd VimrcSearched<CR>
 
 " disable arrow keys
 nnoremap <Up> <Nop>

@@ -67,14 +67,14 @@ repo = 'haya14busa/vim-asterisk'
 on_map = { nx = '<Plug>' }
 hook_add = '''
 let g:asterisk#keeppos = v:true
-nmap *  <Plug>(asterisk-z*)zz
-nmap #  <Plug>(asterisk-z#)zz
-nmap g* <Plug>(asterisk-gz*)zz
-nmap g# <Plug>(asterisk-gz#)zz
-xmap *  <Plug>(asterisk-z*)zz
-xmap #  <Plug>(asterisk-z#)zz
-xmap g* <Plug>(asterisk-gz*)zz
-xmap g# <Plug>(asterisk-gz#)zz
+nmap *  <Plug>(asterisk-z*)<Cmd>Doautocmd VimrcSearched<CR>zzzv
+nmap #  <Plug>(asterisk-z#)<Cmd>Doautocmd VimrcSearched<CR>zzzv
+nmap g* <Plug>(asterisk-gz*)<Cmd>Doautocmd VimrcSearched<CR>zzzv
+nmap g# <Plug>(asterisk-gz#)<Cmd>Doautocmd VimrcSearched<CR>zzzv
+xmap *  <Plug>(asterisk-z*)<Cmd>Doautocmd VimrcSearched<CR>zzzv
+xmap #  <Plug>(asterisk-z#)<Cmd>Doautocmd VimrcSearched<CR>zzzv
+xmap g* <Plug>(asterisk-gz*)<Cmd>Doautocmd VimrcSearched<CR>zzzv
+xmap g# <Plug>(asterisk-gz#)<Cmd>Doautocmd VimrcSearched<CR>zzzv
 '''
 
 [[plugins]]
@@ -117,10 +117,10 @@ nnoremap / <Cmd>call searchx#start({ 'dir': 1 })<CR>
 xnoremap ? <Cmd>call searchx#start({ 'dir': 0 })<CR>
 xnoremap / <Cmd>call searchx#start({ 'dir': 1 })<CR>
 
-nnoremap N <Cmd>call searchx#prev_dir()<CR>zzzv
-nnoremap n <Cmd>call searchx#next_dir()<CR>zzzv
-xnoremap N <Cmd>call searchx#prev_dir()<CR>zzzv
-xnoremap n <Cmd>call searchx#next_dir()<CR>zzzv
+nnoremap N <Cmd>call searchx#prev_dir()<Bar>Doautocmd VimrcSearched<CR>zzzv
+nnoremap n <Cmd>call searchx#next_dir()<Bar>Doautocmd VimrcSearched<CR>zzzv
+xnoremap N <Cmd>call searchx#prev_dir()<Bar>Doautocmd VimrcSearched<CR>zzzv
+xnoremap n <Cmd>call searchx#next_dir()<Bar>Doautocmd VimrcSearched<CR>zzzv
 '''
 
 [[plugins]]

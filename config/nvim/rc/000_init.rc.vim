@@ -92,6 +92,9 @@ if filereadable(expand('~/.vimrc_secret'))
   source ~/.vimrc_secret
 endif
 
+" custom autocmd
+autocmd vimrc User VimrcSearched :
+
 if has('nvim')
   lua require('vimrc.autocmd')
 endif
