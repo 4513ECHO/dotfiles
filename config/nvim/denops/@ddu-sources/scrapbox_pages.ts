@@ -2,13 +2,13 @@ import type { ActionData } from "https://pax.deno.dev/4513ECHO/ddu-kind-url@0.1.
 import type {
   GatherArguments,
   OnInitArguments,
-} from "https://deno.land/x/ddu_vim@v1.7.0/base/source.ts";
-import type { Item } from "https://deno.land/x/ddu_vim@v1.7.0/types.ts";
+} from "https://deno.land/x/ddu_vim@v1.8.0/base/source.ts";
+import type { Item } from "https://deno.land/x/ddu_vim@v1.8.0/types.ts";
 import type {
   Page,
   PageList,
 } from "https://pax.deno.dev/scrapbox-jp/types/rest.ts";
-import { BaseSource } from "https://deno.land/x/ddu_vim@v1.7.0/types.ts";
+import { BaseSource } from "https://deno.land/x/ddu_vim@v1.8.0/types.ts";
 
 interface Params {
   project: string;
@@ -17,7 +17,7 @@ interface Params {
 
 export class Source extends BaseSource<Params, ActionData> {
   kind = "url";
-  private pages: Page[] = [];
+  private pages: Record<string, Page[]> = [];
 
   async onInit(args: OnInitArguments<Params>): Promise<void> {
     if (!args.sourceParams.project) {
@@ -32,7 +32,7 @@ export class Source extends BaseSource<Params, ActionData> {
     );
     if (response.ok) {
       const result = await response.json() as PageList;
-      this.pages = result.pages;
+      this.pages[args.sourceParams.project] = result.pages;
     }
   }
 
@@ -40,7 +40,9 @@ export class Source extends BaseSource<Params, ActionData> {
     const { pages } = this;
     return new ReadableStream({
       start(controller) {
-        const items = pages.map((i): Item<ActionData> => ({
+        const items = pages[args.sourceParams.project].map((
+          i,
+        ): Item<ActionData> => ({
           word: i.title,
           action: {
             url: `https://scrapbox.io/${

@@ -1,8 +1,8 @@
 import * as fn from "https://deno.land/x/denops_std@v3.3.1/function/mod.ts";
 import type { ActionData } from "https://deno.land/x/ddu_kind_file@v0.3.0/file.ts";
-import type { GatherArguments } from "https://deno.land/x/ddu_vim@v1.7.0/base/source.ts";
-import type { Item } from "https://deno.land/x/ddu_vim@v1.7.0/types.ts";
-import { BaseSource } from "https://deno.land/x/ddu_vim@v1.7.0/types.ts";
+import type { GatherArguments } from "https://deno.land/x/ddu_vim@v1.8.0/base/source.ts";
+import type { Item } from "https://deno.land/x/ddu_vim@v1.8.0/types.ts";
+import { BaseSource } from "https://deno.land/x/ddu_vim@v1.8.0/types.ts";
 
 interface Params {
   useLoclist: boolean;
@@ -27,7 +27,8 @@ export class Source extends BaseSource<Params, ActionData> {
         controller.enqueue(
           await Promise.all(
             items.map(async (i): Promise<Item<ActionData>> => ({
-              word: `${await fn.bufname(
+              word: i.text,
+              display: `${await fn.bufname(
                 args.denops,
                 i.bufnr,
               )}|${i.lnum} col ${i.col}|${i.text}`,
