@@ -163,3 +163,39 @@ autocmd vimrc BufWritePost *
       \ |   call s:chmod(expand("<afile>"))
       \ | endif
 
+" always highlight special comment
+autocmd vimrc ColorScheme * silent! hi def link TodoExt Todo
+autocmd vimrc BufEnter,WinEnter,Syntax *
+      \ silent! let g:todo_match =  matchadd('TodoExt',
+      \ '\v\zs(TODO|NOTE|XXX|FIXME|INFO)\ze%(\(.{-}\))?\:')
+
+autocmd vimrc ColorScheme *
+      \ : if &laststatus == 3
+      \ |   hi clear VertSplit
+      \ | endif
+
+autocmd vimrc BufWritePost *
+      \ : if empty(&filetype)
+      \ |   filetype detect
+      \ | endif
+
+autocmd vimrc SwapExists *
+      \ : let v:swapchoice = 'o'
+      \ | echohl ErrorMsg
+      \ | echomsg 'Swapfile is found:' v:swapname
+      \ | echohl NONE
+
+" from https://github.com/aiotter/dotfiles/blob/8e759221/.vimrc#L185
+autocmd vimrc WinEnter *
+      \ : if winnr('$') == 1 && &buftype ==# 'quickfix'
+      \ |   quit
+      \ | endif
+
+autocmd vimrc VimResized *
+      \ : if &equalalways
+      \ |   wincmd =
+      \ | endif
+
+autocmd vimrc BufReadCmd file://* ++nested
+      \ : setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
+      \ | execute 'edit' substitute(expand('<afile>'), '^file://', '', '')
