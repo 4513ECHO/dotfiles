@@ -231,6 +231,9 @@ zsh = '''
 setlocal iskeyword+=-
 '''
 
+[[plugins]]
+repo = '4513echo/vim-jq_indent'
+on_ft = ['jq']
 
 [[plugins]]
 repo = 'bfrg/vim-jq'

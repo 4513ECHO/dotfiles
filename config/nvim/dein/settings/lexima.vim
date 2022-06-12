@@ -129,6 +129,13 @@ let s:rules.sh += [
       \ ]
 let s:rules.zsh = copy(s:rules.sh)
 
+" jq
+let s:rules.jq = []
+" string interpolation
+let s:rules.jq += [
+      \ { 'char': '(', 'at': '\\\%#', 'input_after': ')' },
+      \ ]
+
 function! s:lexima_init() abort
   for [filetype, rules] in items(s:rules)
     for val in rules
