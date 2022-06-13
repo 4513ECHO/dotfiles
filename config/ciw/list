@@ -16,8 +16,6 @@ go:github.com/mattn/gitter-cli
 go:github.com/mattn/longcat
 go:github.com/motemen/sbx
 go:github.com/sheepla/fzenn
-go:github.com/sheepla/longgopher
-go:github.com/sheepla/srss
 go:github.com/syumai/longify
 go:github.com/x-motemen/ghq
 npm:fixjson

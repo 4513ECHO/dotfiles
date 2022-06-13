@@ -45,7 +45,7 @@ packages:
     version_constraint: 'semver(">= 0.2.0")'
     version_overrides:
       - version_constraint: 'semver("< 0.2.0")'
-        supported_if: not (GOOS == "linux" and GOARCH == "arm64")
+        supported_if: GOOS == "darwin" or GOARCH == "amd64"
   - type: github_content
     repo_owner: holman
     repo_name: spark
@@ -82,31 +82,6 @@ packages:
   # init: l
 
   # init: m
-  - type: github_release
-    repo_owner: mgdm
-    repo_name: htmlq
-    asset: "htmlq-{{.Arch}}-{{.OS}}.{{.Format}}"
-    supported_if: not (GOOS == "linux" and GOARCH == "arm64")
-    description: Like jq, but for HTML
-    replacements:
-      amd64: x86_64
-    format: tar.gz
-    overrides:
-      - goos: windows
-        format: zip
-  - type: github_release
-    repo_owner: microsoft
-    repo_name: ripgrep-prebuilt
-    asset: "ripgrep-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz"
-    description: Builds ripgrep on Azure Pipelines for multiple platforms and makes the binaries available as Github releases
-    replacements:
-      darwin: apple-darwin
-      windows: pc-windows-msvc
-      linux: unknown-linux-musl
-      arm64: aarch64
-      amd64: x86_64
-    files:
-      - name: rg
 
   # init: n
   - name: nodejs/node
@@ -132,20 +107,6 @@ packages:
   # init: o
 
   # init: p
-  - type: github_release
-    repo_owner: pen-lang
-    repo_name: pen
-    asset: "pen-{{trimV .Version}}-{{.Arch}}-{.OS}.tar.xz"
-    rosetta2: true
-    supported_if: not (GOOS == "linux" and GOARCH == "arm64")
-    description: The programming language for scalable software development
-    replacements:
-      darwin: apple-darwin
-      linux: unknown-linux-gnu
-      amd64: x86_64
-    files:
-      - name: pen
-        src: target/release/pen
 
   # init: q
 
