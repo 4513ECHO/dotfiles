@@ -7,7 +7,8 @@ script="$(dirname "$0")/util.jq"
 case $1 in
   gen*)
     shift
-    $script --arg type gen < ./aqua.yaml \
+    gojq -r --yaml-input 'include "4513echo/aqua"; generate' \
+      < ./aqua.yaml \
       | while read -r package; do
         case $* in
           -e | --exec)
@@ -21,6 +22,7 @@ case $1 in
       done
     ;;
   desc*)
-    $script --arg type description < ./experimental.yaml
+    gojq -r --yaml-input 'include "4513echo/aqua"; description' \
+      < ./experimental.yaml
     ;;
 esac
