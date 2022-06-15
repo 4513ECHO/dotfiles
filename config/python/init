@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -eu
+
+case $1 in
+  gen*)
+    pipx list --json | jq -r 'include "4513echo/pipx"; generate'
+    ;;
+  exec*)
+    jq -r 'include "4513echo/pipx"; execute' < ./pipx.json | while read -r stdin; do
+      eval "$stdin"
+    done
+    ;;
+esac

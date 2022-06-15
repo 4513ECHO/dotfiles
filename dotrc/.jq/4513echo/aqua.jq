@@ -1,6 +1,6 @@
 module {
   name: "4513echo/aqua",
-  version: "0.1.0",
+  version: "0.1.0"
 };
 
 def generate:

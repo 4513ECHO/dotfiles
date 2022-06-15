@@ -2,8 +2,6 @@
 
 set -ue
 
-script="$(dirname "$0")/util.jq"
-
 case $1 in
   gen*)
     shift
