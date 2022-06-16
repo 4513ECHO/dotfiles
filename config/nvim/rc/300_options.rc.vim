@@ -67,7 +67,7 @@ set display=lastline,uhex
 if has('nvim')
   set display+=msgsep
 endif
-set shortmess+=ascF
+set shortmess=aoOsTcFS
 set lazyredraw
 set nofoldenable
 set synmaxcol=200
@@ -108,7 +108,7 @@ set nrformats-=octal
 set nojoinspaces
 set virtualedit=block
 
-" set clipboard=unnamed
+set clipboard-=autoselect
 set mouse=a
 if !has('nvim')
   set scrollfocus
