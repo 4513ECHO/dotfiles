@@ -27,10 +27,16 @@ hook_add = '''
 let g:auto_cursorline_wait_ms = 4000
 '''
 [plugins.ftplugin]
+molder = '''
+let b:auto_cursorline_disabled = v:true
+'''
 ddu-ff = '''
 let b:auto_cursorline_disabled = v:true
 '''
 ddu-ff-filter = '''
+let b:auto_cursorline_disabled = v:true
+'''
+fern = '''
 let b:auto_cursorline_disabled = v:true
 '''
 
@@ -95,19 +101,21 @@ hook_add = '''
 repo = 'lambdalisue/guise.vim'
 depends = ['denops.vim']
 
-
 [[plugins]]
 repo = 'mattn/vim-molder'
 [plugins.ftplugin]
 molder = '''
 setlocal nolist nospell
-let b:auto_cursorline_disabled = v:true
+nmap <buffer> <C-l> <Plug>(molder-reload)<Cmd>set nohlsearch<CR>
 nnoremap <buffer> q <C-w>q
-nmap <buffer> <C-r> <Plug>(molder-reload)
 nnoremap <silent><buffer><expr> R
       \ printf('<Cmd>edit %s<CR>', system('git rev-parse --show-toplevel'))
 nnoremap <silent><buffer><expr> .
       \ printf('<Cmd>edit %s<CR>', getcwd())
+nnoremap <silent><buffer><expr> j
+      \ line('.') == line('$') ? 'gg' : 'j'
+nnoremap <silent><buffer><expr> k
+      \ line('.') == 1 ? 'G' : 'k'
 '''
 
 [[plugins]]

@@ -230,6 +230,26 @@ call submode#map('nomove', 'nx', '', 'j', '<C-e>')
 call submode#map('nomove', 'nx', '', 'k', '<C-y>')
 '''
 
+[[plugins]]
+repo = 'lambdalisue/fern.vim'
+on_cmd = ['Fern']
+hook_add = '''
+let g:fern#keepalt_on_edit = v:true
+let g:fern#keepjumps_on_edit = v:true
+'''
+[plugins.ftplugin]
+fern = '''
+nmap <buffer> F <Plug>(fern-action-focus:parent)
+nnoremap <buffer> q <C-w>q
+nnoremap <silent><buffer><expr> r
+      \ printf('<Cmd>Fern %s<CR>', system('git rev-parse --show-toplevel'))
+nnoremap <silent><buffer><expr> W
+      \ printf('<Cmd>Fern %s<CR>', getcwd())
+nnoremap <silent><buffer><expr> j
+      \ line('.') == line('$') ? 'gg' : 'j'
+nnoremap <silent><buffer><expr> k
+      \ line('.') == 1 ? 'G' : 'k'
+'''
 
 [[plugins]]
 repo = 'lambdalisue/vim-quickrun-neovim-job'
