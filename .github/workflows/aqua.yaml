@@ -16,10 +16,20 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: aquaproj/aqua-installer@v1.0.0
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Cache packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.local/share/aquaproj-aqua/pkgs
+            ~/.local/share/aquaproj-aqua/registries
+          key: ${{ runner.os }}-${{ hashFiles('config/aqua/aqua.yaml') }}
+      - name: Install aqua
+        uses: aquaproj/aqua-installer@v1.0.0
         with:
           aqua_version: v1.11.0 # renovate: depName=aquaproj/aqua
-      - run: aqua --config config/aqua/aqua.yaml install --test
+      - name: Run test
+        run: aqua --config config/aqua/aqua.yaml install --test
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
