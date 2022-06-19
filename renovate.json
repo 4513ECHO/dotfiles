@@ -1,5 +1,12 @@
 {
   "extends": [
-    "config:base"
-  ]
+    "config:base",
+    "github>aquaproj/aqua-renovate-config#1.1.0",
+    "github>aquaproj/aqua-renovate-config:file#1.1.0(aqua\\.yaml)"
+  ],
+  "automerge": true,
+  "platformAutomerge": true,
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0,
+  "branchConcurrentLimit": 0
 }
