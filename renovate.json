@@ -1,12 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "automerge": true,
+  "branchConcurrentLimit": 0,
   "dependencyDashboard": true,
   "extends": [
     "config:base",
     "github>aquaproj/aqua-renovate-config#1.1.0",
     "github>aquaproj/aqua-renovate-config:file#1.1.0(aqua\\.yaml)"
   ],
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0,
   "schedule": [
     "at any time"
   ]
