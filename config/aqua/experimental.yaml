@@ -79,6 +79,18 @@ packages:
   # init: i
 
   # init: j
+  - type: github_release
+    repo_owner: jiro4989
+    repo_name: ojosama
+    asset: 'ojosama_{{trimV .Version}}_{{.OS}}_{{.Arch}}.{{.Format}}'
+    description: テキストを壱百満天原サロメお嬢様風の口調に変換します
+    replacements:
+      386: i386
+      amd64: x86_64
+    format: tar.gz
+    overrides:
+      - goos: windows
+        format: zip
   - type: github_content
     repo_owner: JosefZIla
     repo_name: bash2048

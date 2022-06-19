@@ -49,7 +49,7 @@ packages:
   - name: sharkdp/hexyl@v0.10.0
   - name: sharkdp/hyperfine@v1.14.0
   - name: sharkdp/pastel@v0.9.0
-  - name: sheepla/fzwiki@v0.1.0-alpha
+  - name: sheepla/fzwiki@v0.0.9 # FIXME: support newer version
   - name: sheepla/longgopher@v0.0.3
   - name: sheepla/pingu@v0.0.2
   - name: sheepla/qiitaz@v0.3.0
@@ -64,10 +64,12 @@ packages:
   - name: ziglang/zig@0.9.1
 
   # local registry
-  - name: holman/spark@master
+  - name: holman/spark
     registry: local
-  - name: JosefZIla/bash2048@master
+    version: master
+  - name: JosefZIla/bash2048
     registry: local
+    version: master
   - name: ko1nksm/getoptions@v3.3.0
     registry: local
   - name: nodejs/node@v18.3.0
@@ -76,8 +78,9 @@ packages:
     registry: local
   - name: rust-lang/rust@1.61.0
     registry: local
-  - name: thinca/ciw@master
+  - name: thinca/ciw
     registry: local
+    version: master
   - name: guptarohit/asciigraph@v0.5.5
     registry: local
   - name: vishaltelangre/ff@v0.1.8
@@ -85,4 +88,6 @@ packages:
   - name: high-moctane/mocword@v0.2.0
     registry: local
   - name: docker/cli@v20.10.17
+    registry: local
+  - name: jiro4989/ojosama@v0.2.0
     registry: local
