@@ -7,14 +7,38 @@ packages:
   # init: c
 
   # init: d
+  - type: http
+    repo_owner: docker
+    repo_name: cli
+    url: 'https://download.docker.com/{{.OS}}/static/stable/{{.Arch}}/docker-{{trimV .Version}}.tgz'
+    link: https://docker.com
+    description: The Docker CLI
+    replacements:
+      amd64: x86_64
+      arm64: aarch64
+      darwin: mac
+      windows: win
+    version_source: github_tag
+    files:
+      - name: docker
+        src: docker/docker
+      - name: docker-init
+        src: docker/docker-init
+      - name: docker-proxy
+        src: docker/docker-proxy
+      - name: dockerd
+        src: docker/dockerd
+      - name: runc
+        src: docker/runc
 
   # init: e
-  - type: github_release
-    repo_owner: elixir-lang
-    repo_name: elixir
-    description: Elixir is a dynamic, functional language designed for building scalable and maintainable applications
 
   # init: f
+  - type: github_release
+    repo_owner: fiatjaf
+    repo_name: jiq
+    asset: 'jiq_{{.OS}}_{{.Arch}}'
+    format: raw
 
   # init: g
   - type: github_release
@@ -63,14 +87,6 @@ packages:
     format: raw
     files:
       - name: bash2048.sh
-  - type: github_content
-    repo_owner: junegunn
-    repo_name: fzf
-    name: junegunn/fzf/bin/fzf-tmux
-    path: bin/fzf-tmux
-    description: fzf-tmux is a bash script that opens fzf in a tmux pane
-    files:
-      - name: fzf-tmux
 
   # init: k
   - type: github_release
@@ -84,8 +100,7 @@ packages:
   # init: m
 
   # init: n
-  - name: nodejs/node
-    type: http
+  - type: http
     repo_owner: nodejs
     repo_name: node
     rosetta2: true

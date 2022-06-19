@@ -3,7 +3,7 @@
 # https://aquaproj.github.io/
 registries:
   - type: standard
-    ref: v2.24.0 # renovate: depName=aquaproj/aqua-registry
+    ref: v2.28.0 # renovate: depName=aquaproj/aqua-registry
   - name: local
     type: local
     path: experimental.yaml
@@ -26,7 +26,10 @@ packages:
   - name: high-moctane/nextword@v0.0.5
   - name: itchyny/gojq@v0.12.8
   - name: itchyny/mmv@v0.1.4
+  - name: jesseduffield/lazydocker@v0.18.1
+  - name: jesseduffield/lazygit@v0.34
   - name: junegunn/fzf@0.30.0
+  - name: junegunn/fzf/fzf-tmux@0.30.0
   - name: kdabir/has@v1.4.0
   - name: koalaman/shellcheck@v0.8.0
   - name: LukeChannings/deno-arm64@v1.22.2
@@ -52,20 +55,18 @@ packages:
   - name: sheepla/qiitaz@v0.3.0
   - name: sheepla/srss@v0.0.3-alpha
   - name: sumneko/lua-language-server@3.2.5
+  - name: suzuki-shunsuke/yaml2json@v0.2.1
   - name: tomnomnom/gron@v0.7.1
   - name: TomWright/dasel@v1.24.3
+  - name: wtfutil/wtf@v0.41.0
   # - name: x-motemen/ghq@v1.3.0 # NOTE: no release for arm64
   - name: XAMPPRocky/tokei@v12.1.2
   - name: ziglang/zig@0.9.1
 
   # local registry
-  # - name: elixir-lang/elixir@v1.13.3
-  #   registry: local
   - name: holman/spark@master
     registry: local
   - name: JosefZIla/bash2048@master
-    registry: local
-  - name: junegunn/fzf/bin/fzf-tmux@0.30.0
     registry: local
   - name: ko1nksm/getoptions@v3.3.0
     registry: local
@@ -82,4 +83,6 @@ packages:
   - name: vishaltelangre/ff@v0.1.8
     registry: local
   - name: high-moctane/mocword@v0.2.0
+    registry: local
+  - name: docker/cli@v20.10.17
     registry: local
