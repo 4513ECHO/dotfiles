@@ -1,17 +1,12 @@
+---
 name: aqua
-
 on:
   push:
-    branches:
-      - main
-    paths:
-      - config/aqua/aqua.yaml
+    branches: [main]
+    paths: [config/aqua/aqua.yaml]
   pull_request:
-    branches:
-      - main
-    paths:
-      - config/aqua/aqua.yaml
-
+    branches: [main]
+    paths: [config/aqua/aqua.yaml]
 jobs:
   test:
     runs-on: ubuntu-latest
