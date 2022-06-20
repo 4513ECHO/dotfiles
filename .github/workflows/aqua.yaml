@@ -9,7 +9,21 @@ on:
     paths: [config/aqua/aqua.yaml]
 jobs:
   test:
+    strategy:
+      matrix:
+        env:
+          - goos: darwin
+            goarch: amd64
+          - goos: darwin
+            goarch: arm64
+          - goos: linux
+            goarch: amd64
+          - goos: linux
+            goarch: arm64
     runs-on: ubuntu-latest
+    env:
+      AQUA_CONFIG: config/aqua/aqua.yaml
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -25,6 +39,7 @@ jobs:
         with:
           aqua_version: v1.11.0 # renovate: depName=aquaproj/aqua
       - name: Run test
-        run: aqua --config config/aqua/aqua.yaml install --test
+        run: aqua install --test
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AQUA_GOARCH: ${{ matrix.env.goarch }}
+          AQUA_GOOS: ${{ matrix.env.goos }}
