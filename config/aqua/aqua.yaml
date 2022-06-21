@@ -37,7 +37,7 @@ packages:
   - name: microsoft/ripgrep-prebuilt@v13.0.0-4
   - name: mikefarah/yq@v4.25.2
   - name: mvdan/sh@v3.5.1
-  - name: nektos/act@v0.2.26
+  - name: nektos/act@v0.2.27
   # - name: neovim/neovim@v0.7.0 # NOTE: no release for arm64
   # - name: ogham/exa@v0.10.1 # NOTE: no release for arm64
   - name: rhysd/actionlint@v1.6.13
@@ -89,7 +89,7 @@ packages:
     registry: local
   - name: docker/cli@v20.10.17
     registry: local
-  - name: jiro4989/ojosama@v0.2.0
+  - name: jiro4989/ojosama@v0.3.0
     registry: local
   - name: greymd/ojichat@v0.2.2
     registry: local
