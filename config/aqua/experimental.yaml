@@ -22,14 +22,15 @@ packages:
     files:
       - name: docker
         src: docker/docker
-      - name: docker-init
-        src: docker/docker-init
-      - name: docker-proxy
-        src: docker/docker-proxy
-      - name: dockerd
-        src: docker/dockerd
-      - name: runc
-        src: docker/runc
+      # TODO: these tools are not avarable on darwin
+      # - name: docker-init
+      #   src: docker/docker-init
+      # - name: docker-proxy
+      #   src: docker/docker-proxy
+      # - name: dockerd
+      #   src: docker/dockerd
+      # - name: runc
+      #   src: docker/runc
 
   # init: e
 
@@ -62,7 +63,7 @@ packages:
     asset: 'mocword-{{.Arch}}-{{.OS}}'
     description: Predict next words (｀･ω･´)
     replacements:
-      darwin: unknown-apple-darwin
+      darwin: apple-darwin
       linux: unknown-linux-musl
       amd64: x86_64
       arm64: aarch64
