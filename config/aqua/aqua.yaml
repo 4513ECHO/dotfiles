@@ -91,3 +91,5 @@ packages:
     registry: local
   - name: jiro4989/ojosama@v0.2.0
     registry: local
+  - name: greymd/ojichat@v0.2.2
+    registry: local

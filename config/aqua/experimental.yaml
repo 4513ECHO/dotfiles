@@ -42,6 +42,9 @@ packages:
     format: raw
 
   # init: g
+  - type: go_install
+    repo_owner: greymd
+    repo_name: ojichat
   - type: github_release
     repo_owner: guptarohit
     repo_name: asciigraph
