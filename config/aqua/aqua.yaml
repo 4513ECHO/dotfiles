@@ -13,6 +13,7 @@ packages:
   - name: aquaproj/aqua-installer@v1.0.0
   - name: b4b4r07/afx@v0.1.25
   # - name: BurntSushi/ripgrep@13.0.0 # NOTE: use microsoft/ripgrep-prebuilt instead
+  - name: chriswalz/bit@v1.1.2
   - name: cli/cli@v2.12.1
   # - name: crate-ci/typos@v1.10.1 # NOTE: no release fomr arm64
   - name: dandavison/delta@0.13.0
@@ -21,6 +22,7 @@ packages:
   - name: ekalinin/github-markdown-toc@0.8.0
   - name: fsaintjacques/semver-tool@3.3.0
   - name: golang/go@go1.19beta1
+  - name: golang/tools/gopls@gopls/v0.8.4
   - name: hadolint/hadolint@v2.10.0
   # - name: harelba/q@v3.1.6 # NOTE: no release fomr arm64
   - name: high-moctane/nextword@v0.0.5
@@ -64,6 +66,8 @@ packages:
   - name: ziglang/zig@0.9.1
 
   # local registry
+  - name: b4b4r07/changed-objects@v0.1.14
+    registry: local
   - name: holman/spark
     registry: local
     version: master
@@ -77,6 +81,8 @@ packages:
   - name: rhysd/vim-startuptime@v1.2.0
     registry: local
   - name: rust-lang/rust@1.61.0
+    registry: local
+  - name: rust-lang/rust-analyzer@2022-06-20
     registry: local
   - name: thinca/ciw
     registry: local

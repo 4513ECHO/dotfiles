@@ -3,6 +3,13 @@ packages:
   # init: a
 
   # init: b
+  - type: github_release
+    repo_owner: b4b4r07
+    repo_name: changed-objects
+    asset: 'changed-objects-{{.OS}}-{{.Arch}}.tar.gz'
+    description: Get changed objects in Git commit
+    replacements:
+      amd64: x86_64
 
   # init: c
 
@@ -45,6 +52,7 @@ packages:
   - type: go_install
     repo_owner: greymd
     repo_name: ojichat
+    description: おじさんがLINEやメールで送ってきそうな文を生成する
   - type: github_release
     repo_owner: guptarohit
     repo_name: asciigraph
@@ -189,6 +197,25 @@ packages:
         src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustfmt-preview/bin/rustfmt"
       - name: cargo-fmt
         src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustfmt-preview/bin/cargo-fmt"
+  - type: github_release
+    repo_owner: rust-lang
+    repo_name: rust-analyzer
+    asset: 'rust-analyzer-{{.Arch}}-{{.OS}}.gz'
+    description: A Rust compiler front-end for IDEs
+    replacements:
+      arm64: aarch64
+      amd64: x86_64
+      darwin: apple-darwin
+      linux: unknown-linux-musl
+      windows: pc-windows-msvc
+    overrides:
+      - goos: linux
+        goarch: arm64
+        replacements:
+          linux: unknown-linux-gnu
+    files:
+      - name: rust-analyzer
+        src: 'rust-analyzer-{{.Arch}}-{{.OS}}'
 
   # init: s
   - type: github_content
