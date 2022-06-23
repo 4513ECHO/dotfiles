@@ -37,7 +37,7 @@ packages:
   - name: LukeChannings/deno-arm64@v1.23.0
   # - name: mattn/gof@v0.0.10 # NOTE: no release for arm64
   - name: microsoft/ripgrep-prebuilt@v13.0.0-4
-  - name: mikefarah/yq@v4.25.2
+  - name: mikefarah/yq@v4.25.3
   - name: mvdan/sh@v3.5.1
   - name: nektos/act@v0.2.28
   # - name: neovim/neovim@v0.7.0 # NOTE: no release for arm64
