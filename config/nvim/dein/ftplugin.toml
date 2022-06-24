@@ -231,10 +231,6 @@ zsh = '''
 setlocal iskeyword+=-
 '''
 
-go = '''
-setlocal noexpandtab nosmarttab shiftwidth=0
-'''
-
 [[plugins]]
 repo = '4513echo/vim-jq_indent'
 on_ft = ['jq']
