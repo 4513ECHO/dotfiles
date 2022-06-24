@@ -1,0 +1,13 @@
+---
+name: aqua
+on:
+  push:
+    paths-ignore: [config/aqua/aqua.yaml]
+  pull_request:
+    paths-ignore: [config/aqua/aqua.yaml]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dummy step
+        run: echo "No build required"
