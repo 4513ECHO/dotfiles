@@ -34,7 +34,7 @@ packages:
   - name: junegunn/fzf/fzf-tmux@0.30.0
   - name: kdabir/has@v1.4.0
   - name: koalaman/shellcheck@v0.8.0
-  - name: LukeChannings/deno-arm64@v1.23.0
+  - name: LukeChannings/deno-arm64@v1.23.1
   # - name: mattn/gof@v0.0.10 # NOTE: no release for arm64
   - name: microsoft/ripgrep-prebuilt@v13.0.0-4
   - name: mikefarah/yq@v4.25.3
