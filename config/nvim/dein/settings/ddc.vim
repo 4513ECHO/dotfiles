@@ -118,9 +118,7 @@ call ddc#custom#patch_filetype(
       \ 'sources': extend(['necovim'], s:sources),
       \ })
 call ddc#custom#patch_filetype(
-      \ ['python', 'typescript', 'typescriptreact', 'rust',
-      \  'yaml', 'lua', 'toml',
-      \ ], {
+      \ dein#get('vim-lsp-settings').on_ft, {
       \ 'sources': extend(['vim-lsp'], s:sources),
       \ })
 call ddc#custom#patch_filetype(

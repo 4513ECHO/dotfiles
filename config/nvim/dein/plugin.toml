@@ -273,7 +273,7 @@ depends = ['vim-lsp']
 on_ft = [
   'python', 'typescript', 'typescriptreact',
   'rust', 'markdown', 'yaml', 'json', 'sh', 'lua',
-  'toml',
+  'toml', 'go',
 ]
 hook_add = '''
 Runtime dein/settings/vim-lsp.vim
