@@ -3,10 +3,16 @@ name: aqua
 on:
   push:
     branches: [main]
-    paths: [config/aqua/aqua.yaml]
+    paths:
+      - .github/workflows/aqua.yaml
+      - config/aqua/aqua.yaml
+      - config/aqua/experimental.yaml
   pull_request:
     branches: [main]
-    paths: [config/aqua/aqua.yaml]
+    paths:
+      - .github/workflows/aqua.yaml
+      - config/aqua/aqua.yaml
+      - config/aqua/experimental.yaml
 jobs:
   test:
     strategy:
