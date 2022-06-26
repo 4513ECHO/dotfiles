@@ -9,7 +9,6 @@ pager:
 # Aliases allow you to create nicknames for gh commands
 aliases:
   co: pr checkout
-  assets: release list
   aqua: |
     gh repo view --json owner --json name --json description --template
     "- type: github_release
@@ -21,8 +20,9 @@ aliases:
   defaultBranch: repo view --json defaultBranchRef --jq '.defaultBranchRef.name'
   description: repo view --json description --jq '.description'
   fork: repo fork
-  get: '!f(){ ghq get $1; };f'
+  forked: repo list --json nameWithOwner --json isFork --jq '.[] | select(.isFork) | .nameWithOwner'
   starred: api --paginate /user/starred --jq 'map(.full_name)[]'
+  stars: repo view --json stargazerCount --jq '.stargazerCount'
   upstream: repo view --json url --jq '.url'
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:

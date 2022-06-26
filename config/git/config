@@ -29,6 +29,7 @@
 
 [pull]
   rebase = false
+  ff = only
 
 [status]
   showUntrackedFiles = all
@@ -53,6 +54,7 @@
 
 [merge]
   conflictstyle = diff3
+  ff = false
 
 [alias]
   ### command abbrev ###
@@ -65,7 +67,7 @@
   cm = commit
   cmm = commit -m
   co = checkout
-  com = !git checkout $(git defaultBranch)
+  com = !git checkout "$(git defaultBranch)"
   df = diff
   dft = difftool
   pl = pull
@@ -75,15 +77,17 @@
   stat = diff --stat
   ### feature shortcut ###
   all-files = !git ls-files
-  alias = !git config --get-regexp "^alias" | sed 's:alias\\.\\([^ ]*\\) \\(.*\\):\\1\\\t -> \\2:' | cut -c 1-46 | sort
+  alias = !git config --get-regexp "^alias" | sed 's@alias\\.\\(\\S*\\) \\(.*\\)@\\1\\\t -> \\2@'
   color = !git -c color.status=always
-  defaultBranch = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@refs/remotes/origin/@@'
+  contributors = shortlog --summary --numbered --email
+  defaultBranch = !git symbolic-ref refs/remotes/origin/HEAD | sed "s@refs/remotes/origin/@@"
   dirs = !git ls-files | sed -e "/^[^\\/]*$/d" -e "s:/[^/]*$::" | uniq
-  graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
   fixit = commit --amend --no-edit
+  graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
   hash = rev-parse --short HEAD
-  history = reflog
+  ignored = !git status --ignored --short | awk '$1 == \"!!\" {print $2}'
   latest = describe --tags --abbrev=0
+  undo = !git reset --hard $(git reflog --color=always | fzf --ansi | awk '{print substr($2, 1, length($2)-1)})'
   upstream = !git pull upstream "$(git defaultBranch)"
   pwd = !pwd
   root = rev-parse --show-toplevel

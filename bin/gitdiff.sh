@@ -2,8 +2,8 @@
 
 set -eu
 
-if [ -n "${GITDIFF:-}" ]; then
-  $GITDIFF "$@"
+if [ -n "${GIT_DIFFER:-}" ]; then
+  $GIT_DIFFER "$@"
   exit $?
 fi
 if command -v delta > /dev/null 2>&1; then
@@ -15,5 +15,5 @@ elif [ -x /usr/share/doc/git/contrib/diff-highlight/diff-highlight ]; then
 elif [ -x /usr/share/git/diff-highlight/diff-highlight ]; then
   /usr/share/git/diff-highlight/diff-highlight "$@"
 else
-  diff "$@"
+  cat "$@"
 fi
