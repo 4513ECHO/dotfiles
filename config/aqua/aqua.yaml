@@ -42,7 +42,7 @@ packages:
   - name: nektos/act@v0.2.28
   # - name: neovim/neovim@v0.7.0 # NOTE: no release for arm64
   # - name: ogham/exa@v0.10.1 # NOTE: no release for arm64
-  - name: rhysd/actionlint@v1.6.13
+  - name: rhysd/actionlint@v1.6.14
   - name: rhysd/hgrep@v0.2.6
   # - name: sahilm/yamldiff@0.1.0 # NOTE: no release for arm64
   - name: sharkdp/bat@v0.21.0
