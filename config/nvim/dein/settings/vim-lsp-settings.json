@@ -79,14 +79,26 @@
         "schemas": [
           {
             "fileMatch": [
-              "deno.json",
-              "deno.jsonc"
+              "/.vim-lsp-settings/settings.json",
+              "/vim-lsp-settings/settings.json"
             ],
-            "url": "https://deno.land/x/deno@v1.23.0/cli/schemas/config-file.v1.json"
+            "url": "https://mattn.github.io/vim-lsp-settings/local-schema.json"
           },
           {
             "fileMatch": [
-              "renovate.json"
+              "deno.json",
+              "deno.jsonc"
+            ],
+            "url": "https://deno.land/x/deno@v1.23.1/cli/schemas/config-file.v1.json"
+          },
+          {
+            "fileMatch": [
+              ".github/renovate.json",
+              ".github/renovate.json5",
+              ".renovaterc",
+              ".renovaterc.json",
+              "renovate.json",
+              "renovate.json5"
             ],
             "url": "https://docs.renovatebot.com/renovate-schema.json"
           }
@@ -147,14 +159,30 @@
           ],
           "enable": true,
           "globals": [
+            "packer_plugins",
             "vim"
           ]
+        },
+        "hover": {
+          "enable": true,
+          "viewNumber": true,
+          "viewString": true,
+          "viewStringMax": 100
+        },
+        "runtime": {
+          "path": [
+            "?.lua",
+            "?/init.lua",
+            "?/?.lua"
+          ],
+          "version": "LuaJIT"
         },
         "signatureHelp": {
           "enable": true
         },
         "workspace": {
-          "library": "`has('nvim') ? keys(v:lua.require('vimrc.plugin.lsp')) : []`",
+          "library": "`has('nvim') ? v:lua.require('vimrc.plugin.lsp') : []`",
+          "maxPreload": 1000,
           "useGitignore": true
         }
       }
@@ -168,18 +196,20 @@
     ],
     "workspace_config": {
       "evenBetterToml": {
+        "activationStatus": true,
         "formatter": {
           "columnWidth": 80
         },
         "schema": {
           "associations": {
-            "unused^(.*(/|\\\\)dein(/|\\\\).*\\.toml)$": "`'file://'.expand('~/Develops/github.com/4513ECHO/taplo/schemas/dein.toml.json')`",
             "^(.*(/|\\\\)dein(/|\\\\).*\\.toml)$": "`'file://'.expand('~/.config/nvim/dein/settings/dein.toml.json')`"
           },
           "enabled": true,
           "repositoryEnabled": true,
           "repositoryUrl": "https://taplo.tamasfe.dev/schema_index.json"
-        }
+        },
+        "taploConfig": "taplo://taplo.toml",
+        "taploConfigEnabled": true
       }
     }
   },

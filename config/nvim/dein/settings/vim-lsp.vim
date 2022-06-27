@@ -28,6 +28,7 @@ let g:lsp_diagnostics_virtual_text_delay = 200
 let g:lsp_document_code_action_signs_delay = 200
 let g:lsp_document_highlight_enabled = v:false
 let g:lsp_fold_enabled = v:false
+let g:lsp_signature_help_enabled = v:true
 let g:lsp_work_done_progress_enabled = v:true
 
 let g:lsp_diagnostics_signs_error = {'text': '✗'}
@@ -46,7 +47,7 @@ let g:lsp_settings_filetype_typescriptreact = 'deno'
 let g:lsp_settings_filetype_markdown = 'efm-langserver'
 let g:lsp_settings_filetype_json = ['json-languageserver', 'efm-langserver']
 let g:lsp_settings_filetype_sh = 'efm-langserver'
-let g:lsp_settings_filetype_yaml = 'yaml-language-server'
+let g:lsp_settings_filetype_yaml = ['yaml-language-server', 'efm-langserver']
 let g:lsp_settings_filetype_toml = 'taplo-lsp'
 let g:lsp_settings_filetype_lua = ['sumneko-lua-language-server', 'efm-langserver']
 
@@ -57,15 +58,24 @@ function! s:on_lsp_buffer_enabled() abort
   if index(['vim', 'yaml', 'markdown', 'sh', 'json', 'toml'], &filetype) == -1
     nmap <buffer> K <Plug>(lsp-hover)
   endif
-  nmap gK <Plug (lsp-hover)
+  nmap <buffer> gK <Plug>(lsp-hover)
   nmap <buffer> g_ <Plug>(lsp-document-diagnostics)
   nmap <buffer> ga <Plug>(lsp-code-action)
   nmap <buffer> gr <Plug>(lsp-rename)
-  nmap <buffer> gd <Plug>(lsp-definition)
+  nmap <buffer> gd <Cmd>call <SID>jump_definition()<CR>
   nmap <buffer> gq <Plug>(lsp-document-format)
   xmap <buffer> gq <Plug>(lsp-document-range-format)
-  nmap <buffer> gn <Plug>(lsp-next-diagnostic)
-  nmap <buffer> gp <Plug>(lsp-previous-diagnostic)
+  nmap <buffer> ]d <Plug>(lsp-next-diagnostic)
+  nmap <buffer> [d <Plug>(lsp-previous-diagnostic)
+endfunction
+
+function! s:jump_definition() abort
+  normal! m'
+  if index(['typescript', 'typescriptreact'], &filetype) != -1
+    LspDenoDefinition
+  else
+    LspDefinition
+  endif
 endfunction
 
 autocmd vimrc BufWritePre *.json LspDocumentFormatSync --server=efm-langserver
