@@ -20,17 +20,11 @@
   "#{"
 ] @punctuation.bracket
 
-; Function Options
-
-((set_item
-   option: (option_name) @_option
-   value: (set_value) @function)
-  (#any-of? @_option
-    "balloonexpr" "bexpr"
-    "diffexpr" "dex"
-    "foldexpr" "fde"
-    "formatexpr" "fex"
-    "includeexpr" "inex"
-    "indentexpr" "inde"
-    "modelineexpr" "mle"
-    "patchexpr" "pex"))
+; ; <expr> mapping
+; ((map_statement
+;   lhs: (map_side) @_map_side
+;   rhs: (ternary_expression
+;     left: (string_literal) @_expr
+;     right: (string_literal) @_expr))
+;    (#set! @_expr @_map_side)
+;    (#offset! @_expr 0 1 0 -1))

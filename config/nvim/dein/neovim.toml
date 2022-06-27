@@ -3,6 +3,16 @@
 repo = 'folke/lua-dev.nvim'
 
 [[plugins]]
+repo = 'hrsh7th/nvim-pasta'
+on_lua = ['pasta.mappings', 'pasta']
+hook_add = '''
+lua require('vimrc.plugin.pasta').hook_add()
+'''
+hook_source = '''
+lua require('vimrc.plugin.pasta').hook_source()
+'''
+
+[[plugins]]
 repo = 'kevinhwang91/nvim-hlslens'
 lazy = true
 on_lua = ['hlslens']
@@ -11,17 +21,21 @@ lua require('vimrc.plugin.hlslens').hook_add()
 '''
 
 [[plugins]]
-repo = 'nathom/filetype.nvim'
-hook_add = '''
-let g:did_load_filetypes = v:true
-'''
+repo = 'milisims/nvim-luaref'
+lazy = true
+
+[[plugins]]
+repo = 'nanotee/luv-vimdocs'
+lazy = true
+
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
 
 [[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
 lazy = true
 depends = ['playground']
 on_event = ['BufRead']
-merge_ftdetect = true
 hook_post_update = 'TSUpdate'
 hook_source = '''
 lua require('vimrc.plugin.treesitter')

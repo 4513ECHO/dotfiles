@@ -26,6 +26,16 @@ function M.hook_add()
       end,
     }
   )
+  vim.api.nvim_create_autocmd(
+    { "WinLeave", "BufWinLeave", "BufLeave", "FocusLost" },
+    {
+      group = "nvim_vimrc",
+      pattern = { "*" },
+      callback = function()
+        require("scrollbar").clear()
+      end,
+    }
+  )
   vim.api.nvim_create_autocmd({ "User" }, {
     group = "nvim_vimrc",
     pattern = { "lsp_diagnostics_updated" },

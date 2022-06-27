@@ -3,13 +3,11 @@
 
 ---@class Path
 ---
---- These are passed and accessible
 ---@field filename string The passed filename
----
---- These are set at start time
 ---@field _absolute string The cached absolute value of the string
 ---@field _cwd string The cwd at the time of creating the string
 ---@field _sep string The separator value for the Path
+---@field path { home: string, sep: string, root: function }
 local Path = {}
 
 ---@param self Path
@@ -18,21 +16,26 @@ local Path = {}
 function Path.__div(self, other) end
 
 ---@param self Path
----@return string
-function Path.__tostring(self) end
-
----@param self Path
 ---@param other string
 ---@return string
 function Path.__concat(self, other) end
 
----@param path unknown
+---@param a unknown
 ---@return boolean
-function Path.is_path(path) end
+function Path.is_path(a) end
 
 ---@vararg Path|string
 ---@return Path
 function Path:new(...) end
+
+---@return string
+function Path:_fs_filename() end
+
+---@return table
+function Path:_stat() end
+
+---@return integer
+function Path:_st_mode() end
 
 ---@vararg Path|string
 ---@return Path
@@ -54,6 +57,10 @@ function Path:make_relative(cwd) end
 ---@param cwd string
 ---@return string
 function Path:normalize(cwd) end
+
+---@param len integer
+---@param exclude string[] #TODO: check it out
+function Path:shorten(len, exclude) end
 
 ---@return boolean
 function Path:is_dir() end
