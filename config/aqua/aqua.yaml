@@ -80,7 +80,7 @@ packages:
     registry: local
   - name: rhysd/vim-startuptime@v1.2.0
     registry: local
-  - name: rust-lang/rust@1.61.0
+  - name: rust-lang/rust@1.62.0
     registry: local
   - name: rust-lang/rust-analyzer@2022-06-20
     registry: local
