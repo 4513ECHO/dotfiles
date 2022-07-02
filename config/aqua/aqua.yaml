@@ -23,6 +23,7 @@ packages:
   - name: fsaintjacques/semver-tool@3.3.0
   - name: golang/go@go1.19beta1
   - name: golang/tools/gopls@v0.8.4
+  - name: guptarohit/asciigraph@v0.5.5
   - name: hadolint/hadolint@v2.10.0
   # - name: harelba/q@v3.1.6 # NOTE: no release fomr arm64
   - name: high-moctane/nextword@v0.0.5
@@ -87,8 +88,6 @@ packages:
   - name: thinca/ciw
     registry: local
     version: master
-  - name: guptarohit/asciigraph@v0.5.5
-    registry: local
   - name: vishaltelangre/ff@v0.1.8
     registry: local
   - name: high-moctane/mocword@v0.2.0
@@ -98,4 +97,12 @@ packages:
   - name: jiro4989/ojosama@v0.7.0
     registry: local
   - name: greymd/ojichat@v0.2.2
+    registry: local
+  - name: fiatjaf/jiq@v0.7.2
+    registry: local
+  - name: docker/compose@v2.6.1
+    registry: local
+  - name: uzimaru0000/tv@v0.7.0
+    registry: local
+  - name: simeji/jid@v0.7.6
     registry: local

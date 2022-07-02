@@ -8,7 +8,6 @@ cargo:typos-cli
 cargo:vim-profiler
 go:github.com/b4b4r07/git-bump
 go:github.com/fedeztk/got/cmd/got
-go:github.com/greymd/ojichat
 go:github.com/haya14busa/hyperlink/cmd/hyperlink
 go:github.com/itchyny/maze/cmd/maze
 go:github.com/jmhobbs/terminal-parrot
