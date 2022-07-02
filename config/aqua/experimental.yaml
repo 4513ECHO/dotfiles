@@ -273,6 +273,9 @@ packages:
       - darwin
       - amd64
     rosetta2: true
+    files:
+      - name: tv
+        src: "tv-{{.Arch}}-{{.OS}}/tv"
 
   # init: v
   - type: github_release
