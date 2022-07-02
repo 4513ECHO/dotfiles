@@ -48,6 +48,7 @@ depends = [
 hook_add = '''
 let g:lightline = {}
 let g:lightline.colorscheme = user#colorscheme#lightline()
+let g:lightline.subseparator = { 'left': '/', 'right': '/' }
 let g:lightline.active = {
       \ 'left': [
       \   ['mode', 'paste'],
@@ -65,14 +66,14 @@ let g:lightline.inactive = {
       \ ],
       \ }
 let g:lightline.component_function = {
-      \ 'colorscheme': 'user#lightline#colorscheme',
-      \ 'ddu': 'user#lightline#ddu',
-      \ 'fileformat': 'user#lightline#file_format',
-      \ 'fileencoding': 'user#lightline#file_encoding',
-      \ 'filename': 'user#lightline#filename',
-      \ 'mode': 'user#lightline#mode',
-      \ 'readonly': 'user#lightline#readonly',
-      \ 'modified': 'user#lightline#modified',
+      \ 'colorscheme': 'lightline#component#vimrc#colorscheme',
+      \ 'ddu': 'lightline#component#vimrc#ddu',
+      \ 'fileformat': 'lightline#component#vimrc#file_format',
+      \ 'fileencoding': 'lightline#component#vimrc#file_encoding',
+      \ 'filename': 'lightline#component#vimrc#filename',
+      \ 'mode': 'lightline#component#vimrc#mode',
+      \ 'readonly': 'lightline#component#vimrc#readonly',
+      \ 'modified': 'lightline#component#vimrc#modified',
       \ }
 let g:lightline.component = {
       \ 'lineinfo': '%3l:%-2v',
@@ -85,6 +86,9 @@ let g:lightline.component_type = {
       \ 'lsp_errors': 'error',
       \ 'lsp_warnings': 'warning',
       \ }
+" from https://github.com/sheepla/dotfiles/blob/fcda1fd7/config/nvim/lightlinerc.vim#L52
+command! -bar LightlineUpdate
+      \ call lightline#init() | call lightline#colorscheme() | call lightline#update()
 '''
 
 [[plugins]]

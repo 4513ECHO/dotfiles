@@ -1,23 +1,27 @@
 let s:lightline_ignore_filetypes = ['help', 'ddu-ff', 'ddu-ff-filter', 'molder']
 
-function! user#lightline#colorscheme() abort
-  return winwidth(0) > 70 ? g:current_colorscheme : ''
+function! s:statuswidth() abort
+  return &laststatus > 2 ? &columns : winwidth(0)
 endfunction
 
-function! user#lightline#file_format() abort
-  return &fileformat !=# 'unix' && winwidth(0) > 70
+function! lightline#component#vimrc#colorscheme() abort
+  return s:statuswidth() > 70 ? g:current_colorscheme : ''
+endfunction
+
+function! lightline#component#vimrc#file_format() abort
+  return &fileformat !=# 'unix' && s:statuswidth() > 70
         \ ? &fileformat : ''
 endfunction
 
-function! user#lightline#file_encoding() abort
-  return &fileencoding !=# 'utf-8' && winwidth(0) > 70
+function! lightline#component#vimrc#file_encoding() abort
+  return &fileencoding !=# 'utf-8' && s:statuswidth() > 70
         \ ? &fileencoding : ''
 endfunction
 
-function! user#lightline#filename() abort
+function! lightline#component#vimrc#filename() abort
   if &filetype =~# '^ddu'
     return ''
-  elseif winwidth(0) > 50
+  elseif s:statuswidth() > 50
     let filename = fnamemodify(bufname(), ':t')
     return empty(filename) ? '[No name]' : filename
   endif
@@ -33,7 +37,7 @@ let s:skkeleton_modes = {
       \ 'abbrev': '/a',
       \ }
 
-function! user#lightline#mode() abort
+function! lightline#component#vimrc#mode() abort
   if !empty(submode#current())
     let mode = ['Sub', submode#current()]
   elseif exists('*skkeleton#is_enabled') && skkeleton#is_enabled()
@@ -42,19 +46,19 @@ function! user#lightline#mode() abort
   else
     let mode = [lightline#mode()]
   endif
-  return winwidth(0) > 70 ? (
+  return s:statuswidth() > 70 ? (
         \ !empty(get(mode, 1))
         \ ? printf('%s[%s]', mode[0], mode[1])
         \ : mode[0]
         \ ) : strcharpart(get(mode, 1, mode[0]), 0, 1)
 endfunction
 
-function! user#lightline#readonly() abort
+function! lightline#component#vimrc#readonly() abort
   return index(s:lightline_ignore_filetypes, &filetype) >= 0 ? ''
         \ : &readonly ? 'RO' : ''
 endfunction
 
-function! user#lightline#modified() abort
+function! lightline#component#vimrc#modified() abort
   return index(s:lightline_ignore_filetypes, &filetype) >= 0 ? ''
         \ : &modified ? '+'
         \ : &modifiable ? '' : '-'
@@ -69,7 +73,7 @@ function! s:get_ddu_status() abort
   return [winid, winnr, status]
 endfunction
 
-function! user#lightline#ddu() abort
+function! lightline#component#vimrc#ddu() abort
   let [winid, _, status] = s:get_ddu_status()
   if empty(status) || &filetype !~# 'ddu'
     return ''
