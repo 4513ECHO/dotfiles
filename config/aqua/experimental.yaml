@@ -13,6 +13,22 @@ packages:
     supported_envs:
       - linux
       - darwin
+  - type: github_release
+    repo_owner: b4b4r07
+    repo_name: gomi
+    asset: "gomi_{{.OS}}_{{.Arch}}.tar.gz"
+    description: Replacement for UNIX rm command
+    replacements:
+      amd64: x86_64
+    supported_envs:
+      - linux
+      - darwin
+    version_constraint: 'semver(">= 1.1.3")'
+    version_overrides:
+      - version_constraint: 'semver("< 1.1.3")'
+        supported_envs:
+          - linux/amd64
+          - darwin
 
   # init: c
 
@@ -106,6 +122,18 @@ packages:
     description: ▁▂▃▅▂▇ in your shell
 
   # init: i
+  - type: github_release
+    repo_owner: itchyny
+    repo_name: gojo
+    asset: "gojo_{{.Version}}_{{.OS}}_{{.Arch}}.{{.Format}}"
+    format: zip
+    description: Yet another Go implementation of jo
+    overrides:
+      - goos: linux
+        format: tar.gz
+    files:
+      - name: gojo
+        src: "gojo_{{.Version}}_{{.OS}}_{{.Arch}}/gojo"
 
   # init: j
   - type: github_release
@@ -134,12 +162,83 @@ packages:
     repo_name: getoptions
     asset: getoptions
     description: An elegant option/argument parser for shell scripts (full support for bash and all POSIX shells)
+  - type: github_release
+    repo_owner: kurehajime
+    repo_name: dajarep
+    asset: "dajarep_{{.OS}}_{{.Arch}}.{{.Format}}"
+    format: tar.gz
+    description: ダジャレを検索するコマンド
+    replacements:
+      amd64: x86_64
+      darwin: macos
+    overrides:
+      - goos: windows
+        format: zip
+    supported_envs:
+      - darwin
+      - linux
+      - amd64
+    rosetta2: true
+  - type: github_release
+    repo_owner: kurehajime
+    repo_name: kuzusi
+    asset: "{{.OS}}_{{.Arch}}.zip"
+    description: breakout for terminal
+    replacements:
+      darwin: macos
+    supported_envs:
+      - darwin
+      - amd64
+    rosetta2: true
+  - type: github_release
+    repo_owner: kurehajime
+    repo_name: pong-command
+    asset: "{{.OS}}_{{.Arch}}.zip"
+    description: pong is not ping.   pong is CLI game
+    replacements:
+      darwin: macos
+    supported_envs:
+      - darwin
+      - amd64
+    rosetta2: true
+    files:
+      - name: pong
 
   # init: l
 
   # init: m
+  - type: github_release
+    repo_owner: MiSawa
+    repo_name: xq
+    asset: "xq-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz"
+    description: Pure rust implementation of jq
+    replacements:
+      amd64: x86_64
+      arm64: aarch64
+      darwin: apple-darwin
+      linux: unknown-linux-musl
+      windows: pc-windows-msvc
+    supported_envs:
+      - darwin
+      - linux
+      - amd64
+    files:
+      - name: xq
+        src: "xq-{{.Version}}-{{.Arch}}-{{.OS}}/xq"
 
   # init: n
+  - type: github_release
+    repo_owner: ninja-build
+    repo_name: ninja
+    asset: "ninja-{{.OS}}.zip"
+    description: a small build system with a focus on speed
+    replacements:
+      darwin: mac
+      windows: win
+    supported_envs:
+      - darwin
+      - amd64
+    rosetta2: true
   - type: http
     repo_owner: nodejs
     repo_name: node
@@ -160,6 +259,25 @@ packages:
         src: "node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/npx"
 
   # init: o
+  - type: github_release
+    repo_owner: ogham
+    repo_name: exa
+    asset: "exa-{{.OS}}-{{.Arch}}-musl-{{.Version}}.{{.Format}}"
+    format: zip
+    description: A modern replacement for ‘ls’
+    replacements:
+      amd64: x86_64
+      darwin: macos
+    overrides:
+      - goos: darwin
+        asset: "exa-{{.OS}}-{{.Arch}}-{{.Version}}.{{.Format}}"
+    supported_envs:
+      - linux/amd64
+      - darwin
+    rosetta2: true
+    files:
+      - name: exa
+        src: bin/exa
 
   # init: p
 
@@ -302,6 +420,19 @@ packages:
   # init: w
 
   # init: x
+  - type: github_release
+    repo_owner: x-motemen
+    repo_name: ghq
+    asset: "ghq_{{.OS}}_{{.Arch}}.zip"
+    description: Remote repository management made easy
+    files:
+      - name: ghq
+        src: "ghq_{{.OS}}_{{.Arch}}/ghq"
+    version_constraint: 'semver(">= 1.3.0")'
+    version_overrides:
+      - version_constraint: 'semver("< 1.3.0")'
+        supported_envs:
+          - amd64
 
   # init: y
 
