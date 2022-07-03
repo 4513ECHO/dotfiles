@@ -180,8 +180,11 @@
         "signatureHelp": {
           "enable": true
         },
+        "telemetry": {
+          "enable": false
+        },
         "workspace": {
-          "library": "`has('nvim') ? v:lua.require('vimrc.plugin.lsp') : []`",
+          "library": "`split(&runtimepath, ',')`",
           "maxPreload": 1000,
           "useGitignore": true
         }

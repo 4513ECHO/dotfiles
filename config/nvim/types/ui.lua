@@ -1,6 +1,6 @@
 ---@diagnostic disable: unused-local
 
--- Prompts the user for input
+--- Prompts the user for input
 ---@param opts { prompt?: string, default?: string, completion?: string, highlight?: function } Additional options. See |input()|
 --- • prompt (string|nil) Text of the prompt.
 ---   Defaults to `Input:`.
@@ -17,7 +17,7 @@
 ---@param on_confirm fun(input?: string): nil Called once the user confirms or abort the input. `input` is what the user typed. `nil` if the user aborted the dialog.
 function vim.ui.input(opts, on_confirm) end
 
--- Prompts the user to pick a single item from a collection of entries
+--- Prompts the user to pick a single item from a collection of entries
 ---@generic T
 ---@param items T[] Arbitrary items
 ---@param opts { prompt?: string, format_item?: (fun(item: T): string), kind?: string } Additional options
