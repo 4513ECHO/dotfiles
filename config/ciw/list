@@ -16,7 +16,6 @@ go:github.com/mattn/longcat
 go:github.com/motemen/sbx
 go:github.com/sheepla/fzenn
 go:github.com/syumai/longify
-go:github.com/x-motemen/ghq
 npm:fixjson
 npm:markdownlint-cli
 npm:npm
