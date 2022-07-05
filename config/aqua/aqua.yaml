@@ -62,7 +62,7 @@ packages:
   - name: sheepla/pingu@v0.0.3
   - name: sheepla/qiitaz@v0.3.0
   - name: sheepla/srss@v0.0.3-alpha
-  - name: sumneko/lua-language-server@3.4.0
+  - name: sumneko/lua-language-server@3.4.1
   - name: suzuki-shunsuke/yaml2json@v0.2.1
   - name: tomnomnom/gron@v0.7.1
   - name: TomWright/dasel@v1.25.0
