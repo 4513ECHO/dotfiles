@@ -171,16 +171,15 @@ packages:
 
   # init: n
   - type: github_release
-    repo_owner: ninja-build
-    repo_name: ninja
-    asset: "ninja-{{.OS}}.zip"
-    description: a small build system with a focus on speed
+    repo_owner: nametake
+    repo_name: golangci-lint-langserver
+    asset: "golangci-lint-langserver_{{.OS}}_{{.Arch}}.tar.gz"
+    description: golangci-lint language server
     replacements:
-      darwin: mac
-      windows: win
+      amd64: x86_64
     supported_envs:
+      - linux
       - darwin
-      - amd64
     rosetta2: true
   - type: http
     repo_owner: nodejs
@@ -292,6 +291,31 @@ packages:
       - linux
       - amd64
     rosetta2: true
+  - type: github_release
+    repo_owner: skanehira
+    repo_name: gjo
+    asset: "{{.OS}}.zip"
+    description: Small utility to create JSON objects
+    replacements:
+      darwin: MacOS
+      linux: Linux
+      windows: Windows
+    supported_envs:
+      - darwin
+      - amd64
+    rosetta2: true
+  - type: github_release
+    repo_owner: skanehira
+    repo_name: rtty
+    asset: "rtty_{{trimV .Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+    description: Terminal on browser via websocket
+    replacements:
+      amd64: x86_64
+      darwin: Darwin
+      linux: Linux
+    supported_envs:
+      - linux
+      - darwin
 
   # init: t
   - type: github_content
@@ -342,6 +366,26 @@ packages:
     rosetta2: true
 
   # init: w
+  - type: github_release
+    repo_owner: Wilfred
+    repo_name: difftastic
+    asset: "difft-{{.Arch}}-{{.OS}}.{{.Format}}"
+    format: tar.gz
+    description: "a structural diff that understands syntax \U0001F7E5\U0001F7E9"
+    replacements:
+      amd64: x86_64
+      darwin: apple-darwin
+      linux: unknown-linux-gnu
+      windows: pc-windows-msvc
+    overrides:
+      - goos: windows
+        format: zip
+    supported_envs:
+      - darwin
+      - amd64
+    rosetta2: true
+    files:
+      - name: difft
 
   # init: x
 
