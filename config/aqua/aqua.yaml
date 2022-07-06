@@ -100,7 +100,7 @@ packages:
     registry: local
   - name: docker/cli@v20.10.17
     registry: local
-  - name: jiro4989/ojosama@v0.7.0
+  - name: jiro4989/ojosama@v0.8.0
     registry: local
   - name: greymd/ojichat@v0.2.2
     registry: local
