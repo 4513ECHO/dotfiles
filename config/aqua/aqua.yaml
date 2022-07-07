@@ -83,7 +83,7 @@ packages:
     version: master
   - name: ko1nksm/getoptions@v3.3.0
     registry: local
-  - name: nodejs/node@v18.4.0
+  - name: nodejs/node@v18.5.0
     registry: local
   - name: rhysd/vim-startuptime@v1.2.0
     registry: local
