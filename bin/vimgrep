@@ -1,0 +1,9 @@
+#!/bin/sh
+# vimgrep - small ripgrep wapper for :vimgrep
+# based on https://github.com/thinca/config/blob/eb27ff47/dotfiles/dot.vim/vimrc#L598
+set -ue
+if ! command -v rg > /dev/null || ! command -v jq > /dev/null; then
+  echo 'ripgrep or jq are not installed' >&2
+  exit 1
+fi
+exec rg --json "$*" --sort=path | jq -r 'include "4513echo/ripgrep"; parse'
