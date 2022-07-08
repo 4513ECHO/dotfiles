@@ -37,7 +37,7 @@ export SSH_FORWARD_KEY="$HOME/.ssh/id_git_ed25519"
 export SSH_SYMLINK_SOCK="$HOME/.ssh/agent"
 if [[ -n "$TMUX" ]]; then
   hook::venv
-  rename-pane-pwd
+  hook::rename-title
 fi
 [[ -f "$SSH_FORWARD_KEY" ]] && enable-agent-forward
 [[ -z "$MINIMUM_DOTFILES" ]] && agent-symlink

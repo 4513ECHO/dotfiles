@@ -21,12 +21,28 @@ hook::venv() {
 }
 add-zsh-hook chpwd hook::venv
 
+# from https://github.com/yuki-yano/dotfiles/blob/7f10462d/.zshrc#L531
+# Automatically save the current git state to reflog
+hook::git_auto_save() {
+  if [[ -d .git ]] && [[ -f .git/auto-save ]] \
+    && [[ $(find .git/auto-save -mmin -$((60)) | wc -l) -eq 0 ]] \
+    && [[ ! -f .git/MERGE_HEAD ]] \
+    && [[ $(git --no-pager diff --cached | wc -l) -eq 0 ]] \
+    && [[ ! -f .git/index.lock ]] \
+    && [[ ! -d .git/rebase-merge ]] \
+    && [[ ! -d .git/rebase-apply ]]; then
+    touch .git/auto-save \
+      && git add --all \
+      && git commit --no-verify --message "Auto save: $(date -R)" >/dev/null \
+      && git reset HEAD^ >/dev/null \
+      && echo "Git auto save!"
+  fi
+}
+add-zsh-hook preexec hook::git_auto_save
+
 zshaddhistory () {
   local line="${1%%$'\n'}"
   local cmd="${line%% *}"
-  # [[ "$cmd" != "exit" ]] && \
-  #   [[ "$cmd" != "rm" ]] && \
-  #   [[ "$(command -v "$cmd")" != "" ]]
   [[ "$cmd" != "exit" ]]
 }
 
@@ -74,20 +90,20 @@ auto_tmux () {
   fi
 }
 
-rename-pane-pwd () {
+hook::rename-title () {
   [[ $- == *m* ]] && printf '\033]2;%s\033\\' "$(pathshorten "$PWD")"
 }
-add-zsh-hook chpwd rename-pane-pwd
+add-zsh-hook chpwd hook::rename-title
 
-cd-git-root () {
+widget::cd::git-root () {
   local root
   root="$(git rev-parse --show-toplevel 2> /dev/null)"
   [[ -z "$root" ]] && return
   BUFFER="cd $root"
   zle accept-line
 }
-zle -N cd-git-root
-bindkey '^Gr' cd-git-root
+zle -N widget::cd::git-root
+bindkey '^Gr' widget::cd::git-root
 
 autoload -Uz history-search-end
 zle -N history-beginning-search-backward-end history-search-end
@@ -103,7 +119,7 @@ bindkey '^Xe' edit-command-line
 autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
 
-cd-fzf-git () {
+widget::cd::git () {
   local root result
   root="$(git rev-parse --show-toplevel 2> /dev/null)"
   [[ -z "$root" ]] && return
@@ -112,16 +128,15 @@ cd-fzf-git () {
     | uniq | fzf --preview \
     "exa -T -a --git-ignore --group-directories-first \
       --color=always $root/{} | head -200")"
-  root=
   zle reset-prompt
   [[ -z "$result" ]] && return
-  BUFFER="cd $(git rev-parse --show-toplevel)/$result"
+  BUFFER="cd $root/$result"
   zle accept-line
 }
-zle -N cd-fzf-git
-bindkey '^Gd' cd-fzf-git
+zle -N widget::cd::git
+bindkey '^Gd' widget::cd::git
 
-cd-fzf-ghq () {
+widget::cd::ghq () {
   local result match
   result="$(ghq list | fzf)"
   zle reset-prompt
@@ -130,68 +145,41 @@ cd-fzf-ghq () {
   BUFFER="cd $match"
   zle accept-line
 }
-zle -N cd-fzf-ghq
-bindkey '^Gh' cd-fzf-ghq
+zle -N widget::cd::ghq
+bindkey '^Gh' widget::cd::ghq
 
-dein-json () {
-  sed 's@\({\|,\)\(\w\+\):@\1"\2":@g' \
-    < "$XDG_CACHE_HOME/nvim/dein/cache_nvim"
-}
-
-cd-fzf-dein () {
-  local plugin
-  plugin="$(dein-json | gojq -r '.[0] | keys | .[]' | fzf)"
-  cd "$(dein-json | gojq -r ".[0].[\"$plugin\"].path")"
-}
-
-accept-line-ext () {
+widget::key::accept () {
   if [[ -z "$BUFFER" ]]; then
     printf '\033[1A'
-    zle accept-line
-    return
   fi
   zle _expand_alias
   zle accept-line
 }
-zle -N accept-line-ext
-bindkey '^M' accept-line-ext
+zle -N widget::key::accept
+bindkey '^M' widget::key::accept
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS=(
-  accept-line-ext
+  widget::key::accept
   history-beginning-search-backword-end
   history-beginning-search-forward-end
 )
 
-insert-bslash () {
+widget::key::bslash () {
   zle -U '\'
 }
-zle -N insert-bslash
-bindkey '¥' insert-bslash
+zle -N widget::key::bslash
+bindkey '¥' widget::key::bslash
+
+widget::key::space () {
+  zle _expand_alias
+  zle self-insert
+}
+zle -N widget::key::space
+bindkey ' ' widget::key::space
 
 zsh-clean () {
   rm -f $ZDOTDIR/*.zwc
   rm -f $ZDOTDIR/.zcompdump.*
+  rm -rf $ZDOTDIR/.zcompcache
   rm -f ~/.cache/zsh/compdump*
   rm -rf $XDG_CACHE_HOME/zpm
-}
-
-:q () {:}
-:w () {:}
-:wq () {:}
-
-benchmark () {
-  local tempfile=$(mktemp)
-  repeat ${1:-10} { time zsh -i -c exit } 2>&1 2>$tempfile
-  printf 'average: %ss maximum: %ss\n' $(awk \
-   '{
-      secs[NR] = $7
-      if (secs[NR] >= max) {
-        max = secs[NR]
-      }
-    }
-    END {
-      for (i = 1; i < length(secs); i++) {
-        sum += secs[i]
-      }
-      print sum/NR, max
-    }' $tempfile)
 }
