@@ -66,7 +66,7 @@ packages:
   - name: sumneko/lua-language-server@3.4.2
   - name: suzuki-shunsuke/yaml2json@v0.2.1
   - name: tomnomnom/gron@v0.7.1
-  - name: TomWright/dasel@v1.25.0
+  - name: TomWright/dasel@v1.26.0
   - name: wtfutil/wtf@v0.41.0
   - name: x-motemen/ghq@v1.3.0
   - name: XAMPPRocky/tokei@v12.1.2
