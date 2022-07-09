@@ -6,6 +6,7 @@ require("nvim-treesitter.configs").setup {
     "jsdoc",
     "lua",
     "markdown",
+    "markdown_inline",
     "python",
     "query",
     "rust",
