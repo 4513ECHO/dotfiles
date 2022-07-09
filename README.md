@@ -127,7 +127,8 @@ tmux must be `3.1c` or later. Latest version is recommended.
 **HEAD is recommended.**
 
 vim must be `v8.2.3520` (toml syntax is included in runtime by default) or
-later. neovim must be `v0.7.2` or later.
+later. neovim must be `v0.8.0` (after `ca64b589c`, filetype.lua is enabled by
+default) or later.
 
 - zsh
 
