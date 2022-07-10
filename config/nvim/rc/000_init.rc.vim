@@ -133,19 +133,6 @@ autocmd vimrc BufWinEnter *
       \ |   execute 'normal! zz' .. repeat("\<C-y>", winheight(0) / 6)
       \ | endif
 
-" from https://qiita.com/Bakudankun/items/649aa6d8b9eccc1712b5
-" TODO: modify the color of EndOfBuffer
-" NOTE: I'm working in progress that making plugin...
-autocmd vimrc ColorScheme *
-      \ : if !hlexists('NormalNC')
-      \ |   execute 'hi NormalNC guibg='
-      \   .. lightsout#darken(lightsout#get_hl('Normal', 'guibg'), 0.03)
-      \ | endif
-if !has('nvim')
-  autocmd vimrc BufWinEnter,WinEnter * setlocal wincolor=
-  autocmd vimrc WinLeave * setlocal wincolor=NormalNC
-endif
-
 " from https://github.com/yuki-yano/dotfiles/blob/11bfe29f07/.vimrc#L696
 autocmd vimrc FocusGained * checktime
 
