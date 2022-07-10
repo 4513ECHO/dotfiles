@@ -6,11 +6,9 @@ let $MYVIMRC = expand('<sfile>:p')
 function! s:source_vimrc(vimrc) abort
   execute 'source' printf('%s/rc/%s.rc.vim', s:config_home, a:vimrc)
 endfunction
-
-" TODO: remove digits of filenames
-call s:source_vimrc('000_init')
-call s:source_vimrc('200_keymap')
-call s:source_vimrc('300_options')
-call s:source_vimrc('100_dein')
+call s:source_vimrc('init')
+call s:source_vimrc('keymap')
+call s:source_vimrc('options')
+call s:source_vimrc('dein')
 
 set secure
