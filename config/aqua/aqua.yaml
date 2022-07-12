@@ -120,7 +120,7 @@ packages:
     registry: local
   - name: skanehira/gjo@1.0.2
     registry: local
-  - name: Wilfred/difftastic@0.30.0
+  - name: Wilfred/difftastic@0.31.0
     registry: local
   - name: skanehira/rtty@v0.3.0
     registry: local
