@@ -22,9 +22,10 @@ nnoremap S <Nop>
 xnoremap q <Nop>
 xnoremap S <Nop>
 
+" Record macro like ["x]Q (in default use 'q' register)
 nnoremap <expr> Q empty(reg_recording())
-      \ ? 'qq' .. '<Cmd>call user#notify("register recording started")<CR>'
-      \ : 'q' .. '<Cmd>call user#notify("register recording finished")<CR>'
+      \ ? 'q' .. (v:register =~# '["*+]' ? 'q' : v:register)
+      \ : 'q'
 
 " disable tmux prefix key
 nnoremap <C-q> <Nop>
