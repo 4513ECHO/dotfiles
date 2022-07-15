@@ -37,7 +37,7 @@ packages:
   - name: maaslalani/slides@v0.8.0
   # - name: mattn/gof@v0.0.12 # FIXME: update upstream
   - name: microsoft/ripgrep-prebuilt@v13.0.0-4
-  - name: mikefarah/yq@v4.25.3
+  - name: mikefarah/yq@v4.26.1
   - name: mvdan/sh@v3.5.1
   - name: nektos/act@v0.2.29
   - name: rhysd/actionlint@v1.6.15
