@@ -21,6 +21,7 @@ export DENO_INSTALL_ROOT="$DENO_INSTALL"
 ## rust ##
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export CARGO_NET_GIT_FETCH_WITH_CLI=true
 
 ## aqua ##
 export AQUA_CONFIG="$XDG_CONFIG_HOME/aqua/aqua.yaml"
@@ -33,7 +34,7 @@ export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"
 ## ripgrep ##
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
 
-## WGET ##
+## wget ##
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 
 ## npm ##
@@ -41,6 +42,17 @@ export NPM_CACHE_DIR="$XDG_CACHE_HOME/npm"
 export NPM_CONFIG_DIR="$XDG_CONFIG_HOME/npm"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export NPM_DATA_DIR="$XDG_DATA_HOME/npm"
+
+## less ##
+export LESS='--hilite-search --ignore-case --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --window=4 --tabs=4'
+export LESSCHARSET='UTF-8'
+export LESS_TERMCAP_mb=$'\e[1;38;5;139m' # Begins blinking
+export LESS_TERMCAP_md=$'\e[1;38;5;110m' # Begins bold
+export LESS_TERMCAP_me=$'\e[0m'          # Ends mode
+export LESS_TERMCAP_so=$'\e[48;5;243m'   # Begins standout-mode
+export LESS_TERMCAP_se=$'\e[0m'          # Ends standout-mode
+export LESS_TERMCAP_us=$'\e[4;38;5;143m' # Begins underline
+export LESS_TERMCAP_ue=$'\e[0m'          # Ends underline
 
 typeset -Ux path fpath manpath cdpath
 path=(
@@ -60,14 +72,11 @@ fpath=(
 )
 fpath=(${(R)fpath%/})
 
-export CARGO_NET_GIT_FETCH_WITH_CLI=true
-
 export EDITOR='nvim'
 export PAGER='less'
 export BROWSER='w3m'
-export MANPAGER='vim -M +MANPAGER -'
-export LESS='-giMRW -z-4 -x4'
-export LESSCHARSET='UTF-8'
+# export MANPAGER='vim -M +MANPAGER -'
+export MANPAGER='less +Gg'
 
 export LANG='ja_JP.UTF-8'
 export LC_TIME='en_US.UTF-8'
