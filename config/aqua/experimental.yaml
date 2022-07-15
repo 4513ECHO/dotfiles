@@ -78,6 +78,9 @@ packages:
       - darwin
       - amd64
     rosetta2: true
+    files:
+      - name: teip
+        src: bin/teip
 
   # init: h
   - type: github_release
