@@ -432,7 +432,11 @@ on_cmd = ['PP', 'PrettyPrint']
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 on_cmd = ['QuickRun']
+on_map = { nx = '<Plug>' }
 hook_add = '''
+nnoremap <Leader>rr <Plug>(quickrun)
+nnoremap <Leader>r <Plug>(quickrun-op)
+xnoremap <Leader>r <Plug>(quickrun)
 nnoremap <silent><expr> <C-c>
       \ quickrun#session#exists()
       \ ? '<Cmd>call quickrun#session#sweep()<CR>'
@@ -440,14 +444,17 @@ nnoremap <silent><expr> <C-c>
 let g:quickrun_config = {
       \ '_': {
       \   'hook/time/enable': v:false,
+      \   'outputter': 'buffer',
       \   'outputter/buffer/close_on_empty': v:true,
       \   'outputter/buffer/opener': 'botright 10new',
+      \   'outputter/error/error': 'quickfix',
+      \   'outputter/error/success': 'buffer',
       \   'runner': has('nvim') ? 'neovim_job' : 'job',
       \   'runner/nvimterm/opener': 'botright 10new',
       \   'runner/terminal/opener': 'botright 10new',
       \ },
       \ 'typescript': {
-      \   'type': 'mine/deno',
+      \   'type': 'deno/run',
       \ },
       \ 'sh': {
       \   'runner': has('nvim') ? 'nvimterm' : 'terminal',
@@ -456,26 +463,55 @@ let g:quickrun_config = {
       \   'runner': has('nvim') ? 'nvimterm' : 'terminal',
       \ },
       \ 'json': {
+      \   'type': 'json/gojq',
+      \ },
+      \ 'json/gojq': {
       \   'command': 'gojq',
       \   'exec': '%c %o %a < %s',
+      \ },
+      \ 'yaml': {
+      \   'type': 'yaml/yq',
+      \ },
+      \ 'yaml/yq': {
+      \   'cmdopt': '--output-format=json',
+      \   'command': 'yq',
+      \   'exec': '%c eval %o < %s',
+      \   'tempfile': '%{tempname()}.json',
       \ },
       \ 'lua': {
       \   'type': 'lua/vim',
       \ },
-      \ 'mine/deno': {
+      \ 'deno/run': {
       \   'cmdopt': '--no-check --allow-all --unstable',
       \   'command': 'deno',
       \   'exec': 'NO_COLOR=1 %c run %o %s %a',
       \   'tempfile': '%{tempname()}.ts',
       \ },
-      \ 'mine/deno_terminal': {
+      \ 'deno/terminal': {
       \   'cmdopt': '--no-check --allow-all --unstable',
       \   'command': 'deno',
       \   'exec': '%c run %o %s %a',
       \   'runner': has('nvim') ? 'nvimterm' : 'terminal',
       \   'tempfile': '%{tempname()}.ts',
       \ },
+      \ 'deno/test': {
+      \   'cmdopt': '--no-check --allow-all --unstable',
+      \   'command': 'deno',
+      \   'exec': 'NO_COLOR=1 %c test %o %s %a',
+      \   'tempfile': '%{tempname()}.ts',
+      \ },
+      \ 'deno/dex': {
+      \   'command': 'dex',
+      \   'exec': '%c %o %s %a',
+      \   'runner': has('nvim') ? 'nvimterm' : 'terminal',
+      \   'tempfile': '%{tempname()}.ts',
+      \ },
       \ }
+" from https://github.com/aiotter/dotfiles/blob/8e759221/.config/nvim/plugins/others.toml#L27
+autocmd vimrc WinEnter *
+      \ : if winnr('$') == 1 && &filetype == 'quickrun'
+      \ |   quit
+      \ | endif
 '''
 [plugins.ftplugin]
 quickrun = '''
