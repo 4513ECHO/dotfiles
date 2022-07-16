@@ -27,12 +27,14 @@ call gf#user#extend('gf#vimrc#find', 1000)
 repo = '4513echo/vim-readme-viewer'
 on_cmd = ['DeinReadme']
 on_source = 'ddu.vim'
+on_func = ['readme_viewer#get', 'readme_viewer#open']
 hook_add = '''
 let g:readme_viewer#plugin_manager = 'dein.vim'
 '''
 
 [[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
+on_cmd = ['FixWhitespace']
 on_event = ['InsertLeave']
 hook_add = '''
 let g:extra_whitespace_ignored_filetypes = ['diff', 'help', 'capture']
@@ -404,7 +406,7 @@ autocmd vimrc ColorScheme *
 [[plugins]]
 repo = 'thinca/vim-partedit'
 depends = ['context_filetype.vim']
-on_cmd = ['Partedit', 'ParteditEnd']
+on_cmd = ['Partedit']
 on_func = ['partedit#start']
 hook_add = '''
 let g:partedit#opener = 'split'
@@ -520,8 +522,9 @@ let b:caw_oneline_comment = ';'
 
 [[plugins]]
 repo = 'tyru/open-browser.vim'
-on_map = { nx = '<Plug>(openbrowser' }
 on_cmd = ['OpenBrowser', 'OpenBrowserSearch', 'OpenBrowserSmartSearch']
+on_func = ['openbrowser#open']
+on_map = { nx = '<Plug>(openbrowser' }
 hook_add = '''
 nmap gx <Plug>(openbrowser-smart-search)
 xmap gx <Plug>(openbrowser-smart-search)
