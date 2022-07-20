@@ -32,6 +32,7 @@ packages:
   - name: high-moctane/nextword@v0.0.5
   - name: itchyny/gojq@v0.12.8
   - name: itchyny/mmv@v0.1.4
+  - name: jiro4989/ojosama@v0.9.0
   - name: junegunn/fzf/fzf-tmux@0.30.0
   - name: junegunn/fzf@0.30.0
   - name: koalaman/shellcheck@v0.8.0
@@ -39,13 +40,16 @@ packages:
   - name: kurehajime/dajarep@v1.9.5
   - name: LukeChannings/deno-arm64@v1.23.4
   - name: maaslalani/slides@v0.8.0
+  - name: mattn/efm-langserver@v0.0.44
   # - name: mattn/gof@v0.0.12 # FIXME: update upstream
   - name: microsoft/ripgrep-prebuilt@v13.0.0-4
   - name: mikefarah/yq@v4.26.1
   - name: mvdan/sh@v3.5.1
+  - name: nametake/golangci-lint-langserver@v0.0.6
   - name: nektos/act@v0.2.29
   - name: rhysd/actionlint@v1.6.15
   - name: rhysd/hgrep@v0.2.6
+  - name: rust-lang/rust-analyzer@2022-07-04
   - name: sharkdp/bat@v0.21.0
   - name: sharkdp/fd@v8.4.0
   - name: sharkdp/hexyl@v0.10.0
@@ -81,16 +85,12 @@ packages:
     registry: local
   - name: rust-lang/rust@1.62.1
     registry: local
-  - name: rust-lang/rust-analyzer@2022-07-04
-    registry: local
   - name: thinca/ciw
     registry: local
     version: master
   - name: vishaltelangre/ff@v0.1.8
     registry: local
   - name: high-moctane/mocword@v0.2.0
-    registry: local
-  - name: jiro4989/ojosama@v0.9.0
     registry: local
   - name: greymd/ojichat@v0.2.2
     registry: local
@@ -103,8 +103,6 @@ packages:
   - name: MiSawa/xq@v0.2.38
     registry: local
   - name: itchyny/gojo@v0.2.1
-    registry: local
-  - name: nametake/golangci-lint-langserver@v0.0.6
     registry: local
   - name: skanehira/gjo@1.0.2
     registry: local

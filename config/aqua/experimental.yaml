@@ -124,17 +124,6 @@ packages:
         src: "gojo_{{.Version}}_{{.OS}}_{{.Arch}}/gojo"
 
   # init: j
-  - type: github_release
-    repo_owner: jiro4989
-    repo_name: ojosama
-    asset: "ojosama_{{trimV .Version}}_{{.OS}}_{{.Arch}}.{{.Format}}"
-    format: tar.gz
-    description: テキストを壱百満天原サロメお嬢様風の口調に変換します
-    replacements:
-      amd64: x86_64
-    overrides:
-      - goos: windows
-        format: zip
   - type: github_content
     repo_owner: JosefZIla
     repo_name: bash2048
@@ -174,17 +163,6 @@ packages:
         src: "xq-{{.Version}}-{{.Arch}}-{{.OS}}/xq"
 
   # init: n
-  - type: github_release
-    repo_owner: nametake
-    repo_name: golangci-lint-langserver
-    asset: "golangci-lint-langserver_{{.OS}}_{{.Arch}}.tar.gz"
-    description: golangci-lint language server
-    replacements:
-      amd64: x86_64
-    supported_envs:
-      - linux
-      - darwin
-    rosetta2: true
   - type: http
     repo_owner: nodejs
     repo_name: node
@@ -257,27 +235,7 @@ packages:
       - name: rustfmt
         src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustfmt-preview/bin/rustfmt"
       - name: cargo-fmt
-        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustfmt-preview/bin/cargo-fmt"
-  - type: github_release
-    repo_owner: rust-lang
-    repo_name: rust-analyzer
-    asset: "rust-analyzer-{{.Arch}}-{{.OS}}.{{.Format}}"
-    format: gz
-    description: A Rust compiler front-end for IDEs
-    replacements:
-      amd64: x86_64
-      arm64: aarch64
-      darwin: apple-darwin
-      linux: unknown-linux-musl
-      windows: pc-windows-msvc
-    overrides:
-      - goos: linux
-        goarch: arm64
-        replacements:
-          linux: unknown-linux-gnu
-    files:
-      - name: rust-analyzer
-        src: "rust-analyzer-{{.Arch}}-{{.OS}}"
+        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustfmt-preview/bin/cargo-fmt
 
   # init: s
   - type: github_content
