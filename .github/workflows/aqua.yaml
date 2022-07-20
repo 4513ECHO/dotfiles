@@ -26,10 +26,6 @@ jobs:
             goarch: amd64
           - goos: linux
             goarch: arm64
-          - goos: windows
-            goarch: amd64
-          - goos: windows
-            goarch: arm64
     runs-on: ubuntu-latest
     env:
       AQUA_CONFIG: config/aqua/aqua.yaml
