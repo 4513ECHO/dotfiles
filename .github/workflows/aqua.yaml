@@ -26,6 +26,10 @@ jobs:
             goarch: amd64
           - goos: linux
             goarch: arm64
+          - goos: wondows
+            goarch: amd64
+          - goos: wondows
+            goarch: arm64
     runs-on: ubuntu-latest
     env:
       AQUA_CONFIG: config/aqua/aqua.yaml
@@ -44,11 +48,11 @@ jobs:
       - name: Install aqua
         uses: aquaproj/aqua-installer@v1.0.0
         with:
-          aqua_version: v1.17.1 # renovate: depName=aquaproj/aqua
+          aqua_version: v1.17.1
       - name: Setup Golang
         uses: actions/setup-go@v3
         with:
-          go-version: "1.18.3"
+          go-version: "1.18.3" # renovate: depName=actions/go-versions
       - name: Run test
         run: aqua install --test
         env:
