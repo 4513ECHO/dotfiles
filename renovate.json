@@ -5,7 +5,8 @@
   "extends": [
     "config:base",
     "github>aquaproj/aqua-renovate-config#1.1.0",
-    "github>aquaproj/aqua-renovate-config:file#1.1.0(aqua\\.yaml)"
+    "github>aquaproj/aqua-renovate-config:file#1.1.0(\\.github/workflows/aqua\\.yaml)",
+    "github>aquaproj/aqua-renovate-config:file#1.1.0(config/aqua/aqua\\.yaml)"
   ],
   "labels": [
     "dependencies"
