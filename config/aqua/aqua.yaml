@@ -23,7 +23,7 @@ packages:
   - name: denoland/deno@v1.23.4
   - name: docker/cli/rootless@v20.10.17
   - name: docker/cli@v20.10.17
-  - name: docker/compose@v2.6.1
+  - name: docker/compose@v2.7.0
   - name: ekalinin/github-markdown-toc@0.8.0
   - name: golang/go@go1.19beta1
   - name: golang/tools/gopls@v0.8.4
