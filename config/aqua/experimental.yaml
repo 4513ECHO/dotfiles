@@ -4,7 +4,7 @@ packages:
   - type: github_release
     repo_owner: arrow2nd
     repo_name: nekome
-    asset: "nekome_{{trimV .Version}}_{{.OS}}_{{.Arch}}.{{.Format}}"
+    asset: nekome_{{trimV .Version}}_{{.OS}}_{{.Arch}}.{{.Format}}
     format: tar.gz
     description: TUI な Twitter クライアント
     replacements:
@@ -20,7 +20,7 @@ packages:
   - type: github_release
     repo_owner: b4b4r07
     repo_name: changed-objects
-    asset: "changed-objects-{{.OS}}-{{.Arch}}.tar.gz"
+    asset: changed-objects-{{.OS}}-{{.Arch}}.tar.gz
     description: Get changed objects in Git commit
     replacements:
       amd64: x86_64
@@ -34,7 +34,7 @@ packages:
     version_source: github_tag
     files:
       - name: xdg-ninja
-        src: "xdg-ninja-{{trimV .Version}}/xdg-ninja.sh"
+        src: xdg-ninja-{{trimV .Version}}/xdg-ninja.sh
 
   # init: c
 
@@ -46,7 +46,7 @@ packages:
   - type: github_release
     repo_owner: fiatjaf
     repo_name: jiq
-    asset: "jiq_{{.OS}}_{{.Arch}}"
+    asset: jiq_{{.OS}}_{{.Arch}}
     format: raw
     description: jid on jq - interactive JSON query tool using jq expressions
     supported_envs:
@@ -59,34 +59,12 @@ packages:
     repo_owner: greymd
     repo_name: ojichat
     description: おじさんがLINEやメールで送ってきそうな文を生成する
-  - type: github_release
-    repo_owner: greymd
-    repo_name: teip
-    asset: "teip-{{trimV .Version}}.{{.Arch}}-{{.OS}}.{{.Format}}"
-    format: tar.gz
-    description: Highly efficient "Masking tape" for Shell
-    replacements:
-      amd64: x86_64
-      darwin: apple-darwin
-      linux: unknown-linux-musl
-      windows: pc-windows-msvc
-    overrides:
-      - goos: windows
-        format: raw
-        asset: "teip_installer-{{trimV .Version}}-{{.Arch}}-{{.OS}}"
-    supported_envs:
-      - darwin
-      - amd64
-    rosetta2: true
-    files:
-      - name: teip
-        src: bin/teip
 
   # init: h
   - type: github_release
     repo_owner: high-moctane
     repo_name: mocword
-    asset: "mocword-{{.Arch}}-{{.OS}}"
+    asset: mocword-{{.Arch}}-{{.OS}}
     description: Predict next words (｀･ω･´)
     replacements:
       darwin: apple-darwin
@@ -113,7 +91,7 @@ packages:
   - type: github_release
     repo_owner: itchyny
     repo_name: gojo
-    asset: "gojo_{{.Version}}_{{.OS}}_{{.Arch}}.{{.Format}}"
+    asset: gojo_{{.Version}}_{{.OS}}_{{.Arch}}.{{.Format}}
     format: zip
     description: Yet another Go implementation of jo
     overrides:
@@ -121,7 +99,7 @@ packages:
         format: tar.gz
     files:
       - name: gojo
-        src: "gojo_{{.Version}}_{{.OS}}_{{.Arch}}/gojo"
+        src: gojo_{{.Version}}_{{.OS}}_{{.Arch}}/gojo
 
   # init: j
   - type: github_content
@@ -135,10 +113,19 @@ packages:
 
   # init: k
   - type: github_release
+    name: ko1nksm/getoptions/getoptions
     repo_owner: ko1nksm
     repo_name: getoptions
     asset: getoptions
     description: An elegant option/argument parser for shell scripts (full support for bash and all POSIX shells)
+  - type: github_release
+    name: ko1nksm/getoptions/gengetoptions
+    repo_owner: ko1nksm
+    repo_name: getoptions
+    asset: gengetoptions
+    description: An elegant option/argument parser for shell scripts (full support for bash and all POSIX shells)
+    files:
+      - name: gengetoptions
 
   # init: l
 
@@ -146,7 +133,7 @@ packages:
   - type: github_release
     repo_owner: MiSawa
     repo_name: xq
-    asset: "xq-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz"
+    asset: xq-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz
     description: Pure rust implementation of jq
     replacements:
       amd64: x86_64
@@ -160,27 +147,27 @@ packages:
       - amd64
     files:
       - name: xq
-        src: "xq-{{.Version}}-{{.Arch}}-{{.OS}}/xq"
+        src: xq-{{.Version}}-{{.Arch}}-{{.OS}}/xq
 
   # init: n
   - type: http
     repo_owner: nodejs
     repo_name: node
     rosetta2: true
-    url: "https://nodejs.org/dist/{{.Version}}/node-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz"
+    url: https://nodejs.org/dist/{{.Version}}/node-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz
     link: https://nodejs.org/
     description: Node.js JavaScript runtime
     replacements:
       amd64: x64
     files:
       - name: corepack
-        src: "node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/corepack"
+        src: node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/corepack
       - name: node
-        src: "node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/node"
+        src: node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/node
       - name: npm
-        src: "node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/npm"
+        src: node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/npm
       - name: npx
-        src: "node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/npx"
+        src: node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/npx
 
   # init: o
 
@@ -192,7 +179,7 @@ packages:
   - type: github_release
     repo_owner: rhysd
     repo_name: vim-startuptime
-    asset: "vim-startuptime_{{trimV .Version}}_{{.OS}}_{{.Arch}}.{{.Format}}"
+    asset: vim-startuptime_{{trimV .Version}}_{{.OS}}_{{.Arch}}.{{.Format}}
     format: tar.gz
     description: A small Go program for better `vim --startuptime` alternative
     overrides:
@@ -201,7 +188,7 @@ packages:
   - type: http
     repo_owner: rust-lang
     repo_name: rust
-    url: "https://static.rust-lang.org/dist/rust-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz"
+    url: https://static.rust-lang.org/dist/rust-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz
     description: Empowering everyone to build reliable and efficient software
     replacements:
       darwin: apple-darwin
@@ -213,27 +200,27 @@ packages:
       386: i686
     files:
       - name: cargo
-        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/cargo/bin/cargo"
+        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/cargo/bin/cargo
       - name: clippy-driver
-        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/clippy-preview/bin/clippy-driver"
+        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/clippy-preview/bin/clippy-driver
       - name: cargo-clippy
-        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/clippy-preview/bin/cargo-clippy"
+        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/clippy-preview/bin/cargo-clippy
       - name: rls
-        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rls-preview/bin/rls"
+        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/rls-preview/bin/rls
       - name: rust-demangler
-        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rust-demangler-preview/bin/rust-demangler"
+        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/rust-demangler-preview/bin/rust-demangler
       - name: rustdoc
-        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rustdoc"
+        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rustdoc
       - name: rust-lldb
-        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rust-lldb"
+        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rust-lldb
       - name: rustc
-        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rustc"
+        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rustc
       - name: rust-gdbgui
-        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rust-gdbgui"
+        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rust-gdbgui
       - name: rust-gdb
-        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rust-gdb"
+        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rust-gdb
       - name: rustfmt
-        src: "rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustfmt-preview/bin/rustfmt"
+        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustfmt-preview/bin/rustfmt
       - name: cargo-fmt
         src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustfmt-preview/bin/cargo-fmt
 
@@ -246,7 +233,7 @@ packages:
   - type: github_release
     repo_owner: simeji
     repo_name: jid
-    asset: "jid_{{.OS}}_{{.Arch}}.zip"
+    asset: jid_{{.OS}}_{{.Arch}}.zip
     description: json incremental digger
     supported_envs:
       - darwin
@@ -269,7 +256,7 @@ packages:
   - type: github_release
     repo_owner: skanehira
     repo_name: rtty
-    asset: "rtty_{{trimV .Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+    asset: rtty_{{trimV .Version}}_{{.OS}}_{{.Arch}}.tar.gz
     description: Terminal on browser via websocket
     replacements:
       amd64: x86_64
@@ -287,29 +274,12 @@ packages:
     description: A wrapper to install cli binary from language associated package manager
 
   # init: u
-  - type: github_release
-    repo_owner: uzimaru0000
-    repo_name: tv
-    asset: "tv-{{.Arch}}-{{.OS}}.zip"
-    description: Format json into table view
-    replacements:
-      amd64: x86_64
-      darwin: apple-darwin
-      linux: unknown-linux-gnu
-      windows: pc-windows-gnu
-    supported_envs:
-      - darwin
-      - amd64
-    rosetta2: true
-    files:
-      - name: tv
-        src: "tv-{{.Arch}}-{{.OS}}/tv"
 
   # init: v
   - type: github_release
     repo_owner: vishaltelangre
     repo_name: ff
-    asset: "find-files-{{.Version}}-{{.Arch}}-{{.OS}}.{{.Format}}"
+    asset: find-files-{{.Version}}-{{.Arch}}-{{.OS}}.{{.Format}}
     format: tar.gz
     description: Find files (ff) by name, fast
     replacements:
@@ -328,26 +298,6 @@ packages:
     rosetta2: true
 
   # init: w
-  - type: github_release
-    repo_owner: Wilfred
-    repo_name: difftastic
-    asset: "difft-{{.Arch}}-{{.OS}}.{{.Format}}"
-    format: tar.gz
-    description: "a structural diff that understands syntax \U0001F7E5\U0001F7E9"
-    replacements:
-      amd64: x86_64
-      darwin: apple-darwin
-      linux: unknown-linux-gnu
-      windows: pc-windows-msvc
-    overrides:
-      - goos: windows
-        format: zip
-    supported_envs:
-      - darwin
-      - amd64
-    rosetta2: true
-    files:
-      - name: difft
 
   # init: x
 

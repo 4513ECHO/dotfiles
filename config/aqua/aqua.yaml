@@ -3,7 +3,7 @@
 # https://aquaproj.github.io/
 registries:
   - type: standard
-    ref: v3.15.0 # renovate: depName=aquaproj/aqua-registry
+    ref: v3.16.0 # renovate: depName=aquaproj/aqua-registry
   - name: local
     type: local
     path: experimental.yaml
@@ -77,7 +77,9 @@ packages:
   - name: JosefZIla/bash2048
     registry: local
     version: master
-  - name: ko1nksm/getoptions@v3.3.0
+  - name: ko1nksm/getoptions/getoptions@v3.3.0
+    registry: local
+  - name: ko1nksm/getoptions/gengetoptions@v3.3.0
     registry: local
   - name: nodejs/node@v18.6.0
     registry: local
@@ -96,8 +98,6 @@ packages:
     registry: local
   - name: fiatjaf/jiq@v0.7.2
     registry: local
-  - name: uzimaru0000/tv@v0.7.0
-    registry: local
   - name: simeji/jid@v0.7.6
     registry: local
   - name: MiSawa/xq@v0.2.38
@@ -106,13 +106,9 @@ packages:
     registry: local
   - name: skanehira/gjo@1.0.2
     registry: local
-  - name: Wilfred/difftastic@0.31.0
-    registry: local
   - name: skanehira/rtty@v0.3.0
     registry: local
   - name: b3nj5m1n/xdg-ninja@v0.2.0.1
     registry: local
   - name: arrow2nd/nekome@v1.0.1
-    registry: local
-  - name: greymd/teip@v2.0.0
     registry: local
