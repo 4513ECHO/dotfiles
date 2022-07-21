@@ -33,8 +33,8 @@ packages:
   - name: itchyny/gojq@v0.12.8
   - name: itchyny/mmv@v0.1.4
   - name: jiro4989/ojosama@v0.9.0
-  - name: junegunn/fzf/fzf-tmux@0.30.0
-  - name: junegunn/fzf@0.30.0
+  - name: junegunn/fzf/fzf-tmux@0.31.0
+  - name: junegunn/fzf@0.31.0
   - name: koalaman/shellcheck@v0.8.0
   - name: ktock/buildg@v0.3.0
   - name: kurehajime/dajarep@v1.9.5
