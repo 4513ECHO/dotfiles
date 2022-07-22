@@ -96,11 +96,11 @@ The configuration files are [here](./config/zsh).
 
 ### Quick Start
 
-You can use [pax.deno.dev](https://github.com/kawarimidoll/pax.deno.dev) to
-abbreviate the URL.
+You only have to fetch setup script from following URL. `-L` option is needed to
+follow redirect.
 
 ```sh
-curl -L pax.deno.dev/4513ECHO/dotfiles/up | sh
+curl -L https://4513echo.deno.dev/dot | sh
 ```
 
 ### Manually install
@@ -140,7 +140,7 @@ many articles on the Internet. Thanks a lot!
 
 ## 📊 Statistics
 
-Statistics are updated at `dac65f4`.
+Statistics are updated at [`16c4ddb`](https://github.com/4513ECHO/dotfiles/commit/16c4ddb5eaf4dbe966b97cc4059c929f48dd2f9f).
 
 ### Code Lengths
 
@@ -154,22 +154,22 @@ It uses [tokei](https://github.com/XAMPPRocky/tokei) to measure.
  BASH                   18          280          188           43           49
  JSON                   12         1283         1283            0            0
  Lua                    10          556          258          248           50
- Makefile                1           95           82            0           13
+ Makefile                1           98           86            0           12
  Python                  1           32           21            3            8
- Scheme                  6          116           93           11           12
- Shell                   8          117           94           13           10
+ Scheme                  6          106           84           11           11
+ Shell                   8          120           97           13           10
  Plain Text              1           35            0           24           11
- TOML                   11         2474         2167           35          272
- TypeScript              5          256          224            7           25
- Vim script             28         2118         1916           66          136
- YAML                    5          748          645           56           47
- Zsh                     6          555          421           87           47
+ TOML                   11         2471         2166           35          270
+ TypeScript              5          227          200            5           22
+ Vim script             28         1955         1771           66          118
+ YAML                    5          642          558           38           46
+ Zsh                     6          519          389           85           45
 -------------------------------------------------------------------------------
- Markdown                2          186            0          126           60
+ Markdown                2          185            0          127           58
  |- YAML                 1            7            7            0            0
- (Total)                            193            7          126           60
+ (Total)                            192            7          127           58
 ===============================================================================
- Total                 114         8851         7392          719          740
+ Total                 114         8509         7101          698          710
 ===============================================================================
 ```
 <!--tokei-end-->
@@ -181,15 +181,15 @@ It uses [hyperfine](https://github.com/sharkdp/hyperfine) to benchmark.
 <!--hyperfine-start-->
 ```
 Benchmark 1: vim --not-a-term +quit
-  Time (mean ± σ):     379.3 ms ±   4.1 ms    [User: 273.9 ms, System: 99.2 ms]
-  Range (min … max):   372.9 ms … 386.1 ms    10 runs
+  Time (mean ± σ):     384.2 ms ±   7.6 ms    [User: 285.0 ms, System: 93.7 ms]
+  Range (min … max):   373.1 ms … 400.3 ms    10 runs
  
 Benchmark 2: nvim --headless +quit
-  Time (mean ± σ):     420.1 ms ±   7.8 ms    [User: 298.7 ms, System: 118.6 ms]
-  Range (min … max):   407.3 ms … 430.1 ms    10 runs
+  Time (mean ± σ):     467.9 ms ±   6.1 ms    [User: 344.3 ms, System: 120.0 ms]
+  Range (min … max):   462.1 ms … 478.8 ms    10 runs
  
 Summary
   'vim --not-a-term +quit' ran
-    1.11 ± 0.02 times faster than 'nvim --headless +quit'
+    1.22 ± 0.03 times faster than 'nvim --headless +quit'
 ```
 <!--hyperfine-end-->
