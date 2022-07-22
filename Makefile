@@ -19,6 +19,7 @@ init: ## Initialize enviroment settings
 	@mkdir -pv ~/.local/bin
 	@mkdir -pv ~/.local/share
 	@mkdir -pv ~/.cache
+	@mkdir -pv ~/Develops
 
 .PHONY: deploy
 deploy: ## Create symlinks to actual directories
@@ -28,8 +29,10 @@ deploy: ## Create symlinks to actual directories
 	@$(LN) $(realpath $(DOTPATH)/config)/zsh/.zshenv $(HOME)/.zshenv
 
 .PHONY: update
-update: ## Fetch all changes from remote repository
+update: ## Fetch and merge all changes from remote repository
+	git stash push --include-untracked
 	git pull origin main
+	git stash apply
 
 .PHONY: install
 install: update init deploy ## Initialize and deploy dotfiles
@@ -52,18 +55,18 @@ distclean: clean ## Remove symlinks and delete this repository
 pipx: ## Install and initialize pipx enviroments
 	python3 -m venv $(XDG_DATA_HOME)/pipx
 	$(XDG_DATA_HOME)/pipx/bin/python -m pip install pipx
-	$(XDG_DATA_HOME)/pipx/bin/python -m pipx ensurepath
 	@$(LN) $(XDG_DATA_HOME)/pipx/bin/pipx $(HOME)/.local/bin
 
 .PHONY: aqua
 aqua: ## Install and initialize aqua enviroments
-	curl -qfsSL 'https://pax.deno.dev/aquaproj/aqua-installer@v1.0.0/aqua-installer' | bash
-	-aqua i --test
+	curl -fsSL https://pax.deno.dev/aquaproj/aqua-installer@v1.0.0/aqua-installer | bash
+	aqua install --test
 
 .PHONY: rust
 rust: ## Install and initialize rust enviroments
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
-	-rustup toolchain install nightly
+	rustup update nightly
+	rustup default nightly
 
 .PHONY: go
 go: ## Install and initialize golang enviroments
@@ -90,7 +93,6 @@ go: ## Install and initialize golang enviroments
 	  CYGWIN|*[Ww]indows*) GOOS="windows" ;; \
 	esac; \
 	GOVERSION="$(shell curl -qfsSL https://go.dev/VERSION?m=text)"; \
-	curl -qfsSLO https://golang.org/dl/$${GOVERSION}.$${GOOS}-$${GOARCH}.tar.gz
+	curl -fsSLO https://golang.org/dl/$${GOVERSION}.$${GOOS}-$${GOARCH}.tar.gz
 	tar -C $(XDG_DATA_HOME) -xzf go*.tar.gz
 	@$(RM) go*.tar.gz
-
