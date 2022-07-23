@@ -30,9 +30,8 @@ deploy: ## Create symlinks to actual directories
 
 .PHONY: update
 update: ## Fetch and merge all changes from remote repository
-	git stash push --include-untracked
-	git pull origin main
-	git stash apply
+	git fetch origin
+	git rebase --autostash FETCH_HEAD
 
 .PHONY: install
 install: update init deploy ## Initialize and deploy dotfiles

@@ -56,6 +56,12 @@
   conflictstyle = diff3
   ff = false
 
+[fetch]
+  prune = true
+
+[rebase]
+  autostash = true
+
 [alias]
   ### command abbrev ###
   adn = add -N
