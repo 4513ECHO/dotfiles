@@ -110,5 +110,5 @@ packages:
     registry: local
   - name: b3nj5m1n/xdg-ninja@v0.2.0.1
     registry: local
-  - name: arrow2nd/nekome@v1.0.1
+  - name: arrow2nd/nekome@v1.0.2
     registry: local
