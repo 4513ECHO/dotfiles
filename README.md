@@ -1,4 +1,4 @@
-# dotfiles
+# ![dotfiles](https://user-images.githubusercontent.com/81011153/180718947-cb2428f2-0f54-46a1-93c6-d54ad206c6a8.jpeg)
 
 > ⚙ My configuration files and personal preferences
 
