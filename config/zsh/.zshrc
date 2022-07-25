@@ -56,11 +56,9 @@ if type fd > /dev/null; then
   export FZF_ALT_C_COMMAND="fd --type d --follow --hidden --exclude '.git'"
 fi
 
-# TODO: if zprof is exists, don't execute auto_tmux
-[[ $SHLVL -eq 1 ]] && [[ -z "$MINIMUM_DOTFILES" ]] \
-  && [[ -z "$LOADED_ZSHRC" ]] && auto_tmux
-export LOADED_ZSHRC=true
-
 if type zprof > /dev/null; then
   zprof | less
+elif [[ $SHLVL -eq 1 ]] && [[ -z "$MINIMUM_DOTFILES" ]] && [[ -z "$LOADED_ZSHRC" ]]; then
+  widget::tmux::session
 fi
+export LOADED_ZSHRC=true

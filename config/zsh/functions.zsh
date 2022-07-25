@@ -66,29 +66,37 @@ agent-symlink () {
   fi
 }
 
-auto_tmux () {
-  local list create_new_session
-  if [[ ! $- == *l* ]]; then
-    return
-  fi
-  if [[ -z "$TMUX" ]]; then
+widget::tmux::session () {
+  local list result attach_cmd create_new_session new_session
+  list="$(tmux list-sessions -F \
+    '#S: #{session_windows} windows [#{pane_current_command} "#W"]' \
+    2>/dev/null)"
+  if [[ -z "$list" ]]; then
+    tmux new-session -t "$(flower)" -d
     list="$(tmux list-sessions -F \
-      '#S: #{session_windows} windows [#{pane_current_command} "#W"]')"
-    if [[ -z "$list" ]]; then
-      tmux new-session -t "$(flower)"
-    fi
-    create_new_session="Create New Session"
-    list="$list\n$create_new_session:"
-    list="$(echo $list | fzf | cut -d: -f1)"
-    if [[ "$list" = "$create_new_session" ]]; then
-      tmux new-session -t "$(flower)"
-    elif [[ -n "$list" ]]; then
-      tmux attach-session -t "$list"
-    fi
+      '#S: #{session_windows} windows [#{pane_current_command} "#W"]' \
+      2>/dev/null)"
+  fi
+  create_new_session='Create New Session'
+  result="$(echo "$list\n$create_new_session:" | fzf | cut -d: -f1)"
+  if [[ -z "$TMUX" ]]; then
+    attach_cmd='attach-session'
   else
-    :
+    attach_cmd='switch-client'
+  fi
+  if [[ "$result" = "$create_new_session" ]]; then
+    while tmux has-session -t "$new_session" 2>/dev/null; do
+      new_session="$(flower)"
+    done
+    tmux new-session -t "$new_session" -d
+    tmux "$attach_cmd" -t "$new_session"
+  elif [[ -n "$result" ]]; then
+    tmux "$attach_cmd" -t "$result"
   fi
 }
+zle -N widget::tmux::session
+bindkey '^X^T' widget::tmux::session
+bindkey '^Xt' widget::tmux::session
 
 hook::rename-title () {
   [[ $- == *m* ]] && printf '\033]2;%s\033\\' "$(pathshorten "$PWD")"
