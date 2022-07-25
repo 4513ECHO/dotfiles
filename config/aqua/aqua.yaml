@@ -12,6 +12,7 @@ packages:
   - name: antonmedv/fx@24.0.0
   - name: aquaproj/aqua-installer@v1.0.0
   - name: aristocratos/btop@v1.2.8
+  - name: arrow2nd/nekome@v1.0.2
   - name: b4b4r07/afx@v0.1.25
   - name: b4b4r07/gist@v1.2.6
   - name: b4b4r07/gomi@v1.1.3
@@ -25,7 +26,7 @@ packages:
   - name: docker/cli@v20.10.17
   - name: docker/compose@v2.7.0
   - name: ekalinin/github-markdown-toc@0.8.0
-  - name: golang/go@go1.19beta1
+  - name: golang/go@go1.18.4
   - name: golang/tools/gopls@v0.8.4
   - name: golangci/golangci-lint@v1.47.2
   - name: hadolint/hadolint@v2.10.0
@@ -35,6 +36,7 @@ packages:
   - name: jiro4989/ojosama@v0.9.0
   - name: junegunn/fzf/fzf-tmux@0.31.0
   - name: junegunn/fzf@0.31.0
+  - name: ko1nksm/shdotenv@v0.13.0
   - name: koalaman/shellcheck@v0.8.0
   - name: ktock/buildg@v0.3.0
   - name: kurehajime/dajarep@v1.9.5
@@ -69,15 +71,13 @@ packages:
   - name: ziglang/zig@0.9.1
 
   # local registry
-  - name: b4b4r07/changed-objects@v0.1.14
-    registry: local
   - name: holman/spark
     registry: local
     version: master
   - name: JosefZIla/bash2048
     registry: local
     version: master
-  - name: ko1nksm/getoptions/getoptions@v3.3.0
+  - name: ko1nksm/getoptions@v3.3.0
     registry: local
   - name: ko1nksm/getoptions/gengetoptions@v3.3.0
     registry: local
@@ -104,11 +104,13 @@ packages:
     registry: local
   - name: itchyny/gojo@v0.2.1
     registry: local
-  - name: skanehira/gjo@1.0.2
-    registry: local
   - name: skanehira/rtty@v0.3.0
     registry: local
   - name: b3nj5m1n/xdg-ninja@v0.2.0.1
     registry: local
-  - name: arrow2nd/nekome@v1.0.2
+  - name: jez/as-tree@0.12.0
+    registry: local
+  - name: zigtools/zls@0.9.0
+    registry: local
+  - name: ddddddO/gtree@v1.7.9
     registry: local

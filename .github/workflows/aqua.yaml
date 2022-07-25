@@ -33,14 +33,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      # NOTE: cache is too slow
-      # - name: Cache packages
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: |
-      #       ~/.local/share/aquaproj-aqua/pkgs
-      #       ~/.local/share/aquaproj-aqua/registries
-      #     key: ${{ runner.os }}-aqua-${{ matrix.goos }}-${{ matrix.goarch }}-${{ hashFiles('config/aqua/aqua.yaml') }}
       - name: Install aqua
         uses: aquaproj/aqua-installer@v1.0.0
         with:
@@ -48,7 +40,7 @@ jobs:
       - name: Setup Golang
         uses: actions/setup-go@v3
         with:
-          go-version: "1.18.3"
+          go-version: "1.18.3" # renovate: depName=actions/go-versions
       - name: Run test
         run: aqua install --test
         env:

@@ -12,5 +12,16 @@
   ],
   "platformAutomerge": true,
   "prConcurrentLimit": 0,
-  "prHourlyLimit": 0
+  "prHourlyLimit": 0,
+  "regexManagers": [
+    {
+      "datasourceTemplate": "github-releases",
+      "fileMatch": [
+        ".github/workflows/aqua.yaml"
+      ],
+      "matchStrings": [
+        "go-version: \"(?<currentValue>.*?)\" # renovate: depName=(?<depName>.*)"
+      ]
+    }
+  ]
 }
