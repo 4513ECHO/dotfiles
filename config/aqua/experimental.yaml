@@ -307,3 +307,6 @@ packages:
       - darwin
       - amd64
     rosetta2: true
+    files:
+      - name: zls
+        src: bin/zls
