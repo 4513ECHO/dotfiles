@@ -1,0 +1,42 @@
+---
+name: udd
+on:
+  schedule:
+    - cron: "0 0 * * 0"
+  workflow_dispatch:
+jobs:
+  update-dependencies:
+    runs-on: ubuntu-latest
+    env:
+      NO_COLOR: 1
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: Setup deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: 1.24.0
+      - name: Update deno dependencies
+        run: >
+          deno run --allow-all https://deno.land/x/udd@0.7.4/main.ts
+          $(find -type f \( -name '*.ts' -or -name '*.json' -or -name '*.yaml' \))
+          > ../output.txt
+      - name: Read ../output.txt
+        id: log
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ../output.txt
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: "chore(deps): update deno dependencies"
+          title: "chore(deps): update deno dependencies"
+          body: |
+            Update deno dependencies by [udd](https://github.com/hayd/deno-udd):
+
+            ${{ steps.log.outputs.content }}
+
+          branch: udd/deno-dependency-updates
+          author: GitHub <noreply@github.com>
+          labels: dependencies
+          delete-branch: true

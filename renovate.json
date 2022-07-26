@@ -16,11 +16,22 @@
   "regexManagers": [
     {
       "datasourceTemplate": "github-releases",
+      "depNameTemplate": "actions/go-versions",
       "fileMatch": [
         ".github/workflows/aqua.yaml"
       ],
       "matchStrings": [
-        "go-version: \"(?<currentValue>.*?)\" # renovate: depName=(?<depName>.*)"
+        "go-version: \"(?<currentValue>.*?)\""
+      ]
+    },
+    {
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "denoland/deno",
+      "fileMatch": [
+        ".github/workflows/udd.yaml"
+      ],
+      "matchStrings": [
+        "deno-version: (?<currentValue>.*?)"
       ]
     }
   ]
