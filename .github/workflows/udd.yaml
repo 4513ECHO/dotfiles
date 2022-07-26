@@ -19,8 +19,8 @@ jobs:
       - name: Update deno dependencies
         run: >
           deno run --allow-all https://deno.land/x/udd@0.7.4/main.ts
-          -- **/*.ts **/*.json **/*.yaml .github/**/*.yaml
-          > ../output.txt
+          -- ./**/*.ts ./**/*.json ./**/*.yaml .github/**/*.yaml
+          | tee ../output.txt
       - name: Read ../output.txt
         id: log
         uses: juliangruber/read-file-action@v1
