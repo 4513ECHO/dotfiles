@@ -34,7 +34,9 @@ jobs:
           body: |
             Update deno dependencies by [udd](https://github.com/hayd/deno-udd):
 
+            ```
             ${{ steps.log.outputs.content }}
+            ```
 
           branch: udd/deno-dependency-updates
           author: GitHub <noreply@github.com>
