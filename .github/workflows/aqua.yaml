@@ -40,7 +40,7 @@ jobs:
               - 'config/aqua/aqua.yaml'
               - 'config/aqua/experimental.yaml'
       - name: Run test
-        if: steps.filter.output.aqua == 'true'
+        if: steps.filter.outputs.aqua == 'true'
         run: aqua install --test
         env:
           AQUA_GOARCH: ${{ matrix.goarch }}
