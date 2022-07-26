@@ -81,7 +81,7 @@ packages:
     registry: local
   - name: ko1nksm/getoptions/gengetoptions@v3.3.0
     registry: local
-  - name: nodejs/node@v18.6.0
+  - name: nodejs/node@v18.7.0
     registry: local
   - name: rhysd/vim-startuptime@v1.3.0
     registry: local
