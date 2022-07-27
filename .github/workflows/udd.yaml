@@ -44,10 +44,11 @@ jobs:
           author: GitHub <noreply@github.com>
           labels: dependencies
           delete-branch: true
+          token: ${{ secrets.PAT }}
       - name: Enable Pull Request Automerge
         if: steps.pr.outputs.pull-request-operation == 'created'
         uses: peter-evans/enable-pull-request-automerge@v2
         with:
-          token: ${{ secrets.PAT_TOKEN }}
+          token: ${{ secrets.PAT }}
           pull-request-number: ${{ steps.pr.outputs.pull-request-number }}
           merge-method: squash
