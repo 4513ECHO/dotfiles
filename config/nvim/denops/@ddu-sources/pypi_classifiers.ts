@@ -5,41 +5,10 @@ import type {
 } from "https://deno.land/x/ddu_vim@v1.8.7/base/source.ts";
 import type { Item } from "https://deno.land/x/ddu_vim@v1.8.7/types.ts";
 import { BaseSource } from "https://deno.land/x/ddu_vim@v1.8.7/types.ts";
+import { readerFromStreamReader } from "https://deno.land/std@0.148.0/streams/conversion.ts";
+import { readLines } from "https://deno.land/std@0.148.0/io/mod.ts";
 
 type Params = Record<never, never>;
-
-// based on https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
-async function* IterLines(
-  body: ReadableStream<Uint8Array>,
-): AsyncIterable<string> {
-  const decoder = new TextDecoder();
-  const reader = body.getReader();
-  let { value, done: readerDone } = await reader.read();
-  let chunk = value ? decoder.decode(value) : "";
-
-  const re = /\n|\r|\r\n/gm;
-  let startIndex = 0;
-
-  while (true) {
-    const result = re.exec(chunk);
-    if (!result) {
-      if (readerDone) {
-        break;
-      }
-      const remainder = chunk.substr(startIndex);
-      ({ value, done: readerDone } = await reader.read());
-      chunk = remainder + (value ? decoder.decode(value) : "");
-      startIndex = re.lastIndex = 0;
-      continue;
-    }
-    yield chunk.substring(startIndex, result.index);
-    startIndex = re.lastIndex;
-  }
-  if (startIndex < chunk.length) {
-    // last line didn't end in a newline char
-    yield chunk.substr(startIndex);
-  }
-}
 
 export class Source extends BaseSource<Params, ActionData> {
   kind = "word";
@@ -50,7 +19,9 @@ export class Source extends BaseSource<Params, ActionData> {
       "https://pypi.org/pypi?%3Aaction=list_classifiers",
     );
     if (response.ok) {
-      for await (const line of IterLines(response.body)) {
+      for await (
+        const line of readLines(readerFromStreamReader(response.body))
+      ) {
         this.classifiers.push(line);
       }
     }
