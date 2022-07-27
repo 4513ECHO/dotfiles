@@ -10,7 +10,7 @@ jobs:
     env:
       NO_COLOR: 1
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v3
       - name: Setup deno
         uses: denoland/setup-deno@v1
@@ -27,6 +27,7 @@ jobs:
         with:
           path: ../output.txt
       - name: Create Pull Request
+        id: pr
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: "chore(deps): update deno dependencies"
@@ -38,7 +39,14 @@ jobs:
             ${{ steps.log.outputs.content }}
             ```
 
+            Pull Request is created by [create-pull-request](https://github.com/peter-evans/create-pull-request)
           branch: udd/deno-dependency-updates
           author: GitHub <noreply@github.com>
           labels: dependencies
           delete-branch: true
+      - name: Enable Pull Request Automerge
+        if: steps.pr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          pull-request-number: ${{ steps.pr.outputs.pull-request-number }}
+          merge-method: squash
