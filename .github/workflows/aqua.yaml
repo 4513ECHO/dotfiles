@@ -23,14 +23,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Install aqua
-        uses: aquaproj/aqua-installer@v1.0.0
-        with:
-          aqua_version: v1.17.1
-      - name: Setup Golang
-        uses: actions/setup-go@v3
-        with:
-          go-version: "1.18.3"
       - uses: dorny/paths-filter@v2
         id: filter
         with:
@@ -39,6 +31,16 @@ jobs:
               - '.github/workflows/aqua.yaml'
               - 'config/aqua/aqua.yaml'
               - 'config/aqua/experimental.yaml'
+      - name: Install aqua
+        if: steps.filter.outputs.aqua == 'true'
+        uses: aquaproj/aqua-installer@v1.0.0
+        with:
+          aqua_version: v1.17.1
+      - name: Setup Golang
+        if: steps.filter.outputs.aqua == 'true'
+        uses: actions/setup-go@v3
+        with:
+          go-version: "1.18.3"
       - name: Run test
         if: steps.filter.outputs.aqua == 'true'
         run: aqua install --test
