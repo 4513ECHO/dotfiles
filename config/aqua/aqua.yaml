@@ -11,7 +11,7 @@ registries:
 packages:
   - name: ajeetdsouza/zoxide@v0.8.2
   - name: antonmedv/fx@24.0.0
-  - name: aquaproj/aqua-installer@v1.0.0
+  - name: aquaproj/aqua-installer@v1.1.0
   - name: aristocratos/btop@v1.2.8
   - name: arrow2nd/nekome@v1.0.2
   - name: b4b4r07/afx
