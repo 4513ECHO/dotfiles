@@ -34,7 +34,7 @@ jobs:
               - 'config/aqua/experimental.yaml'
       - name: Install aqua
         if: steps.filter.outputs.aqua == 'true'
-        uses: aquaproj/aqua-installer@v1.0.0
+        uses: aquaproj/aqua-installer@v1.1.0
         with:
           aqua_version: v1.18.0
       - name: Setup Golang
