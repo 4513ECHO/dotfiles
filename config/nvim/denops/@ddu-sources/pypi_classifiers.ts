@@ -2,11 +2,11 @@ import type { ActionData } from "https://pax.deno.dev/Shougo/ddu-kind-word/denop
 import type {
   GatherArguments,
   OnInitArguments,
-} from "https://deno.land/x/ddu_vim@v1.8.7/base/source.ts";
-import type { Item } from "https://deno.land/x/ddu_vim@v1.8.7/types.ts";
-import { BaseSource } from "https://deno.land/x/ddu_vim@v1.8.7/types.ts";
-import { readerFromStreamReader } from "https://deno.land/std@0.148.0/streams/conversion.ts";
-import { readLines } from "https://deno.land/std@0.148.0/io/mod.ts";
+} from "https://deno.land/x/ddu_vim@v1.8.8/base/source.ts";
+import type { Item } from "https://deno.land/x/ddu_vim@v1.8.8/types.ts";
+import { BaseSource } from "https://deno.land/x/ddu_vim@v1.8.8/types.ts";
+import { readerFromStreamReader } from "https://deno.land/std@0.150.0/streams/conversion.ts";
+import { readLines } from "https://deno.land/std@0.150.0/io/mod.ts";
 
 type Params = Record<never, never>;
 
