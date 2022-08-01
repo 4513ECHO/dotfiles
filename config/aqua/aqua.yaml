@@ -47,7 +47,7 @@ packages:
   - name: mattn/efm-langserver@v0.0.44
   # - name: mattn/gof@v0.0.12 # FIXME: update upstream
   - name: microsoft/ripgrep-prebuilt@v13.0.0-4
-  - name: mikefarah/yq@v4.26.1
+  - name: mikefarah/yq@v4.27.2
   - name: mvdan/sh@v3.5.1
   - name: nametake/golangci-lint-langserver@v0.0.6
   - name: nektos/act@v0.2.30
