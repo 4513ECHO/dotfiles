@@ -23,6 +23,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      # NOTE: use paths-filter instead of on.pull_request.paths to trigger test always
       - name: Check Changed Files
         uses: dorny/paths-filter@v2
         id: filter

@@ -7,49 +7,56 @@ root-markers:
 tools:
   textlint-lint: &textlint-lint
     prefix: textlint
-    lint-command: 'npx --no-install textlint -f unix --stdin --stdin-filename ${INPUT}'
+    lint-command: "npx --no-install textlint --cache -f unix --stdin --stdin-filename ${INPUT}"
     lint-ignore-exit-code: true
     lint-stdin: true
     lint-formats:
-      - '%f:%l:%c: %m [%trror/%r]'
-      - '%f:%l:%c: 【%r】 %m'
-      - '%E%f:%l:%c: %m'
-      - '%Z%m [%trror/%r]'
-      - '%C%m'
+      - "%f:%l:%c: %m [%trror/%r]"
+      - "%f:%l:%c: 【%r】 %m"
+      - "%E%f:%l:%c: %m"
+      - "%Z%m [%trror/%r]"
+      - "%C%m"
     root-markers:
       - .textlintrc
       - .textlintrc.json
       - .textlintrc.yaml
       - .textlintrc.yml
     commands:
-      - title: 'textlint fix'
+      - title: "textlint fix"
         command: npx
         arguments:
-          - '--no-install'
-          - 'textlint'
-          - '--fix'
-          - '${INPUT}'
+          - "--no-install"
+          - "textlint"
+          - "--cache"
+          - "--fix"
+          - "${INPUT}"
 
   markdownlint-lint: &markdownlint-lint
     prefix: markdownlint
-    lint-command: 'npx --no-install markdownlint --stdin'
+    lint-command: "npx --no-install markdownlint --stdin"
     lint-stdin: true
     lint-formats:
-      - '%f:%l:%c MD%n/%*[^ ] %m'
-      - '%f:%l MD%n/%*[^ ] %m'
+      - "%f:%l:%c MD%n/%*[^ ] %m"
+      - "%f:%l MD%n/%*[^ ] %m"
     commands:
-      - title: 'markdownlint fix'
+      - title: "markdownlint fix"
         command: markdownlint
         arguments:
-          - '--fix'
-          - '${INPUT}'
+          - "--fix"
+          - "${INPUT}"
+
+  hadolint-lint: &hadolint-lint
+    prefix: hadolint
+    lint-command: "hadolint"
+    lint-formats:
+      - "%f:%l DL%n %t%*[a-z]: %m"
 
   commitlint-lint: &commitlint-lint
     prefix: commitlint
-    lint-command: 'npx --no-install commitlint -c false'
+    lint-command: "npx --no-install commitlint -c false"
     lint-stdin: true
     lint-formats:
-      - '%t%*[^ ] %m'
+      - "%t%*[^ ] %m"
     root-markers:
       - .commitlintrc
       - .commitlintrc.json
@@ -61,57 +68,59 @@ tools:
       - commitlint.config.js
       - commitlint.config.cjs
       - commitlint.config.ts
-
-  # jq-format: &jq-format
-  #   format-command: 'jq .'
-  #   format-stdin: true
+    lint-category-map:
+      ✖: E
+      ⚠: W
 
   fixjson-format: &fixjson-format
-    format-command: 'fixjson'
+    format-command: "fixjson"
     format-stdin: true
 
   stylua-format: &stylua-format
-    format-command: 'stylua --config-path $XDG_CONFIG_HOME/stylua/stylua.toml -'
+    format-command: "stylua --config-path $XDG_CONFIG_HOME/stylua/stylua.toml -"
     format-stdin: true
 
   shellcheck-lint: &shellcheck-lint
     prefix: shellcheck
-    lint-command: 'shellcheck -f gcc -x -'
+    lint-command: "shellcheck -f gcc -x -"
     lint-stdin: true
     lint-formats:
-      - '%f:%l:%c: %t%*[^:]: %m [SC%n]'
+      - "%f:%l:%c: %t%*[^:]: %m [SC%n]"
 
   shfmt-format: &shfmt-format
-    format-command: 'shfmt -s -ln bash -i 2 -bn -ci -sr'
+    format-command: "shfmt -s -ln bash -i 2 -bn -ci -sr"
     format-stdin: true
 
   yamllint-lint: &yamllint-lint
     prefix: yamllint
-    lint-command: 'yamllint --strict --format parsable ${INPUT}'
+    lint-command: "yamllint --strict --format parsable ${INPUT}"
     lint-stdin: false
     lint-formats:
-      - '%f:%l:%c: [%t%*[a-z]] %m'
+      - "%f:%l:%c: [%t%*[a-z]] %m"
     env:
-      - 'PYTHONIOENCODING=UTF-8'
+      - "PYTHONIOENCODING=UTF-8"
 
   actionlint-lint: &actionlint-lint
     prefix: actionlint
     lint-command: "bash -c \"[[ '${INPUT}' =~ \\\\.github/workflows/ ]]\" && actionlint -oneline -no-color -"
     lint-stdin: true
     lint-formats:
-      - '%f:%l:%c: %m'
+      - "%f:%l:%c: %m"
     root-markers:
       - .github
 
   vint-lint: &vint-lint
     prefix: vint
-    lint-command: 'vint --enable-neovim --style-problem --stdin-display-name ${INPUT} -'
+    lint-command: "vint --enable-neovim --style-problem --stdin-display-name ${INPUT} -"
     lint-stdin: true
 
 languages:
   markdown:
     - <<: *textlint-lint
     - <<: *markdownlint-lint
+
+  dockerfile:
+    - <<: *hadolint-lint
 
   gitcommit:
     - <<: *commitlint-lint
@@ -124,7 +133,6 @@ languages:
     - <<: *stylua-format
 
   json:
-    # - <<: *jq-format
     - <<: *fixjson-format
 
   vim:
@@ -136,4 +144,3 @@ languages:
 
   zsh:
     - <<: *shfmt-format
-
