@@ -15,17 +15,6 @@ packages:
   # init: c
 
   # init: d
-  - type: github_release
-    repo_owner: ddddddO
-    repo_name: gtree
-    asset: gtree_{{.OS}}_{{.Arch}}.{{.Format}}
-    format: tar.gz
-    description: Output tree or Make directories(files) from Markdown or Programmatically. Provide CLI and Go Package
-    replacements:
-      amd64: x86_64
-    overrides:
-      - goos: windows
-        format: zip
 
   # init: e
 
@@ -65,18 +54,6 @@ packages:
     description: ▁▂▃▅▂▇ in your shell
 
   # init: i
-  - type: github_release
-    repo_owner: itchyny
-    repo_name: gojo
-    asset: gojo_{{.Version}}_{{.OS}}_{{.Arch}}.{{.Format}}
-    format: zip
-    description: Yet another Go implementation of jo
-    overrides:
-      - goos: linux
-        format: tar.gz
-    files:
-      - name: gojo
-        src: gojo_{{.Version}}_{{.OS}}_{{.Arch}}/gojo
 
   # init: j
   - type: github_content
@@ -113,24 +90,6 @@ packages:
   # init: l
 
   # init: m
-  - type: github_release
-    repo_owner: MiSawa
-    repo_name: xq
-    asset: xq-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz
-    description: Pure rust implementation of jq
-    replacements:
-      amd64: x86_64
-      arm64: aarch64
-      darwin: apple-darwin
-      linux: unknown-linux-musl
-      windows: pc-windows-msvc
-    supported_envs:
-      - darwin
-      - linux
-      - amd64
-    files:
-      - name: xq
-        src: xq-{{.Version}}-{{.Arch}}-{{.OS}}/xq
 
   # init: n
   - type: http

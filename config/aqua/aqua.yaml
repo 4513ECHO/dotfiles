@@ -100,13 +100,7 @@ packages:
     registry: local
   - name: simeji/jid@v0.7.6
     registry: local
-  - name: MiSawa/xq@v0.2.38
-    registry: local
-  - name: itchyny/gojo@v0.2.1
-    registry: local
   - name: skanehira/rtty@v0.3.0
     registry: local
   - name: b3nj5m1n/xdg-ninja@v0.2.0.1
-    registry: local
-  - name: ddddddO/gtree@v1.7.10
     registry: local
