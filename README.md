@@ -2,6 +2,11 @@
 
 > ⚙ My configuration files and personal preferences
 
+![last commit](https://img.shields.io/github/last-commit/4513ECHO/dotfiles)
+![license](https://img.shields.io/github/license/4513ECHO/dotfiles)
+![code size](https://img.shields.io/github/languages/code-size/4513ECHO/dotfiles)
+![repo stars](https://img.shields.io/github/stars/4513ECHO/dotfiles)
+
 ---
 
 Table of Contents
