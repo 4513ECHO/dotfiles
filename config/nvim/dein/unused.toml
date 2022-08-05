@@ -1,7 +1,4 @@
 [[plugins]]
-repo = 'ap/vim-css-color'
-
-[[plugins]]
 repo = 'cespare/vim-toml'
 if = '!has("patch-8.2.3520") && !has("nvim")'
 merge_ftdetect = true

@@ -40,7 +40,37 @@ let g:sclow_hide_full_length = v:true
 '''
 
 [[plugins]]
+repo = 'plasticboy/vim-markdown'
+on_ft = ['markdown']
+hook_add = '''
+let g:vim_markdown_no_default_key_mappings = v:true
+let g:vim_markdown_follow_anchor = v:true
+let g:vim_markdown_no_extensions_in_markdown = v:true
+let g:vim_markdown_math = v:true
+let g:vim_markdown_frontmatter = v:true
+let g:vim_markdown_strikethrough = v:true
+'''
+[[plugins]]
 repo = 'rbtnn/vim-coloredit'
 lazy = true
 on_cmd = ['ColorEdit']
 
+[[plugins]]
+repo = 'rhysd/vim-gfm-syntax'
+on_ft = ['markdown']
+[plugins.ftplugin]
+markdown = '''
+syn cluster mkdNonListItem add=@githubFlavoredMarkdown
+syn cluster mkdNonListItemBlock add=@githubFlavoredMarkdown
+syn cluster githubFlavoredMarkdown contains=githubFlavoredMarkdownCode,
+      \githubFlavoredMarkdownMention,githubFlavoredMarkdownStrikethrough,
+      \githubFlavoredMarkdownEmoji,githubFlavoredMarkdownTableDelimiter,
+      \githubFlavoredMarkdownTableAligner,githubFlavoredMarkdownTableBorder,
+      \githubFlavoredMarkdownIssueNumber,githubFlavoredMarkdownCheckBoxBracket,
+      \githubFlavoredMarkdownCheckBoxX
+'''
+
+[[plugins]]
+repo = 'vim-jp/syntax-vim-ex'
+lazy = true
+on_ft = ['vim']

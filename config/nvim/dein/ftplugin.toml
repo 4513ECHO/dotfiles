@@ -257,10 +257,6 @@ autocmd vimrc WinClosed <buffer>
 '''
 
 [[plugins]]
-repo = 'gko/vim-coloresque'
-on_ft = ['vim', 'css', 'scss', 'sass']
-
-[[plugins]]
 repo = 'itchyny/vim-qfedit'
 on_ft = ['qf']
 
@@ -280,35 +276,13 @@ merge_ftdetect = true
 on_ft = ['log']
 
 [[plugins]]
-repo = 'plasticboy/vim-markdown'
-on_ft = ['markdown']
-hook_add = '''
-let g:vim_markdown_no_default_key_mappings = v:true
-let g:vim_markdown_follow_anchor = v:true
-let g:vim_markdown_no_extensions_in_markdown = v:true
-let g:vim_markdown_math = v:true
-let g:vim_markdown_frontmatter = v:true
-let g:vim_markdown_strikethrough = v:true
-'''
-
-[[plugins]]
 repo = 'rbtnn/vim-vimscript_indentexpr'
 on_ft = ['vim']
 
 [[plugins]]
-repo = 'rhysd/vim-gfm-syntax'
-on_ft = ['markdown']
-[plugins.ftplugin]
-markdown = '''
-syn cluster mkdNonListItem add=@githubFlavoredMarkdown
-syn cluster mkdNonListItemBlock add=@githubFlavoredMarkdown
-syn cluster githubFlavoredMarkdown contains=githubFlavoredMarkdownCode,
-      \githubFlavoredMarkdownMention,githubFlavoredMarkdownStrikethrough,
-      \githubFlavoredMarkdownEmoji,githubFlavoredMarkdownTableDelimiter,
-      \githubFlavoredMarkdownTableAligner,githubFlavoredMarkdownTableBorder,
-      \githubFlavoredMarkdownIssueNumber,githubFlavoredMarkdownCheckBoxBracket,
-      \githubFlavoredMarkdownCheckBoxX
-'''
+repo = 'syusui-s/scrapbox-vim'
+merge_ftdetect = true
+on_ft = ['scrapbox']
 
 [[plugins]]
 repo = 'thinca/vim-qfreplace'
@@ -331,9 +305,3 @@ on_ft = ['tmux']
 repo = 'tpope/vim-git'
 merge_ftdetect = true
 on_ft = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendmail']
-
-[[plugins]]
-repo = 'vim-jp/syntax-vim-ex'
-on_ft = ['vim']
-
-

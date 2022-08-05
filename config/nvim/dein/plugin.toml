@@ -404,6 +404,17 @@ autocmd vimrc ColorScheme *
 '''
 
 [[plugins]]
+repo = 'RRethy/vim-hexokinase'
+on_cmd = ['HexokinaseToggle', 'HexokinaseTurnOn', 'HexokinaseTurnOff']
+on_event = ['BufRead', 'InsertLeave']
+hook_add = '''
+let g:Hexokinase_highlighters = ['backgroundfull']
+let g:Hexokinase_ftOptOutPatterns = {'yaml': 'colour_names'}
+let g:Hexokinase_ftDisabled = ['molder']
+let g:Hexokinase_executable_path = exepath('hexokinase')
+'''
+
+[[plugins]]
 repo = 'thinca/vim-partedit'
 depends = ['context_filetype.vim']
 on_cmd = ['Partedit']
