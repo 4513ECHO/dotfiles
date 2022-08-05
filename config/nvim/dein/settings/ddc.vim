@@ -16,74 +16,74 @@ let s:sourceOptions._ = {
       \ 'maxItems': 10,
       \ }
 let s:sourceOptions.around = {
-      \ 'mark': 'ard',
+      \ 'mark': '[ard]',
       \ 'isVolatile': v:true,
       \ 'maxItems': 8,
       \ }
 let s:sourceOptions.file = {
-      \ 'mark': 'file',
+      \ 'mark': '[file]',
       \ 'minAutoCompleteLength': 30,
       \ 'isVolatile': v:true,
       \ 'forceCompletionPattern': '[\w@:~._-]/[\w@:~._-]*',
       \ }
 let s:sourceOptions['vim-lsp'] = {
-      \ 'mark': 'lsp',
+      \ 'mark': '[lsp]',
       \ 'isVolatile': v:true,
       \ 'forceCompletionPattern': '\.|:\s*|->\s*',
       \ }
 let s:sourceOptions.skkeleton = {
-      \ 'mark': 'skk',
+      \ 'mark': '[skk]',
       \ 'matchers': ['skkeleton'],
       \ 'sorters': [],
       \ 'converters': [],
       \ 'minAutoCompleteLength': 2,
       \ }
 let s:sourceOptions.necovim = {
-      \ 'mark': 'vim',
+      \ 'mark': '[vim]',
       \ 'isVolatile': v:true,
       \ 'maxItems': 8,
       \ }
 let s:sourceOptions.emoji = {
-      \ 'mark': 'emoji',
+      \ 'mark': '[emoji]',
       \ 'matchers': ['emoji'],
       \ 'sorters': [],
       \ }
 let s:sourceOptions['cmdline-history'] = {
-      \ 'mark': 'hist',
+      \ 'mark': '[hist]',
       \ 'maxItems': 5,
       \ 'sorters': [],
       \ }
 let s:sourceOptions.vsnip = {
-      \ 'mark': 'snip',
+      \ 'mark': '[snip]',
       \ 'dup': v:true,
       \ }
 let s:sourceOptions.zsh = {
-      \ 'mark': 'zsh',
+      \ 'mark': '[zsh]',
       \ 'isVolatile': v:true,
       \ 'forceCompletionPattern': '[\w@:~._-]/[\w@:~._-]*',
       \ 'maxItems': 8,
       \ }
 let s:sourceOptions.nextword = {
-      \ 'mark': 'word',
+      \ 'mark': '[word]',
       \ 'minAutoCompleteLength': 3,
       \ 'isVolatile': v:true,
       \ }
 let s:sourceOptions.github_issue = {
-      \ 'mark': 'issue',
+      \ 'mark': '[issue]',
       \ 'forceCompletionPattern': '#\d*',
       \ }
 let s:sourceOptions.github_pull_request = {
-      \ 'mark': 'PR',
+      \ 'mark': '[PR]',
       \ 'forceCompletionPattern': '#\d*',
       \ }
 let s:sourceOptions.cmdline = {
-      \ 'mark': 'cmd',
+      \ 'mark': '[cmd]',
       \ 'isVolatile': v:true,
       \ }
-let s:sourceOptions.buffer = {'mark': 'buf'}
-let s:sourceOptions.tmux = {'mark': 'tmux'}
-let s:sourceOptions.omni = {'mark': 'omni'}
-let s:sourceOptions.line = {'mark': 'line'}
+let s:sourceOptions.buffer = {'mark': '[buf]'}
+let s:sourceOptions.tmux = {'mark': '[tmux]'}
+let s:sourceOptions.omni = {'mark': '[omni]'}
+let s:sourceOptions.line = {'mark': '[line]'}
 
 let s:sourceParams.around = {'maxSize': 500}
 let s:sourceParams.buffer = {
@@ -118,13 +118,18 @@ call ddc#custom#patch_filetype(
       \ 'sources': extend(['necovim'], s:sources),
       \ })
 call ddc#custom#patch_filetype(
+      \ ['toml'], {
+      \ 'sourceOptions': {
+      \   'vim-lsp': {'forceCompletionPattern': '\.|[={[,"]\s*'},
+      \ }})
+call ddc#custom#patch_filetype(
       \ dein#get('vim-lsp-settings').on_ft, {
       \ 'sources': extend(['vim-lsp'], s:sources),
       \ })
 call ddc#custom#patch_filetype(
       \ ['markdown', 'gitcommit'], {
       \ 'sources': extend([
-      \   'emoji', 'nextword',
+      \   'nextword',
       \   'github_issue', 'github_pull_request',
       \ ], s:sources),
       \ 'keywordPattern': '[a-zA-Z_:#]\k*',

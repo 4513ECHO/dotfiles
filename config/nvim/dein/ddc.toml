@@ -66,10 +66,6 @@ repo = 'delphinus/ddc-tmux'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'gamoutatsumi/ddc-emoji'
-on_source = 'ddc.vim'
-
-[[plugins]]
 repo = 'hrsh7th/vim-vsnip-integ'
 depends = ['vim-vsnip']
 on_source = ['ddc.vim']
@@ -112,6 +108,13 @@ on_source = 'ddc.vim'
 [[plugins]]
 repo = 'Shougo/pum.vim'
 on_source = 'ddc.vim'
+hook_source = '''
+call pum#set_option({
+      \ 'highlight_kind': 'Type',
+      \ 'max_width': 60,
+      \ 'use_complete': v:true,
+      \ })
+'''
 
 [[plugins]]
 repo = 'matsui54/denops-popup-preview.vim'
@@ -125,8 +128,10 @@ call popup_preview#enable()
 repo = 'matsui54/denops-signature_help'
 depends = ['denops.vim', 'vim-lsp']
 on_source = 'ddc.vim'
-hook_source = '''
+hook_add = '''
 let g:lsp_signature_help_enabled = v:false
+'''
+hook_source = '''
 call signature_help#enable()
 '''
 
