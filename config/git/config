@@ -64,27 +64,27 @@
 
 [alias]
   ### command abbrev ###
-  adn = add -N
-  adp = add -p
-  adu = add -u
+  adn = add --intent-to-add # -N
+  adp = add --patch # -p
+  adu = add --update # -u
   br = branch
-  # cl = clone
-  cl = !ghq get
   cm = commit
   cmm = commit -m
   co = checkout
-  com = !git checkout "$(git defaultBranch)"
+  # com = !git checkout "$(git defaultBranch)"
+  com = !git switch "$(git defaultBranch)"
   df = diff
   dft = difftool
   pl = pull
   ps = push
-  shorts = status -s -b
+  shorts = status --short --branch
   st = status
   stat = diff --stat
+  sw = switch
   ### feature shortcut ###
   all-files = !git ls-files
   alias = !git config --get-regexp "^alias" | sed 's@alias\\.\\(\\S*\\) \\(.*\\)@\\1\\\t -> \\2@'
-  color = !git -c color.status=always
+  colorst = !git -c color.status=always status --short --branch
   contributors = shortlog --summary --numbered --email
   defaultBranch = !git symbolic-ref refs/remotes/origin/HEAD | sed "s@refs/remotes/origin/@@"
   dirs = !git ls-files | sed -e "/^[^\\/]*$/d" -e "s:/[^/]*$::" | uniq
@@ -96,6 +96,7 @@
   undo = !git reset --hard $(git reflog --color=always | fzf --ansi | awk '{print substr($2, 1, length($2)-1)})'
   upstream = !git pull upstream "$(git defaultBranch)"
   pwd = !pwd
+  recommit = commit --amend
   root = rev-parse --show-toplevel
   uncommit = reset --soft HEAD^
   unstage = restore --staged

@@ -8,14 +8,9 @@ prompt: enabled
 pager:
 # Aliases allow you to create nicknames for gh commands
 aliases:
+  assets: >
+    !gh release view "$(gh release list | fzf | awk '{print $1}')"
   co: pr checkout
-  aqua: |
-    gh repo view --json owner --json name --json description --template
-    "- type: github_release
-      repo_owner: {{.owner.login}}
-      repo_name: {{.name}}
-      description: {{.description}}
-    "
   current: repo view --json nameWithOwner --jq '.nameWithOwner'
   defaultBranch: repo view --json defaultBranchRef --jq '.defaultBranchRef.name'
   description: repo view --json description --jq '.description'
