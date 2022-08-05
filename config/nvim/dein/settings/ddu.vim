@@ -49,17 +49,23 @@ let s:uiParams.ff = {
       \ 'winRow': &lines / 4,
       \ 'winWidth': &columns / 3 * 2,
       \ }
-autocmd vimrc VimResized * call ddu#custom#patch_global('uiParams', {'ff': {
-      \ 'previewWidth': &columns / 3 * 2,
-      \ 'winCol': &columns / 6,
-      \ 'winHeight': &lines / 2,
-      \ 'winRow': &lines / 4,
-      \ 'winWidth': &columns / 3 * 2,
-      \ }})
+autocmd vimrc VimResized * call <SID>ddu_on_resized()
 autocmd vimrc TextChangedI,CursorMoved ddu*
       \ : if get(g:, 'loaded_lightline', v:false)
       \ |   call lightline#update()
       \ | endif
+
+function! s:ddu_on_resized() abort
+  let options = {'uiParams': {'ff': {
+        \ 'previewWidth': &columns / 3 * 2,
+        \ 'winCol': &columns / 6,
+        \ 'winHeight': &lines / 2,
+        \ 'winRow': &lines / 4,
+        \ 'winWidth': &columns / 3 * 2,
+        \ }}}
+  call ddu#custom#patch_global(options)
+  call ddu#ui#ff#do_action('updateOptions', options)
+endfunction
 
 call ddu#custom#patch_local('file_rec', {
       \ 'sources': [{
@@ -85,6 +91,20 @@ call ddu#custom#patch_local('rg_live', {
       \   'ignoreEmpty': v:false,
       \   'autoResize': v:false,
       \ }},
+      \ })
+call ddu#custom#patch_local('preview_colorscheme', {
+      \ 'sources': [{
+      \   'name': 'color',
+      \ }],
+      \ 'uiParams': {'ff': {
+      \   'autoAction': {
+      \     'name': 'itemAction',
+      \   },
+      \ }},
+      \ 'actionOptions': {
+      \   'callback': {'quit': v:false},
+      \   'set': {'quit': v:false},
+      \ },
       \ })
 
 let s:kindOptions.action = {'defaultAction': 'do'}

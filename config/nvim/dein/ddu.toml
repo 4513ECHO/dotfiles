@@ -6,7 +6,7 @@ let g:launcher_config.ddu = {
       \ 'char': 'd',
       \ 'run': { -> ddu#start({'sources': [{'name': 'source'}]}) },
       \ }
-nnoremap <Leader>r <Cmd>Ddu -resume<CR>
+nnoremap <Leader>d <Cmd>Ddu -resume<CR>
 inoremap <C-x><C-e> <Cmd>Ddu emoji -ui-param-startFilter<CR>
 '''
 hook_source = '''
@@ -42,10 +42,11 @@ nnoremap <buffer> v
 '''
 
 ddu-ff-filter = '''
-nnoremap <buffer> q     <Cmd>close<CR>
-nnoremap <buffer> <CR>  <Cmd>close<CR>
+nnoremap <buffer> q     <Cmd>call ddu#ui#ff#close()<CR>
+nnoremap <buffer> <CR>  <Cmd>call ddu#ui#ff#close()<CR>
 inoremap <buffer> <CR>
       \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
+inoremap <buffer> <C-l> <Cmd>call ddu#ui#ff#close()<CR>
 inoremap <buffer> <C-n>
       \ <Cmd>call ddu#ui#ff#execute("call cursor(line('.')+1,0)")<CR>
 inoremap <buffer> <C-p>
