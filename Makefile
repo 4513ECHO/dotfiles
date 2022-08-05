@@ -31,7 +31,7 @@ deploy: ## Create symlinks to actual directories
 .PHONY: update
 update: ## Fetch and merge all changes from remote repository
 	git fetch origin
-	git rebase --autostash FETCH_HEAD
+	git rebase --autostash --stat FETCH_HEAD
 
 .PHONY: install
 install: update init deploy ## Initialize and deploy dotfiles
@@ -43,12 +43,6 @@ clean: ## Remove symlinks from actual directories
 	@$(foreach val, $(CONFIGHOME), test -f $(HOME)/.config/$(notdir $(val)) && $(RM) $(HOME)/.config/$(notdir $(val)) ||:;)
 	@$(foreach val, $(BINFILE), test -f $(HOME)/.local/bin/$(notdir $(val)) && $(RM) $(HOME)/.local/bin/$(notdir $(val)) ||:;)
 	@$(RM) $(HOME)/.zshenv
-
-.PHONY: distclean
-distclean: clean ## Remove symlinks and delete this repository
-	-rm -rf $(DOTPATH)
-	-rm -rf $(HOME)/.cache/*
-	-rm -rf $(HOME)/.local/share/*
 
 .PHONY: pipx
 pipx: ## Install and initialize pipx enviroments
