@@ -23,6 +23,7 @@ zpm load zsh-users/zsh-completions,apply:fpath,fpath:/src,async
 # zpm load junegunn/fzf,source:/shell/key-bindings.zsh,source:/shell/completion.zsh,async
 # zpm load junegunn/fzf,source:/shell/completion.zsh,async
 zpm load junegunn/fzf,source:/shell/key-bindings.zsh,async
+# zpm load junegunn/fzf,source:/shell/*.zsh,async
 # zpm load iwata/git-now,apply:path,hook:"make prefix=./ install"
 exists deno && zpm load @exec/deno,destination:completion,origin:'deno completions zsh'
 exists rustup && zpm load @exec/rustup,destination:completion,origin:'rustup completions zsh'
@@ -34,6 +35,7 @@ exists poetry && zpm load @exec/poetry,destination:completion,origin:'poetry com
 exists sbx && zpm load @exec/sbx,destination:completion,origin:'sbx completion zsh'
 exists hgrep && zpm load @exec/hgrep,destination:completion,origin:'hgrep --generate-completion-script zsh'
 exists afx && zpm load @exec/afx,destination:completion,origin:'afx completion zsh'
+exists yq && zpm load @exec/afx,destination:completion,origin:'afx completion zsh'
 exists aqua && zpm load @exec/aqua,origin:'aqua completion zsh'
 zpm load @exec/git,destination:completion,origin:'curl -qfsSL https://pax.deno.dev/git/git/contrib/completion/git-completion.zsh'
 zpm load @exec/fd,destination:completion,origin:'curl -qfsSL https://pax.deno.dev/sharkdp/fd/contrib/completion/_fd'
@@ -41,3 +43,5 @@ zpm load @exec/rg,destination:completion,origin:'curl -qfsSL https://pax.deno.de
 zpm load @exec/exa,destination:completion,origin:'curl -qfsSL https://pax.deno.dev/ogham/exa/completions/zsh/_exa'
 zpm load @exec/ghq,destination:completion,origin:'curl -qfsSL https://pax.deno.dev/x-motemen/ghq/misc/zsh/_ghq'
 zpm load @exec/gojq,destination:completion,origin:'curl -qfsSL https://pax.deno.dev/itchyny/gojq/_gojq'
+zpm load @exec/bat,destination:completion,origin:'curl -qfsSL https://pax.deno.dev/sharkdp/bat/assets/completions/bat.zsh.in | sed -e "s/{{PROJECT_EXECUTABLE}}/bat/g"'
+zpm load @exec/docker,destination:completion,origin:'curl -qfsSL https://pax.deno.dev/docker/cli/contrib/completion/zsh/_docker'

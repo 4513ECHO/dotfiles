@@ -83,4 +83,3 @@ if vcs_info 2> /dev/null; then
 else
   add-zsh-hook precmd redraw-prompt
 fi
-

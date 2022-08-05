@@ -133,10 +133,10 @@ widget::cd::git () {
   [[ -z "$root" ]] && return
   result="$(cd "$root" && git ls-files 2> /dev/null \
     | sed '/^[^\/]*$/d;s:/[^/]*$::' \
-    | uniq | fzf --preview \
+    | sort -u | fzf --preview \
     "exa -T -a --git-ignore --group-directories-first \
       --color=always $root/{} | head -200")"
-  zle reset-prompt
+  root= zle reset-prompt
   [[ -z "$result" ]] && return
   BUFFER="cd $root/$result"
   zle accept-line

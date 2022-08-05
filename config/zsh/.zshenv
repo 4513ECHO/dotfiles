@@ -4,12 +4,15 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_RUNTIME_DIR="/run/user/$UID"
+[[ ! -d "$XDG_RUNTIME_DIR" ]] && { mkdir -p "$XDG_RUNTIME_DIR" && chmod 0700 "$XDG_RUNTIME_DIR" || :; }
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export HISTFILE="$XDG_DATA_HOME/zsh/history"
 
 ## docker ##
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock"
 
 ## go ##
 export GOPATH="$XDG_DATA_HOME/go"
