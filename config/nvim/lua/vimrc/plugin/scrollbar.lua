@@ -1,4 +1,5 @@
 local M = {}
+local autocmd = require "vimrc.autocmd"
 
 local mark_type_map = {
   E = "Error",
@@ -8,42 +9,32 @@ local mark_type_map = {
 }
 
 function M.hook_add()
-  vim.api.nvim_create_autocmd({ "ColorScheme" }, {
-    group = "nvim_vimrc",
+  autocmd "ColorScheme" {
     pattern = { "*" },
     callback = function()
       require("scrollbar.utils").set_highlights()
     end,
-  })
-  vim.api.nvim_create_autocmd(
-    { "WinEnter", "WinScrolled", "VimResized", "FocusGained" },
-    {
-      group = "nvim_vimrc",
-      pattern = { "*" },
-      callback = function()
-        require("scrollbar.handlers").show()
-        require("scrollbar").render()
-      end,
-    }
-  )
-  vim.api.nvim_create_autocmd(
-    { "WinLeave", "BufWinLeave", "BufLeave", "FocusLost" },
-    {
-      group = "nvim_vimrc",
-      pattern = { "*" },
-      callback = function()
-        require("scrollbar").clear()
-      end,
-    }
-  )
-  vim.api.nvim_create_autocmd({ "User" }, {
-    group = "nvim_vimrc",
+  }
+  autocmd { "WinEnter", "WinScrolled", "VimResized", "FocusGained" } {
+    pattern = { "*" },
+    callback = function()
+      require("scrollbar.handlers").show()
+      require("scrollbar").render()
+    end,
+  }
+  autocmd { "WinLeave", "BufWinLeave", "BufLeave", "FocusLost" } {
+    pattern = { "*" },
+    callback = function()
+      require("scrollbar").clear()
+    end,
+  }
+  autocmd "User" {
     pattern = { "lsp_diagnostics_updated" },
     callback = function()
       require("scrollbar.handlers").show()
       require("scrollbar").render()
     end,
-  })
+  }
 end
 
 function M.hook_source()

@@ -1,7 +1,19 @@
-local group = vim.api.nvim_create_augroup("nvim_vimrc", {})
+local M = {}
+M.group = vim.api.nvim_create_augroup("nvim_vimrc", { clear = true })
 
-vim.api.nvim_create_autocmd({ "TermOpen" }, {
-  group = group,
+---@param event string|string[]
+---@return function
+function M.autocmd(event)
+  ---@param opts table
+  return function(opts)
+    vim.api.nvim_create_autocmd(
+      event,
+      vim.tbl_deep_extend("force", { group = M.group }, opts)
+    )
+  end
+end
+
+M.autocmd "TermOpen" {
   pattern = { "*" },
   callback = function()
     -- NOTE: check lazily to handle opening in background
@@ -15,12 +27,17 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
       end
     end)
   end,
-})
+}
 
-vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-  group = group,
+M.autocmd "TextYankPost" {
   pattern = { "*" },
   callback = function()
     vim.highlight.on_yank { timeout = 100, on_macro = true }
+  end,
+}
+
+return setmetatable(M, {
+  __call = function(_, event)
+    return M.autocmd(event)
   end,
 })
