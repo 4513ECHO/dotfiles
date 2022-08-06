@@ -108,7 +108,8 @@ nnoremap z. <Cmd>normal! zszH<CR>
 " from https://github.com/romgrk/nvim/blob/ba305c52/rc/keymap.vim#L98-L99
 nnoremap <expr> i getline('.') =~# '^\s\+$' ? 'cc' : 'i'
 
-xnoremap v $
+" NOTE: `g_` is almost same as `$h`
+xnoremap v g_
 xnoremap <Space> t<Space>
 xnoremap ) t)
 xnoremap < <gv
@@ -120,19 +121,21 @@ inoremap <Leader>z <C-o>zz
 inoremap <Leader>p <Cmd>setlocal paste! paste?<CR>
 
 " emacs-like insert/cmdline mode mapping {{{
+function! s:is_at_end() abort
+  return mode() ==# 'c'
+        \ ? getcmdpos() > strlen(getcmdline())
+        \ : col('.')    > strlen(getline('.'))
+endfunction
 noremap! <C-a> <Home>
-noremap! <C-e> <End>
-
+inoremap <expr> <C-e> <SID>is_at_end() ? '<C-e>' : '<End>'
 noremap! <C-b> <Left>
 noremap! <C-n> <Down>
 noremap! <C-p> <Up>
 noremap! <C-f> <Right>
-
-noremap! <C-d> <Del>
-inoremap <C-k> <C-o>D
+noremap! <expr> <C-d> <SID>is_at_end() ? '<C-d>' : '<Del>'
+inoremap <expr> <C-k> <SID>is_at_end() ? '<C-o>gJ' : '<C-o>D'
 cnoremap <expr> <C-k>
      \ repeat("\<Del>", strchars(getcmdline()[getcmdpos() - 1:]))
-
 noremap! <C-y> <C-r>*
 " }}}
 

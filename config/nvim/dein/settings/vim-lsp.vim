@@ -58,10 +58,11 @@ function! s:on_lsp_buffer_enabled() abort
   if index(['vim', 'yaml', 'markdown', 'sh', 'json', 'toml'], &filetype) == -1
     nmap <buffer> K <Plug>(lsp-hover)
   endif
-  nmap <buffer> gK <Plug>(lsp-hover)
-  nmap <buffer> g_ <Plug>(lsp-document-diagnostics)
-  nmap <buffer> ga <Plug>(lsp-code-action)
-  nmap <buffer> gr <Plug>(lsp-rename)
+  nmap <buffer> mK <Plug>(lsp-hover)
+  nmap <buffer> md <Plug>(lsp-document-diagnostics)
+  nmap <buffer> ma <Plug>(lsp-code-action)
+  nmap <buffer> mi  <plug>(lsp-implementation)
+  nmap <buffer> mr <Plug>(lsp-rename)
   nmap <buffer> gd <Cmd>call <SID>jump_definition()<CR>
   nmap <buffer> gq <Plug>(lsp-document-format)
   xmap <buffer> gq <Plug>(lsp-document-range-format)
