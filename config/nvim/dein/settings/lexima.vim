@@ -52,24 +52,21 @@ let s:rules.toml += [
       \ ]
 
 " vim
-" from https://github.com/thinca/config/blob/5413e42a18/dotfiles/dot.vim/vimrc#L2755
-function! s:vim_input_bslash() abort
-  let base = '<CR><C-o>d0a%s<Bslash> '
-  let disable_smartindent_string = '<C-o>:setlocal indentkeys-=o<CR>a'
-        \ .. '%s<C-o>:setlocal indentkeys+=o<CR>a'
-  return printf(disable_smartindent_string,
-        \ printf(base, repeat('<Space>', g:vim_indent_cont),
-        \ ))
-endfunction
+" based on https://github.com/thinca/config/blob/5413e42a18/dotfiles/dot.vim/vimrc#L2755
+let s:vim_input_bslash = printf('<CR>%s<Bslash><Space>', repeat('<Space>', g:vim_indent_cont))
 
 let s:rules.vim = []
 let s:rules.vim += [
-      \ { 'char': '<CR>', 'at': '{\%#}',   'input': s:vim_input_bslash(), 'input_after': '<CR><Bslash> '   },
-      \ { 'char': '<CR>', 'at': '{\%#$',   'input': s:vim_input_bslash(), 'input_after': '<CR><Bslash> }'  },
-      \ { 'char': '<CR>', 'at': '(\%#)',   'input': s:vim_input_bslash(), 'input_after': '<CR><Bslash> '   },
-      \ { 'char': '<CR>', 'at': '(\%#$',   'input': s:vim_input_bslash(), 'input_after': '<CR><Bslash> )'  },
-      \ { 'char': '<CR>', 'at': '\[\%#\]', 'input': s:vim_input_bslash(), 'input_after': '<CR><Bslash> '   },
-      \ { 'char': '<CR>', 'at': '\[\%#$',  'input': s:vim_input_bslash(), 'input_after': '<CR><Bslash> \]' },
+      \ { 'char': '<CR>', 'at': '{\%#}',   'input': s:vim_input_bslash, 'input_after': '<CR><Bslash> '   },
+      \ { 'char': '<CR>', 'at': '{\%#$',   'input': s:vim_input_bslash, 'input_after': '<CR><Bslash> }'  },
+      \ { 'char': '<CR>', 'at': '(\%#)',   'input': s:vim_input_bslash, 'input_after': '<CR><Bslash> '   },
+      \ { 'char': '<CR>', 'at': '(\%#$',   'input': s:vim_input_bslash, 'input_after': '<CR><Bslash> )'  },
+      \ { 'char': '<CR>', 'at': '\[\%#\]', 'input': s:vim_input_bslash, 'input_after': '<CR><Bslash> '   },
+      \ { 'char': '<CR>', 'at': '\[\%#$',  'input': s:vim_input_bslash, 'input_after': '<CR><Bslash> \]' },
+      \ ]
+" endmarker
+let s:rules.vim += [
+      \ { 'char': '<CR>', 'at': '<<\s*\%(trim\s\+\)\?\(\h\w*\)\%#$', 'input': '<CR>', 'input_after': '<CR>\1', 'with_submatch': v:true },
       \ ]
 
 " markdown
@@ -79,12 +76,12 @@ let s:rules.markdown += [
       \ { 'char': '<Tab>', 'at': '^\s*[-*]\s*\%#$', 'input': '<Home><Space><Space><End>' },
       \ { 'char': '<BS>',  'at': '^\s*[-*]\s*\%#$', 'input': '<Home><Del><Del><End>'     },
       \ { 'char': '-',     'at': '^\s*\%#$',        'input': '-<Space>',                 },
-      \ { 'char': '*',     'at': '^\s*\%#$',        'input': '*<Space>',                 },
       \ ]
 " smart checkbox
 let s:rules.markdown += [
-      \ { 'char': '<Space>', 'at': '^\s*[-*]\s*\[\%#\]$', 'input': '<Space><Right>'  },
-      \ { 'char': 'x',       'at': '^\s*[-*]\s*\[\%#\]$', 'input': 'x<Right>'        },
+      \ { 'char': ']',       'at': '^\s*[-*]\s*\%#$',       'input': '[<Space>]'          },
+      \ { 'char': '<Space>', 'at': '^\s*[-*]\s*\[\%#\]$',   'input': '<Space>'            },
+      \ { 'char': 'x',       'at': '^\s*[-*]\s*\[\s\]\%#$', 'input': '<Left><BS>x<Right>' },
       \ ]
 " smart bold, italic and strikethrough
 let s:rules.markdown += [
@@ -92,6 +89,8 @@ let s:rules.markdown += [
       \ { 'char': '~',     'input': '~',    'input_after': '~' },
       \ { 'char': '<Tab>', 'at': '\%#\*',   'leave':  '*'      },
       \ { 'char': '<Tab>', 'at': '\%#\~',   'leave':  '~'      },
+      \ { 'char': '<BS>',  'at': '\*\%#\*', 'delete': '*'      },
+      \ { 'char': '<BS>',  'at': '\~\%#\~', 'delete': '~'      },
       \ ]
 
 " typescript
@@ -156,17 +155,19 @@ function! s:lexima_alter_command(original, altanative) abort
     call lexima#add_rule({
           \ 'char': char,
           \ 'mode': ':',
-          \ 'at': '^\(''<,''>\)\?' .. a:original .. '\%#',
+          \ 'at': '\c^\(''<,''>\)\?' .. a:original .. '\%#',
           \ 'input': '<C-w>' .. a:altanative ..  char,
           \ })
   endfor
 endfunction
+command! -nargs=+ -complete=command LeximaAlterCommand call <SID>lexima_alter_command(<f-args>)
 
-command! -nargs=+ LeximaAlterCommand call <SID>lexima_alter_command(<f-args>)
-
+" Builtin Commands
 LeximaAlterCommand hg\%[rep]                    helpgrep
 LeximaAlterCommand bon\%[ew]                    botright<Space>new
 LeximaAlterCommand hea\%[lthcheck]              checkhealth
+
+" Plugin Commands
 LeximaAlterCommand cap\%[ture]                  Capture
 LeximaAlterCommand capturej\%[son]              CaptureJson
 LeximaAlterCommand capj\%[son]                  CaptureJson
@@ -177,13 +178,21 @@ LeximaAlterCommand dd\%[u]                      Ddu
 LeximaAlterCommand dei\%[n]                     Dein
 LeximaAlterCommand deinr\%[eadme]               DeinReadme
 LeximaAlterCommand readm\%[e]                   DeinReadme
+LeximaAlterCommand rg                           Rg
 LeximaAlterCommand helpfu\%[lversion]           HelpfulVersion
 LeximaAlterCommand tsp\%[laygroundtoggle]       TSPlaygroundToggle
-LeximaAlterCommand tsh\%[ighlightcaptureundercursor]    TSHighlightCaptureUnderCursor
+LeximaAlterCommand tsh\%[ighlightcapturesundercursor]    TSHighlightCapturesUnderCursor
+LeximaAlterCommand lspc\%[odeaction]            LspCodeAction
+LeximaAlterCommand lspd\%[ocumentformat]        LspDocumentFormat
+LeximaAlterCommand lsph\%[over]                 LspHover
+LeximaAlterCommand lsps\%[tatus]                LspStatus
+LeximaAlterCommand lspt\%[ypedefinition]        LspTypeDefinition
+
+" My Commands
 LeximaAlterCommand colo\%[rscheme]              ColorScheme
 LeximaAlterCommand ra\%[ndomcolorscheme]        RandomColorScheme
 LeximaAlterCommand todo\%[list]                 TodoList
 LeximaAlterCommand mi\%[ninote]                 MiniNote
 LeximaAlterCommand not\%[e]                     MiniNote
 LeximaAlterCommand deinu\%[pdatemine]           DeinUpdateMine
-
+LeximaAlterCommand lig\%[htlineupdate]          LightlineUpdate
