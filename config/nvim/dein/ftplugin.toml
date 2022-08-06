@@ -271,6 +271,10 @@ on_ft = ['markdown']
 on_cmd = ['MakeTable', 'UnmakeTable']
 
 [[plugins]]
+repo = 'mrk21/yaml-vim'
+on_ft = ['yaml']
+
+[[plugins]]
 repo = 'MTDL9/vim-log-highlighting'
 merge_ftdetect = true
 on_ft = ['log']

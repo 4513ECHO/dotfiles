@@ -27,6 +27,10 @@ repo = 'lambdalisue/vim-manpager'
 on_cmd = ['MANPAGER', 'Man']
 
 [[plugins]]
+repo = 'lambdalisue/mr-quickfix.vim'
+on_cmd = ['Mru', 'Mrw']
+
+[[plugins]]
 repo = 'lambdalisue/qfloc.vim'
 on_ft = ['qf']
 hook_add = '''

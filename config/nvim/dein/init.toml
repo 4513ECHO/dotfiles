@@ -106,6 +106,9 @@ repo = 'lambdalisue/guise.vim'
 depends = ['denops.vim']
 
 [[plugins]]
+repo = 'lambdalisue/mr.vim'
+
+[[plugins]]
 repo = 'mattn/vim-molder'
 [plugins.ftplugin]
 molder = '''
@@ -131,6 +134,20 @@ nmap <silent><buffer> r  <Plug>(molder-operations-rename)
 '''
 
 [[plugins]]
+repo = 'mhinz/vim-signify'
+hook_add = '''
+if exists('*setcellwidths')
+  call setcellwidths([[0x2503, 0x2503, 1]])
+endif
+let g:signify_sign_add               = '┃'
+let g:signify_sign_change            = '┃'
+let g:signify_sign_delete            = '┃'
+let g:signify_sign_delete_first_line = '┃'
+" highlight line
+let g:signify_line_highlight = v:false
+'''
+
+[[plugins]]
 repo = 'rafamadriz/friendly-snippets'
 
 [[plugins]]
@@ -146,4 +163,12 @@ hook_add = '''
 let g:localrc_filename = '.vimrc.local'
 '''
 
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+hook_add = '''
+let g:indentLine_bufTypeExclude = ['help', 'terminal']
+let g:indentLine_char = '¦'
+let g:indentLine_faster = v:true
+let g:indentLine_setConceal = v:false
+'''
 

@@ -33,6 +33,11 @@ let g:readme_viewer#plugin_manager = 'dein.vim'
 '''
 
 [[plugins]]
+repo = '4513echo/vim-vimhelp-url'
+on_cmd = ['HelpUrl']
+on_func = ['vimhelp_url#create']
+
+[[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
 on_cmd = ['FixWhitespace']
 on_event = ['InsertLeave']
@@ -63,6 +68,10 @@ on_cmd = ['ColorSwatchGenerate']
 repo = 'cocopon/inspecthi.vim'
 depends = ['colorswatch.vim']
 on_cmd = ['Inspecthi']
+
+[[plugins]]
+repo = 'cocopon/snapbuffer.vim'
+on_cmd = ['SnapBuffer']
 
 [[plugins]]
 repo = 'cohama/lexima.vim'
@@ -258,6 +267,20 @@ call submode#map('nomove', 'nx', '', 'k', '<C-y>')
 '''
 
 [[plugins]]
+repo = 'kyoh86/vim-ripgrep'
+on_cmd = ['Rg']
+hook_source = '''
+function! s:ripgrep(args, bang) abort
+  let root = a:bang ? ['.git'] : ['.']
+  let cwd = ripgrep#path#traverse_root(getcwd(), root)
+  let cmd = ['rg', '--json', &smartcase ? '--smart-case' : '', a:args]
+  echomsg join(cmd)
+  call ripgrep#call(join(cmd), cwd[0], cwd[1])
+endfunction
+command! -bar -bang -nargs=1 Rg call s:ripgrep(<q-args>, <bang>0)
+'''
+
+[[plugins]]
 repo = 'lambdalisue/fern.vim'
 on_cmd = ['Fern']
 hook_add = '''
@@ -277,6 +300,10 @@ nnoremap <silent><buffer><expr> j
 nnoremap <silent><buffer><expr> k
       \ line('.') == 1 ? 'G' : 'k'
 '''
+
+[[plugins]]
+repo = 'lambdalisue/vim-protocol'
+on_path = '^https\?://'
 
 [[plugins]]
 repo = 'lambdalisue/vim-quickrun-neovim-job'
@@ -370,7 +397,27 @@ let g:no_cecutil_maps = v:true
 '''
 
 [[plugins]]
+repo = 'prabirshrestha/async.vim'
+on_cmd = ['AsyncEmbed']
+
+[[plugins]]
 repo = 'prabirshrestha/vim-lsp'
+
+[[plugins]]
+repo = 'skanehira/denops-twihi.vim'
+depends = ['denops.vim']
+on_cmd = [
+  'TwihiTimeline', 'TwihiHome', 'TwihiMentions',
+  'TwihiTweet', 'TwihiEditConfig',
+]
+
+[[plugins]]
+repo = 'skanehira/translate.vim'
+on_cmd = ['Translate']
+hook_add = '''
+nnoremap <Leader>t <Cmd>Translate<CR>
+xnoremap <Leader>t :Translate<CR>
+'''
 
 [[plugins]]
 repo = 'statiolake/vim-quickrun-runner-nvimterm'
@@ -412,6 +459,25 @@ let g:Hexokinase_highlighters = ['backgroundfull']
 let g:Hexokinase_ftOptOutPatterns = {'yaml': 'colour_names'}
 let g:Hexokinase_ftDisabled = ['molder']
 let g:Hexokinase_executable_path = exepath('hexokinase')
+'''
+
+[[plugins]]
+repo = 't9md/vim-choosewin'
+on_cmd = ['ChooseWin', 'ChooseWinSwap', 'ChooseWinSwapStay']
+on_map = { n = '<Plug>' }
+hook_add = '''
+let g:choosewin_overlay_enable = v:true
+let g:choosewin_overlay_clear_multibyte = v:true
+nmap <C-w>w <Plug>(choosewin)
+'''
+
+[[plugins]]
+repo = 'tani/glance-vim'
+depends = ['denops.vim']
+on_cmd = ['Glance']
+hook_add = '''
+let g:glance#markdown_html = v:true
+let g:glance#stylesheet = '@import url("https://unpkg.com/sakura.css/css/sakura.css");'
 '''
 
 [[plugins]]
