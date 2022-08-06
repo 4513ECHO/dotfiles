@@ -27,6 +27,9 @@ hook_add = '''
 let g:auto_cursorline_wait_ms = 4000
 '''
 [plugins.ftplugin]
+qf = '''
+let b:auto_cursorline_disabled = v:true
+'''
 molder = '''
 let b:auto_cursorline_disabled = v:true
 '''
@@ -104,6 +107,9 @@ hook_add = '''
 [[plugins]]
 repo = 'lambdalisue/guise.vim'
 depends = ['denops.vim']
+hook_add = '''
+let g:guise_edit_opener = 'vsplit'
+'''
 
 [[plugins]]
 repo = 'lambdalisue/mr.vim'

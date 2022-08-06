@@ -153,6 +153,9 @@ nnoremap / <Cmd>call searchx#start({ 'dir': 1 })<CR>
 xnoremap ? <Cmd>call searchx#start({ 'dir': 0 })<CR>
 xnoremap / <Cmd>call searchx#start({ 'dir': 1 })<CR>
 
+cnoremap <C-g> <Cmd>call searchx#next_dir()<CR>
+cnoremap <C-t> <Cmd>call searchx#prev_dir()<CR>
+
 nnoremap N <Cmd>call searchx#prev_dir()<Bar>Doautocmd VimrcSearched<CR>zzzv
 nnoremap n <Cmd>call searchx#next_dir()<Bar>Doautocmd VimrcSearched<CR>zzzv
 xnoremap N <Cmd>call searchx#prev_dir()<Bar>Doautocmd VimrcSearched<CR>zzzv
@@ -365,7 +368,7 @@ on_event = ['TextYankPost']
 hook_add = '''
 autocmd vimrc TextYankPost *
       \ : if v:event.regname ==# 'p'
-      \ |   execute 'OSCYankReg "'
+      \ |   execute 'OSCYankReg p'
       \ | endif
 '''
 
@@ -543,6 +546,9 @@ let g:quickrun_config = {
       \ 'typescript': {
       \   'type': 'deno/run',
       \ },
+      \ 'typescriptreact': {
+      \   'type': 'deno/run',
+      \ },
       \ 'sh': {
       \   'runner': has('nvim') ? 'nvimterm' : 'terminal',
       \ },
@@ -614,11 +620,21 @@ on_cmd = ['HelpfulVersion']
 repo = 'tyru/capture.vim'
 on_cmd = ['Capture', 'CaptureJson']
 hook_source = '''
+function! s:to_string(expr) abort
+  if type(a:expr) == v:t_list
+    return map(copy(a:expr), { _, v -> s:to_string(v) })
+  elseif type(a:expr) == v:t_dict
+    return map(copy(a:expr), { _, v -> s:to_string(v) })
+  elseif type(a:expr) == v:t_func
+    return string(a:expr)
+  endif
+  return a:expr
+endfunction
 command! -bang -bar -nargs=1 -complete=expression
       \ CaptureJson
-      \ : execute 'Capture<bang> echo json_encode(' <q-args> ')'
+      \ : execute 'Capture<bang> echo json_encode(<SID>to_string(' <q-args> '))'
       \ | if &filetype ==# 'capture'
-      \ |   execute '%!gojq'
+      \ |   silent! execute '%!gojq'
       \ |   setfiletype json
       \ | endif
 '''
@@ -660,13 +676,14 @@ let g:openbrowser_browser_commands = [{
 [[plugins]]
 repo = 'vim-denops/denops.vim'
 on_event = ['FocusLost', 'CursorHold']
-if = 'executable("deno")'
+hook_add = '''
+let g:denops_server_addr = '127.0.0.1:32123'
+'''
 
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 type__depth = 1
 
-# TODO: use :SclowDisable before to decrease flickering
 [[plugins]]
 repo = 'yuttie/comfortable-motion.vim'
 on_func = 'comfortable_motion#flick'

@@ -243,6 +243,9 @@ Visual = { ctermbg = 237, cterm = 'NONE', guibg = '#3c3836', gui = 'NONE' }
 repo = 'mvanderkamp/cocoa.vim'
 [[plugins.colorschemes]]
 name = 'cocoa'
+[plugins.colorschemes.highlight]
+# NOTE: Remove term/cterm/gui attrs
+SignifySignDelete = { ctermfg = 4, ctermbg = 0, guifg = '#573e55', guibg = '#280f0e' }
 
 [[plugins]]
 repo = 'nanotech/jellybeans.vim'

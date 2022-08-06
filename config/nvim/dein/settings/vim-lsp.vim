@@ -35,8 +35,8 @@ let g:lsp_diagnostics_signs_error = {'text': '✗'}
 let g:lsp_diagnostics_signs_hint = {'text': '?'}
 let g:lsp_diagnostics_signs_information = {'text': 'i'}
 let g:lsp_diagnostics_signs_warning = {'text': '‼'}
-let g:lsp_document_code_action_signs_hint = {'text': 'A'}
-let g:lsp_diagnostics_virtual_text_prefix = " ‣ "
+let g:lsp_document_code_action_signs_enabled = v:false
+let g:lsp_diagnostics_virtual_text_prefix = ' ‣ '
 
 let g:lsp_log_file = g:data_home .. '/vim-lsp.log'
 

@@ -231,6 +231,10 @@ zsh = '''
 setlocal iskeyword+=-
 '''
 
+checkhealth = '''
+nnoremap <buffer> q <C-w>q
+'''
+
 go = '''
 setlocal noexpandtab nosmarttab shiftwidth=0
 '''
