@@ -421,19 +421,29 @@ on_cmd = ['Partedit']
 on_func = ['partedit#start']
 hook_add = '''
 let g:partedit#opener = 'split'
-function! s:operator_partedit() abort
+function! s:operator_partedit(...) abort
+  " let range = get(a:000, 0, [])
   let context = context_filetype#get()
   if context.range == [[0, 0], [0, 0]]
     echohl WarningMsg
-    echomsg 'Context is not found'
+    echomsg '[partedit] Context is not found'
     echohl NONE
     return
   endif
   call partedit#start(context.range[0][0], context.range[1][0],
         \ {'filetype': context.filetype})
-  nnoremap <buffer> q <Cmd>ParteditEnd<CR>
+  nnoremap <buffer> q <Cmd>ParteditEnd<Bar>close<CR>
 endfunction
 nnoremap <C-x><C-x> <Cmd>call <SID>operator_partedit()<CR>
+xnoremap <C-x><C-x> <Cmd>call <SID>operator_partedit(sort([line('v'), line('.')]))<CR>
+'''
+[plugins.ftplugin]
+help = '''
+let b:partedit_filetype = 'vim'
+let b:partedit_prefix = "\<Tab>"
+'''
+toml = '''
+let b:partedit_filetype = 'vim'
 '''
 
 [[plugins]]
