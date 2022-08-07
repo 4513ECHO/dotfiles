@@ -12,8 +12,10 @@ packages:
   - name: ajeetdsouza/zoxide@v0.8.2
   - name: antonmedv/fx@24.0.0
   - name: aquaproj/aqua-installer@v1.1.1
+  - name: aquaproj/registry-tool@v0.1.2
   - name: aristocratos/btop@v1.2.8
   - name: arrow2nd/nekome@v1.0.3
+  - name: b3nj5m1n/xdg-ninja@v0.2.0.1
   - name: b4b4r07/afx
     version: v0.1.21 # NOTE: https://github.com/b4b4r07/afx/issues/51
   - name: b4b4r07/gist@v1.2.6
@@ -32,6 +34,7 @@ packages:
   - name: golang/tools/gopls@v0.8.4
   - name: golangci/golangci-lint@v1.48.0
   - name: hadolint/hadolint@v2.10.0
+  - name: high-moctane/mocword@v0.2.0
   - name: high-moctane/nextword@v0.0.5
   - name: itchyny/gojq@v0.12.8
   - name: itchyny/mmv@v0.1.4
@@ -53,6 +56,7 @@ packages:
   - name: nektos/act@v0.2.30
   - name: rhysd/actionlint@v1.6.15
   - name: rhysd/hgrep@v0.2.6
+  - name: rhysd/vim-startuptime@v1.3.0
   - name: rust-lang/rust-analyzer@2022-07-04
   - name: sharkdp/bat@v0.21.0
   - name: sharkdp/fd@v8.4.0
@@ -67,6 +71,7 @@ packages:
   - name: sumneko/lua-language-server@3.5.2
   - name: tomnomnom/gron@v0.7.1
   - name: TomWright/dasel@v1.26.0
+  - name: vishaltelangre/ff@v0.1.8
   - name: wtfutil/wtf@v0.41.0
   - name: x-motemen/ghq@v1.3.0
   - name: XAMPPRocky/tokei@v12.1.2
@@ -85,22 +90,20 @@ packages:
     registry: local
   - name: nodejs/node@v18.7.0
     registry: local
-  - name: rhysd/vim-startuptime@v1.3.0
-    registry: local
   - name: rust-lang/rust@1.62.1
     registry: local
   - name: thinca/ciw
     registry: local
     version: master
-  - name: vishaltelangre/ff@v0.1.8
-    registry: local
-  - name: high-moctane/mocword@v0.2.0
-    registry: local
   - name: greymd/ojichat@v0.2.2
     registry: local
   - name: simeji/jid@v0.7.6
     registry: local
   - name: skanehira/rtty@v0.3.0
     registry: local
-  - name: b3nj5m1n/xdg-ninja@v0.2.0.1
+  - name: wtetsu/gaze@v1.1.1
+    registry: local
+  - name: itchyny/bed@v0.2.2
+    registry: local
+  - name: mattn/cho@v0.0.12
     registry: local

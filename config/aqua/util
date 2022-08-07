@@ -23,4 +23,14 @@ case $1 in
     gojq -r --yaml-input 'include "4513echo/aqua"; description' \
       < ./experimental.yaml
     ;;
+  pr)
+    package="${2:-$(git branch --show-current | sed 's@^feat/@@')}"
+    tempfile="$(mktemp)"
+    desc="$(gojq -r --yaml-input '.packages[].description' < "pkgs/$package/registry.yaml")"
+    printf '[%s](https://github.com/%s): %s' "$package" "$package" "$desc" | tee "$tempfile"
+    {
+      cat "$tempfile"
+      echo
+    } >&2
+    ;;
 esac

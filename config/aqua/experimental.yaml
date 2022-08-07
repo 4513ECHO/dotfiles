@@ -3,14 +3,6 @@ packages:
   # init: a
 
   # init: b
-  - type: github_archive
-    repo_owner: b3nj5m1n
-    repo_name: xdg-ninja
-    description: A shell script which checks your $HOME for unwanted files and directories
-    version_source: github_tag
-    files:
-      - name: xdg-ninja
-        src: xdg-ninja-{{trimV .Version}}/xdg-ninja.sh
 
   # init: c
 
@@ -27,26 +19,6 @@ packages:
     description: おじさんがLINEやメールで送ってきそうな文を生成する
 
   # init: h
-  - type: github_release
-    repo_owner: high-moctane
-    repo_name: mocword
-    asset: mocword-{{.Arch}}-{{.OS}}
-    description: Predict next words (｀･ω･´)
-    replacements:
-      darwin: apple-darwin
-      linux: unknown-linux-musl
-      amd64: x86_64
-      arm64: aarch64
-    supported_envs:
-      - darwin
-      - linux
-      - amd64
-    version_constraint: 'semver(">= 0.2.0")'
-    version_overrides:
-      - version_constraint: 'semver("< 0.2.0")'
-        supported_envs:
-          - darwin
-          - amd64
   - type: github_content
     repo_owner: holman
     repo_name: spark
@@ -54,6 +26,18 @@ packages:
     description: ▁▂▃▅▂▇ in your shell
 
   # init: i
+  - type: github_release
+    repo_owner: itchyny
+    repo_name: bed
+    asset: bed_{{.Version}}_{{.OS}}_{{.Arch}}.{{.Format}}
+    format: zip
+    description: Binary editor written in Go
+    overrides:
+      - goos: linux
+        format: tar.gz
+    files:
+      - name: bed
+        src: bed_{{.Version}}_{{.OS}}_{{.Arch}}/bed
 
   # init: j
   - type: github_content
@@ -90,6 +74,21 @@ packages:
   # init: l
 
   # init: m
+  - type: github_release
+    repo_owner: mattn
+    repo_name: cho
+    asset: cho_{{.Version}}_{{.OS}}_{{.Arch}}.{{.Format}}
+    format: zip
+    overrides:
+      - goos: linux
+        format: tar.gz
+    supported_envs:
+      - darwin
+      - amd64
+    rosetta2: true
+    files:
+      - name: cho
+        src: cho_{{.Version}}_{{.OS}}_{{.Arch}}/cho
 
   # init: n
   - type: http
@@ -118,15 +117,6 @@ packages:
   # init: q
 
   # init: r
-  - type: github_release
-    repo_owner: rhysd
-    repo_name: vim-startuptime
-    asset: vim-startuptime_{{trimV .Version}}_{{.OS}}_{{.Arch}}.{{.Format}}
-    format: tar.gz
-    description: A small Go program for better `vim --startuptime` alternative
-    overrides:
-      - goos: windows
-        format: zip
   - type: http
     repo_owner: rust-lang
     repo_name: rust
@@ -205,28 +195,29 @@ packages:
   # init: u
 
   # init: v
-  - type: github_release
-    repo_owner: vishaltelangre
-    repo_name: ff
-    asset: find-files-{{.Version}}-{{.Arch}}-{{.OS}}.{{.Format}}
-    format: tar.gz
-    description: Find files (ff) by name, fast
-    replacements:
-      amd64: x86_64
-      arm64: aarch64
-      darwin: apple-darwin
-      linux: unknown-linux-musl
-    overrides:
-      - goos: linux
-        goarch: arm64
-        replacements:
-          linux: unknown-linux-gnu
-    supported_envs:
-      - linux
-      - darwin
-    rosetta2: true
 
   # init: w
+  - type: github_release
+    repo_owner: wtetsu
+    repo_name: gaze
+    asset: gaze_{{.OS}}_{{.Version}}.{{.Format}}
+    format: zip
+    description: Executes commands for you
+    replacements:
+      darwin: macos
+    overrides:
+      - goos: darwin
+        asset: gaze_{{.OS}}_amd_{{.Version}}.{{.Format}}
+        files:
+          - name: gaze
+            src: gaze_{{.OS}}_amd_{{.Version}}/gaze
+    supported_envs:
+      - darwin
+      - amd64
+    rosetta2: true
+    files:
+      - name: gaze
+        src: gaze_{{.OS}}_{{.Version}}/gaze
 
   # init: x
 
