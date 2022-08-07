@@ -9,9 +9,16 @@ LN := ln -sfnv
 
 .PHONY: help
 help: ## Show targets in this Makefile
+ifeq ($(TARGET),)
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
 	  | sort \
 	  | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
+	@echo 'Please `$(MAKE) help TARGET=<target>` to see more detail of each of the targets.'
+else
+	@awk -v TARGET=$(TARGET) \
+	  'BEGIN {found = 0}; /^[^\t#]|^$$/ {found = $$1 == TARGET ":" || (found && $$1 ~ /^(if|else|endif)/)}; found' \
+	  $(MAKEFILE_LIST)
+endif
 
 .PHONY: init
 init: ## Initialize enviroment settings
