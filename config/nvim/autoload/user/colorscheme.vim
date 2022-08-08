@@ -1,28 +1,34 @@
-function! user#colorscheme#get(...) abort
-  let update = get(a:000, 0, v:false)
-  if exists('s:cache') && !update
-    return s:cache
-  endif
-  let s:cache = {}
-  for plugins in values(filter(copy(dein#get()),
-        \ { _, v -> has_key(v, 'colorschemes') }))
-    if has_key(plugins, 'if') && !eval(plugins.if)
-      continue
+if empty($VIM_DISABLE_DEIN)
+  function! user#colorscheme#get(...) abort
+    let update = get(a:000, 0, v:false)
+    if exists('s:cache') && !update
+      return s:cache
     endif
-    for colorscheme in plugins.colorschemes
-      " let s:cache[colorscheme.name] = extend(colorscheme, { 'plugin': plugins.name })
-      let s:cache[colorscheme.name] = colorscheme
+    let s:cache = {}
+    for plugins in values(filter(copy(dein#get()),
+          \ { _, v -> has_key(v, 'colorschemes') }))
+      if has_key(plugins, 'if') && !eval(plugins.if)
+        continue
+      endif
+      for colorscheme in plugins.colorschemes
+        " let s:cache[colorscheme.name] = extend(colorscheme, { 'plugin': plugins.name })
+        let s:cache[colorscheme.name] = colorscheme
+      endfor
     endfor
-  endfor
-  return s:cache
-endfunction
+    return s:cache
+  endfunction
+else
+  function! user#colorscheme#get(...) abort
+    return {}
+  endfunction
+endif
 
 function! user#colorscheme#lightline() abort
   if g:current_colorscheme ==# 'random'
     return 'default'
   endif
   let custom_name = get(get(user#colorscheme#get(),
-       \ g:current_colorscheme, {}), 'lightline')
+        \ g:current_colorscheme, {}), 'lightline')
   return empty(custom_name)
         \ ? g:current_colorscheme
         \ : custom_name
@@ -117,9 +123,7 @@ function! user#colorscheme#command(colorscheme, ...) abort
   for i in range(16)
     unlet! g:terminal_color_{i}
   endfor
-  unlet! g:terminal_color_foreground
-  unlet! g:terminal_color_background
-  unlet! g:terminal_ansi_colors
+  unlet! g:terminal_color_foreground g:terminal_color_background g:terminal_ansi_colors
   execute 'colorscheme' colorscheme
   call user#colorscheme#set_customize(colorscheme)
   let g:current_colorscheme = colorscheme
