@@ -21,14 +21,6 @@ lua require('vimrc.plugin.hlslens').hook_add()
 '''
 
 [[plugins]]
-repo = 'milisims/nvim-luaref'
-lazy = true
-
-[[plugins]]
-repo = 'nanotee/luv-vimdocs'
-lazy = true
-
-[[plugins]]
 repo = 'nvim-lua/plenary.nvim'
 
 [[plugins]]
