@@ -182,7 +182,3 @@ autocmd vimrc VimResized *
       \ : if &equalalways
       \ |   wincmd =
       \ | endif
-
-autocmd vimrc BufReadCmd file://* ++nested
-      \ : setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
-      \ | execute 'edit' substitute(expand('<afile>'), '^file://', '', '')

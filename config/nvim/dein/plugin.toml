@@ -1,29 +1,4 @@
 [[plugins]]
-repo = '4513echo/vim-gf-user'
-# NOTE: forked from kana/vim-gf-user
-on_map = { nx = '<Plug>' }
-rev = 'non-builtin'
-hook_add = '''
-nmap gf         <Plug>(gf-user-gf)
-nmap gF         <Plug>(gf-user-gF)
-nmap <C-w>f     <Plug>(gf-user-<C-w>f)
-nmap <C-w><C-f> <Plug>(gf-user-<C-w><C-f>)
-nmap <C-w>F     <Plug>(gf-user-<C-w>F)
-nmap <C-w>gf    <Plug>(gf-user-<C-w>gf)
-nmap <C-w>gF    <Plug>(gf-user-<C-w>gF)
-xmap gf         <Plug>(gf-user-gf)
-xmap gF         <Plug>(gf-user-gF)
-xmap <C-w>f     <Plug>(gf-user-<C-w>f)
-xmap <C-w><C-f> <Plug>(gf-user-<C-w><C-f>)
-xmap <C-w>F     <Plug>(gf-user-<C-w>F)
-xmap <C-w>gf    <Plug>(gf-user-<C-w>gf)
-xmap <C-w>gF    <Plug>(gf-user-<C-w>gF)
-'''
-hook_source = '''
-call gf#user#extend('gf#vimrc#find', 1000)
-'''
-
-[[plugins]]
 repo = '4513echo/vim-readme-viewer'
 on_cmd = ['DeinReadme']
 on_source = 'ddu.vim'
@@ -303,6 +278,10 @@ nnoremap <silent><buffer><expr> j
 nnoremap <silent><buffer><expr> k
       \ line('.') == 1 ? 'G' : 'k'
 '''
+
+[[plugins]]
+repo = 'lambdalisue/file-protocol.vim'
+on_path = '^file://'
 
 [[plugins]]
 repo = 'lambdalisue/vim-protocol'
