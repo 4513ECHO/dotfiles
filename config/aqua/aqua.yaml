@@ -41,8 +41,8 @@ packages:
   - name: jiro4989/ojosama@v0.9.0
   - name: junegunn/fzf/fzf-tmux@0.32.1
   - name: junegunn/fzf@0.32.1
-  # - name: ko1nksm/getoptions/gengetoptions@v3.3.0
-  # - name: ko1nksm/getoptions@v3.3.0
+  - name: ko1nksm/getoptions/gengetoptions@v3.3.0
+  - name: ko1nksm/getoptions@v3.3.0
   - name: ko1nksm/shdotenv@v0.13.0
   - name: koalaman/shellcheck@v0.8.0
   - name: ktock/buildg@v0.3.0
@@ -70,7 +70,7 @@ packages:
   - name: sheepla/pingu@v0.0.3
   - name: sheepla/qiitaz@v0.3.0
   - name: sheepla/srss@v0.0.3-alpha
-  # - name: skanehira/rtty@v0.3.0
+  - name: skanehira/rtty@v0.3.0
   - name: sumneko/lua-language-server@3.5.2
   - name: tomnomnom/gron@v0.7.1
   - name: TomWright/dasel@v1.26.0
