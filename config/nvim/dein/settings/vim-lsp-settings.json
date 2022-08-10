@@ -89,7 +89,7 @@
               "deno.json",
               "deno.jsonc"
             ],
-            "url": "https://deno.land/x/deno@v1.24.1/cli/schemas/config-file.v1.json"
+            "url": "https://deno.land/x/deno@v1.24.2/cli/schemas/config-file.v1.json"
           },
           {
             "fileMatch": [
@@ -232,10 +232,10 @@
             "/efm-langserver/config.yaml",
             "/efm-langserver/config.yml"
           ],
-          "https://pax.deno.dev/aquaproj/aqua@v1.19.0-3/json-schema/aqua-yaml.json": [
+          "https://pax.deno.dev/aquaproj/aqua@v1.19.1/json-schema/aqua-yaml.json": [
             "/aqua/aqua.yaml"
           ],
-          "https://pax.deno.dev/aquaproj/aqua@v1.19.0-3/json-schema/registry.json": [
+          "https://pax.deno.dev/aquaproj/aqua@v1.19.1/json-schema/registry.json": [
             "/aqua-registry/pkgs/*/*/registry.yaml",
             "/aqua-registry/registry.yaml",
             "/aqua/experimental.yaml",

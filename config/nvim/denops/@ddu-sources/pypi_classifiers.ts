@@ -5,8 +5,8 @@ import type {
 } from "https://deno.land/x/ddu_vim@v1.8.8/base/source.ts";
 import type { Item } from "https://deno.land/x/ddu_vim@v1.8.8/types.ts";
 import { BaseSource } from "https://deno.land/x/ddu_vim@v1.8.8/types.ts";
-import { readerFromStreamReader } from "https://deno.land/std@0.150.0/streams/conversion.ts";
-import { readLines } from "https://deno.land/std@0.150.0/io/mod.ts";
+import { readerFromStreamReader } from "https://deno.land/std@0.151.0/streams/conversion.ts";
+import { readLines } from "https://deno.land/std@0.151.0/io/mod.ts";
 
 type Params = Record<never, never>;
 
