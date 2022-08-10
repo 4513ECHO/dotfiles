@@ -1,4 +1,4 @@
-import * as fn from "https://deno.land/x/denops_std@v3.6.0/function/mod.ts";
+import * as fn from "https://deno.land/x/denops_std@v3.8.1/function/mod.ts";
 import type { ActionData } from "https://deno.land/x/ddu_kind_file@v0.3.0/file.ts";
 import type { GatherArguments } from "https://deno.land/x/ddu_vim@v1.8.8/base/source.ts";
 import type { Item } from "https://deno.land/x/ddu_vim@v1.8.8/types.ts";
