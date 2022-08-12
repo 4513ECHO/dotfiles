@@ -4,8 +4,8 @@
   "dependencyDashboard": true,
   "extends": [
     "config:base",
-    "github>aquaproj/aqua-renovate-config#1.2.3",
-    "github>aquaproj/aqua-renovate-config:file#1.2.3(config/aqua/aqua\\.yaml)"
+    "github>aquaproj/aqua-renovate-config#1.2.4",
+    "github>aquaproj/aqua-renovate-config:file#1.2.4(config/aqua/aqua\\.yaml)"
   ],
   "labels": [
     "dependencies"
