@@ -1,7 +1,3 @@
-
-[[plugins]]
-repo = 'folke/lua-dev.nvim'
-
 [[plugins]]
 repo = 'hrsh7th/nvim-pasta'
 on_lua = ['pasta.mappings', 'pasta']
@@ -11,6 +7,9 @@ lua require('vimrc.plugin.pasta').hook_add()
 hook_source = '''
 lua require('vimrc.plugin.pasta').hook_source()
 '''
+
+[[plugins]]
+repo = 'ii14/emmylua-nvim'
 
 [[plugins]]
 repo = 'kevinhwang91/nvim-hlslens'
