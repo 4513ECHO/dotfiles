@@ -59,8 +59,9 @@ pipx: ## Install and initialize pipx enviroments
 
 .PHONY: aqua
 aqua: ## Install and initialize aqua enviroments
-	curl -fsSL https://pax.deno.dev/aquaproj/aqua-installer@v1.0.0/aqua-installer | bash
-	aqua install --test
+	curl -fsSL https://pax.deno.dev/aquaproj/aqua-installer@v1.1.1/aqua-installer | bash
+	aqua --version
+	aqua install --all --test
 
 .PHONY: rust
 rust: ## Install and initialize rust enviroments
