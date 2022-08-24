@@ -1,8 +1,8 @@
 import * as fn from "https://deno.land/x/denops_std@v3.8.1/function/mod.ts";
 import type { ActionData } from "https://deno.land/x/ddu_kind_file@v0.3.0/file.ts";
-import type { GatherArguments } from "https://deno.land/x/ddu_vim@v1.8.8/base/source.ts";
-import type { Item } from "https://deno.land/x/ddu_vim@v1.8.8/types.ts";
-import { BaseSource } from "https://deno.land/x/ddu_vim@v1.8.8/types.ts";
+import type { GatherArguments } from "https://deno.land/x/ddu_vim@v1.9.0/base/source.ts";
+import type { Item } from "https://deno.land/x/ddu_vim@v1.9.0/types.ts";
+import { BaseSource } from "https://deno.land/x/ddu_vim@v1.9.0/types.ts";
 
 interface Params {
   useLoclist: boolean;
