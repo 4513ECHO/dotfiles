@@ -38,7 +38,8 @@ let g:lightline.subseparator = { 'left': '/', 'right': '/' }
 let g:lightline.active = {
       \ 'left': [
       \   ['mode', 'paste'],
-      \   ['readonly', 'filename', 'modified', 'ddu'],
+      \   ['readonly', 'filename', 'modified'],
+      \   ['protocol', 'ddu', 'lsp_progress'],
       \ ],
       \ 'right': [
       \   ['lsp_errors', 'lsp_warnings', 'lineinfo'],
@@ -60,6 +61,8 @@ let g:lightline.component_function = {
       \ 'mode': 'lightline#component#vimrc#mode',
       \ 'readonly': 'lightline#component#vimrc#readonly',
       \ 'modified': 'lightline#component#vimrc#modified',
+      \ 'protocol': 'lightline#component#vimrc#protocol',
+      \ 'lsp_progress': 'lightline_lsp_progress#progress',
       \ }
 let g:lightline.component = {
       \ 'lineinfo': '%3l:%-2v',
@@ -135,6 +138,9 @@ let g:signify_sign_delete_first_line = '┃'
 " highlight line
 let g:signify_line_highlight = v:false
 '''
+
+[[plugins]]
+repo = 'micchy326/lightline-lsp-progress'
 
 [[plugins]]
 repo = 'rafamadriz/friendly-snippets'

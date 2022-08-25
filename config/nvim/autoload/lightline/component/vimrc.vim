@@ -83,3 +83,8 @@ function! lightline#component#vimrc#ddu() abort
         \ line('.', winid), line('$', winid), status.maxItems,
         \ status.done ? '' : '[async]'))
 endfunction
+
+function! lightline#component#vimrc#protocol() abort
+  return bufname() =~# '^\a\+://' && s:statuswidth() > 70
+        \ ? printf('(%s)', matchstr(bufname(), '^\a\+\ze://')) : ''
+endfunction
