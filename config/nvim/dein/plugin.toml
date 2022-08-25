@@ -386,6 +386,24 @@ on_cmd = ['AsyncEmbed']
 repo = 'prabirshrestha/vim-lsp'
 
 [[plugins]]
+repo = 'Shougo/context_filetype.vim'
+on_func = ['context_filetype#get']
+hook_source = '''
+let g:context_filetype#filetypes = extend(
+      \ copy(context_filetype#default_filetypes()),
+      \ {'markdown': values(map(
+      \   {'\(\h\w*\)': '\1', 'viml': 'vim'},
+      \   { key, val -> {
+      \     'start': '^\s*```\s*' .. key,
+      \     'end': '^\s*```$',
+      \     'filetype': val,
+      \ } }))})
+let g:context_filetype#ignore_patterns = {
+      \ 'toml': ['^\s*#\s*'],
+      \ }
+'''
+
+[[plugins]]
 repo = 'skanehira/denops-twihi.vim'
 depends = ['denops.vim']
 on_cmd = [
@@ -625,7 +643,7 @@ nnoremap <buffer> q <C-w>q
 [[plugins]]
 repo = 'tyru/caw.vim'
 on_map = { nx = '<Plug>' }
-depends = ['vim-operator-user']
+depends = ['context_filetype.vim', 'vim-operator-user']
 hook_add = '''
 let g:caw_operator_keymappings = v:true
 let g:caw_no_default_keymappings = v:true
