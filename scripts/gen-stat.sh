@@ -1,7 +1,10 @@
 #!/bin/sh
 set -ue
 
-abort() { echo "error: $*" >&2; exit 1; }
+abort() {
+  echo "error: $*" >&2
+  exit 1
+}
 
 src="${1:-README.md}"
 
@@ -28,9 +31,18 @@ insert_command() {
   rm -f "$tmp" "$src$ext"
 }
 
+vim_plugins() {
+  vim_plugins_tempfile="$(mktemp)"
+  for toml in config/nvim/dein/*.toml; do
+    printf '%-20s %3d\n' "$(basename "$toml")" \
+        "$(dasel -r toml -w json -f "$toml" | jq -r '.plugins|length')"
+  done | tee "$vim_plugins_tempfile"
+  awk -f"$(dirname "$0")/vim_plugins.awk" < "$vim_plugins_tempfile"
+}
+
 # shellcheck disable=SC2046
 insert_command 'tokei' tokei --hidden -- $(git ls-files)
-insert_command 'hyperfine' hyperfine 'vim --not-a-term +quit' 'nvim --headless +quit'
+insert_command 'vim-plugins' vim_plugins
 
 # shellcheck disable=SC2016
 updated_at=$(printf 'Statistics are updated at [`%s`](%s/commit/%s).' \

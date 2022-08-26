@@ -12,7 +12,6 @@
 Table of Contents
 
 <!--ts-->
-* [dotfiles](#dotfiles)
    * [Features](#-features)
       * [aqua](#aqua)
       * [tmux](#tmux)
@@ -25,7 +24,7 @@ Table of Contents
    * [Acknowledgements](#-acknowledgements)
    * [Statistics](#-statistics)
       * [Code Lengths](#code-lengths)
-      * [(neo)vim Startup Time](#neovim-startup-time)
+      * [Vim Plugins](#vim-plugins)
 <!--te-->
 
 TOC is created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc).
@@ -121,8 +120,8 @@ make install
 Other executable binaries or plugins will be installed automatically by
 [aqua](#aqua).
 
-- curl
-- git
+- [curl](https://curl.se)
+- [git](https://git-scm.com)
 - [tmux](https://github.com/tmux/tmux)
 
 tmux must be `3.1c` or later. Latest version is recommended.
@@ -145,7 +144,8 @@ many articles on the Internet. Thanks a lot!
 
 ## 📊 Statistics
 
-Statistics are updated at [`16c4ddb`](https://github.com/4513ECHO/dotfiles/commit/16c4ddb5eaf4dbe966b97cc4059c929f48dd2f9f).
+<!--deno-fmt-ignore-->
+Statistics are updated at [`52302ac`](https://github.com/4513ECHO/dotfiles/commit/52302ac3e1bb78ca442fdfeb5908b8cc8fa19ed8).
 
 ### Code Lengths
 
@@ -157,44 +157,44 @@ It uses [tokei](https://github.com/XAMPPRocky/tokei) to measure.
  Language            Files        Lines         Code     Comments       Blanks
 ===============================================================================
  BASH                   18          280          188           43           49
- JSON                   12         1283         1283            0            0
- Lua                    10          556          258          248           50
- Makefile                1           98           86            0           12
- Python                  1           32           21            3            8
+ JSON                   12         1305         1305            0            0
+ Lua                     7          318          241           42           35
+ Makefile                1           98           87            0           11
+ Python                  1           33           22            3            8
  Scheme                  6          106           84           11           11
- Shell                   8          120           97           13           10
+ Shell                   8          177          142           19           16
  Plain Text              1           35            0           24           11
- TOML                   11         2471         2166           35          270
+ TOML                   11         2476         2181           31          264
  TypeScript              5          227          200            5           22
- Vim script             28         1955         1771           66          118
- YAML                    5          642          558           38           46
- Zsh                     6          519          389           85           45
+ Vim script             27         1916         1752           50          114
+ YAML                    7          583          498           37           48
+ Zsh                     6          537          411           85           41
 -------------------------------------------------------------------------------
- Markdown                2          185            0          127           58
+ Markdown                2          192            0          134           58
  |- YAML                 1            7            7            0            0
- (Total)                            192            7          127           58
+ (Total)                            199            7          134           58
 ===============================================================================
- Total                 114         8509         7101          698          710
+ Total                 112         8283         7111          484          688
 ===============================================================================
 ```
 <!--tokei-end-->
 
-### (neo)vim Startup Time
+### Vim Plugins
 
-It uses [hyperfine](https://github.com/sharkdp/hyperfine) to benchmark.
-
-<!--hyperfine-start-->
+<!--vim-plugins-start-->
 ```
-Benchmark 1: vim --not-a-term +quit
-  Time (mean ± σ):     384.2 ms ±   7.6 ms    [User: 285.0 ms, System: 93.7 ms]
-  Range (min … max):   373.1 ms … 400.3 ms    10 runs
- 
-Benchmark 2: nvim --headless +quit
-  Time (mean ± σ):     467.9 ms ±   6.1 ms    [User: 344.3 ms, System: 120.0 ms]
-  Range (min … max):   462.1 ms … 478.8 ms    10 runs
- 
-Summary
-  'vim --not-a-term +quit' ran
-    1.22 ± 0.03 times faster than 'nvim --headless +quit'
+colorscheme.toml      60
+ddc.toml              22
+ddu.toml              32
+ftplugin.toml         13
+init.toml             17
+neovim.toml            8
+plugin.toml           50
+textobj.toml          11
+unused.toml           20
+vim.toml               9
+------------------------
+total(vim)           214
+total(neovim)        213
 ```
-<!--hyperfine-end-->
+<!--vim-plugins-end-->
