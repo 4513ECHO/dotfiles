@@ -27,7 +27,7 @@ packages:
   - name: denoland/deno@v1.25.0
   - name: docker/cli/rootless@v20.10.17
   - name: docker/cli@v20.10.17
-  - name: docker/compose@v2.10.1
+  - name: docker/compose@v2.10.2
   - name: ekalinin/github-markdown-toc@0.8.0
   - name: ericchiang/pup@v0.4.0
   - name: golang/go@go1.18.5
