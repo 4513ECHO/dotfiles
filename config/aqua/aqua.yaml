@@ -29,10 +29,12 @@ packages:
   - name: docker/cli@v20.10.17
   - name: docker/compose@v2.10.1
   - name: ekalinin/github-markdown-toc@0.8.0
+  - name: ericchiang/pup@v0.4.0
   - name: golang/go@go1.18.5
   - name: golang/tools/gopls@v0.8.4
   - name: golangci/golangci-lint@v1.49.0
   - name: hadolint/hadolint@v2.10.0
+  - name: hairyhenderson/gomplate@v3.11.2
   - name: high-moctane/mocword@v0.2.0
   - name: high-moctane/nextword@v0.0.5
   - name: itchyny/gojq@v0.12.8
@@ -95,4 +97,6 @@ packages:
     registry: local
     version: master
   - name: greymd/ojichat@v0.2.2
+    registry: local
+  - name: machikado-network/sakura@v0.3.5
     registry: local

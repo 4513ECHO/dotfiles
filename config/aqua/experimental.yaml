@@ -42,6 +42,17 @@ packages:
   # init: l
 
   # init: m
+  - type: github_release
+    repo_owner: machikado-network
+    repo_name: sakura
+    asset: "{{.Version}}-{{.Arch}}-{{.OS}}"
+    format: raw
+    replacements:
+      amd64: x86_64
+      arm64: aarch64
+      linux: unknown-linux-gnu
+    supported_envs:
+      - linux
 
   # init: n
   - type: http
