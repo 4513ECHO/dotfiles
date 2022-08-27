@@ -26,6 +26,18 @@ packages:
     description: ▁▂▃▅▂▇ in your shell
 
   # init: i
+  - type: github_release
+    repo_owner: itchyny
+    repo_name: maze
+    asset: maze_{{.Version}}_{{.OS}}_{{.Arch}}.{{.Format}}
+    format: zip
+    description: A maze command written in Go
+    overrides:
+      - goos: linux
+        format: tar.gz
+    files:
+      - name: maze
+        src: maze_{{.Version}}_{{.OS}}_{{.Arch}}/maze
 
   # init: j
   - type: github_content
@@ -81,6 +93,10 @@ packages:
   # init: q
 
   # init: r
+  - type: go_install
+    repo_owner: rrethy
+    repo_name: hexokinase
+    description: Fast text scraper to find and convert colours (hex, rgb, rgb, hsl, web colours, custom patterns, etc.) into hex values
   - type: http
     repo_owner: rust-lang
     repo_name: rust
