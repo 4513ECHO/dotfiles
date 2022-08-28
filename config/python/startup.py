@@ -1,6 +1,6 @@
-import readline
-import inspect
 import datetime
+import inspect
+import readline
 import sys
 
 q = exit
@@ -13,10 +13,11 @@ class Dev:
 
 
 # from https://unix.stackexchange.com/questions/121377/how-can-i-disable-the-new-history-feature-in-python-3-4
-def register_readline_completion():
+def register_readline_completion() -> None:
     # rlcompleter must be loaded for Python-specific completion
     try:
-        import readline, rlcompleter
+        import readline
+        import rlcompleter
     except ImportError:
         return
     # Enable tab-completion

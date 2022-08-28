@@ -11,4 +11,5 @@ case $1 in
       eval "$stdin"
     done
     ;;
+  *) exit 1 ;;
 esac

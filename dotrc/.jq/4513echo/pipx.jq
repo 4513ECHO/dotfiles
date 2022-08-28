@@ -16,5 +16,5 @@ def generate:
   };
 
 def execute:
-  (.install | map("pipx install \(.) &")[]),
-  (.inject | to_entries | map("pipx inject \(.key) \(.value | join(" ")) &")[]);
+  (.install | map("pipx install \(.)")[]),
+  (.inject | to_entries | map("pipx inject \(.key) \(.value | join(" "))")[]);

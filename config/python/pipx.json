@@ -1,5 +1,10 @@
 {
   "inject": {
+    "flake8": [
+      "pep8-naming",
+      "flake8-isort",
+      "flake8-pyproject"
+    ],
     "python-lsp-server": [
       "pyls-isort",
       "pylsp-mypy",
@@ -16,8 +21,8 @@
     "mypy",
     "pip-chill",
     "poetry",
+    "pepdocs",
     "pycowsay",
-    "pyproject-flake8",
     "python-lsp-server[all]",
     "term2048",
     "toml-sort",

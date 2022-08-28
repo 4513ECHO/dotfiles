@@ -120,8 +120,7 @@
             "enabled": true
           },
           "flake8": {
-            "enabled": true,
-            "executable": "pflake8"
+            "enabled": true
           },
           "mccabe": {
             "enabled": false
