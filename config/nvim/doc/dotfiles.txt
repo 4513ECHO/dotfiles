@@ -1,0 +1,126 @@
+*dotfiles.txt*			My vim configuration files references
+
+Author: Hibiki <4513echo@gmail.com>
+License: MIT License
+URL: https://github.com/4513ECHO/dotfiles
+Last change: 2022 Aug 30
+
+==============================================================================
+CONTENTS						*dotfiles-contents*
+
+Introduction						|dotfiles-introdution|
+Interface						|dotfiles-interface|
+  Commands						|dotfiles-commands|
+  Mappings						|dotfiles-mappings|
+Directory Structure					|directory-structure|
+Dark Powered						|dark-powered|
+About							|dotfiles-about|
+
+==============================================================================
+INTRODUCTION						*dotfiles-introdution*
+
+*dotfiles* is my vim configuration files.
+
+==============================================================================
+INTERFACE						*dotfiles-interface*
+
+------------------------------------------------------------------------------
+COMMANDS						*dotfiles-commands*
+
+:RTP							*:RTP*
+	Output the value of 'runtimepath' human-friendly.
+
+:ColorScheme[!]						*:ColorScheme*
+	Output the name of the currently active |colorscheme|.
+	If bang exists, this will reload the current colorscheme and output
+	nothing.
+
+:ColorScheme {name}
+	Load color scheme {name} more conveniently.
+	This also effects |g:lightline.colorscheme| automatically.
+
+:RandomColorScheme					*:RandomColorScheme*
+	Load color scheme randomly from definitions.
+
+:WWW {what}						*:WWW*
+	Search {what} in |terminal| window using "w3m".
+	This uses |termopen()| in Neovim, |term_start()| in Vim.
+
+:PopupTerminal						*:PopupTerminal*
+	Open |terminal| buffer on |popup| window.
+	NOTE: It is working on only Vim.
+
+------------------------------------------------------------------------------
+MAPPINGS						*dotfiles-mappings*
+
+							*dotfiles-mapleader*
+|<Leader>| is "," .
+
+<Leader><Leader>		*Leader-Leader* *<Leader>-<Leader>*
+	It is shortcut of |<Esc>| and |CTRL-[|.
+
+<Leader><Space>						*LEADER-SPACE*
+
+Y							*dotfiles-Y*
+	This is same as `y$`. This traces |default-mappings| in Neovim
+
+CTRL-L							*dotfiles-CTRL-L*
+
+[Space]w						*SPACE-w*
+
+[Space]W						*SPACE-W*
+
+[Space]f						*SPACE-f*
+
+^							*dotfiles-^*
+
+==============================================================================
+DIRECTORY STRUCTURE					*directory-structure*
+
+>
+	after/
+	autoload/
+	colors/
+	dein/
+	dein/settings/
+	denops/
+	doc/
+	ftdetect/
+	lua/
+	rc/
+	snippets/
+	syntax/
+	template/
+	types/
+
+See also 'runtimepath'. `after/`, `autoload/`, `colors`, `doc/`, `ftdetect/`,
+`lua/`(used only in Neovim) and `syntax` are used for default feature.
+`dein/` contains TOML files to use with |dein-toml|. There are specific plugins
+settings in `dein/settings/`.
+`denops/` contains TypeScript files to use |denops.vim|, especially used for
+|ddu-sources|.
+
+==============================================================================
+DARK POWERED						*dark-powered*
+
+Here is mean of "dark powered" in Shougo wares (e.g. |dein|, |ddc|, |ddu|)
+This section is moved from |deoplete-faq-general|
+(https://github.com/Shougo/deoplete.nvim/blob/33ed4fa0/doc/deoplete.txt#L1966).
+
+Q: What means "dark powered"?
+
+A: I think text editor is everything in the world. I want to do everything in
+   Vim(neovim) like Emacs. It is not allowed by |design-not| in Vim. It is not
+   the light way to use Vim. So I have defined it as the dark way. I am the
+   dark Vimmer. My plugins are dark powered.
+
+==============================================================================
+ABOUT							*dotfiles-about*
+
+|dotfiles| is developed by Hibiki(4513ECHO) and licensed under the
+MIT License. Visit the project page for the latest version:
+
+	https://github.com/4513ECHO/dotfiles
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:noet:fen:
