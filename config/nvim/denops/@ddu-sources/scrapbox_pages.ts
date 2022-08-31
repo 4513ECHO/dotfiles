@@ -2,13 +2,13 @@ import type { ActionData } from "https://pax.deno.dev/4513ECHO/ddu-kind-url@0.1.
 import type {
   GatherArguments,
   OnInitArguments,
-} from "https://deno.land/x/ddu_vim@v1.9.0/base/source.ts";
-import type { Item } from "https://deno.land/x/ddu_vim@v1.9.0/types.ts";
+} from "https://deno.land/x/ddu_vim@v1.10.1/base/source.ts";
+import type { Item } from "https://deno.land/x/ddu_vim@v1.10.1/types.ts";
 import type {
   Page,
   PageList,
-} from "https://pax.deno.dev/scrapbox-jp/types@0.3.5/rest.ts";
-import { BaseSource } from "https://deno.land/x/ddu_vim@v1.9.0/types.ts";
+} from "https://pax.deno.dev/scrapbox-jp/types@0.3.6/rest.ts";
+import { BaseSource } from "https://deno.land/x/ddu_vim@v1.10.1/types.ts";
 
 interface Params {
   project: string;
