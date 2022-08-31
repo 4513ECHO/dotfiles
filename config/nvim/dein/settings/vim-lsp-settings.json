@@ -89,7 +89,7 @@
               "deno.json",
               "deno.jsonc"
             ],
-            "url": "https://deno.land/x/deno@v1.24.3/cli/schemas/config-file.v1.json"
+            "url": "https://deno.land/x/deno@v1.25.0/cli/schemas/config-file.v1.json"
           },
           {
             "fileMatch": [

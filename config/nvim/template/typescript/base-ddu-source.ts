@@ -2,9 +2,9 @@ import type { ActionData } from "";
 import type {
   GatherArguments,
   OnInitArguments,
-} from "https://deno.land/x/ddu_vim@v1.9.0/base/source.ts";
-import type { Item } from "https://deno.land/x/ddu_vim@v1.9.0/types.ts";
-import { BaseSource } from "https://deno.land/x/ddu_vim@v1.9.0/types.ts";
+} from "https://deno.land/x/ddu_vim@v1.10.1/base/source.ts";
+import type { Item } from "https://deno.land/x/ddu_vim@v1.10.1/types.ts";
+import { BaseSource } from "https://deno.land/x/ddu_vim@v1.10.1/types.ts";
 
 // interface ActionData {}
 // interface Params {}
