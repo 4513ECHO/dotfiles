@@ -23,16 +23,6 @@
       "matchStrings": [
         "go-version: \"(?<currentValue>.*?)\""
       ]
-    },
-    {
-      "datasourceTemplate": "github-releases",
-      "depNameTemplate": "denoland/deno",
-      "fileMatch": [
-        ".github/workflows/udd.yaml"
-      ],
-      "matchStrings": [
-        "deno-version: (?<currentValue>.*?)"
-      ]
     }
   ]
 }

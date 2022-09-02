@@ -15,7 +15,7 @@ jobs:
       - name: Setup deno
         uses: denoland/setup-deno@v1
         with:
-          deno-version: 1.24.0
+          deno-version: 1.x
       - name: Update deno dependencies
         run: >
           deno run --allow-all "https://deno.land/x/udd@0.7.5/main.ts"
