@@ -41,13 +41,12 @@ if [[ -n "$TMUX" ]]; then
 fi
 [[ -f "$SSH_FORWARD_KEY" ]] && enable-agent-forward
 [[ -z "$MINIMUM_DOTFILES" ]] && agent-symlink
+[[ ! -f "$HISTFILE" ]] && { mkdir -p "$(dirname "$HISTFILE")" && touch "$HISTFILE"; }
+[[ ! -d "$XDG_RUNTIME_DIR" ]] && { mkdir -p "$XDG_RUNTIME_DIR" 2> /dev/null && chmod 0700 "$XDG_RUNTIME_DIR"; }
 
-if type dircolors > /dev/null; then
-  eval "$(dircolors -b $ZDOTDIR/dircolors)"
-fi
-if type afx > /dev/null; then
-  source <(afx init)
-fi
+type dircolors > /dev/null && source <(dircolors -b "$ZDOTDIR/dircolors")
+type afx > /dev/null && source <(afx init)
+type zoxide > /dev/null && source <(zoxide init zsh)
 
 export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --marker='*'"
 if type fd > /dev/null; then
