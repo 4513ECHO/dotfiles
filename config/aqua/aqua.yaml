@@ -48,7 +48,7 @@ packages:
   - name: koalaman/shellcheck@v0.8.0
   - name: ktock/buildg@v0.3.0
   - name: kurehajime/dajarep@v1.9.8
-  - name: LukeChannings/deno-arm64@v1.25.0
+  - name: LukeChannings/deno-arm64@v1.25.1
   - name: maaslalani/slides@v0.8.0
   - name: mattn/efm-langserver@v0.0.44
   - name: mattn/gof@v0.0.12
