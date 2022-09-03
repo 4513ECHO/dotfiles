@@ -38,7 +38,8 @@ let g:loaded_zipPlugin         = v:true
 
 [ftplugin]
 _ = '''
-setlocal formatoptions-=ro
+setlocal formatoptions-=r
+setlocal formatoptions-=o
 setlocal formatoptions+=mMBl
 '''
 
@@ -50,6 +51,7 @@ function! s:set_abbrev(instruction) abort
 endfunction
 
 call s:set_abbrev('add')
+call s:set_abbrev('arg')
 call s:set_abbrev('cmd')
 call s:set_abbrev('copy')
 call s:set_abbrev('entrypoint')
@@ -70,10 +72,10 @@ inoreabbrev <expr><buffer> as
 '''
 
 gitcommit = '''
+setlocal textwidth=72 colorcolumn=+1
 " from https://zenn.dev/uochan/articles/2021-12-08-vim-conventional-commits
 function! s:select_type() abort
   let title = printf('%s: ', trim(split(getline('.'), ';')[0]))
-
   silent! normal! "_dip
   silent! put! =title
   silent! startinsert!
@@ -86,18 +88,12 @@ nnoremap <buffer> <CR> <Cmd>Cycle<CR>
 '''
 
 help = '''
-setlocal iskeyword+=#
-setlocal iskeyword+=:
-setlocal iskeyword+=-
-setlocal iskeyword+=+
-
 nnoremap <buffer> q <C-w>q
 nnoremap <buffer> <CR> <C-]>zv
 xnoremap <buffer> <CR> <C-]>zv
 nnoremap <buffer><silent><expr> [Toggle]l
-      \ expand('%:e') ==# 'jax'
-      \ ? printf('<Cmd>help %s@en<CR>', expand('<cword>'))
-      \ : printf('<Cmd>help %s@ja<CR>', expand('<cword>'))
+      \ printf('<Cmd>help %s@%s<CR>', expand('<cword>'),
+      \ expand('%:e') ==# 'jax' ? 'en': 'ja')
 
 let s:tag_pattern = join([
       \ '\\\@<!|[#-)!+-~]\+|', '\*[#-)!+-~]\+\*\s', '\*[#-)!+-~]\+\*$',
@@ -193,11 +189,9 @@ autocmd vimrc ColorScheme *
 '''
 
 python = '''
-setlocal softtabstop=4
-setlocal shiftwidth=4
+setlocal softtabstop=4 shiftwidth=4
 setlocal textwidth=80
-setlocal smarttab
-setlocal nosmartindent
+setlocal smarttab nosmartindent
 inoreabbrev <expr><buffer> improt
       \ (getline('.')[:col('.') - 2] =~# 'from\s\+.*\s\+' <Bar><Bar>
       \  getline('.')[:col('.') - 2] ==# 'improt')
@@ -210,14 +204,12 @@ setlocal numberwidth=2
 nnoremap <buffer><expr> q getwininfo(win_getid())[0].loclist
       \ ? '<Cmd>lclose<CR>'
       \ : '<Cmd>cclose<CR>'
-nnoremap <buffer><expr> j line('.') == line('$') ? 'gg' : 'j'
-nnoremap <buffer><expr> k line('.') == 1 ? 'G' : 'k'
+" based on https://github.com/kuuote/dotvim/blob/9c7ba6307c/ftplugin/qf.vim#L1
+nnoremap <buffer><expr> j (line('.') == line('$') ? 'gg' : 'j') .. '<CR>zz<C-w>p'
+nnoremap <buffer><expr> k (line('.') == 1 ? 'G' : 'k') .. '<CR>zz<C-w>p'
 " from https://github.com/mityu/dotfiles/blob/f5cb5f9a92/dot_vim/runtime/ftplugin/qf.vim#L6
 nnoremap <buffer> o <CR>zz<C-w>p
 nnoremap <buffer> p <CR>zz<C-w>p
-" from https://github.com/kuuote/dotvim/blob/9c7ba6307c/ftplugin/qf.vim#L1
-nnoremap <buffer> j j<CR>zz<C-w>p
-nnoremap <buffer> k k<CR>zz<C-w>p
 '''
 
 toml = '''

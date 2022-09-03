@@ -4,7 +4,7 @@ if &buftype ==# 'help'
 endif
 
 setlocal list tabstop=8 shiftwidth=8 softtabstop=8
-setlocal noexpandtab textwidth=78
+setlocal noexpandtab textwidth=78 colorcolumn=+1 conceallevel=0
 
 function! s:set_highlight(group) abort
   for group in ['helpBar', 'helpBacktick', 'helpStar', 'helpIgnore']
@@ -12,20 +12,14 @@ function! s:set_highlight(group) abort
   endfor
 endfunction
 
-if exists('+colorcolumn')
-  setlocal colorcolumn=+1
-endif
-if has('conceal')
-  setlocal conceallevel=0
-  call s:set_highlight('Special')
-  augroup vimrc_help
-    autocmd!
-    autocmd BufUnload <buffer>
-          \ : call <SID>set_highlight('Ignore')
-          \ | autocmd! vimrc_help
-    autocmd ColorScheme * call <SID>set_highlight('Special')
-  augroup END
-endif
+call s:set_highlight('Special')
+augroup vimrc_help
+  autocmd!
+  autocmd BufUnload <buffer>
+        \ : call <SID>set_highlight('Ignore')
+        \ | autocmd! vimrc_help
+  autocmd ColorScheme * call <SID>set_highlight('Special')
+augroup END
 
 nnoremap <buffer> q <Nop>
 nnoremap <buffer> <CR> <CR>
