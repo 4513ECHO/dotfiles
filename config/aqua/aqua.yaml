@@ -61,7 +61,7 @@ packages:
   - name: rhysd/hgrep@v0.2.6
   - name: rhysd/vim-startuptime@v1.3.0
   - name: rust-lang/rust-analyzer@2022-07-04
-  - name: sharkdp/bat@v0.21.0
+  - name: sharkdp/bat@v0.22.0
   - name: sharkdp/fd@v8.4.0
   - name: sharkdp/hexyl@v0.10.0
   - name: sharkdp/hyperfine@v1.14.0
