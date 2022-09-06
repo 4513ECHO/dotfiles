@@ -22,7 +22,7 @@ packages:
   - name: b4b4r07/gomi@v1.1.3
   - name: charmbracelet/glow@v1.4.1
   - name: chriswalz/bit@v1.1.2
-  - name: cli/cli@v2.14.7
+  - name: cli/cli@v2.15.0
   - name: dandavison/delta@0.14.0
   - name: denoland/deno@v1.25.1
   - name: docker/cli/rootless@v20.10.17
