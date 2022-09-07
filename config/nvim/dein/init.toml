@@ -105,7 +105,7 @@ repo = 'mattn/vim-molder'
 [plugins.ftplugin]
 molder = '''
 setlocal nolist nospell
-nmap <buffer> <C-l> <Plug>(molder-reload)<Cmd>set nohlsearch<CR>
+nnoremap <buffer> <C-l> <Plug>(molder-reload)<Cmd>set nohlsearch<CR>
 nnoremap <buffer> q <C-w>q
 nnoremap <silent><buffer><expr> R
       \ printf('<Cmd>edit %s<CR>', system('git rev-parse --show-toplevel'))
@@ -121,8 +121,8 @@ nnoremap <silent><buffer><expr> k
 repo = 'mattn/vim-molder-operations'
 [plugins.ftplugin]
 molder = '''
-nmap <silent><buffer> dd <Plug>(molder-operations-delete)
-nmap <silent><buffer> r  <Plug>(molder-operations-rename)
+nnoremap <silent><buffer> dd <Plug>(molder-operations-delete)
+nnoremap <silent><buffer> r  <Plug>(molder-operations-rename)
 '''
 
 [[plugins]]

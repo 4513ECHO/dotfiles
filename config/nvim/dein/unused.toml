@@ -9,7 +9,7 @@ repo = 'dhruvasagar/vim-zoom'
 on_map = { n = '<Plug>' }
 hook_add = '''
 let g:zoom#statustext = 'zoomed'
-nmap <C-w>z <Plug>(zoom-toggle)
+nnoremap <C-w>z <Plug>(zoom-toggle)
 '''
 
 [[plugins]]
@@ -40,19 +40,19 @@ let g:qfloc_disable_sign = v:true
 let g:qfloc_disable_hover = v:true
 nmap <expr> ]c &diff ? ']c' : '<Plug>(qfloc-cnext)'
 nmap <expr> [c &diff ? '[c' : '<Plug>(qfloc-cprevious)'
-nmap ]l <Plug>(qfloc-lnext)
-nmap [l <Plug>(qfloc-lprevious)
+nnoremap ]l <Plug>(qfloc-lnext)
+nnoremap [l <Plug>(qfloc-lprevious)
 '''
 [plugins.ftplugin]
 qf = '''
-nmap <buffer> j <Plug>(qfloc-j)
-nmap <buffer> k <Plug>(qfloc-k)
-nmap <buffer> s <Plug>(qfloc-sbuffer)
-nmap <buffer> p <Plug>(qfloc-preview)
-nmap <buffer> o <Plug>(qfloc-preview)
-nmap <buffer> u <Plug>(qfloc-undo)
-nmap <buffer> dd <Plug>(qfloc-delete)
-xmap <buffer> d  <Plug>(qfloc-delete)
+nnoremap <buffer> j <Plug>(qfloc-j)
+nnoremap <buffer> k <Plug>(qfloc-k)
+nnoremap <buffer> s <Plug>(qfloc-sbuffer)
+nnoremap <buffer> p <Plug>(qfloc-preview)
+nnoremap <buffer> o <Plug>(qfloc-preview)
+nnoremap <buffer> u <Plug>(qfloc-undo)
+nnoremap <buffer> dd <Plug>(qfloc-delete)
+xnoremap <buffer> d  <Plug>(qfloc-delete)
 '''
 
 [[plugins]]

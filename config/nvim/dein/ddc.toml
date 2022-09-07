@@ -83,7 +83,7 @@ repo = 'vim-skk/skkeleton'
 depends = ['denops.vim']
 on_map = { ic = '<Plug>' }
 hook_add = '''
-map! <C-j> <Plug>(skkeleton-toggle)
+noremap! <C-j> <Plug>(skkeleton-toggle)
 '''
 hook_source = '''
 Runtime dein/settings/skkeleton.vim

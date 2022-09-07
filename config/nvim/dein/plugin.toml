@@ -78,24 +78,24 @@ repo = 'haya14busa/vim-asterisk'
 on_map = { nx = '<Plug>' }
 hook_add = '''
 let g:asterisk#keeppos = v:true
-nmap *  <Plug>(asterisk-z*)<Cmd>Doautocmd VimrcSearched<CR>zzzv
-nmap #  <Plug>(asterisk-z#)<Cmd>Doautocmd VimrcSearched<CR>zzzv
-nmap g* <Plug>(asterisk-gz*)<Cmd>Doautocmd VimrcSearched<CR>zzzv
-nmap g# <Plug>(asterisk-gz#)<Cmd>Doautocmd VimrcSearched<CR>zzzv
-xmap *  <Plug>(asterisk-z*)<Cmd>Doautocmd VimrcSearched<CR>zzzv
-xmap #  <Plug>(asterisk-z#)<Cmd>Doautocmd VimrcSearched<CR>zzzv
-xmap g* <Plug>(asterisk-gz*)<Cmd>Doautocmd VimrcSearched<CR>zzzv
-xmap g# <Plug>(asterisk-gz#)<Cmd>Doautocmd VimrcSearched<CR>zzzv
+nnoremap *  <Plug>(asterisk-z*)<Cmd>Doautocmd VimrcSearched<CR>zzzv
+nnoremap #  <Plug>(asterisk-z#)<Cmd>Doautocmd VimrcSearched<CR>zzzv
+nnoremap g* <Plug>(asterisk-gz*)<Cmd>Doautocmd VimrcSearched<CR>zzzv
+nnoremap g# <Plug>(asterisk-gz#)<Cmd>Doautocmd VimrcSearched<CR>zzzv
+xnoremap *  <Plug>(asterisk-z*)<Cmd>Doautocmd VimrcSearched<CR>zzzv
+xnoremap #  <Plug>(asterisk-z#)<Cmd>Doautocmd VimrcSearched<CR>zzzv
+xnoremap g* <Plug>(asterisk-gz*)<Cmd>Doautocmd VimrcSearched<CR>zzzv
+xnoremap g# <Plug>(asterisk-gz#)<Cmd>Doautocmd VimrcSearched<CR>zzzv
 '''
 
 [[plugins]]
 repo = 'haya14busa/vim-edgemotion'
 on_map = { nx = '<Plug>' }
 hook_add = '''
-nmap <C-j> <Plug>(edgemotion-j)
-nmap <C-k> <Plug>(edgemotion-k)
-xmap <C-j> <Plug>(edgemotion-j)
-xmap <C-k> <Plug>(edgemotion-k)
+nnoremap <C-j> <Plug>(edgemotion-j)
+nnoremap <C-k> <Plug>(edgemotion-k)
+xnoremap <C-j> <Plug>(edgemotion-j)
+xnoremap <C-k> <Plug>(edgemotion-k)
 '''
 
 [[plugins]]
@@ -203,9 +203,9 @@ command! -bar FzfMru call fzf#run(fzf#wrap({
 repo = 'kana/vim-niceblock'
 on_map = { x = '<Plug>' }
 hook_add = '''
-xmap I  <Plug>(niceblock-I)
-xmap gI <Plug>(niceblock-gI)
-xmap A  <Plug>(niceblock-A)
+xnoremap I  <Plug>(niceblock-I)
+xnoremap gI <Plug>(niceblock-gI)
+xnoremap A  <Plug>(niceblock-A)
 '''
 
 [[plugins]]
@@ -267,7 +267,7 @@ let g:fern#keepjumps_on_edit = v:true
 '''
 [plugins.ftplugin]
 fern = '''
-nmap <buffer> F <Plug>(fern-action-focus:parent)
+nnoremap <buffer> F <Plug>(fern-action-focus:parent)
 nnoremap <buffer> q <C-w>q
 nnoremap <silent><buffer><expr> r
       \ printf('<Cmd>Fern %s<CR>', system('git rev-parse --show-toplevel'))
@@ -296,11 +296,11 @@ on_source = ['vim-quickrun']
 repo = 'machakann/vim-highlightedundo'
 on_map = { n = '<Plug>' }
 hook_add = '''
-nmap u     <Plug>(highlightedundo-undo)
-nmap <C-r> <Plug>(highlightedundo-redo)
-nmap U     <Plug>(highlightedundo-Undo)
-nmap g-    <Plug>(highlightedundo-gminus)
-nmap g+    <Plug>(highlightedundo-gplus)
+nnoremap u     <Plug>(highlightedundo-undo)
+nnoremap <C-r> <Plug>(highlightedundo-redo)
+nnoremap U     <Plug>(highlightedundo-Undo)
+nnoremap g-    <Plug>(highlightedundo-gminus)
+nnoremap g+    <Plug>(highlightedundo-gplus)
 '''
 
 [[plugins]]
@@ -335,8 +335,8 @@ let g:sonictemplate_vim_vars = {
       \ },
       \ }
 let g:sonictemplate_postfix_key = ''
-nmap <C-x>T <Plug>(sonictemplate)
-nmap <C-x><C-t> <Plug>(sonictemplate-intelligent)
+nnoremap <C-x>T <Plug>(sonictemplate)
+nnoremap <C-x><C-t> <Plug>(sonictemplate-intelligent)
 '''
 
 [[plugins]]
@@ -355,10 +355,10 @@ autocmd vimrc TextYankPost *
 repo = 'osyo-manga/vim-jplus'
 on_map = { nx = '<Plug>' }
 hook_add = '''
-nmap J  <Plug>(jplus-getchar)<Space>
-xmap J  <Plug>(jplus-getchar)<Space>
-nmap gJ <Plug>(jplus)
-xmap gJ <Plug>(jplus)
+nnoremap J  <Plug>(jplus-getchar)<Space>
+xnoremap J  <Plug>(jplus-getchar)<Space>
+nnoremap gJ <Plug>(jplus)
+xnoremap gJ <Plug>(jplus)
 let g:jplus#config = {
       \ '_': {
       \   'delimiter': '',
@@ -428,18 +428,18 @@ on_source = ['vim-quickrun']
 repo = 'rhysd/clever-f.vim'
 on_map = { nxo = '<Plug>' }
 hook_add = '''
-nmap F <Plug>(clever-f-F)
-nmap T <Plug>(clever-f-T)
-nmap f <Plug>(clever-f-f)
-nmap t <Plug>(clever-f-t)
-omap F <Plug>(clever-f-F)
-omap T <Plug>(clever-f-T)
-omap f <Plug>(clever-f-f)
-omap t <Plug>(clever-f-t)
-xmap F <Plug>(clever-f-F)
-xmap T <Plug>(clever-f-T)
-xmap f <Plug>(clever-f-f)
-xmap t <Plug>(clever-f-t)
+nnoremap F <Plug>(clever-f-F)
+nnoremap T <Plug>(clever-f-T)
+nnoremap f <Plug>(clever-f-f)
+nnoremap t <Plug>(clever-f-t)
+onoremap F <Plug>(clever-f-F)
+onoremap T <Plug>(clever-f-T)
+onoremap f <Plug>(clever-f-f)
+onoremap t <Plug>(clever-f-t)
+xnoremap F <Plug>(clever-f-F)
+xnoremap T <Plug>(clever-f-T)
+xnoremap f <Plug>(clever-f-f)
+xnoremap t <Plug>(clever-f-t)
 let g:clever_f_across_no_line = v:true
 let g:clever_f_ignore_case = v:true
 let g:clever_f_smart_case = v:true
@@ -468,7 +468,7 @@ on_map = { n = '<Plug>' }
 hook_add = '''
 let g:choosewin_overlay_enable = v:true
 let g:choosewin_overlay_clear_multibyte = v:true
-nmap <C-w>w <Plug>(choosewin)
+nnoremap <C-w>w <Plug>(choosewin)
 '''
 
 [[plugins]]
@@ -647,9 +647,9 @@ depends = ['context_filetype.vim', 'vim-operator-user']
 hook_add = '''
 let g:caw_operator_keymappings = v:true
 let g:caw_no_default_keymappings = v:true
-nmap <silent> ;; <Plug>(caw:hatpos:toggle)
-nmap <silent> ;  <Plug>(caw:hatpos:toggle:operator)
-xmap <silent> ;  <Plug>(caw:hatpos:toggle:operator)
+nnoremap <silent> ;; <Plug>(caw:hatpos:toggle)
+nnoremap <silent> ;  <Plug>(caw:hatpos:toggle:operator)
+xnoremap <silent> ;  <Plug>(caw:hatpos:toggle:operator)
 '''
 [plugins.ftplugin]
 gitcommit = '''
@@ -662,8 +662,8 @@ on_cmd = ['OpenBrowser', 'OpenBrowserSearch', 'OpenBrowserSmartSearch']
 on_func = ['openbrowser#open']
 on_map = { nx = '<Plug>(openbrowser' }
 hook_add = '''
-nmap gx <Plug>(openbrowser-smart-search)
-xmap gx <Plug>(openbrowser-smart-search)
+nnoremap gx <Plug>(openbrowser-smart-search)
+xnoremap gx <Plug>(openbrowser-smart-search)
 let g:openbrowser_browser_commands = [{
       \ 'name': 'w3m',
       \ 'args': 'tmux-w3m {uri} -t open-browser',

@@ -12,17 +12,17 @@ let g:operator_sandwich_no_default_key_mappings = v:true
 let g:textobj_sandwich_no_default_key_mappings = v:true
 
 " vim-surround like mappings
-nmap ys <Plug>(sandwich-add)
+nnoremap ys <Plug>(sandwich-add)
 onoremap <SID>line :normal! ^vg_<CR>
-nmap <silent> yss <Plug>(sandwich-add)<SID>line
+nnoremap <silent> yss <Plug>(sandwich-add)<SID>line
 onoremap <SID>gul g_
-nmap <silent> yS <Plug>(sandwich-add)<SID>gul
-nmap ds <Plug>(sandwich-delete)
-nmap dss <Plug>(sandwich-delete-auto)
-nmap cs <Plug>(sandwich-replace)
-nmap css <Plug>(sandwich-replace-auto)
-xmap S <Plug>(sandwich-add)
-nmap . <Plug>(operator-sandwich-dot)
+nnoremap <silent> yS <Plug>(sandwich-add)<SID>gul
+nnoremap ds <Plug>(sandwich-delete)
+nnoremap dss <Plug>(sandwich-delete-auto)
+nnoremap cs <Plug>(sandwich-replace)
+nnoremap css <Plug>(sandwich-replace-auto)
+xnoremap S <Plug>(sandwich-add)
+nnoremap . <Plug>(operator-sandwich-dot)
 
 let g:sandwich#magicchar#f#patterns = [{
       \ 'header' : '\<\%(\h\k*\.\)*\h\k*',
@@ -96,10 +96,10 @@ repo = 'kana/vim-textobj-entire'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
 hook_add = '''
-omap ae <Plug>(textobj-entire-a)
-omap ie <Plug>(textobj-entire-i)
-xmap ae <Plug>(textobj-entire-a)
-xmap ie <Plug>(textobj-entire-i)
+onoremap ae <Plug>(textobj-entire-a)
+onoremap ie <Plug>(textobj-entire-i)
+xnoremap ae <Plug>(textobj-entire-a)
+xnoremap ie <Plug>(textobj-entire-i)
 '''
 
 [[plugins]]
@@ -107,10 +107,10 @@ repo = 'kana/vim-textobj-line'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
 hook_add = '''
-omap al <Plug>(textobj-line-a)
-omap il <Plug>(textobj-line-i)
-xmap al <Plug>(textobj-line-a)
-xmap il <Plug>(textobj-line-i)
+onoremap al <Plug>(textobj-line-a)
+onoremap il <Plug>(textobj-line-i)
+xnoremap al <Plug>(textobj-line-a)
+xnoremap il <Plug>(textobj-line-i)
 '''
 
 [[plugins]]
@@ -128,10 +128,10 @@ let g:textobj_functioncall_patterns = [{
       \ 'ket'    : ')',
       \ 'footer' : '',
       \ }]
-omap <silent> af <Plug>(textobj-functioncall-i)
-omap <silent> if <Plug>(textobj-functioncall-innerparen-i)
-xmap <silent> af <Plug>(textobj-functioncall-i)
-xmap <silent> if <Plug>(textobj-functioncall-innerparen-i)
+onoremap <silent> af <Plug>(textobj-functioncall-i)
+onoremap <silent> if <Plug>(textobj-functioncall-innerparen-i)
+xnoremap <silent> af <Plug>(textobj-functioncall-i)
+xnoremap <silent> if <Plug>(textobj-functioncall-innerparen-i)
 
 let g:textobj_functioncall_generics_patterns = [{
       \ 'header' : '\<\h\k*',
@@ -143,10 +143,10 @@ onoremap <silent> <Plug>(textobj-functioncall-generics-a) :<C-u>call textobj#fun
 onoremap <silent> <Plug>(textobj-functioncall-generics-i) :<C-u>call textobj#functioncall#ip('o', g:textobj_functioncall_generics_patterns)<CR>
 xnoremap <silent> <Plug>(textobj-functioncall-generics-a) :<C-u>call textobj#functioncall#i('x', g:textobj_functioncall_generics_patterns)<CR>
 xnoremap <silent> <Plug>(textobj-functioncall-generics-i) :<C-u>call textobj#functioncall#ip('x', g:textobj_functioncall_generics_patterns)<CR>
-omap <silent> ag <Plug>(textobj-functioncall-generics-a)
-omap <silent> ig <Plug>(textobj-functioncall-generics-i)
-xmap <silent> ag <Plug>(textobj-functioncall-generics-a)
-xmap <silent> ig <Plug>(textobj-functioncall-generics-i)
+onoremap <silent> ag <Plug>(textobj-functioncall-generics-a)
+onoremap <silent> ig <Plug>(textobj-functioncall-generics-i)
+xnoremap <silent> ag <Plug>(textobj-functioncall-generics-a)
+xnoremap <silent> ig <Plug>(textobj-functioncall-generics-i)
 '''
 
 [[plugins]]
@@ -154,8 +154,8 @@ repo = 'osyo-manga/vim-textobj-context'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
 hook_add = '''
-omap ix <Plug>(textobj-context-i)
-xmap ix <Plug>(textobj-context-i)
+onoremap ix <Plug>(textobj-context-i)
+xnoremap ix <Plug>(textobj-context-i)
 '''
 
 [[plugins]]
@@ -163,10 +163,10 @@ repo = 'rhysd/vim-textobj-anyblock'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
 hook_add = '''
-omap ab <Plug>(textobj-anyblock-a)
-omap ib <Plug>(textobj-anyblock-i)
-xmap ab <Plug>(textobj-anyblock-a)
-xmap ib <Plug>(textobj-anyblock-i)
+onoremap ab <Plug>(textobj-anyblock-a)
+onoremap ib <Plug>(textobj-anyblock-i)
+xnoremap ab <Plug>(textobj-anyblock-a)
+xnoremap ib <Plug>(textobj-anyblock-i)
 '''
 
 [[plugins]]
@@ -175,20 +175,20 @@ on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
 hook_add = '''
 let g:textobj_wiw_no_default_key_mappings = v:true
-omap au <Plug>(textobj-wiw-a)
-omap iu <Plug>(textobj-wiw-i)
-xmap au <Plug>(textobj-wiw-a)
-xmap iu <Plug>(textobj-wiw-i)
+onoremap au <Plug>(textobj-wiw-a)
+onoremap iu <Plug>(textobj-wiw-i)
+xnoremap au <Plug>(textobj-wiw-a)
+xnoremap iu <Plug>(textobj-wiw-i)
 '''
 
 [[plugins]]
 repo = 'terryma/vim-expand-region'
 on_map = { nx = '<Plug>' }
 hook_add = '''
-nmap + <Plug>(expand_region_expand)
-nmap - <Plug>(expand_region_shrink)
-xmap + <Plug>(expand_region_expand)
-xmap - <Plug>(expand_region_shrink)
+nnoremap + <Plug>(expand_region_expand)
+nnoremap - <Plug>(expand_region_shrink)
+xnoremap + <Plug>(expand_region_expand)
+xnoremap - <Plug>(expand_region_shrink)
 let g:expand_region_text_objects = {
       \ 'iu': 0,
       \ 'iw': 0,
@@ -206,8 +206,8 @@ on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
 hook_add = '''
 let g:textobj_between_no_default_key_mappings = v:true
-omap ao <Plug>(textobj-between-a)
-omap io <Plug>(textobj-between-i)
-xmap ao <Plug>(textobj-between-a)
-xmap io <Plug>(textobj-between-i)
+onoremap ao <Plug>(textobj-between-a)
+onoremap io <Plug>(textobj-between-i)
+xnoremap ao <Plug>(textobj-between-a)
+xnoremap io <Plug>(textobj-between-i)
 '''

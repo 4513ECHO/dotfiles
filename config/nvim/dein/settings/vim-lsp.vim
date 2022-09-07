@@ -56,18 +56,19 @@ function! s:on_lsp_buffer_enabled() abort
   setlocal tagfunc=lsp#tagfunc
   setlocal signcolumn=number
   if index(['vim', 'yaml', 'markdown', 'sh', 'json', 'toml'], &filetype) == -1
-    nmap <buffer> K <Plug>(lsp-hover)
+    nnoremap <buffer> K <Plug>(lsp-hover)
   endif
-  nmap <buffer> mK <Plug>(lsp-hover)
-  nmap <buffer> md <Plug>(lsp-document-diagnostics)
-  nmap <buffer> ma <Plug>(lsp-code-action)
-  nmap <buffer> mi  <plug>(lsp-implementation)
-  nmap <buffer> mr <Plug>(lsp-rename)
-  nmap <buffer> gd <Cmd>call <SID>jump_definition()<CR>
-  nmap <buffer> gq <Plug>(lsp-document-format)
-  xmap <buffer> gq <Plug>(lsp-document-range-format)
-  nmap <buffer> ]d <Plug>(lsp-next-diagnostic)
-  nmap <buffer> [d <Plug>(lsp-previous-diagnostic)
+  nnoremap <buffer> mK <Plug>(lsp-hover)
+  nnoremap <buffer> md <Plug>(lsp-document-diagnostics)
+  nnoremap <buffer> ma <Plug>(lsp-code-action)
+  nnoremap <buffer> mi <Plug>(lsp-implementation)
+  nnoremap <buffer> mr <Plug>(lsp-rename)
+  nnoremap <buffer> mf <Plug>(lsp-references)
+  nnoremap <buffer> gd <Cmd>call <SID>jump_definition()<CR>
+  nnoremap <buffer> gq <Plug>(lsp-document-format)
+  xnoremap <buffer> gq <Plug>(lsp-document-range-format)
+  nnoremap <buffer> ]d <Plug>(lsp-next-diagnostic)
+  nnoremap <buffer> [d <Plug>(lsp-previous-diagnostic)
 endfunction
 
 function! s:jump_definition() abort
