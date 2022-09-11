@@ -67,7 +67,7 @@ registry includes it.
 
 The configuration files are [here](./config/tmux).
 
-- Plugins managed by [tpm](https://github.com/tmux-plugins/tpm)
+- Quick copying with [tmux-thumbs](https://github.com/fcsonline/tmux-thumbs)
 
 ### vim / neovim
 
@@ -124,7 +124,7 @@ Other executable binaries or plugins will be installed automatically by
 - [git](https://git-scm.com)
 - [tmux](https://github.com/tmux/tmux)
 
-tmux must be `3.1c` or later. Latest version is recommended.
+tmux must be `3.2a` or later. Latest version is recommended.
 
 - [vim](https://github.com/vim/vim) / [neovim](https://github.com/neovim/neovim)
 

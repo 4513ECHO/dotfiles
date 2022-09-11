@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+index="$(tr -dc 0-9 < /dev/random | head -c 3 | sed 's/^0\+//')"
+index=$((${index:-0} % 26 + 1))
+printf '%s' "$(head -$index < "$XDG_CONFIG_HOME/tmux/flowers.txt" | tail -1)"

@@ -37,4 +37,3 @@ bind -T copy-mode-vi v send-keys -X begin-selection
 # aliases
 # from https://github.com/tmux/tmux/issues/3088
 # set -s command-alias[99] 'load-buffer=load-buffer -w'
-

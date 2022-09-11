@@ -1,5 +1,4 @@
 # vim:ft=tmux
-
 set -g default-shell "$SHELL"
 
 # color
@@ -22,8 +21,8 @@ set  -g  pane-base-index 1
 set  -g  focus-events on
 set  -g  status-keys emacs
 set  -sg set-clipboard on
+set  -g  mouse on
 
 # hooks
 # set-hook -g cilent-resized 'select-layout tiled'
 # set-hook -g pane-exited 'select-layout tiled'
-

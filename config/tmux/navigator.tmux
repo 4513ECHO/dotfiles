@@ -2,18 +2,18 @@
 
 # Smart pane switching with awareness of Vim splits.
 # See: https://github.com/christoomey/vim-tmux-navigator
-is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
+%hidden is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
     | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
 
 bind -n C-w switch-client -T navigator
 bind -T navigator C-w send-keys C-w
 
-bind -T navigator h if-shell "$is_vim" "send-keys C-w h" "select-pane -L"
-bind -T navigator j if-shell "$is_vim" "send-keys C-w j" "select-pane -D"
-bind -T navigator k if-shell "$is_vim" "send-keys C-w k" "select-pane -U"
-bind -T navigator l if-shell "$is_vim" "send-keys C-w l" "select-pane -R"
+bind -T navigator h if-shell "$is_vim" { send-keys C-w h } { select-pane -L }
+bind -T navigator j if-shell "$is_vim" { send-keys C-w j } { select-pane -D }
+bind -T navigator k if-shell "$is_vim" { send-keys C-w k } { select-pane -U }
+bind -T navigator l if-shell "$is_vim" { send-keys C-w l } { select-pane -R }
 
-# NOTE: echo {'!'..'}'}
+# NOTE: run `echo {'!'..'~'}` on shell
 bind -T navigator '!' send-keys C-w '!'
 bind -T navigator '"' send-keys C-w '"'
 bind -T navigator '#' send-keys C-w '#'
@@ -107,6 +107,7 @@ bind -T navigator z send-keys C-w z
 bind -T navigator '{' send-keys C-w '{'
 bind -T navigator '|' send-keys C-w '|'
 bind -T navigator '}' send-keys C-w '}'
+bind -T navigator '~' send-keys C-w '~'
 
 bind -T navigator C-a send-keys C-w C-a
 bind -T navigator C-b send-keys C-w C-b
