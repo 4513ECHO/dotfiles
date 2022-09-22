@@ -91,7 +91,7 @@ packages:
     version: master
   - name: nodejs/node@v18.9.0
     registry: local
-  - name: rust-lang/rust@1.63.0
+  - name: rust-lang/rust@1.64.0
     registry: local
   - name: thinca/ciw
     registry: local
