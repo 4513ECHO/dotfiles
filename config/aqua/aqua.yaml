@@ -75,7 +75,7 @@ packages:
   - name: skanehira/rtty@v0.3.0
   - name: sumneko/lua-language-server@3.5.6
   - name: tomnomnom/gron@v0.7.1
-  - name: TomWright/dasel@v1.27.0
+  - name: TomWright/dasel@v1.27.1
   - name: vishaltelangre/ff@v0.1.8
   - name: wtfutil/wtf@v0.41.0
   - name: x-motemen/ghq@v1.3.0
