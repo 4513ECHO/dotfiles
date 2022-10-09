@@ -77,7 +77,7 @@ packages:
   - name: tomnomnom/gron@v0.7.1
   - name: TomWright/dasel@v1.27.1
   - name: vishaltelangre/ff@v0.1.8
-  - name: wtfutil/wtf@v0.41.0
+  - name: wtfutil/wtf@v0.42.0
   - name: x-motemen/ghq@v1.3.0
   - name: XAMPPRocky/tokei@v12.1.2
   - name: ziglang/zig@0.9.1
