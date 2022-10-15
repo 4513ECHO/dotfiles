@@ -17,11 +17,11 @@ set  -g status-right \
     "#[dim]#(cut -d' ' -f1 /proc/loadavg) [%m/%d(%a) %H:%M:%S]#[default]"
 
 # window status
-setw -g window-status-format "#{window_index}: #{window_name}"
-setw -g window-status-current-format "#{window_index}: #{window_name}#[default]"
+setw -g window-status-format '#{window_index}: #{window_name}'
+setw -g window-status-current-format '#{window_index}: #{window_name}#[default]'
 setw -g window-status-current-style bright
 setw -g window-status-style dim
-setw -g window-status-separator "|"
+setw -g window-status-separator '|'
 
 # message
 set  -g message-style fg=colour235,bg=colour246
@@ -30,7 +30,7 @@ set  -g mode-style fg=colour235,bg=colour246
 
 # pane border
 set  -g pane-border-style fg=colour239
-set  -g pane-border-format " #{pane_index}: #{pane_title} (#{pane_tty}) "
+set  -g pane-border-format ' #{pane_index}: #{pane_title} (#{pane_tty}) '
 set  -g pane-border-status top
 set  -g pane-active-border-style fg=colour246
 
@@ -38,3 +38,7 @@ set  -g pane-active-border-style fg=colour246
 set  -g display-panes-active-colour colour246
 set  -g display-panes-colour colour239
 setw -g clock-mode-colour colour246
+
+# search
+setw -g copy-mode-match-style bg=colour235,fg=colour239,bold
+setw -g copy-mode-current-match-style bg=colour246,fg=colour239,bold
