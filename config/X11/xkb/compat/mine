@@ -1,0 +1,8 @@
+default xkb_compatibility "mine" {
+  // Sticky keys
+  interpret Shift_L+Any   { action = LatchMods(modifiers = modMapMods); };
+  interpret Control_L+Any { action = LatchMods(modifiers = modMapMods); };
+  interpret Alt_L+Any     { action = LatchMods(modifiers = modMapMods); };
+  interpret Super_L+Any   { action = LatchMods(modifiers = modMapMods); };
+};
+// vim:ft=xkb

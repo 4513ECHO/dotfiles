@@ -1,0 +1,10 @@
+default partial modifier_keys
+xkb_symbols "mine" {
+    // Swap CapsLock and Control
+    replace key <CAPS> { [ Control_L, Control_L ] };
+    replace key <LCTL> { [ Caps_Lock ] };
+
+    // Adjust underscore
+    key <AB11> { [ underscore, underscore ] };
+};
+// vim:ft=xkb

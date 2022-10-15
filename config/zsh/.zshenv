@@ -1,15 +1,16 @@
 # zmodload zsh/zprof && zprof
-
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_RUNTIME_DIR="/run/user/$UID"
 
+## zsh ##
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export HISTFILE="$XDG_DATA_HOME/zsh/history"
 export HISTSIZE=10000
 export SAVEHIST=10000
+export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 ## docker ##
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
@@ -48,7 +49,7 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export NPM_DATA_DIR="$XDG_DATA_HOME/npm"
 
 ## less ##
-export LESS='--hilite-search --ignore-case --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --window=4 --tabs=4'
+export LESS='--hilite-search --ignore-case --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --window=4 --tabs=4 --mouse'
 export LESSCHARSET='UTF-8'
 export LESS_TERMCAP_mb=$'\e[1;38;5;139m' # Begins blinking
 export LESS_TERMCAP_md=$'\e[1;38;5;110m' # Begins bold
@@ -75,14 +76,15 @@ fpath=(
 )
 fpath=(${(R)fpath%/})
 
-export EDITOR='nvim'
+if command -v nvim > /dev/null; then
+  export EDITOR="${EDITOR:-nvim}"
+else
+  export EDITOR="${EDITOR:-vim}"
+fi
 export PAGER='less'
-export BROWSER='w3m'
-# export MANPAGER='vim -M +MANPAGER -'
+export BROWSER="${BROWSER:-w3m}"
 export MANPAGER='less +Gg'
 
 export LANG='ja_JP.UTF-8'
 export LC_TIME='en_US.UTF-8'
 export TZ='Asia/Tokyo'
-
-export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'

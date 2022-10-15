@@ -57,6 +57,9 @@ fi
 
 if type zprof > /dev/null; then
   zprof | less
+elif [[ "$TERM" = 'linux' ]]; then
+  echo -n 'You are using virtual console directly. Start X server? [y/N] '
+  read -q && xinit
 elif [[ $SHLVL -eq 1 ]] && [[ -z "$MINIMUM_DOTFILES" ]] && [[ -z "$LOADED_ZSHRC" ]]; then
   widget::tmux::session
 fi
