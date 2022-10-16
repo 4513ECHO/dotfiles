@@ -45,18 +45,11 @@ function! user#ddc#cmdline_post() abort
 endfunction
 
 function! user#ddc#skkeleton_pre() abort
-  let b:skkeleton_enabled = v:true
   let b:_ddc_skkeleton_prev_buffer_config = ddc#custom#get_buffer()
-  call ddc#custom#patch_buffer({
-       \ 'sources': ['skkeleton'],
-       \ 'completionMenu': 'native',
-       \ })
+  call ddc#custom#patch_buffer({'sources': ['skkeleton']})
 endfunction
 
 function! user#ddc#skkeleton_post() abort
-  if exists('b:skkeleton_enabled')
-    unlet b:skkeleton_enabled
-  endif
   if exists('b:_ddc_skkeleton_prev_buffer_config')
     call ddc#custom#set_buffer(b:_ddc_skkeleton_prev_buffer_config)
     unlet b:_ddc_skkeleton_prev_buffer_config

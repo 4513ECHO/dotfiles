@@ -36,7 +36,8 @@ let s:sourceOptions.skkeleton = {
       \ 'matchers': ['skkeleton'],
       \ 'sorters': [],
       \ 'converters': [],
-      \ 'minAutoCompleteLength': 2,
+      \ 'minAutoCompleteLength': 1,
+      \ 'isVolatile': v:true,
       \ }
 let s:sourceOptions.necovim = {
       \ 'mark': '[vim]',

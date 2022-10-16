@@ -1,7 +1,9 @@
 let s:skk_dir = expand('~/.local/share/skk')
 let s:globalJisyo = s:skk_dir .. '/SKK-JISYO.L'
 
-if !filereadable(s:globalJisyo)
+if filereadable('/usr/share/skk/SKK-JISYO.L')
+  let s:globalJisyo = '/usr/share/skk/SKK-JISYO.L'
+elseif !filereadable(s:globalJisyo)
   echomsg 'Installing skk global jisyo ...'
   let s:gzipfile = s:globalJisyo .. '.gz'
   call system('curl -fLo ' .. s:gzipfile .. ' --create-dirs '
