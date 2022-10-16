@@ -7,6 +7,14 @@ packages:
   # init: c
 
   # init: d
+  - type: github_content
+    repo_owner: dylanaraps
+    repo_name: neofetch
+    path: neofetch
+    description: A command-line system information tool written in bash 3.2+
+    supported_envs:
+      - darwin
+      - linux
 
   # init: e
 
@@ -40,6 +48,21 @@ packages:
         src: maze_{{.Version}}_{{.OS}}_{{.Arch}}/maze
 
   # init: j
+  - type: github_release
+    repo_owner: JohnnyMorganz
+    repo_name: StyLua
+    asset: stylua-{{.OS}}-{{.Arch}}.zip
+    description: An opinionated Lua code formatter
+    replacements:
+      amd64: x86_64
+      arm64: aarch64
+      darwin: macos
+    supported_envs:
+      - darwin
+      - linux
+      - amd64
+    files:
+      - name: stylua
   - type: github_content
     repo_owner: JosefZIla
     repo_name: bash2048
@@ -48,6 +71,9 @@ packages:
     format: raw
     files:
       - name: bash2048.sh
+    supported_envs:
+      - darwin
+      - linux
 
   # init: k
 
@@ -89,6 +115,15 @@ packages:
   # init: o
 
   # init: p
+  - type: github_content
+    repo_owner: pipeseroni
+    repo_name: pipes.sh
+    path: pipes.sh
+    description: Animated pipes terminal screensaver
+    format: raw
+    supported_envs:
+      - darwin
+      - linux
 
   # init: q
 
