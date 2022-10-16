@@ -13,5 +13,14 @@ config/gh/hosts.yml
 # btop
 config/btop/btop.log
 
+# fcitx
+config/fcitx/*
+!config/fcitx/config
+!config/fcitx/skk/
+!config/fcitx/conf/
+config/fcitx/conf/*
+!config/fcitx/conf/fcitx-skk.config
+!config/fcitx/conf/fcitx-xkb.config
+
 !**/.gitkeep
 # vim:ft=gitignore
