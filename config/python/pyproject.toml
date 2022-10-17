@@ -10,7 +10,7 @@ python = "^3.10"
 [tool.poetry.group.tool.dependencies]
 black = "^22.10.0"
 isort = "^5.10.1"
-mypy = "^0.971"
+mypy = "^0.982"
 
 [tool.poetry.group.util.dependencies]
 ddgr = "^2.0"
