@@ -6,27 +6,16 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-# font pango:monospace 8
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
-
-# Start XDG autostart .desktop files using dex. See also
-# https://wiki.archlinux.org/index.php/XDG_Autostart
-exec --no-startup-id dex --autostart --environment i3
-
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-
-# Start IME
-exec --no-startup-id fcitx
+font pango:monospace 8
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+
+# title on bar
+title_align center
+
+# diable focus when hovering mouse
+focus_follows_mouse no
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
@@ -40,9 +29,6 @@ bindsym $mod+F4 kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
-# diable focus when hovering mouse
-focus_follows_mouse no
 
 # change focus
 bindsym $mod+h focus left
@@ -72,14 +58,13 @@ bindsym $mod+s split vertical
 bindsym $mod+f fullscreen toggle
 
 # change container layout
-set $layout "layout [(h)splitv/(v)splith/(e)toggle split/(s)stacking/(t)tabbed]"
+set $layout "layout [(h)splitv/(v)splith/t(o)ggle split/(s)tacking/(t)abbed/(f)loating]"
 mode $layout {
         bindsym h layout splitv; mode "default"
         bindsym v layout splith; mode "default"
-        bindsym e layout toggle split; mode "default"
+        bindsym o layout toggle split; mode "default"
         bindsym s layout stacking; mode "default"
         bindsym t layout tabbed; mode "default"
-        # toggle tiling / floating
         bindsym f floating toggle; mode "default"
         # back to normal: Enter or Escape or $mod+w
         bindsym Return mode "default"
@@ -138,6 +123,11 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
+# Take screenshot
+bindsym Print       exec maim --format=png ~/Pictures/screenshot-$(date +%F_%H%M%S)-all.png
+bindsym $mod+Print  exec maim --format=png --window $(xdotool getactivewindow) ~/Pictures/screenshot-$(date +%F_%H%M%S)-current.png
+bindsym Shift+Print exec maim --format=png --select ~/Pictures/screenshot-$(date +%F_%H%M%S)-selected.png
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # Pressing left will shrink the window’s width.
@@ -163,4 +153,5 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+        position top
 }
