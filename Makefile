@@ -51,11 +51,12 @@ clean: ## Remove symlinks from actual directories
 	@$(foreach val, $(BINFILE), test -f $(HOME)/.local/bin/$(notdir $(val)) && $(RM) $(HOME)/.local/bin/$(notdir $(val)) ||:;)
 	@$(RM) $(HOME)/.zshenv
 
-.PHONY: pipx
-pipx: ## Install and initialize pipx enviroments
-	python3 -m venv $(XDG_DATA_HOME)/pipx
-	$(XDG_DATA_HOME)/pipx/bin/python -m pip install pipx
-	@$(LN) $(XDG_DATA_HOME)/pipx/bin/pipx $(HOME)/.local/bin
+.PHONY: python
+python: ## Install and initialize python enviroments
+	python3 -m venv $(XDG_DATA_HOME)/poetry
+	$(XDG_DATA_HOME)/poetry/bin/python -m pip install poetry
+	cd $(XDG_CONFIG_HOME)/python; \
+	$(XDG_DATA_HOME)/poetry/bin/poetry install
 
 .PHONY: aqua
 aqua: ## Install and initialize aqua enviroments

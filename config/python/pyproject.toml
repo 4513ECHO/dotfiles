@@ -1,0 +1,50 @@
+[tool.poetry]
+name = "dotfiles"
+version = "0.0.0"
+description = ""
+authors = ["4513ECHO <4513echo@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.group.tool.dependencies]
+black = "^22.10.0"
+isort = "^5.10.1"
+mypy = "^0.971"
+
+[tool.poetry.group.util.dependencies]
+ddgr = "^2.0"
+httpie = "^3.2.1"
+jc = "^1.22.0"
+# NOTE: pepdocs uses too old version of click
+# pepdocs = "^0.3.0"
+pip-chill = "^1.0.1"
+toml-sort = "^0.20.1"
+vim-vint = "^0.3.21"
+yamllint = "^1.28.0"
+
+[tool.poetry.group.flake8.dependencies]
+flake8 = "^5.0.4"
+flake8-pyproject = "^1.1.0.post0"
+flake8-isort = "^4.2.0"
+pep8-naming = "^0.13.2"
+
+[tool.poetry.group.lsp.dependencies]
+# NOTE: Current release on PyPI cannnot use with flake8 >=5
+python-lsp-server = { git = "https://github.com/python-lsp/python-lsp-server.git", rev = "ff41880", extras = ["all"] }
+python-lsp-black = "^1.2.1"
+pyls-isort = "^0.2.2"
+pylsp-mypy = "^0.6.3"
+
+[tool.poetry.group.poetry.dependencies]
+poetry = "^1.2.2"
+poetry-plugin-export = "^1.1.2"
+poetry-dynamic-versioning-plugin = "^0.4.0"
+
+[tool.poetry.group.game.dependencies]
+pycowsay = "^0.0.0.1"
+term2048 = "^0.2.7"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
