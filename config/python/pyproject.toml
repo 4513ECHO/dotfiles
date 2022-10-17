@@ -26,7 +26,7 @@ yamllint = "^1.28.0"
 [tool.poetry.group.flake8.dependencies]
 flake8 = "^5.0.4"
 flake8-pyproject = "^1.1.0.post0"
-flake8-isort = "^4.2.0"
+flake8-isort = "^5.0.0"
 pep8-naming = "^0.13.2"
 
 [tool.poetry.group.lsp.dependencies]
