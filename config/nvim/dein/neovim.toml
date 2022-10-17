@@ -25,20 +25,51 @@ repo = 'nvim-lua/plenary.nvim'
 [[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
 lazy = true
-depends = ['playground']
 on_event = ['BufRead']
 hook_post_update = 'TSUpdate'
-hook_source = '''
-lua require('vimrc.plugin.treesitter')
-'''
-[plugins.ftplugin]
-tsplayground = '''
-nnoremap <buffer> q <C-w>q
+lua_source = '''
+require("nvim-treesitter.configs").setup {
+  ensure_installed = {
+    "bash",
+    "go",
+    "html",
+    "jsdoc",
+    "lua",
+    "markdown",
+    "markdown_inline",
+    "python",
+    "query",
+    "rust",
+    "toml",
+    "typescript",
+    "vim",
+    "yaml",
+  },
+  additionnal_vim_regex_highlighting = false,
+  highlight = {
+    enable = true,
+    disable = { "bash", "yaml", "help" },
+  },
+  playground = {
+    enable = true,
+    keybindings = {
+      update = "<C-r>",
+    },
+  },
+  query_linter = {
+    enable = true,
+  },
+}
 '''
 
 [[plugins]]
 repo = 'nvim-treesitter/playground'
 lazy = true
+on_source = ['nvim-treesitter']
+[plugins.ftplugin]
+tsplayground = '''
+nnoremap <buffer> q <C-w>q
+'''
 
 [[plugins]]
 repo = 'petertriho/nvim-scrollbar'
