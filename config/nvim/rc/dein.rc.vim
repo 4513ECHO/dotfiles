@@ -3,10 +3,9 @@ let s:dein_repo_dir = s:dein_dir .. '/repos/github.com/Shougo/dein.vim'
 
 if &runtimepath !~# s:dein_repo_dir
   if !isdirectory(s:dein_repo_dir)
-    call system(printf('git clone --depth 1 '
-          \ .. 'https://github.com/Shougo/dein.vim %s',
-          \ s:dein_repo_dir))
-    if v:shell_error != 0
+    execute '!git clone --depth 1 https://github.com/Shoguo/dein.vim '
+          \ .. s:dein_repo_dir
+    if v:shell_error
       echohl ErrorMsg
       echomsg 'Could not install dein.vim to' s:dein_repo_dir
       echohl NONE
@@ -25,29 +24,20 @@ let g:dein#auto_remote_plugins = v:false
 let g:dein#enable_notification = v:true
 let g:denops#disabled = !executable('deno')
 
-function! s:load_toml(filename, lazy) abort
-  call dein#load_toml(fnamemodify(
-        \ g:config_home .. '/dein/' .. a:filename, ':p'),
-        \ a:lazy ? {'lazy': v:true} : {})
-endfunction
-
 if dein#min#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  call s:load_toml('init.toml', v:false)
-  call s:load_toml('colorscheme.toml', v:false)
-  call s:load_toml('textobj.toml', v:true)
-  call s:load_toml('ftplugin.toml', v:true)
-  call s:load_toml('plugin.toml', v:true)
+  call dein#load_toml(g:config_home .. '/dein/init.toml',        {'lazy': v:false})
+  call dein#load_toml(g:config_home .. '/dein/colorscheme.toml', {'lazy': v:false})
+  call dein#load_toml(g:config_home .. '/dein/textobj.toml',     {'lazy': v:true})
+  call dein#load_toml(g:config_home .. '/dein/ftplugin.toml',    {'lazy': v:true})
+  call dein#load_toml(g:config_home .. '/dein/plugin.toml',      {'lazy': v:true})
   if !g:denops#disabled
-    call s:load_toml('ddc.toml', v:true)
-    call s:load_toml('ddu.toml', v:true)
+    call dein#load_toml(g:config_home .. '/dein/ddc.toml',       {'lazy': v:true})
+    call dein#load_toml(g:config_home .. '/dein/ddu.toml',       {'lazy': v:true})
   endif
-  if has('nvim')
-    call s:load_toml('neovim.toml', v:false)
-  else
-    call s:load_toml('vim.toml', v:false)
-  endif
+  call dein#load_toml(g:config_home .. '/dein/' ..
+        \ (has('nvim') ? 'neovim.toml' : 'vim.toml'),            {'lazy': v:false})
 
   call dein#end()
   call dein#save_state()
@@ -55,13 +45,12 @@ endif
 
 if has('vim_starting') && dein#check_install()
   call dein#install()
-  if exists('g:dein#install_github_api_token')
-        \ && !empty(g:dein#install_github_api_token)
-    call dein#check_update(v:true)
+  if !empty(get(g:, 'dein#install_github_api_token', ''))
+    call timer_start(0, { -> dein#check_update(v:true) })
   endif
 endif
 
-if getcwd() =~# expand('~/Develops/github.com/4513echo/')
+if getcwd() =~? expand('~/Develops/github.com/4513ECHO/')
   let s:git_root = system('git rev-parse --show-toplevel')
   execute 'set runtimepath^=' .. s:git_root
   if isdirectory(s:git_root .. '/after')
@@ -71,4 +60,3 @@ endif
 
 syntax enable
 filetype indent plugin on
-

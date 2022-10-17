@@ -486,6 +486,12 @@
             }
           }
         },
+        "lua_add": {
+          "type": "string"
+        },
+        "lua_source": {
+          "type": "string"
+        },
         "colorschemes": {
           "type": "array",
           "additionalItems": false,

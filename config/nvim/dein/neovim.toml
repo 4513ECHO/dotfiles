@@ -1,11 +1,16 @@
 [[plugins]]
 repo = 'hrsh7th/nvim-pasta'
-on_lua = ['pasta.mappings', 'pasta']
-hook_add = '''
-lua require('vimrc.plugin.pasta').hook_add()
-'''
-hook_source = '''
-lua require('vimrc.plugin.pasta').hook_source()
+lua_add = '''
+vim.keymap.set({ "n", "x" }, "p", require("pasta.mappings").p)
+vim.keymap.set({ "n", "x" }, "P", require("pasta.mappings").P)
+require("pasta").setup {
+  converters = {
+    require("pasta.converters").indentation,
+  },
+  paste_mode = true,
+  next_key = vim.api.nvim_replace_termcodes("<C-p>", true, true, true),
+  prev_key = vim.api.nvim_replace_termcodes("<C-n>", true, true, true),
+}
 '''
 
 [[plugins]]
@@ -15,8 +20,8 @@ repo = 'ii14/emmylua-nvim'
 repo = 'kevinhwang91/nvim-hlslens'
 lazy = true
 on_lua = ['hlslens']
-hook_add = '''
-lua require('vimrc.plugin.hlslens').hook_add()
+lua_add = '''
+require('vimrc.plugin.hlslens').hook_add()
 '''
 
 [[plugins]]
@@ -75,18 +80,18 @@ nnoremap <buffer> q <C-w>q
 repo = 'petertriho/nvim-scrollbar'
 lazy = true
 on_lua = ['scrollbar', 'scrollbar.utils', 'scrollbar.handlers']
-hook_add = '''
-lua require('vimrc.plugin.scrollbar').hook_add()
+lua_add = '''
+require('vimrc.plugin.scrollbar').hook_add()
 '''
-hook_source = '''
-lua require('vimrc.plugin.scrollbar').hook_source()
+lua_source = '''
+require('vimrc.plugin.scrollbar').hook_source()
 '''
 
 [[plugins]]
 repo = 'rcarriga/nvim-notify'
 lazy = true
 on_lua = ['notify']
-hook_source = '''
-lua require('vimrc.plugin.notify')
+lua_source = '''
+require('vimrc.plugin.notify')
 '''
 
