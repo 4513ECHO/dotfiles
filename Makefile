@@ -68,32 +68,3 @@ rust: ## Install and initialize rust enviroments
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
 	rustup update nightly
 	rustup default nightly
-
-.PHONY: go
-go: ## Install and initialize golang enviroments
-	case "$(shell uname -m)" in \
-	  i386) GOARCH="386" ;; \
-	  i686|x86_64) GOARCH="amd64" ;; \
-	  arm|armv7l|armv6l) GOARCH="arm" ;; \
-	  aarch64|armv8b|armv8l) GOARCH="arm64" ;; \
-	  mips) GOARCH="mips" ;; \
-	  mips64) GOARCH="mips64" ;; \
-	  ppc|ppc64) GOARCH="ppc64" ;; \
-	  ppc64le|ppcle) GOARCH="ppc64le" ;; \
-	  s390|s390x) GOARCH="s390x" ;; \
-	esac; \
-	case "$(shell uname -s)" in \
-	  AIX) GOOS="aix" ;; \
-	  Darwin) GOOS="darwin" ;; \
-	  DragonFly) GOOS="dragonfly" ;; \
-	  FreeBSD) GOOS="freebsd" ;; \
-	  Linux) GOOS="linux" ;; \
-	  OpenBSD) GOOS="openbsd" ;; \
-	  NetBSD) GOOS="netbsd" ;; \
-	  SunOS) GOOS="solaris" ;; \
-	  CYGWIN|*[Ww]indows*) GOOS="windows" ;; \
-	esac; \
-	GOVERSION="$(shell curl -qfsSL https://go.dev/VERSION?m=text)"; \
-	curl -fsSLO https://golang.org/dl/$${GOVERSION}.$${GOOS}-$${GOARCH}.tar.gz
-	tar -C $(XDG_DATA_HOME) -xzf go*.tar.gz
-	@$(RM) go*.tar.gz
