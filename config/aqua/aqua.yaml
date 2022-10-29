@@ -55,7 +55,7 @@ packages:
   - name: mattn/efm-langserver@v0.0.44
   - name: mattn/gof@v0.0.12
   - name: microsoft/ripgrep-prebuilt@v13.0.0-4
-  - name: mikefarah/yq@v4.28.2
+  - name: mikefarah/yq@v4.29.1
   - name: mvdan/sh@v3.5.1
   - name: nametake/golangci-lint-langserver@v0.0.7
   - name: nektos/act@v0.2.32
