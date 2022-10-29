@@ -4,8 +4,9 @@ function! user#ddc#cmdline_pre(mode) abort
   endif
   " NOTE: I have to define map each time because I sometimes use default
   " cmdline completion with `g:`
-  call user#ddc#define_map('c', '<Tab>', 'pum#map#select_relative(+1)',
-       \ 'ddc#map#manual_complete()', v:true)
+  cnoremap <expr> <Tab> pum#visible()
+        \ ? '<Cmd>call pum#map#longest_relative(+1)<CR>'
+        \ : ddc#map#manual_complete()
   set wildcharm=<C-l>
 
   let b:_ddc_cmdline_prev_buffer_config = ddc#custom#get_buffer()
@@ -28,13 +29,6 @@ let s:patch_buffer['/'].sourceOptions = {
       \   'minAutoCompleteLength': 1,
       \ }}
 
-function! user#ddc#define_map(mode, lhs, func, rhs, ...) abort
-  let rhs = get(a:000, 0, v:false) ? a:rhs : "'" .. a:rhs .. "'"
-  let cmd = '%snoremap <expr> %s ' ..
-        \ 'pum#visible() ? ''<Cmd>call %s<CR>'' : %s'
-  execute printf(cmd, a:mode, a:lhs, a:func, rhs)
-endfunction
-
 function! user#ddc#cmdline_post() abort
   if exists('b:_ddc_cmdline_prev_buffer_config')
     call ddc#custom#set_buffer(b:_ddc_cmdline_prev_buffer_config)
@@ -55,20 +49,3 @@ function! user#ddc#skkeleton_post() abort
     unlet b:_ddc_skkeleton_prev_buffer_config
   endif
 endfunction
-
-function! user#ddc#imap_cr() abort
-  if pum#visible()
-    return "\<Cmd>call pum#map#confirm()\<CR>"
-  else
-    return lexima#expand('<CR>', 'i')
-  endif
-endfunction
-
-function! user#ddc#imap_bs() abort
-  if pum#visible()
-    return "\<Cmd>call pum#map#cancel()\<CR>"
-  else
-    return lexima#expand('<BS>', 'i')
-  endif
-endfunction
-

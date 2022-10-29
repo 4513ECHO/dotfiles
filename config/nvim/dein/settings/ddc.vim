@@ -44,16 +44,6 @@ let s:sourceOptions.necovim = {
       \ 'isVolatile': v:true,
       \ 'maxItems': 8,
       \ }
-let s:sourceOptions.emoji = {
-      \ 'mark': '[emoji]',
-      \ 'matchers': ['emoji'],
-      \ 'sorters': [],
-      \ }
-let s:sourceOptions['cmdline-history'] = {
-      \ 'mark': '[hist]',
-      \ 'maxItems': 5,
-      \ 'sorters': [],
-      \ }
 let s:sourceOptions.vsnip = {
       \ 'mark': '[snip]',
       \ 'dup': v:true,
@@ -96,7 +86,6 @@ let s:sourceParams.file = {
       \ 'trailingSlash': v:true,
       \ 'followSymlinks': v:true,
       \ }
-let s:sourceParams['cmdline-history'] = {'maxSize': 100}
 let s:sourceParams.tmux = {
       \ 'currentWinOnly': v:true,
       \ 'excludeCurrentPane': v:true,
@@ -128,7 +117,7 @@ call ddc#custom#patch_filetype(
       \ 'sources': extend(['vim-lsp'], s:sources),
       \ })
 call ddc#custom#patch_filetype(
-      \ ['markdown', 'gitcommit'], {
+      \ ['markdown', 'gitcommit', 'help'], {
       \ 'sources': extend([
       \   'nextword',
       \   'github_issue', 'github_pull_request',
@@ -158,41 +147,26 @@ let s:patch_global.sourceParams = s:sourceParams
 let s:patch_global.filterParams = s:filterParams
 let s:patch_global.backspaceCompletion = v:true
 let s:patch_global.specialBufferCompletion = v:true
-let s:patch_global.overwriteCompleteopt = v:false
 
 " Use pum.vim
 let s:patch_global.autoCompleteEvents = [
       \ 'InsertEnter', 'TextChangedI', 'TextChangedP',
       \ 'CmdlineEnter', 'CmdlineChanged',
       \ ]
-let s:patch_global.completionMenu = 'pum.vim'
+let s:patch_global.ui = 'pum'
 
 call ddc#custom#patch_global(s:patch_global)
 
-" keymappings
-
-" insert mode
-call user#ddc#define_map('i', '<C-n>', 'pum#map#select_relative(+1)', '<Down>')
-call user#ddc#define_map('i', '<C-p>', 'pum#map#select_relative(-1)', '<Up>')
-inoremap <silent><expr> <BS> user#ddc#imap_bs()
-inoremap <silent><expr> <CR> user#ddc#imap_cr()
-
-" cmdline mode
-call user#ddc#define_map('c', '<C-n>', 'pum#map#select_relative(+1)', '<Down>')
-call user#ddc#define_map('c', '<C-p>', 'pum#map#select_relative(-1)', '<Up>')
-call user#ddc#define_map('c', '<BS>',  'pum#map#cancel()',  '<BS>')
-call user#ddc#define_map('c', '<CR>', 'pum#map#confirm()',
-      \ 'lexima#expand(''<lt>CR>'', '':'')', v:true)
+" key mappings
+" NOTE: define these in hook_source to ensure it is loaded after lexima.vim is sourced
+inoremap <silent><expr> <BS> pum#visible()
+      \ ? '<Cmd>call pum#map#cancel()<CR>'
+      \ : lexima#expand('<lt>BS>', 'i')
+inoremap <silent><expr> <CR> pum#visible()
+      \ ? '<Cmd>call pum#map#confirm()<CR>'
+      \ : lexima#expand('<lt>CR>', 'i')
+cnoremap <expr> <CR> pum#visible()
+      \ ? '<Cmd>call pum#map#confirm()<CR>'
+      \ : lexima#expand('<lt>CR>', ':')
 
 call ddc#enable()
-
-function! s:on_gh() abort
-  if fnamemodify(bufname(), ':h') != '/tmp' || getcwd() == '/tmp'
-    return
-  endif
-  inoremap <silent><expr><buffer> <C-x><C-g>
-        \ ddc#map#manual_complete('github_issue', 'github_pull_request')
-endfunction
-autocmd vimrc FileType markdown call <SID>on_gh()
-call s:on_gh()
-

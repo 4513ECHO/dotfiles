@@ -1,10 +1,18 @@
 [[plugins]]
 repo = 'Shougo/ddc.vim'
-depends = ['context_filetype.vim', 'denops.vim', 'pum.vim', 'lexima.vim']
+depends = ['context_filetype.vim', 'denops.vim', 'lexima.vim']
 on_event = ['InsertEnter']
 hook_add = '''
+inoremap <silent><expr> <C-n> pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>' : '<Down>'
+inoremap <silent><expr> <C-p> pum#visible() ? '<Cmd>call pum#map#select_relative(-1)<CR>' : '<Up>'
+
+" cmdline mode
 nnoremap : <Cmd>call timer_start(10, { -> user#ddc#cmdline_pre(':') })<CR>:
 xnoremap : <Cmd>call timer_start(10, { -> user#ddc#cmdline_pre(':') })<CR>:
+cnoremap <expr> <C-n> pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>' : '<Down>'
+cnoremap <expr> <C-p> pum#visible() ? '<Cmd>call pum#map#select_relative(-1)<CR>' : '<Up>'
+cnoremap <expr> <BS> pum#visible() ? '<Cmd>call pum#map#cancel()<CR>' : '<BS>'
+
 " emulate default mappings (see `:help ins-completion`)
 inoremap <silent><expr> <C-x><C-l> ddc#map#manual_complete('line')
 inoremap <silent><expr> <C-x><C-n> ddc#map#manual_complete('around')
@@ -14,10 +22,26 @@ inoremap <silent><expr> <C-x><C-v> ddc#map#manual_complete('cmdline')
 inoremap <silent><expr> <C-x><C-u> ddc#map#manual_complete()
 inoremap <silent><expr> <C-x><C-o> ddc#map#manual_complete('omni')
 inoremap <silent><expr> <C-x><C-s> ddc#map#manual_complete('nextword')
+
+function! s:on_gh() abort
+  if fnamemodify(bufname(), ':h') != '/tmp' || getcwd() == '/tmp'
+    return
+  endif
+  inoremap <silent><expr><buffer> <C-x><C-g>
+        \ ddc#map#manual_complete(['github_issue', 'github_pull_request'])
+endfunction
+autocmd vimrc FileType markdown call <SID>on_gh()
 '''
 hook_source = '''
 Runtime dein/settings/ddc.vim
 '''
+
+# UI
+
+[[plugins]]
+repo = 'Shougo/ddc-ui-pum'
+depends = 'pum.vim'
+on_source = 'ddc.vim'
 
 # sources
 
@@ -30,31 +54,27 @@ repo = 'LumaKernel/ddc-file'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'Shougo/ddc-around'
+repo = 'Shougo/ddc-source-around'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'Shougo/ddc-cmdline'
+repo = 'Shougo/ddc-source-cmdline'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'Shougo/ddc-cmdline-history'
+repo = 'Shougo/ddc-source-line'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'Shougo/ddc-line'
+repo = 'Shougo/ddc-source-nextword'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'Shougo/ddc-nextword'
+repo = 'Shougo/ddc-source-omni'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'Shougo/ddc-omni'
-on_source = 'ddc.vim'
-
-[[plugins]]
-repo = 'Shougo/ddc-zsh'
+repo = 'Shougo/ddc-source-zsh'
 on_source = 'ddc.vim'
 
 [[plugins]]
@@ -107,10 +127,11 @@ on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/pum.vim'
-on_source = 'ddc.vim'
 hook_source = '''
 call pum#set_option({
-      \ 'highlight_kind': 'Type',
+      \ 'highlight_columns': {
+      \   'kind': 'Type',
+      \ },
       \ 'max_width': 60,
       \ 'use_complete': v:true,
       \ })
@@ -134,4 +155,3 @@ let g:lsp_signature_help_enabled = v:false
 hook_source = '''
 call signature_help#enable()
 '''
-
