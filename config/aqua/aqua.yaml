@@ -108,7 +108,7 @@ packages:
     version: master
   - name: itchyny/maze@v0.0.8
     registry: local
-  - name: JohnnyMorganz/StyLua@v0.15.1
+  - name: JohnnyMorganz/StyLua@v0.15.2
     registry: local
   - name: dylanaraps/neofetch@7.1.0
     registry: local
