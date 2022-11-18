@@ -75,7 +75,7 @@ packages:
   - name: sheepla/srss@v0.1.0
   - name: simeji/jid@v0.7.6
   - name: skanehira/rtty@v0.3.0
-  - name: stateful/runme@v0.2.4
+  - name: stateful/runme@v0.3.0
   - name: sumneko/lua-language-server@3.6.3
   - name: tomnomnom/gron@v0.7.1
   - name: TomWright/dasel@v1.27.3
