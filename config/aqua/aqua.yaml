@@ -48,7 +48,7 @@ packages:
   - name: ko1nksm/shdotenv@v0.13.0
   - name: koalaman/shellcheck@v0.8.0
   - name: ktock/buildg@v0.4.1
-  - name: kurehajime/dajarep@v1.9.8
+  - name: kurehajime/dajarep@v1.10.0
   - name: kurehajime/pong-command@v2.0.8
   - name: LukeChannings/deno-arm64@v1.28.1
   - name: maaslalani/slides@v0.9.0
