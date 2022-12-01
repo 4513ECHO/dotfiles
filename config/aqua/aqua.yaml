@@ -101,7 +101,7 @@ packages:
     version: master
   - name: greymd/ojichat@v0.2.2
     registry: local
-  - name: machikado-network/sakura@v0.3.5
+  - name: machikado-network/sakura@v0.4.2
     registry: local
   - name: rrethy/hexokinase
     registry: local
