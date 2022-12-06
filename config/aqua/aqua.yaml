@@ -61,7 +61,7 @@ packages:
   - name: nektos/act@v0.2.34
   - name: rhysd/actionlint@v1.6.22
   - name: rhysd/hgrep@v0.2.6
-  - name: rhysd/vim-startuptime@v1.3.0
+  - name: rhysd/vim-startuptime@v1.3.1
   - name: rust-lang/rust-analyzer@2022-10-10
   - name: sharkdp/bat@v0.22.1
   - name: sharkdp/fd@v8.5.3
