@@ -30,7 +30,7 @@ packages:
   - name: docker/compose@v2.14.0
   - name: ekalinin/github-markdown-toc@0.8.0
   - name: ericchiang/pup@v0.4.0
-  - name: golang/go@go1.19.3
+  - name: golang/go@go1.19.4
   - name: golang/tools/gopls@v0.8.4
   - name: golangci/golangci-lint@v1.50.1
   - name: google/yamlfmt@v0.6.0
