@@ -78,7 +78,7 @@ packages:
   - name: stateful/runme@v0.3.0
   - name: sumneko/lua-language-server@3.6.4
   - name: tomnomnom/gron@v0.7.1
-  - name: TomWright/dasel@v2.0.1
+  - name: TomWright/dasel@v2.0.2
   - name: vishaltelangre/ff@v0.1.8
   - name: wtfutil/wtf@v0.42.0
   - name: x-motemen/ghq@v1.3.0
