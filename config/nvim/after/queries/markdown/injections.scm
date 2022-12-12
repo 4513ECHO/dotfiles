@@ -1,3 +1,4 @@
+;; extends
 ; from https://github.com/monaqa/dotfiles/blob/8abb1f48/.config/nvim/after/queries/markdown/injections.scm
 
 (fenced_code_block
