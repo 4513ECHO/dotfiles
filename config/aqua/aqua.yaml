@@ -56,7 +56,7 @@ packages:
   - name: mattn/gof@v0.0.12
   - name: microsoft/ripgrep-prebuilt@v13.0.0-4
   - name: mikefarah/yq@v4.30.5
-  - name: mvdan/sh@v3.5.1
+  - name: mvdan/sh@v3.6.0
   - name: nametake/golangci-lint-langserver@v0.0.7
   - name: nektos/act@v0.2.34
   - name: rhysd/actionlint@v1.6.22
