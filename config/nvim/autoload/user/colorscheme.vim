@@ -35,18 +35,9 @@ function! user#colorscheme#lightline() abort
 endfunction
 
 function! user#colorscheme#random() abort
-  if exists('*rand')
-    let randint = rand()
-  elseif has('nvim')
-    lua math.randomseed(os.time())
-    let randint = luaeval('math.random(1000)')
-  else
-    let randint = str2nr(matchstr(reltimestr(reltime()),
-          \ '\.\@<=\d\+')[1:])
-  endif
   let list = keys(user#colorscheme#get())
   call user#colorscheme#command(
-        \ get(list, randint % len(list)),
+        \ get(list, rand() % len(list)),
         \ )
 endfunction
 
@@ -70,7 +61,7 @@ function! user#colorscheme#set_customize(colorscheme) abort
   let terminal = get(customize, 'terminal')
   if !empty(terminal)
     call s:set_terminal_colors(
-          \ type(terminal) == v:t_string && terminal ==# 'mini'
+          \ terminal is# 'mini'
           \ ? [
           \ '#1d1f21', '#cc6666', '#b5bd68', '#f0c674', '#81a2be', '#b294bb', '#8abeb7', '#d3d7cf',
           \ '#707880', '#cc6666', '#b5bd68', '#de955f', '#729fcf', '#b294bb', '#005f5f', '#707880']
@@ -124,7 +115,8 @@ function! user#colorscheme#command(colorscheme, ...) abort
     unlet! g:terminal_color_{i}
   endfor
   unlet! g:terminal_color_foreground g:terminal_color_background g:terminal_ansi_colors
-  execute 'colorscheme' colorscheme
+  " NOTE: ignore W18
+  execute 'silent colorscheme' colorscheme
   call user#colorscheme#set_customize(colorscheme)
   let g:current_colorscheme = colorscheme
   if !exists('g:lightline')
@@ -138,15 +130,8 @@ function! user#colorscheme#command(colorscheme, ...) abort
 endfunction
 
 function! user#colorscheme#completion(ArgLead, CmdLine, CursorPos) abort
-  let list = keys(user#colorscheme#get())
-  if exists('*matchfuzzy')
-    if empty(a:ArgLead)
-      return sort(copy(list))
-    else
-      return matchfuzzy(copy(list), a:ArgLead)
-    endif
-  else
-    return filter(copy(list), {_, val -> val =~? a:ArgLead})
-  endif
+  return empty(a:ArgLead)
+        \ ? sort(copy(keys(user#colorscheme#get()))
+        \ : matchfuzzy(copy(keys(user#colorscheme#get()), a:ArgLead)
 endfunction
 

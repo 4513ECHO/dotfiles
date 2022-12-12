@@ -70,6 +70,8 @@ name = 'duskfox'
 name = 'nordfox'
 [[plugins.colorschemes]]
 name = 'terafox'
+[[plugins.colorschemes]]
+name = 'carbonfox'
 # [[plugins.colorschemes]]
 # name = 'dawnfox'
 # [[plugins.colorschemes]]
@@ -207,6 +209,9 @@ name = 'sacredforest'
 repo = 'kyoh86/momiji'
 [[plugins.colorschemes]]
 name = 'momiji'
+[plugins.colorschemes.highlight]
+# NOTE: Remove term/cterm/gui attrs
+SignifySignDelete = { ctermfg = 9, ctermbg = 0, guifg = '#f5875b', guibg = '#140c0c' }
 
 [[plugins]]
 repo = 'lifepillar/vim-solarized8'
@@ -285,6 +290,20 @@ terminal = [
   '#282c34', '#e06c75', '#98c379', '#e5c07b', '#61afef', '#c678dd', '#56b6c2', '#828997',
   '#5c6370', '#e06c75', '#98c379', '#e5c07b', '#61afef', '#c678dd', '#56b6c2', '#abb2bf',
 ]
+
+[[plugins]]
+repo = 'rebelot/kanagawa.nvim'
+if = 'has("nvim")'
+on_event = ['ColorSchemePre']
+lua_source = '''
+require("kanagawa").setup {
+  dimInactive = true,
+  globalStatus = (vim.o.laststatus == 3),
+}
+'''
+[[plugins.colorschemes]]
+name = 'kanagawa'
+lightline = 'mini'
 
 [[plugins]]
 repo = 'rhysd/vim-color-spring-night'
