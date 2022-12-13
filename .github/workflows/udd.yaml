@@ -18,7 +18,7 @@ jobs:
           deno-version: 1.x
       - name: Update deno dependencies
         run: >
-          deno run --allow-all "https://deno.land/x/udd@0.7.5/main.ts"
+          deno run --allow-all "https://deno.land/x/udd@0.8.2/main.ts"
           -- ./**/*.ts ./**/*.json ./**/*.yaml .github/**/*.yaml
           | tee ../output.txt
       - name: Read ../output.txt

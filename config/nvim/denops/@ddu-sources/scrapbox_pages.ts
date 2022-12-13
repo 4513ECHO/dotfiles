@@ -2,13 +2,13 @@ import type { ActionData } from "https://pax.deno.dev/4513ECHO/ddu-kind-url@0.1.
 import type {
   GatherArguments,
   OnInitArguments,
-} from "https://deno.land/x/ddu_vim@v1.10.1/base/source.ts";
-import type { Item } from "https://deno.land/x/ddu_vim@v1.10.1/types.ts";
+} from "https://deno.land/x/ddu_vim@v2.0.0/base/source.ts";
+import type { Item } from "https://deno.land/x/ddu_vim@v2.0.0/types.ts";
 import type {
   Page,
   PageList,
 } from "https://pax.deno.dev/scrapbox-jp/types@0.3.6/rest.ts";
-import { BaseSource } from "https://deno.land/x/ddu_vim@v1.10.1/types.ts";
+import { BaseSource } from "https://deno.land/x/ddu_vim@v2.0.0/types.ts";
 
 interface Params {
   project: string;
@@ -16,14 +16,15 @@ interface Params {
 }
 
 export class Source extends BaseSource<Params, ActionData> {
-  kind = "url";
-  private pages: Record<string, Page[]> = [];
+  override kind = "url";
+  #pages: Record<string, Page[]> = [];
 
-  async onInit(args: OnInitArguments<Params>): Promise<void> {
+  override async onInit(args: OnInitArguments<Params>): Promise<void> {
     if (!args.sourceParams.project) {
       await args.denops.call(
         "ddu#util#print_error",
         "Invalid sourceParams: project is empty",
+        "ddu-source-scrapbox_pages",
       );
       return;
     }
@@ -32,15 +33,16 @@ export class Source extends BaseSource<Params, ActionData> {
     );
     if (response.ok) {
       const result = await response.json() as PageList;
-      this.pages[args.sourceParams.project] = result.pages;
+      this.#pages[args.sourceParams.project] = result.pages;
     }
   }
 
-  gather(args: GatherArguments<Params>): ReadableStream<Item<ActionData>[]> {
-    const { pages } = this;
+  override gather(
+    args: GatherArguments<Params>,
+  ): ReadableStream<Item<ActionData>[]> {
     return new ReadableStream({
-      start(controller) {
-        const items = pages[args.sourceParams.project].map((
+      start: (controller) => {
+        const items = this.#pages[args.sourceParams.project].map((
           i,
         ): Item<ActionData> => ({
           word: i.title,
@@ -58,7 +60,7 @@ export class Source extends BaseSource<Params, ActionData> {
     });
   }
 
-  params(): Params {
+  override params(): Params {
     /* NOTE: These values are my personal preferences.
        I will change these when publishing as plugin. */
     return {

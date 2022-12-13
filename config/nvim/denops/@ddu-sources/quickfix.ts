@@ -1,8 +1,8 @@
-import * as fn from "https://deno.land/x/denops_std@v3.8.1/function/mod.ts";
-import type { ActionData } from "https://deno.land/x/ddu_kind_file@v0.3.0/file.ts";
-import type { GatherArguments } from "https://deno.land/x/ddu_vim@v1.10.1/base/source.ts";
-import type { Item } from "https://deno.land/x/ddu_vim@v1.10.1/types.ts";
-import { BaseSource } from "https://deno.land/x/ddu_vim@v1.10.1/types.ts";
+import * as fn from "https://deno.land/x/denops_std@v3.11.3/function/mod.ts";
+import type { ActionData } from "https://deno.land/x/ddu_kind_file@v0.3.2/file.ts";
+import type { GatherArguments } from "https://deno.land/x/ddu_vim@v2.0.0/base/source.ts";
+import type { Item } from "https://deno.land/x/ddu_vim@v2.0.0/types.ts";
+import { BaseSource } from "https://deno.land/x/ddu_vim@v2.0.0/types.ts";
 
 interface Params {
   useLoclist: boolean;
@@ -15,9 +15,11 @@ interface QflistItem {
 }
 
 export class Source extends BaseSource<Params, ActionData> {
-  kind = "file";
+  override kind = "file";
 
-  gather(args: GatherArguments<Params>): ReadableStream<Item<ActionData>[]> {
+  override gather(
+    args: GatherArguments<Params>,
+  ): ReadableStream<Item<ActionData>[]> {
     return new ReadableStream({
       async start(controller) {
         const func = args.sourceParams.useLoclist
@@ -46,7 +48,7 @@ export class Source extends BaseSource<Params, ActionData> {
     });
   }
 
-  params(): Params {
+  override params(): Params {
     return {
       useLoclist: false,
     };
