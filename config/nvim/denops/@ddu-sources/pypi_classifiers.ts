@@ -13,7 +13,7 @@ export class Source extends BaseSource<Params, ActionData> {
   override kind = "word";
   #classifiers: Item<ActionData>[] = [];
   #stream: ReadableStream<Item<ActionData>[]> = new ReadableStream();
-  #streamFlushed = false;
+  #queued = 0;
 
   override async onInit(args: OnInitArguments<Params>): Promise<void> {
     const response = await fetch(
@@ -26,15 +26,18 @@ export class Source extends BaseSource<Params, ActionData> {
         .pipeThrough(
           new TransformStream({
             transform: (chunk, controller) => {
-              const item: Item<ActionData> = {
-                word: chunk,
-                action: { text: chunk },
-              };
-              this.#classifiers.push(item);
-              controller.enqueue([item]);
-            },
-            flush: (_controller) => {
-              this.#streamFlushed = true;
+              if (this.#queued === 0) {
+                controller.enqueue(this.#classifiers);
+              }
+              if (this.#queued >= this.#classifiers.length) {
+                const item: Item<ActionData> = {
+                  word: chunk,
+                  action: { text: chunk },
+                };
+                this.#classifiers.push(item);
+                controller.enqueue([item]);
+              }
+              this.#queued += 1;
             },
           }),
         );
@@ -50,14 +53,7 @@ export class Source extends BaseSource<Params, ActionData> {
   override gather(
     _args: GatherArguments<Params>,
   ): ReadableStream<Item<ActionData>[]> {
-    if (this.#streamFlushed) {
-      return new ReadableStream({
-        start: (controller) => {
-          controller.enqueue(this.#classifiers);
-          controller.close();
-        },
-      });
-    }
+    this.#queued = 0;
     return this.#stream;
   }
 
