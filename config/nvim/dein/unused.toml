@@ -94,6 +94,14 @@ on_cmd = ['KeycastStart', 'KeycastStop']
 repo = 'pocke/vanner'
 
 [[plugins]]
+repo = 'powerman/vim-plugin-AnsiEsc'
+on_cmd = ['AnsiEsc']
+hook_add = '''
+let g:no_ansiesc_menu = v:true
+let g:no_cecutil_maps = v:true
+'''
+
+[[plugins]]
 repo = 'reireias/vim-cheatsheet'
 on_cmd = ['Cheat']
 hook_add = '''
@@ -109,6 +117,29 @@ on_cmd = ['FixJson']
 repo = 'skanehira/badapple.vim'
 if = '!has("nvim")'
 on_cmd = ['BadApple']
+
+[[plugins]]
+repo = 'terryma/vim-expand-region'
+on_map = { nx = '<Plug>' }
+hook_add = '''
+nnoremap + <Plug>(expand_region_expand)
+nnoremap - <Plug>(expand_region_shrink)
+xnoremap + <Plug>(expand_region_expand)
+xnoremap - <Plug>(expand_region_shrink)
+let g:expand_region_text_objects = {
+      \ 'iu': 0,
+      \ 'iw': 0,
+      \ 'ib': 1,
+      \ 'af': 1,
+      \ 'il': 0,
+      \ 'ip': 0,
+      \ 'ie': 0,
+      \ }
+'''
+
+[[plugins]]
+repo = 'thinca/vim-prettyprint'
+on_cmd = ['PP', 'PrettyPrint']
 
 [[plugins]]
 repo = 'thinca/vim-scall'

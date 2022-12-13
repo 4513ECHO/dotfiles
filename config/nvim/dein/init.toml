@@ -28,52 +28,47 @@ let b:auto_cursorline_disabled = v:true
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
-depends = [
-  'lightline-gruvbox.vim', 'lightline-hybrid.vim',
-]
+depends = ['lightline-gruvbox.vim', 'lightline-hybrid.vim']
 hook_add = '''
-let g:lightline = {}
-let g:lightline.colorscheme = user#colorscheme#lightline()
-let g:lightline.subseparator = { 'left': '/', 'right': '/' }
-let g:lightline.active = {
-      \ 'left': [
-      \   ['mode', 'paste'],
-      \   ['readonly', 'filename', 'modified'],
-      \   ['protocol', 'ddu', 'lsp_progress'],
-      \ ],
-      \ 'right': [
-      \   ['lsp_errors', 'lsp_warnings', 'lineinfo'],
-      \   ['percent'],
-      \   ['colorscheme', 'fileformat', 'fileencoding', 'filetype'],
-      \ ],
-      \ }
-let g:lightline.inactive = {
-      \ 'left': [
-      \   ['filename', 'modified'],
-      \ ],
-      \ }
-let g:lightline.component_function = {
-      \ 'colorscheme': 'lightline#component#vimrc#colorscheme',
-      \ 'ddu': 'lightline#component#vimrc#ddu',
-      \ 'fileformat': 'lightline#component#vimrc#file_format',
-      \ 'fileencoding': 'lightline#component#vimrc#file_encoding',
-      \ 'filename': 'lightline#component#vimrc#filename',
-      \ 'mode': 'lightline#component#vimrc#mode',
-      \ 'readonly': 'lightline#component#vimrc#readonly',
-      \ 'modified': 'lightline#component#vimrc#modified',
-      \ 'protocol': 'lightline#component#vimrc#protocol',
-      \ 'lsp_progress': 'lightline_lsp_progress#progress',
-      \ }
-let g:lightline.component = {
-      \ 'lineinfo': '%3l:%-2v',
-      \ }
-let g:lightline.component_expand = {
-      \ 'lsp_errors': 'lightline_lsp#errors',
-      \ 'lsp_warnings': 'lightline_lsp#warnings',
-      \ }
-let g:lightline.component_type = {
-      \ 'lsp_errors': 'error',
-      \ 'lsp_warnings': 'warning',
+let g:lightline = #{
+      \ colorscheme: user#colorscheme#lightline(),
+      \ subseparator: #{ left: '/', right: '/' },
+      \ active: #{
+      \   left: [
+      \     ['mode', 'paste'],
+      \     ['readonly', 'filename', 'modified'],
+      \     ['protocol', 'ddu', 'lsp_progress'],
+      \   ],
+      \   right: [
+      \     ['lsp_errors', 'lsp_warnings', 'lineinfo'],
+      \     ['percent'],
+      \     ['colorscheme', 'fileformat', 'fileencoding', 'filetype'],
+      \   ],
+      \ },
+      \ inactive: #{ left: [ ['filename', 'modified'] ] },
+      \ component_function: #{
+      \   colorscheme: 'lightline#component#vimrc#colorscheme',
+      \   ddu: 'lightline#component#vimrc#ddu',
+      \   fileformat: 'lightline#component#vimrc#file_format',
+      \   fileencoding: 'lightline#component#vimrc#file_encoding',
+      \   filename: 'lightline#component#vimrc#filename',
+      \   mode: 'lightline#component#vimrc#mode',
+      \   readonly: 'lightline#component#vimrc#readonly',
+      \   modified: 'lightline#component#vimrc#modified',
+      \   protocol: 'lightline#component#vimrc#protocol',
+      \   lsp_progress: 'lightline_lsp_progress#progress',
+      \ },
+      \ component: #{
+      \   lineinfo: '%3l:%-2v',
+      \ },
+      \ component_expand: #{
+      \   lsp_errors: 'lightline_lsp#errors',
+      \   lsp_warnings: 'lightline_lsp#warnings',
+      \ },
+      \ component_type: #{
+      \   lsp_errors: 'error',
+      \   lsp_warnings: 'warning',
+      \ },
       \ }
 " from https://github.com/sheepla/dotfiles/blob/fcda1fd7/config/nvim/lightlinerc.vim#L52
 command! -bar LightlineUpdate
@@ -85,10 +80,8 @@ repo = 'itchyny/vim-highlighturl'
 
 [[plugins]]
 repo = 'itchyny/vim-parenmatch'
-hook_add = '''
-" TODO: send PR to the repository to use instead 'hi def Group' instead of 'hi Group'
-" autocmd vimrc ColorScheme * hi link ParenMatch MatchParen
-'''
+# TODO: send PR to the repository to use instead 'hi def Group' instead of 'hi Group'
+# autocmd vimrc ColorScheme * hi link ParenMatch MatchParen
 
 [[plugins]]
 repo = 'lambdalisue/guise.vim'
@@ -128,14 +121,11 @@ nnoremap <silent><buffer> r  <Plug>(molder-operations-rename)
 [[plugins]]
 repo = 'mhinz/vim-signify'
 hook_add = '''
-if exists('*setcellwidths')
-  call setcellwidths([[0x2503, 0x2503, 1]])
-endif
+call setcellwidths([[0x2503, 0x2503, 1]])
 let g:signify_sign_add               = '┃'
 let g:signify_sign_change            = '┃'
 let g:signify_sign_delete            = '┃'
 let g:signify_sign_delete_first_line = '┃'
-" highlight line
 let g:signify_line_highlight = v:false
 '''
 

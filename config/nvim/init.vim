@@ -1,4 +1,4 @@
-let s:config_home = empty($XDG_CONFIG_HOME) ? expand('~/.config/nvim') : $XDG_CONFIG_HOME .. '/nvim'
+let s:config_home = $XDG_CONFIG_HOME .. '/nvim'
 set runtimepath&
 let &runtimepath = join([s:config_home, &runtimepath, s:config_home .. '/after'], ',')
 let $MYVIMRC = expand('<sfile>:p')

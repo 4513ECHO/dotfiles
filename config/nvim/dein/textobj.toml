@@ -56,7 +56,7 @@ let g:sandwich#recipes += [
       \   'filetype': ['vim', 'ruby', 'eruby'],
       \ },
       \ {
-      \   'buns': ['InputGenerics()', '">"'],
+      \   'buns': ['SandwichGenericsName()', '">"'],
       \   'expr': v:true,
       \   'cursor': 'inner_tail',
       \   'kind': ['add', 'replace'],
@@ -71,9 +71,9 @@ let g:sandwich#recipes += [
       \ },
       \ ]
 
-function! InputGenerics() abort
+function! SandwichGenericsName() abort
   let genericsname = input('Generics Name: ', '')
-  if genericsname ==# ''
+  if empty(genericsname)
     throw 'OperatorSandwichCancel'
   endif
   return genericsname .. '<'
@@ -179,25 +179,6 @@ onoremap au <Plug>(textobj-wiw-a)
 onoremap iu <Plug>(textobj-wiw-i)
 xnoremap au <Plug>(textobj-wiw-a)
 xnoremap iu <Plug>(textobj-wiw-i)
-'''
-
-[[plugins]]
-repo = 'terryma/vim-expand-region'
-on_map = { nx = '<Plug>' }
-hook_add = '''
-nnoremap + <Plug>(expand_region_expand)
-nnoremap - <Plug>(expand_region_shrink)
-xnoremap + <Plug>(expand_region_expand)
-xnoremap - <Plug>(expand_region_shrink)
-let g:expand_region_text_objects = {
-      \ 'iu': 0,
-      \ 'iw': 0,
-      \ 'ib': 1,
-      \ 'af': 1,
-      \ 'il': 0,
-      \ 'ip': 0,
-      \ 'ie': 0,
-      \ }
 '''
 
 [[plugins]]

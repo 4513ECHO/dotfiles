@@ -2,24 +2,19 @@ augroup vimrc
   autocmd!
 augroup END
 
-let g:cache_home = empty($XDG_CACHE_HOME) ?
-      \ expand('~/.cache/nvim') : $XDG_CACHE_HOME .. '/nvim'
-let g:config_home = empty($XDG_CONFIG_HOME) ?
-      \ expand('~/.config/nvim') : $XDG_CONFIG_HOME .. '/nvim'
-let g:data_home = empty($XDG_DATA_HOME) ?
-      \ expand('~/.local/share/nvim') : $XDG_DATA_HOME .. '/nvim'
-let g:vim_cache_home = empty($XDG_CACHE_HOME) ?
-      \ expand('~/.cache/vim') : $XDG_CACHE_HOME .. '/vim'
-let g:vim_data_home = empty($XDG_DATA_HOME) ?
-      \ expand('~/.local/share/vim') : $XDG_DATA_HOME .. '/vim'
+let g:cache_home = $XDG_CACHE_HOME .. '/nvim'
+let g:config_home = $XDG_CONFIG_HOME .. '/nvim'
+let g:data_home = $XDG_DATA_HOME .. '/nvim'
+let g:vim_cache_home = $XDG_CACHE_HOME .. '/vim'
+let g:vim_data_home = $XDG_DATA_HOME .. '/vim'
 
 let g:current_colorscheme = get(g:, 'current_colorscheme', 'random')
 
 let g:launcher_config = get(g:, 'launcher_config', {})
 nnoremap <C-s> <Cmd>call user#launcher#select()<CR>
-let g:launcher_config.color = {
-      \ 'char': 'r',
-      \ 'run': 'RandomColorScheme',
+let g:launcher_config.color = #{
+      \ char: 'r',
+      \ run: 'RandomColorScheme',
       \ }
 
 autocmd vimrc VimEnter * ++nested call user#colorscheme#random()
@@ -33,18 +28,6 @@ if has('vim_starting')
         \ | redraw
         \ | echomsg printf('startuptime: %fms', reltimefloat(g:startuptime) * 1000)
 endif
-
-" if has('nvim')
-"   let g:python3_host_prog = stdpath('data') .. '/venv/bin/python'
-"   if !filereadable(stdpath('data') .. '/venv/installed')
-"     call mkdir(stdpath('data') .. '/venv', 'p')
-"     call timer_start(10, { ->
-"          \ system('python3 -m venv ' .. stdpath('data') .. '/venv') })
-"     call timer_start(10, { ->
-"          \ system(stdpath('data') .. '/venv/bin/pip install pynvim neovim') })
-"     call writefile([''], stdpath('data') .. '/venv/installed')
-"   endif
-" endif
 
 command! -nargs=1 Runtime runtime! g:config_home <args>
 
@@ -64,7 +47,7 @@ command! PopupTerminal
       \ call popup_create(term_start(
       \     [&shell], { 'hidden': v:true, 'term_finish': 'close' }
       \   ), {
-      \   'border': [], 'minwidth': winwidth(0)/2, 'minheight': &lines/2
+      \   'border': [], 'minwidth': winwidth(0)/2, 'minheight': &lines/2,
       \ })
 
 command! -bar HtmlFormat
@@ -75,7 +58,7 @@ command! -bar -bang TodoList vimgrep '\vTODO\ze%(\(.{-}\))?:' `git ls-files`
 
 command! -nargs=? -bar -complete=filetype MiniNote
       \ : execute (empty(<q-mods>) ? 'botright' : <q-mods>) 'new'
-      \ | setlocal bufhidden=wipe filetype=<args>
+      \ | setlocal bufhidden=wipe buftype=nofile filetype=<args>
 
 command! -bar DeinUpdateMine
       \ call dein#update(keys(filter(copy(dein#get()),
@@ -139,15 +122,14 @@ autocmd vimrc FocusGained * checktime
 " from https://github.com/kuuote/dotvim/blob/46760385c2/conf/rc/autocmd.vim#L5
 function! s:chmod(file) abort
   let perm = getfperm(a:file)
-  let newperm = printf("%sx%sx%sx", perm[0:1], perm[3:4], perm[6:7])
+  let newperm = printf('%sx%sx%sx', perm[0:1], perm[3:4], perm[6:7])
   if perm != newperm
     call setfperm(a:file, newperm)
   endif
 endfunction
-
 autocmd vimrc BufWritePost *
-      \ : if getline(1) =~# "^#!"
-      \ |   call s:chmod(expand("<afile>"))
+      \ : if getline(1) =~# '^#!'
+      \ |   call s:chmod(expand('<afile>'))
       \ | endif
 
 " always highlight special comment

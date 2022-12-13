@@ -11,23 +11,19 @@ elseif !filereadable(s:globalJisyo)
   call system('gzip -d ' .. s:gzipfile)
 endif
 
-call skkeleton#config({
-      \ 'eggLikeNewline': v:true,
-      \ 'registerConvertResult': v:true,
-      \ 'globalJisyo': s:globalJisyo,
-      \ 'userJisyo': s:skk_dir .. '/SKK-JISYO.user',
+call skkeleton#config(#{
+      \ eggLikeNewline: v:true,
+      \ completionRankFile: s:skk_dir .. '/completionRankFile',
+      \ globalJisyo: s:globalJisyo,
+      \ keepState: v:true,
+      \ registerConvertResult: v:true,
+      \ userJisyo: s:skk_dir .. '/SKK-JISYO.user',
       \ })
 
 call skkeleton#register_kanatable('rom', {
       \ ',,': 'escape',
-      \ '~':         ['〜',     ''],
-      \ '...':       ['…',     ''],
-      \ ",\<Space>": ['、',     ''],
-      \ "z\<Space>": ["\u3000", ''],
-      \ ".\<Space>": ['。',     ''],
-      \ "(\<Space>": ['（',     ''],
-      \ ")\<Space>": ['）',     ''],
-      \ "/\<Space>": ['・',     ''],
+      \ ', ': ['、'],
+      \ "z\<Space>": ["\u3000"],
       \ })
 
 " from https://github.com/thinca/config/blob/5413e42a18/dotfiles/dot.vim/vimrc#L2289

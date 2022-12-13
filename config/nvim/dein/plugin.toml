@@ -54,8 +54,6 @@ on_event = ['InsertEnter', 'CmdlineEnter']
 hook_add = '''
 let g:lexima_no_default_rules = v:true
 let g:lexima_ctrlh_as_backspace = v:true
-" NOTE: vim v8.2.4504 broke compatibility around <Esc> keys. (fixed by v8.2.4551)
-" let g:lexima_map_escape = ''
 '''
 hook_source = '''
 Runtime dein/settings/lexima.vim
@@ -100,22 +98,21 @@ xnoremap <C-k> <Plug>(edgemotion-k)
 
 [[plugins]]
 repo = 'hrsh7th/vim-searchx'
-on_func = ['searchx#start', 'searchx#prev_dir', 'searchx#next_dir']
+on_func = ['searchx#']
 hook_add = '''
-let g:searchx = {}
-let g:searchx.auto_accept = v:true
-let g:searchx.markers = split('ASDFGHJKLQWERTYUIOP', '.\zs')
-let g:searchx.nohlsearch = {
-      \ 'jump': v:true,
+let g:searchx = #{
+      \ auto_accept: v:true,
+      \ markers: split('ASDFGHJKLQWERTYUIOPZXCVBNM', '.\zs'),
+      \ nohlsearch: #{ jump: v:true },
+      \ scrolltime: 500,
+      \ scrolloff: &scrolloff,
       \ }
-let g:searchx.scrolltime = 500
-let g:searchx.scrolloff = &scrolloff
 
 function! g:searchx.convert(input) abort
   if a:input !~# '\k'
     return '\V' .. a:input
   endif
-  return join(split(a:input, '\s\+'), '.\{-}')
+  return substitute(a:input, '\s\+', '.\{-}', 'g')
 endfunction
 
 autocmd vimrc User SearchxEnter
@@ -123,10 +120,10 @@ autocmd vimrc User SearchxEnter
 autocmd vimrc User SearchxLeave call searchx#clear()
 autocmd vimrc User SearchxAccept normal! zzzv
 
-nnoremap ? <Cmd>call searchx#start({ 'dir': 0 })<CR>
-nnoremap / <Cmd>call searchx#start({ 'dir': 1 })<CR>
-xnoremap ? <Cmd>call searchx#start({ 'dir': 0 })<CR>
-xnoremap / <Cmd>call searchx#start({ 'dir': 1 })<CR>
+nnoremap ? <Cmd>call searchx#start(#{ dir: 0 })<CR>
+nnoremap / <Cmd>call searchx#start(#{ dir: 1 })<CR>
+xnoremap ? <Cmd>call searchx#start(#{ dir: 0 })<CR>
+xnoremap / <Cmd>call searchx#start(#{ dir: 1 })<CR>
 
 cnoremap <C-g> <Cmd>call searchx#next_dir()<CR>
 cnoremap <C-t> <Cmd>call searchx#prev_dir()<CR>
@@ -143,14 +140,15 @@ on_event = ['InsertEnter']
 on_source = 'ddc.vim'
 hook_add = '''
 let g:vsnip_snippet_dir = g:config_home .. '/snippets'
-imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+inoremap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : ''
+snoremap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : ''
 autocmd vimrc User PumCompleteDone
       \ call vsnip_integ#on_complete_done(g:pum#completed_item)
 '''
 
 [[plugins]]
 repo = 'junegunn/fzf'
+on_func = ['fzf#']
 merged = false
 on_cmd = ['FZF']
 
@@ -164,6 +162,7 @@ on_cmd = [
   'FzfCommands', 'FzfMaps', 'FzfHelptags', 'FzfFiletypes',
   'FzfGhq', 'FzfDein', 'FzFActions', 'FzfMru',
 ]
+on_func = ['fzf#']
 hook_add = '''
 let g:fzf_command_prefix = 'Fzf'
 let g:launcher_config.fzf = {
@@ -371,14 +370,6 @@ let g:jplus#config = {
 '''
 
 [[plugins]]
-repo = 'powerman/vim-plugin-AnsiEsc'
-on_cmd = ['AnsiEsc']
-hook_add = '''
-let g:no_ansiesc_menu = v:true
-let g:no_cecutil_maps = v:true
-'''
-
-[[plugins]]
 repo = 'prabirshrestha/async.vim'
 on_cmd = ['AsyncEmbed']
 
@@ -412,7 +403,8 @@ on_cmd = [
 ]
 
 [[plugins]]
-repo = 'skanehira/translate.vim'
+repo = 'skanehira/denops-translate.vim'
+depends = ['denops.vim']
 on_cmd = ['Translate']
 hook_add = '''
 nnoremap <Leader>t <Cmd>Translate<CR>
@@ -456,8 +448,18 @@ on_cmd = ['HexokinaseToggle', 'HexokinaseTurnOn', 'HexokinaseTurnOff']
 on_event = ['BufRead', 'InsertLeave']
 hook_add = '''
 let g:Hexokinase_highlighters = ['backgroundfull']
-let g:Hexokinase_ftOptOutPatterns = {'yaml': 'colour_names'}
-let g:Hexokinase_ftDisabled = ['molder']
+let g:Hexokinase_optOutPatterns = ['colour_names']
+let g:Hexokinase_ftOptInPatterns = {
+      \ 'css': [
+      \   'full_hex', 'triple_hex', 'rgb',
+      \   'rgba', 'hsl', 'hsla', 'colour_names'
+      \ ],
+      \ 'html': [
+      \   'full_hex', 'triple_hex', 'rgb',
+      \   'rgba', 'hsl', 'hsla', 'colour_names'
+      \ ],
+      \ }
+let g:Hexokinase_ftDisabled = ['molder', 'ddu-ff', 'ddu-ff-filter']
 let g:Hexokinase_executable_path = exepath('hexokinase')
 '''
 
@@ -487,8 +489,7 @@ on_cmd = ['Partedit']
 on_func = ['partedit#start']
 hook_add = '''
 let g:partedit#opener = 'split'
-function! s:operator_partedit(...) abort
-  " let range = get(a:000, 0, [])
+function! s:operator_partedit() abort
   let context = context_filetype#get()
   if context.range == [[0, 0], [0, 0]]
     echohl WarningMsg
@@ -501,7 +502,6 @@ function! s:operator_partedit(...) abort
   nnoremap <buffer> q <Cmd>ParteditEnd<Bar>close<CR>
 endfunction
 nnoremap <C-x><C-x> <Cmd>call <SID>operator_partedit()<CR>
-xnoremap <C-x><C-x> <Cmd>call <SID>operator_partedit(sort([line('v'), line('.')]))<CR>
 '''
 [plugins.ftplugin]
 help = '''
@@ -510,11 +510,8 @@ let b:partedit_prefix = "\<Tab>"
 '''
 toml = '''
 let b:partedit_filetype = 'vim'
+let b:partedit_auto_prefix = v:false
 '''
-
-[[plugins]]
-repo = 'thinca/vim-prettyprint'
-on_cmd = ['PP', 'PrettyPrint']
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
@@ -524,8 +521,7 @@ hook_add = '''
 nnoremap <Leader>rr <Plug>(quickrun)
 nnoremap <Leader>r <Plug>(quickrun-op)
 xnoremap <Leader>r <Plug>(quickrun)
-nnoremap <silent><expr> <C-c>
-      \ quickrun#session#exists()
+nnoremap <silent><expr> <C-c> quickrun#session#exists()
       \ ? '<Cmd>call quickrun#session#sweep()<CR>'
       \ : '<C-c>'
 let g:quickrun_config = {
@@ -588,12 +584,6 @@ let g:quickrun_config = {
       \   'cmdopt': '--no-check --allow-all --unstable',
       \   'command': 'deno',
       \   'exec': 'NO_COLOR=1 %c test %o %s %a',
-      \   'tempfile': '%{tempname()}.ts',
-      \ },
-      \ 'deno/dex': {
-      \   'command': 'dex',
-      \   'exec': '%c %o %s %a',
-      \   'runner': has('nvim') ? 'nvimterm' : 'terminal',
       \   'tempfile': '%{tempname()}.ts',
       \ },
       \ }
@@ -664,17 +654,26 @@ on_map = { nx = '<Plug>(openbrowser' }
 hook_add = '''
 nnoremap gx <Plug>(openbrowser-smart-search)
 xnoremap gx <Plug>(openbrowser-smart-search)
-let g:openbrowser_browser_commands = [{
-      \ 'name': 'w3m',
-      \ 'args': 'tmux-w3m {uri} -t open-browser',
-      \ }]
+let g:openbrowser_allowed_schemes = ['http', 'https']
+let g:openbrowser_browser_commands = []
+      \ + (empty($DISPLAY) ? [] : [{
+      \   'name': 'xdg-open',
+      \   'args': ['{browser}', '{uri}']
+      \ }])
+      \ + (empty($TMUX) ? [] : [{
+      \   'name': 'w3m',
+      \   'args': 'tmux-w3m {uri} -t open-browser',
+      \ }])
 '''
 
 [[plugins]]
 repo = 'vim-denops/denops.vim'
-on_event = ['FocusLost', 'CursorHold']
+on_event = ['CursorHold', 'FocusFost']
 hook_add = '''
 let g:denops_server_addr = '127.0.0.1:32123'
+let g:denops#server#deno_args = [
+      \ '--allow-all', '--no-lock', '--quiet', '--unstable',
+      \ ]
 '''
 
 [[plugins]]

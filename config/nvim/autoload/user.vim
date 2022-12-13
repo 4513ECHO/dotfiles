@@ -25,16 +25,8 @@ function! user#pager() abort
   setlocal noswapfile buftype=nofile
   setlocal modifiable nomodified readonly
   let b:undo_ftplugin = 'setlocal list number synmaxcol<'
-  if exists(':AnsiEsc') == 2
-    autocmd vimrc VimEnter *
-          \ : execute 'AnsiEsc'
-          \ | silent! keepjump keeppatterns
-          \ | %substitute/\v\e\[%(%(\d+;)?\d{1,2})?[mK]//ge
-          \ | filetype detect
-  else
-    silent! keepjump keeppatterns %substitute/\v\e\[%(%(\d+;)?\d{1,2})?[mK]//ge
-    filetype detect
-  endif
+  silent! keepjump keeppatterns %substitute/\v\e\[%(%(\d+;)?\d{1,2})?[mK]//ge
+  filetype detect
   normal! gg
 endfunction
 
@@ -52,6 +44,6 @@ function! user#auto_mkdir(dir, force) abort
   if !isdirectory(a:dir) && (a:force ||
         \ input(printf('"%s" does not exist. Create? [y/N]', a:dir))
         \ =~? '^y\%[es]$')
-    call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
+    call mkdir(a:dir, 'p')
   endif
 endfunction
