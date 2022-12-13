@@ -2,47 +2,66 @@ import type { ActionData } from "https://pax.deno.dev/Shougo/ddu-kind-word/denop
 import type {
   GatherArguments,
   OnInitArguments,
-} from "https://deno.land/x/ddu_vim@v1.10.1/base/source.ts";
-import type { Item } from "https://deno.land/x/ddu_vim@v1.10.1/types.ts";
-import { BaseSource } from "https://deno.land/x/ddu_vim@v1.10.1/types.ts";
-import { readerFromStreamReader } from "https://deno.land/std@0.154.0/streams/conversion.ts";
-import { readLines } from "https://deno.land/std@0.154.0/io/mod.ts";
+} from "https://deno.land/x/ddu_vim@v2.0.0/base/source.ts";
+import type { Item } from "https://deno.land/x/ddu_vim@v2.0.0/types.ts";
+import { BaseSource } from "https://deno.land/x/ddu_vim@v2.0.0/types.ts";
+import { TextLineStream } from "https://deno.land/std@0.167.0/streams/text_line_stream.ts";
 
 type Params = Record<never, never>;
 
 export class Source extends BaseSource<Params, ActionData> {
-  kind = "word";
-  private classifiers: string[] = [];
+  override kind = "word";
+  #classifiers: Item<ActionData>[] = [];
+  #stream: ReadableStream<Item<ActionData>[]> = new ReadableStream();
+  #streamFlushed = false;
 
-  async onInit(_args: OnInitArguments<Params>): Promise<void> {
+  override async onInit(args: OnInitArguments<Params>): Promise<void> {
     const response = await fetch(
       "https://pypi.org/pypi?%3Aaction=list_classifiers",
     );
     if (response.ok) {
-      for await (
-        const line of readLines(readerFromStreamReader(response.body))
-      ) {
-        this.classifiers.push(line);
-      }
+      this.#stream = response.body!
+        .pipeThrough(new TextDecoderStream())
+        .pipeThrough(new TextLineStream())
+        .pipeThrough(
+          new TransformStream({
+            transform: (chunk, controller) => {
+              const item: Item<ActionData> = {
+                word: chunk,
+                action: { text: chunk },
+              };
+              this.#classifiers.push(item);
+              controller.enqueue([item]);
+            },
+            flush: (_controller) => {
+              this.#streamFlushed = true;
+            },
+          }),
+        );
+    } else {
+      await args.denops.call(
+        "ddu#util#print_error",
+        "Failed to fetch response",
+        "ddu-source-pypi_classifiers",
+      );
     }
   }
 
-  gather(_args: GatherArguments<Params>): ReadableStream<Item<ActionData>[]> {
-    const { classifiers } = this;
-    return new ReadableStream({
-      start(controller) {
-        controller.enqueue(
-          classifiers.map((i): Item<ActionData> => ({
-            word: i,
-            action: { text: i },
-          })),
-        );
-        controller.close();
-      },
-    });
+  override gather(
+    _args: GatherArguments<Params>,
+  ): ReadableStream<Item<ActionData>[]> {
+    if (this.#streamFlushed) {
+      return new ReadableStream({
+        start: (controller) => {
+          controller.enqueue(this.#classifiers);
+          controller.close();
+        },
+      });
+    }
+    return this.#stream;
   }
 
-  params(): Params {
+  override params(): Params {
     return {};
   }
 }
