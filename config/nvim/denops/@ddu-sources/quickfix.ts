@@ -23,9 +23,9 @@ export class Source extends BaseSource<Params, ActionData> {
     return new ReadableStream({
       async start(controller) {
         const func = args.sourceParams.useLoclist
-          ? ["getloclist", 0]
-          : ["getqflist"];
-        const items: QflistItem[] = await args.denops.call(...func);
+          ? ["getloclist", 0] as const
+          : ["getqflist"] as const;
+        const items = await args.denops.call(...func) as QflistItem[];
         controller.enqueue(
           await Promise.all(
             items.map(async (i): Promise<Item<ActionData>> => ({

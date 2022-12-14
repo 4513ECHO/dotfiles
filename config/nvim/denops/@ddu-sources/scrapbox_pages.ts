@@ -5,7 +5,7 @@ import type {
 } from "https://deno.land/x/ddu_vim@v2.0.0/base/source.ts";
 import type { Item } from "https://deno.land/x/ddu_vim@v2.0.0/types.ts";
 import type {
-  Page,
+  BasePage,
   PageList,
 } from "https://pax.deno.dev/scrapbox-jp/types@0.3.6/rest.ts";
 import { BaseSource } from "https://deno.land/x/ddu_vim@v2.0.0/types.ts";
@@ -17,7 +17,7 @@ interface Params {
 
 export class Source extends BaseSource<Params, ActionData> {
   override kind = "url";
-  #pages: Record<string, Page[]> = [];
+  #pages: Record<string, BasePage[]> = {};
 
   override async onInit(args: OnInitArguments<Params>): Promise<void> {
     if (!args.sourceParams.project) {
