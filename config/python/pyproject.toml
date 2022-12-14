@@ -9,36 +9,36 @@ python = "^3.10"
 
 [tool.poetry.group.tool.dependencies]
 black = "^22.10.0"
-isort = "^5.10.1"
+isort = "^5.11.2"
 mypy = "^0.991"
 
+# cli tools that has low priority
 [tool.poetry.group.util.dependencies]
-ddgr = "^2.0"
-httpie = "^3.2.1"
-jc = "^1.22.0"
+# ddgr = "^2.1"
+# httpie = "^3.2.1"
+# jc = "^1.22.2"
 # NOTE: pepdocs uses too old version of click
 # pepdocs = "^0.3.0"
-pip-chill = "^1.0.1"
-toml-sort = "^0.20.1"
-vim-vint = "^0.3.21"
-yamllint = "^1.28.0"
+# pip-chill = "^1.0.1"
+# toml-sort = "^0.20.1"
+# vim-vint = "^0.3.21"
+# yamllint = "^1.28.0"
 
 [tool.poetry.group.flake8.dependencies]
 flake8 = "^5.0.4"
-flake8-pyproject = "^1.1.0.post0"
-flake8-isort = "^5.0.0"
+flake8-pyproject = "^1.2.2"
+flake8-isort = "^5.0.3"
 pep8-naming = "^0.13.2"
 
 [tool.poetry.group.lsp.dependencies]
-# NOTE: Current release on PyPI cannnot use with flake8 >=5
-python-lsp-server = { git = "https://github.com/python-lsp/python-lsp-server.git", rev = "ff41880", extras = ["all"] }
+python-lsp-server = { git = "https://github.com/python-lsp/python-lsp-server.git", rev = "59de0f8", branch = "develop", extras = ["all"] }
 python-lsp-black = "^1.2.1"
 pyls-isort = "^0.2.2"
-pylsp-mypy = "^0.6.3"
+pylsp-mypy = "^0.6.4"
 
 [tool.poetry.group.poetry.dependencies]
-poetry = "^1.2.2"
-poetry-plugin-export = "^1.1.2"
+poetry = "^1.3.1"
+poetry-plugin-export = "^1.2.0"
 poetry-dynamic-versioning-plugin = "^0.4.0"
 
 [tool.poetry.group.game.dependencies]
