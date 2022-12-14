@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "{{_input_:name}}"
-version = "0.1.0"
+version = "0.0.0"
 description = ""
 authors = ["Hibiki(4513ECHO) <4513echo@gmail.com>"]
 license = "MIT"
@@ -27,15 +27,15 @@ cli = "{{_input_:name}}.main:main"
 [tool.poetry.dependencies]
 python = "^3.9"
 
-[tool.poetry.dev-dependencies]
-black = "^22.6.0"
-isort = "^5.10.0"
-mypy = "^0.971"
-flake8 = "^5.0.0"
-flake8-pyproject = "^1.1.0"
+[tool.poetry.group.dev.dependencies]
+black = "^22.10.0"
+isort = "^5.11.2"
+mypy = "^0.991"
+flake8 = "^5.0.4"
+flake8-pyproject = "^1.2.2"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]

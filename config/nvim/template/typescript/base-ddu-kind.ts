@@ -1,8 +1,8 @@
-import type { Actions } from "https://deno.land/x/ddu_vim@v1.10.1/types.ts";
+import type { Actions } from "https://deno.land/x/ddu_vim@v2.0.0/types.ts";
 import {
   ActionFlags,
   BaseKind,
-} from "https://deno.land/x/ddu_vim@v1.10.1/types.ts";
+} from "https://deno.land/x/ddu_vim@v2.0.0/types.ts";
 
 export interface ActionData {
   placeholder: unknown;
@@ -10,17 +10,17 @@ export interface ActionData {
 type Params = Record<never, never>;
 
 export class Kind extends BaseKind<Params> {
-  actions: Actions<Params> = {
-    action(args) {
+  override actions: Actions<Params> = {
+    action: (args) => {
       for (const item of args.items) {
-        const _action = item?.action as ActionData;
-        // {{_cursor_}}
+        const action = item?.action as ActionData;
+        action; // {{_cursor_}}
       }
       return Promise.resolve(ActionFlags.None);
     },
   };
 
-  params(): Params {
+  override params(): Params {
     return {};
   }
 }
