@@ -1,13 +1,21 @@
 [[plugins]]
 repo = 'Shougo/ddu.vim'
 depends = ['denops.vim']
+on_func = ['ddu#start']
 hook_add = '''
 let g:launcher_config.ddu = {
       \ 'char': 'd',
       \ 'run': { -> ddu#start({'sources': [{'name': 'source'}]}) },
       \ }
 nnoremap <Leader>d <Cmd>Ddu -resume<CR>
-inoremap <C-x><C-e> <Cmd>Ddu emoji -ui-param-startFilter<CR>
+inoremap <C-x><C-e> <Cmd>call ddu#start(#{
+      \ sources: [
+      \   #{ name: 'emoji', options: #{ defaultAction: 'feedkeys' } },
+      \ ],
+      \ uiParams: #{
+      \   ff: #{ replaceCol: col('.') }
+      \ },
+      \ })<CR>
 '''
 hook_source = '''
 Runtime dein/settings/ddu.vim

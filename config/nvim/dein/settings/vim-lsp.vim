@@ -28,7 +28,7 @@ let g:lsp_diagnostics_virtual_text_delay = 200
 let g:lsp_document_code_action_signs_delay = 200
 let g:lsp_document_highlight_enabled = v:false
 let g:lsp_fold_enabled = v:false
-let g:lsp_signature_help_enabled = v:true
+let g:lsp_signature_help_enabled = v:false " NOTE: use denops-signature-help
 let g:lsp_work_done_progress_enabled = v:true
 
 let g:lsp_diagnostics_signs_error = {'text': '✗'}

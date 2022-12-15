@@ -116,7 +116,7 @@ function! g:searchx.convert(input) abort
   if a:input !~# '\k'
     return '\V' .. a:input
   endif
-  return substitute(a:input, '\s\+', '.\{-}', 'g')
+  return split(a:input, '\s\+')->join('.\{-}')
 endfunction
 
 autocmd vimrc User SearchxEnter
@@ -287,6 +287,10 @@ repo = 'lambdalisue/file-protocol.vim'
 on_path = '^file://'
 
 [[plugins]]
+repo = 'lambdalisue/suda.vim'
+on_cmd = ['SudaRead', 'SudaWrite']
+
+[[plugins]]
 repo = 'lambdalisue/vim-protocol'
 on_path = '^https\?://'
 
@@ -329,12 +333,12 @@ hook_add = '''
 let g:sonictemplate_vim_template_dir = [
       \ g:config_home .. '/template',
       \ ]
-let g:sonictemplate_vim_vars = {
-      \ '_': {
+let g:sonictemplate_vim_vars = #{
+      \ _: {
       \   'author': 'Hibiki',
       \ },
-      \ 'help': {
-      \   'author': 'Hibiki <4513echo@gmail.com>'
+      \ help: #{
+      \   author: 'Hibiki <4513echo@gmail.com>'
       \ },
       \ }
 let g:sonictemplate_postfix_key = ''
@@ -377,14 +381,14 @@ nnoremap J  <Plug>(jplus-getchar)<Space>
 xnoremap J  <Plug>(jplus-getchar)<Space>
 nnoremap gJ <Plug>(jplus)
 xnoremap gJ <Plug>(jplus)
-let g:jplus#config = {
-      \ '_': {
-      \   'delimiter': '',
-      \   'right_matchstr_pattern': '^\s*#\s*\zs.*\|\s*\zs.*',
-      \   'left_matchstr_pattern': '^.\{-}\%(\ze\s*\\$\|$\)',
+let g:jplus#config = #{
+      \ _: #{
+      \   delimiter: '',
+      \   right_matchstr_pattern: '^\s*#\s*\zs.*\|\s*\zs.*',
+      \   left_matchstr_pattern: '^.\{-}\%(\ze\s*\\$\|$\)',
       \ },
-      \ 'vim': {
-      \   'right_matchstr_pattern': '^\s*\\\s*\zs.*\|^\s*"\s*\zs.*\|\s*\zs.*',
+      \ vim: #{
+      \   right_matchstr_pattern: '^\s*\\\s*\zs.*\|^\s*"\s*\zs.*\|\s*\zs.*',
       \ }}
 '''
 
@@ -503,6 +507,8 @@ depends = ['denops.vim']
 on_cmd = ['Glance']
 hook_add = '''
 let g:glance#markdown_html = v:true
+let g:glance#markdown_linkify = v:true
+let g:glance#markdown_breaks = v:true
 let g:glance#stylesheet = '@import url("https://unpkg.com/sakura.css/css/sakura.css");'
 '''
 

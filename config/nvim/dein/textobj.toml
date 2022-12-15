@@ -116,28 +116,27 @@ xnoremap il <Plug>(textobj-line-i)
 [[plugins]]
 repo = 'machakann/vim-textobj-functioncall'
 on_map = { xo = '<Plug>' }
-on_func = ['textobj#functioncall#i', 'textobj#functioncall#ip']
+on_func = ['textobj#functioncall#']
 depends = ['vim-textobj-user']
 hook_add = '''
 " from https://github.com/yuki-yano/dotfiles/blob/8840dc3a90/.vimrc#L2953
 let g:textobj_functioncall_no_default_key_mappings = v:true
-
-let g:textobj_functioncall_patterns = [{
-      \ 'header' : '\<\%(\h\k*\.\)*\h\k*',
-      \ 'bra'    : '(',
-      \ 'ket'    : ')',
-      \ 'footer' : '',
+let g:textobj_functioncall_patterns = [#{
+      \ header: '\<\%(\h\k*\.\)*\h\k*',
+      \ bra   : '(',
+      \ ket   : ')',
+      \ footer: '',
       \ }]
 onoremap <silent> af <Plug>(textobj-functioncall-i)
 onoremap <silent> if <Plug>(textobj-functioncall-innerparen-i)
 xnoremap <silent> af <Plug>(textobj-functioncall-i)
 xnoremap <silent> if <Plug>(textobj-functioncall-innerparen-i)
 
-let g:textobj_functioncall_generics_patterns = [{
-      \ 'header' : '\<\h\k*',
-      \ 'bra'    : '<',
-      \ 'ket'    : '>',
-      \ 'footer' : '',
+let g:textobj_functioncall_generics_patterns = [#{
+      \ header: '\<\h\k*',
+      \ bra   : '<',
+      \ ket   : '>',
+      \ footer: '',
       \ }]
 onoremap <silent> <Plug>(textobj-functioncall-generics-a) :<C-u>call textobj#functioncall#i('o', g:textobj_functioncall_generics_patterns)<CR>
 onoremap <silent> <Plug>(textobj-functioncall-generics-i) :<C-u>call textobj#functioncall#ip('o', g:textobj_functioncall_generics_patterns)<CR>
