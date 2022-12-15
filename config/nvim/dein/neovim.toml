@@ -1,13 +1,11 @@
 [[plugins]]
 repo = 'hrsh7th/nvim-pasta'
-on_map = { nx = '<Plug>' }
+on_lua = 'pasta'
 lua_add = '''
-vim.keymap.set({ "n", "x" }, "p", "<Plug>(pasta-p)")
-vim.keymap.set({ "n", "x" }, "P", "<Plug>(pasta-P)")
+vim.keymap.set({ "n", "x" }, "p", function() require("pasta.mappings").p() end)
+vim.keymap.set({ "n", "x" }, "P", function() require("pasta.mappings").P() end)
 '''
 lua_source = '''
-vim.keymap.set({ "n", "x" }, "<Plug>(pasta-p)", require("pasta.mappings").p)
-vim.keymap.set({ "n", "x" }, "<Plug>(pasta-P)", require("pasta.mappings").P)
 require("pasta").setup {
   converters = {
     require("pasta.converters").indentation,

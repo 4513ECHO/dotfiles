@@ -319,9 +319,9 @@ Runtime dein/settings/vim-lsp.vim
 '''
 hook_source = '''
 if v:vim_did_enter
-  call lsp#enable()
+  call timer_start(0, { -> lsp#enable() })
 else
-  autocmd vimrc VimEnter * call lsp#enable()
+  autocmd vimrc VimEnter *  call timer_start(0, { -> lsp#enable() })
 endif
 '''
 
