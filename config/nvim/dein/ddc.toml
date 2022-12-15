@@ -1,36 +1,13 @@
 [[plugins]]
 repo = 'Shougo/ddc.vim'
-depends = ['context_filetype.vim', 'denops.vim', 'lexima.vim']
+depends = ['denops.vim', 'lexima.vim']
 on_event = ['InsertEnter']
 hook_add = '''
-inoremap <silent><expr> <C-n> pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>' : '<Down>'
-inoremap <silent><expr> <C-p> pum#visible() ? '<Cmd>call pum#map#select_relative(-1)<CR>' : '<Up>'
-
-" cmdline mode
 nnoremap : <Cmd>call timer_start(10, { -> user#ddc#cmdline_pre(':') })<CR>:
 xnoremap : <Cmd>call timer_start(10, { -> user#ddc#cmdline_pre(':') })<CR>:
 cnoremap <expr> <C-n> pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>' : '<Down>'
 cnoremap <expr> <C-p> pum#visible() ? '<Cmd>call pum#map#select_relative(-1)<CR>' : '<Up>'
-cnoremap <expr> <BS> pum#visible() ? '<Cmd>call pum#map#cancel()<CR>' : '<BS>'
-
-" emulate default mappings (see `:help ins-completion`)
-inoremap <silent><expr> <C-x><C-l> ddc#map#manual_complete('line')
-inoremap <silent><expr> <C-x><C-n> ddc#map#manual_complete('around')
-inoremap <silent><expr> <C-x><C-f> ddc#map#manual_complete('file')
-inoremap <silent><expr> <C-x><C-d> ddc#map#manual_complete('vim-lsp')
-inoremap <silent><expr> <C-x><C-v> ddc#map#manual_complete('cmdline')
-inoremap <silent><expr> <C-x><C-u> ddc#map#manual_complete()
-inoremap <silent><expr> <C-x><C-o> ddc#map#manual_complete('omni')
-inoremap <silent><expr> <C-x><C-s> ddc#map#manual_complete('nextword')
-
-function! s:on_gh() abort
-  if fnamemodify(bufname(), ':h') != '/tmp' || getcwd() == '/tmp'
-    return
-  endif
-  inoremap <silent><expr><buffer> <C-x><C-g>
-        \ ddc#map#manual_complete(['github_issue', 'github_pull_request'])
-endfunction
-autocmd vimrc FileType markdown call <SID>on_gh()
+cnoremap <expr> <BS>  pum#visible() ? '<Cmd>call pum#map#cancel()<CR>' : '<BS>'
 '''
 hook_source = '''
 Runtime dein/settings/ddc.vim
@@ -50,7 +27,7 @@ repo = '4513echo/ddc-github'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'LumaKernel/ddc-file'
+repo = 'LumaKernel/ddc-source-file'
 on_source = 'ddc.vim'
 
 [[plugins]]
@@ -79,7 +56,7 @@ on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/neco-vim'
-on_source = 'ddc.vim'
+on_ft = ['vim']
 
 [[plugins]]
 repo = 'delphinus/ddc-tmux'
@@ -87,8 +64,8 @@ on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'hrsh7th/vim-vsnip-integ'
-depends = ['vim-vsnip']
-on_source = ['ddc.vim']
+depends = 'vim-vsnip'
+on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'matsui54/ddc-buffer'
@@ -96,7 +73,7 @@ on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'shun/ddc-vim-lsp'
-on_source = ['ddc.vim', 'vim-lsp']
+on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'vim-skk/skkeleton'
@@ -149,9 +126,6 @@ call popup_preview#enable()
 repo = 'matsui54/denops-signature_help'
 depends = ['denops.vim', 'vim-lsp']
 on_source = 'ddc.vim'
-hook_add = '''
-let g:lsp_signature_help_enabled = v:false
-'''
 hook_source = '''
 call signature_help#enable()
 '''

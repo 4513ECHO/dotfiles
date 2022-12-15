@@ -104,7 +104,7 @@ let s:filterParams.converter_truncate = {
       \ }
 
 call ddc#custom#patch_filetype(
-      \ ['vim', 'toml'], {
+      \ ['vim'], {
       \ 'sources': extend(['necovim'], s:sources),
       \ })
 call ddc#custom#patch_filetype(
@@ -113,7 +113,8 @@ call ddc#custom#patch_filetype(
       \   'vim-lsp': {'forceCompletionPattern': '\.|[={[,"]\s*'},
       \ }})
 call ddc#custom#patch_filetype(
-      \ dein#get('vim-lsp-settings').on_ft, {
+      \ ['python', 'typescript', 'typescriptreact', 'rust', 'markdown', 'yaml',
+      \ 'json', 'sh', 'lua', 'toml', 'go'], {
       \ 'sources': extend(['vim-lsp'], s:sources),
       \ })
 call ddc#custom#patch_filetype(
@@ -158,15 +159,28 @@ let s:patch_global.ui = 'pum'
 call ddc#custom#patch_global(s:patch_global)
 
 " key mappings
+inoremap <silent><expr> <C-n> pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>' : '<Down>'
+inoremap <silent><expr> <C-p> pum#visible() ? '<Cmd>call pum#map#select_relative(-1)<CR>' : '<Up>'
 " NOTE: define these in hook_source to ensure it is loaded after lexima.vim is sourced
-inoremap <silent><expr> <BS> pum#visible()
-      \ ? '<Cmd>call pum#map#cancel()<CR>'
-      \ : lexima#expand('<lt>BS>', 'i')
-inoremap <silent><expr> <CR> pum#visible()
-      \ ? '<Cmd>call pum#map#confirm()<CR>'
-      \ : lexima#expand('<lt>CR>', 'i')
-cnoremap <expr> <CR> pum#visible()
-      \ ? '<Cmd>call pum#map#confirm()<CR>'
-      \ : lexima#expand('<lt>CR>', ':')
+inoremap <silent><expr> <BS> pum#visible() ? '<Cmd>call pum#map#cancel()<CR>'  : lexima#expand('<lt>BS>', 'i')
+inoremap <silent><expr> <CR> pum#visible() ? '<Cmd>call pum#map#confirm()<CR>' : lexima#expand('<lt>CR>', 'i')
+cnoremap         <expr> <CR> pum#visible() ? '<Cmd>call pum#map#confirm()<CR>' : lexima#expand('<lt>CR>', ':')
+" emulate default mappings (see `:help ins-completion`)
+inoremap <silent><expr> <C-x><C-l> ddc#map#manual_complete('line')
+inoremap <silent><expr> <C-x><C-n> ddc#map#manual_complete('around')
+inoremap <silent><expr> <C-x><C-f> ddc#map#manual_complete('file')
+inoremap <silent><expr> <C-x><C-d> ddc#map#manual_complete('vim-lsp')
+inoremap <silent><expr> <C-x><C-v> ddc#map#manual_complete('cmdline')
+inoremap <silent><expr> <C-x><C-u> ddc#map#manual_complete()
+inoremap <silent><expr> <C-x><C-o> ddc#map#manual_complete('omni')
+inoremap <silent><expr> <C-x><C-s> ddc#map#manual_complete('nextword')
+
+function! s:on_gh() abort
+  if fnamemodify(bufname(), ':h') ==# '/tmp' && getcwd() !=# '/tmp'
+    inoremap <silent><expr><buffer> <C-x><C-g>
+          \ ddc#map#manual_complete(['github_issue', 'github_pull_request'])
+  endif
+endfunction
+autocmd vimrc FileType markdown call <SID>on_gh()
 
 call ddc#enable()
