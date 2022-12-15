@@ -2,9 +2,6 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'cocopon/lightline-hybrid.vim'
-
-[[plugins]]
 repo = 'delphinus/vim-auto-cursorline'
 hook_add = '''
 let g:auto_cursorline_wait_ms = 4000
@@ -28,7 +25,6 @@ let b:auto_cursorline_disabled = v:true
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
-depends = ['lightline-gruvbox.vim', 'lightline-hybrid.vim']
 hook_add = '''
 let g:lightline = #{
       \ colorscheme: user#colorscheme#lightline(),
@@ -119,41 +115,9 @@ nnoremap <silent><buffer> r  <Plug>(molder-operations-rename)
 '''
 
 [[plugins]]
-repo = 'mhinz/vim-signify'
-hook_add = '''
-call setcellwidths([[0x2503, 0x2503, 1]])
-let g:signify_sign_add               = '┃'
-let g:signify_sign_change            = '┃'
-let g:signify_sign_delete            = '┃'
-let g:signify_sign_delete_first_line = '┃'
-let g:signify_line_highlight = v:false
-'''
-
-[[plugins]]
-repo = 'micchy326/lightline-lsp-progress'
-
-[[plugins]]
 repo = 'rafamadriz/friendly-snippets'
 
 [[plugins]]
 repo = 'roxma/vim-tmux-clipboard'
 if = '!has("gui_running")'
-
-[[plugins]]
-repo = 'shinchu/lightline-gruvbox.vim'
-
-[[plugins]]
-repo = 'thinca/vim-localrc'
-hook_add = '''
-let g:localrc_filename = '.vimrc.local'
-'''
-
-[[plugins]]
-repo = 'Yggdroot/indentLine'
-hook_add = '''
-let g:indentLine_bufTypeExclude = ['help', 'terminal']
-let g:indentLine_char = '¦'
-let g:indentLine_faster = v:true
-let g:indentLine_setConceal = v:false
-'''
 

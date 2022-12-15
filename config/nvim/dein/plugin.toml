@@ -40,6 +40,10 @@ repo = 'cocopon/colorswatch.vim'
 on_cmd = ['ColorSwatchGenerate']
 
 [[plugins]]
+repo = 'cocopon/lightline-hybrid.vim'
+on_source = 'lightline.vim'
+
+[[plugins]]
 repo = 'cocopon/inspecthi.vim'
 depends = ['colorswatch.vim']
 on_cmd = ['Inspecthi']
@@ -65,7 +69,7 @@ on_cmd = ['XtermColorTable']
 
 [[plugins]]
 repo = 'halkn/lightline-lsp'
-on_func = ['lightline_lsp#errors', 'lightline_lsp#ok', 'lightline_lsp#warnings']
+on_func = 'lightline_lsp#'
 
 [[plugins]]
 repo = 'haya14busa/dein-command.vim'
@@ -304,17 +308,17 @@ nnoremap g+    <Plug>(highlightedundo-gplus)
 
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
-depends = ['vim-lsp']
-on_ft = [
-  'python', 'typescript', 'typescriptreact',
-  'rust', 'markdown', 'yaml', 'json', 'sh', 'lua',
-  'toml', 'go',
-]
+depends = 'vim-lsp'
+on_event = ['BufRead']
 hook_add = '''
 Runtime dein/settings/vim-lsp.vim
 '''
 hook_source = '''
-call lsp#enable()
+if v:vim_did_enter
+  call lsp#enable()
+else
+  autocmd vimrc VimEnter * call lsp#enable()
+endif
 '''
 
 [[plugins]]
@@ -339,10 +343,25 @@ nnoremap <C-x><C-t> <Plug>(sonictemplate-intelligent)
 '''
 
 [[plugins]]
+repo = 'mhinz/vim-signify'
+on_event = ['BufRead']
+hook_add = '''
+call setcellwidths([[0x2503, 0x2503, 1]])
+let g:signify_sign_add               = '┃'
+let g:signify_sign_change            = '┃'
+let g:signify_sign_delete            = '┃'
+let g:signify_sign_delete_first_line = '┃'
+let g:signify_line_highlight = v:false
+'''
+
+[[plugins]]
+repo = 'micchy326/lightline-lsp-progress'
+on_func = 'lightline_lsp_progress#'
+
+[[plugins]]
 repo = 'ojroques/vim-oscyank'
 if = '!has("gui_running")'
 on_cmd = ['OSCYank', 'OSCYankReg']
-on_event = ['TextYankPost']
 hook_add = '''
 autocmd vimrc TextYankPost *
       \ : if v:event.regname ==# 'p'
@@ -375,6 +394,11 @@ on_cmd = ['AsyncEmbed']
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
+on_source = 'vim-lsp-settings'
+
+[[plugins]]
+repo = 'shinchu/lightline-gruvbox.vim'
+on_source = 'lightline.vim'
 
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
@@ -480,6 +504,13 @@ on_cmd = ['Glance']
 hook_add = '''
 let g:glance#markdown_html = v:true
 let g:glance#stylesheet = '@import url("https://unpkg.com/sakura.css/css/sakura.css");'
+'''
+
+[[plugins]]
+repo = 'thinca/vim-localrc'
+on_event = ['BufRead']
+hook_add = '''
+let g:localrc_filename = '.vimrc.local'
 '''
 
 [[plugins]]
@@ -679,6 +710,17 @@ let g:denops#server#deno_args = [
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 type__depth = 1
+
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+on_event = ['BufRead']
+hook_add = '''
+let g:indentLine_bufTypeExclude = ['help', 'terminal']
+let g:indentLine_char = '¦'
+let g:indentLine_faster = v:true
+let g:indentLine_setConceal = v:false
+'''
 
 [[plugins]]
 repo = 'yuttie/comfortable-motion.vim'
