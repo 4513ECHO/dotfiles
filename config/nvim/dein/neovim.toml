@@ -1,8 +1,13 @@
 [[plugins]]
 repo = 'hrsh7th/nvim-pasta'
+on_map = { nx = '<Plug>' }
 lua_add = '''
-vim.keymap.set({ "n", "x" }, "p", require("pasta.mappings").p)
-vim.keymap.set({ "n", "x" }, "P", require("pasta.mappings").P)
+vim.keymap.set({ "n", "x" }, "p", "<Plug>(pasta-p)")
+vim.keymap.set({ "n", "x" }, "P", "<Plug>(pasta-P)")
+'''
+lua_source = '''
+vim.keymap.set({ "n", "x" }, "<Plug>(pasta-p)", require("pasta.mappings").p)
+vim.keymap.set({ "n", "x" }, "<Plug>(pasta-P)", require("pasta.mappings").P)
 require("pasta").setup {
   converters = {
     require("pasta.converters").indentation,
@@ -74,17 +79,6 @@ on_source = ['nvim-treesitter']
 [plugins.ftplugin]
 tsplayground = '''
 nnoremap <buffer> q <C-w>q
-'''
-
-[[plugins]]
-repo = 'petertriho/nvim-scrollbar'
-lazy = true
-on_lua = ['scrollbar', 'scrollbar.utils', 'scrollbar.handlers']
-lua_add = '''
-require('vimrc.plugin.scrollbar').hook_add()
-'''
-lua_source = '''
-require('vimrc.plugin.scrollbar').hook_source()
 '''
 
 [[plugins]]
