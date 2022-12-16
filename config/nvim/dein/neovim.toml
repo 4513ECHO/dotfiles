@@ -23,8 +23,12 @@ repo = 'ii14/emmylua-nvim'
 repo = 'kevinhwang91/nvim-hlslens'
 lazy = true
 on_lua = ['hlslens']
+on_event = ['CmdlineEnter']
 lua_add = '''
 require('vimrc.plugin.hlslens').hook_add()
+'''
+lua_source = '''
+require("hlslens").setup { auto_enable = false }
 '''
 
 [[plugins]]
