@@ -3,24 +3,31 @@ name: poetry
 on:
   push:
     branches: [main]
-    paths:
-      - config/python
   pull_request:
     branches: [main]
-    paths:
-      - config/python
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Check out
         uses: actions/checkout@v3
+      # NOTE: use paths-filter instead of on.pull_request.paths to trigger test always
+      - name: Check Changed Files
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            python:
+              - 'config/python/pyproject.toml'
+              - 'config/python/poetry.lock'
       - name: Set up python
+        if: steps.filter.outputs.python == "true"
         id: python
         uses: actions/python@v4
         with:
           python-version: "3.10"
       - name: Install Poetry
+        if: steps.filter.outputs.python == "true"
         uses: snok/install-poetry@v1
         with:
           virtualenvs-create: true
@@ -28,14 +35,17 @@ jobs:
           virtualenvs-path: ~/.cache/venv
           installer-parallel: true
       - name: Load cached venv
+        if: steps.filter.outputs.python == "true"
         id: cache
         uses: actions/cache@v3
         with:
           path: ~/.cache/venv
           key: venv-${{ runner.os }}-${{ steps.python.outputs.python-version }}-${{ hashFiles('config/python/poetry.lock') }}
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != "true"
+        if: steps.filter.outputs.python == "true" && steps.cache.outputs.cache-hit != "true"
         run: poetry install --no-interaction --no-root
+        working-directory: config/python
       - name: Install project
+        if: steps.filter.outputs.python == "true"
         run: poetry install --no-interaction
         working-directory: config/python
