@@ -9,7 +9,7 @@ python = "^3.10"
 
 [tool.poetry.group.tool.dependencies]
 black = "^22.10.0"
-isort = "^5.11.2"
+isort = "^5.11.3"
 mypy = "^0.991"
 
 # cli tools that has low priority
