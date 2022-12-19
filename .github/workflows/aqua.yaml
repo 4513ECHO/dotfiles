@@ -34,17 +34,17 @@ jobs:
               - "config/aqua/aqua.yaml"
               - "config/aqua/experimental.yaml"
       - name: Install aqua
-        if: steps.filter.outputs.aqua == "true"
+        if: steps.filter.outputs.aqua == 'true'
         uses: aquaproj/aqua-installer@v1.1.1
         with:
           aqua_version: v1.25.0
       - name: Set up Golang
-        if: steps.filter.outputs.aqua == "true"
+        if: steps.filter.outputs.aqua == 'true'
         uses: actions/setup-go@v3
         with:
           go-version: "1.19.4"
       - name: Run test
-        if: steps.filter.outputs.aqua == "true"
+        if: steps.filter.outputs.aqua == 'true'
         run: aqua install --test
         env:
           AQUA_GOARCH: ${{ matrix.goarch }}
