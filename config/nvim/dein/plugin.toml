@@ -69,7 +69,7 @@ on_cmd = ['XtermColorTable']
 
 [[plugins]]
 repo = 'halkn/lightline-lsp'
-on_func = 'lightline_lsp#'
+on_source = 'lightline.vim'
 
 [[plugins]]
 repo = 'haya14busa/dein-command.vim'
@@ -148,6 +148,55 @@ inoremap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : ''
 snoremap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : ''
 autocmd vimrc User PumCompleteDone
       \ call vsnip_integ#on_complete_done(g:pum#completed_item)
+'''
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+on_event = ['WinNew', 'TabNew']
+hook_add = '''
+let g:lightline = #{
+      \ colorscheme: user#colorscheme#lightline(),
+      \ subseparator: #{ left: '/', right: '/' },
+      \ active: #{
+      \   left: [
+      \     ['mode', 'paste'],
+      \     ['readonly', 'filename', 'modified'],
+      \     ['protocol', 'ddu', 'lsp_progress'],
+      \   ],
+      \   right: [
+      \     ['lsp_errors', 'lsp_warnings', 'lineinfo'],
+      \     ['percent'],
+      \     ['colorscheme', 'fileformat', 'fileencoding', 'filetype'],
+      \   ],
+      \ },
+      \ inactive: #{ left: [ ['filename', 'modified'] ] },
+      \ component_function: #{
+      \   colorscheme: 'lightline#component#vimrc#colorscheme',
+      \   ddu: 'lightline#component#vimrc#ddu',
+      \   fileformat: 'lightline#component#vimrc#file_format',
+      \   fileencoding: 'lightline#component#vimrc#file_encoding',
+      \   filename: 'lightline#component#vimrc#filename',
+      \   mode: 'lightline#component#vimrc#mode',
+      \   readonly: 'lightline#component#vimrc#readonly',
+      \   modified: 'lightline#component#vimrc#modified',
+      \   protocol: 'lightline#component#vimrc#protocol',
+      \   lsp_progress: 'lightline_lsp_progress#progress',
+      \ },
+      \ component: #{
+      \   lineinfo: '%3l:%-2v',
+      \ },
+      \ component_expand: #{
+      \   lsp_errors: 'lightline_lsp#errors',
+      \   lsp_warnings: 'lightline_lsp#warnings',
+      \ },
+      \ component_type: #{
+      \   lsp_errors: 'error',
+      \   lsp_warnings: 'warning',
+      \ },
+      \ }
+" from https://github.com/sheepla/dotfiles/blob/fcda1fd7/config/nvim/lightlinerc.vim#L52
+command! -bar LightlineUpdate
+      \ call lightline#init() | call lightline#colorscheme() | call lightline#update()
 '''
 
 [[plugins]]
@@ -360,7 +409,7 @@ let g:signify_line_highlight = v:false
 
 [[plugins]]
 repo = 'micchy326/lightline-lsp-progress'
-on_func = 'lightline_lsp_progress#'
+on_source = 'lightline.vim'
 
 [[plugins]]
 repo = 'ojroques/vim-oscyank'
