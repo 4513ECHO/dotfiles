@@ -472,14 +472,6 @@ let g:context_filetype#ignore_patterns = {
 '''
 
 [[plugins]]
-repo = 'skanehira/denops-twihi.vim'
-depends = ['denops.vim']
-on_cmd = [
-  'TwihiTimeline', 'TwihiHome', 'TwihiMentions',
-  'TwihiTweet', 'TwihiEditConfig',
-]
-
-[[plugins]]
 repo = 'skanehira/denops-translate.vim'
 depends = ['denops.vim']
 on_cmd = ['Translate']
@@ -532,12 +524,12 @@ on_event = ['BufRead', 'InsertLeave']
 hook_add = '''
 let g:Hexokinase_highlighters = ['backgroundfull']
 let g:Hexokinase_optOutPatterns = ['colour_names']
-let g:Hexokinase_ftOptInPatterns = {
-      \ 'css': [
+let g:Hexokinase_ftOptInPatterns = #{
+      \ css: [
       \   'full_hex', 'triple_hex', 'rgb',
       \   'rgba', 'hsl', 'hsla', 'colour_names'
       \ ],
-      \ 'html': [
+      \ html: [
       \   'full_hex', 'triple_hex', 'rgb',
       \   'rgba', 'hsl', 'hsla', 'colour_names'
       \ ],
@@ -730,8 +722,8 @@ hook_add = '''
 let g:caw_operator_keymappings = v:true
 let g:caw_no_default_keymappings = v:true
 nnoremap <silent> <Bslash><Bslash> <Plug>(caw:hatpos:toggle)
-nnoremap <silent> <Bslash>  <Plug>(caw:hatpos:toggle:operator)
-xnoremap <silent> <Bslash>  <Plug>(caw:hatpos:toggle:operator)
+nnoremap <silent> <Bslash>         <Plug>(caw:hatpos:toggle:operator)
+xnoremap <silent> <Bslash>         <Plug>(caw:hatpos:toggle:operator)
 '''
 [plugins.ftplugin]
 gitcommit = '''

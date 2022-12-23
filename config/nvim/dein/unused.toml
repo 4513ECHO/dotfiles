@@ -119,6 +119,14 @@ if = '!has("nvim")'
 on_cmd = ['BadApple']
 
 [[plugins]]
+repo = 'skanehira/denops-twihi.vim'
+depends = ['denops.vim']
+on_cmd = [
+  'TwihiTimeline', 'TwihiHome', 'TwihiMentions',
+  'TwihiTweet', 'TwihiEditConfig',
+]
+
+[[plugins]]
 repo = 'terryma/vim-expand-region'
 on_map = { nx = '<Plug>' }
 hook_add = '''
