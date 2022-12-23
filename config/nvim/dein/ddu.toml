@@ -32,7 +32,7 @@ nnoremap <buffer> i
 nnoremap <buffer> <Tab>
       \ <Cmd>call ddu#ui#ff#do_action('chooseAction')<CR>
 nnoremap <buffer> <C-l>
-      \ <Cmd>call ddu#ui#ff#do_action('refreshItems')<CR>
+      \ <Cmd>call ddu#ui#ff#do_action('refreshItems')<Bar>redraw<CR>
 nnoremap <buffer> p
       \ <Cmd>call ddu#ui#ff#do_action('preview')<CR>
 nnoremap <buffer> q
@@ -52,13 +52,12 @@ nnoremap <buffer> v
 ddu-ff-filter = '''
 nnoremap <buffer> q     <Cmd>call ddu#ui#ff#close()<CR>
 nnoremap <buffer> <CR>  <Cmd>call ddu#ui#ff#close()<CR>
-inoremap <buffer> <CR>
-      \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
-inoremap <buffer> <C-l> <Cmd>call ddu#ui#ff#close()<CR>
+inoremap <buffer> <CR>  <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
+inoremap <buffer> <C-c> <Esc><Cmd>call ddu#ui#ff#close()<CR>
 inoremap <buffer> <C-n>
-      \ <Cmd>call ddu#ui#ff#execute("call cursor(line('.')+1,0)")<CR>
+      \ <Cmd>call ddu#ui#ff#execute("call cursor(line('.')+1,0)<Bar>redraw")<CR>
 inoremap <buffer> <C-p>
-      \ <Cmd>call ddu#ui#ff#execute("call cursor(line('.')-1,0)")<CR>
+      \ <Cmd>call ddu#ui#ff#execute("call cursor(line('.')-1,0)<Bar>redraw")<CR>
 '''
 
 [[plugins]]
@@ -124,10 +123,6 @@ repo = '4513echo/ddu-source-source'
 on_source = 'ddu.vim'
 
 [[plugins]]
-repo = 'Bakudankun/ddu-source-package'
-on_source = 'ddu.vim'
-
-[[plugins]]
 repo = 'kuuote/ddu-source-mr'
 on_source = 'ddu.vim'
 
@@ -137,14 +132,6 @@ on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'Shougo/ddu-source-file'
-on_source = 'ddu.vim'
-
-[[plugins]]
-repo = 'Shougo/ddu-source-file_old'
-on_source = 'ddu.vim'
-
-[[plugins]]
-repo = 'Shougo/ddu-source-file_point'
 on_source = 'ddu.vim'
 
 [[plugins]]
@@ -180,10 +167,6 @@ repo = 'matsui54/ddu-source-help'
 on_source = 'ddu.vim'
 
 [[plugins]]
-repo = 'matsui54/ddu-source-highlight'
-on_source = 'ddu.vim'
-
-[[plugins]]
 repo = 'matsui54/ddu-source-man'
 on_source = 'ddu.vim'
 
@@ -194,5 +177,4 @@ on_source = 'ddu.vim'
 [[plugins]]
 repo = 'shun/ddu-source-rg'
 on_source = 'ddu.vim'
-
 
