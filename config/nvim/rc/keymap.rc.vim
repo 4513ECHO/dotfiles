@@ -2,9 +2,6 @@
 let g:mapleader = ','
 nnoremap <Leader> <Nop>
 xnoremap <Leader> <Nop>
-inoremap <Leader><Space> <Leader>
-" NOTE: enable remap because of lexima.vim
-imap <silent> <Leader><Leader> <Esc>
 xnoremap <Leader><Leader> <Esc>
 
 if has('nvim')
@@ -26,11 +23,6 @@ xnoremap S <Nop>
 nnoremap <expr> Q empty(reg_recording())
       \ ? 'q' .. (v:register =~# '["*+]' ? 'q' : v:register)
       \ : 'q'
-
-" disable tmux prefix key
-nnoremap <C-q> <Nop>
-xnoremap <C-q> <Nop>
-noremap! <C-q> <Nop>
 
 nnoremap j gj
 nnoremap k gk
@@ -83,8 +75,6 @@ inoremap <C-w> <C-g>u<C-w>
 nnoremap [Space] <Nop>
 nmap <Space> [Space]
 nnoremap <C-l> <Cmd>nohlsearch<Bar>diffupdate<CR><C-l>
-nnoremap <Leader><C-r>
-      \ <Cmd>source $MYVIMRC<Bar>nohlsearch<Bar>echomsg 'reloaded!'<CR>
 nnoremap [Space]w <Cmd>update<CR>
 nnoremap [Space]W <Cmd>write<CR>
 nnoremap ^ <C-^><Cmd>edit<CR>
@@ -107,6 +97,9 @@ xnoremap / <Esc>/\%V
 nnoremap z. <Cmd>normal! zszH<CR>
 " from https://github.com/romgrk/nvim/blob/ba305c52/rc/keymap.vim#L98-L99
 nnoremap <expr> i getline('.') =~# '^\s\+$' ? 'cc' : 'i'
+" from https://github.com/monaqa/dotfiles/blob/de4bdb9f/.config/nvim/lua/rc/keymap.lua#L436
+nnoremap <expr> dd empty(getline('.')) && v:count1 == 1 && v:register ==# '"'
+      \ ? '"_dd' : 'dd'
 
 " NOTE: `g_` is almost same as `$h`
 xnoremap v g_
@@ -117,8 +110,8 @@ xnoremap > >gv
 onoremap <Space> t<Space>
 onoremap ) t)
 
-inoremap <Leader>z <C-o>zz
-inoremap <Leader>p <Cmd>setlocal paste! paste?<CR>
+inoremap <C-g>z <C-o>zz
+inoremap <C-g>p <Cmd>setlocal paste! paste?<CR>
 
 " emacs-like insert/cmdline mode mapping {{{
 function! s:is_at_end() abort
@@ -139,14 +132,11 @@ cnoremap <expr> <C-k>
 noremap! <C-y> <C-r>*
 " }}}
 
-noremap! ¥ <Bslash>
+map! ¥ <Bslash>
+map  ¥ <Bslash>
 
 " insert current file fullpath
-cnoremap <C-x> <C-r>=expand('%:p')<CR>
-
-cnoreabbrev <expr> w!!
-      \ (getcmdtype() ==# ':' && getcmdline() ==# 'w!!')
-      \ ? 'write !sudo tee > /dev/null %' : 'w!!'
+cnoremap <C-x><C-x> <C-r>=expand('%:p')<CR>
 
 " toggle options
 nnoremap [Toggle] <Nop>

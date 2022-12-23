@@ -509,11 +509,17 @@ xnoremap F <Plug>(clever-f-F)
 xnoremap T <Plug>(clever-f-T)
 xnoremap f <Plug>(clever-f-f)
 xnoremap t <Plug>(clever-f-t)
+nnoremap ; <Plug>(clever-f-repeat-forward)
+nnoremap , <Plug>(clever-f-repeat-back)
+xnoremap ; <Plug>(clever-f-repeat-forward)
+xnoremap , <Plug>(clever-f-repeat-back)
+onoremap ; <Plug>(clever-f-repeat-forward)
+onoremap , <Plug>(clever-f-repeat-back)
 let g:clever_f_across_no_line = v:true
 let g:clever_f_ignore_case = v:true
 let g:clever_f_smart_case = v:true
 let g:clever_f_use_migemo = v:true
-let g:clever_f_chars_match_any_signs = ';'
+let g:clever_f_chars_match_any_signs = "\<C-g>"
 let g:clever_f_timeout_ms = 5000
 autocmd vimrc ColorScheme *
       \ hi def CleverFDefaultLabel guifg=red guibg=NONE gui=bold,underline
@@ -723,9 +729,9 @@ depends = ['context_filetype.vim', 'vim-operator-user']
 hook_add = '''
 let g:caw_operator_keymappings = v:true
 let g:caw_no_default_keymappings = v:true
-nnoremap <silent> ;; <Plug>(caw:hatpos:toggle)
-nnoremap <silent> ;  <Plug>(caw:hatpos:toggle:operator)
-xnoremap <silent> ;  <Plug>(caw:hatpos:toggle:operator)
+nnoremap <silent> <Bslash><Bslash> <Plug>(caw:hatpos:toggle)
+nnoremap <silent> <Bslash>  <Plug>(caw:hatpos:toggle:operator)
+xnoremap <silent> <Bslash>  <Plug>(caw:hatpos:toggle:operator)
 '''
 [plugins.ftplugin]
 gitcommit = '''
