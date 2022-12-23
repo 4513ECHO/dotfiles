@@ -60,7 +60,8 @@ python: ## Install and initialize python enviroments
 
 .PHONY: aqua
 aqua: ## Install and initialize aqua enviroments
-	curl -fsSL https://pax.deno.dev/aquaproj/aqua-installer@v1.1.2/aqua-installer | bash
+	curl -fsSL https://pax.deno.dev/aquaproj/aqua-installer@v1.2.0/aqua-installer | bash
+	export PATH="$${AQUA_ROOT_DIR:-$$XDG_DATA_HOME/aquaproj-aqua/bin}:$$PATH"
 	aqua install --all --test
 
 .PHONY: rust
