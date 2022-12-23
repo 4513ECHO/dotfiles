@@ -3,7 +3,7 @@ let s:dein_repo_dir = s:dein_dir .. '/repos/github.com/Shougo/dein.vim'
 
 if &runtimepath !~# s:dein_repo_dir
   if !isdirectory(s:dein_repo_dir)
-    execute '!git clone --depth 1 https://github.com/Shoguo/dein.vim '
+    execute '!git clone --depth 1 https://github.com/Shougo/dein.vim '
           \ .. s:dein_repo_dir
     if v:shell_error
       echohl ErrorMsg
@@ -22,22 +22,19 @@ let g:dein#install_check_diff = v:true
 let g:dein#install_progress_type = 'floating'
 let g:dein#auto_remote_plugins = v:false
 let g:dein#enable_notification = v:true
-let g:denops#disabled = !executable('deno')
 
 if dein#min#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  call dein#load_toml(g:config_home .. '/dein/init.toml',        {'lazy': v:false})
-  call dein#load_toml(g:config_home .. '/dein/colorscheme.toml', {'lazy': v:false})
-  call dein#load_toml(g:config_home .. '/dein/textobj.toml',     {'lazy': v:true})
-  call dein#load_toml(g:config_home .. '/dein/ftplugin.toml',    {'lazy': v:true})
-  call dein#load_toml(g:config_home .. '/dein/plugin.toml',      {'lazy': v:true})
-  if !g:denops#disabled
-    call dein#load_toml(g:config_home .. '/dein/ddc.toml',       {'lazy': v:true})
-    call dein#load_toml(g:config_home .. '/dein/ddu.toml',       {'lazy': v:true})
-  endif
+  call dein#load_toml(g:config_home .. '/dein/init.toml',        #{ lazy: v:false })
+  call dein#load_toml(g:config_home .. '/dein/colorscheme.toml', #{ lazy: v:false })
+  call dein#load_toml(g:config_home .. '/dein/textobj.toml',     #{ lazy: v:true })
+  call dein#load_toml(g:config_home .. '/dein/ftplugin.toml',    #{ lazy: v:true })
+  call dein#load_toml(g:config_home .. '/dein/plugin.toml',      #{ lazy: v:true })
+  call dein#load_toml(g:config_home .. '/dein/ddc.toml',         #{ lazy: v:true })
+  call dein#load_toml(g:config_home .. '/dein/ddu.toml',         #{ lazy: v:true })
   call dein#load_toml(g:config_home .. '/dein/' ..
-        \ (has('nvim') ? 'neovim.toml' : 'vim.toml'),            {'lazy': v:false})
+        \ (has('nvim') ? 'neovim.toml' : 'vim.toml'),            #{ lazy: v:false })
 
   call dein#end()
   call dein#save_state()
