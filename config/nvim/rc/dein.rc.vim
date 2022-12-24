@@ -3,8 +3,8 @@ let s:dein_repo_dir = s:dein_dir .. '/repos/github.com/Shougo/dein.vim'
 
 if &runtimepath !~# s:dein_repo_dir
   if !isdirectory(s:dein_repo_dir)
-    execute '!git clone --depth 1 https://github.com/Shougo/dein.vim '
-          \ .. s:dein_repo_dir
+    execute join(['!git', 'clone', '--depth=1', '--filter=blob:none',
+          \ 'https://github.com/Shougo/dein.vim', s:dein_repo_dir])
     if v:shell_error
       echohl ErrorMsg
       echomsg 'Could not install dein.vim to' s:dein_repo_dir
@@ -15,13 +15,14 @@ if &runtimepath !~# s:dein_repo_dir
   execute 'set runtimepath^=' .. s:dein_repo_dir
 endif
 
-let g:dein#types#git#clone_depth = 1
 let g:dein#auto_recache = v:true
-let g:dein#lazy_rplugins = v:true
-let g:dein#install_check_diff = v:true
-let g:dein#install_progress_type = 'floating'
 let g:dein#auto_remote_plugins = v:false
 let g:dein#enable_notification = v:true
+let g:dein#install_check_diff = v:true
+let g:dein#install_progress_type = 'floating'
+let g:dein#lazy_rplugins = v:true
+let g:dein#types#git#clone_depth = 1
+let g:dein#types#git#enable_partial_clone = v:true
 
 if dein#min#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
