@@ -7,14 +7,6 @@ packages:
   # init: c
 
   # init: d
-  - type: github_content
-    repo_owner: dylanaraps
-    repo_name: neofetch
-    path: neofetch
-    description: A command-line system information tool written in bash 3.2+
-    supported_envs:
-      - darwin
-      - linux
 
   # init: e
 
@@ -76,6 +68,22 @@ packages:
       - linux
 
   # init: k
+  - type: github_release
+    name: k0kubun/xremap/x11 # and gnome, sway
+    repo_owner: k0kubun
+    repo_name: xremap
+    asset: xremap-{{.OS}}-{{.Arch}}-x11.zip
+    description: Key remapper for X11 and Wayland
+    replacements:
+      amd64: x86_64
+      arm64: aarch64
+    supported_envs:
+      - linux
+    version_constraint: semver(">= 0.5.0")
+    version_overrides:
+      - version_constraint: "true"
+        supported_envs:
+          - linux/amd64
 
   # init: l
 
