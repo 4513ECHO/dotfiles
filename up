@@ -8,6 +8,6 @@ failed() { echo "failed: $*" 1>&2; exit 1; }
 printf '\e[1m'
 curl -fsSL "$HEADER"
 printf '\e[m'
-git clone --depth 1 "$URL" "$DOTPATH"
+git clone --depth=1 --filter=blob:none "$URL" "$DOTPATH"
 cd "$DOTPATH" || failed "could not change directory to $DOTPATH"
 make install

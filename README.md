@@ -110,7 +110,7 @@ curl -L https://4513echo.deno.dev/dot | sh
 ### Manually install
 
 ```sh
-git clone --depth 1 https://github.com/4513ECHO/dotfiles
+git clone --depth=1 --filter=blob:none https://github.com/4513ECHO/dotfiles
 cd dotfiles
 make install
 ```
@@ -121,20 +121,16 @@ Other executable binaries or plugins will be installed automatically by
 [aqua](#aqua).
 
 - [curl](https://curl.se)
+- make
 - [git](https://git-scm.com)
-- [tmux](https://github.com/tmux/tmux)
-
-tmux must be `3.2a` or later. Latest version is recommended.
-
+- [tmux](https://github.com/tmux/tmux): `3.2a` or later
 - [vim](https://github.com/vim/vim) / [neovim](https://github.com/neovim/neovim)
-
-**HEAD is recommended.**
-
-vim must be `v8.2.3520` (toml syntax is included in runtime by default) or
-later. neovim must be `v0.8.0` (after `ca64b589c`, filetype.lua is enabled by
-default) or later.
-
 - zsh
+
+Latest versions are recommended.
+
+vim must be `v9.0.1000` or later. neovim must be `v0.9.0` or later. For both of
+vim and neovim, **HEAD is recommended.**
 
 ## 💞 Acknowledgements
 
@@ -145,7 +141,7 @@ many articles on the Internet. Thanks a lot!
 ## 📊 Statistics
 
 <!--deno-fmt-ignore-->
-Statistics are updated at [`52302ac`](https://github.com/4513ECHO/dotfiles/commit/52302ac3e1bb78ca442fdfeb5908b8cc8fa19ed8).
+Statistics are updated at [`cbe8330`](https://github.com/4513ECHO/dotfiles/commit/cbe83308d2dbb8c3bb82fe5a2f6f89365405d5dd).
 
 ### Code Lengths
 
@@ -156,25 +152,26 @@ It uses [tokei](https://github.com/XAMPPRocky/tokei) to measure.
 ===============================================================================
  Language            Files        Lines         Code     Comments       Blanks
 ===============================================================================
- BASH                   18          280          188           43           49
- JSON                   12         1305         1305            0            0
- Lua                     7          318          241           42           35
- Makefile                1           98           87            0           11
+ BASH                   18          285          192           43           50
+ INI                     1            2            2            0            0
+ JSON                   15         1305         1305            0            0
+ Lua                     3          152           85           41           26
+ Makefile                1           71           61            0           10
  Python                  1           33           22            3            8
- Scheme                  6          106           84           11           11
- Shell                   8          177          142           19           16
- Plain Text              1           35            0           24           11
- TOML                   11         2476         2181           31          264
- TypeScript              5          227          200            5           22
- Vim script             27         1916         1752           50          114
- YAML                    7          583          498           37           48
- Zsh                     6          537          411           85           41
+ Scheme                  6          141          119           10           12
+ Shell                   9          179          130           29           20
+ Plain Text              3          187            0          142           45
+ TOML                   13         2624         2302           46          276
+ TypeScript              5          248          222            4           22
+ Vim script             26         1779         1650           45           84
+ YAML                    9          721          632           41           48
+ Zsh                     6          535          402           92           41
 -------------------------------------------------------------------------------
- Markdown                2          192            0          134           58
+ Markdown                2          188            0          133           55
  |- YAML                 1            7            7            0            0
- (Total)                            199            7          134           58
+ (Total)                            195            7          133           55
 ===============================================================================
- Total                 112         8283         7111          484          688
+ Total                 118         8450         7124          629          697
 ===============================================================================
 ```
 <!--tokei-end-->
@@ -185,16 +182,16 @@ It uses [tokei](https://github.com/XAMPPRocky/tokei) to measure.
 ```
 colorscheme.toml      60
 ddc.toml              22
-ddu.toml              32
+ddu.toml              28
 ftplugin.toml         13
-init.toml             17
-neovim.toml            8
-plugin.toml           50
-textobj.toml          11
-unused.toml           20
+init.toml             10
+neovim.toml            7
+plugin.toml           55
+textobj.toml          10
+unused.toml           24
 vim.toml               9
 ------------------------
-total(vim)           214
-total(neovim)        213
+total(vim)           207
+total(neovim)        205
 ```
 <!--vim-plugins-end-->
