@@ -86,8 +86,23 @@ nnoremap <buffer> q <C-w>q
 [[plugins]]
 repo = 'rcarriga/nvim-notify'
 lazy = true
+on_cmd = ['Notifications']
 on_lua = ['notify']
+lua_add = '''
+vim.notify = function(...) require "notify" (...) end
+'''
 lua_source = '''
-require('vimrc.plugin.notify')
+require("notify").setup {
+  stages = "slide",
+  background_color = "NormalFloat",
+  minimum_width = 30,
+  icons = {
+    ERROR = "✗",
+    WARN = "‼",
+    INFO = "i",
+    DEBUG = "D",
+    TRACE = "T",
+  },
+}
 '''
 
