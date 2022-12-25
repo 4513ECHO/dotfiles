@@ -1,11 +1,11 @@
 # Python
 __pycache__/
 venv/
+.venv/
 .env
 
 # vim
-[._]*s[a-v][a-z]
-!*.json
+[._]*.s[a-v][a-z]
 !*.svg
 [._]*.sw[a-p]
 [._]s[a-rt-v][a-z]
@@ -17,6 +17,14 @@ Sessionx.vim
 *~
 tags/
 [._]*.un~
+
+# node
+node_modules/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
 
 # others
 *.log

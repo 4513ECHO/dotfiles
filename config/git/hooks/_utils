@@ -10,34 +10,37 @@ if [ -e "$LOCAL_HOOK" ]; then
   source "$LOCAL_HOOK"
 fi
 
-LOGFILE="$(mktemp)"
-# echo "$LOGFILE" 1>&2
-exec 1> >(tee -a "$LOGFILE" >&2)
-exec 2> >(tee -a "$LOGFILE" >&2)
-trap 'rm -f $LOGFILE' EXIT
+git_hook_tempfile="$(mktemp)"
+exec 1> >(tee -a "$git_hook_tempfile" >&2)
+exec 2> >(tee -a "$git_hook_tempfile" >&2)
+trap 'rm -f $git_hook_tempfile' EXIT
+
+if git rev-parse --verify HEAD > /dev/null; then
+  against='HEAD'
+else
+  # Initial commit: diff against an empty tree object
+  against="$(git hash-object -t tree /dev/null)"
+fi
 
 check() {
   printf '\e[1m●\e[m \e[1m%s\e[m\n' "$1"
-  shift
-  if eval "$*"; then
-    :
-  fi
-  if [ -n "${GITHOOK_IGNORE:-}" ]; then
-    :
+  if [[ -n $2 ]]; then
+    git diff-index --cached --name-only "$against" \
+      | grep -Eq "$2"
   fi
 }
 
 error() {
   local len
-  len="$(wc -l < "$LOGFILE")"
+  len="$(wc -l < "$git_hook_tempfile")"
   printf '\e[%dF\e[1;31m✗\e[%dE\e[31m\e[1E' "$len" "$len"
   printf 'Error\e[m: %s\n' "$*"
   exit 1
 }
 
-check_end() {
+endcheck() {
   local len
-  len="$(wc -l < "$LOGFILE")"
+  len="$(wc -l < "$git_hook_tempfile")"
   printf '\e[%dF\e[1;32m✔︎\e[m\e[%dE' "$len" "$len"
-  printf '' > "$LOGFILE"
+  printf '' > "$git_hook_tempfile"
 }
