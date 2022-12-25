@@ -1,2 +1,2 @@
-file=$XDG_DATA_HOME/skk/SKK-JISYO.user,mode=readwrite,type=file
-file=/usr/share/skk/SKK-JISYO.L,mode=readonly,type=file
+type=file,file=/home/hibiki/.local/share/skk/SKK-JISYO.user,mode=readwrite,encoding=UTF-8
+type=file,file=/usr/share/skk/SKK-JISYO.L,mode=readonly
