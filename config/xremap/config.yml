@@ -1,0 +1,27 @@
+keymap:
+  - name: Emacs like bindings
+    application:
+      not:
+        - Gnome-terminal
+        - org.wezfurlong.wezterm
+    remap:
+      Ctrl-b: { with_mark: Left }
+      Ctrl-f: { with_mark: Right }
+      Ctrl-p: { with_mark: Up }
+      Ctrl-n: { with_mark: Down }
+      Ctrl-a: { with_mark: Home }
+      Ctrl-e: { with_mark: End }
+      Ctrl-k: [Shift-End, Backspace, { set_mark: false }]
+      Ctrl-h: [Backspace, { set_mark: false }]
+      Ctrl-d: [Delete, { set_mark: false }]
+  - name: Chromium
+    application:
+      only: Chromium
+    remap:
+      # Copy/Paste as same as gnome-terminal
+      Ctrl-Shift-c: Ctrl-c
+      Ctrl-Shift-v: Ctrl-v
+      # Select All
+      Alt-a: Ctrl-a
+      # History
+      Alt-h: Ctrl-h

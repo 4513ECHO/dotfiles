@@ -24,11 +24,12 @@ fi
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
-has chromium && export BROWSER=chromium
+has chromium-browser && export BROWSER=chromium-browser-wrapper
 # has wezterm && export TERMINAL=wezterm
 [ -n "$LOADED_ZSHRC" ] && unset LOADED_ZSHRC
 
 fcitx-autostart &
+# xremap "$XDG_CONFIG_HOME"/xremap/config.yml &
 xkbcomp -I"$XDG_CONFIG_HOME"/X11/xkb "$XDG_CONFIG_HOME"/X11/xkb/keymap/mine "$DISPLAY"
 
 # load system configuration

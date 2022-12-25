@@ -17,38 +17,33 @@ title_align center
 # diable focus when hovering mouse
 focus_follows_mouse no
 
+# Wallpaper
+exec --no-startup-id feh --bg-scale --no-fehbg ~/Pictures/wallpaper.jpg
+
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
 # start a browser
-bindsym $mod+b exec --no-startup-id chromium
+bindsym $mod+b exec --no-startup-id sensible-browser
 
 # kill focused window
 bindsym $mod+Shift+q kill
 bindsym $mod+F4 kill
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# start rofi (a program launcher)
+bindsym $mod+d exec --no-startup-id rofi -show combi
 
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
 
 # split in horizontal/vertical orientation
 bindsym $mod+v split horizontal
@@ -58,7 +53,7 @@ bindsym $mod+s split vertical
 bindsym $mod+f fullscreen toggle
 
 # change container layout
-set $layout "layout [(h)splitv/(v)splith/t(o)ggle split/(s)tacking/(t)abbed/(f)loating]"
+set $layout "layout [(h)orizontal/(v)ertical/t(o)ggle split/(s)tacking/(t)abbed/(f)loating]"
 mode $layout {
         bindsym h layout splitv; mode "default"
         bindsym v layout splith; mode "default"
@@ -138,10 +133,6 @@ mode "resize" {
         bindsym j resize grow height 10 px or 10 ppt
         bindsym k resize shrink height 10 px or 10 ppt
         bindsym l resize grow width 10 px or 10 ppt
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
