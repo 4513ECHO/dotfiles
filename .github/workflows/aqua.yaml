@@ -37,7 +37,7 @@ jobs:
         if: steps.filter.outputs.aqua == 'true'
         uses: aquaproj/aqua-installer@v1.1.1
         with:
-          aqua_version: v1.25.2
+          aqua_version: v1.26.1
       - name: Set up Golang
         if: steps.filter.outputs.aqua == 'true'
         uses: actions/setup-go@v3
