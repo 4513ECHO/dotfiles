@@ -14,7 +14,7 @@ packages:
   - name: aquaproj/aqua-installer@v2.0.2
   - name: aquaproj/registry-tool@v0.1.6
   - name: aristocratos/btop@v1.2.13
-  - name: arrow2nd/nekome@v2.2.0
+  - name: arrow2nd/nekome@v2.2.1
   - name: b3nj5m1n/xdg-ninja@v0.2.0.1
   - name: b4b4r07/afx
     version: v0.1.21 # NOTE: https://github.com/b4b4r07/afx/issues/51
