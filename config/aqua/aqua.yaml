@@ -90,7 +90,7 @@ packages:
   - name: JosefZIla/bash2048
     registry: local
     version: master
-  - name: nodejs/node@v19.4.0
+  - name: nodejs/node@v19.5.0
     registry: local
   - name: rust-lang/rust@1.66.1
     registry: local
