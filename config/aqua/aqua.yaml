@@ -56,7 +56,7 @@ packages:
   - name: mikefarah/yq@v4.30.8
   - name: mvdan/sh@v3.6.0
   - name: nametake/golangci-lint-langserver@v0.0.7
-  - name: nektos/act@v0.2.40
+  - name: nektos/act@v0.2.41
   - name: noahgorstein/jqp@v0.4.0
   - name: rhysd/actionlint@v1.6.23
   - name: rhysd/hgrep@v0.3.1
