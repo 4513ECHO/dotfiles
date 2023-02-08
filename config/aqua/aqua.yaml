@@ -26,7 +26,7 @@ packages:
   - name: denoland/deno@v1.30.3
   - name: docker/cli/rootless@v20.10.17
   - name: docker/cli@v20.10.17
-  - name: docker/compose@v2.15.1
+  - name: docker/compose@v2.16.0
   - name: dylanaraps/neofetch@7.1.0
   - name: ekalinin/github-markdown-toc@0.8.0
   - name: ericchiang/pup@v0.4.0
