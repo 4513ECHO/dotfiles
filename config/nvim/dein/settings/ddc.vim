@@ -91,9 +91,6 @@ let s:sourceParams.tmux = {
       \ 'excludeCurrentPane': v:true,
       \ 'kindFormat': '#{pane_index}.#{pane_current_command}',
       \ }
-let s:sourceParams['vim-lsp'] = {
-      \ 'ignoreCompleteProvider': v:true,
-      \ }
 
 let s:filterParams.converter_truncate = {
       \ 'maxAbbrWidth': 40,
@@ -147,7 +144,12 @@ let s:patch_global.sourceOptions = s:sourceOptions
 let s:patch_global.sourceParams = s:sourceParams
 let s:patch_global.filterParams = s:filterParams
 let s:patch_global.backspaceCompletion = v:true
-let s:patch_global.specialBufferCompletion = v:true
+
+" from https://github.com/kuuote/dotvim/blob/0e8dd6a4/conf/ddc.toml#L170
+autocmd vimrc OptionSet buftype
+      \ : if &buftype ==# 'acwrite'
+      \ |   call ddc#custom#patch_buffer('specialBufferCompletion', v:true)
+      \ | endif
 
 " Use pum.vim
 let s:patch_global.autoCompleteEvents = [
@@ -166,21 +168,18 @@ inoremap <silent><expr> <BS> pum#visible() ? '<Cmd>call pum#map#cancel()<CR>'  :
 inoremap <silent><expr> <CR> pum#visible() ? '<Cmd>call pum#map#confirm()<CR>' : lexima#expand('<lt>CR>', 'i')
 cnoremap         <expr> <CR> pum#visible() ? '<Cmd>call pum#map#confirm()<CR>' : lexima#expand('<lt>CR>', ':')
 " emulate default mappings (see `:help ins-completion`)
-inoremap <silent><expr> <C-x><C-l> ddc#map#manual_complete('line')
-inoremap <silent><expr> <C-x><C-n> ddc#map#manual_complete('around')
-inoremap <silent><expr> <C-x><C-f> ddc#map#manual_complete('file')
-inoremap <silent><expr> <C-x><C-d> ddc#map#manual_complete('vim-lsp')
-inoremap <silent><expr> <C-x><C-v> ddc#map#manual_complete('cmdline')
+inoremap <silent><expr> <C-x><C-l> ddc#map#manual_complete(#{ sources: ['line'] })
+inoremap <silent><expr> <C-x><C-n> ddc#map#manual_complete(#{ sources: ['around'] })
+inoremap <silent><expr> <C-x><C-f> ddc#map#manual_complete(#{ sources: ['file'] })
+inoremap <silent><expr> <C-x><C-d> ddc#map#manual_complete(#{ sources: ['lsp'] })
+inoremap <silent><expr> <C-x><C-v> ddc#map#manual_complete(#{ sources: ['cmdline'] })
 inoremap <silent><expr> <C-x><C-u> ddc#map#manual_complete()
-inoremap <silent><expr> <C-x><C-o> ddc#map#manual_complete('omni')
-inoremap <silent><expr> <C-x><C-s> ddc#map#manual_complete('nextword')
+inoremap <silent><expr> <C-x><C-o> ddc#map#manual_complete(#{ sources: ['omni'] })
+inoremap <silent><expr> <C-x><C-s> ddc#map#manual_complete(#{ sources: ['nextword'] })
 
-function! s:on_gh() abort
-  if fnamemodify(bufname(), ':h') ==# '/tmp' && getcwd() !=# '/tmp'
-    inoremap <silent><expr><buffer> <C-x><C-g>
-          \ ddc#map#manual_complete(['github_issue', 'github_pull_request'])
-  endif
-endfunction
-autocmd vimrc FileType markdown call <SID>on_gh()
+if bufname() =~# '^/tmp/\d\+\.md$'
+  inoremap <silent><expr><buffer> <C-x><C-g>
+        \ ddc#map#manual_complete(#{ sources: ['github_issue', 'github_pull_request'] })
+endif
 
 call ddc#enable()

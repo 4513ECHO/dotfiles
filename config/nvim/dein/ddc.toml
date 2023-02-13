@@ -72,7 +72,7 @@ repo = 'matsui54/ddc-buffer'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'shun/ddc-vim-lsp'
+repo = 'shun/ddc-source-vim-lsp'
 on_source = 'ddc.vim'
 
 [[plugins]]
@@ -99,6 +99,9 @@ on_source = 'ddc.vim'
 [[plugins]]
 repo = 'tani/ddc-fuzzy'
 on_source = 'ddc.vim'
+hook_add = '''
+autocmd vimrc ColorScheme * hi def link FuzzyAccent Number
+'''
 
 # popup windows
 
