@@ -23,8 +23,25 @@ let g:bufpreview_server_port = 8888
 '''
 
 [[plugins]]
-repo = 'lambdalisue/vim-manpager'
-on_cmd = ['MANPAGER', 'Man']
+repo = 'lambdalisue/fern.vim'
+on_cmd = ['Fern']
+hook_add = '''
+let g:fern#keepalt_on_edit = v:true
+let g:fern#keepjumps_on_edit = v:true
+'''
+[plugins.ftplugin]
+fern = '''
+nnoremap <buffer> F <Plug>(fern-action-focus:parent)
+nnoremap <buffer> q <C-w>q
+nnoremap <silent><buffer><expr> r
+      \ printf('<Cmd>Fern %s<CR>', system('git rev-parse --show-toplevel'))
+nnoremap <silent><buffer><expr> W
+      \ printf('<Cmd>Fern %s<CR>', getcwd())
+nnoremap <silent><buffer><expr> j
+      \ line('.') == line('$') ? 'gg' : 'j'
+nnoremap <silent><buffer><expr> k
+      \ line('.') == 1 ? 'G' : 'k'
+'''
 
 [[plugins]]
 repo = 'lambdalisue/mr-quickfix.vim'
@@ -54,6 +71,10 @@ nnoremap <buffer> u <Plug>(qfloc-undo)
 nnoremap <buffer> dd <Plug>(qfloc-delete)
 xnoremap <buffer> d  <Plug>(qfloc-delete)
 '''
+
+[[plugins]]
+repo = 'lambdalisue/vim-manpager'
+on_cmd = ['MANPAGER', 'Man']
 
 [[plugins]]
 repo = 'mattn/benchvimrc-vim'

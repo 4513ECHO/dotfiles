@@ -108,7 +108,7 @@ let g:searchx = #{
       \ auto_accept: v:true,
       \ markers: split('ASDFGHJKLQWERTYUIOPZXCVBNM', '.\zs'),
       \ nohlsearch: #{ jump: v:true },
-      \ scrolltime: 500,
+      \ scrolltime: 200,
       \ scrolloff: &scrolloff,
       \ }
 
@@ -152,7 +152,7 @@ autocmd vimrc User PumCompleteDone
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
-on_event = ['WinNew', 'TabNew']
+on_event = 'WinNew'
 hook_add = '''
 let g:lightline = #{
       \ colorscheme: user#colorscheme#lightline(),
@@ -311,27 +311,6 @@ command! -bar -bang -nargs=1 Rg call s:ripgrep(<q-args>, <bang>0)
 '''
 
 [[plugins]]
-repo = 'lambdalisue/fern.vim'
-on_cmd = ['Fern']
-hook_add = '''
-let g:fern#keepalt_on_edit = v:true
-let g:fern#keepjumps_on_edit = v:true
-'''
-[plugins.ftplugin]
-fern = '''
-nnoremap <buffer> F <Plug>(fern-action-focus:parent)
-nnoremap <buffer> q <C-w>q
-nnoremap <silent><buffer><expr> r
-      \ printf('<Cmd>Fern %s<CR>', system('git rev-parse --show-toplevel'))
-nnoremap <silent><buffer><expr> W
-      \ printf('<Cmd>Fern %s<CR>', getcwd())
-nnoremap <silent><buffer><expr> j
-      \ line('.') == line('$') ? 'gg' : 'j'
-nnoremap <silent><buffer><expr> k
-      \ line('.') == 1 ? 'G' : 'k'
-'''
-
-[[plugins]]
 repo = 'lambdalisue/file-protocol.vim'
 on_path = '^file://'
 
@@ -459,15 +438,18 @@ on_func = ['context_filetype#get']
 hook_source = '''
 let g:context_filetype#filetypes = extend(
       \ copy(context_filetype#default_filetypes()),
-      \ {'markdown': values(map(
+      \ #{ markdown: values(map(
       \   {'\(\h\w*\)': '\1', 'viml': 'vim'},
-      \   { key, val -> {
-      \     'start': '^\s*```\s*' .. key,
-      \     'end': '^\s*```$',
-      \     'filetype': val,
-      \ } }))})
-let g:context_filetype#ignore_patterns = {
-      \ 'toml': ['^\s*#\s*'],
+      \   { key, val ->
+      \     #{
+      \       start: '^\s*```\s*' .. key,
+      \       end: '^\s*```$',
+      \       filetype: val,
+      \     }
+      \   }
+      \ ))})
+let g:context_filetype#ignore_patterns = #{
+      \ toml: ['^\s*#\s*'],
       \ }
 '''
 
@@ -501,12 +483,12 @@ xnoremap F <Plug>(clever-f-F)
 xnoremap T <Plug>(clever-f-T)
 xnoremap f <Plug>(clever-f-f)
 xnoremap t <Plug>(clever-f-t)
-nnoremap ; <Plug>(clever-f-repeat-forward)
-nnoremap , <Plug>(clever-f-repeat-back)
-xnoremap ; <Plug>(clever-f-repeat-forward)
-xnoremap , <Plug>(clever-f-repeat-back)
-onoremap ; <Plug>(clever-f-repeat-forward)
-onoremap , <Plug>(clever-f-repeat-back)
+nnoremap ;         <Plug>(clever-f-repeat-forward)
+nnoremap <Leader>, <Plug>(clever-f-repeat-back)
+xnoremap ;         <Plug>(clever-f-repeat-forward)
+xnoremap <Leader>, <Plug>(clever-f-repeat-back)
+onoremap ;         <Plug>(clever-f-repeat-forward)
+onoremap <Leader>, <Plug>(clever-f-repeat-back)
 let g:clever_f_across_no_line = v:true
 let g:clever_f_ignore_case = v:true
 let g:clever_f_smart_case = v:true
@@ -725,6 +707,27 @@ nnoremap <silent> <Bslash><Bslash> <Plug>(caw:hatpos:toggle)
 nnoremap <silent> <Bslash>         <Plug>(caw:hatpos:toggle:operator)
 xnoremap <silent> <Bslash>         <Plug>(caw:hatpos:toggle:operator)
 '''
+# NOTE: Workaround of https://github.com/tyru/caw.vim/issues/183
+lua_add = '''
+local M = {}
+---@param lnum integer
+---@param col integer
+---@return boolean
+function M.has_syntax(lnum, col)
+  local bufnr = vim.api.nvim_get_current_buf()
+  local items = vim.inspect_pos(bufnr, lnum - 1, col - 1)
+  if #items.treesitter > 0 then
+    for _, capture in ipairs(items.treesitter) do
+      if capture.hl_group == "@comment" then
+        return true
+      end
+    end
+  end
+  return false
+end
+---@diagnostic disable-next-line: duplicate-set-field
+_G.package.preload.caw = function() return M end
+'''
 [plugins.ftplugin]
 gitcommit = '''
 let b:caw_oneline_comment = ';'
@@ -740,13 +743,13 @@ nnoremap gx <Plug>(openbrowser-smart-search)
 xnoremap gx <Plug>(openbrowser-smart-search)
 let g:openbrowser_allowed_schemes = ['http', 'https']
 let g:openbrowser_browser_commands = []
-      \ + (empty($DISPLAY) ? [] : [{
-      \   'name': 'xdg-open',
-      \   'args': ['{browser}', '{uri}']
+      \ + (empty($DISPLAY) ? [] : [#{
+      \   name: 'xdg-open',
+      \   args: ['{browser}', '{uri}'],
       \ }])
-      \ + (empty($TMUX) ? [] : [{
-      \   'name': 'w3m',
-      \   'args': 'tmux-w3m {uri} -t open-browser',
+      \ + (empty($TMUX) ? [] : [#{
+      \   name: 'w3m',
+      \   args: 'tmux-w3m {uri} -t open-browser',
       \ }])
 '''
 
@@ -755,15 +758,12 @@ repo = 'vim-denops/denops.vim'
 on_event = ['CursorHold', 'FocusFost']
 hook_add = '''
 let g:denops_server_addr = '127.0.0.1:32123'
-let g:denops#server#deno_args = [
-      \ '--allow-all', '--no-lock', '--quiet', '--unstable',
-      \ ]
+" autocmd vimrc User DenopsProcessStarted call denops#plugin#check_type()
 '''
 
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 type__depth = 1
-
 
 [[plugins]]
 repo = 'Yggdroot/indentLine'

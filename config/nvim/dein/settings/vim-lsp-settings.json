@@ -183,6 +183,7 @@
           "enable": false
         },
         "workspace": {
+          "checkThirdParty": false,
           "library": "`has('nvim') ? nvim_get_runtime_file('lua', v:true) : []`",
           "maxPreload": 1000,
           "useGitignore": true

@@ -117,6 +117,7 @@ let s:kindOptions['ui-select'] = #{ defaultAction: 'execute' }
 
 let s:actionOptions.echo = #{ quit: v:false }
 let s:actionOptions.echoDiff = #{ quit: v:false }
+let s:actionOptions.do = #{ quit: v:false }
 
 let s:patch_global.ui = 'ff'
 let s:patch_global.sourceOptions = s:sourceOptions
