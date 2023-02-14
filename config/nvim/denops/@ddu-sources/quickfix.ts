@@ -1,12 +1,12 @@
-import * as fn from "https://deno.land/x/denops_std@v3.11.3/function/mod.ts";
+import * as fn from "https://deno.land/x/denops_std@v4.0.0/function/mod.ts";
 import type { ActionData } from "https://deno.land/x/ddu_kind_file@v0.3.2/file.ts";
-import type { GatherArguments } from "https://deno.land/x/ddu_vim@v2.0.0/base/source.ts";
-import type { Item } from "https://deno.land/x/ddu_vim@v2.0.0/types.ts";
-import { BaseSource } from "https://deno.land/x/ddu_vim@v2.0.0/types.ts";
+import type { GatherArguments } from "https://deno.land/x/ddu_vim@v2.2.0/base/source.ts";
+import type { Item } from "https://deno.land/x/ddu_vim@v2.2.0/types.ts";
+import { BaseSource } from "https://deno.land/x/ddu_vim@v2.2.0/types.ts";
 
-interface Params {
+type Params = {
   useLoclist: boolean;
-}
+};
 interface QflistItem {
   bufnr: number;
   lnum: number;
@@ -23,9 +23,11 @@ export class Source extends BaseSource<Params, ActionData> {
     return new ReadableStream({
       async start(controller) {
         const func = args.sourceParams.useLoclist
-          ? ["getloclist", 0] as const
-          : ["getqflist"] as const;
-        const items = await args.denops.call(...func) as QflistItem[];
+          ? ["getloclist", 0]
+          : ["getqflist"];
+        const items = await args.denops.call(
+          ...func as [string, ...unknown[]],
+        ) as QflistItem[];
         controller.enqueue(
           await Promise.all(
             items.map(async (i): Promise<Item<ActionData>> => ({

@@ -25,6 +25,7 @@ let s:sourceOptions.file = {
       \ 'minAutoCompleteLength': 30,
       \ 'isVolatile': v:true,
       \ 'forceCompletionPattern': '[\w@:~._-]/[\w@:~._-]*',
+      \ 'sorters': ['sorter_file'],
       \ }
 let s:sourceOptions['vim-lsp'] = {
       \ 'mark': '[lsp]',

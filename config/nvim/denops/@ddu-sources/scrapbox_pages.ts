@@ -2,18 +2,18 @@ import type { ActionData } from "https://pax.deno.dev/4513ECHO/ddu-kind-url@0.1.
 import type {
   GatherArguments,
   OnInitArguments,
-} from "https://deno.land/x/ddu_vim@v2.0.0/base/source.ts";
-import type { Item } from "https://deno.land/x/ddu_vim@v2.0.0/types.ts";
+} from "https://deno.land/x/ddu_vim@v2.2.0/base/source.ts";
+import type { Item } from "https://deno.land/x/ddu_vim@v2.2.0/types.ts";
 import type {
   BasePage,
   PageList,
-} from "https://pax.deno.dev/scrapbox-jp/types@0.3.6/rest.ts";
-import { BaseSource } from "https://deno.land/x/ddu_vim@v2.0.0/types.ts";
+} from "https://pax.deno.dev/scrapbox-jp/types@0.3.8/rest.ts";
+import { BaseSource } from "https://deno.land/x/ddu_vim@v2.2.0/types.ts";
 
-interface Params {
+type Params = {
   project: string;
   rawTextUrl: boolean;
-}
+};
 
 export class Source extends BaseSource<Params, ActionData> {
   override kind = "url";
@@ -42,18 +42,19 @@ export class Source extends BaseSource<Params, ActionData> {
   ): ReadableStream<Item<ActionData>[]> {
     return new ReadableStream({
       start: (controller) => {
-        const items = this.#pages[args.sourceParams.project].map((
-          i,
-        ): Item<ActionData> => ({
-          word: i.title,
-          action: {
-            url: `https://scrapbox.io/${
-              args.sourceParams.rawTextUrl ? "api/pages/" : ""
-            }${args.sourceParams.project}/${
-              encodeURI(i.title.replaceAll(" ", "_"))
-            }${args.sourceParams.rawTextUrl ? "/text" : ""}`,
-          },
-        }));
+        const items = this.#pages[args.sourceParams.project]
+          .map((item): Item<ActionData> => ({
+            word: item.title,
+            action: {
+              url: [
+                "https://scrapbox.io/",
+                args.sourceParams.rawTextUrl ? "api/pages" : "",
+                args.sourceParams.project,
+                "/" + encodeURI(item.title.replaceAll(" ", "_")),
+                args.sourceParams.rawTextUrl ? "/text" : "",
+              ].join(""),
+            },
+          }));
         controller.enqueue(items);
         controller.close();
       },
