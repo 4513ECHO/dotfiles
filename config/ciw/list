@@ -2,7 +2,6 @@ cargo:cargo-expand
 cargo:dont
 cargo:evcxr_repl
 cargo:exa
-cargo:taplo-cli
 go:github.com/b4b4r07/git-bump
 go:github.com/fedeztk/got/cmd/got
 go:github.com/haya14busa/hyperlink/cmd/hyperlink
@@ -11,8 +10,5 @@ go:github.com/mattn/longcat
 go:github.com/motemen/sbx
 go:github.com/sheepla/fzenn
 go:github.com/syumai/longify
-npm:fixjson
-npm:markdownlint-cli
 npm:npm
 npm:prettier
-npm:quicktype
