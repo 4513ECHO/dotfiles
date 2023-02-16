@@ -78,8 +78,7 @@ else
     call s:reset()
     call prop_add(line('.'), 0, #{
           \ type: s:prop_type,
-          \ text: ' ' ..
-          \   get(s:skkeleton_modes, skkeleton#mode(), skkeleton#mode()),
+          \ text: get(s:skkeleton_modes, skkeleton#mode(), skkeleton#mode()),
           \ text_align: 'after',
           \ })
   endfunction
