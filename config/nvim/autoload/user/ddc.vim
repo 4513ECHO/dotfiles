@@ -9,7 +9,7 @@ function! user#ddc#cmdline_pre(mode) abort
         \ : ddc#map#manual_complete()
   set wildcharm=<C-l>
 
-  let b:_ddc_cmdline_prev_buffer_config = ddc#custom#get_buffer()
+  let b:ddc_cmdline_config = ddc#custom#get_buffer()
   call ddc#custom#patch_buffer(get(s:patch_buffer, a:mode, {}))
   autocmd vimrc User DDCCmdlineLeave ++once call user#ddc#cmdline_post()
   autocmd vimrc InsertEnter <buffer> ++once call user#ddc#cmdline_post()
@@ -30,9 +30,9 @@ let s:patch_buffer['/'].sourceOptions = #{
       \ }}
 
 function! user#ddc#cmdline_post() abort
-  if exists('b:_ddc_cmdline_prev_buffer_config')
-    call ddc#custom#set_buffer(b:_ddc_cmdline_prev_buffer_config)
-    unlet b:_ddc_cmdline_prev_buffer_config
+  if exists('b:ddc_cmdline_config')
+    call ddc#custom#set_buffer(b:ddc_cmdline_config)
+    unlet b:ddc_cmdline_config
   endif
   silent! cunmap <Tab>
   set wildcharm&

@@ -58,7 +58,7 @@ let s:skkeleton_modes = {
 
 if has('nvim')
   let s:ns = nvim_create_namespace('skkeleton')
-  let s:id = 1234321
+  let s:id = 1234
   function! s:set() abort
     call nvim_buf_set_extmark(0, s:ns, line('.') - 1, col('.') - 1, #{
           \ id: s:id,
@@ -88,13 +88,13 @@ else
 endif
 
 function! s:show_mode_enable() abort
-  augroup skkeleton-show-mode
+  augroup skkeleton_show_mode
     autocmd!
     autocmd CursorMovedI * call s:set()
   augroup END
 endfunction
 function! s:show_mode_disable() abort
-  augroup skkeleton-show-mode
+  augroup skkeleton_show_mode
     autocmd!
   augroup END
   call s:reset()

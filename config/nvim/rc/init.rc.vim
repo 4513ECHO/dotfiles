@@ -57,7 +57,7 @@ command! -bar HtmlFormat
 command! -bar -bang TodoList vimgrep '\vTODO\ze%(\(.{-}\))?:' `git ls-files`
 
 command! -nargs=? -bar -complete=filetype MiniNote
-      \ : execute (empty(<q-mods>) ? 'botright' : <q-mods>) 'new'
+      \ : execute (empty(<q-mods>) ? 'botright' : <q-mods>) 'new mininote'
       \ | setlocal bufhidden=wipe buftype=nofile filetype=<args>
 
 command! -bar DeinUpdateMine
