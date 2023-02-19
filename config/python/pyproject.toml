@@ -8,9 +8,9 @@ authors = ["4513ECHO <4513echo@gmail.com>"]
 python = "^3.10"
 
 [tool.poetry.group.tool.dependencies]
-black = "^22.10.0"
+black = "^23.0.0"
 isort = "^5.11.3"
-mypy = "^0.991"
+mypy = "^1.0"
 
 # cli tools that has low priority
 [tool.poetry.group.util.dependencies]
@@ -27,7 +27,7 @@ mypy = "^0.991"
 [tool.poetry.group.flake8.dependencies]
 flake8 = "^5.0.4"
 flake8-pyproject = "^1.2.2"
-flake8-isort = "^5.0.3"
+flake8-isort = "^6.0.0"
 pep8-naming = "^0.13.2"
 
 [tool.poetry.group.lsp.dependencies]
