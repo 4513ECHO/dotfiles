@@ -27,7 +27,7 @@ mypy = "^0.991"
 [tool.poetry.group.flake8.dependencies]
 flake8 = "^5.0.4"
 flake8-pyproject = "^1.2.2"
-flake8-isort = "^5.0.3"
+flake8-isort = "^6.0.0"
 pep8-naming = "^0.13.2"
 
 [tool.poetry.group.lsp.dependencies]
