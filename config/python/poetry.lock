@@ -1334,14 +1334,14 @@ files = [
 
 [[package]]
 name = "pydocstyle"
-version = "6.3.0"
+version = "6.2.3"
 description = "Python docstring style checker"
 category = "dev"
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "pydocstyle-6.3.0-py3-none-any.whl", hash = "sha256:118762d452a49d6b05e194ef344a55822987a462831ade91ec5c06fd2169d019"},
-    {file = "pydocstyle-6.3.0.tar.gz", hash = "sha256:7ce43f0c0ac87b07494eb9c0b462c0b73e6ff276807f204d6b53edc72b7e44e1"},
+    {file = "pydocstyle-6.2.3-py3-none-any.whl", hash = "sha256:a04ed1e6fe0be0970eddbb1681a7ab59b11eb92729fdb4b9b24f0eb11a25629e"},
+    {file = "pydocstyle-6.2.3.tar.gz", hash = "sha256:d867acad25e48471f2ad8a40ef9813125e954ad675202245ca836cb6e28b2297"},
 ]
 
 [package.dependencies]
@@ -1408,19 +1408,19 @@ python-lsp-server = "*"
 
 [[package]]
 name = "pylsp-mypy"
-version = "0.6.4"
+version = "0.6.5"
 description = "Mypy linter for the Python LSP Server"
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "pylsp-mypy-0.6.4.tar.gz", hash = "sha256:981ec6249c5eeb0bef9c24716dc43080089c1f534d827370e1d374ad286eb345"},
-    {file = "pylsp_mypy-0.6.4-py3-none-any.whl", hash = "sha256:f591dba24d93c007ab10c489e543631a1ee8c1bc826e99cdfb412acdd5d089ef"},
+    {file = "pylsp-mypy-0.6.5.tar.gz", hash = "sha256:14bff75ee48cf958f0f85b5a8a93ae2f43d4c4bb581a6a6effd182daf6ae17a4"},
+    {file = "pylsp_mypy-0.6.5-py3-none-any.whl", hash = "sha256:4a78af649546642d31478fb7c6089e840418f51c2216ef6f1bb200e6b70900a5"},
 ]
 
 [package.dependencies]
 mypy = "*"
-python-lsp-server = "*"
+python-lsp-server = ">=1.7.0"
 toml = "*"
 
 [package.extras]
@@ -1503,51 +1503,47 @@ test = ["coverage", "pycodestyle", "pyflakes", "pylint", "pytest", "pytest-cov"]
 
 [[package]]
 name = "python-lsp-server"
-version = "1.6.1.dev14+g59de0f8"
+version = "1.7.1"
 description = "Python Language Server for the Language Server Protocol"
 category = "dev"
 optional = false
 python-versions = ">=3.7"
-files = []
-develop = false
+files = [
+    {file = "python-lsp-server-1.7.1.tar.gz", hash = "sha256:67473bb301f35434b5fa8b21fc5ed5fac27dc8a8446ccec8bae456af52a0aef6"},
+    {file = "python_lsp_server-1.7.1-py3-none-any.whl", hash = "sha256:8f8b382868b161199aa385659b28427890be628d86f54810463a4d0ee0d6d091"},
+]
 
 [package.dependencies]
 autopep8 = {version = ">=1.6.0,<1.7.0", optional = true, markers = "extra == \"all\""}
 docstring-to-markdown = "*"
-flake8 = {version = ">=5.0.0,<5.1.0", optional = true, markers = "extra == \"all\""}
+flake8 = {version = ">=5.0.0,<7", optional = true, markers = "extra == \"all\""}
 jedi = ">=0.17.2,<0.19.0"
 mccabe = {version = ">=0.7.0,<0.8.0", optional = true, markers = "extra == \"all\""}
 pluggy = ">=1.0.0"
-pycodestyle = {version = ">=2.9.0,<2.10.0", optional = true, markers = "extra == \"all\""}
-pydocstyle = {version = ">=2.0.0", optional = true, markers = "extra == \"all\""}
-pyflakes = {version = ">=2.5.0,<2.6.0", optional = true, markers = "extra == \"all\""}
-pylint = {version = ">=2.5.0", optional = true, markers = "extra == \"all\""}
+pycodestyle = {version = ">=2.9.0,<2.11.0", optional = true, markers = "extra == \"all\""}
+pydocstyle = {version = ">=6.2.0,<6.3.0", optional = true, markers = "extra == \"all\""}
+pyflakes = {version = ">=2.5.0,<3.1.0", optional = true, markers = "extra == \"all\""}
+pylint = {version = ">=2.5.0,<3", optional = true, markers = "extra == \"all\""}
 python-lsp-jsonrpc = ">=1.0.0"
 rope = {version = ">1.2.0", optional = true, markers = "extra == \"all\""}
 setuptools = ">=39.0.0"
 ujson = ">=3.0.0"
-whatthepatch = {version = "*", optional = true, markers = "extra == \"all\""}
+whatthepatch = {version = ">=1.0.2,<2.0.0", optional = true, markers = "extra == \"all\""}
 yapf = {version = "*", optional = true, markers = "extra == \"all\""}
 
 [package.extras]
-all = ["autopep8 (>=1.6.0,<1.7.0)", "flake8 (>=5.0.0,<5.1.0)", "mccabe (>=0.7.0,<0.8.0)", "pycodestyle (>=2.9.0,<2.10.0)", "pydocstyle (>=2.0.0)", "pyflakes (>=2.5.0,<2.6.0)", "pylint (>=2.5.0)", "rope (>1.2.0)", "whatthepatch", "yapf"]
+all = ["autopep8 (>=1.6.0,<1.7.0)", "flake8 (>=5.0.0,<7)", "mccabe (>=0.7.0,<0.8.0)", "pycodestyle (>=2.9.0,<2.11.0)", "pydocstyle (>=6.2.0,<6.3.0)", "pyflakes (>=2.5.0,<3.1.0)", "pylint (>=2.5.0,<3)", "rope (>1.2.0)", "whatthepatch (>=1.0.2,<2.0.0)", "yapf"]
 autopep8 = ["autopep8 (>=1.6.0,<1.7.0)"]
-flake8 = ["flake8 (>=5.0.0,<5.1.0)"]
+flake8 = ["flake8 (>=5.0.0,<7)"]
 mccabe = ["mccabe (>=0.7.0,<0.8.0)"]
-pycodestyle = ["pycodestyle (>=2.9.0,<2.10.0)"]
-pydocstyle = ["pydocstyle (>=2.0.0)"]
-pyflakes = ["pyflakes (>=2.5.0,<2.6.0)"]
-pylint = ["pylint (>=2.5.0)"]
+pycodestyle = ["pycodestyle (>=2.9.0,<2.11.0)"]
+pydocstyle = ["pydocstyle (>=6.2.0,<6.3.0)"]
+pyflakes = ["pyflakes (>=2.5.0,<3.1.0)"]
+pylint = ["pylint (>=2.5.0,<3)"]
 rope = ["rope (>1.2.0)"]
-test = ["coverage", "flaky", "matplotlib", "numpy", "pandas", "pylint (>=2.5.0)", "pyqt5", "pytest", "pytest-cov"]
+test = ["coverage", "flaky", "matplotlib", "numpy", "pandas", "pylint (>=2.5.0,<3)", "pyqt5", "pytest", "pytest-cov"]
 websockets = ["websockets (>=10.3)"]
 yapf = ["whatthepatch (>=1.0.2,<2.0.0)", "yapf"]
-
-[package.source]
-type = "git"
-url = "https://github.com/python-lsp/python-lsp-server.git"
-reference = "59de0f8"
-resolved_reference = "59de0f8172d2cad85798ff3ee36c3f46e2c05852"
 
 [[package]]
 name = "pytoolconfig"
@@ -2214,4 +2210,4 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "c603e18c10ace862e829aac94fffd38caa3fed492d6b669499031a0295050606"
+content-hash = "e29c26c27553673ddf8bc16b1c47a64e219a009b838ffceabc2398a13e1e3fbd"
