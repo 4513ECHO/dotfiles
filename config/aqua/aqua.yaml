@@ -52,7 +52,7 @@ packages:
   - name: maaslalani/slides@v0.9.0
   - name: mattn/efm-langserver@v0.0.44
   - name: microsoft/ripgrep-prebuilt@v13.0.0-4
-  - name: mikefarah/yq@v4.30.8
+  - name: mikefarah/yq@v4.31.1
   - name: mvdan/sh@v3.6.0
   - name: nametake/golangci-lint-langserver@v0.0.7
   - name: nektos/act@v0.2.42
