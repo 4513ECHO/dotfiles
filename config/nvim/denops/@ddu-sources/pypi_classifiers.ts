@@ -6,14 +6,13 @@ import type {
 import type { Item } from "https://deno.land/x/ddu_vim@v2.2.0/types.ts";
 import { BaseSource } from "https://deno.land/x/ddu_vim@v2.2.0/types.ts";
 import { TextLineStream } from "https://deno.land/std@0.177.0/streams/text_line_stream.ts";
+import { ChunkedStream } from "https://deno.land/x/chunked_stream@0.1.1/mod.ts";
 
 type Params = Record<never, never>;
 
 export class Source extends BaseSource<Params, ActionData> {
   override kind = "word";
-  #classifiers: Item<ActionData>[] = [];
   #stream: ReadableStream<Item<ActionData>[]> = new ReadableStream();
-  #queued = 0;
 
   override async onInit(args: OnInitArguments<Params>): Promise<void> {
     const response = await fetch(
@@ -31,29 +30,21 @@ export class Source extends BaseSource<Params, ActionData> {
       .pipeThrough(new TextDecoderStream())
       .pipeThrough(new TextLineStream())
       .pipeThrough(
-        new TransformStream({
+        new TransformStream<string, Item<ActionData>>({
           transform: (chunk, controller) => {
-            if (this.#queued === 0) {
-              controller.enqueue(this.#classifiers);
-            }
-            if (this.#queued >= this.#classifiers.length) {
-              const item: Item<ActionData> = {
-                word: chunk,
-                action: { text: chunk },
-              };
-              this.#classifiers.push(item);
-              controller.enqueue([item]);
-            }
-            this.#queued += 1;
+            controller.enqueue({
+              word: chunk,
+              action: { text: chunk },
+            });
           },
         }),
-      );
+      )
+      .pipeThrough(new ChunkedStream({ chunkSize: 100 }));
   }
 
   override gather(
     _args: GatherArguments<Params>,
   ): ReadableStream<Item<ActionData>[]> {
-    this.#queued = 0;
     return this.#stream;
   }
 
