@@ -40,13 +40,14 @@ let s:filterParams.matcher_fzf = #{
 let s:uiParams.ff = #{
       \ floatingBorder: 'rounded',
       \ previewFloating: v:true,
+      \ previewFloatingBorder: 'rounded',
       \ previewWidth: &columns / 3 * 2,
       \ prompt: '>',
       \ split: has('nvim') ? 'floating' : 'horizontal',
       \ statusline: v:false,
       \ winCol: &columns / 6,
-      \ winHeight: &lines / 2,
-      \ winRow: &lines / 4,
+      \ winHeight: &lines / 3 * 2,
+      \ winRow: &lines / 6,
       \ winWidth: &columns / 3 * 2,
       \ }
 autocmd vimrc VimResized * call <SID>ddu_on_resized()
@@ -59,45 +60,45 @@ function! s:ddu_on_resized() abort
   let options = #{ uiParams: #{ ff: #{
         \ previewWidth: &columns / 3 * 2,
         \ winCol: &columns / 6,
-        \ winHeight: &lines / 2,
-        \ winRow: &lines / 4,
+        \ winHeight: &lines / 3 * 2,
+        \ winRow: &lines / 6,
         \ winWidth: &columns / 3 * 2,
         \ }}}
   call ddu#custom#patch_global(options)
   call ddu#ui#ff#do_action('updateOptions', options)
 endfunction
 
-call ddu#custom#patch_local('file_rec', #{
-      \ sources: [#{ name: 'file_rec' }],
-      \ uiParams: #{ ff: #{
+call ddu#custom#patch_local('preview', 'uiParams', #{
+      \ ff: #{
       \   autoAction: #{ name: 'preview' },
-      \   previewHeight: &lines / 2,
-      \   previewVertical: v:true,
+      \   previewHeight: &lines / 3 * 2,
+      \   previewSplit: 'vertical',
       \   previewWidth: &columns / 3,
       \   winWidth: &columns / 3,
-      \ }},
+      \ },
       \ })
 call ddu#custom#patch_local('rg_live', #{
-      \ volatile: v:true,
       \ sources: [#{
       \   name: 'rg',
-      \   options: #{matchers: []},
+      \   options: #{ matchers: [] },
       \ }],
-      \ uiParams: #{ff: #{
-      \   ignoreEmpty: v:false,
-      \   autoResize: v:false,
-      \ }},
-      \ })
-call ddu#custom#patch_local('preview_colorscheme', #{
-      \ sources: [#{ name: 'color' }],
-      \ uiParams: #{ ff: #{
-      \   autoAction: #{
-      \     name: 'itemAction',
+      \ uiParams: #{
+      \   ff: #{
+      \     ignoreEmpty: v:false,
+      \     autoResize: v:false,
       \   },
-      \ }},
+      \ },
+      \ volatile: v:true,
+      \ })
+call ddu#custom#patch_local('UBA', #{
       \ actionOptions: #{
       \   callback: #{ quit: v:false },
-      \   set: #{ quit: v:false },
+      \ },
+      \ sources: [#{ name: 'color' }],
+      \ uiParams: #{
+      \   ff: #{
+      \     autoAction: #{ name: 'itemAction' },
+      \   },
       \ },
       \ })
 

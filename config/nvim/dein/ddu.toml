@@ -23,6 +23,7 @@ Runtime dein/settings/ddu.vim
 
 [plugins.ftplugin]
 ddu-ff = '''
+setlocal cursorline
 nnoremap <buffer> <CR>
       \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
 nnoremap <buffer> <Space>
@@ -38,15 +39,15 @@ nnoremap <buffer> p
 nnoremap <buffer> q
       \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
 nnoremap <buffer> c
-      \ <Cmd>call ddu#ui#ff#do_action('itemAction', {'name': 'create'})<CR>
+      \ <Cmd>call ddu#ui#ff#do_action('itemAction', #{ name: 'create' })<CR>
 nnoremap <buffer> c
-      \ <Cmd>call ddu#ui#ff#do_action('itemAction', {'name': 'edit'})<CR>
+      \ <Cmd>call ddu#ui#ff#do_action('itemAction', #{ name: 'edit' })<CR>
 nnoremap <buffer> E
       \ <Cmd>call ddu#ui#ff#do_action('itemAction',
-      \ {'params': eval(input('params: ', "{}\<lt>Left>"))})<CR>
+      \ #{ params: eval(input('params: ', "{}\<lt>Left>")) })<CR>
 nnoremap <buffer> v
       \ <Cmd>call ddu#ui#ff#do_action('itemAction',
-      \ {'name': 'open', 'params': {'command': 'vsplit'}})<CR>
+      \ #{ name: 'open', params: #{ command: 'vsplit' } })<CR>
 '''
 
 ddu-ff-filter = '''
