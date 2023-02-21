@@ -1,0 +1,67 @@
+* {
+    colorFg: #fcfcdf;
+    colorBg: #242829;
+    colorBorder: #b7b7b7;
+    colorLight: #4a4b4b;
+    colorSpecial: #72d5d2;
+    colorAccent: #df2683;
+
+    background-color: @colorBg;
+    text-color: @colorFg;
+    border-color: @colorBorder;
+    border-radius: 10px;
+    vertical-align: 0.5;
+}
+
+window {
+    font: "monospace 12";
+    height: 40%;
+    border: 2px;
+}
+
+inputbar {
+    padding: 0.5em;
+    spacing: 0.5em;
+}
+
+prompt, button selected {
+    text-color: @colorSpecial;
+    background-color: @colorLight;
+    padding: 0.5em;
+}
+
+case-indicator {
+    text-color: @colorAccent;
+}
+
+entry {
+    padding: 0.5em;
+    border: 2px;
+}
+
+listview {
+    padding: 0.5em;
+}
+
+element {
+    padding: 0.2em;
+}
+
+element selected.normal {
+    background-color: @colorLight;
+}
+
+element-text {
+    background-color: inherit;
+    highlight: underline #df2683;
+}
+
+element-icon {
+    background-color: inherit;
+    padding: 0.2em 0.8em 0.2em 0.4em;
+    size: 1.1em;
+}
+
+button {
+    padding: 0.5em;
+}
