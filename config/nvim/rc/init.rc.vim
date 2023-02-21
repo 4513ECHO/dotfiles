@@ -18,6 +18,8 @@ let g:launcher_config.color = #{
       \ }
 
 autocmd vimrc VimEnter * ++nested call user#colorscheme#random()
+autocmd vimrc Colorscheme *
+      \ call user#colorscheme#update_lightline()
 
 " echo message vim start up time
 " https://github.com/lighttiger2505/.dotfiles/blob/6d0d4b8392/.vimrc#L11

@@ -5,7 +5,7 @@ function! s:statuswidth() abort
 endfunction
 
 function! lightline#component#vimrc#colorscheme() abort
-  return s:statuswidth() > 70 ? g:current_colorscheme : ''
+  return s:statuswidth() > 70 ? g:colors_name : ''
 endfunction
 
 function! lightline#component#vimrc#file_format() abort

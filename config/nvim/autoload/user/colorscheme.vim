@@ -1,7 +1,6 @@
 if empty($VIM_DISABLE_DEIN)
-  function! user#colorscheme#get(...) abort
-    let update = get(a:000, 0, v:false)
-    if exists('s:cache') && !update
+  function! user#colorscheme#get(update = v:false) abort
+    if exists('s:cache') && !a:update
       return s:cache
     endif
     let s:cache = {}
@@ -18,19 +17,19 @@ if empty($VIM_DISABLE_DEIN)
     return s:cache
   endfunction
 else
-  function! user#colorscheme#get(...) abort
+  function! user#colorscheme#get(update = v:false) abort
     return {}
   endfunction
 endif
 
 function! user#colorscheme#lightline() abort
-  if g:current_colorscheme ==# 'random'
+  if g:colors_name ==# 'random'
     return 'default'
   endif
   let custom_name = get(get(user#colorscheme#get(),
-        \ g:current_colorscheme, {}), 'lightline')
+        \ g:colors_name, {}), 'lightline')
   return empty(custom_name)
-        \ ? g:current_colorscheme
+        \ ? g:colors_name
         \ : custom_name
 endfunction
 
@@ -95,35 +94,38 @@ function! s:set_terminal_colors(list) abort
   endif
 endfunction
 
-function! user#colorscheme#command(colorscheme, ...) abort
-  let reload = get(a:000, 0, v:false)
+function! user#colorscheme#command(colorscheme, reload = v:false) abort
   if empty(user#colorscheme#get())
     return
   endif
-  let colorscheme = reload
-        \ ? g:current_colorscheme
+  let colorscheme = a:reload
+        \ ? g:colors_name
         \ : a:colorscheme
-  if empty(colorscheme) && !reload
-    echo g:current_colorscheme
+  if empty(colorscheme) && !a:reload
+    echo g:colors_name
     return
   endif
   if colorscheme ==# 'random'
-    call user#colorscheme#random()
-    return
+    return user#colorscheme#random()
   endif
   for i in range(16)
     unlet! g:terminal_color_{i}
   endfor
   unlet! g:terminal_color_foreground g:terminal_color_background g:terminal_ansi_colors
-  " NOTE: ignore W18
+  " NOTE: Use :silent to ignore W18
   execute 'silent colorscheme' colorscheme
   call user#colorscheme#set_customize(colorscheme)
-  let g:current_colorscheme = colorscheme
+endfunction
+
+function! user#colorscheme#update_lightline() abort
   if !exists('g:lightline')
     return
   endif
-  " NOTE: `:help lightline-problem-13`
-  let g:lightline.colorscheme = user#colorscheme#lightline()
+  " NOTE: See `:help lightline-problem-13`
+  let name = user#colorscheme#lightline()
+  let g:lightline.colorscheme = name
+  " NOTE: Reload colorscheme file to support 'background' change
+  silent! execute 'runtime autoload/lightline/colorscheme/' .. name .. '.vim'
   call lightline#init()
   call lightline#colorscheme()
   call lightline#update()
@@ -134,4 +136,3 @@ function! user#colorscheme#completion(ArgLead, CmdLine, CursorPos) abort
         \ ? sort(copy(keys(user#colorscheme#get()))
         \ : matchfuzzy(copy(keys(user#colorscheme#get()), a:ArgLead)
 endfunction
-

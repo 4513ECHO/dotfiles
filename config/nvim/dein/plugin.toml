@@ -155,7 +155,6 @@ repo = 'itchyny/lightline.vim'
 on_event = 'WinNew'
 hook_add = '''
 let g:lightline = #{
-      \ colorscheme: user#colorscheme#lightline(),
       \ subseparator: #{ left: '/', right: '/' },
       \ active: #{
       \   left: [
