@@ -10,7 +10,6 @@ if empty($VIM_DISABLE_DEIN)
         continue
       endif
       for colorscheme in plugins.colorschemes
-        " let s:cache[colorscheme.name] = extend(colorscheme, { 'plugin': plugins.name })
         let s:cache[colorscheme.name] = colorscheme
       endfor
     endfor
@@ -40,8 +39,8 @@ function! user#colorscheme#random() abort
         \ )
 endfunction
 
-function! user#colorscheme#set_customize(colorscheme) abort
-  let customize = get(user#colorscheme#get(), a:colorscheme)
+function! user#colorscheme#set_customize() abort
+  let customize = get(user#colorscheme#get(), g:colors_name)
   if empty(customize)
     return
   endif
@@ -108,13 +107,8 @@ function! user#colorscheme#command(colorscheme, reload = v:false) abort
   if colorscheme ==# 'random'
     return user#colorscheme#random()
   endif
-  for i in range(16)
-    unlet! g:terminal_color_{i}
-  endfor
-  unlet! g:terminal_color_foreground g:terminal_color_background g:terminal_ansi_colors
   " NOTE: Use :silent to ignore W18
   execute 'silent colorscheme' colorscheme
-  call user#colorscheme#set_customize(colorscheme)
 endfunction
 
 function! user#colorscheme#update_lightline() abort
