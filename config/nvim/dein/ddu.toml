@@ -3,9 +3,9 @@ repo = 'Shougo/ddu.vim'
 depends = ['denops.vim']
 on_func = ['ddu#start']
 hook_add = '''
-let g:launcher_config.ddu = {
-      \ 'char': 'd',
-      \ 'run': { -> ddu#start({'sources': [{'name': 'source'}]}) },
+let g:launcher_config.ddu = #{
+      \ char: 'd',
+      \ run: { -> ddu#start(#{ sources: [#{ name: 'source' }] }) },
       \ }
 nnoremap <Leader>d <Cmd>Ddu -resume<CR>
 inoremap <C-x><C-e> <Cmd>call ddu#start(#{
@@ -13,7 +13,7 @@ inoremap <C-x><C-e> <Cmd>call ddu#start(#{
       \   #{ name: 'emoji', options: #{ defaultAction: 'feedkeys' } },
       \ ],
       \ uiParams: #{
-      \   ff: #{ replaceCol: col('.') }
+      \   ff: #{ replaceCol: col('.') },
       \ },
       \ })<CR>
 '''
@@ -28,6 +28,12 @@ nnoremap <buffer> <CR>
       \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
 nnoremap <buffer> <Space>
       \ <Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>
+xnoremap <buffer><silent> <Space>
+      \ :call ddu#ui#ff#do_action('toggleSelectItem')<CR>
+nnoremap <buffer> A
+      \ <Cmd>call ddu#ui#ff#do_action('toggleAllItems')<CR>
+nnoremap <buffer> C
+      \ <Cmd>call ddu#ui#ff#do_action('clearSelectAllItems')<CR>
 nnoremap <buffer> i
       \ <Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>
 nnoremap <buffer> <Tab>
@@ -38,19 +44,13 @@ nnoremap <buffer> p
       \ <Cmd>call ddu#ui#ff#do_action('preview')<CR>
 nnoremap <buffer> q
       \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
-nnoremap <buffer> c
-      \ <Cmd>call ddu#ui#ff#do_action('itemAction', #{ name: 'create' })<CR>
-nnoremap <buffer> c
-      \ <Cmd>call ddu#ui#ff#do_action('itemAction', #{ name: 'edit' })<CR>
 nnoremap <buffer> E
       \ <Cmd>call ddu#ui#ff#do_action('itemAction',
-      \ #{ params: eval(input('params: ', "{}\<lt>Left>")) })<CR>
-nnoremap <buffer> v
-      \ <Cmd>call ddu#ui#ff#do_action('itemAction',
-      \ #{ name: 'open', params: #{ command: 'vsplit' } })<CR>
+      \ #{ params: eval(input('params: ', "#{}\<lt>Left>")) })<CR>
 '''
 
 ddu-ff-filter = '''
+setlocal nocursorline
 nnoremap <buffer> q     <Cmd>call ddu#ui#ff#close()<CR>
 nnoremap <buffer> <CR>  <Cmd>call ddu#ui#ff#close()<CR>
 inoremap <buffer> <CR>  <Esc><Cmd>call ddu#ui#ff#do_action('itemAction')<CR>

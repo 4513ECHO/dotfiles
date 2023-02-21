@@ -39,39 +39,52 @@ let s:filterParams.matcher_fzf = #{
 
 let s:uiParams.ff = #{
       \ floatingBorder: 'rounded',
+      \ highlights: #{
+      \   floating: 'Normal,EndOfBuffer:DduEndOfBuffer,FloatBorder:Identifier'
+      \ },
       \ previewFloating: v:true,
       \ previewFloatingBorder: 'rounded',
-      \ previewWidth: &columns / 3 * 2,
       \ prompt: '>',
       \ split: has('nvim') ? 'floating' : 'horizontal',
       \ statusline: v:false,
-      \ winCol: &columns / 6,
-      \ winHeight: &lines / 3 * 2,
-      \ winRow: &lines / 6,
-      \ winWidth: &columns / 3 * 2,
       \ }
-autocmd vimrc VimResized * call <SID>ddu_on_resized()
-autocmd vimrc TextChangedI,CursorMoved ddu*
-      \ : if get(g:, 'loaded_lightline', v:false)
-      \ |   call lightline#update()
-      \ | endif
 
-function! s:ddu_on_resized() abort
-  let options = #{ uiParams: #{ ff: #{
+function! s:on_changed() abort
+  if has('nvim')
+    let bgcolor = printf('#%06x', get(
+          \ nvim_get_hl_by_name('Normal', v:true),
+          \ 'background', 0x000000))
+    call nvim_set_hl(0, 'DduEndOfBuffer', #{
+          \ foreground: bgcolor,
+          \ background: bgcolor,
+          \ default: v:true,
+          \ })
+  endif
+  let options = #{ uiParams: #{ ff: {} } }
+  let options.uiParams.ff = #{
         \ previewWidth: &columns / 3 * 2,
         \ winCol: &columns / 6,
         \ winHeight: &lines / 3 * 2,
         \ winRow: &lines / 6,
         \ winWidth: &columns / 3 * 2,
-        \ }}}
+        \ }
   call ddu#custom#patch_global(options)
-  call ddu#ui#ff#do_action('updateOptions', options)
+  " call ddu#ui#ff#do_action('updateOptions', options)
 endfunction
 
-call ddu#custom#patch_local('preview', 'uiParams', #{
+autocmd vimrc ColorScheme,VimResized * call s:on_changed()
+autocmd vimrc TextChangedI,CursorMoved ddu*
+      \ : if get(g:, 'loaded_lightline', v:false)
+      \ |   call lightline#update()
+      \ | endif
+call s:on_changed()
+
+call ddu#custom#patch_local('with_preview', 'uiParams', #{
       \ ff: #{
       \   autoAction: #{ name: 'preview' },
+      \   previewCol: &columns / 2,
       \   previewHeight: &lines / 3 * 2,
+      \   previewRow: &lines / 6,
       \   previewSplit: 'vertical',
       \   previewWidth: &columns / 3,
       \   winWidth: &columns / 3,
