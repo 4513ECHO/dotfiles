@@ -30,10 +30,7 @@ init: ## Initialize enviroment settings
 
 .PHONY: deploy
 deploy: ## Create symlinks to actual directories
-	@$(foreach val, $(DOTRC), $(LN) $(abspath $(val)) $(HOME)/$(notdir $(val));)
-	@$(foreach val, $(CONFIGHOME), $(LN) $(abspath $(val)) $(HOME)/.config/$(notdir $(val));)
-	@$(foreach val, $(BINFILE), $(LN) $(abspath $(val)) $(HOME)/.local/bin/$(notdir $(val));)
-	@$(LN) $(realpath $(DOTPATH)/config)/zsh/.zshenv $(HOME)/.zshenv
+	@$(DOTPATH)/scripts/link.sh link
 
 .PHONY: update
 update: ## Fetch and merge all changes from remote repository
@@ -46,10 +43,7 @@ install: update init deploy ## Initialize and deploy dotfiles
 
 .PHONY: clean
 clean: ## Remove symlinks from actual directories
-	@$(foreach val, $(DOTRC), test -f $(HOME)/$(notdir $(val)) && $(RM) $(HOME)/$(notdir $(val)) ||:;)
-	@$(foreach val, $(CONFIGHOME), test -f $(HOME)/.config/$(notdir $(val)) && $(RM) $(HOME)/.config/$(notdir $(val)) ||:;)
-	@$(foreach val, $(BINFILE), test -f $(HOME)/.local/bin/$(notdir $(val)) && $(RM) $(HOME)/.local/bin/$(notdir $(val)) ||:;)
-	@$(RM) $(HOME)/.zshenv
+	@$(DOTPATH)/scripts/link.sh unlink
 
 .PHONY: python
 python: ## Install and initialize python enviroments

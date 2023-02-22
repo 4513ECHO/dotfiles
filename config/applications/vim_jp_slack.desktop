@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Name=vim-jp Slack
+Comment=vim-jp Slack PWA client
+Icon=vim-jp
+Exec=/home/hibiki/.local/bin/chromium-browser-wrapper --app=https://vim-jp.slack.com
+Terminal=false
+StartupNotify=true
+StartupWMClass=vim-jp.slack.com
