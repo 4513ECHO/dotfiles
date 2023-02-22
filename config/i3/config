@@ -55,16 +55,16 @@ bindsym $mod+f fullscreen toggle
 # change container layout
 set $layout "layout [(h)orizontal/(v)ertical/t(o)ggle split/(s)tacking/(t)abbed/(f)loating]"
 mode $layout {
-        bindsym h layout splitv; mode "default"
-        bindsym v layout splith; mode "default"
-        bindsym o layout toggle split; mode "default"
-        bindsym s layout stacking; mode "default"
-        bindsym t layout tabbed; mode "default"
-        bindsym f floating toggle; mode "default"
-        # back to normal: Enter or Escape or $mod+w
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+w mode "default"
+    bindsym h layout splitv; mode "default"
+    bindsym v layout splith; mode "default"
+    bindsym o layout toggle split; mode "default"
+    bindsym s layout stacking; mode "default"
+    bindsym t layout tabbed; mode "default"
+    bindsym f floating toggle; mode "default"
+    # back to normal: Enter or Escape or $mod+w
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+w mode "default"
 }
 bindsym $mod+w mode $layout
 
@@ -125,24 +125,19 @@ bindsym Shift+Print exec maim --format=png --select ~/Pictures/screenshot-$(date
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
+    # back to normal: Enter or Escape or $mod+r
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
 }
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-        status_command i3status
-        position top
-}
+include ~/.config/i3/hatsunemiku.conf
