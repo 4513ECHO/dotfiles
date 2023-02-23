@@ -110,5 +110,5 @@ packages:
     registry: local
   - name: pipeseroni/pipes.sh@v1.3.0
     registry: local
-  - name: k0kubun/xremap/x11@v0.8.1
+  - name: k0kubun/xremap/x11@v0.8.2
     registry: local
