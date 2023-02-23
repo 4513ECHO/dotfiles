@@ -1,5 +1,6 @@
 [[plugins]]
 repo = 'hrsh7th/nvim-pasta'
+lazy = true
 on_lua = 'pasta'
 lua_add = '''
 vim.keymap.set({ "n", "x" }, "p", function() require("pasta.mappings").p() end)
@@ -36,6 +37,8 @@ require("hlslens").setup { auto_enable = false }
 
 [[plugins]]
 repo = 'nvim-lua/plenary.nvim'
+lazy = true
+on_lua = 'plenary'
 
 [[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'

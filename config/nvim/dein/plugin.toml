@@ -13,11 +13,13 @@ on_cmd = ['HelpUrl']
 on_func = ['vimhelp_url#create']
 
 [[plugins]]
-repo = 'bronson/vim-trailing-whitespace'
+# NOTE: latest original is broken for only Neovim
+# repo = 'bronson/vim-trailing-whitespace'
+repo = 'PabloScolpino/vim-trailing-whitespace'
 on_cmd = ['FixWhitespace']
 on_event = ['InsertLeave']
 hook_add = '''
-let g:extra_whitespace_ignored_filetypes = ['diff', 'help', 'capture']
+let g:extra_whitespace_ignored_filetypes = ['diff', 'help', 'capture', 'tsv']
 '''
 
 [[plugins]]

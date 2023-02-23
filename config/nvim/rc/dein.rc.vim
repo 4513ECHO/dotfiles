@@ -33,7 +33,7 @@ if dein#min#load_state(s:dein_dir)
   call dein#load_toml(g:config_home .. '/dein/ftplugin.toml',    #{ lazy: v:true })
   call dein#load_toml(g:config_home .. '/dein/plugin.toml',      #{ lazy: v:true })
   call dein#load_toml(g:config_home .. '/dein/ddc.toml',         #{ lazy: v:true })
-  call dein#load_toml(g:config_home .. '/dein/ddu.toml',         #{ lazy: v:true })
+  call dein#load_toml(g:config_home .. '/dein/ddu.toml',         #{ lazy: v:false })
   call dein#load_toml(g:config_home .. '/dein/' ..
         \ (has('nvim') ? 'neovim.toml' : 'vim.toml'),            #{ lazy: v:false })
 

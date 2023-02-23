@@ -64,6 +64,7 @@ inoremap <buffer> <C-p>
 [[plugins]]
 repo = 'Shougo/ddu-commands.vim'
 depends = ['ddu.vim']
+lazy = true
 on_cmd = ['Ddu']
 
 # UI
