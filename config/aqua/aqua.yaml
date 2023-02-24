@@ -48,7 +48,7 @@ packages:
   - name: ktock/buildg@v0.4.1
   - name: kurehajime/dajarep@v1.10.0
   - name: kurehajime/pong-command@v2.0.8
-  - name: LukeChannings/deno-arm64@v1.30.3
+  - name: LukeChannings/deno-arm64@v1.31.0
   - name: maaslalani/slides@v0.9.0
   - name: mattn/efm-langserver@v0.0.44
   - name: microsoft/ripgrep-prebuilt@v13.0.0-4
