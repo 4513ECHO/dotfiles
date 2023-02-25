@@ -22,7 +22,8 @@ packages:
   - name: charmbracelet/glow@v1.5.0
   - name: cli/cli@v2.23.0
   - name: dandavison/delta@0.15.1
-  - name: denoland/deno@v1.31.0
+  - name: denoland/deno
+    version: v1.30.3
   - name: docker/cli/rootless@v20.10.17
   - name: docker/cli@v20.10.17
   - name: docker/compose@v2.16.0
@@ -48,7 +49,8 @@ packages:
   - name: ktock/buildg@v0.4.1
   - name: kurehajime/dajarep@v1.10.0
   - name: kurehajime/pong-command@v2.0.8
-  - name: LukeChannings/deno-arm64@v1.31.0
+  - name: LukeChannings/deno-arm64
+    version: v1.30.3
   - name: maaslalani/slides@v0.9.0
   - name: mattn/efm-langserver@v0.0.44
   - name: microsoft/ripgrep-prebuilt@v13.0.0-4
