@@ -40,12 +40,12 @@ xnoremap x "_x
 xnoremap s "_s
 xnoremap Y y$
 
-nnoremap n nzzzv<Cmd>Doautocmd VimrcSearched<CR>
-nnoremap N Nzzzv<Cmd>Doautocmd VimrcSearched<CR>
-nnoremap * *zzzv<Cmd>Doautocmd VimrcSearched<CR>
-nnoremap # #zzzv<Cmd>Doautocmd VimrcSearched<CR>
-nnoremap g* g*zzzv<Cmd>Doautocmd VimrcSearched<CR>
-nnoremap g# g#zzzv<Cmd>Doautocmd VimrcSearched<CR>
+nnoremap n nzzzv<Plug>(VimrcSearchPost)
+nnoremap N Nzzzv<Plug>(VimrcSearchPost)
+nnoremap * *zzzv<Plug>(VimrcSearchPost)
+nnoremap # #zzzv<Plug>(VimrcSearchPost)
+nnoremap g* g*zzzv<Plug>(VimrcSearchPost)
+nnoremap g# g#zzzv<Plug>(VimrcSearchPost)
 
 " disable arrow keys
 nnoremap <Up> <Nop>

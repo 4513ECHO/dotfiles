@@ -3,7 +3,7 @@ local autocmd = require('vimrc.autocmd')
 
 function M.hook_add()
   autocmd "User" {
-    pattern = { "VimrcSearched" },
+    pattern = { "VimrcSearchPost" },
     callback = function()
       local hlslens = require "hlslens"
       hlslens.enable()

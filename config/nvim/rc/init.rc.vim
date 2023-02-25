@@ -78,14 +78,13 @@ command! -bar DiffOrig
       \ : vertical new | setlocal buftype=nofile | r ++edit # | 0d_
       \ | diffthis | wincmd p | diffthis
 
-command! -nargs=1 Doautocmd doautocmd <nomodeline> User <args>
-
 if filereadable(expand('~/.vimrc_secret'))
   source ~/.vimrc_secret
 endif
 
 " custom autocmd
-autocmd vimrc User VimrcSearched :
+nnoremap <Plug>(VimrcSearchPost) <Cmd>doautocmd <nomodeline> User VimrcSearchPost<CR>
+autocmd vimrc User VimrcSearchPost :
 
 if has('nvim')
   lua require('vimrc.autocmd')
