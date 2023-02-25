@@ -316,6 +316,26 @@ repo = 'lambdalisue/file-protocol.vim'
 on_path = '^file://'
 
 [[plugins]]
+repo = 'lambdalisue/kensaku.vim'
+denops_wait = false
+hook_add = '''
+let s:kensaku_state = #{ cmdline: '', converted: v:false }
+function! s:convert_kensaku() abort
+  if !s:kensaku_state.converted
+    let s:kensaku_state.cmdline = getcmdline()
+    let query = kensaku#query(s:kensaku_state.cmdline)
+    " NOTE: Ignore regexp bug
+    call setcmdline(substitute(query, '\\+α', '+α', 'g'))
+  else
+    call setcmdline(s:kensaku_state.cmdline)
+  endif
+  let s:kensaku_state.converted = !s:kensaku_state.converted
+endfunction
+autocmd vimrc CmdlineLeave * let s:kensaku_state.converted = v:false
+cnoremap <C-x><C-k> <Cmd>call <SID>convert_kensaku()<CR>
+'''
+
+[[plugins]]
 repo = 'lambdalisue/suda.vim'
 on_cmd = ['SudaRead', 'SudaWrite']
 
