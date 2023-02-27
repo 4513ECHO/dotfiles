@@ -45,7 +45,7 @@ insert_command 'tokei' tokei --hidden -- $(git ls-files)
 insert_command 'vim-plugins' vim_plugins
 
 # shellcheck disable=SC2016
-updated_at=$(printf 'Statistics are updated at [`%s`](%s/commit/%s).' \
+updated_at=$(printf 'Statistics are updated at [`%s`](%s/commit/%s),' \
   "$(git rev-parse --short HEAD)" "$(git remote get-url origin)" "$(git rev-parse HEAD)")
 echo "$updated_at"
 sed -i "s@^Statistics are updated at .*\$@$updated_at@" "$src"
