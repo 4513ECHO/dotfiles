@@ -1,83 +1,50 @@
 [[plugins]]
 repo = 'machakann/vim-sandwich'
-depends = [
-  'vim-textobj-entire', 'vim-textobj-line',
-  'vim-textobj-wiw', 'vim-textobj-anyblock', 'vim-textobj-between',
-  'vim-textobj-functioncall',
-]
-on_map = { xno = '<Plug>', n = '<Plug>(operator-sandwich' }
+on_map = { xno = '<Plug>', n = '<Plug>(operator-sandwich-dot)' }
 hook_add = '''
-let g:sandwich_no_default_key_mappings = v:true
-let g:operator_sandwich_no_default_key_mappings = v:true
-let g:textobj_sandwich_no_default_key_mappings = v:true
-
 " vim-surround like mappings
-nnoremap ys <Plug>(sandwich-add)
-onoremap <SID>line :normal! ^vg_<CR>
-nnoremap <silent> yss <Plug>(sandwich-add)<SID>line
-onoremap <SID>gul g_
-nnoremap <silent> yS <Plug>(sandwich-add)<SID>gul
-nnoremap ds <Plug>(sandwich-delete)
-nnoremap dss <Plug>(sandwich-delete-auto)
-nnoremap cs <Plug>(sandwich-replace)
-nnoremap css <Plug>(sandwich-replace-auto)
-xnoremap S <Plug>(sandwich-add)
-nnoremap . <Plug>(operator-sandwich-dot)
-
-let g:sandwich#magicchar#f#patterns = [{
-      \ 'header' : '\<\%(\h\k*\.\)*\h\k*',
-      \ 'bra'    : '(',
-      \ 'ket'    : ')',
-      \ 'footer' : '',
+execute 'source' dein#get('vim-sandwich').path .. '/macros/sandwich/keymap/surround.vim'
+let g:sandwich#magicchar#f#patterns = [#{
+      \ header : '\<\%(\h\k*\.\)*\h\k*',
+      \ bra    : '(',
+      \ ket    : ')',
+      \ footer : '',
       \ }]
 '''
 hook_source = '''
 call operator#sandwich#set('add', 'char', 'skip_space', 1)
-let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
-" form https://github.com/yuki-yano/dotfiles/blob/8840dc3a90/.vimrc#L2899
-let g:sandwich#recipes += [
-      \ {
-      \   'buns': ['${', '}'],
-      \   'input': ['$'],
-      \   'filetype': [
-      \     'javascript', 'javascriptreact', 'typescript', 'typescriptreact',
-      \   ],
+'''
+
+[[plugins]]
+repo = 'yuki-yano/vim-textobj-generics'
+depends = ['vim-sandwich', 'vim-textobj-functioncall']
+on_source = 'vim-sandwich'
+on_map = { xo = '<Plug>' }
+hook_add = '''
+let g:textobj_generics_no_default_key_mappings = v:true
+onoremap ag <Plug>(textobj-generics-i)
+onoremap ig <Plug>(textobj-generics-innerparen-i)
+xnoremap ag <Plug>(textobj-generics-i)
+xnoremap ig <Plug>(textobj-generics-innerparen-i)
+'''
+hook_source = '''
+" from README
+let g:sandwich#recipes = get(g:, 'sandwich#recipes', g:sandwich#default_recipes) + [
+      \ #{
+      \   buns: ['textobj#generics#input_generics()', '">"'],
+      \   expr: v:true,
+      \   cursor: 'inner_tail',
+      \   kind: ['add', 'replace'],
+      \   action: ['add'],
+      \   input: ['g'],
       \ },
-      \ {
-      \   'buns': ['$(', ')'],
-      \   'input': ['$'],
-      \   'filetype': [
-      \     'sh', 'zsh',
-      \   ],
-      \ },
-      \ {
-      \   'buns': ['#{', '}'],
-      \   'input': ['#'],
-      \   'filetype': ['vim', 'ruby', 'eruby'],
-      \ },
-      \ {
-      \   'buns': ['SandwichGenericsName()', '">"'],
-      \   'expr': v:true,
-      \   'cursor': 'inner_tail',
-      \   'kind': ['add', 'replace'],
-      \   'action': ['add'],
-      \   'input': ['g'],
-      \ },
-      \ {
-      \   'external': ['i<', "\<Plug>(textobj-functioncall-generics-a)"],
-      \   'noremap': v:false,
-      \   'kind': ['delete', 'replace', 'query'],
-      \   'input': ['g'],
+      \ #{
+      \   external: ['i<', "\<Plug>(textobj-generics-a)"],
+      \   noremap: v:false,
+      \   kind: ['delete', 'replace', 'query'],
+      \   input: ['g'],
       \ },
       \ ]
-
-function! SandwichGenericsName() abort
-  let genericsname = input('Generics Name: ', '')
-  if empty(genericsname)
-    throw 'OperatorSandwichCancel'
-  endif
-  return genericsname .. '<'
-endfunction
 '''
 
 [[plugins]]
@@ -116,7 +83,6 @@ xnoremap il <Plug>(textobj-line-i)
 [[plugins]]
 repo = 'machakann/vim-textobj-functioncall'
 on_map = { xo = '<Plug>' }
-on_func = ['textobj#functioncall#']
 depends = ['vim-textobj-user']
 hook_add = '''
 " from https://github.com/yuki-yano/dotfiles/blob/8840dc3a90/.vimrc#L2953
@@ -127,25 +93,10 @@ let g:textobj_functioncall_patterns = [#{
       \ ket   : ')',
       \ footer: '',
       \ }]
-onoremap <silent> af <Plug>(textobj-functioncall-i)
-onoremap <silent> if <Plug>(textobj-functioncall-innerparen-i)
-xnoremap <silent> af <Plug>(textobj-functioncall-i)
-xnoremap <silent> if <Plug>(textobj-functioncall-innerparen-i)
-
-let g:textobj_functioncall_generics_patterns = [#{
-      \ header: '\<\h\k*',
-      \ bra   : '<',
-      \ ket   : '>',
-      \ footer: '',
-      \ }]
-onoremap <silent> <Plug>(textobj-functioncall-generics-a) :<C-u>call textobj#functioncall#i('o', g:textobj_functioncall_generics_patterns)<CR>
-onoremap <silent> <Plug>(textobj-functioncall-generics-i) :<C-u>call textobj#functioncall#ip('o', g:textobj_functioncall_generics_patterns)<CR>
-xnoremap <silent> <Plug>(textobj-functioncall-generics-a) :<C-u>call textobj#functioncall#i('x', g:textobj_functioncall_generics_patterns)<CR>
-xnoremap <silent> <Plug>(textobj-functioncall-generics-i) :<C-u>call textobj#functioncall#ip('x', g:textobj_functioncall_generics_patterns)<CR>
-onoremap <silent> ag <Plug>(textobj-functioncall-generics-a)
-onoremap <silent> ig <Plug>(textobj-functioncall-generics-i)
-xnoremap <silent> ag <Plug>(textobj-functioncall-generics-a)
-xnoremap <silent> ig <Plug>(textobj-functioncall-generics-i)
+onoremap af <Plug>(textobj-functioncall-i)
+onoremap if <Plug>(textobj-functioncall-innerparen-i)
+xnoremap af <Plug>(textobj-functioncall-i)
+xnoremap if <Plug>(textobj-functioncall-innerparen-i)
 '''
 
 [[plugins]]
