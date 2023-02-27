@@ -7,5 +7,14 @@
     "prefix": [
       "set"
     ]
+  },
+  "shellcheck": {
+    "body": [
+      "shellcheck ${1|disable,source,shell|}=$0"
+    ],
+    "description": "shellcheck annotation comment",
+    "prefix": [
+      "shellcheck"
+    ]
   }
 }

@@ -9,7 +9,7 @@
       "",
       "</details>"
     ],
-    "description": "<details> tag",
+    "description": "summary/detail folding",
     "prefix": [
       "details"
     ]

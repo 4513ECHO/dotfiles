@@ -1,0 +1,11 @@
+{
+  "coau": {
+    "body": [
+      "Co-authored-by: ${1:name}"
+    ],
+    "description": "Co-authored-by tag",
+    "prefix": [
+      "coau"
+    ]
+  }
+}
