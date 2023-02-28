@@ -5,7 +5,7 @@ Name=Discord
 Comment=Discord PWA client
 # from https://discord.com/branding
 Icon=discord
-Exec=/home/hibiki/.local/bin/chromium-browser-wrapper --app=https://discord.com
+Exec=/home/hibiki/.local/bin/chromium-browser-wrapper --app=https://discord.com/app
 Terminal=false
 StartupNotify=true
 StartupWMClass=discord.com
