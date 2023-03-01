@@ -1,7 +1,8 @@
 [[plugins]]
 repo = 'Shougo/ddu.vim'
-depends = ['denops.vim']
-on_func = ['ddu#start']
+depends = 'denops.vim'
+lazy = true
+on_func = 'ddu#start'
 hook_add = '''
 let g:launcher_config.ddu = #{
       \ char: 'd',
@@ -21,6 +22,16 @@ hook_source = '''
 Runtime dein/settings/ddu.vim
 '''
 
+[[plugins]]
+repo = 'Shougo/ddu-commands.vim'
+depends = 'ddu.vim'
+lazy = true
+on_cmd = 'Ddu'
+
+# UI
+
+[[plugins]]
+repo = 'Shougo/ddu-ui-ff'
 [plugins.ftplugin]
 ddu-ff = '''
 setlocal cursorline
@@ -61,122 +72,84 @@ inoremap <buffer> <C-p>
       \ <Cmd>call ddu#ui#ff#execute("call cursor(line('.')-1,0)<Bar>redraw")<CR>
 '''
 
-[[plugins]]
-repo = 'Shougo/ddu-commands.vim'
-depends = ['ddu.vim']
-lazy = true
-on_cmd = ['Ddu']
-
-# UI
-
-[[plugins]]
-repo = 'Shougo/ddu-ui-ff'
-on_source = 'ddu.vim'
-
 # filters
 
 [[plugins]]
 repo = 'Shougo/ddu-filter-matcher_hidden'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'Shougo/ddu-filter-matcher_relative'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'Shougo/ddu-filter-matcher_substring'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'yuki-yano/ddu-filter-fzf'
-on_source = 'ddu.vim'
 
 # kinds
 
 [[plugins]]
 repo = '4513echo/ddu-kind-url'
-depends = ['open-browser.vim']
-on_source = 'ddu.vim'
+depends = 'open-browser.vim'
 
 [[plugins]]
 repo = 'Shougo/ddu-kind-file'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'Shougo/ddu-kind-word'
-on_source = 'ddu.vim'
 
 # sources
 
 [[plugins]]
 repo = '4513echo/ddu-source-colorscheme'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = '4513echo/ddu-source-emoji'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = '4513echo/ddu-source-ghq'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = '4513echo/ddu-source-source'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'kuuote/ddu-source-mr'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'Shougo/ddu-source-action'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'Shougo/ddu-source-file'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'Shougo/ddu-source-file_rec'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'Shougo/ddu-source-line'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'Shougo/ddu-source-register'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'liquidz/ddu-source-custom-list'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'matsui54/ddu-source-dein_update'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'matsui54/ddu-source-file_external'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'matsui54/ddu-source-command_history'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'matsui54/ddu-source-help'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'matsui54/ddu-source-man'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'shun/ddu-source-buffer'
-on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'shun/ddu-source-rg'
-on_source = 'ddu.vim'
-
