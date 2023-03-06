@@ -148,8 +148,6 @@ hook_add = '''
 let g:vsnip_snippet_dir = g:config_home .. '/snippets'
 inoremap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : ''
 snoremap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : ''
-autocmd vimrc User PumCompleteDone
-      \ call vsnip_integ#on_complete_done(g:pum#completed_item)
 '''
 
 [[plugins]]

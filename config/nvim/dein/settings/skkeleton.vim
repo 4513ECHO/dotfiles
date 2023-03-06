@@ -14,7 +14,7 @@ endif
 call skkeleton#config(#{
       \ eggLikeNewline: v:true,
       \ completionRankFile: s:skk_dir .. '/completionRankFile',
-      \ globalJisyo: s:globalJisyo,
+      \ globalDictionaries: [[s:globalJisyo, 'euc-jp']],
       \ keepState: v:true,
       \ registerConvertResult: v:true,
       \ userJisyo: s:skk_dir .. '/SKK-JISYO.user',

@@ -89,7 +89,7 @@ Runtime dein/settings/skkeleton.vim
 # filters
 
 [[plugins]]
-repo = 'Shougo/ddc-converter_remove_overlap'
+repo = 'Shougo/ddc-filter-converter_remove_overlap'
 on_source = 'ddc.vim'
 
 [[plugins]]

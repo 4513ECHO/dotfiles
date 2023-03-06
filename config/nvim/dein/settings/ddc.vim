@@ -121,7 +121,6 @@ call ddc#custom#patch_filetype(
       \   'nextword',
       \   'github_issue', 'github_pull_request',
       \ ], s:sources),
-      \ keywordPattern: '[a-zA-Z_:#]\k*',
       \ })
 call ddc#custom#patch_filetype(
       \ ['sh', 'zsh'], #{
