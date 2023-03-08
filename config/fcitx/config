@@ -1,6 +1,6 @@
 [Hotkey]
 # 入力メソッドのオンオフ
-TriggerKey=HENKANMODE
+TriggerKey=ZENKAKUHANKAKU
 # アクティブでない時だけその他のトリガーキーを使用する
 # Available Value:
 # True False
