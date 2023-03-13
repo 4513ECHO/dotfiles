@@ -1,13 +1,17 @@
 import type { Denops } from "https://deno.land/x/denops_std@v4.0.0/mod.ts";
 
-export async function main(denops: Denops): Promise<void> {
+export function main(denops: Denops): Promise<void> {
   denops.dispatcher = {
-    meta(): Promise<unknown> {
-      return Promise.resolve({
+    async meta(): Promise<unknown> {
+      return {
         meta: denops.meta,
-        version: Deno.version,
-      });
+        denoVersion: Deno.version,
+        nvimVersion: denops.meta.host === "nvim"
+          ? await denops.call("luaeval", "vim.version()")
+          : {},
+      };
     },
   };
-  await Promise.resolve();
+
+  return Promise.resolve();
 }

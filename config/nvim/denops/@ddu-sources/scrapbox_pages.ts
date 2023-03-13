@@ -48,7 +48,7 @@ export class Source extends BaseSource<Params, ActionData> {
             action: {
               url: [
                 "https://scrapbox.io/",
-                args.sourceParams.rawTextUrl ? "api/pages" : "",
+                args.sourceParams.rawTextUrl ? "api/pages/" : "",
                 args.sourceParams.project,
                 "/" + encodeURI(item.title.replaceAll(" ", "_")),
                 args.sourceParams.rawTextUrl ? "/text" : "",
