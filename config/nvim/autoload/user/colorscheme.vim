@@ -4,8 +4,9 @@ if empty($VIM_DISABLE_DEIN)
       return s:cache
     endif
     let s:cache = {}
-    for plugins in values(filter(copy(dein#get()),
-          \ { _, v -> has_key(v, 'colorschemes') }))
+    for plugins in dein#get()->copy()
+          \ ->filter({ _, v -> has_key(v, 'colorschemes') })
+          \ ->values()
       if has_key(plugins, 'if') && !eval(plugins.if)
         continue
       endif
@@ -25,26 +26,24 @@ function! user#colorscheme#lightline() abort
   if g:colors_name ==# 'random'
     return 'default'
   endif
-  let custom_name = get(get(user#colorscheme#get(),
-        \ g:colors_name, {}), 'lightline')
-  return empty(custom_name)
-        \ ? g:colors_name
-        \ : custom_name
+  let custom_name = user#colorscheme#get()
+        \ ->get(g:colors_name, {})
+        \ ->get('lightline')
+  return empty(custom_name) ? g:colors_name : custom_name
 endfunction
 
 function! user#colorscheme#random() abort
-  let list = keys(user#colorscheme#get())
-  call user#colorscheme#command(
-        \ get(list, rand() % len(list)),
-        \ )
+  let list = user#colorscheme#get()->keys()
+  return list->get(rand() % list->len())
+        \ ->user#colorscheme#command()
 endfunction
 
 function! user#colorscheme#set_customize() abort
-  let customize = get(user#colorscheme#get(), g:colors_name)
+  let customize = user#colorscheme#get()->get(g:colors_name)
   if empty(customize)
     return
   endif
-  let highlight = get(customize, 'highlight')
+  let highlight = customize->get('highlight')
   if !empty(highlight)
     " TODO: use hiset() if exists
     for [group, attr] in items(highlight)
@@ -56,7 +55,7 @@ function! user#colorscheme#set_customize() abort
     endfor
   endif
   " TODO: edit v:colornames if exists
-  let terminal = get(customize, 'terminal')
+  let terminal = customize->get('terminal')
   if !empty(terminal)
     call s:set_terminal_colors(
           \ terminal is# 'mini'
@@ -75,7 +74,7 @@ function! user#colorscheme#set_customize() abort
       let g:terminal_color_{i} = g:terminal_ansi_colors[i]
     endfor
   endif
-  let link = get(customize, 'link')
+  let link = customize->get('link')
   if !empty(link)
     for [linked, base] in items(link)
       execute 'hi! link' linked base
@@ -97,9 +96,7 @@ function! user#colorscheme#command(colorscheme, reload = v:false) abort
   if empty(user#colorscheme#get())
     return
   endif
-  let colorscheme = a:reload
-        \ ? g:colors_name
-        \ : a:colorscheme
+  let colorscheme = a:reload ? g:colors_name : a:colorscheme
   if empty(colorscheme) && !a:reload
     echo g:colors_name
     return
@@ -126,7 +123,6 @@ function! user#colorscheme#update_lightline() abort
 endfunction
 
 function! user#colorscheme#completion(ArgLead, CmdLine, CursorPos) abort
-  return empty(a:ArgLead)
-        \ ? sort(copy(keys(user#colorscheme#get()))
-        \ : matchfuzzy(copy(keys(user#colorscheme#get()), a:ArgLead)
+  let items = user#colorscheme#get()->keys()->copy()
+  return empty(a:ArgLead) ? sort(items) : matchfuzzy(items, a:ArgLead)
 endfunction
