@@ -1,6 +1,5 @@
 cargo:cargo-expand
 cargo:dont
-cargo:evcxr_repl
 cargo:exa
 go:github.com/b4b4r07/git-bump
 go:github.com/fedeztk/got/cmd/got
@@ -11,4 +10,5 @@ go:github.com/motemen/sbx
 go:github.com/sheepla/fzenn
 go:github.com/syumai/longify
 npm:npm
+npm:pnpm
 npm:prettier
