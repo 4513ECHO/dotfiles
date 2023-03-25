@@ -51,9 +51,9 @@ let s:uiParams.ff = #{
 
 function! s:on_changed() abort
   if has('nvim')
-    let bgcolor = printf('#%06x', get(
-          \ nvim_get_hl_by_name('Normal', v:true),
-          \ 'background', 0x000000))
+    let bgcolor = nvim_get_hl_by_name('Normal', v:true)
+          \ ->get('background', 0x000000)
+          \ ->printf('#%06x')
     call nvim_set_hl(0, 'DduEndOfBuffer', #{
           \ foreground: bgcolor,
           \ background: bgcolor,
@@ -69,7 +69,7 @@ function! s:on_changed() abort
         \ winWidth: &columns / 3 * 2,
         \ }
   call ddu#custom#patch_global(options)
-  " call ddu#ui#ff#do_action('updateOptions', options)
+  " call ddu#ui#do_action('updateOptions', options)
 endfunction
 
 autocmd vimrc ColorScheme,VimResized * call s:on_changed()

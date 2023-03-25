@@ -36,36 +36,36 @@ repo = 'Shougo/ddu-ui-ff'
 ddu-ff = '''
 setlocal cursorline
 nnoremap <buffer> <CR>
-      \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
+      \ <Cmd>call ddu#ui#do_action('itemAction')<CR>
 nnoremap <buffer> <Space>
-      \ <Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>
+      \ <Cmd>call ddu#ui#do_action('toggleSelectItem')<CR>
 xnoremap <buffer><silent> <Space>
-      \ :call ddu#ui#ff#do_action('toggleSelectItem')<CR>
+      \ :call ddu#ui#do_action('toggleSelectItem')<CR>
 nnoremap <buffer> A
-      \ <Cmd>call ddu#ui#ff#do_action('toggleAllItems')<CR>
+      \ <Cmd>call ddu#ui#do_action('toggleAllItems')<CR>
 nnoremap <buffer> C
-      \ <Cmd>call ddu#ui#ff#do_action('clearSelectAllItems')<CR>
+      \ <Cmd>call ddu#ui#do_action('clearSelectAllItems')<CR>
 nnoremap <buffer> i
-      \ <Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>
+      \ <Cmd>call ddu#ui#do_action('openFilterWindow')<CR>
 nnoremap <buffer> <Tab>
-      \ <Cmd>call ddu#ui#ff#do_action('chooseAction')<CR>
+      \ <Cmd>call ddu#ui#do_action('chooseAction')<CR>
 nnoremap <buffer> <C-l>
-      \ <Cmd>call ddu#ui#ff#do_action('refreshItems')<Bar>redraw<CR>
+      \ <Cmd>call ddu#ui#do_action('refreshItems')<Bar>redraw<CR>
 nnoremap <buffer> p
-      \ <Cmd>call ddu#ui#ff#do_action('preview')<CR>
+      \ <Cmd>call ddu#ui#do_action('preview')<CR>
 nnoremap <buffer> q
-      \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
+      \ <Cmd>call ddu#ui#do_action('quit')<CR>
 nnoremap <buffer> E
-      \ <Cmd>call ddu#ui#ff#do_action('itemAction',
+      \ <Cmd>call ddu#ui#do_action('itemAction',
       \ #{ params: eval(input('params: ', "#{}\<lt>Left>")) })<CR>
 '''
 
 ddu-ff-filter = '''
 setlocal nocursorline
-nnoremap <buffer> q     <Cmd>call ddu#ui#ff#close()<CR>
-nnoremap <buffer> <CR>  <Cmd>call ddu#ui#ff#close()<CR>
-inoremap <buffer> <CR>  <Esc><Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
-inoremap <buffer> <C-c> <Esc><Cmd>call ddu#ui#ff#close()<CR>
+nnoremap <buffer> q     <Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
+nnoremap <buffer> <CR>  <Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
+inoremap <buffer> <CR>  <Esc><Cmd>call ddu#ui#do_action('itemAction')<CR>
+inoremap <buffer> <C-c> <Esc><Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
 inoremap <buffer> <C-n>
       \ <Cmd>call ddu#ui#ff#execute("call cursor(line('.')+1,0)<Bar>redraw")<CR>
 inoremap <buffer> <C-p>
