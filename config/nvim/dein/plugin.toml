@@ -727,6 +727,7 @@ nnoremap <silent> <Bslash>         <Plug>(caw:hatpos:toggle:operator)
 xnoremap <silent> <Bslash>         <Plug>(caw:hatpos:toggle:operator)
 '''
 # NOTE: Workaround of https://github.com/tyru/caw.vim/issues/183
+# based on https://github.com/tyru/caw.vim/pulls/185
 lua_add = '''
 local M = {}
 ---@param lnum integer
@@ -737,7 +738,7 @@ function M.has_syntax(lnum, col)
   local items = vim.inspect_pos(bufnr, lnum - 1, col - 1)
   if #items.treesitter > 0 then
     for _, capture in ipairs(items.treesitter) do
-      if capture.hl_group == "@comment" then
+      if capture.capture == "comment" then
         return true
       end
     end
