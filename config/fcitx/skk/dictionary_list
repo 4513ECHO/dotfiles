@@ -1,2 +1,3 @@
 type=file,file=/home/hibiki/.local/share/skk/SKK-JISYO.user,mode=readwrite,encoding=UTF-8
+type=file,file=/home/hibiki/.local/share/skk/SKK-JISYO.4513echo,mode=readonly,encoding=UTF-8
 type=file,file=/usr/share/skk/SKK-JISYO.L,mode=readonly

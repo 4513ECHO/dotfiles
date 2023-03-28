@@ -11,26 +11,30 @@ elseif !filereadable(s:globalJisyo)
   call system('gzip -d ' .. s:gzipfile)
 endif
 
-call skkeleton#config(#{
-      \ eggLikeNewline: v:true,
-      \ completionRankFile: s:skk_dir .. '/completionRankFile',
-      \ globalDictionaries: [[s:globalJisyo, 'euc-jp']],
-      \ keepState: v:true,
-      \ registerConvertResult: v:true,
-      \ userJisyo: s:skk_dir .. '/SKK-JISYO.user',
-      \ })
+function! s:on_init() abort
+  call skkeleton#config(#{
+        \ eggLikeNewline: v:true,
+        \ completionRankFile: s:skk_dir .. '/completionRankFile',
+        \ globalDictionaries: [
+        \   s:skk_dir .. '/SKK-JISYO.4513echo',
+        \   [s:globalJisyo, 'euc-jp'],
+        \ ],
+        \ keepState: v:true,
+        \ registerConvertResult: v:true,
+        \ userJisyo: s:skk_dir .. '/SKK-JISYO.user',
+        \ })
 
-call skkeleton#register_kanatable('rom', {
-      \ "z\<Space>": ["\u3000"],
-      \ })
+  call skkeleton#register_kanatable('rom', {
+        \ "z\<Space>": ["\u3000"],
+        \ })
+endfunction
 
 function! s:on_enable() abort
   let b:skkeleton_config = ddc#custom#get_buffer()
-  " call ddc#custom#patch_buffer(#{
-  "      \ sources: ['skkeleton'],
-  "      \ specialBufferCompletion: v:true,
-  "      \ })
-  call ddc#custom#patch_buffer(#{ sources: [] })
+  call ddc#custom#patch_buffer(#{
+        \ sources: ['skkeleton'],
+        \ specialBufferCompletion: v:true,
+        \ })
 endfunction
 function! s:on_disable() abort
   if exists('b:skkeleton_config')
@@ -39,6 +43,7 @@ function! s:on_disable() abort
   endif
 endfunction
 
+autocmd vimrc User skkeleton-initialize-pre call s:on_init()
 autocmd vimrc User skkeleton-enable-pre call s:on_enable()
 autocmd vimrc User skkeleton-disable-pre call s:on_disable()
 autocmd vimrc User skkeleton-enable-post call lightline#update()
@@ -48,12 +53,12 @@ autocmd vimrc User skkeleton-mode-changed call lightline#update()
 " original code by @uga-rosa
 " based on https://github.com/kuuote/dotvim/blob/6a69151c/conf/plug/skkeleton.lua#L32
 
-let s:skkeleton_modes = {
-      \ 'hira': 'あ',
-      \ 'kata': 'ア',
-      \ 'hankata': 'ｧｱ',
-      \ 'zenkaku': 'ａ',
-      \ 'abbrev': '/a',
+let s:skkeleton_modes = #{
+      \ hira: 'あ',
+      \ kata: 'ア',
+      \ hankata: 'ｧｱ',
+      \ zenkaku: 'ａ',
+      \ abbrev: '/a',
       \ }
 
 if has('nvim')
