@@ -170,17 +170,16 @@ setlocal formatoptions-=ro textwidth=0
 
 [[plugins]]
 repo = '4513echo/vim-jq_indent'
-on_ft = ['jq']
 
 [[plugins]]
 repo = 'bfrg/vim-jq'
 merge_ftdetect = true
-on_ft = ['jq']
 
 [[plugins]]
 repo = 'cohama/vim-hier'
-on_ft = ['qf']
+lazy = true
 on_cmd = ['HierClean', 'HierStart', 'HierStop', 'HierUpdate']
+on_ft = 'qf'
 [plugins.ftplugin]
 qf = '''
 autocmd vimrc WinClosed <buffer>
@@ -192,44 +191,42 @@ autocmd vimrc WinClosed <buffer>
 [[plugins]]
 repo = 'Fymyte/rasi.vim'
 merge_ftdetect = true
-on_ft = ['rasi']
 [plugins.ftplugin]
 rasi = '''
 setlocal shiftwidth=4 indentkeys=0{,0},o,O
 '''
 
 [[plugins]]
-repo = 'itchyny/vim-qfedit'
-on_ft = ['qf']
-
-[[plugins]]
 repo = 'lark-parser/vim-lark-syntax'
 merge_ftdetect = true
-on_ft = ['lark']
+
+[[plugins]]
+repo = 'lifepillar/pgsql.vim'
+merge_ftdetect = true
+hook_add = '''
+let g:sql_type_default = 'pgsql'
+'''
 
 [[plugins]]
 repo = 'mattn/vim-maketable'
-on_ft = ['markdown']
+lazy = true
 on_cmd = ['MakeTable', 'UnmakeTable']
 
 [[plugins]]
 repo = 'MTDL9/vim-log-highlighting'
 merge_ftdetect = true
-on_ft = ['log']
 
 [[plugins]]
 repo = 'rbtnn/vim-vimscript_indentexpr'
-on_ft = ['vim']
 
 [[plugins]]
 repo = 'syusui-s/scrapbox-vim'
 merge_ftdetect = true
-on_ft = ['scrapbox']
 
 [[plugins]]
 repo = 'thinca/vim-qfreplace'
-on_ft = ['qf']
-on_cmd = ['Qfreplace']
+lazy = true
+on_cmd = 'Qfreplace'
 [plugins.ftplugin]
 qf = '''
 nnoremap <buffer> r <Cmd>Qfreplace<CR>
@@ -241,9 +238,11 @@ nnoremap <buffer> q <C-w>q
 [[plugins]]
 repo = 'tmux-plugins/vim-tmux'
 merge_ftdetect = true
-on_ft = ['tmux']
 
 [[plugins]]
 repo = 'tpope/vim-git'
 merge_ftdetect = true
-on_ft = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendmail']
+
+[[plugins]]
+repo = 'vim-skk/skkdict.vim'
+merge_ftdetect = true
