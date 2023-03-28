@@ -33,13 +33,11 @@ fi
   done
 }
 
-export SSH_FORWARD_KEY="$HOME/.ssh/id_git_ed25519"
-export SSH_SYMLINK_SOCK="$HOME/.ssh/agent"
 if [[ -n "$TMUX" ]]; then
   hook::venv
   hook::rename-title
 fi
-[[ -f "$SSH_FORWARD_KEY" ]] && enable-agent-forward
+[[ -f '~/.ssh/id_git_ed25519' ]] && enable-agent-forward '~/.ssh/id_git_ed25519'
 [[ -z "$MINIMUM_DOTFILES" ]] && agent-symlink
 [[ ! -f "$HISTFILE" ]] && { mkdir -p "$(dirname "$HISTFILE")" && touch "$HISTFILE"; }
 [[ ! -d "$XDG_RUNTIME_DIR" ]] && { mkdir -p "$XDG_RUNTIME_DIR" 2> /dev/null && chmod 0700 "$XDG_RUNTIME_DIR"; }

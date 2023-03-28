@@ -24,10 +24,10 @@ fi
 alias a='aqua'
 alias d='docker'
 alias g='git'
-alias sys='systemctl'
+alias sys='systemctl --user'
 alias carog='cargo' # for typo
 alias globalip='curl -q globalip.me'
-alias reload='exec $SHELL -l'
+alias reload='exec $SHELL -l && rehash'
 alias cp='cp -i'
 alias rm='rm -i'
 alias mkdir='mkdir -p'

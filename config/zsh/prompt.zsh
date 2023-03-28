@@ -10,19 +10,11 @@ function venv-prompt () {
   fi
 }
 
-# use term ansi prompt_colors when using vim
 typeset -gA prompt_colors
-if [[ -n "$VIM" ]]; then
-  prompt_colors[red]=001
-  prompt_colors[green]=002
-  prompt_colors[yellow]=003
-  prompt_colors[cyan]=006
-else
-  prompt_colors[red]=161
-  prompt_colors[green]=154
-  prompt_colors[yellow]=226
-  prompt_colors[cyan]=081
-fi
+prompt_colors[red]=001
+prompt_colors[green]=002
+prompt_colors[yellow]=003
+prompt_colors[cyan]=006
 
 # use vcs_info
 zstyle ':vcs_info:git:*' check-for-changes true
@@ -47,7 +39,6 @@ function +vi-git-hook-begin () {
 function +vi-git-untracked () {
   if command git status --porcelain 2> /dev/null \
       | command grep '^??' > /dev/null 2>&1; then
-    # hook_com[staged]+="%F{${prompt_colors[yellow]}}?"
     hook_com[staged]="%F{${prompt_colors[yellow]}}?${hook_com[staged]}"
   fi
 }

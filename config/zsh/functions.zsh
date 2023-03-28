@@ -47,10 +47,8 @@ zshaddhistory () {
 }
 
 enable-agent-forward () {
-  if [[ -z "$SSH_AUTH_SOCK" ]]; then
-    eval "$(ssh-agent)" > /dev/null
-  fi
-  ssh-add "$SSH_FORWARD_KEY"
+  [[ -z "$SSH_AUTH_SOCK" ]] && eval "$(ssh-agent)" > /dev/null
+  ssh-add "$1"
 }
 
 agent-symlink () {
