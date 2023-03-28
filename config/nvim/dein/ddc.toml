@@ -1,7 +1,8 @@
 [[plugins]]
 repo = 'Shougo/ddc.vim'
-depends = ['denops.vim', 'lexima.vim']
-on_event = ['InsertEnter']
+depends = ['denops.vim', 'lexima.vim', 'pum.vim']
+lazy = true
+on_event = 'InsertEnter'
 hook_add = '''
 nnoremap : <Cmd>call timer_start(10, { -> user#ddc#cmdline_pre(':') })<CR>:
 xnoremap : <Cmd>call timer_start(10, { -> user#ddc#cmdline_pre(':') })<CR>:
@@ -17,67 +18,55 @@ Runtime dein/settings/ddc.vim
 
 [[plugins]]
 repo = 'Shougo/ddc-ui-pum'
-depends = 'pum.vim'
-on_source = 'ddc.vim'
 
 # sources
 
 [[plugins]]
 repo = '4513echo/ddc-github'
-on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'LumaKernel/ddc-source-file'
-on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/ddc-source-around'
-on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/ddc-source-cmdline'
-on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/ddc-source-line'
-on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/ddc-source-nextword'
-on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/ddc-source-omni'
-on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/ddc-source-zsh'
-on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/neco-vim'
-on_ft = ['vim']
+lazy = true
+on_ft = 'vim'
 
 [[plugins]]
 repo = 'delphinus/ddc-tmux'
-on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'hrsh7th/vim-vsnip-integ'
 depends = 'vim-vsnip'
-on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'matsui54/ddc-buffer'
-on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'shun/ddc-source-vim-lsp'
-on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'vim-skk/skkeleton'
-depends = ['denops.vim']
+depends = 'denops.vim'
+lazy = true
 on_map = { ic = '<Plug>' }
 hook_add = '''
 noremap! <C-j> <Plug>(skkeleton-toggle)
@@ -90,15 +79,12 @@ Runtime dein/settings/skkeleton.vim
 
 [[plugins]]
 repo = 'Shougo/ddc-filter-converter_remove_overlap'
-on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'matsui54/ddc-converter_truncate'
-on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'tani/ddc-fuzzy'
-on_source = 'ddc.vim'
 hook_add = '''
 autocmd vimrc ColorScheme * hi def link FuzzyAccent Number
 '''
@@ -112,23 +98,28 @@ call pum#set_option(#{
       \ highlight_columns: #{
       \   kind: 'Type',
       \ },
-      \ max_width: 60,
+      \ max_width: 100,
+      \ scrollbar_char: '█',
       \ use_complete: v:true,
       \ })
 '''
 
 [[plugins]]
 repo = 'matsui54/denops-popup-preview.vim'
-depends = ['denops.vim', 'vim-lsp']
-on_source = 'ddc.vim'
-hook_source = '''
-call popup_preview#enable()
+depends = 'denops.vim'
+hook_add = '''
+let g:popup_preview_config = #{
+      \ maxWidth: 100,
+      \ }
+autocmd vimrc TextChangedI * ++once ++nested call popup_preview#enable()
 '''
 
 [[plugins]]
 repo = 'matsui54/denops-signature_help'
-depends = ['denops.vim', 'vim-lsp']
-on_source = 'ddc.vim'
-hook_source = '''
-call signature_help#enable()
+depends = 'denops.vim'
+hook_add = '''
+let g:signature_help_config = #{
+      \ maxWidth: 100,
+      \ }
+autocmd vimrc TextChangedI * ++once ++nested call signature_help#enable()
 '''

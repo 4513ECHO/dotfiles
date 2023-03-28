@@ -95,10 +95,10 @@ let s:sourceParams.tmux = #{
 
 let s:filterParams.converter_truncate = #{
       \ maxAbbrWidth: 40,
-      \ maxInfoWidth: 40,
+      \ maxInfoWidth: 400,
       \ maxKindWidth: 20,
       \ maxMenuWidth: 20,
-      \ ellipsis: '..',
+      \ ellipsis: '…',
       \ }
 
 call ddc#custom#patch_filetype(
