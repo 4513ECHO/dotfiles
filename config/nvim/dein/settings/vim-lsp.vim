@@ -23,10 +23,10 @@ let g:lsp_fold_enabled = v:false
 let g:lsp_signature_help_enabled = v:false " NOTE: use denops-signature-help
 let g:lsp_work_done_progress_enabled = v:true
 
-let g:lsp_diagnostics_signs_error = {'text': '✗'}
-let g:lsp_diagnostics_signs_hint = {'text': '?'}
-let g:lsp_diagnostics_signs_information = {'text': 'i'}
-let g:lsp_diagnostics_signs_warning = {'text': '‼'}
+let g:lsp_diagnostics_signs_error = #{ text: '✗' }
+let g:lsp_diagnostics_signs_hint = #{ text: '?' }
+let g:lsp_diagnostics_signs_information = #{ text: 'i' }
+let g:lsp_diagnostics_signs_warning = #{ text: '‼' }
 let g:lsp_document_code_action_signs_enabled = v:false
 let g:lsp_diagnostics_virtual_text_prefix = ' ‣ '
 
@@ -73,6 +73,7 @@ function! s:jump_definition() abort
 endfunction
 
 autocmd vimrc BufWritePre *.json LspDocumentFormatSync --server=efm-langserver
-
+autocmd vimrc BufReadPost .env
+      \ call lsp#disable_diagnostics_for_buffer(bufnr(expand('<afile>')))
 autocmd vimrc User lsp_buffer_enabled
-      \ call <SID>on_lsp_buffer_enabled()
+      \ call s:on_lsp_buffer_enabled()

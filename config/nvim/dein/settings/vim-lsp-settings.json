@@ -89,7 +89,7 @@
               "deno.json",
               "deno.jsonc"
             ],
-            "url": "https://deno.land/x/deno@v1.30.3/cli/schemas/config-file.v1.json"
+            "url": "https://deno.land/x/deno@v1.32.1/cli/schemas/config-file.v1.json"
           },
           {
             "fileMatch": [
@@ -135,7 +135,12 @@
             "enabled": true
           },
           "pylsp_mypy": {
-            "enabled": true
+            "enabled": true,
+            "overrides": [
+              "--no-pretty",
+              true
+            ],
+            "report_progress": true
           }
         }
       }
@@ -205,7 +210,7 @@
         },
         "schema": {
           "associations": {
-            "/dein/.*\\.toml": ""
+            "/dein/.*\\.toml": "This will replaced in vim script"
           },
           "enabled": true,
           "repositoryEnabled": true,
@@ -232,10 +237,10 @@
             "/efm-langserver/config.yaml",
             "/efm-langserver/config.yml"
           ],
-          "https://pax.deno.dev/aquaproj/aqua@v1.33.0/json-schema/aqua-yaml.json": [
+          "https://pax.deno.dev/aquaproj/aqua@v2.3.0-3/json-schema/aqua-yaml.json": [
             "/aqua/aqua.yaml"
           ],
-          "https://pax.deno.dev/aquaproj/aqua@v1.33.0/json-schema/registry.json": [
+          "https://pax.deno.dev/aquaproj/aqua@v2.3.0-3/json-schema/registry.json": [
             "/aqua-registry/pkgs/**/registry.yaml",
             "/aqua-registry/registry.yaml",
             "/aqua/experimental.yaml",
