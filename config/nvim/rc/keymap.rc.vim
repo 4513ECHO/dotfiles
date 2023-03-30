@@ -95,14 +95,14 @@ xnoremap / <Esc>/\%V
 " from https://github.com/nnsnico/dotfiles/blob/cf9ce83cfa/vim/vimrcs/basic.vim#L150-L151
 " center horizontally on cursor position
 nnoremap z. <Cmd>normal! zszH<CR>
-" from https://github.com/romgrk/nvim/blob/ba305c52/rc/keymap.vim#L98-L99
-nnoremap <expr> i getline('.') =~# '^\s\+$' ? 'cc' : 'i'
+" based on https://github.com/romgrk/nvim/blob/ba305c52/rc/keymap.vim#L98-L99
+nnoremap <expr> i getline('.') =~# '^\s*$' ? 'cc' : 'i'
 " from https://github.com/monaqa/dotfiles/blob/de4bdb9f/.config/nvim/lua/rc/keymap.lua#L436
-nnoremap <expr> dd empty(getline('.')) && v:count1 == 1 && v:register ==# '"'
+nnoremap <expr> dd empty(getline('.')) && v:count1 ==# 1 && v:register ==# '"'
       \ ? '"_dd' : 'dd'
 
 " NOTE: `g_` is almost same as `$h`
-xnoremap v g_
+xnoremap <expr> v mode() ==# 'v' ? 'g_' : 'v'
 xnoremap <Space> t<Space>
 xnoremap ) t)
 xnoremap < <gv
@@ -127,9 +127,9 @@ noremap! <C-p> <Up>
 noremap! <C-f> <Right>
 noremap! <expr> <C-d> <SID>is_at_end() ? '<C-d>' : '<Del>'
 inoremap <expr> <C-k> <SID>is_at_end() ? '<C-o>gJ' : '<C-o>D'
-cnoremap <expr> <C-k>
-     \ repeat("\<Del>", strchars(getcmdline()[getcmdpos() - 1:]))
-noremap! <C-y> <C-r>*
+cnoremap <C-k> <Cmd>call setcmdline(
+      \ getcmdpos() ==# 1 ? '' : getcmdline()[:getcmdpos() - 2])<CR>
+noremap! <C-y> <C-r>"
 " }}}
 
 map! ¥ <Bslash>
