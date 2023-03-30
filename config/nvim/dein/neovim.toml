@@ -15,7 +15,7 @@ require("pasta").setup {
   next_key = vim.api.nvim_replace_termcodes("<C-p>", true, true, true),
   prev_key = vim.api.nvim_replace_termcodes("<C-n>", true, true, true),
 }
-require("pasta").setup.filetype({ "markdown", "yaml" }, {
+require("pasta").setup.filetype({ "markdown", "python", "yaml" }, {
   converters = {},
 })
 '''
@@ -60,12 +60,11 @@ require("nvim-treesitter.configs").setup {
     "toml",
     "typescript",
     "vim",
-    "yaml",
   },
-  additionnal_vim_regex_highlighting = false,
   highlight = {
     enable = true,
-    disable = { "bash", "yaml", "help" },
+    disable = { "bash", "help" },
+    additionnal_vim_regex_highlighting = false,
   },
   playground = {
     enable = true,
