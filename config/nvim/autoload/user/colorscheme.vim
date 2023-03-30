@@ -5,9 +5,9 @@ if empty($VIM_DISABLE_DEIN)
     endif
     let s:cache = {}
     for plugins in dein#get()->copy()
-          \ ->filter({ _, v -> has_key(v, 'colorschemes') })
+          \ ->filter({ _, val -> val->has_key('colorschemes') })
           \ ->values()
-      if has_key(plugins, 'if') && !eval(plugins.if)
+      if plugins->has_key('if') && !eval(plugins.if)
         continue
       endif
       for colorscheme in plugins.colorschemes

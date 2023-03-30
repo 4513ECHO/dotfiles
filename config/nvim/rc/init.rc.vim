@@ -8,8 +8,6 @@ let g:data_home = $XDG_DATA_HOME .. '/nvim'
 let g:vim_cache_home = $XDG_CACHE_HOME .. '/vim'
 let g:vim_data_home = $XDG_DATA_HOME .. '/vim'
 
-let g:current_colorscheme = get(g:, 'current_colorscheme', 'random')
-
 let g:launcher_config = get(g:, 'launcher_config', {})
 nnoremap <C-s> <Cmd>call user#launcher#select()<CR>
 let g:launcher_config.color = #{

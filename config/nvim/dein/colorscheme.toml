@@ -102,6 +102,7 @@ NonText = { ctermbg = 'NONE', guibg = 'NONE' }
 repo = 'fenetikm/falcon'
 [[plugins.colorschemes]]
 name = 'falcon'
+lightline = 'mini'
 
 [[plugins]]
 repo = 'franbach/miramare'
