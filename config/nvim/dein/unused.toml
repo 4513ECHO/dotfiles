@@ -205,3 +205,12 @@ SpaceVimPlugManager = '''
 autocmd vimrc TextChanged <buffer> normal! G
 '''
 
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+on_event = ['BufRead']
+hook_add = '''
+let g:indentLine_bufTypeExclude = ['help', 'terminal']
+let g:indentLine_char = '¦'
+let g:indentLine_faster = v:true
+let g:indentLine_setConceal = v:false
+'''

@@ -412,11 +412,11 @@ on_source = 'lightline.vim'
 [[plugins]]
 repo = 'ojroques/vim-oscyank'
 if = '!has("gui_running")'
-on_cmd = ['OSCYank', 'OSCYankReg']
+on_cmd = ['OSCYank', 'OSCYankRegister']
 hook_add = '''
 autocmd vimrc TextYankPost *
       \ : if v:event.regname ==# 'p'
-      \ |   execute 'OSCYankReg p'
+      \ |   execute 'OSCYankRegister p'
       \ | endif
 '''
 
@@ -457,16 +457,15 @@ on_func = ['context_filetype#get']
 hook_source = '''
 let g:context_filetype#filetypes = extend(
       \ copy(context_filetype#default_filetypes()),
-      \ #{ markdown: values(map(
-      \   {'\(\h\w*\)': '\1', 'viml': 'vim'},
-      \   { key, val ->
-      \     #{
-      \       start: '^\s*```\s*' .. key,
-      \       end: '^\s*```$',
-      \       filetype: val,
-      \     }
-      \   }
-      \ ))})
+      \ #{ markdown:
+      \   {'\(\h\w*\)': '\1', 'viml': 'vim'}
+      \   ->map({ key, val -> #{
+      \     start: '^\s*```\s*' .. key,
+      \     end: '^\s*```$',
+      \     filetype: val,
+      \   } })
+      \   ->values(),
+      \ })
 let g:context_filetype#ignore_patterns = #{
       \ toml: ['^\s*#\s*'],
       \ }
@@ -488,7 +487,7 @@ on_source = ['vim-quickrun']
 
 [[plugins]]
 repo = 'rhysd/clever-f.vim'
-on_map = { nxo = '<Plug>' }
+on_map = { nxo = '<Plug>(clever-f' }
 hook_add = '''
 nnoremap F <Plug>(clever-f-F)
 nnoremap T <Plug>(clever-f-T)
@@ -541,7 +540,6 @@ let g:Hexokinase_executable_path = exepath('hexokinase')
 
 [[plugins]]
 repo = 't9md/vim-choosewin'
-on_cmd = ['ChooseWin', 'ChooseWinSwap', 'ChooseWinSwapStay']
 on_map = { n = '<Plug>' }
 hook_add = '''
 let g:choosewin_overlay_enable = v:true
@@ -583,7 +581,7 @@ function! s:operator_partedit() abort
     return
   endif
   call partedit#start(context.range[0][0], context.range[1][0],
-        \ {'filetype': context.filetype})
+        \ #{ filetype: context.filetype })
   nnoremap <buffer> q <Cmd>ParteditEnd<Bar>close<CR>
 endfunction
 nnoremap <C-x><C-x> <Cmd>call <SID>operator_partedit()<CR>
@@ -692,6 +690,16 @@ on_cmd = ['HelpfulVersion']
 repo = 'tyru/capture.vim'
 on_cmd = ['Capture', 'CaptureJson']
 hook_source = '''
+command! -bang -bar -nargs=1 -complete=expression CaptureJson
+      \ call s:capture_json(<f-args>, '<bang>')
+function! s:capture_json(value, bang) abort
+  execute printf('Capture%s echo json_encode(%sto_string(%s))',
+        \ a:bang, expand('<SID>'), a:value)
+  if &filetype ==# 'capture'
+    silent! execute '%!gojq'
+    setlocal filetype=json
+  endif
+endfunction
 function! s:to_string(expr) abort
   if type(a:expr) == v:t_list
     return map(copy(a:expr), { _, v -> s:to_string(v) })
@@ -702,13 +710,6 @@ function! s:to_string(expr) abort
   endif
   return a:expr
 endfunction
-command! -bang -bar -nargs=1 -complete=expression
-      \ CaptureJson
-      \ : execute 'Capture<bang> echo json_encode(<SID>to_string(' <q-args> '))'
-      \ | if &filetype ==# 'capture'
-      \ |   silent! execute '%!gojq'
-      \ |   setfiletype json
-      \ | endif
 '''
 [plugins.ftplugin]
 capture = '''
@@ -755,7 +756,6 @@ let b:caw_oneline_comment = ';'
 
 [[plugins]]
 repo = 'tyru/open-browser.vim'
-on_cmd = ['OpenBrowser', 'OpenBrowserSearch', 'OpenBrowserSmartSearch']
 on_func = ['openbrowser#open']
 on_map = { nx = '<Plug>(openbrowser' }
 hook_add = '''
@@ -778,22 +778,12 @@ repo = 'vim-denops/denops.vim'
 on_event = ['CursorHold', 'FocusFost']
 hook_add = '''
 let g:denops_server_addr = '127.0.0.1:32123'
-" autocmd vimrc User DenopsProcessStarted call denops#plugin#check_type()
 '''
+# autocmd vimrc User DenopsProcessStarted call denops#plugin#check_type()
 
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 type__depth = 1
-
-[[plugins]]
-repo = 'Yggdroot/indentLine'
-on_event = ['BufRead']
-hook_add = '''
-let g:indentLine_bufTypeExclude = ['help', 'terminal']
-let g:indentLine_char = '¦'
-let g:indentLine_faster = v:true
-let g:indentLine_setConceal = v:false
-'''
 
 [[plugins]]
 repo = 'yuttie/comfortable-motion.vim'
@@ -805,4 +795,3 @@ nnoremap <silent> <C-u> <Cmd>call comfortable_motion#flick(winheight(0) * -2)<CR
 nnoremap <silent> <C-f> <Cmd>call comfortable_motion#flick(winheight(0) * 4)<CR>
 nnoremap <silent> <C-b> <Cmd>call comfortable_motion#flick(winheight(0) * -4)<CR>
 '''
-
