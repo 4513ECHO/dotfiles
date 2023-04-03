@@ -25,10 +25,8 @@ endif
 
 " ------------------
 " stausline
-set laststatus=2
-if has('nvim')
-  set laststatus=3
-endif
+" NOTE: Set 'laststatus' in lightline.vim hook
+set laststatus=0
 set noshowmode
 set showcmd
 set noruler

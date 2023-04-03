@@ -152,8 +152,10 @@ snoremap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : ''
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
-on_event = 'WinNew'
 hook_add = '''
+autocmd vimrc VimEnter * call timer_start(0, { -> dein#source('lightline.vim') })
+'''
+hook_source = '''
 let g:lightline = #{
       \ subseparator: #{ left: '/', right: '/' },
       \ active: #{
@@ -193,9 +195,9 @@ let g:lightline = #{
       \   lsp_warnings: 'warning',
       \ },
       \ }
-" from https://github.com/sheepla/dotfiles/blob/fcda1fd7/config/nvim/lightlinerc.vim#L52
-command! -bar LightlineUpdate
-      \ call lightline#init() | call lightline#colorscheme() | call lightline#update()
+
+let &laststatus = has('nvim') ? 3 : 2
+call user#colorscheme#update_lightline()
 '''
 
 [[plugins]]
