@@ -1366,14 +1366,14 @@ files = [
 
 [[package]]
 name = "pydocstyle"
-version = "6.2.3"
+version = "6.3.0"
 description = "Python docstring style checker"
 category = "dev"
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "pydocstyle-6.2.3-py3-none-any.whl", hash = "sha256:a04ed1e6fe0be0970eddbb1681a7ab59b11eb92729fdb4b9b24f0eb11a25629e"},
-    {file = "pydocstyle-6.2.3.tar.gz", hash = "sha256:d867acad25e48471f2ad8a40ef9813125e954ad675202245ca836cb6e28b2297"},
+    {file = "pydocstyle-6.3.0-py3-none-any.whl", hash = "sha256:118762d452a49d6b05e194ef344a55822987a462831ade91ec5c06fd2169d019"},
+    {file = "pydocstyle-6.3.0.tar.gz", hash = "sha256:7ce43f0c0ac87b07494eb9c0b462c0b73e6ff276807f204d6b53edc72b7e44e1"},
 ]
 
 [package.dependencies]
@@ -1550,47 +1550,48 @@ test = ["coverage", "pycodestyle", "pyflakes", "pylint", "pytest", "pytest-cov"]
 
 [[package]]
 name = "python-lsp-server"
-version = "1.7.1"
+version = "1.7.2"
 description = "Python Language Server for the Language Server Protocol"
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "python-lsp-server-1.7.1.tar.gz", hash = "sha256:67473bb301f35434b5fa8b21fc5ed5fac27dc8a8446ccec8bae456af52a0aef6"},
-    {file = "python_lsp_server-1.7.1-py3-none-any.whl", hash = "sha256:8f8b382868b161199aa385659b28427890be628d86f54810463a4d0ee0d6d091"},
+    {file = "python-lsp-server-1.7.2.tar.gz", hash = "sha256:b2433467d0fcb8fd45828463ff1cc805837c08731fcea5d7d953d9be776881e1"},
+    {file = "python_lsp_server-1.7.2-py3-none-any.whl", hash = "sha256:eb57ce2f119b8f952eb0af4566b5251b5e6ff14150b6180ba9828966e0e4faaa"},
 ]
 
 [package.dependencies]
-autopep8 = {version = ">=1.6.0,<1.7.0", optional = true, markers = "extra == \"all\""}
+autopep8 = {version = ">=1.6.0,<2.1.0", optional = true, markers = "extra == \"all\""}
 docstring-to-markdown = "*"
 flake8 = {version = ">=5.0.0,<7", optional = true, markers = "extra == \"all\""}
 jedi = ">=0.17.2,<0.19.0"
 mccabe = {version = ">=0.7.0,<0.8.0", optional = true, markers = "extra == \"all\""}
 pluggy = ">=1.0.0"
 pycodestyle = {version = ">=2.9.0,<2.11.0", optional = true, markers = "extra == \"all\""}
-pydocstyle = {version = ">=6.2.0,<6.3.0", optional = true, markers = "extra == \"all\""}
+pydocstyle = {version = ">=6.3.0,<6.4.0", optional = true, markers = "extra == \"all\""}
 pyflakes = {version = ">=2.5.0,<3.1.0", optional = true, markers = "extra == \"all\""}
 pylint = {version = ">=2.5.0,<3", optional = true, markers = "extra == \"all\""}
 python-lsp-jsonrpc = ">=1.0.0"
 rope = {version = ">1.2.0", optional = true, markers = "extra == \"all\""}
 setuptools = ">=39.0.0"
+toml = {version = "*", optional = true, markers = "extra == \"all\""}
 ujson = ">=3.0.0"
 whatthepatch = {version = ">=1.0.2,<2.0.0", optional = true, markers = "extra == \"all\""}
-yapf = {version = "*", optional = true, markers = "extra == \"all\""}
+yapf = {version = "<=0.32.0", optional = true, markers = "extra == \"all\""}
 
 [package.extras]
-all = ["autopep8 (>=1.6.0,<1.7.0)", "flake8 (>=5.0.0,<7)", "mccabe (>=0.7.0,<0.8.0)", "pycodestyle (>=2.9.0,<2.11.0)", "pydocstyle (>=6.2.0,<6.3.0)", "pyflakes (>=2.5.0,<3.1.0)", "pylint (>=2.5.0,<3)", "rope (>1.2.0)", "whatthepatch (>=1.0.2,<2.0.0)", "yapf"]
-autopep8 = ["autopep8 (>=1.6.0,<1.7.0)"]
+all = ["autopep8 (>=1.6.0,<2.1.0)", "flake8 (>=5.0.0,<7)", "mccabe (>=0.7.0,<0.8.0)", "pycodestyle (>=2.9.0,<2.11.0)", "pydocstyle (>=6.3.0,<6.4.0)", "pyflakes (>=2.5.0,<3.1.0)", "pylint (>=2.5.0,<3)", "rope (>1.2.0)", "toml", "whatthepatch (>=1.0.2,<2.0.0)", "yapf (<=0.32.0)"]
+autopep8 = ["autopep8 (>=1.6.0,<2.1.0)"]
 flake8 = ["flake8 (>=5.0.0,<7)"]
 mccabe = ["mccabe (>=0.7.0,<0.8.0)"]
 pycodestyle = ["pycodestyle (>=2.9.0,<2.11.0)"]
-pydocstyle = ["pydocstyle (>=6.2.0,<6.3.0)"]
+pydocstyle = ["pydocstyle (>=6.3.0,<6.4.0)"]
 pyflakes = ["pyflakes (>=2.5.0,<3.1.0)"]
 pylint = ["pylint (>=2.5.0,<3)"]
 rope = ["rope (>1.2.0)"]
 test = ["coverage", "flaky", "matplotlib", "numpy", "pandas", "pylint (>=2.5.0,<3)", "pyqt5", "pytest", "pytest-cov"]
 websockets = ["websockets (>=10.3)"]
-yapf = ["whatthepatch (>=1.0.2,<2.0.0)", "yapf"]
+yapf = ["toml", "whatthepatch (>=1.0.2,<2.0.0)", "yapf (<=0.32.0)"]
 
 [[package]]
 name = "pytoolconfig"
