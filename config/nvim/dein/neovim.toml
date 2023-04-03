@@ -88,6 +88,28 @@ nnoremap <buffer> q <C-w>q
 '''
 
 [[plugins]]
+repo = 'nvim-zh/colorful-winsep.nvim'
+lazy = true
+on_event = 'WinNew'
+lua_source = '''
+require("colorful-winsep").setup {
+  highlight = {
+    -- NvimSeparator
+    link = "Identifier",
+    default = true,
+  },
+  interval = 30,
+  no_exec_files = { "ddu-ff", "ddu-ff-filter" },
+  symbols = { "─", "│", "┌", "┐", "└", "┘" },
+  create_event = function()
+    if vim.fn.winnr "$" == 3 then
+      require("colorful-winsep").NvimSeparatorDel()
+    end
+  end,
+}
+'''
+
+[[plugins]]
 repo = 'rcarriga/nvim-notify'
 lazy = true
 on_cmd = ['Notifications']
@@ -109,4 +131,3 @@ require("notify").setup {
   },
 }
 '''
-
