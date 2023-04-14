@@ -32,6 +32,14 @@ let s:sourceParams.color = #{
       \ }
 let s:sourceParams.mrr = #{ kind: 'mrr' }
 let s:sourceParams.mrw = #{ kind: 'mrw' }
+let s:sourceParams.rg = #{
+      \ args: ['--json'],
+      \ highlights: #{
+      \   path: 'Directory',
+      \   lineNr: 'LineNr',
+      \   word: 'Search',
+      \ },
+      \ }
 
 let s:filterParams.matcher_fzf = #{
       \ highlightMatched: 'Search',
@@ -40,7 +48,8 @@ let s:filterParams.matcher_fzf = #{
 let s:uiParams.ff = #{
       \ floatingBorder: 'rounded',
       \ highlights: #{
-      \   floating: 'Normal,EndOfBuffer:DduEndOfBuffer,FloatBorder:Identifier'
+      \   floating: 'Normal,EndOfBuffer:DduEndOfBuffer',
+      \   floatingBorder: 'Identifier',
       \ },
       \ previewFloating: v:true,
       \ previewFloatingBorder: 'rounded',
@@ -51,8 +60,9 @@ let s:uiParams.ff = #{
 
 function! s:on_changed() abort
   if has('nvim')
-    let bgcolor = nvim_get_hl_by_name('Normal', v:true)
-          \ ->get('background', 0x000000)
+    " NOTE: eob of 'fillchars' is annoying
+    let bgcolor = nvim_get_hl(0, #{ name: 'Normal' })
+          \ ->get('bg', 0x000000)
           \ ->printf('#%06x')
     call nvim_set_hl(0, 'DduEndOfBuffer', #{
           \ foreground: bgcolor,
@@ -73,10 +83,7 @@ function! s:on_changed() abort
 endfunction
 
 autocmd vimrc ColorScheme,VimResized * call s:on_changed()
-autocmd vimrc TextChangedI,CursorMoved ddu*
-      \ : if get(g:, 'loaded_lightline', v:false)
-      \ |   call lightline#update()
-      \ | endif
+autocmd vimrc CursorMoved,TextChangedI ddu* call lightline#update()
 call s:on_changed()
 
 call ddu#custom#patch_local('with_preview', 'uiParams', #{
@@ -93,15 +100,16 @@ call ddu#custom#patch_local('with_preview', 'uiParams', #{
 call ddu#custom#patch_local('rg_live', #{
       \ sources: [#{
       \   name: 'rg',
-      \   options: #{ matchers: [] },
-      \ }],
-      \ uiParams: #{
-      \   ff: #{
-      \     ignoreEmpty: v:false,
-      \     autoResize: v:false,
+      \   options: #{
+      \     matchers: [],
+      \     volatile: v:true,
       \   },
-      \ },
-      \ volatile: v:true,
+      \ }],
+      \ uiParams: #{ ff: #{
+      \   ignoreEmpty: v:false,
+      \   autoResize: v:false,
+      \   startFilter: v:true,
+      \ } },
       \ })
 call ddu#custom#patch_local('UBA', #{
       \ actionOptions: #{
