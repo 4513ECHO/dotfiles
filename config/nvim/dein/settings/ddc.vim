@@ -47,7 +47,7 @@ let s:sourceOptions.necovim = #{
       \ }
 let s:sourceOptions.vsnip = #{
       \ mark: '[snip]',
-      \ dup: v:true,
+      \ dup: 'keep',
       \ }
 let s:sourceOptions.zsh = #{
       \ mark: '[zsh]',
@@ -71,6 +71,7 @@ let s:sourceOptions.github_pull_request = #{
 let s:sourceOptions.cmdline = #{
       \ mark: '[cmd]',
       \ isVolatile: v:true,
+      \ forceCompletionPattern: '[\w@:~._-]/[\w@:~._-]*',
       \ }
 let s:sourceOptions.buffer = #{ mark: '[buf]' }
 let s:sourceOptions.tmux = #{ mark: '[tmux]' }
