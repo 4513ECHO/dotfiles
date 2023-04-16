@@ -115,10 +115,10 @@ let g:searchx = #{
       \ }
 
 function! g:searchx.convert(input) abort
-  if a:input !~# '\k'
+  if a:input !~# '\k' && a:input !~# '\v^^|[*$]$'
     return '\V' .. a:input
   endif
-  return split(a:input, '\s\+')->join('.\{-}')
+  return a:input->split('\s\+')->join('.\{-}')
 endfunction
 
 autocmd vimrc User SearchxEnter
@@ -198,6 +198,7 @@ let g:lightline = #{
 
 let &laststatus = has('nvim') ? 3 : 2
 call user#colorscheme#update_lightline()
+messages
 '''
 
 [[plugins]]
@@ -325,7 +326,7 @@ function! s:convert_kensaku() abort
     let s:kensaku_state.cmdline = getcmdline()
     let query = kensaku#query(s:kensaku_state.cmdline)
     " NOTE: Ignore regexp bug
-    call setcmdline(substitute(query, '\\+α', '+α', 'g'))
+    call setcmdline(query->substitute('\\+α', '+α', 'g'))
   else
     call setcmdline(s:kensaku_state.cmdline)
   endif
@@ -375,16 +376,19 @@ endif
 '''
 
 [[plugins]]
+repo = 'mattn/vim-maketable'
+on_cmd = ['MakeTable', 'UnmakeTable']
+
+[[plugins]]
 repo = 'mattn/vim-sonictemplate'
-on_cmd = ['Template']
 on_map = { n = '<Plug>' }
 hook_add = '''
 let g:sonictemplate_vim_template_dir = [
       \ g:config_home .. '/template',
       \ ]
 let g:sonictemplate_vim_vars = #{
-      \ _: {
-      \   'author': 'Hibiki',
+      \ _: #{
+      \   author: 'Hibiki',
       \ },
       \ help: #{
       \   author: 'Hibiki <4513echo@gmail.com>'
@@ -414,7 +418,7 @@ on_source = 'lightline.vim'
 [[plugins]]
 repo = 'ojroques/vim-oscyank'
 if = '!has("gui_running")'
-on_cmd = ['OSCYank', 'OSCYankRegister']
+on_cmd = 'OSCYankRegister'
 hook_add = '''
 autocmd vimrc TextYankPost *
       \ : if v:event.regname ==# 'p'
@@ -521,7 +525,6 @@ autocmd vimrc ColorScheme *
 
 [[plugins]]
 repo = 'RRethy/vim-hexokinase'
-on_cmd = ['HexokinaseToggle', 'HexokinaseTurnOn', 'HexokinaseTurnOff']
 on_event = ['BufRead', 'InsertLeave']
 hook_add = '''
 let g:Hexokinase_highlighters = ['backgroundfull']
@@ -621,55 +624,55 @@ let g:quickrun_config = {
       \   'runner/nvimterm/opener': 'botright 10new',
       \   'runner/terminal/opener': 'botright 10new',
       \ },
-      \ 'typescript': {
-      \   'type': 'deno/run',
+      \ 'typescript': #{
+      \   type: 'deno/run',
       \ },
-      \ 'typescriptreact': {
-      \   'type': 'deno/run',
+      \ 'typescriptreact': #{
+      \   type: 'deno/run',
       \ },
-      \ 'sh': {
-      \   'runner': has('nvim') ? 'nvimterm' : 'terminal',
+      \ 'sh': #{
+      \   runner: has('nvim') ? 'nvimterm' : 'terminal',
       \ },
-      \ 'zsh': {
-      \   'runner': has('nvim') ? 'nvimterm' : 'terminal',
+      \ 'zsh': #{
+      \   runner: has('nvim') ? 'nvimterm' : 'terminal',
       \ },
-      \ 'json': {
-      \   'type': 'json/gojq',
+      \ 'json': #{
+      \   type: 'json/gojq',
       \ },
-      \ 'json/gojq': {
-      \   'command': 'gojq',
-      \   'exec': '%c %o %a < %s',
+      \ 'json/gojq': #{
+      \   command: 'gojq',
+      \   exec: '%c %o %a < %s',
       \ },
-      \ 'yaml': {
-      \   'type': 'yaml/yq',
+      \ 'yaml': #{
+      \   type: 'yaml/yq',
       \ },
-      \ 'yaml/yq': {
-      \   'cmdopt': '--output-format=json',
-      \   'command': 'yq',
-      \   'exec': '%c eval %o < %s',
-      \   'tempfile': '%{tempname()}.json',
+      \ 'yaml/yq': #{
+      \   cmdopt: '--output-format=json',
+      \   command: 'yq',
+      \   exec: '%c eval %o < %s',
+      \   tempfile: '%{tempname()}.json',
       \ },
-      \ 'lua': {
-      \   'type': 'lua/vim',
+      \ 'lua': #{
+      \   type: 'lua/vim',
       \ },
-      \ 'deno/run': {
-      \   'cmdopt': '--no-check --allow-all --unstable',
-      \   'command': 'deno',
-      \   'exec': 'NO_COLOR=1 %c run %o %s %a',
-      \   'tempfile': '%{tempname()}.ts',
+      \ 'deno/run': #{
+      \   cmdopt: '--no-check --allow-all --unstable',
+      \   command: 'deno',
+      \   exec: 'NO_COLOR=1 %c run %o %s %a',
+      \   tempfile: '%{tempname()}.ts',
       \ },
-      \ 'deno/terminal': {
-      \   'cmdopt': '--no-check --allow-all --unstable',
-      \   'command': 'deno',
-      \   'exec': '%c run %o %s %a',
-      \   'runner': has('nvim') ? 'nvimterm' : 'terminal',
-      \   'tempfile': '%{tempname()}.ts',
+      \ 'deno/terminal': #{
+      \   cmdopt: '--no-check --allow-all --unstable',
+      \   command: 'deno',
+      \   exec: '%c run %o %s %a',
+      \   runner: has('nvim') ? 'nvimterm' : 'terminal',
+      \   tempfile: '%{tempname()}.ts',
       \ },
-      \ 'deno/test': {
-      \   'cmdopt': '--no-check --allow-all --unstable',
-      \   'command': 'deno',
-      \   'exec': 'NO_COLOR=1 %c test %o %s %a',
-      \   'tempfile': '%{tempname()}.ts',
+      \ 'deno/test': #{
+      \   cmdopt: '--no-check --allow-all --unstable',
+      \   command: 'deno',
+      \   exec: 'NO_COLOR=1 %c test %o %s %a',
+      \   tempfile: '%{tempname()}.ts',
       \ },
       \ }
 " from https://github.com/aiotter/dotfiles/blob/8e759221/.config/nvim/plugins/others.toml#L27
@@ -703,11 +706,10 @@ function! s:capture_json(value, bang) abort
   endif
 endfunction
 function! s:to_string(expr) abort
-  if type(a:expr) == v:t_list
-    return map(copy(a:expr), { _, v -> s:to_string(v) })
-  elseif type(a:expr) == v:t_dict
-    return map(copy(a:expr), { _, v -> s:to_string(v) })
-  elseif type(a:expr) == v:t_func
+  let type = type(a:expr)
+  if type ==# v:t_list || type ==# v:t_dict
+    return copy(a:expr)->map({ _, val -> s:to_string(val) })
+  elseif type ==# v:t_func
     return string(a:expr)
   endif
   return a:expr
@@ -776,22 +778,10 @@ let g:openbrowser_browser_commands = []
 '''
 
 [[plugins]]
-repo = 'vim-denops/denops.vim'
-on_event = ['CursorHold', 'FocusFost']
-hook_add = '''
-let g:denops_server_addr = '127.0.0.1:32123'
-'''
-# autocmd vimrc User DenopsProcessStarted call denops#plugin#check_type()
-
-[[plugins]]
-repo = 'vim-jp/vimdoc-ja'
-type__depth = 1
-
-[[plugins]]
 repo = 'yuttie/comfortable-motion.vim'
 on_func = 'comfortable_motion#flick'
 hook_add = '''
-let g:comfortable_motion_no_default_key_mappings = 1
+let g:comfortable_motion_no_default_key_mappings = v:true
 nnoremap <silent> <C-d> <Cmd>call comfortable_motion#flick(winheight(0) * 2)<CR>
 nnoremap <silent> <C-u> <Cmd>call comfortable_motion#flick(winheight(0) * -2)<CR>
 nnoremap <silent> <C-f> <Cmd>call comfortable_motion#flick(winheight(0) * 4)<CR>

@@ -17,10 +17,11 @@ let g:launcher_config.color = #{
 
 autocmd vimrc VimEnter * ++nested call user#colorscheme#random()
 autocmd vimrc ColorSchemePre *
-      \ : unlet! g:terminal_color_foreground g:terminal_color_background
+      \ : unlet! g:terminal_color_foreground
+      \          g:terminal_color_background
       \          g:terminal_ansi_colors
-      \ | for i in range(16)
-      \ |   unlet! g:terminal_color_{i}
+      \ | for s:i in range(16)
+      \ |   unlet! g:terminal_color_{s:i}
       \ | endfor
 autocmd vimrc ColorScheme *
       \ : call user#colorscheme#update_lightline()
@@ -49,14 +50,6 @@ command! -nargs=? -bar -bang -complete=customlist,user#colorscheme#completion
 " from https://qiita.com/gorilla0513/items/11be5413405792337558
 command! -nargs=1 WWW call user#google(<q-args>)
 
-" from https://qiita.com/gorilla0513/items/f59e54606f6f4d7e3514
-command! PopupTerminal
-      \ call popup_create(term_start(
-      \     [&shell], { 'hidden': v:true, 'term_finish': 'close' }
-      \   ), {
-      \   'border': [], 'minwidth': winwidth(0)/2, 'minheight': &lines/2,
-      \ })
-
 command! -bar HtmlFormat
       \ : silent! keepjumps keeppattern substitute+\v\>(\<)@=+>\r+ge
       \ | silent! keepjumps normal! gg=G
@@ -68,8 +61,8 @@ command! -nargs=? -bar -complete=filetype MiniNote
       \ | setlocal bufhidden=wipe buftype=nofile filetype=<args>
 
 command! -bar DeinUpdateMine
-      \ call dein#update(keys(filter(copy(dein#get()),
-      \ { key, val -> val.repo =~? '^4513ECHO/' })))
+      \ call dein#update(dein#get()->copy()
+      \ ->filter({ _, val -> val.repo =~? '^4513ECHO/' })->keys())
 
 " from `:help :DiffOrig`
 command! -bar DiffOrig
@@ -85,6 +78,7 @@ nnoremap <Plug>(VimrcSearchPost) <Cmd>doautocmd <nomodeline> User VimrcSearchPos
 autocmd vimrc User VimrcSearchPost :
 
 if has('nvim')
+  lua vim.loader.enable()
   lua require('vimrc.autocmd')
 endif
 
@@ -134,7 +128,7 @@ function! s:chmod(file) abort
   endif
 endfunction
 autocmd vimrc BufWritePost *
-      \ : if getline(1) =~# '^#!'
+      \ : if getline(1) =~# '^#!/'
       \ |   call s:chmod(expand('<afile>'))
       \ | endif
 

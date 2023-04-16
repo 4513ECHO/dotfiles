@@ -128,7 +128,7 @@ let s:rules.jq += [
 function! s:lexima_init() abort
   for [filetype, rules] in items(s:rules)
     for val in rules
-      if filetype !=# '_'  && type(filetype) == v:t_string
+      if filetype !=# '_' && type(filetype) ==# v:t_string
         let base = #{ filetype: filetype }
       else
         let base = {}

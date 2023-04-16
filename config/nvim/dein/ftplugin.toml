@@ -208,11 +208,6 @@ let g:sql_type_default = 'pgsql'
 '''
 
 [[plugins]]
-repo = 'mattn/vim-maketable'
-lazy = true
-on_cmd = ['MakeTable', 'UnmakeTable']
-
-[[plugins]]
 repo = 'MTDL9/vim-log-highlighting'
 merge_ftdetect = true
 

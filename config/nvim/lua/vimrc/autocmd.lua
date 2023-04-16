@@ -18,7 +18,7 @@ M.autocmd "TermOpen" {
     -- NOTE: check lazily to handle opening in background
     vim.fn.timer_start(0, function()
       if vim.bo.buftype == "terminal" then
-        vim.cmd "startinsert"
+        vim.cmd.startinsert {}
         vim.wo.number = false
         vim.wo.relativenumber = false
         vim.wo.signcolumn = "no"
@@ -29,7 +29,9 @@ M.autocmd "TermOpen" {
 }
 
 M.autocmd "TextYankPost" {
-  callback = function() vim.highlight.on_yank { timeout = 100, on_macro = true } end,
+  callback = function()
+    vim.highlight.on_yank { timeout = 100, on_macro = true }
+  end,
 }
 
 M.autocmd "InsertLeave" {

@@ -73,3 +73,13 @@ repo = 'rafamadriz/friendly-snippets'
 repo = 'roxma/vim-tmux-clipboard'
 if = '!has("gui_running")'
 
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+hook_add = '''
+let g:denops_server_addr = '127.0.0.1:32123'
+'''
+# autocmd vimrc User DenopsProcessStarted call denops#plugin#check_type()
+
+[[plugins]]
+repo = 'vim-jp/vimdoc-ja'
+type__depth = 1

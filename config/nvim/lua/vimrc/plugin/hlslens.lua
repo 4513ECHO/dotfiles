@@ -1,5 +1,5 @@
 local M = {}
-local autocmd = require('vimrc.autocmd')
+local autocmd = require "vimrc.autocmd"
 
 function M.hook_add()
   autocmd "User" {
@@ -12,15 +12,11 @@ function M.hook_add()
   }
   autocmd "User" {
     pattern = { "SearchxEnter" },
-    callback = function()
-      require("hlslens").start(true)
-    end,
+    callback = function() require("hlslens").start(true) end,
   }
   autocmd "User" {
     pattern = { "SearchxCancel" },
-    callback = function()
-      require("hlslens").disable()
-    end,
+    callback = function() require("hlslens").disable() end,
   }
   autocmd "User" {
     pattern = { "SearchxInputChanged" },

@@ -63,7 +63,7 @@ require("nvim-treesitter.configs").setup {
   },
   highlight = {
     enable = true,
-    disable = { "bash", "help" },
+    disable = { "bash", "vimdoc" },
     additionnal_vim_regex_highlighting = false,
   },
   playground = {
@@ -112,7 +112,6 @@ require("colorful-winsep").setup {
 [[plugins]]
 repo = 'rcarriga/nvim-notify'
 lazy = true
-on_cmd = ['Notifications']
 on_lua = ['notify']
 lua_add = '''
 vim.notify = function(...) require "notify" (...) end

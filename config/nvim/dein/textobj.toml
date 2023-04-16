@@ -5,10 +5,10 @@ hook_add = '''
 " vim-surround like mappings
 execute 'source' dein#get('vim-sandwich').path .. '/macros/sandwich/keymap/surround.vim'
 let g:sandwich#magicchar#f#patterns = [#{
-      \ header : '\<\%(\h\k*\.\)*\h\k*',
-      \ bra    : '(',
-      \ ket    : ')',
-      \ footer : '',
+      \ header: '\<\%(\h\k*\.\)*\h\k*',
+      \ bra   : '(',
+      \ ket   : ')',
+      \ footer: '',
       \ }]
 '''
 hook_source = '''

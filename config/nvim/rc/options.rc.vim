@@ -8,7 +8,6 @@ if &modifiable
 endif
 set fileencodings=ucs-boms,utf-8,euc-jp,cp932
 set fileformats=unix,dos,mac
-" set ambiwidth=double
 set ambiwidth=single
 
 " ------------------
