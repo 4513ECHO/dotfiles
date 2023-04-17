@@ -492,6 +492,9 @@
         "lua_source": {
           "type": "string"
         },
+        "denops_wait": {
+          "$ref": "#/definitions/Boolean"
+        },
         "colorschemes": {
           "type": "array",
           "additionalItems": false,

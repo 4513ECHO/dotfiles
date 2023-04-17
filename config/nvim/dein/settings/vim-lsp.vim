@@ -34,8 +34,8 @@ let g:lsp_log_file = g:data_home .. '/vim-lsp.log'
 
 let g:lsp_settings_servers_dir = g:data_home .. '/vim-lsp-settings/servers'
 let g:lsp_settings_filetype_python = 'pylsp-all'
-let g:lsp_settings_filetype_typescript = 'deno'
-let g:lsp_settings_filetype_typescriptreact = 'deno'
+let g:lsp_settings_filetype_typescript = ['typescript-language-server', 'deno']
+let g:lsp_settings_filetype_typescriptreact = ['typescript-language-server', 'deno']
 let g:lsp_settings_filetype_markdown = 'efm-langserver'
 let g:lsp_settings_filetype_json = ['json-languageserver', 'efm-langserver']
 let g:lsp_settings_filetype_sh = 'efm-langserver'

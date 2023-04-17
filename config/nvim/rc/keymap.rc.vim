@@ -111,7 +111,9 @@ onoremap <Space> t<Space>
 onoremap ) t)
 
 inoremap <C-g>z <C-o>zz
+inoremap <C-g><C-z> <C-o>zz
 inoremap <C-g>p <Cmd>setlocal paste! paste?<CR>
+inoremap <C-g><C-p> <Cmd>setlocal paste! paste?<CR>
 
 " emacs-like insert/cmdline mode mapping {{{
 function! s:is_at_end() abort

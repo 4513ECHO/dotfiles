@@ -148,11 +148,6 @@ function! s:lexima_alter_command(original, altanative) abort
 endfunction
 command! -nargs=+ -complete=command LeximaAlterCommand call <SID>lexima_alter_command(<f-args>)
 
-" Builtin Commands
-LeximaAlterCommand hg\%[rep]                    helpgrep
-LeximaAlterCommand bon\%[ew]                    botright<Space>new
-LeximaAlterCommand hea\%[lthcheck]              checkhealth
-
 " Plugin Commands
 LeximaAlterCommand cap\%[ture]                  Capture
 LeximaAlterCommand capturej\%[son]              CaptureJson
@@ -163,22 +158,19 @@ LeximaAlterCommand fixw\%[hitespace]            FixWhitespace
 LeximaAlterCommand dd\%[u]                      Ddu
 LeximaAlterCommand dei\%[n]                     Dein
 LeximaAlterCommand deinr\%[eadme]               DeinReadme
-LeximaAlterCommand readm\%[e]                   DeinReadme
 LeximaAlterCommand rg                           Rg
 LeximaAlterCommand helpfu\%[lversion]           HelpfulVersion
 LeximaAlterCommand tsp\%[laygroundtoggle]       TSPlaygroundToggle
-LeximaAlterCommand tsh\%[ighlightcapturesundercursor]    TSHighlightCapturesUnderCursor
 LeximaAlterCommand lspc\%[odeaction]            LspCodeAction
 LeximaAlterCommand lspd\%[ocumentformat]        LspDocumentFormat
 LeximaAlterCommand lsph\%[over]                 LspHover
 LeximaAlterCommand lsps\%[tatus]                LspStatus
 LeximaAlterCommand lspt\%[ypedefinition]        LspTypeDefinition
+LeximaAlterCommand copi\%[lot]                  Copilot
 
 " My Commands
 LeximaAlterCommand colo\%[rscheme]              ColorScheme
 LeximaAlterCommand ra\%[ndomcolorscheme]        RandomColorScheme
 LeximaAlterCommand todo\%[list]                 TodoList
 LeximaAlterCommand mi\%[ninote]                 MiniNote
-LeximaAlterCommand not\%[e]                     MiniNote
 LeximaAlterCommand deinu\%[pdatemine]           DeinUpdateMine
-LeximaAlterCommand lig\%[htlineupdate]          LightlineUpdate
