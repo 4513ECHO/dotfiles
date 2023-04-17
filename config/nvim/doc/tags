@@ -1,11 +1,9 @@
 :ColorScheme	dotfiles.txt	/*:ColorScheme*
-:PopupTerminal	dotfiles.txt	/*:PopupTerminal*
+:DeinUpdateMine	dotfiles.txt	/*:DeinUpdateMine*
+:MiniNote	dotfiles.txt	/*:MiniNote*
 :RTP	dotfiles.txt	/*:RTP*
 :RandomColorScheme	dotfiles.txt	/*:RandomColorScheme*
 :WWW	dotfiles.txt	/*:WWW*
-<Leader>-<Leader>	dotfiles.txt	/*<Leader>-<Leader>*
-LEADER-SPACE	dotfiles.txt	/*LEADER-SPACE*
-Leader-Leader	dotfiles.txt	/*Leader-Leader*
 SPACE-W	dotfiles.txt	/*SPACE-W*
 SPACE-f	dotfiles.txt	/*SPACE-f*
 SPACE-w	dotfiles.txt	/*SPACE-w*
@@ -16,6 +14,7 @@ dotfiles-CTRL-L	dotfiles.txt	/*dotfiles-CTRL-L*
 dotfiles-Y	dotfiles.txt	/*dotfiles-Y*
 dotfiles-^	dotfiles.txt	/*dotfiles-^*
 dotfiles-about	dotfiles.txt	/*dotfiles-about*
+dotfiles-colorscheme	dotfiles.txt	/*dotfiles-colorscheme*
 dotfiles-commands	dotfiles.txt	/*dotfiles-commands*
 dotfiles-contents	dotfiles.txt	/*dotfiles-contents*
 dotfiles-interface	dotfiles.txt	/*dotfiles-interface*

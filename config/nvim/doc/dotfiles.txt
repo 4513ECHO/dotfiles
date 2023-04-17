@@ -1,15 +1,16 @@
-*dotfiles.txt*			My vim configuration files references
+*dotfiles.txt*				My vim configuration files references
 
 Author: Hibiki <4513echo@gmail.com>
 License: MIT License
 URL: https://github.com/4513ECHO/dotfiles
-Last change: 2022 Aug 30
+Last change: 2023 Apr 18
 
 ==============================================================================
 CONTENTS						*dotfiles-contents*
 
 Introduction						|dotfiles-introdution|
 Interface						|dotfiles-interface|
+  Color Scheme						|dotfiles-colorscheme|
   Commands						|dotfiles-commands|
   Mappings						|dotfiles-mappings|
 Directory Structure					|directory-structure|
@@ -23,6 +24,79 @@ INTRODUCTION						*dotfiles-introdution*
 
 ==============================================================================
 INTERFACE						*dotfiles-interface*
+
+------------------------------------------------------------------------------
+COLOR SCHEME						*dotfiles-colorscheme*
+
+Unlet |g:terminal_ansi_colors|, `g:terminal_color_x` (See |terminal-config|)
+in |ColorSchemePre| autocmd.
+
+Following color schemes are available with |:ColorScheme|:
+>
+	deep-space
+	snow
+	challenger_deep
+	falcon
+	dracula
+	nightfly
+	dogrun
+	gruvbit
+	tender
+	github
+	OceanicNext
+	yowish
+	zengarden
+	iceberg
+	nightfox
+	wombat256mod
+	gruvbox-material
+	rigel
+	molokai
+	aquarium
+	miramare
+	cocoa
+	onehalfdark
+	kanagawa
+	ayu
+	edge
+	hydrangea
+	spring-night
+	snazzy
+	vitaminonec
+	momiji
+	srcery
+	gruvbox
+	elly
+	spaceduck
+	felipec
+	vadelma
+	palenight
+	urara
+	solarized8
+	orbital
+	monokai_pro
+	onedark
+	embark
+	apprentice
+	duskfox
+	lighthaus
+	sacredforest
+	stellarized
+	reliquiae
+	melange
+	jellybeans
+	hatsunemiku
+	nordfox
+	candy
+	tokyonight
+	one
+	terafox
+	carbonfox
+	nord
+	night-owl
+	gotham
+	two-firewatch
+	hybrid
 
 ------------------------------------------------------------------------------
 COMMANDS						*dotfiles-commands*
@@ -46,23 +120,20 @@ COMMANDS						*dotfiles-commands*
 	Search {what} in |terminal| window using "w3m".
 	This uses |termopen()| in Neovim, |term_start()| in Vim.
 
-:PopupTerminal						*:PopupTerminal*
-	Open |terminal| buffer on |popup| window.
-	NOTE: It is working on only Vim.
+:MiniNote [{filetype}]					*:MiniNote*
+	Open scratch buffer.
+
+:DeinUpdateMine						*:DeinUpdateMine*
+	Call |dein#update()| for the plugins developed by me (4513ECHO).
 
 ------------------------------------------------------------------------------
 MAPPINGS						*dotfiles-mappings*
 
 							*dotfiles-mapleader*
-|<Leader>| is "," .
+|<Leader>| is "`,`".
 
-<Leader><Leader>		*Leader-Leader* *<Leader>-<Leader>*
-	It is shortcut of |<Esc>| and |CTRL-[|.
-
-<Leader><Space>						*LEADER-SPACE*
-
-Y							*dotfiles-Y*
-	This is same as `y$`. This traces |default-mappings| in Neovim
+ Y							*dotfiles-Y*
+	This is same as `y$`. This traces |default-mappings| of Neovim.
 
 CTRL-L							*dotfiles-CTRL-L*
 
@@ -72,7 +143,8 @@ CTRL-L							*dotfiles-CTRL-L*
 
 [Space]f						*SPACE-f*
 
-^							*dotfiles-^*
+ ^							*dotfiles-^*
+	This is same as |CTRL-^|, just a shortcut for it.
 
 ==============================================================================
 DIRECTORY STRUCTURE					*directory-structure*
@@ -80,7 +152,6 @@ DIRECTORY STRUCTURE					*directory-structure*
 >
 	after/
 	autoload/
-	colors/
 	dein/
 	dein/settings/
 	denops/
@@ -89,15 +160,13 @@ DIRECTORY STRUCTURE					*directory-structure*
 	lua/
 	rc/
 	snippets/
-	syntax/
 	template/
-	types/
 
-See also 'runtimepath'. `after/`, `autoload/`, `colors`, `doc/`, `ftdetect/`,
-`lua/`(used only in Neovim) and `syntax` are used for default feature.
-`dein/` contains TOML files to use with |dein-toml|. There are specific plugins
-settings in `dein/settings/`.
-`denops/` contains TypeScript files to use |denops.vim|, especially used for
+See also 'runtimepath' option. `after/`, `autoload/`, `doc/`, `ftdetect/` and
+`lua/` (only in Neovim) are used for default feature.
+`dein/` contains TOML files to use with |dein-toml|. `dein/settings/` contains
+specific plugins settings.
+`denops/` contains TypeScript files for |denops.vim|, especially used for
 |ddu-sources|.
 
 ==============================================================================
