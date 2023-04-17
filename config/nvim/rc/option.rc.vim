@@ -1,4 +1,3 @@
-
 " ------------------
 " encoding/char
 set encoding=utf-8
@@ -168,4 +167,3 @@ set tildeop
 set diffopt=internal,filler,vertical,algorithm:histogram,indent-heuristic
 set nofsync
 set nolangremap
-

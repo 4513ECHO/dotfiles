@@ -7,8 +7,9 @@ function! s:source_vimrc(vimrc) abort
   execute 'source' printf('%s/rc/%s.rc.vim', s:config_home, a:vimrc)
 endfunction
 call s:source_vimrc('init')
+call s:source_vimrc('autocmd')
 call s:source_vimrc('keymap')
-call s:source_vimrc('options')
+call s:source_vimrc('option')
 if empty($VIM_DISABLE_DEIN)
   call s:source_vimrc('dein')
 endif
