@@ -403,7 +403,6 @@ repo = 'ulwlu/elly.vim'
 [[plugins.colorschemes]]
 name = 'elly'
 
-# TODO: try https://github.com/DTr4n/windows-terminal-wombat'
 [[plugins]]
 repo = 'vim-scripts/wombat256.vim'
 [[plugins.colorschemes]]
@@ -452,7 +451,6 @@ terminal = [
   '#1e222c', '#e91e63', '#9df086', '#fedc1b', '#537dd5', '#c398fe', '#56c7ee', '#586374',
   '#3b4351', '#e91e63', '#9df086', '#fedc1b', '#537dd5', '#fe7ecd', '#56c7ee', '#c3d5ec',
 ]
-# TODO: support is broken
 lightline = 'mini'
 [plugins.colorschemes.highlight]
 Constant = { ctermbg = 'NONE', guibg = 'NONE' }

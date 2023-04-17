@@ -2,7 +2,6 @@
 " ------------------
 " encoding/char
 set encoding=utf-8
-scriptencoding utf-8
 if &modifiable
   set fileencoding=utf-8
 endif

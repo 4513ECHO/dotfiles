@@ -112,11 +112,6 @@ nnoremap <buffer> <C-n> <Cmd>call <SID>move_link(1, v:count1)<CR>
 nnoremap <buffer> <C-p> <Cmd>call <SID>move_link(0, v:count1)<CR>
 '''
 
-markdown = '''
-hi link markdownCode Constant
-autocmd vimrc ColorScheme * hi link markdownCode Constant
-'''
-
 python = '''
 setlocal softtabstop=4 shiftwidth=4
 setlocal textwidth=80

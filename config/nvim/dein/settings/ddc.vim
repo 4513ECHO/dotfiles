@@ -157,19 +157,21 @@ inoremap <silent><expr> <BS> pum#visible() ? '<Cmd>call pum#map#cancel()<CR>'  :
 inoremap <silent><expr> <CR> pum#visible() ? '<Cmd>call pum#map#confirm()<CR>' : lexima#expand('<lt>CR>', 'i')
 cnoremap         <expr> <CR> pum#visible() ? '<Cmd>call pum#map#confirm()<CR>' : lexima#expand('<lt>CR>', ':')
 " emulate default mappings (see `:help ins-completion`)
-inoremap <silent><expr> <C-x><C-l> ddc#map#manual_complete(#{ sources: ['line'] })
-inoremap <silent><expr> <C-x><C-n> ddc#map#manual_complete(#{ sources: ['around'] })
-inoremap <silent><expr> <C-x><C-f> ddc#map#manual_complete(#{ sources: ['file'] })
-inoremap <silent><expr> <C-x><C-d> ddc#map#manual_complete(#{ sources: ['vim-lsp'] })
-inoremap <silent><expr> <C-x><C-v> ddc#map#manual_complete(#{ sources: ['cmdline'] })
-inoremap <silent><expr> <C-x><C-u> ddc#map#manual_complete()
-inoremap <silent><expr> <C-x><C-o> ddc#map#manual_complete(#{ sources: ['omni'] })
-inoremap <silent><expr> <C-x><C-s> ddc#map#manual_complete(#{ sources: ['nextword'] })
-inoremap <silent><expr> <C-x><C-t> ddc#map#manual_complete(#{ sources: ['tmux'] })
+function! s:ddc_complete(...) abort
+  return ddc#map#manual_complete(#{ sources: a:000 })
+endfunction
+inoremap <silent><expr> <C-x><C-l> s:ddc_complete('line')
+inoremap <silent><expr> <C-x><C-n> s:ddc_complete('around')
+inoremap <silent><expr> <C-x><C-f> s:ddc_complete('file')
+inoremap <silent><expr> <C-x><C-d> s:ddc_complete('vim-lsp')
+inoremap <silent><expr> <C-x><C-v> s:ddc_complete('cmdline')
+inoremap <silent><expr> <C-x><C-u> s:ddc_complete()
+inoremap <silent><expr> <C-x><C-o> s:ddc_complete('omni')
+inoremap <silent><expr> <C-x><C-s> s:ddc_complete('nextword')
+inoremap <silent><expr> <C-x><C-t> s:ddc_complete('tmux')
 
 if bufname() =~# '^/tmp/\d\+\.md$'
-  inoremap <silent><expr><buffer> <C-x><C-g>
-        \ ddc#map#manual_complete(#{ sources: ['github_issue', 'github_pull_request'] })
+  inoremap <silent><expr><buffer> <C-x><C-g> s:ddc_complete('github_issue', 'github_pull_request')
 endif
 
 call ddc#enable()

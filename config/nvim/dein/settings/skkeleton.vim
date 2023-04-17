@@ -55,11 +55,13 @@ if has('nvim')
   let s:ns = nvim_create_namespace('skkeleton')
   let s:id = 1234
   function! s:set() abort
+    let skk_mode = skkeleton#mode()
     call nvim_buf_set_extmark(0, s:ns, line('.') - 1, col('.') - 1, #{
           \ id: s:id,
           \ virt_text: [[
-          \   get(s:skkeleton_modes, skkeleton#mode(), skkeleton#mode()),
-          \   'PmenuSel']],
+          \   s:skkeleton_modes->get(skk_mode, skk_mode),
+          \   'PmenuSel',
+          \ ]],
           \ virt_text_pos: 'eol',
           \ })
   endfunction
@@ -71,9 +73,10 @@ else
   call prop_type_add(s:prop_type, #{ highlight: 'PmenuSel' })
   function! s:set() abort
     call s:reset()
+    let skk_mode = skkeleton#mode()
     call prop_add(line('.'), 0, #{
           \ type: s:prop_type,
-          \ text: get(s:skkeleton_modes, skkeleton#mode(), skkeleton#mode()),
+          \ text: s:skkeleton_modes->get(skk_mode, skk_mode),
           \ text_align: 'after',
           \ })
   endfunction
@@ -83,6 +86,7 @@ else
 endif
 
 function! s:show_mode_enable() abort
+  call s:set()
   augroup skkeleton_show_mode
     autocmd!
     autocmd CursorMovedI * call s:set()

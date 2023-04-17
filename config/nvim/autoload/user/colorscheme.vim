@@ -26,10 +26,9 @@ function! user#colorscheme#lightline() abort
   if g:colors_name ==# 'random'
     return 'default'
   endif
-  let custom_name = user#colorscheme#get()
+  return user#colorscheme#get()
         \ ->get(g:colors_name, {})
-        \ ->get('lightline')
-  return empty(custom_name) ? g:colors_name : custom_name
+        \ ->get('lightline', g:colors_name)
 endfunction
 
 function! user#colorscheme#random() abort

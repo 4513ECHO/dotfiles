@@ -128,11 +128,7 @@ let s:rules.jq += [
 function! s:lexima_init() abort
   for [filetype, rules] in items(s:rules)
     for val in rules
-      if filetype !=# '_' && type(filetype) ==# v:t_string
-        let base = #{ filetype: filetype }
-      else
-        let base = {}
-      endif
+      let base = filetype ==# '_' ? {} : #{ filetype: filetype }
       call lexima#add_rule(extend(base, val))
     endfor
   endfor
@@ -146,7 +142,7 @@ function! s:lexima_alter_command(original, altanative) abort
           \ char: char,
           \ mode: ':',
           \ at: '\c^\(''<,''>\)\?' .. a:original .. '\%#',
-          \ input: '<C-w>' .. a:altanative ..  char,
+          \ input: '<C-w>' .. a:altanative .. char,
           \ })
   endfor
 endfunction
