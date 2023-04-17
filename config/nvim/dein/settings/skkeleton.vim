@@ -1,15 +1,5 @@
 let s:skk_dir = expand('~/.local/share/skk')
-let s:globalJisyo = s:skk_dir .. '/SKK-JISYO.L'
-
-if filereadable('/usr/share/skk/SKK-JISYO.L')
-  let s:globalJisyo = '/usr/share/skk/SKK-JISYO.L'
-elseif !filereadable(s:globalJisyo)
-  echomsg 'Installing skk global jisyo ...'
-  let s:gzipfile = s:globalJisyo .. '.gz'
-  call system('curl -fLo ' .. s:gzipfile .. ' --create-dirs '
-        \ .. 'https://skk-dev.github.io/dict/SKK-JISYO.L.gz')
-  call system('gzip -d ' .. s:gzipfile)
-endif
+let s:globalJisyo = denops#request('vimrc', 'downloadJisyo', [s:skk_dir])
 
 function! s:on_init() abort
   call skkeleton#config(#{

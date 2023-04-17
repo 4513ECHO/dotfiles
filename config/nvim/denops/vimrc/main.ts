@@ -1,4 +1,7 @@
-import type { Denops } from "https://deno.land/x/denops_std@v4.0.0/mod.ts";
+import type { Denops } from "https://deno.land/x/denops_std@v4.1.5/mod.ts";
+import { assertString } from "https://deno.land/x/unknownutil@v2.1.0/mod.ts";
+import { exists } from "https://deno.land/std@0.183.0/fs/exists.ts";
+import { join } from "https://deno.land/std@0.183.0/path/mod.ts";
 
 export function main(denops: Denops): Promise<void> {
   denops.dispatcher = {
@@ -10,6 +13,23 @@ export function main(denops: Denops): Promise<void> {
           ? await denops.call("luaeval", "vim.version()")
           : {},
       };
+    },
+
+    async downloadJisyo(baseDir: unknown): Promise<unknown> {
+      assertString(baseDir);
+      if (await exists("/usr/share/skk/SKK-JISYO.L", { isFile: true })) {
+        return "/usr/share/skk/SKK-JISYO.L";
+      } else if (!(await exists(baseDir, { isDirectory: true }))) {
+        denops.cmd("echomsg 'Install SKK-JISYO.L ...'");
+        const url = "https://skk-dev.github.io/dict/SKK-JISYO.L.gz";
+        const file = await Deno.mkdir(baseDir, { recursive: true })
+          .then(() => Deno.create(join(baseDir, "SKK-JISYO.L")));
+        const response = await fetch(url);
+        response.body!
+          .pipeThrough(new DecompressionStream("gzip"))
+          .pipeTo(file.writable);
+      }
+      return join(baseDir, "SKK-JISYO.L");
     },
   };
 
