@@ -22,11 +22,16 @@ endif
 
 .PHONY: init
 init: ## Initialize enviroment settings
-	@mkdir -pv ~/.config
-	@mkdir -pv ~/.local/bin
-	@mkdir -pv ~/.local/share
-	@mkdir -pv ~/.cache
-	@mkdir -pv ~/Develops
+	export XDG_CONFIG_HOME="$(HOME)/.config"
+	export XDG_CACHE_HOME="$(HOME)/.cache"
+	export XDG_DATA_HOME="$(HOME)/.local/share"
+	export XDG_STATE_HOME="$(HOME)/.local/state"
+	mkdir -p $$XDG_CONFIG_HOME
+	mkdir -p $$XDG_CACHE_HOME
+	mkdir -p $$XDG_STATE_HOME
+	mkdir -p $$XDG_DATA_HOME
+	mkdir -p $(HOME)/.local/bin
+	mkdir -p $(HOME)/Develops
 
 .PHONY: deploy
 deploy: ## Create symlinks to actual directories
@@ -39,7 +44,7 @@ update: ## Fetch and merge all changes from remote repository
 
 .PHONY: install
 install: update init deploy ## Initialize and deploy dotfiles
-	@exec "$$SHELL" -l
+	exec "$$SHELL" -l
 
 .PHONY: clean
 clean: ## Remove symlinks from actual directories
