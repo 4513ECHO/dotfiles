@@ -88,8 +88,6 @@ repo = 'fcpg/vim-orbital'
 [[plugins.colorschemes]]
 name = 'orbital'
 terminal = 'mini'
-[plugins.colorschemes.highlight]
-String = { ctermbg = 'NONE', guibg = 'NONE' }
 
 [[plugins]]
 repo = 'felipec/vim-felipec'
@@ -100,9 +98,15 @@ NonText = { ctermbg = 'NONE', guibg = 'NONE' }
 
 [[plugins]]
 repo = 'fenetikm/falcon'
+hook_add = '''
+let g:loaded_falcon = v:true
+'''
 [[plugins.colorschemes]]
 name = 'falcon'
 lightline = 'mini'
+[plugins.colorschemes.highlight]
+Normal = { ctermfg = 249, guifg = '#b4b4b9', ctermbg = 0, guibg = '#000000' }
+NonText = { ctermfg = 237, guifg = '#36363a', ctermbg = 'NONE', guibg = 'NONE' }
 
 [[plugins]]
 repo = 'franbach/miramare'

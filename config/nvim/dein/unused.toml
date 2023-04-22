@@ -1,26 +1,19 @@
 [[plugins]]
-repo = 'cespare/vim-toml'
-if = '!has("patch-8.2.3520") && !has("nvim")'
-merge_ftdetect = true
-on_ft = ['toml']
+repo = 'cocopon/colorswatch.vim'
+on_cmd = ['ColorSwatchGenerate']
 
 [[plugins]]
-repo = 'dhruvasagar/vim-zoom'
-on_map = { n = '<Plug>' }
-hook_add = '''
-let g:zoom#statustext = 'zoomed'
-nnoremap <C-w>z <Plug>(zoom-toggle)
-'''
+repo = 'cocopon/inspecthi.vim'
+depends = ['colorswatch.vim']
+on_cmd = ['Inspecthi']
 
 [[plugins]]
-repo = 'kat0h/bufpreview.vim'
-depends = ['denops.vim']
-on_cmd = ['PreviewMarkdown', 'PreviewMarkdownClose', 'PreviewMarkdownToggle']
-on_ft = ['markdown']
-hook_add = '''
-let g:bufpreview_server_host = '0.0.0.0'
-let g:bufpreview_server_port = 8888
-'''
+repo = 'cocopon/snapbuffer.vim'
+on_cmd = ['SnapBuffer']
+
+[[plugins]]
+repo = 'guns/xterm-color-table.vim'
+on_cmd = ['XtermColorTable']
 
 [[plugins]]
 repo = 'lambdalisue/fern.vim'
@@ -44,35 +37,6 @@ nnoremap <silent><buffer><expr> k
 '''
 
 [[plugins]]
-repo = 'lambdalisue/mr-quickfix.vim'
-on_cmd = ['Mru', 'Mrw']
-
-[[plugins]]
-repo = 'lambdalisue/qfloc.vim'
-on_ft = ['qf']
-hook_add = '''
-let g:qfloc_disable_default_mappings = v:true
-" NOTE: I can't toggle qfloc sign/hover.
-let g:qfloc_disable_sign = v:true
-let g:qfloc_disable_hover = v:true
-nmap <expr> ]c &diff ? ']c' : '<Plug>(qfloc-cnext)'
-nmap <expr> [c &diff ? '[c' : '<Plug>(qfloc-cprevious)'
-nnoremap ]l <Plug>(qfloc-lnext)
-nnoremap [l <Plug>(qfloc-lprevious)
-'''
-[plugins.ftplugin]
-qf = '''
-nnoremap <buffer> j <Plug>(qfloc-j)
-nnoremap <buffer> k <Plug>(qfloc-k)
-nnoremap <buffer> s <Plug>(qfloc-sbuffer)
-nnoremap <buffer> p <Plug>(qfloc-preview)
-nnoremap <buffer> o <Plug>(qfloc-preview)
-nnoremap <buffer> u <Plug>(qfloc-undo)
-nnoremap <buffer> dd <Plug>(qfloc-delete)
-xnoremap <buffer> d  <Plug>(qfloc-delete)
-'''
-
-[[plugins]]
 repo = 'lambdalisue/vim-manpager'
 on_cmd = ['MANPAGER', 'Man']
 
@@ -82,28 +46,7 @@ on_cmd = ['BenchVimrc']
 
 [[plugins]]
 repo = 'mattn/vim-sl'
-on_event = ['CmdUndefined']
 on_func = ['sl#animate']
-
-[[plugins]]
-repo = 'osyo-manga/vim-precious'
-depends = ['context_filetype.vim']
-hook_add = '''
-let g:precious_enable_switchers = {
-      \ '*': {
-      \   'setfiletype': 0,
-      \ },
-      \ 'markdown': {
-      \   'setfiletype': 1,
-      \ },
-      \ 'toml': {
-      \   'setfiletype': 1,
-      \ },
-      \ 'vim': {
-      \   'setfiletype': 1,
-      \ },
-      \ }
-'''
 
 [[plugins]]
 repo = 'pocke/keycast.vim'
@@ -115,56 +58,13 @@ on_cmd = ['KeycastStart', 'KeycastStop']
 repo = 'pocke/vanner'
 
 [[plugins]]
-repo = 'powerman/vim-plugin-AnsiEsc'
-on_cmd = ['AnsiEsc']
-hook_add = '''
-let g:no_ansiesc_menu = v:true
-let g:no_cecutil_maps = v:true
-'''
-
-[[plugins]]
-repo = 'reireias/vim-cheatsheet'
-on_cmd = ['Cheat']
-hook_add = '''
-let g:cheatsheet#cheat_file = g:config_home .. '/doc/cheatsheet.md'
-'''
-
-[[plugins]]
-repo = 'rhysd/vim-fixjson'
-on_ft = ['json']
-on_cmd = ['FixJson']
+repo = 'prabirshrestha/async.vim'
+on_cmd = ['AsyncEmbed']
 
 [[plugins]]
 repo = 'skanehira/badapple.vim'
 if = '!has("nvim")'
 on_cmd = ['BadApple']
-
-[[plugins]]
-repo = 'skanehira/denops-twihi.vim'
-depends = ['denops.vim']
-on_cmd = [
-  'TwihiTimeline', 'TwihiHome', 'TwihiMentions',
-  'TwihiTweet', 'TwihiEditConfig',
-]
-
-[[plugins]]
-repo = 'terryma/vim-expand-region'
-on_map = { nx = '<Plug>' }
-hook_add = '''
-nnoremap + <Plug>(expand_region_expand)
-nnoremap - <Plug>(expand_region_shrink)
-xnoremap + <Plug>(expand_region_expand)
-xnoremap - <Plug>(expand_region_shrink)
-let g:expand_region_text_objects = {
-      \ 'iu': 0,
-      \ 'iw': 0,
-      \ 'ib': 1,
-      \ 'af': 1,
-      \ 'il': 0,
-      \ 'ip': 0,
-      \ 'ie': 0,
-      \ }
-'''
 
 [[plugins]]
 repo = 'thinca/vim-prettyprint'
@@ -184,14 +84,6 @@ on_func = ['Scouter']
 hook_add = '''
 command! Scouter echo Scouter(g:config_home)
 '''
-
-[[plugins]]
-repo = 'tmux-plugins/vim-tmux-focus-events'
-if = '!has("gui_running") && !has("patch-8.2.2345") && !has("nvim")'
-
-[[plugins]]
-repo = 'tpope/vim-repeat'
-on_map = { xno = '<Plug>(Repeat' }
 
 [[plugins]]
 repo = 'tweekmonster/startuptime.vim'

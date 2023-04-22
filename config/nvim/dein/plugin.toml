@@ -38,21 +38,8 @@ nnoremap <C-w>l <Cmd>TmuxNavigateRight<CR>
 '''
 
 [[plugins]]
-repo = 'cocopon/colorswatch.vim'
-on_cmd = ['ColorSwatchGenerate']
-
-[[plugins]]
 repo = 'cocopon/lightline-hybrid.vim'
 on_source = 'lightline.vim'
-
-[[plugins]]
-repo = 'cocopon/inspecthi.vim'
-depends = ['colorswatch.vim']
-on_cmd = ['Inspecthi']
-
-[[plugins]]
-repo = 'cocopon/snapbuffer.vim'
-on_cmd = ['SnapBuffer']
 
 [[plugins]]
 repo = 'cohama/lexima.vim'
@@ -80,10 +67,6 @@ autocmd vimrc OptionSet buftype
       \ |   let b:copilot_enabled = v:false
       \ | endif
 '''
-
-[[plugins]]
-repo = 'guns/xterm-color-table.vim'
-on_cmd = ['XtermColorTable']
 
 [[plugins]]
 repo = 'halkn/lightline-lsp'
@@ -460,10 +443,6 @@ let g:jplus#config = #{
       \   right_matchstr_pattern: '^\s*\\\s*\zs.*\|^\s*"\s*\zs.*\|\s*\zs.*',
       \ }}
 '''
-
-[[plugins]]
-repo = 'prabirshrestha/async.vim'
-on_cmd = ['AsyncEmbed']
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
