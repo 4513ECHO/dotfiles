@@ -5,7 +5,7 @@ URL="${URL:-https://github.com/4513ECHO/dotfiles}"
 error() { echo "error: $*" 1>&2; exit 1; }
 [ -d "$DOTPATH" ] && error "$DOTPATH has already existed."
 printf '\e[1m'
-cat <<EOF
+cat <<'EOF'
 .------------------------------------------------------------------------------.
 :                                                                              :
 :               d88          d88      .d888 d8b d88                            :
@@ -17,11 +17,11 @@ cat <<EOF
 :          Y88b 888 Y88..88P Y88b.   888    888 888 Y8b.          X88          :
 :           "Y8888P  "Y88P"   "Y888  88P    88P 88P  "Y888P   88888P"          :
 :                                                                              :
-:                     $URL                     :
+:                     https://github.com/4513ECHO/dotfiles                     :
 :                                                                              :
 '------------------------------------------------------------------------------'
 EOF
-printf '\e[1m'
+printf '\e[m'
 git clone --depth=1 --filter=blob:none "$URL" "$DOTPATH"
 cd "$DOTPATH" || error "could not change directory to $DOTPATH"
 make install
