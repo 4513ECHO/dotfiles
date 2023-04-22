@@ -1,13 +1,27 @@
 #!/bin/sh
 set -eu
-DOTPATH="${DOTFILES:-$HOME/dotfiles}"
+DOTPATH="${DOTPATH:-$HOME/dotfiles}"
 URL="${URL:-https://github.com/4513ECHO/dotfiles}"
-HEADER="${HEADER:-https://raw.githubusercontent.com/4513ECHO/dotfiles/main/header}"
-failed() { echo "failed: $*" 1>&2; exit 1; }
-[ -d "$DOTPATH" ] && failed "$DOTPATH has already existed."
-printf '\e[1m'
-curl -fsSL "$HEADER"
-printf '\e[m'
+error() { echo "error: $*" 1>&2; exit 1; }
+[ -d "$DOTPATH" ] && error "$DOTPATH has already existed."
+cat <<EOF
+\e[1m
+.------------------------------------------------------------------------------.
+:                                                                              :
+:               d88          d88      .d888 d8b d88                            :
+:               888          888     d88P"  Y8P 888                            :
+:               888          888     888        888                            :
+:           .d88888  .d88b. d888888 d888888 888 888  .d88b.  .d8888b           :
+:          d88" 888 d88""88b 888     888    888 888 d8P  Y8b 88K               :
+:          888  888 888  888 888     888    888 888 88888888 "Y8888b.          :
+:          Y88b 888 Y88..88P Y88b.   888    888 888 Y8b.          X88          :
+:           "Y8888P  "Y88P"   "Y888  88P    88P 88P  "Y888P   88888P"          :
+:                                                                              :
+:                     $URL                     :
+:                                                                              :
+'------------------------------------------------------------------------------'
+\e[m
+EOF
 git clone --depth=1 --filter=blob:none "$URL" "$DOTPATH"
-cd "$DOTPATH" || failed "could not change directory to $DOTPATH"
+cd "$DOTPATH" || error "could not change directory to $DOTPATH"
 make install
