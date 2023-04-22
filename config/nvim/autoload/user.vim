@@ -1,17 +1,15 @@
 function! user#title_string() abort
   let f = expand('%:t')
-  let d = pathshorten(expand('%:~:h'))
-  let r = pathshorten(fnamemodify(getcwd(), ':~'))
+  let d = expand('%:~:h')->pathshorten()
+  let r = getcwd()->fnamemodify(':~')->pathshorten()
   if &buftype ==# 'help'
     let [dir, file] = ['help', f]
   elseif &buftype ==# 'terminal'
     let [dir, file] = ['terminal', f]
   elseif &buftype ==# 'nofile'
-    if &filetype ==# 'molder'
-      let [dir, file] = [d, f]
-    else
-      let [dir, file] = [r, bufname()]
-    endif
+    let [dir, file] = &filetype ==# 'molder'
+          \ ? [d, f]
+          \ : [r, bufname()]
   elseif &buftype ==# 'quickfix'
     let [dir, file] = [r, 'QuickFix']
   else

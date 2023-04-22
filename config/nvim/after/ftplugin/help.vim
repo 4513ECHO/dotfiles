@@ -5,21 +5,9 @@ endif
 
 setlocal list tabstop=8 shiftwidth=8 softtabstop=8
 setlocal noexpandtab textwidth=78 colorcolumn=+1 conceallevel=0
-
-function! s:set_highlight(group) abort
-  for group in ['helpBar', 'helpBacktick', 'helpStar', 'helpIgnore']
-    execute 'hi link' group a:group
-  endfor
-endfunction
-
-call s:set_highlight('Special')
-augroup vimrc_help
-  autocmd!
-  autocmd BufUnload <buffer>
-        \ : call <SID>set_highlight('Ignore')
-        \ | autocmd! vimrc_help
-  autocmd ColorScheme * call <SID>set_highlight('Special')
-augroup END
+if has('nvim')
+  setlocal winhighlight=helpBar:Special,helpBacktick:Special,helpStar:Special,helpIgnore:Special
+endif
 
 nnoremap <buffer> q <Nop>
 nnoremap <buffer> <CR> <CR>
@@ -28,10 +16,6 @@ inoremap <silent><expr> <Leader>- repeat('-', &textwidth)
 nnoremap <buffer> [Toggle]c <Cmd>call <SID>toggle_conceal()<CR>
 
 function! s:toggle_conceal() abort
-  if &conceallevel == 0
-    setlocal conceallevel=3
-  else
-    setlocal conceallevel=0
-  endif
+  let &l:conceallevel = &l:conceallevel ? 0 : 3
   setlocal conceallevel?
 endfunction

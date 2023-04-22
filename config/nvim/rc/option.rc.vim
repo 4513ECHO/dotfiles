@@ -133,7 +133,7 @@ set history=400
 set cedit=
 
 " ------------------
-" buckup
+" backup
 set backup
 set writebackup
 set swapfile

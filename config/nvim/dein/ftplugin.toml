@@ -95,6 +95,7 @@ nnoremap <buffer><silent><expr> [Toggle]l
       \ printf('<Cmd>help %s@%s<CR>', expand('<cword>'),
       \ expand('%:e') ==# 'jax' ? 'en': 'ja')
 
+" NOTE: pattern is from $VIMRUNTIME/syntax/help.vim
 let s:tag_pattern = join([
       \ '\\\@<!|[#-)!+-~]\+|', '\*[#-)!+-~]\+\*\s', '\*[#-)!+-~]\+\*$',
       \ "'[a-z]\\{2,\\}'", "'t_..'",
@@ -102,9 +103,9 @@ let s:tag_pattern = join([
       \ 'CTRL-.', 'CTRL-SHIFT-.', 'CTRL-Break', 'CTRL-PageUp', 'CTRL-PageDown',
       \ 'CTRL-Insert', 'CTRL-Del', 'CTRL-{char}',
       \ ], '\|')
-function! s:move_link(dir, count) abort
-  for cnt in range(a:count)
-    let flags = (a:dir ? '' : 'b') .. 'W'
+function! s:move_link(direction, count) abort
+  let flags = (a:direction ? '' : 'b') .. 'W'
+  for _ in range(a:count)
     call search(s:tag_pattern, flags, 0, 500)
   endfor
 endfunction
