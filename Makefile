@@ -1,3 +1,4 @@
+export
 DOTPATH ?= $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 XDG_CONFIG_HOME ?= $(HOME)/.config
 XDG_CACHE_HOME ?= $(HOME)/.cache
