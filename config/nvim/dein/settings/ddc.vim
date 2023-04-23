@@ -55,10 +55,11 @@ let s:sourceOptions.zsh = #{
       \ forceCompletionPattern: '[\w@:~._-]/[\w@:~._-]*',
       \ maxItems: 8,
       \ }
-let s:sourceOptions.nextword = #{
+let s:sourceOptions.mocword = #{
       \ mark: '[word]',
       \ minAutoCompleteLength: 3,
       \ isVolatile: v:true,
+      \ enabledIf: "exists('$MOCWORD_DATA')",
       \ }
 let s:sourceOptions.github_issue = #{
       \ mark: '[issue]',
@@ -74,7 +75,10 @@ let s:sourceOptions.cmdline = #{
       \ forceCompletionPattern: '[\w@:~._-]/[\w@:~._-]*',
       \ }
 let s:sourceOptions.buffer = #{ mark: '[buf]' }
-let s:sourceOptions.tmux = #{ mark: '[tmux]' }
+let s:sourceOptions.tmux = #{
+      \ mark: '[tmux]',
+      \ enabledIf: "exists('$TMUX')",
+      \ }
 let s:sourceOptions.omni = #{ mark: '[omni]' }
 let s:sourceOptions.line = #{ mark: '[line]' }
 
@@ -119,7 +123,7 @@ call ddc#custom#patch_filetype(
 call ddc#custom#patch_filetype(
       \ ['markdown', 'gitcommit', 'help'], #{
       \ sources: extend([
-      \   'nextword',
+      \   'mocword',
       \   'github_issue', 'github_pull_request',
       \ ], s:sources),
       \ })
@@ -160,18 +164,18 @@ cnoremap         <expr> <CR> pum#visible() ? '<Cmd>call pum#map#confirm()<CR>' :
 function! s:ddc_complete(...) abort
   return ddc#map#manual_complete(#{ sources: a:000 })
 endfunction
-inoremap <silent><expr> <C-x><C-l> s:ddc_complete('line')
-inoremap <silent><expr> <C-x><C-n> s:ddc_complete('around')
-inoremap <silent><expr> <C-x><C-f> s:ddc_complete('file')
-inoremap <silent><expr> <C-x><C-d> s:ddc_complete('vim-lsp')
-inoremap <silent><expr> <C-x><C-v> s:ddc_complete('cmdline')
-inoremap <silent><expr> <C-x><C-u> s:ddc_complete()
-inoremap <silent><expr> <C-x><C-o> s:ddc_complete('omni')
-inoremap <silent><expr> <C-x><C-s> s:ddc_complete('nextword')
-inoremap <silent><expr> <C-x><C-t> s:ddc_complete('tmux')
+inoremap <silent><expr> <C-x><C-l> <SID>ddc_complete('line')
+inoremap <silent><expr> <C-x><C-n> <SID>ddc_complete('around')
+inoremap <silent><expr> <C-x><C-f> <SID>ddc_complete('file')
+inoremap <silent><expr> <C-x><C-d> <SID>ddc_complete('vim-lsp')
+inoremap <silent><expr> <C-x><C-v> <SID>ddc_complete('cmdline')
+inoremap <silent><expr> <C-x><C-u> <SID>ddc_complete()
+inoremap <silent><expr> <C-x><C-o> <SID>ddc_complete('omni')
+inoremap <silent><expr> <C-x><C-s> <SID>ddc_complete('mocword')
+inoremap <silent><expr> <C-x><C-t> <SID>ddc_complete('tmux')
 
 if bufname() =~# '^/tmp/\d\+\.md$'
-  inoremap <silent><expr><buffer> <C-x><C-g> s:ddc_complete('github_issue', 'github_pull_request')
+  inoremap <silent><expr><buffer> <C-x><C-g> <SID>ddc_complete('github_issue', 'github_pull_request')
 endif
 
 call ddc#enable()

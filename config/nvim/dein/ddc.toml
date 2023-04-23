@@ -37,7 +37,7 @@ repo = 'Shougo/ddc-source-cmdline'
 repo = 'Shougo/ddc-source-line'
 
 [[plugins]]
-repo = 'Shougo/ddc-source-nextword'
+repo = 'Shougo/ddc-source-mocword'
 
 [[plugins]]
 repo = 'Shougo/ddc-source-omni'
