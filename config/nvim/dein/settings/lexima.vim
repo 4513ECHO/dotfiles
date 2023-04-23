@@ -141,8 +141,8 @@ function! s:lexima_alter_command(original, altanative) abort
     call lexima#add_rule(#{
           \ char: char,
           \ mode: ':',
-          \ at: '\c^\(''<,''>\)\?' .. a:original .. '\%#',
-          \ input: '<C-w>' .. a:altanative .. char,
+          \ at: $'\c^\(''<,''>\)\?{a:original}\%#',
+          \ input: $'<C-w>{a:altanative}{char}',
           \ })
   endfor
 endfunction

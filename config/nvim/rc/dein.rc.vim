@@ -3,8 +3,8 @@ let s:dein_repo_dir = s:dein_dir .. '/repos/github.com/Shougo/dein.vim'
 
 if &runtimepath !~# s:dein_repo_dir
   if !isdirectory(s:dein_repo_dir)
-    execute join(['!git', 'clone', '--depth=1', '--filter=blob:none',
-          \ 'https://github.com/Shougo/dein.vim', s:dein_repo_dir])
+    execute ['!git', 'clone', '--depth=1', '--filter=blob:none',
+          \ 'https://github.com/Shougo/dein.vim', s:dein_repo_dir]->join()
     if v:shell_error
       echohl ErrorMsg
       echomsg 'Could not install dein.vim to' s:dein_repo_dir
@@ -12,7 +12,7 @@ if &runtimepath !~# s:dein_repo_dir
       finish
     endif
   endif
-  execute 'set runtimepath^=' .. s:dein_repo_dir
+  execute $'set runtimepath^={s:dein_repo_dir}'
 endif
 
 let g:dein#auto_recache = v:true
@@ -43,16 +43,16 @@ endif
 
 if has('vim_starting') && dein#check_install()
   call dein#install()
-  if !empty(get(g:, 'dein#install_github_api_token', ''))
+  if !empty(g:->get('dein#install_github_api_token'))
     call timer_start(0, { -> dein#check_update(v:true) })
   endif
 endif
 
 if getcwd() =~? expand('~/Develops/github.com/4513ECHO/')
   let s:git_root = system('git rev-parse --show-toplevel')
-  execute 'set runtimepath^=' .. s:git_root
+  execute $'set runtimepath^={s:git_root}'
   if isdirectory(s:git_root .. '/after')
-    execute 'set runtimepath+=' .. s:git_root .. '/after'
+    execute $'set runtimepath+={s:git_root}/after'
   endif
 endif
 

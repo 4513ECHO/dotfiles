@@ -20,8 +20,7 @@ function! lightline#component#vimrc#filename() abort
   if &filetype =~# '^ddu'
     return ''
   elseif s:statuswidth() > 50
-    let filename = bufname()->fnamemodify(':t')
-    return empty(filename) ? '[No name]' : filename
+    return bufname()->fnamemodify(':t') ?? '[No name]'
   endif
   return ''
 endfunction

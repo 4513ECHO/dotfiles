@@ -13,9 +13,9 @@ function! user#title_string() abort
   elseif &buftype ==# 'quickfix'
     let [dir, file] = [r, 'QuickFix']
   else
-    let [dir, file] = [(!empty(d) ? d : r), f]
+    let [dir, file] = [d ?? r, f]
   endif
-  return printf('%s (%s) - %s', file, dir, toupper(v:progname))
+  return $'{file} ({dir}) - {toupper(v:progname)}'
 endfunction
 
 function! user#pager() abort
@@ -29,12 +29,12 @@ function! user#pager() abort
 endfunction
 
 function! user#google(query) abort
-  let cmd = ['w3m', printf('https://google.com/search?q=%s', a:query)]
+  let cmd = ['w3m', $'https://google.com/search?q={a:query}']
   if has('nvim')
     new
     call termopen(cmd)
   else
-    call term_start(cmd, {'term_finish': 'close'})
+    call term_start(cmd, #{ term_finish: 'close' })
   endif
 endfunction
 

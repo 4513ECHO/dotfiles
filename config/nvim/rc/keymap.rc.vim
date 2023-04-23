@@ -87,9 +87,9 @@ cnoremap <expr> ? getcmdtype() ==# '?' ? '\?' : '?'
 nnoremap g: :
 nnoremap g/ /
 " from https://github.com/pesblog/dots-base/blob/a0762b8ffe/home/.vimrc#L140
-nnoremap <expr> gp '`[' .. strpart(getregtype(), 0, 1) .. '`]'
+nnoremap <expr> gp $'`[{getregtype()->strpart(0, 1)}`]'
 " from https://baqamore.hatenablog.com/entry/2016/07/07/201856
-xnoremap <expr> p 'pgv"' .. v:register .. 'ygv<Esc>'
+xnoremap <expr> p $'pgv"{v:register}ygv<Esc>'
 " from https://vim-jp.org/vim-users-jp/2009/08/31/Hack-65.html
 xnoremap / <Esc>/\%V
 " from https://github.com/nnsnico/dotfiles/blob/cf9ce83cfa/vim/vimrcs/basic.vim#L150-L151

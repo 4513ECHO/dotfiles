@@ -60,8 +60,8 @@ function! user#colorscheme#set_customize() abort
           \ terminal is# 'mini'
           \ ? [
           \ '#1d1f21', '#cc6666', '#b5bd68', '#f0c674', '#81a2be', '#b294bb', '#8abeb7', '#d3d7cf',
-          \ '#707880', '#cc6666', '#b5bd68', '#de955f', '#729fcf', '#b294bb', '#005f5f', '#707880']
-          \ : terminal
+          \ '#707880', '#cc6666', '#b5bd68', '#de955f', '#729fcf', '#b294bb', '#005f5f', '#707880',
+          \ ] : terminal
           \ )
   elseif !has('nvim') && exists('g:terminal_color_0')
     let g:terminal_ansi_colors = []
@@ -115,7 +115,7 @@ function! user#colorscheme#update_lightline() abort
   let name = user#colorscheme#lightline()
   let g:lightline.colorscheme = name
   " NOTE: Reload colorscheme file to support 'background' change
-  silent! execute 'runtime autoload/lightline/colorscheme/' .. name .. '.vim'
+  execute $'runtime autoload/lightline/colorscheme/{name}.vim'
   call lightline#init()
   call lightline#colorscheme()
   call lightline#update()
