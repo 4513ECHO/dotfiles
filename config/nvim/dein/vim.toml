@@ -1,16 +1,15 @@
-
 [[plugins]]
 repo = 'machakann/vim-highlightedyank'
 lazy = true
-on_map = { nxo = '<Plug>' }
-on_event = ['TextYankPost']
+on_event = 'TextYankPost'
 hook_add = '''
 let g:highlightedyank_highlight_duration = 100
 '''
 
 [[plugins]]
 repo = 'markonm/traces.vim'
-on_event = ['CmdlineEnter', 'CmdwinEnter']
+lazy = true
+on_event = 'CmdlineEnter'
 hook_add = '''
 let g:traces_normal_preview = v:true
 '''
@@ -18,12 +17,13 @@ let g:traces_normal_preview = v:true
 [[plugins]]
 repo = 'mattn/vim-notification'
 lazy = true
+on_func = 'notification#'
 
 [[plugins]]
 repo = 'obcat/vim-hitspop'
 lazy = true
-on_event = ['CmdlineLeave', 'CmdwinLeave']
-on_func = ['hitspop#main']
+on_event = 'CmdlineLeave'
+on_func = 'hitspop#main'
 hook_add = '''
 let g:hitspop_line = 'winbot'
 let g:hitspop_column = 'winleft'
@@ -40,37 +40,9 @@ let g:sclow_hide_full_length = v:true
 '''
 
 [[plugins]]
-repo = 'plasticboy/vim-markdown'
-on_ft = ['markdown']
-hook_add = '''
-let g:vim_markdown_no_default_key_mappings = v:true
-let g:vim_markdown_follow_anchor = v:true
-let g:vim_markdown_no_extensions_in_markdown = v:true
-let g:vim_markdown_math = v:true
-let g:vim_markdown_frontmatter = v:true
-let g:vim_markdown_strikethrough = v:true
-'''
-[[plugins]]
 repo = 'rbtnn/vim-coloredit'
 lazy = true
-on_cmd = ['ColorEdit']
-
-[[plugins]]
-repo = 'rhysd/vim-gfm-syntax'
-on_ft = ['markdown']
-[plugins.ftplugin]
-markdown = '''
-syn cluster mkdNonListItem add=@githubFlavoredMarkdown
-syn cluster mkdNonListItemBlock add=@githubFlavoredMarkdown
-syn cluster githubFlavoredMarkdown contains=githubFlavoredMarkdownCode,
-      \githubFlavoredMarkdownMention,githubFlavoredMarkdownStrikethrough,
-      \githubFlavoredMarkdownEmoji,githubFlavoredMarkdownTableDelimiter,
-      \githubFlavoredMarkdownTableAligner,githubFlavoredMarkdownTableBorder,
-      \githubFlavoredMarkdownIssueNumber,githubFlavoredMarkdownCheckBoxBracket,
-      \githubFlavoredMarkdownCheckBoxX
-'''
+on_cmd = 'ColorEdit'
 
 [[plugins]]
 repo = 'vim-jp/syntax-vim-ex'
-lazy = true
-on_ft = ['vim']
