@@ -15,8 +15,7 @@ packages:
   - name: aquaproj/registry-tool@v0.1.10
   - name: aristocratos/btop@v1.2.13
   - name: b3nj5m1n/xdg-ninja@v0.2.0.1
-  - name: b4b4r07/afx
-    version: v0.1.21 # NOTE: https://github.com/b4b4r07/afx/issues/51
+  - name: b4b4r07/afx@v0.2.0
   - name: b4b4r07/gist@v1.2.6
   - name: b4b4r07/gomi@v1.1.6
   - name: charmbracelet/glow@v1.5.0

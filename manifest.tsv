@@ -1,3 +1,4 @@
+afx/afx.yaml	$XDG_CONFIG_HOME/afx/afx.yaml
 applications	$XDG_DATA_HOME
 aqua	$XDG_CONFIG_HOME
 bat	$XDG_CONFIG_HOME

@@ -32,6 +32,9 @@ export CARGO_NET_GIT_FETCH_WITH_CLI=true
 export AQUA_GLOBAL_CONFIG="$XDG_CONFIG_HOME/aqua/aqua.yaml"
 export AQUA_ROOT_DIR="$XDG_DATA_HOME/aquaproj-aqua"
 
+## afx ##
+export AFX_COMMAND_PATH="$HOME/.local/bin"
+
 ## python ##
 export PIPX_HOME="$XDG_DATA_HOME/pipx"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"
