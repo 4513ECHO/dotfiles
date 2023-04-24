@@ -1,0 +1,6 @@
+[Unit]
+Description=Lock Screen Automatically at Night
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/xautolock -locknow

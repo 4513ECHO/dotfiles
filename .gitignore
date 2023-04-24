@@ -22,5 +22,9 @@ config/fcitx/conf/*
 !config/fcitx/conf/fcitx-skk.config
 !config/fcitx/conf/fcitx-xkb.config
 
+# systemd
+config/systemd/user/*.target.wants/*
+config/systemd/user/docker.service
+
 !**/.gitkeep
 # vim:ft=gitignore

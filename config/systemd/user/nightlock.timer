@@ -1,0 +1,8 @@
+[Unit]
+Description=Lock Screen Automatically at Night
+
+[Timer]
+OnCalendar=*-*-* 0:20:00
+
+[Install]
+WantedBy=timers.target

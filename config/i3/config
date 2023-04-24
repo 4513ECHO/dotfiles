@@ -19,6 +19,8 @@ focus_follows_mouse no
 
 # Wallpaper
 exec --no-startup-id feh --bg-scale --no-fehbg ~/Pictures/wallpaper.jpg
+# Screen locker
+exec --no-startup-id xautolock -time 5 -locker 'i3lock-fancy' -detectsleep
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
