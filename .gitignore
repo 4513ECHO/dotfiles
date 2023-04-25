@@ -23,8 +23,8 @@ config/fcitx/conf/*
 !config/fcitx/conf/fcitx-xkb.config
 
 # systemd
-config/systemd/user/
-!config/systemd/user/templates/*
+config/systemd/user/*
+!config/systemd/user/templates/
 
 !**/.gitkeep
 # vim:ft=gitignore
