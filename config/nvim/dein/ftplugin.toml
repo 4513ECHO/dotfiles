@@ -138,8 +138,7 @@ nnoremap <buffer> p <CR>zz<C-w>p
 '''
 
 toml = '''
-if !has('nvim') && !empty(filter(getline(1, 4),
-      \ { _, val -> val =~# '\V\^\([[plugins]]\|hook_\)' }))
+if !has('nvim') && getline(1) =~# '\v^(\[\[plugins]]|hook_)'
   call dein#toml#syntax()
 endif
 '''

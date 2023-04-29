@@ -55,6 +55,7 @@ let s:uiParams.ff = #{
       \ previewFloatingBorder: 'rounded',
       \ prompt: '>',
       \ split: has('nvim') ? 'floating' : 'horizontal',
+      "\ NOTE: Use lightline component instead
       \ statusline: v:false,
       \ }
 
