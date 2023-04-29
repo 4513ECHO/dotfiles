@@ -68,25 +68,7 @@ require("nvim-treesitter.configs").setup {
     disable = { "bash", "yaml", "vimdoc" },
     additionnal_vim_regex_highlighting = false,
   },
-  playground = {
-    enable = true,
-    keybindings = {
-      update = "<C-r>",
-    },
-  },
-  query_linter = {
-    enable = true,
-  },
 }
-'''
-
-[[plugins]]
-repo = 'nvim-treesitter/playground'
-lazy = true
-on_source = ['nvim-treesitter']
-[plugins.ftplugin]
-tsplayground = '''
-nnoremap <buffer> q <C-w>q
 '''
 
 [[plugins]]
