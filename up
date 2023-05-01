@@ -2,10 +2,13 @@
 set -eu
 DOTPATH="${DOTPATH:-$HOME/dotfiles}"
 URL="${URL:-https://github.com/4513ECHO/dotfiles}"
-error() { echo "error: $*" 1>&2; exit 1; }
+error() {
+  printf '\e[1;38;5;1mError\e[m: %s\n' "$*" 1>&2
+  exit 1
+}
 [ -d "$DOTPATH" ] && error "$DOTPATH has already existed."
 printf '\e[1m'
-cat <<'EOF'
+cat << 'EOF'
 .------------------------------------------------------------------------------.
 :                                                                              :
 :               d88          d88      .d888 d8b d88                            :
@@ -23,5 +26,6 @@ cat <<'EOF'
 EOF
 printf '\e[m'
 git clone --depth=1 --filter=blob:none "$URL" "$DOTPATH"
-cd "$DOTPATH" || error "could not change directory to $DOTPATH"
+cd "$DOTPATH" || error "Could not change directory to $DOTPATH"
 make install
+exec "$SHELL" -l
