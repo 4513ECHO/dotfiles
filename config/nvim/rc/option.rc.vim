@@ -11,7 +11,9 @@ set ambiwidth=single
 " ------------------
 " color/sequence
 set background=dark
-set termguicolors
+if !has('mac')
+  set termguicolors
+endif
 if !has('gui_running') && !has('nvim')
   set t_Co=256
   let &t_Cs = "\<Esc>[4:3m"
