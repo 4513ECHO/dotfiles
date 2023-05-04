@@ -4,7 +4,7 @@ Type=Application
 Name=Element
 Comment=Matrix PWA client with Element
 Icon=element
-Exec=/home/hibiki/.local/bin/chromium-browser-wrapper --app=https://app.element.io
+Exec=chromium-browser-wrapper --app=https://app.element.io
 Terminal=false
 StartupNotify=true
 StartupWMClass=app.element.io

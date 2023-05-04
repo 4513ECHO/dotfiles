@@ -6,7 +6,7 @@ Name=Misskey.io
 Comment=Misskey.io PWA client
 # from https://github.com/misskey-dev/assets/blob/fb10fb514c/favicon.png
 Icon=misskey
-Exec=/home/hibiki/.local/bin/chromium-browser-wrapper --app=https://misskey.io
+Exec=chromium-browser-wrapper --app=https://misskey.io
 Terminal=false
 StartupNotify=true
 StartupWMClass=misskey.io
