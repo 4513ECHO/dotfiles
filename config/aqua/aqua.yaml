@@ -37,7 +37,7 @@ packages:
     version: v3.11.4
   - name: high-moctane/mocword@v0.2.0
   - name: itchyny/gojq@v0.12.12
-  - name: itchyny/mmv@v0.1.5
+  - name: itchyny/mmv@v0.1.6
   - name: jiro4989/ojosama@v0.11.0
   - name: junegunn/fzf/fzf-tmux@0.39.0
   - name: junegunn/fzf@0.39.0
