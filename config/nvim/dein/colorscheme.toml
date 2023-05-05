@@ -403,7 +403,8 @@ lightline = 'deepspace'
 terminal = 'mini'
 
 [[plugins]]
-repo = 'ulwlu/elly.vim'
+# repo = 'ulwlu/elly.vim'
+repo = 'kuuote/elly.vim'
 [[plugins.colorschemes]]
 name = 'elly'
 
