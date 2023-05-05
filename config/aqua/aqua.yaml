@@ -97,7 +97,7 @@ packages:
   - name: rrethy/hexokinase
     registry: local
     version: master
-  - name: itchyny/maze@v0.0.8
+  - name: itchyny/maze@v0.0.9
     registry: local
   - name: JohnnyMorganz/StyLua@v0.17.1
     registry: local
