@@ -2,22 +2,22 @@
 # aqua Policy
 # https://aquaproj.github.io/
 registries:
-# Example
+  # Example
   - name: local
     type: local
     path: experimental.yaml
-# - name: aqua-registry
-#   type: github_content
-#   repo_owner: aquaproj
-#   repo_name: aqua-registry
-#   ref: semver(">= 3.0.0") # ref is optional
-#   path: registry.yaml
+  # - name: aqua-registry
+  #   type: github_content
+  #   repo_owner: aquaproj
+  #   repo_name: aqua-registry
+  #   ref: semver(">= 3.0.0") # ref is optional
+  #   path: registry.yaml
   - type: standard
     ref: semver(">= 3.0.0")
 packages:
-# Example
+  # Example
   - registry: local # allow all packages in the Registry
-# - name: cli/cli # allow only a specific package. The default value of registry is "standard"
-# - name: cli/cli
-#   version: semver(">= 2.0.0") # version is optional
+  # - name: cli/cli # allow only a specific package. The default value of registry is "standard"
+  # - name: cli/cli
+  #   version: semver(">= 2.0.0") # version is optional
   - registry: standard
