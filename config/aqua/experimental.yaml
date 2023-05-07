@@ -79,6 +79,8 @@ packages:
       arm64: aarch64
     supported_envs:
       - linux
+    files:
+      - name: xremap
     version_constraint: semver(">= 0.5.0")
     version_overrides:
       - version_constraint: "true"
