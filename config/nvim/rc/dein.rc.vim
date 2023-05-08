@@ -23,19 +23,19 @@ let g:dein#install_progress_type = 'floating'
 let g:dein#lazy_rplugins = v:true
 let g:dein#types#git#clone_depth = 1
 let g:dein#types#git#enable_partial_clone = v:true
+let $DEIN_DIR = g:config_home .. '/dein'
 
 if dein#min#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  call dein#load_toml(g:config_home .. '/dein/init.toml',        #{ lazy: v:false })
-  call dein#load_toml(g:config_home .. '/dein/colorscheme.toml', #{ lazy: v:false })
-  call dein#load_toml(g:config_home .. '/dein/textobj.toml',     #{ lazy: v:true })
-  call dein#load_toml(g:config_home .. '/dein/ftplugin.toml',    #{ lazy: v:false })
-  call dein#load_toml(g:config_home .. '/dein/plugin.toml',      #{ lazy: v:true })
-  call dein#load_toml(g:config_home .. '/dein/ddc.toml',         #{ lazy: v:false })
-  call dein#load_toml(g:config_home .. '/dein/ddu.toml',         #{ lazy: v:false })
-  call dein#load_toml(g:config_home .. '/dein/' ..
-        \ (has('nvim') ? 'neovim.toml' : 'vim.toml'),            #{ lazy: v:false })
+  call dein#load_toml('$DEIN_DIR/init.toml')
+  call dein#load_toml('$DEIN_DIR/colorscheme.toml')
+  call dein#load_toml('$DEIN_DIR/textobj.toml', #{ lazy: v:true })
+  call dein#load_toml('$DEIN_DIR/ftplugin.toml')
+  call dein#load_toml('$DEIN_DIR/plugin.toml', #{ lazy: v:true })
+  call dein#load_toml('$DEIN_DIR/ddc.toml')
+  call dein#load_toml('$DEIN_DIR/ddu.toml')
+  call dein#load_toml($'$DEIN_DIR/{has('nvim') ? 'neovim' : 'vim'}.toml')
 
   call dein#end()
   call dein#save_state()
