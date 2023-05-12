@@ -7,10 +7,6 @@ export XDG_RUNTIME_DIR="/run/user/$UID"
 
 ## zsh ##
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-export HISTFILE="$XDG_DATA_HOME/zsh/history"
-export HISTSIZE=10000
-export SAVEHIST=10000
-export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 ## docker ##
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
@@ -44,7 +40,7 @@ export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
 
 ## wget ##
-export WGETRC="$XDG_CONFIG_HOME/wgetrc"
+# export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 
 ## npm ##
 export NPM_CACHE_DIR="$XDG_CACHE_HOME/npm"
@@ -55,13 +51,6 @@ export NPM_DATA_DIR="$XDG_DATA_HOME/npm"
 ## less ##
 export LESS='--hilite-search --ignore-case --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --window=4 --tabs=4 --mouse'
 export LESSCHARSET='UTF-8'
-export LESS_TERMCAP_mb=$'\e[1;38;5;139m' # Begins blinking
-export LESS_TERMCAP_md=$'\e[1;38;5;110m' # Begins bold
-export LESS_TERMCAP_me=$'\e[0m'          # Ends mode
-export LESS_TERMCAP_so=$'\e[48;5;243m'   # Begins standout-mode
-export LESS_TERMCAP_se=$'\e[0m'          # Ends standout-mode
-export LESS_TERMCAP_us=$'\e[4;38;5;143m' # Begins underline
-export LESS_TERMCAP_ue=$'\e[0m'          # Ends underline
 
 typeset -Ux path fpath manpath cdpath
 path=(

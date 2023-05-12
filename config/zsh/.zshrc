@@ -5,6 +5,11 @@ if [[ -f ~/.minimum_dotfiles ]]; then
   export MINIMUM_DOTFILES=true
 fi
 
+HISTFILE="$XDG_DATA_HOME/zsh/history"
+HISTSIZE=10000
+SAVEHIST=10000
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+
 () {
   for rc in $ZDOTDIR/*.zsh; do
     source "$rc"
@@ -23,6 +28,7 @@ fi
     compinit -i -d "$dump"
     { rm -rf "$dumpc" && zcompile "$dump" } &!
   else
+    mkdir -p "$(dirname "$dump")"
     compinit -C -d "$dump"
     { [[ ! -s $dumpc || $dump -nt $dumpc ]] && rm -rf "$dumpc" && zcompile "$dump" } &!
   fi
@@ -58,7 +64,7 @@ if type zprof > /dev/null; then
 elif [[ "$TERM" = 'linux' ]]; then
   echo -n 'You are using virtual console directly. Start X server? [y/N] '
   read -q && xinit
-elif [[ $SHLVL -eq 1 ]] && [[ -z "$MINIMUM_DOTFILES" ]] && [[ -z "$LOADED_ZSHRC" ]]; then
+elif type tmux > /dev/null && [[ $SHLVL -eq 1 ]] && [[ -z "$MINIMUM_DOTFILES" ]] && [[ -z "$LOADED_ZSHRC" ]]; then
   widget::tmux::session
 fi
 export LOADED_ZSHRC=true
