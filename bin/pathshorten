@@ -8,12 +8,14 @@ else
   dir="$(cat /dev/stdin)"
 fi
 
-tildepath="${dir/#$HOME/'~'}"
+tilde='~'
+tildepath="${dir/#$HOME/$tilde}"
 read -ra patharray <<< "${tildepath//\// }"
 result=''
 
 for ((i = 0; i < ${#patharray[@]}; i++)); do
-  if [[ "$(("$i" + 1))" == "${#patharray[@]}" ]]; then
+  # shellcheck disable=SC2004
+  if [[ "$(($i + 1))" == "${#patharray[@]}" ]]; then
     result+="${patharray[$i]}"
     break
   fi
