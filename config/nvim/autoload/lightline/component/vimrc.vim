@@ -65,19 +65,23 @@ function! s:get_ddu_status() abort
   let winid = &filetype =~# 'filter'
         \ ? g:->get('ddu#ui#ff#_filter_parent_winid', 0)
         \ : win_getid()
-  let [_, winnr] = win_id2tabwin(winid)
+  let winnr = win_id2win(winid)
   let status = winnr->getwinvar('ddu_ui_ff_status', {})
   return [winid, winnr, status]
 endfunction
 
 function! lightline#component#vimrc#ddu() abort
-  let [winid, _, status] = s:get_ddu_status()
+  let [winid, winnr, status] = s:get_ddu_status()
   if empty(status) || &filetype !~# 'ddu'
     return ''
   endif
+  let [cur, avail, max] = [line('.', winid), line('$', winid), status.maxItems]
+  if [cur, avail] + winbufnr(winnr)->getbufline(1) ==# [1, 1, '']
+    let [cur, avail] = [0, 0]
+  endif
   return printf('[ddu-%s] %d/%d/%d %s',
         \ status.name,
-        \ line('.', winid), line('$', winid), status.maxItems,
+        \ cur, avail, max,
         \ status.done ? '' : '[async]')->trim()
 endfunction
 

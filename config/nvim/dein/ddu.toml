@@ -65,11 +65,13 @@ setlocal nocursorline
 nnoremap <buffer> q     <Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
 nnoremap <buffer> <CR>  <Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
 inoremap <buffer> <CR>  <Esc><Cmd>call ddu#ui#do_action('itemAction')<CR>
-inoremap <buffer> <C-c> <Esc><Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
-inoremap <buffer> <C-n>
-      \ <Cmd>call ddu#ui#ff#execute("call cursor(line('.')+1,0)<Bar>redraw")<CR>
-inoremap <buffer> <C-p>
-      \ <Cmd>call ddu#ui#ff#execute("call cursor(line('.')-1,0)<Bar>redraw")<CR>
+inoremap <buffer> <C-l> <Esc><Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
+inoremap <buffer> <C-n> <Cmd>call ddu#ui#multi_actions([
+      \ ['cursorNext'], ['updateLightline'],
+      \ ])<CR>
+inoremap <buffer> <C-p> <Cmd>call ddu#ui#multi_actions([
+      \ ['cursorPrevious'], ['updateLightline'],
+      \ ])<CR>
 '''
 
 # filters

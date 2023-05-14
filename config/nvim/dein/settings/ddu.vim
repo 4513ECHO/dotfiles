@@ -47,8 +47,9 @@ let s:filterParams.matcher_fzf = #{
 
 let s:uiParams.ff = #{
       \ floatingBorder: 'rounded',
+      \ floatingTitle: 'ddu-ff',
       \ highlights: #{
-      \   floating: 'Normal,EndOfBuffer:DduEndOfBuffer',
+      \   floating: 'Normal,EndOfBuffer:DduEndOfBuffer,SignColumn:Normal',
       \   floatingBorder: 'Identifier',
       \ },
       \ previewFloating: v:true,
@@ -83,8 +84,19 @@ function! s:on_changed() abort
   " call ddu#ui#do_action('updateOptions', options)
 endfunction
 
+let s:lightline_timer = -1
+function! s:update_lightline() abort
+  call timer_stop(s:lightline_timer)
+  let s:lightline_timer = timer_start(200, { -> s:update_lightline_impl() })
+endfunction
+function! s:update_lightline_impl() abort
+  call lightline#update()
+  redrawstatus
+endfunction
+
 autocmd vimrc ColorScheme,VimResized * call s:on_changed()
-autocmd vimrc CursorMoved,TextChangedI ddu* call lightline#update()
+autocmd vimrc CursorMoved,TextChangedI ddu-ff-* call s:update_lightline()
+call ddu#custom#action('ui', 'ff', 'updateLightline', { -> s:update_lightline() })
 call s:on_changed()
 
 call ddu#custom#patch_local('with_preview', 'uiParams', #{
