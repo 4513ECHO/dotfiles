@@ -76,9 +76,8 @@ set signcolumn=number
 set sidescroll=1
 set sidescrolloff=2
 
-set t_vb=
-set novisualbell
-set belloff=all
+set belloff=
+set visualbell
 
 set listchars=tab:»-,trail:-,extends:»,precedes:«,eol:¬,nbsp:%
 let &showbreak = '» '
@@ -109,9 +108,6 @@ set virtualedit=block
 
 set clipboard-=autoselect
 set mouse=a
-if !has('nvim')
-  set scrollfocus
-endif
 
 set completeopt=menuone,noinsert,noselect
 if !has('nvim')
@@ -123,13 +119,7 @@ set isfname& isfname-== isfname+=@-@
 " commandline
 set wildmenu
 set wildmode=longest,full
-set wildoptions=tagfile
-if has('nvim') || has('patch-8.2.4325')
-  set wildoptions+=pum
-endif
-if has('patch-8.2.4463')
-  set wildoptions+=fuzzy
-endif
+set wildoptions=pum,tagfile,fuzzy
 set wildignorecase
 set history=400
 set cedit=

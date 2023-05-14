@@ -2,14 +2,6 @@
 let g:mapleader = ','
 nnoremap <Leader> <Nop>
 xnoremap <Leader> <Nop>
-xnoremap <Leader><Leader> <Esc>
-
-if has('nvim')
-  tnoremap <Leader><Leader> <C-\><C-n>
-else
-  tnoremap <Leader><Leader> <C-w>N
-endif
-tnoremap <Leader><Space> <Leader>
 
 " disable dengerous/annoying mapping
 " NOTE: ZQ is useful when cmdline is broken
@@ -144,33 +136,10 @@ cnoremap <C-x><C-x> <C-r>=expand('%:p')<CR>
 nnoremap [Toggle] <Nop>
 nmap <C-t> [Toggle]
 nnoremap [Toggle]w <Cmd>setlocal wrap! wrap?<CR>
-nnoremap [Toggle]p <Cmd>setlocal paste! paste?<CR>
-nnoremap [Toggle]c <Cmd>setlocal termguicolors! termguicolors?<CR>
 nnoremap [Toggle]n <Cmd>setlocal relativenumber! relativenumber?<CR>
 
-" moving mappings {{{
 " buffer move
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
-
-" quickfix move
-" NOTE: conflict with diff move (see `:help jumpto-diffs`)
-" nnoremap <silent> [c :cprevious<CR>
-" nnoremap <silent> ]c :cnext<CR>
-" nnoremap <silent> [C :cfirst<CR>
-" nnoremap <silent> ]C :clast<CR>
-
-" locationlist move
-nnoremap <silent> [l :lprevious<CR>
-nnoremap <silent> ]l :lnext<CR>
-nnoremap <silent> [L :lfirst<CR>
-nnoremap <silent> ]L :llast<CR>
-
-" tabpage move
-nnoremap <silent> [t :tabprevious<CR>
-nnoremap <silent> ]t :tabnext<CR>
-nnoremap <silent> [T :tabfirst<CR>
-nnoremap <silent> ]T :tablast<CR>
-" }}}
