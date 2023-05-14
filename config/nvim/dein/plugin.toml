@@ -140,16 +140,6 @@ xnoremap n <Cmd>call searchx#next_dir()<CR><Plug>(VimrcSearchPost)zzzv
 '''
 
 [[plugins]]
-repo = 'hrsh7th/vim-vsnip'
-on_event = ['InsertEnter']
-on_source = 'ddc.vim'
-hook_add = '''
-let g:vsnip_snippet_dir = g:config_home .. '/snippets'
-inoremap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : ''
-snoremap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : ''
-'''
-
-[[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = '''
 autocmd vimrc VimEnter * call timer_start(0, { -> dein#source('lightline.vim') })

@@ -54,8 +54,20 @@ on_ft = 'vim'
 repo = 'delphinus/ddc-tmux'
 
 [[plugins]]
+repo = 'hrsh7th/vim-vsnip'
+lazy = true
+on_source = 'ddc.vim'
+hook_add = '''
+let g:vsnip_snippet_dir = g:config_home .. '/snippets'
+inoremap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : ''
+snoremap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : ''
+'''
+
+[[plugins]]
 repo = 'hrsh7th/vim-vsnip-integ'
+lazy = true
 depends = 'vim-vsnip'
+on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'matsui54/ddc-buffer'
