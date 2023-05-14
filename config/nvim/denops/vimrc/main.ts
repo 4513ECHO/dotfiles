@@ -1,7 +1,7 @@
-import type { Denops } from "https://deno.land/x/denops_std@v4.1.5/mod.ts";
-import { assertString } from "https://deno.land/x/unknownutil@v2.1.0/mod.ts";
-import { exists } from "https://deno.land/std@0.183.0/fs/exists.ts";
-import { join } from "https://deno.land/std@0.183.0/path/mod.ts";
+import type { Denops } from "https://deno.land/x/denops_std@v4.3.1/mod.ts";
+import { assertString } from "https://deno.land/x/unknownutil@v2.1.1/mod.ts";
+import { exists } from "https://deno.land/std@0.187.0/fs/exists.ts";
+import { join } from "https://deno.land/std@0.187.0/path/mod.ts";
 
 export function main(denops: Denops): Promise<void> {
   denops.dispatcher = {

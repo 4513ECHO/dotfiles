@@ -1,11 +1,8 @@
 import type { ActionData } from "https://pax.deno.dev/Shougo/ddu-kind-word/denops/@ddu-kinds/word.ts";
-import type {
-  GatherArguments,
-  OnInitArguments,
-} from "https://deno.land/x/ddu_vim@v2.8.0/base/source.ts";
-import type { Item } from "https://deno.land/x/ddu_vim@v2.8.0/types.ts";
-import { BaseSource } from "https://deno.land/x/ddu_vim@v2.8.0/types.ts";
-import { TextLineStream } from "https://deno.land/std@0.183.0/streams/text_line_stream.ts";
+import type { OnInitArguments } from "https://deno.land/x/ddu_vim@v2.8.4/base/source.ts";
+import type { Item } from "https://deno.land/x/ddu_vim@v2.8.4/types.ts";
+import { BaseSource } from "https://deno.land/x/ddu_vim@v2.8.4/types.ts";
+import { TextLineStream } from "https://deno.land/std@0.187.0/streams/text_line_stream.ts";
 import { ChunkedStream } from "https://deno.land/x/chunked_stream@0.1.2/mod.ts";
 
 type Params = Record<never, never>;
@@ -42,9 +39,7 @@ export class Source extends BaseSource<Params, ActionData> {
       .pipeThrough(new ChunkedStream({ chunkSize: 100 }));
   }
 
-  override gather(
-    _args: GatherArguments<Params>,
-  ): ReadableStream<Item<ActionData>[]> {
+  override gather(_args: unknown): ReadableStream<Item<ActionData>[]> {
     return this.#stream;
   }
 
