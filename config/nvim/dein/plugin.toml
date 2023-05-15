@@ -253,38 +253,36 @@ xnoremap A  <Plug>(niceblock-A)
 
 [[plugins]]
 repo = 'kana/vim-submode'
-on_map = { nx = [
-  '<C-w>+', '<C-w>-', '<C-w>>', '<C-w><',
-  'zl', 'zh', 'zL', 'zH', 'zj', 'zk',
-] }
+on_map = { n = '<Plug>' }
 hook_add = '''
 let g:submode_always_show_submode = v:true
 let g:submode_keep_leaving_key = v:true
+nnoremap <C-w>> <Plug>(submode-dummy)
+nnoremap <C-w>< <Plug>(submode-dummy)
+nnoremap <C-w>+ <Plug>(submode-dummy)
+nnoremap <C-w>- <Plug>(submode-dummy)
+nnoremap zl <Plug>(submode-dummy)
+nnoremap zh <Plug>(submode-dummy)
+nnoremap zL <Plug>(submode-dummy)
+nnoremap zH <Plug>(submode-dummy)
+nnoremap zj <Plug>(submode-dummy)
+nnoremap zk <Plug>(submode-dummy)
 '''
 hook_source = '''
 " resize window
-call submode#enter_with('winsize', 'n', '', '<C-w>>', '<C-w>>')
-call submode#enter_with('winsize', 'n', '', '<C-w><', '<C-w><')
-call submode#enter_with('winsize', 'n', '', '<C-w>+', '<C-w>+')
-call submode#enter_with('winsize', 'n', '', '<C-w>-', '<C-w>-')
-call submode#map('winsize', 'n', '', '>', '<C-w>>')
-call submode#map('winsize', 'n', '', '<', '<C-w><')
-call submode#map('winsize', 'n', '', '+', '<C-w>+')
-call submode#map('winsize', 'n', '', '-', '<C-w>-')
-
-" scroll but cursor doesn't move
-call submode#enter_with('nomove', 'nx', '', 'zl', 'zl')
-call submode#enter_with('nomove', 'nx', '', 'zh', 'zh')
-call submode#enter_with('nomove', 'nx', '', 'zL', 'zL')
-call submode#enter_with('nomove', 'nx', '', 'zH', 'zH')
-call submode#enter_with('nomove', 'nx', '', 'zj', '<C-e>')
-call submode#enter_with('nomove', 'nx', '', 'zk', '<C-y>')
-call submode#map('nomove', 'nx', '', 'l', 'zl')
-call submode#map('nomove', 'nx', '', 'h', 'zh')
-call submode#map('nomove', 'nx', '', 'L', 'zL')
-call submode#map('nomove', 'nx', '', 'H', 'zH')
-call submode#map('nomove', 'nx', '', 'j', '<C-e>')
-call submode#map('nomove', 'nx', '', 'k', '<C-y>')
+for s:k in ['>', '<', '+', '-']
+  call submode#enter_with('resizewin', 'n', '', $'<C-w>{s:k}', $'<C-w>{s:k}')
+  call submode#map('resizewin', 'n', '', s:k, $'<C-w>{s:k}')
+endfor
+" scroll without cursor moving
+for s:k in ['l', 'h', 'L', 'H']
+  call submode#enter_with('stickycursor', 'n', '', $'z{s:k}', $'z{s:k}')
+  call submode#map('stickycursor', 'n', '', s:k, $'z{s:k}')
+endfor
+for [s:k1, s:k2] in [['j', '<C-e>'], ['k', '<C-y>']]
+  call submode#enter_with('stickycursor', 'n', '', $'z{s:k1}', s:k2)
+  call submode#map('stickycursor', 'n', '', s:k1, s:k2)
+endfor
 '''
 
 [[plugins]]
