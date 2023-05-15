@@ -2,7 +2,7 @@
 name = "{{_input_:name}}"
 version = "0.0.0"
 description = ""
-authors = ["Hibiki(4513ECHO) <4513echo@gmail.com>"]
+authors = ["Hibiki(4513ECHO) <mail@4513echo.dev>"]
 license = "MIT"
 readme = "README.md"
 repository = "{{_input_:url}}"

@@ -1,6 +1,6 @@
 *dotfiles.txt*				My vim configuration files references
 
-Author: Hibiki <4513echo@gmail.com>
+Author: Hibiki <mail@4513echo.dev>
 License: MIT License
 URL: https://github.com/4513ECHO/dotfiles
 Last change: 2023 Apr 18

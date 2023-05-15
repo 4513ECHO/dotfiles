@@ -378,7 +378,7 @@ let g:sonictemplate_vim_vars = #{
       \   author: 'Hibiki',
       \ },
       \ help: #{
-      \   author: 'Hibiki <4513echo@gmail.com>'
+      \   author: 'Hibiki <mail@4513echo.dev>'
       \ },
       \ }
 let g:sonictemplate_postfix_key = ''

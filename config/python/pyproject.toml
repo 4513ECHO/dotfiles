@@ -2,7 +2,7 @@
 name = "dotfiles"
 version = "0.0.0"
 description = ""
-authors = ["4513ECHO <4513echo@gmail.com>"]
+authors = ["4513ECHO <mail@4513echo.dev>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
