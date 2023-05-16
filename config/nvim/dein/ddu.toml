@@ -112,6 +112,9 @@ repo = '4513echo/ddu-source-emoji'
 repo = '4513echo/ddu-source-ghq'
 
 [[plugins]]
+repo = '4513echo/ddu-source-pypi_classifiers'
+
+[[plugins]]
 repo = '4513echo/ddu-source-source'
 
 [[plugins]]
