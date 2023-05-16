@@ -48,7 +48,7 @@ repo = 'Shougo/ddc-source-zsh'
 [[plugins]]
 repo = 'Shougo/neco-vim'
 lazy = true
-on_ft = 'vim'
+on_ft = ['toml', 'vim']
 
 [[plugins]]
 repo = 'delphinus/ddc-tmux'

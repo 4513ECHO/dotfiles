@@ -178,4 +178,6 @@ if bufname() =~# '^/tmp/\d\+\.md$'
   inoremap <silent><expr><buffer> <C-x><C-g> <SID>ddc_complete('github_issue', 'github_pull_request')
 endif
 
-call ddc#enable()
+call ddc#enable(#{
+      \ context_filetype: has('nvim') ? 'treesitter': 'context_filetype',
+      \ })
