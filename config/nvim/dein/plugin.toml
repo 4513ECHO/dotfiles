@@ -191,58 +191,6 @@ messages
 '''
 
 [[plugins]]
-repo = 'junegunn/fzf'
-on_func = ['fzf#']
-merged = false
-on_cmd = ['FZF']
-
-[[plugins]]
-repo = 'junegunn/fzf.vim'
-depends = ['fzf']
-on_cmd = [
-  'FzfFiles', 'FzfGFiles', 'FzfBuffers', 'FzfColors', 'FzfAg', 'FzfRg',
-  'FzfLines', 'FzfBLines', 'FzfTags', 'FzfBTags', 'FzfMarks', 'FzfWindows',
-  'FzfLocate', 'FzfHistory', 'FzfSnippets', 'FzfCommits', 'FzfBCommits',
-  'FzfCommands', 'FzfMaps', 'FzfHelptags', 'FzfFiletypes',
-  'FzfGhq', 'FzfDein', 'FzFActions', 'FzfMru',
-]
-on_func = ['fzf#']
-hook_add = '''
-let g:fzf_command_prefix = 'Fzf'
-let g:launcher_config.fzf = {
-      \ 'char': 'f',
-      \ 'run': 'FzFActions',
-      \ }
-'''
-hook_source = '''
-command! -bar FzfColors call fzf#run(fzf#wrap({
-      \ 'source': keys(user#colorscheme#get()),
-      \ 'sink': { arg -> user#colorscheme#command(arg) },
-      \ }))
-command! -bar FzfReadme call fzf#run(fzf#wrap({
-      \ 'source': keys(readme_viewer#get()),
-      \ 'sink': { arg -> readme_viewer#open(arg, '') },
-      \ }))
-command! -bar FzfGhq call fzf#run(fzf#wrap({
-      \ 'source': 'ghq list --full-path',
-      \ 'sink': 'edit',
-      \ }))
-command! -bar FzfDein call fzf#run(fzf#wrap({
-      \ 'source': keys(dein#get()),
-      \ 'sink': { arg -> execute('edit ' .. dein#get(arg).path) },
-      \ }))
-command! -bar FzFActions call fzf#run(fzf#wrap({
-      \ 'source': map(split(execute('command Fzf'), "\n")[1:],
-      \   { _, val -> matchstr(val, '\<Fzf\a\+\>') }),
-      \ 'sink': { arg -> execute(arg) },
-      \ }))
-command! -bar FzfMru call fzf#run(fzf#wrap({
-      \ 'source': mr#mru#list(),
-      \ 'sink': 'edit',
-      \ }))
-'''
-
-[[plugins]]
 repo = 'kana/vim-niceblock'
 on_map = { x = '<Plug>' }
 hook_add = '''
