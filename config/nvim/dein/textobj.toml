@@ -18,7 +18,7 @@ call operator#sandwich#set('add', 'char', 'skip_space', 1)
 [[plugins]]
 repo = 'yuki-yano/vim-textobj-generics'
 depends = ['vim-sandwich', 'vim-textobj-functioncall']
-on_source = 'vim-sandwich'
+on_source = ['vim-sandwich']
 on_map = { xo = '<Plug>' }
 hook_add = '''
 let g:textobj_generics_no_default_key_mappings = v:true

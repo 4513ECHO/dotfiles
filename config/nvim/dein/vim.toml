@@ -1,7 +1,7 @@
 [[plugins]]
 repo = 'machakann/vim-highlightedyank'
 lazy = true
-on_event = 'TextYankPost'
+on_event = ['TextYankPost']
 hook_add = '''
 let g:highlightedyank_highlight_duration = 100
 '''
@@ -9,7 +9,7 @@ let g:highlightedyank_highlight_duration = 100
 [[plugins]]
 repo = 'markonm/traces.vim'
 lazy = true
-on_event = 'CmdlineEnter'
+on_event = ['CmdlineEnter']
 hook_add = '''
 let g:traces_normal_preview = v:true
 '''
@@ -17,13 +17,13 @@ let g:traces_normal_preview = v:true
 [[plugins]]
 repo = 'mattn/vim-notification'
 lazy = true
-on_func = 'notification#'
+on_func = ['notification#']
 
 [[plugins]]
 repo = 'obcat/vim-hitspop'
 lazy = true
-on_event = 'CmdlineLeave'
-on_func = 'hitspop#main'
+on_event = ['CmdlineLeave']
+on_func = ['hitspop#main']
 hook_add = '''
 let g:hitspop_line = 'winbot'
 let g:hitspop_column = 'winleft'
@@ -42,7 +42,7 @@ let g:sclow_hide_full_length = v:true
 [[plugins]]
 repo = 'rbtnn/vim-coloredit'
 lazy = true
-on_cmd = 'ColorEdit'
+on_cmd = ['ColorEdit']
 
 [[plugins]]
 repo = 'vim-jp/syntax-vim-ex'

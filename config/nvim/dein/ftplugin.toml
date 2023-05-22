@@ -174,7 +174,7 @@ merge_ftdetect = true
 repo = 'cohama/vim-hier'
 lazy = true
 on_cmd = ['HierClean', 'HierStart', 'HierStop', 'HierUpdate']
-on_ft = 'qf'
+on_ft = ['qf']
 [plugins.ftplugin]
 qf = '''
 autocmd vimrc WinClosed <buffer>
@@ -216,7 +216,7 @@ merge_ftdetect = true
 [[plugins]]
 repo = 'thinca/vim-qfreplace'
 lazy = true
-on_cmd = 'Qfreplace'
+on_cmd = ['Qfreplace']
 [plugins.ftplugin]
 qf = '''
 nnoremap <buffer> r <Cmd>Qfreplace<CR>

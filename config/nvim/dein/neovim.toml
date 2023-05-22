@@ -1,7 +1,7 @@
 [[plugins]]
 repo = 'hrsh7th/nvim-pasta'
 lazy = true
-on_lua = 'pasta'
+on_lua = ['pasta']
 lua_add = '''
 vim.keymap.set({ "n", "x" }, "p", function() require("pasta.mappings").p() end)
 vim.keymap.set({ "n", "x" }, "P", function() require("pasta.mappings").P() end)
@@ -26,8 +26,8 @@ repo = 'ii14/emmylua-nvim'
 [[plugins]]
 repo = 'kevinhwang91/nvim-hlslens'
 lazy = true
-on_lua = 'hlslens'
-on_event = 'CmdlineEnter'
+on_lua = ['hlslens']
+on_event = ['CmdlineEnter']
 hook_add = '''
 autocmd vimrc User SearchxEnter,SearchxInputChanged,VimrcSearchPost lua require("hlslens").start()
 autocmd vimrc User SearchxCancel lua require("hlslens").stop()
@@ -39,7 +39,7 @@ require("hlslens").setup {}
 [[plugins]]
 repo = 'nvim-lua/plenary.nvim'
 lazy = true
-on_lua = 'plenary'
+on_lua = ['plenary']
 
 [[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
@@ -74,7 +74,7 @@ require("nvim-treesitter.configs").setup {
 [[plugins]]
 repo = 'nvim-zh/colorful-winsep.nvim'
 lazy = true
-on_event = 'WinNew'
+on_event = ['WinNew']
 lua_source = '''
 require("colorful-winsep").setup {
   highlight = {

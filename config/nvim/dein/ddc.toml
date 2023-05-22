@@ -2,7 +2,7 @@
 repo = 'Shougo/ddc.vim'
 depends = ['denops.vim', 'lexima.vim', 'pum.vim']
 lazy = true
-on_event = 'InsertEnter'
+on_event = ['InsertEnter']
 hook_add = '''
 nnoremap : <Cmd>call timer_start(10, { -> user#ddc#cmdline_pre(':') })<CR>:
 xnoremap : <Cmd>call timer_start(10, { -> user#ddc#cmdline_pre(':') })<CR>:
@@ -118,7 +118,7 @@ call pum#set_option(#{
 
 [[plugins]]
 repo = 'matsui54/denops-popup-preview.vim'
-depends = 'denops.vim'
+depends = ['denops.vim']
 hook_add = '''
 let g:popup_preview_config = #{
       \ maxWidth: 100,
@@ -128,7 +128,7 @@ autocmd vimrc TextChangedI * ++once ++nested call popup_preview#enable()
 
 [[plugins]]
 repo = 'matsui54/denops-signature_help'
-depends = 'denops.vim'
+depends = ['denops.vim']
 hook_add = '''
 let g:signature_help_config = #{
       \ maxWidth: 100,
