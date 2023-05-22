@@ -238,9 +238,9 @@ hook_source = '''
 function! s:ripgrep(args, bang) abort
   let root = a:bang ? ['.git'] : ['.']
   let cwd = ripgrep#path#traverse_root(getcwd(), root)
-  let cmd = ['rg', '--json', &smartcase ? '--smart-case' : '', a:args]
-  echomsg join(cmd)
-  call ripgrep#call(join(cmd), cwd[0], cwd[1])
+  let cmd = ['rg', '--json', &smartcase ? '--smart-case' : '', a:args]->join()
+  echomsg cmd
+  call ripgrep#call(cmd, cwd[0], cwd[1])
 endfunction
 command! -bar -bang -nargs=1 Rg call s:ripgrep(<q-args>, <bang>0)
 '''
@@ -255,13 +255,13 @@ denops_wait = false
 hook_add = '''
 let s:kensaku_state = #{ cmdline: '', converted: v:false }
 function! s:convert_kensaku() abort
-  if !s:kensaku_state.converted
+  if s:kensaku_state.converted
+    call setcmdline(s:kensaku_state.cmdline)
+  else
     let s:kensaku_state.cmdline = getcmdline()
     let query = kensaku#query(s:kensaku_state.cmdline)
     " NOTE: Ignore regexp bug
     call setcmdline(query->substitute('\\+α', '+α', 'g'))
-  else
-    call setcmdline(s:kensaku_state.cmdline)
   endif
   let s:kensaku_state.converted = !s:kensaku_state.converted
 endfunction
@@ -390,9 +390,9 @@ on_source = ['lightline.vim']
 repo = 'Shougo/context_filetype.vim'
 on_func = ['context_filetype#get']
 hook_source = '''
-let g:context_filetype#filetypes = extend(
-      \ copy(context_filetype#default_filetypes()),
-      \ #{ markdown:
+let g:context_filetype#filetypes =
+      \ context_filetype#default_filetypes()->copy()->extend(#{
+      \ markdown:
       \   {'\(\h\w*\)': '\1', 'viml': 'vim'}
       \   ->map({ key, val -> #{
       \     start: '^\s*```\s*' .. key,
@@ -569,15 +569,6 @@ let g:quickrun_config = {
       \   command: 'gojq',
       \   exec: '%c %o %a < %s',
       \ },
-      \ 'yaml': #{
-      \   type: 'yaml/yq',
-      \ },
-      \ 'yaml/yq': #{
-      \   cmdopt: '--output-format=json',
-      \   command: 'yq',
-      \   exec: '%c eval %o < %s',
-      \   tempfile: '%{tempname()}.json',
-      \ },
       \ 'lua': #{
       \   type: 'lua/vim',
       \ },
@@ -585,19 +576,6 @@ let g:quickrun_config = {
       \   cmdopt: '--no-check --allow-all --unstable',
       \   command: 'deno',
       \   exec: 'NO_COLOR=1 %c run %o %s %a',
-      \   tempfile: '%{tempname()}.ts',
-      \ },
-      \ 'deno/terminal': #{
-      \   cmdopt: '--no-check --allow-all --unstable',
-      \   command: 'deno',
-      \   exec: '%c run %o %s %a',
-      \   runner: has('nvim') ? 'nvimterm' : 'terminal',
-      \   tempfile: '%{tempname()}.ts',
-      \ },
-      \ 'deno/test': #{
-      \   cmdopt: '--no-check --allow-all --unstable',
-      \   command: 'deno',
-      \   exec: 'NO_COLOR=1 %c test %o %s %a',
       \   tempfile: '%{tempname()}.ts',
       \ },
       \ }
@@ -658,7 +636,7 @@ nnoremap <silent> <Bslash>         <Plug>(caw:hatpos:toggle:operator)
 xnoremap <silent> <Bslash>         <Plug>(caw:hatpos:toggle:operator)
 '''
 # NOTE: Workaround of https://github.com/tyru/caw.vim/issues/183
-# based on https://github.com/tyru/caw.vim/pulls/185
+# based on https://github.com/tyru/caw.vim/pull/185
 lua_add = '''
 local M = {}
 ---@param lnum integer
@@ -666,12 +644,10 @@ local M = {}
 ---@return boolean
 function M.has_syntax(lnum, col)
   local bufnr = vim.api.nvim_get_current_buf()
-  local items = vim.inspect_pos(bufnr, lnum - 1, col - 1)
-  if #items.treesitter > 0 then
-    for _, capture in ipairs(items.treesitter) do
-      if capture.capture == "comment" then
-        return true
-      end
+  local captures = vim.treesitter.get_captures_at_pos(bufnr, lnum - 1, col - 1)
+  for _, capture in ipairs(captures) do
+    if capture.capture == "comment" then
+      return true
     end
   end
   return false
@@ -689,8 +665,8 @@ repo = 'tyru/open-browser.vim'
 on_func = ['openbrowser#open']
 on_map = { nx = '<Plug>(openbrowser' }
 hook_add = '''
-nnoremap gx <Plug>(openbrowser-smart-search)
-xnoremap gx <Plug>(openbrowser-smart-search)
+nnoremap gx <Plug>(openbrowser-open)
+xnoremap gx <Plug>(openbrowser-open)
 let g:openbrowser_allowed_schemes = ['http', 'https']
 let g:openbrowser_browser_commands = []
       \ + (empty($DISPLAY) ? [] : [#{

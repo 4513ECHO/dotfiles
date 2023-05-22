@@ -96,18 +96,16 @@ nnoremap <buffer><silent><expr> [Toggle]l
       \ expand('%:e') ==# 'jax' ? 'en': 'ja')
 
 " NOTE: pattern is from $VIMRUNTIME/syntax/help.vim
-let s:tag_pattern = join([
+let s:tag_pattern = [
       \ '\\\@<!|[#-)!+-~]\+|', '\*[#-)!+-~]\+\*\s', '\*[#-)!+-~]\+\*$',
       \ "'[a-z]\\{2,\\}'", "'t_..'",
       \ '<[-a-zA-Z0-9_]\+>', '<[SCM]-.>',
       \ 'CTRL-.', 'CTRL-SHIFT-.', 'CTRL-Break', 'CTRL-PageUp', 'CTRL-PageDown',
       \ 'CTRL-Insert', 'CTRL-Del', 'CTRL-{char}',
-      \ ], '\|')
+      \ ]->join('\|')
 function! s:move_link(direction, count) abort
   let flags = (a:direction ? '' : 'b') .. 'W'
-  for _ in range(a:count)
-    call search(s:tag_pattern, flags, 0, 500)
-  endfor
+  call range(a:count)->map({ -> search(s:tag_pattern, flags, 0, 500) })
 endfunction
 nnoremap <buffer> <C-n> <Cmd>call <SID>move_link(1, v:count1)<CR>
 nnoremap <buffer> <C-p> <Cmd>call <SID>move_link(0, v:count1)<CR>

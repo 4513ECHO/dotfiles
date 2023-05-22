@@ -66,7 +66,6 @@ require("nvim-treesitter.configs").setup {
   highlight = {
     enable = true,
     disable = { "bash", "yaml", "vimdoc" },
-    additionnal_vim_regex_highlighting = false,
   },
 }
 '''
@@ -86,7 +85,7 @@ require("colorful-winsep").setup {
   no_exec_files = { "ddu-ff", "ddu-ff-filter" },
   symbols = { "─", "│", "┌", "┐", "└", "┘" },
   create_event = function()
-    if vim.fn.winnr "$" == 3 then
+    if require("colorful-winsep.utils").calculate_number_windows() == 2 then
       require("colorful-winsep").NvimSeparatorDel()
     end
   end,
