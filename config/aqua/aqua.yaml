@@ -45,7 +45,7 @@ packages:
   - name: LuaLS/lua-language-server@3.6.19
   - name: LukeChannings/deno-arm64@v1.34.0
   - name: mattn/efm-langserver@v0.0.44
-  - name: microsoft/ripgrep-prebuilt@v13.0.0-7
+  - name: microsoft/ripgrep-prebuilt@v13.0.0-8
   - name: mvdan/sh@v3.6.0
   - name: nametake/golangci-lint-langserver@v0.0.8
   - name: nektos/act@v0.2.45
