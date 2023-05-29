@@ -1296,19 +1296,19 @@ tomlkit = ">=0.4"
 
 [[package]]
 name = "poetry-plugin-export"
-version = "1.3.1"
+version = "1.4.0"
 description = "Poetry plugin to export the dependencies to various formats"
 category = "dev"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "poetry_plugin_export-1.3.1-py3-none-any.whl", hash = "sha256:941d7ba02a59671d6327b16dc6deecc9262477abbc120d728a500cf125bc1e06"},
-    {file = "poetry_plugin_export-1.3.1.tar.gz", hash = "sha256:d949742757a8a5f0b5810495bffaf4ed8a767f2e2ffda9887cf72f896deabf84"},
+    {file = "poetry_plugin_export-1.4.0-py3-none-any.whl", hash = "sha256:5d9186d6f77cf2bf35fc96bd11fe650cc7656e515b17d99cb65018d50ba22589"},
+    {file = "poetry_plugin_export-1.4.0.tar.gz", hash = "sha256:f16974cd9f222d4ef640fa97a8d661b04d4fb339e51da93973f1bc9d578e183f"},
 ]
 
 [package.dependencies]
-poetry = ">=1.3.0,<2.0.0"
-poetry-core = ">=1.3.0,<2.0.0"
+poetry = ">=1.5.0,<2.0.0"
+poetry-core = ">=1.6.0,<2.0.0"
 
 [[package]]
 name = "ptyprocess"
