@@ -1,8 +1,8 @@
-import type { Item } from "https://deno.land/x/ddc_vim@v3.4.0/types.ts";
+import type { Item } from "https://deno.land/x/ddc_vim@v3.4.1/types.ts";
 import {
   BaseFilter,
   type FilterArguments,
-} from "https://deno.land/x/ddc_vim@v3.4.0/base/filter.ts";
+} from "https://deno.land/x/ddc_vim@v3.4.1/base/filter.ts";
 // based on https://github.com/kuuote/dotvim/blob/92773506/denops/%40ddc-filters/sorter_file.ts
 
 const kindRankDefinition: Record<string, number> = {
