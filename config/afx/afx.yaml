@@ -1,14 +1,4 @@
 ---
-http:
-  - name: high-moctane/nextword-data
-    description: Dataset for nextword.
-    url: https://github.com/high-moctane/nextword-data/archive/refs/tags/large.tar.gz
-    command:
-      env:
-        NEXTWORD_DATA_PATH: $XDG_CACHE_HOME/nextword/nextword-data-large
-      link:
-        - from: nextword-data-large
-          to: $XDG_CACHE_HOME/nextword/nextword-data-large
 github:
   - name: nurse/nkf
     description: Netword Kanji Filter
@@ -21,6 +11,7 @@ github:
           - make install prefix=~/.local
       link:
         - from: nkf
+
   - name: high-moctane/mocword-data
     description: Predict next words.
     owner: high-moctane
@@ -34,28 +25,47 @@ github:
       link:
         - from: mocword.sqlite
           to: $XDG_CACHE_HOME/mocword/mocword.sqlite
-  - name: koron/cmigemo
-    description: C/Migemo
-    owner: koron
-    repo: cmigemo
-    command:
-      build:
-        steps:
-          - ./configure
-          # NOTE: Require editing /etc/ld.so.conf.d/*.conf and execute `ldconfig`
-          - make gcc-install prefix=~/.local FILTER_CP932='nkf -s' FILTER_EUCJP='nkf -e'
-      link:
-        - from: build/cmigemo
-  - name: tats/w3m
-    description: "Debian's w3m: WWW browsable pager"
-    owner: tats
-    repo: w3m
-    command:
-      build:
-        steps:
-          # NOTE: Require `apt install libgc-dev`
-          - ./configure
-          - make
-          - make install prefix=~/.local
-      link:
-        - from: w3m
+
+  # - name: koron/cmigemo
+  #   description: C/Migemo
+  #   owner: koron
+  #   repo: cmigemo
+  #   command:
+  #     build:
+  #       steps:
+  #         - ./configure
+  #         # NOTE: Require editing /etc/ld.so.conf.d/*.conf and execute `ldconfig`
+  #         - make gcc-install prefix=~/.local FILTER_CP932='nkf -s' FILTER_EUCJP='nkf -e'
+  #     link:
+  #       - from: build/cmigemo
+
+  # - name: tats/w3m
+  #   description: "Debian's w3m: WWW browsable pager"
+  #   owner: tats
+  #   repo: w3m
+  #   command:
+  #     build:
+  #       steps:
+  #         # NOTE: Require `apt install libgc-dev`
+  #         - ./configure
+  #         - make
+  #         - make install prefix=~/.local
+  #     link:
+  #       - from: w3m
+
+  # - name: yusukebe/gh-markdown-preview
+  #   description: GitHub CLI extension to preview Markdown looks like GitHub.
+  #   owner: yusukebe
+  #   repo: gh-markdown-preview
+  #   as:
+  #     gh-extension:
+  #       name: gh-markdown-preview
+  #       tag: v1.4.0
+
+  - name: kawarimidoll/gh-q
+    description: A gh extension to clone GitHub repositories using fzf and ghq.
+    owner: kawarimidoll
+    repo: gh-q
+    as:
+      gh-extension:
+        name: gh-q
