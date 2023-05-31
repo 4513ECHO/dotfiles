@@ -14,6 +14,7 @@ call ddu#custom#alias('source', 'mrw', 'mr')
 let s:sourceOptions._ = #{
       \ ignoreCase: v:true,
       \ matchers: ['matcher_fzf'],
+      \ sorters: ['sorter_fzf'],
       \ }
 let s:sourceOptions.dein_update = #{ matchers: ['matcher_dein_update'] }
 let s:sourceOptions.file = #{ defaultAction: 'narrow' }

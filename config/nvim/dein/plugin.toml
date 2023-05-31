@@ -340,6 +340,14 @@ let g:signify_sign_change            = '┃'
 let g:signify_sign_delete            = '┃'
 let g:signify_sign_delete_first_line = '┃'
 let g:signify_line_highlight = v:false
+" from `:help signify-mappings`
+autocmd vimrc User SignifyHunk call s:show_current_hunk()
+function! s:show_current_hunk() abort
+  let h = sy#util#get_hunk_stats()
+  if !empty(h)
+    echo $'[Hunk {h.current_hunk}/{h.total_hunks}]'
+  endif
+endfunction
 '''
 
 [[plugins]]

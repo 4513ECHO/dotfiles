@@ -16,6 +16,8 @@ function! s:on_init() abort
 
   call skkeleton#register_kanatable('rom', {
         \ "z\<Space>": ["\u3000"],
+        "\ from https://github.com/yasunori-kirin0418/dotfiles/blob/c5863428/config/nvim/autoload/vimrc.vim#L122
+        \ 'z0': ["\u25CB"],
         \ })
 endfunction
 
