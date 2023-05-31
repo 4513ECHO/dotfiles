@@ -1,8 +1,7 @@
-let g:lsp_settings = json_decode(join(readfile(
-      \ g:config_home .. '/dein/settings/vim-lsp-settings.json'
-      \ )))
+let g:lsp_settings =  (g:config_home .. '/dein/settings/vim-lsp-settings.json')
+      \ ->readfile()->join()->json_decode()
 let g:lsp_settings['taplo-lsp'].workspace_config.evenBetterToml.schema.associations['/dein/.*\.toml']
-      \ = 'file://' .. g:config_home .. '/dein/settings/dein.toml.json'
+      \ = $'file://{g:config_home}/dein/settings/dein.toml.json'
 if has('nvim')
   let g:lsp_settings['sumneko-lua-language-server'].workspace_config.Lua.workspace.library
         \ = nvim_get_runtime_file('lua', v:true)

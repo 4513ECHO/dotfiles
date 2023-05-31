@@ -5,9 +5,6 @@ autocmd vimrc BufReadPost *
       \ |   execute 'normal! g`"'
       \ | endif
 
-" vim as a pager
-autocmd vimrc StdinReadPost * call user#pager()
-
 " auto make directories
 " from https://vim-jp.org/vim-users-jp/2011/02/20/Hack-202.html
 autocmd vimrc BufWritePre *

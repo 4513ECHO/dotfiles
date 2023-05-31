@@ -259,9 +259,7 @@ function! s:convert_kensaku() abort
     call setcmdline(s:kensaku_state.cmdline)
   else
     let s:kensaku_state.cmdline = getcmdline()
-    let query = kensaku#query(s:kensaku_state.cmdline)
-    " NOTE: Ignore regexp bug
-    call setcmdline(query->substitute('\\+α', '+α', 'g'))
+    call setcmdline(kensaku#query(s:kensaku_state.cmdline))
   endif
   let s:kensaku_state.converted = !s:kensaku_state.converted
 endfunction
@@ -662,7 +660,6 @@ let b:caw_oneline_comment = ';'
 
 [[plugins]]
 repo = 'tyru/open-browser.vim'
-on_func = ['openbrowser#open']
 on_map = { nx = '<Plug>(openbrowser' }
 hook_add = '''
 nnoremap gx <Plug>(openbrowser-open)

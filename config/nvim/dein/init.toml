@@ -75,7 +75,6 @@ if = '!has("gui_running")'
 
 [[plugins]]
 repo = 'vim-denops/denops.vim'
-rev = 'v5'
 hook_add = '''
 let g:denops_server_addr = '127.0.0.1:32123'
 '''

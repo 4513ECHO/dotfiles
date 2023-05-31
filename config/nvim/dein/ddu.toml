@@ -96,7 +96,7 @@ repo = 'yuki-yano/ddu-filter-fzf'
 
 [[plugins]]
 repo = '4513echo/ddu-kind-url'
-depends = 'open-browser.vim'
+depends = ['open-browser.vim']
 
 [[plugins]]
 repo = 'Shougo/ddu-kind-file'

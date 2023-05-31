@@ -79,10 +79,9 @@ function! lightline#component#vimrc#ddu() abort
   if [cur, avail] + winbufnr(winnr)->getbufline(1) ==# [1, 1, '']
     let [cur, avail] = [0, 0]
   endif
-  return printf('[ddu-%s] %d/%d/%d %s',
-        \ status.name,
-        \ cur, avail, max,
-        \ status.done ? '' : '[async]')->trim()
+  return ['[ddu-%s] %d/%d/%d %s',
+        \ status.name, cur, avail, max, status.done ? '' : '[async]',
+        \ ]->{ args -> call('printf', args) }()->trim()
 endfunction
 
 function! lightline#component#vimrc#protocol() abort
