@@ -674,6 +674,10 @@ let g:openbrowser_browser_commands = []
       \   name: 'w3m',
       \   args: 'tmux-w3m {uri} -t open-browser',
       \ }])
+      \ + (!has('mac') ? [] : [#{
+      \   name: 'open',
+      \   args: ['{browser}', '{uri}'],
+      \ }])
 '''
 
 [[plugins]]

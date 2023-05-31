@@ -11,7 +11,7 @@ set ambiwidth=single
 " ------------------
 " color/sequence
 set background=dark
-if !has('mac')
+if !has('mac') || $COLORTERM ==# 'truecolor'
   set termguicolors
 endif
 if !has('gui_running') && !has('nvim')
