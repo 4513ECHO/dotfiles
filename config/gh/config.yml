@@ -9,13 +9,12 @@ pager:
 # Aliases allow you to create nicknames for gh commands
 aliases:
   assets: >
-    !gh release view "$(gh release list | fzf | awk '{print $1}')"
+    !gh release list | fzf --preview 'gh release view {1} | head -100' | awk '{print $1}' | xargs gh release view
   co: pr checkout
   current: repo view --json nameWithOwner --jq '.nameWithOwner'
   defaultBranch: repo view --json defaultBranchRef --jq '.defaultBranchRef.name'
   description: repo view --json description --jq '.description'
-  fork: repo fork
-  forked: repo list --json nameWithOwner --json isFork --jq '.[] | select(.isFork) | .nameWithOwner'
+  forked: repo list --json nameWithOwner,isFork --jq '.[] | select(.isFork) | .nameWithOwner'
   starred: api --paginate /user/starred --jq 'map(.full_name)[]'
   stars: repo view --json stargazerCount --jq '.stargazerCount'
   upstream: repo view --json url --jq '.url'
