@@ -30,7 +30,7 @@ packages:
   - name: gohugoio/hugo@v0.112.6
   - name: golang/go@go1.20.4
   - name: golang/tools/gopls@v0.8.4
-  - name: golangci/golangci-lint@v1.52.2
+  - name: golangci/golangci-lint@v1.53.0
   - name: hadolint/hadolint@v2.12.0
   - name: hairyhenderson/gomplate
     version: v3.11.4
