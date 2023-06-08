@@ -80,7 +80,7 @@ packages:
   - name: JosefZIla/bash2048
     registry: local
     version: master
-  - name: nodejs/node@v20.2.0
+  - name: nodejs/node@v20.3.0
     registry: local
   # - name: rust-lang/rust@1.70.0
   #   registry: local
