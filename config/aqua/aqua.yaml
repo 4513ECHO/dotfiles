@@ -43,7 +43,7 @@ packages:
   - name: ko1nksm/getoptions@v3.3.0
   - name: koalaman/shellcheck@v0.9.0
   - name: LuaLS/lua-language-server@3.6.22
-  - name: LukeChannings/deno-arm64@v1.34.2
+  - name: LukeChannings/deno-arm64@v1.34.3
   - name: mattn/efm-langserver@v0.0.44
   - name: microsoft/ripgrep-prebuilt@v13.0.0-9
   - name: mvdan/sh@v3.6.0
