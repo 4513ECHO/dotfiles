@@ -1,12 +1,12 @@
-import type { Actions } from "https://deno.land/x/ddu_vim@v2.2.0/types.ts";
+import type { Actions } from "https://deno.land/x/ddu_vim@v3.2.7/types.ts";
 import {
   ActionFlags,
   BaseKind,
-} from "https://deno.land/x/ddu_vim@v2.2.0/types.ts";
+} from "https://deno.land/x/ddu_vim@v3.2.7/types.ts";
 
-export interface ActionData {
+export type ActionData = {
   placeholder: unknown;
-}
+};
 type Params = Record<never, never>;
 
 export class Kind extends BaseKind<Params> {
