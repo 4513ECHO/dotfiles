@@ -29,6 +29,11 @@ export class Config extends BaseConfig {
         buffer: {
           mark: "[buf]",
         },
+        cmdline: {
+          mark: "[cmd]",
+          isVolatile: true,
+          forceCompletionPattern: "[\\w@:~._-]/[\\w@:~._-]*",
+        },
         file: {
           mark: "[file]",
           minAutoCompleteLength: 30,
