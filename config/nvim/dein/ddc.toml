@@ -110,6 +110,7 @@ call pum#set_option(#{
       \ highlight_columns: #{
       \   kind: 'Type',
       \ },
+      \ max_columns: #{},
       \ max_width: 100,
       \ scrollbar_char: '█',
       \ use_complete: v:true,

@@ -13,7 +13,11 @@ endfunction
 
 let s:patch_buffer = {':': {}, '/': {}}
 let s:patch_buffer[':'].cmdlineSources = ['cmdline', 'around']
-let s:patch_buffer[':'].keywordPattern = '[0-9a-zA-Z_:#-]*'
+let s:patch_buffer[':'].sourceOptions = #{
+      \ cmdline: #{
+      \   keywordPattern: '[0-9a-zA-Z_:#-]*',
+      \   minAutoCompleteLength: 2,
+      \ }}
 let s:patch_buffer['/'].cmdlineSources = ['around', 'buffer']
 let s:patch_buffer['/'].sourceOptions = #{
       \ around: #{
