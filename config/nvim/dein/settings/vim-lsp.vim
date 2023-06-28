@@ -1,4 +1,4 @@
-let g:lsp_settings =  (g:config_home .. '/dein/settings/vim-lsp-settings.json')
+let g:lsp_settings = (g:config_home .. '/dein/settings/vim-lsp-settings.json')
       \ ->readfile()->join()->json_decode()
 let g:lsp_settings['taplo-lsp'].workspace_config.evenBetterToml.schema.associations['/dein/.*\.toml']
       \ = $'file://{g:config_home}/dein/settings/dein.toml.json'
@@ -71,7 +71,7 @@ function! s:jump_definition() abort
   endif
 endfunction
 
-autocmd vimrc BufWritePre *.json LspDocumentFormatSync --server=efm-langserver
+" autocmd vimrc BufWritePre *.json LspDocumentFormatSync --server=efm-langserver
 autocmd vimrc BufReadPost .env
       \ call lsp#disable_diagnostics_for_buffer(bufnr(expand('<afile>')))
 autocmd vimrc User lsp_buffer_enabled
