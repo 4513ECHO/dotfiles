@@ -1,3 +1,12 @@
+" hook_add {{{
+nnoremap : <Cmd>call timer_start(10, { -> user#ddc#cmdline_pre(':') })<CR>:
+xnoremap : <Cmd>call timer_start(10, { -> user#ddc#cmdline_pre(':') })<CR>:
+cnoremap <expr> <C-n> pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>' : '<Down>'
+cnoremap <expr> <C-p> pum#visible() ? '<Cmd>call pum#map#select_relative(-1)<CR>' : '<Up>'
+cnoremap <expr> <BS>  pum#visible() ? '<Cmd>call pum#map#cancel()<CR>' : '<BS>'
+" }}}
+
+" hook_source {{{
 " based on https://github.com/kuuote/dotvim/blob/0e8dd6a4/conf/ddc.toml#L170
 autocmd vimrc OptionSet buftype
       \ : if &buftype ==# 'acwrite' || bufname() ==# 'mininote'
@@ -33,3 +42,4 @@ call ddc#custom#load_config(expand('$DEIN_DIR/settings/ddc.ts'))
 call ddc#enable(#{
       \ context_filetype: has('nvim') ? 'treesitter': 'context_filetype',
       \ })
+" }}}

@@ -3,16 +3,7 @@ repo = 'Shougo/ddc.vim'
 depends = ['denops.vim', 'lexima.vim', 'pum.vim']
 lazy = true
 on_event = ['InsertEnter']
-hook_add = '''
-nnoremap : <Cmd>call timer_start(10, { -> user#ddc#cmdline_pre(':') })<CR>:
-xnoremap : <Cmd>call timer_start(10, { -> user#ddc#cmdline_pre(':') })<CR>:
-cnoremap <expr> <C-n> pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>' : '<Down>'
-cnoremap <expr> <C-p> pum#visible() ? '<Cmd>call pum#map#select_relative(-1)<CR>' : '<Up>'
-cnoremap <expr> <BS>  pum#visible() ? '<Cmd>call pum#map#cancel()<CR>' : '<BS>'
-'''
-hook_source = '''
-Runtime dein/settings/ddc.vim
-'''
+hooks_file = '$DEIN_DIR/settings/ddc.vim'
 
 # UI
 
