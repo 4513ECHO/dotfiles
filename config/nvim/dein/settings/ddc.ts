@@ -33,6 +33,7 @@ export class Config extends BaseConfig {
           mark: "[cmd]",
           isVolatile: true,
           forceCompletionPattern: "[\\w@:~._-]/[\\w@:~._-]*",
+          keywordPattern: "[\\w#:~_-]*",
         },
         file: {
           mark: "[file]",
