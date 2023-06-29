@@ -37,19 +37,17 @@ function +vi-git-hook-begin () {
 }
 
 function +vi-git-untracked () {
-  if command git status --porcelain 2> /dev/null \
-      | command grep '^??' > /dev/null 2>&1; then
+  if command git status --porcelain 2> /dev/null | command grep -q '^??'; then
     hook_com[staged]="%F{${prompt_colors[yellow]}}?${hook_com[staged]}"
   fi
 }
 
 function +vi-git-unpushed () {
-  local branch remote upstream pushed
+  local branch remote
   branch="$(command git symbolic-ref --short HEAD 2> /dev/null)"
   remote="$(command git config branch.$branch.remote 2> /dev/null)"
   if [[ -n "$remote" ]]; then
-    upstream="$remote/$branch"
-    if [[ -n "$(command git log $upstream..)" ]]; then
+    if [[ -n "$(command git log $remote/$branch.. --)" ]]; then
       hook_com[misc]+="%F{${prompt_colors[red]}}[up]"
     else
       hook_com[misc]+="%F{${prompt_colors[green]}}[up]"
