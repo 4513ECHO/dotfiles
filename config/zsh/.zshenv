@@ -27,7 +27,8 @@ export CARGO_NET_GIT_FETCH_WITH_CLI=true
 ## aqua ##
 export AQUA_GLOBAL_CONFIG="$XDG_CONFIG_HOME/aqua/aqua.yaml"
 export AQUA_ROOT_DIR="$XDG_DATA_HOME/aquaproj-aqua"
-export AQUA_POLICY_CONFIG="$XDG_CONFIG_HOME/aqua/aqua-policy.yaml"
+# export AQUA_POLICY_CONFIG="$XDG_CONFIG_HOME/aqua/aqua-policy.yaml"
+export AQUA_DISABLE_POLICY=true
 
 ## afx ##
 export AFX_COMMAND_PATH="$HOME/.local/bin"
