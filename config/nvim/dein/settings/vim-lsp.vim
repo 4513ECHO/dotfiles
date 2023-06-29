@@ -71,7 +71,7 @@ function! s:jump_definition() abort
   endif
 endfunction
 
-" autocmd vimrc BufWritePre *.json LspDocumentFormatSync --server=efm-langserver
+autocmd vimrc BufWritePre *.json LspDocumentFormatSync --server=efm-langserver
 autocmd vimrc BufReadPost .env
       \ call lsp#disable_diagnostics_for_buffer(bufnr(expand('<afile>')))
 autocmd vimrc User lsp_buffer_enabled

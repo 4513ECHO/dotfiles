@@ -8,7 +8,7 @@ tools:
   textlint-lint: &textlint-lint
     prefix: textlint
     lint-command: >
-      deno run --allow-all --no-lock --unstable --node-modules-dir
+      deno run --allow-all --no-lock
       npm:textlint --cache -f unix --no-color ${INPUT}
     lint-ignore-exit-code: true
     lint-formats:
@@ -22,6 +22,7 @@ tools:
       - .textlintrc.json
       - .textlintrc.yaml
       - .textlintrc.yml
+    require-marker: true
     commands:
       - title: "textlint fix"
         command: deno
@@ -29,8 +30,6 @@ tools:
           - run
           - --allow-all
           - --no-lock
-          - --unstable
-          - --node-modules-dir
           - npm:textlint
           - --cache
           - --fix
@@ -64,8 +63,9 @@ tools:
       ⚠: W
 
   fixjson-format: &fixjson-format
-    format-command: deno run -A --no-lock --unstable npm:fixjson
-    format-stdin: true
+    format-command: >
+      deno run --allow-all --no-lock --node-modules-dir=false
+      npm:fixjson ${INPUT}
 
   stylua-format: &stylua-format
     format-command: "stylua --search-parent-directories -"
@@ -91,11 +91,6 @@ tools:
     root-markers:
       - .github
 
-  vint-lint: &vint-lint
-    prefix: vint
-    lint-command: "vint --enable-neovim --style-problem --stdin-display-name ${INPUT} -"
-    lint-stdin: true
-
 languages:
   markdown:
     - <<: *textlint-lint
@@ -115,9 +110,6 @@ languages:
 
   json:
     - <<: *fixjson-format
-
-  vim:
-    - <<: *vint-lint
 
   yaml:
     - <<: *actionlint-lint
