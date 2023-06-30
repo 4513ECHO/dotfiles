@@ -46,25 +46,26 @@ function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal tagfunc=lsp#tagfunc
   setlocal signcolumn=number
-  if index(['vim', 'yaml', 'markdown', 'sh', 'json', 'toml'], &filetype) == -1
-    nnoremap <buffer> K <Plug>(lsp-hover)
-  endif
-  nnoremap <buffer> mK <Plug>(lsp-hover)
-  nnoremap <buffer> md <Plug>(lsp-document-diagnostics)
-  nnoremap <buffer> ma <Plug>(lsp-code-action)
-  nnoremap <buffer> mi <Plug>(lsp-implementation)
-  nnoremap <buffer> mr <Plug>(lsp-rename)
-  nnoremap <buffer> mf <Plug>(lsp-references)
-  nnoremap <buffer> gd <Cmd>call <SID>jump_definition()<CR>
+
   nnoremap <buffer> gq <Plug>(lsp-document-format)
   xnoremap <buffer> gq <Plug>(lsp-document-range-format)
+  if index(['lua', 'markdown', 'toml', 'vim'], &filetype) < 0
+    nnoremap <buffer> K <Plug>(lsp-hover)
+  endif
+  nnoremap <buffer> gK <Plug>(lsp-hover)
+  nnoremap <buffer> gd <Cmd>call <SID>jump_definition()<CR>
+  nnoremap <buffer> gi <Plug>(lsp-implementation)
+  nnoremap <buffer> gr <Plug>(lsp-rename)
+  nnoremap <buffer> ma <Plug>(lsp-code-action)
+  nnoremap <buffer> md <Plug>(lsp-document-diagnostics)
+  nnoremap <buffer> mf <Plug>(lsp-references)
   nnoremap <buffer> ]d <Plug>(lsp-next-diagnostic)
   nnoremap <buffer> [d <Plug>(lsp-previous-diagnostic)
 endfunction
 
 function! s:jump_definition() abort
   normal! m'
-  if index(['typescript', 'typescriptreact'], &filetype) != -1
+  if index(['typescript', 'typescriptreact'], &filetype) > -1
     LspDenoDefinition
   else
     LspDefinition
