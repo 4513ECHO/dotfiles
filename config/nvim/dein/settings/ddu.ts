@@ -1,8 +1,8 @@
 import {
   BaseConfig,
   type ConfigArguments,
-} from "https://deno.land/x/ddu_vim@v3.2.7/base/config.ts";
-import type { Params as DduUiFFParams } from "https://pax.deno.dev/Shougo/ddu-ui-ff/denops/@ddu-uis/ff.ts";
+} from "https://deno.land/x/ddu_vim@v3.3.0/base/config.ts";
+import type { Params as DduUiFFParams } from "https://deno.land/x/ddu_ui_ff@v1.0.2/ff.ts";
 import { collect } from "https://deno.land/x/denops_std@v5.0.1/batch/collect.ts";
 
 export class Config extends BaseConfig {
