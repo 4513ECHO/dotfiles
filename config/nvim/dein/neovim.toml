@@ -7,16 +7,9 @@ vim.keymap.set({ "n", "x" }, "p", function() require("pasta.mappings").p() end)
 vim.keymap.set({ "n", "x" }, "P", function() require("pasta.mappings").P() end)
 '''
 lua_source = '''
-require("pasta").setup {
-  converters = {
-    require("pasta.converters").indentation,
-  },
-  paste_mode = true,
-  next_key = vim.api.nvim_replace_termcodes("<C-p>", true, true, true),
-  prev_key = vim.api.nvim_replace_termcodes("<C-n>", true, true, true),
-}
+require("pasta").setup {}
 require("pasta").setup.filetype({ "markdown", "python", "yaml" }, {
-  converters = {},
+  fix_indent = false,
 })
 '''
 
