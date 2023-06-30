@@ -127,15 +127,15 @@ let s:rules.jq += [
 
 function! s:lexima_init() abort
   for [filetype, rules] in items(s:rules)
-    for val in rules
-      let base = filetype ==# '_' ? {} : #{ filetype: filetype }
-      call lexima#add_rule(extend(base, val))
+    let base = filetype ==# '_' ? {} : #{ filetype: filetype }
+    for rule in rules
+      call lexima#add_rule(extend(copy(base), rule))
     endfor
   endfor
 endfunction
 call s:lexima_init()
 
-" from https://github.com/yuki-yano/dotfiles/blob/9bfee6c807/.vimrc#L3335
+" based on https://github.com/yuki-yano/dotfiles/blob/9bfee6c807/.vimrc#L3335
 function! s:lexima_alter_command(original, altanative) abort
   for char in ['<CR>', '<Space>', '!']
     call lexima#add_rule(#{
@@ -160,12 +160,6 @@ LeximaAlterCommand dei\%[n]                     Dein
 LeximaAlterCommand deinr\%[eadme]               DeinReadme
 LeximaAlterCommand rg                           Rg
 LeximaAlterCommand helpfu\%[lversion]           HelpfulVersion
-LeximaAlterCommand tsp\%[laygroundtoggle]       TSPlaygroundToggle
-LeximaAlterCommand lspc\%[odeaction]            LspCodeAction
-LeximaAlterCommand lspd\%[ocumentformat]        LspDocumentFormat
-LeximaAlterCommand lsph\%[over]                 LspHover
-LeximaAlterCommand lsps\%[tatus]                LspStatus
-LeximaAlterCommand lspt\%[ypedefinition]        LspTypeDefinition
 LeximaAlterCommand copi\%[lot]                  Copilot
 
 " My Commands
