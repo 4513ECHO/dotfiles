@@ -40,6 +40,13 @@ let g:guise_edit_opener = 'vsplit'
 
 [[plugins]]
 repo = 'lambdalisue/mr.vim'
+hook_add = '''
+let s:predicates = [
+      \ { filename -> filename !~# '/.git/COMMIT_EDITMSG$' },
+      \ ]
+let g:mr#mru#predicates = s:predicates
+let g:mr#mrw#predicates = s:predicates
+'''
 
 [[plugins]]
 repo = 'mattn/vim-molder'
