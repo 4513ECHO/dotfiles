@@ -6,6 +6,7 @@ config/zsh/.zcompdump*
 config/zsh/.zinit/*
 config/zsh/completions/*
 config/zsh/.zcompcache/*
+config/zsh/.zsh_sessions/*
 
 # gh
 config/gh/hosts.yml
