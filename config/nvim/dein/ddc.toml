@@ -55,16 +55,13 @@ snoremap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : ''
 '''
 
 [[plugins]]
-repo = 'hrsh7th/vim-vsnip-integ'
-lazy = true
-depends = 'vim-vsnip'
-on_source = 'ddc.vim'
-
-[[plugins]]
 repo = 'matsui54/ddc-buffer'
 
 [[plugins]]
 repo = 'shun/ddc-source-vim-lsp'
+
+[[plugins]]
+repo = 'uga-rosa/ddc-source-vsnip'
 
 [[plugins]]
 repo = 'vim-skk/skkeleton'
