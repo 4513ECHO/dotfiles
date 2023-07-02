@@ -126,8 +126,13 @@ cnoremap <C-k> <Cmd>call setcmdline(
 noremap! <C-y> <C-r>"
 " }}}
 
-map! ¥ <Bslash>
-map  ¥ <Bslash>
+" Use backslack instead of ¥
+map!  ¥     <Bslash>
+map   ¥     <Bslash>
+tmap  ¥     <Bslash>
+map!  <C-¥> <C-\>
+map   <C-¥> <C-\>
+tmap  <C-¥> <C-\>
 
 " insert current file fullpath
 cnoremap <C-x><C-x> <C-r>=expand('%:p')<CR>
