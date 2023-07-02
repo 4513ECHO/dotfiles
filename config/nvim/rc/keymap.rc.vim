@@ -76,7 +76,6 @@ nnoremap gf gF
 cnoremap <expr> / getcmdtype() ==# '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() ==# '?' ? '\?' : '?'
 " open native cmdline
-nnoremap g: :
 nnoremap g/ /
 " from https://github.com/pesblog/dots-base/blob/a0762b8ffe/home/.vimrc#L140
 nnoremap <expr> gp $'`[{getregtype()->strpart(0, 1)}`]'
