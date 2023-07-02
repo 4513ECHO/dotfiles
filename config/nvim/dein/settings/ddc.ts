@@ -8,6 +8,15 @@ export class Config extends BaseConfig {
     const sources = ["file", "around", "vsnip", "tmux", "buffer"];
 
     args.contextBuilder.patchGlobal({
+      cmdlineSources: {
+        ":": ["cmdline", "around"],
+        "@": [
+          // NOTE: The `options` property can accept partial options but not defined in type.
+          // deno-lint-ignore no-explicit-any
+          { name: "around", options: { minAutoCompleteLength: 1 } as any },
+          "buffer",
+        ],
+      },
       sources,
       sourceOptions: {
         _: {
