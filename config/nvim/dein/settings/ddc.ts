@@ -1,7 +1,7 @@
 import {
   BaseConfig,
   type ConfigArguments,
-} from "https://deno.land/x/ddc_vim@v3.8.1/base/config.ts";
+} from "https://deno.land/x/ddc_vim@v3.8.2/base/config.ts";
 
 export class Config extends BaseConfig {
   override config(args: ConfigArguments): Promise<void> {
@@ -11,9 +11,7 @@ export class Config extends BaseConfig {
       cmdlineSources: {
         ":": ["cmdline", "around"],
         "@": [
-          // NOTE: The `options` property can accept partial options but not defined in type.
-          // deno-lint-ignore no-explicit-any
-          { name: "around", options: { minAutoCompleteLength: 1 } as any },
+          { name: "around", options: { minAutoCompleteLength: 1 } },
           "buffer",
         ],
       },

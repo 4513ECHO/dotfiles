@@ -3,8 +3,8 @@ import type { ActionData } from "https://deno.land/x/ddu_kind_file@v0.5.2/file.t
 import {
   BaseSource,
   type GatherArguments,
-} from "https://deno.land/x/ddu_vim@v3.3.2/base/source.ts";
-import type { Item } from "https://deno.land/x/ddu_vim@v3.3.2/types.ts";
+} from "https://deno.land/x/ddu_vim@v3.3.3/base/source.ts";
+import type { Item } from "https://deno.land/x/ddu_vim@v3.3.3/types.ts";
 
 type Params = {
   useLoclist: boolean;

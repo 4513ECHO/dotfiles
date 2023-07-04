@@ -1,7 +1,7 @@
 import {
   BaseConfig,
   type ConfigArguments,
-} from "https://deno.land/x/ddu_vim@v3.3.2/base/config.ts";
+} from "https://deno.land/x/ddu_vim@v3.3.3/base/config.ts";
 import type { Params as DduUiFFParams } from "https://deno.land/x/ddu_ui_ff@v1.0.2/ff.ts";
 import { collect } from "https://deno.land/x/denops_std@v5.0.1/batch/collect.ts";
 
@@ -30,17 +30,17 @@ export class Config extends BaseConfig {
         },
       },
       kindOptions: {
-        "custom-list": { defaultAction: "callback" },
-        "ui-select": { defaultAction: "execute" },
         action: { defaultAction: "do" },
         colorscheme: { defaultAction: "set" },
         command_history: { defaultAction: "edit" },
+        "custom-list": { defaultAction: "callback" },
         dein_update: { defaultAction: "viewDiff" },
         file: { defaultAction: "open" },
         help: { defaultAction: "open" },
         highlight: { defaultAction: "edit" },
         readme_viewer: { defaultAction: "open" },
         source: { defaultAction: "execute" },
+        "ui-select": { defaultAction: "execute" },
         url: { defaultAction: "open" },
         word: { defaultAction: "append" },
       },
@@ -98,7 +98,6 @@ export class Config extends BaseConfig {
     args.contextBuilder.patchLocal("rg_live", {
       sources: [{
         name: "rg",
-        // @ts-expect-error: This can accept partial options but not defined in type.
         options: {
           matchers: [],
           volatile: true,
