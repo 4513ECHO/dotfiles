@@ -6,10 +6,10 @@ on_func = ['ddu#start']
 hook_add = '''
 let g:launcher_config.ddu = #{
       \ char: 'd',
-      \ run: { -> ddu#start(#{ sources: [#{ name: 'source' }] }) },
+      \ run: { -> s:ddu_start(#{ sources: [#{ name: 'source' }] }) },
       \ }
 nnoremap <Leader>d <Cmd>Ddu -resume<CR>
-inoremap <C-x><C-e> <Cmd>call ddu#start(#{
+inoremap <C-x><C-e> <Cmd>call s:ddu_start(#{
       \ sources: [
       \   #{ name: 'emoji', options: #{ defaultAction: 'feedkeys' } },
       \ ],
@@ -17,6 +17,15 @@ inoremap <C-x><C-e> <Cmd>call ddu#start(#{
       \   ff: #{ replaceCol: col('.') },
       \ },
       \ })<CR>
+function s:ddu_start(options = {}) abort
+  if g:->get('loaded_ddu_config')
+    call ddu#start(a:options)
+  else
+    call dein#source('ddu.vim')
+    let s:options = a:options
+    autocmd vimrc User DduConfigLoaded ++once call ddu#start(s:options)
+  endif
+endfunction
 '''
 hook_source = '''
 Runtime dein/settings/ddu.vim

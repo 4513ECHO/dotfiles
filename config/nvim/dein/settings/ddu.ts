@@ -2,8 +2,60 @@ import {
   BaseConfig,
   type ConfigArguments,
 } from "https://deno.land/x/ddu_vim@v3.3.3/base/config.ts";
+import { ActionFlags } from "https://deno.land/x/ddu_vim@v3.3.3/types.ts";
 import type { Params as DduUiFFParams } from "https://deno.land/x/ddu_ui_ff@v1.0.2/ff.ts";
+import type { Denops } from "https://deno.land/x/denops_std@v5.0.1/mod.ts";
 import { collect } from "https://deno.land/x/denops_std@v5.0.1/batch/collect.ts";
+import * as autocmd from "https://deno.land/x/denops_std@v5.0.1/autocmd/mod.ts";
+import * as lambda from "https://deno.land/x/denops_std@v5.0.1/lambda/mod.ts";
+import * as opt from "https://deno.land/x/denops_std@v5.0.1/option/mod.ts";
+
+// based on https://github.com/kuuote/dotvim/blob/4ed6461/conf/plug/ddu.ts#L13
+type Size = [x: number, y: number, width: number, height: number];
+async function calculateUiSize(denops: Denops): Promise<Size> {
+  const [columns, lines] = await collect(denops, (denops) => [
+    opt.columns.get(denops),
+    opt.lines.get(denops),
+  ]);
+  return [
+    Math.floor(columns / 6),
+    Math.floor(lines / 6),
+    Math.floor(columns / 3) * 2,
+    Math.floor(lines / 3) * 2,
+  ];
+}
+
+async function setUiSize(args: ConfigArguments): Promise<void> {
+  const [winCol, winRow, winWidth, winHeight] = await calculateUiSize(
+    args.denops,
+  );
+  const options = {
+    uiParams: {
+      ff: {
+        winCol,
+        winRow,
+        winWidth,
+        winHeight,
+        previewWidth: winWidth / 2,
+        previewCol: 0,
+        previewRow: 0,
+        previewHeight: 0,
+      } satisfies Partial<DduUiFFParams>,
+    },
+  };
+  args.contextBuilder.patchGlobal(options);
+  await args.denops.call("ddu#ui#do_action", "updateOptions", options);
+}
+
+let timer = -1;
+function updateLightline(args: { denops: Denops }): Promise<ActionFlags> {
+  clearTimeout(timer);
+  timer = setTimeout(async () => {
+    await args.denops.call("lightline#update");
+    await args.denops.cmd("redrawstatus");
+  }, 200);
+  return Promise.resolve(ActionFlags.Persist);
+}
 
 export class Config extends BaseConfig {
   override async config(args: ConfigArguments): Promise<void> {
@@ -78,6 +130,7 @@ export class Config extends BaseConfig {
         },
       },
       ui: "ff",
+      uiOptions: { ff: { actions: { updateLightline } } },
       uiParams: {
         ff: {
           floatingBorder: "rounded",
@@ -88,6 +141,7 @@ export class Config extends BaseConfig {
           },
           previewFloating: true,
           previewFloatingBorder: "rounded",
+          previewSplit: "vertical",
           prompt: ">",
           split: hasNvim ? "floating" : "horizontal",
           statusline: false,
@@ -123,5 +177,30 @@ export class Config extends BaseConfig {
         } satisfies Partial<DduUiFFParams>,
       },
     });
+
+    const idSetUiSize = lambda.register(args.denops, () => setUiSize(args));
+    const idUpdateLightline = lambda.register(
+      args.denops,
+      () => updateLightline(args),
+    );
+    await autocmd.group(args.denops, "vimrc-ddu", (helper) => {
+      helper.remove("*");
+      helper.define(
+        "VimResized",
+        "*",
+        `call denops#notify('ddu', '${idSetUiSize}', [])`,
+      );
+      helper.define(
+        ["CursorMoved", "TextChangedI"],
+        "ddu-ff-*",
+        `call denops#notify('ddu', '${idUpdateLightline}', [])`,
+      );
+      helper.define("User", "DduConfigLoaded", ":");
+    });
+    await setUiSize(args);
+
+    // NOTE: Call hook on end of config
+    await args.denops.cmd("let g:loaded_ddu_config = v:true");
+    await autocmd.emit(args.denops, "User", "DduConfigLoaded");
   }
 }
