@@ -75,16 +75,17 @@ gitcommit = '''
 setlocal textwidth=72 colorcolumn=+1
 " based on https://zenn.dev/uochan/articles/2021-12-08-vim-conventional-commits
 function! s:select_type() abort
-  let title = printf('%s: ', trim(split(getline('.'), ';')[0]))
-  silent! normal! "_dip
-  silent! put! =title
-  silent! startinsert!
+  let title = getline('.')->split(';')[0]->trim()->printf('%s: ')
+  normal! "_dip
+  put! =title
 endfunction
-nnoremap <buffer> <CR><CR> <Cmd>call <SID>select_type()<CR>
+nnoremap <buffer> <CR><CR> <Cmd>call <SID>select_type()<CR>A
 '''
 
 gitrebase = '''
-nnoremap <buffer> <CR> <Cmd>Cycle<CR>
+nnoremap <buffer> <CR>  <Cmd>Cycle<CR>
+nnoremap <buffer> <C-j> <Cmd>move +1<CR>
+nnoremap <buffer> <C-k> <Cmd>move -2<CR>
 '''
 
 help = '''
