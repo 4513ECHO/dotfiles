@@ -27,7 +27,7 @@ repo = 'Shougo/ddu-commands.vim'
 depends = ['ddu.vim']
 lazy = true
 on_cmd = ['Ddu']
-hook_source = '''
+hook_post_source = '''
 command! -nargs=* -range -bar -complete=customlist,ddu#commands#complete
       \ Ddu call ddu#patched#commands(<q-args>)
 '''
