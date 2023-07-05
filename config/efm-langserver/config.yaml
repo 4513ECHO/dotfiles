@@ -64,8 +64,9 @@ tools:
 
   fixjson-format: &fixjson-format
     format-command: >
-      deno run --allow-all --no-lock --node-modules-dir=false
-      npm:fixjson ${INPUT}
+      deno run --allow-all --no-config --no-lock --node-modules-dir=false
+      npm:fixjson --stdin-filename ${INPUT}
+    format-stdin: true
 
   stylua-format: &stylua-format
     format-command: "stylua --search-parent-directories -"
