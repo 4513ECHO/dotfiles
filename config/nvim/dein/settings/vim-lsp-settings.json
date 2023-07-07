@@ -66,45 +66,10 @@
       "json",
       "lua",
       "markdown",
-      "sh"
+      "sh",
+      "yaml"
     ],
     "disabled": false
-  },
-  "json-languageserver": {
-    "workspace_config": {
-      "json": {
-        "format": {
-          "enable": true
-        },
-        "schemas": [
-          {
-            "fileMatch": [
-              "/.vim-lsp-settings/settings.json",
-              "/vim-lsp-settings/settings.json"
-            ],
-            "url": "https://mattn.github.io/vim-lsp-settings/local-schema.json"
-          },
-          {
-            "fileMatch": [
-              "deno.json",
-              "deno.jsonc"
-            ],
-            "url": "https://pax.deno.dev/denoland/deno@v1.34.3/cli/schemas/config-file.v1.json"
-          },
-          {
-            "fileMatch": [
-              ".github/renovate.json",
-              ".github/renovate.json5",
-              ".renovaterc",
-              ".renovaterc.json",
-              "renovate.json",
-              "renovate.json5"
-            ],
-            "url": "https://docs.renovatebot.com/renovate-schema.json"
-          }
-        ]
-      }
-    }
   },
   "pylsp-all": {
     "cmd": [
@@ -153,9 +118,7 @@
     "workspace_config": {
       "Lua": {
         "completion": {
-          "callSnippet": "Disable",
-          "enable": true,
-          "keywordSnippet": "Replace"
+          "showWord": "Disable"
         },
         "diagnostics": {
           "disable": [
@@ -167,12 +130,6 @@
             "vim"
           ]
         },
-        "hover": {
-          "enable": true,
-          "viewNumber": true,
-          "viewString": true,
-          "viewStringMax": 100
-        },
         "runtime": {
           "path": [
             "?.lua",
@@ -181,17 +138,13 @@
           ],
           "version": "LuaJIT"
         },
-        "signatureHelp": {
-          "enable": true
-        },
         "telemetry": {
           "enable": false
         },
         "workspace": {
           "checkThirdParty": false,
           "library": [],
-          "maxPreload": 1000,
-          "useGitignore": true
+          "maxPreload": 1000
         }
       }
     }
@@ -204,38 +157,37 @@
     ],
     "workspace_config": {
       "evenBetterToml": {
-        "activationStatus": true,
-        "formatter": {
-          "columnWidth": 80
-        },
         "schema": {
           "associations": {
             "/dein/.*\\.toml": "This will replaced in vim script"
-          },
-          "enabled": true,
-          "repositoryEnabled": true,
-          "repositoryUrl": "https://taplo.tamasfe.dev/schema_index.json"
-        },
-        "taploConfig": "taplo://taplo.toml",
-        "taploConfigEnabled": true
+          }
+        }
       }
     }
   },
   "vim-language-server": {
     "disabled": true
   },
+  "vscode-json-language-server": {
+    "cmd": [
+      "deno",
+      "run",
+      "--allow-all",
+      "--no-config",
+      "--no-lock",
+      "--node-modules-dir=false",
+      "npm:vscode-langservers-extracted@4.7.0/vscode-json-language-server",
+      "--stdio"
+    ]
+  },
   "yaml-language-server": {
     "workspace_config": {
       "yaml": {
         "completion": true,
-        "format": {
-          "enable": true
-        },
         "hover": true,
         "schemas": {
           "https://mattn.github.io/efm-langserver/schema.json": [
-            "/efm-langserver/config.yaml",
-            "/efm-langserver/config.yml"
+            "/efm-langserver/config.yaml"
           ],
           "https://pax.deno.dev/aquaproj/aqua@v2.9.0/json-schema/aqua-yaml.json": [
             "/aqua/aqua.yaml"

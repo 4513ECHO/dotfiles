@@ -2,10 +2,10 @@ let g:lsp_settings = (g:config_home .. '/dein/settings/vim-lsp-settings.json')
       \ ->readfile()->join()->json_decode()
 let g:lsp_settings['taplo-lsp'].workspace_config.evenBetterToml.schema.associations['/dein/.*\.toml']
       \ = $'file://{g:config_home}/dein/settings/dein.toml.json'
-if has('nvim')
-  let g:lsp_settings['sumneko-lua-language-server'].workspace_config.Lua.workspace.library
-        \ = nvim_get_runtime_file('lua', v:true)
-endif
+let g:lsp_settings['yaml-language-server'].cmd = [
+      \ g:cache_home .. '/ls/node_modules/yaml-language-server/bin/yaml-language-server',
+      \ '--stdio',
+      \ ]
 
 let g:lsp_async_completion = v:true
 let g:lsp_completion_documentation_delay = 50
@@ -33,10 +33,10 @@ let g:lsp_log_file = g:data_home .. '/vim-lsp.log'
 
 let g:lsp_settings_servers_dir = g:data_home .. '/vim-lsp-settings/servers'
 let g:lsp_settings_filetype_python = 'pylsp-all'
-let g:lsp_settings_filetype_typescript = ['typescript-language-server', 'deno']
-let g:lsp_settings_filetype_typescriptreact = ['typescript-language-server', 'deno']
+let g:lsp_settings_filetype_typescript = 'deno'
+let g:lsp_settings_filetype_typescriptreact = 'deno'
 let g:lsp_settings_filetype_markdown = 'efm-langserver'
-let g:lsp_settings_filetype_json = ['json-languageserver', 'efm-langserver']
+let g:lsp_settings_filetype_json = ['vscode-json-language-server', 'efm-langserver']
 let g:lsp_settings_filetype_sh = 'efm-langserver'
 let g:lsp_settings_filetype_yaml = ['yaml-language-server', 'efm-langserver']
 let g:lsp_settings_filetype_toml = 'taplo-lsp'
