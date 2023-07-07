@@ -39,7 +39,7 @@ async function setUiSize(args: ConfigArguments): Promise<void> {
         previewWidth: winWidth / 2,
         previewCol: 0,
         previewRow: 0,
-        previewHeight: 0,
+        previewHeight: winHeight,
       } satisfies Partial<DduUiFFParams>,
     },
   };
@@ -133,6 +133,9 @@ export class Config extends BaseConfig {
       uiOptions: { ff: { actions: { updateLightline } } },
       uiParams: {
         ff: {
+          autoAction: {
+            name: "preview",
+          },
           floatingBorder: "rounded",
           floatingTitle: "ddu-ff",
           highlights: {
@@ -196,12 +199,7 @@ export class Config extends BaseConfig {
         "ddu-ff-*",
         `call denops#notify('ddu', '${idUpdateLightline}', [])`,
       );
-      helper.define("User", "DduConfigLoaded", ":");
     });
     await setUiSize(args);
-
-    // NOTE: Call hook on end of config
-    await args.denops.cmd("let g:loaded_ddu_config = v:true");
-    await autocmd.emit(args.denops, "User", "DduConfigLoaded");
   }
 }
