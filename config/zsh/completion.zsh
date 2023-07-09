@@ -1,7 +1,5 @@
 # from https://github.com/yutkat/dotfiles/blob/0ea6fa3a54/.config/zsh/rc/completion.zsh
 
-[[ $- == *i* ]] || return
-
 #==============================================================#
 ##          Completion                                        ##
 #==============================================================#

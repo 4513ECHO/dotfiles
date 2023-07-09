@@ -1,5 +1,4 @@
 autoload -Uz vcs_info
-[[ $- == *i* ]] || return
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 function venv-prompt () {

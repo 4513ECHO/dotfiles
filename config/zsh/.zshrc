@@ -16,8 +16,6 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
   done
 }
 
-[[ $- == *l* ]] || return
-
 () {
   autoload -Uz compinit
   : ${ZSH_COMPDUMP:=$XDG_CACHE_HOME/zsh/compdump-$(hostname)-$ZSH_VERSION}
@@ -41,7 +39,7 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 if [[ -n "$TMUX" ]]; then
   hook::venv
-  hook::rename-title
+  hook-set-title
 fi
 [[ -f '~/.ssh/id_git_ed25519' ]] && enable-agent-forward '~/.ssh/id_git_ed25519'
 [[ -z "$MINIMUM_DOTFILES" ]] && agent-symlink

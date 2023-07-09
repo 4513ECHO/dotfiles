@@ -31,7 +31,7 @@ export AQUA_ROOT_DIR="$XDG_DATA_HOME/aquaproj-aqua"
 export AQUA_DISABLE_POLICY=true
 
 ## afx ##
-export AFX_COMMAND_PATH="$HOME/.local/bin"
+export AFX_COMMAND_PATH="$HOME/.local/share/afx/bin"
 
 ## python ##
 export PIPX_HOME="$XDG_DATA_HOME/pipx"
@@ -60,7 +60,9 @@ path=(
   $DENO_INSTALL/bin(N-/)
   $HOME/.local/bin(N-/)
   $AQUA_ROOT_DIR/bin(N-/)
-  $HOME/bin(N-/)
+  $AFX_COMMAND_PATH(N-/)
+  /opt/homebrew/bin(N-/)
+  /opt/homebrew/sbin(N-/)
   $path[@]
 )
 path=(${(R)path%/})

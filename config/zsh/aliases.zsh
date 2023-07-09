@@ -19,6 +19,7 @@ if command -v rg > /dev/null; then
   alias grep='rg'
 else
   alias grep='grep --color=auto'
+  alias rg='grep --color=auto'
 fi
 
 alias a='aqua'

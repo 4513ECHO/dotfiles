@@ -23,7 +23,7 @@ add-zsh-hook chpwd hook::venv
 
 # from https://github.com/yuki-yano/dotfiles/blob/7f10462d/.zshrc#L531
 # Automatically save the current git state to reflog
-hook::git_auto_save() {
+hook-git-auto-save () {
   if [[ -d .git ]] && [[ -f .git/auto-save ]] \
     && [[ $(find .git/auto-save -mmin -$((60)) | wc -l) -eq 0 ]] \
     && [[ ! -f .git/MERGE_HEAD ]] \
@@ -35,10 +35,10 @@ hook::git_auto_save() {
       && git add --all \
       && git commit --no-verify --message "Auto save: $(date -R)" >/dev/null \
       && git reset HEAD^ >/dev/null \
-      && echo "Git auto save!"
+      && echo 'Git auto save!'
   fi
 }
-add-zsh-hook preexec hook::git_auto_save
+add-zsh-hook preexec hook-git-auto-save
 
 zshaddhistory () {
   local line="${1%%$'\n'}"
@@ -96,10 +96,10 @@ zle -N widget::tmux::session
 bindkey '^X^T' widget::tmux::session
 bindkey '^Xt' widget::tmux::session
 
-hook::rename-title () {
+hook-set-title () {
   [[ $- == *m* ]] && printf '\033]2;%s\033\\' "$(pathshorten "$PWD")"
 }
-add-zsh-hook chpwd hook::rename-title
+add-zsh-hook chpwd hook-set-title
 
 widget::cd::git-root () {
   local root
@@ -125,15 +125,15 @@ bindkey '^Xe' edit-command-line
 autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
 
+bindkey '^U' backward-kill-line
+
 widget::cd::git () {
   local root result
   root="$(git rev-parse --show-toplevel 2> /dev/null)"
   [[ -z "$root" ]] && return
   result="$(cd "$root" && git ls-files 2> /dev/null \
     | sed '/^[^\/]*$/d;s:/[^/]*$::' \
-    | sort -u | fzf --preview \
-    "exa -T -a --git-ignore --group-directories-first \
-      --color=always $root/{} | head -200")"
+    | sort -u | fzf)"
   root= zle reset-prompt
   [[ -z "$result" ]] && return
   BUFFER="cd $root/$result"
@@ -154,33 +154,26 @@ widget::cd::ghq () {
 zle -N widget::cd::ghq
 bindkey '^Gh' widget::cd::ghq
 
-widget::key::accept () {
-  if [[ -z "$BUFFER" ]]; then
-    printf '\033[1A'
-  fi
+accept-line-extended () {
+  [[ -z "$BUFFER" ]] && printf '\033[1A'
   zle _expand_alias
   zle accept-line
 }
-zle -N widget::key::accept
-bindkey '^M' widget::key::accept
+zle -N accept-line-extended
+bindkey '^M' accept-line-extended
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS=(
-  widget::key::accept
+  accept-line-extended
   history-beginning-search-backword-end
   history-beginning-search-forward-end
 )
 
-widget::key::bslash () {
-  zle -U '\'
-}
-zle -N widget::key::bslash
-bindkey '¥' widget::key::bslash
+insert-bslach () { zle -U '\'; }
+zle -N insert-bslach
+bindkey '¥' insert-bslach
 
-widget::key::space () {
-  zle _expand_alias
-  zle self-insert
-}
-zle -N widget::key::space
-bindkey ' ' widget::key::space
+insert-space () { zle _expand_alias; zle self-insert; }
+zle -N insert-space
+bindkey ' ' insert-space
 
 zsh-clean () {
   rm -f $ZDOTDIR/*.zwc
