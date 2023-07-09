@@ -177,22 +177,16 @@ export class Config extends BaseConfig {
       },
     });
 
-    const idSetUiSize = lambda.register(args.denops, () => setUiSize(args));
-    const idUpdateLightline = lambda.register(
-      args.denops,
-      () => updateLightline(args),
-    );
+    const notify = (fn: () => unknown) =>
+      `call denops#notify('ddu', '${lambda.register(args.denops, fn)}', [])`;
+
     await autocmd.group(args.denops, "vimrc-ddu", (helper) => {
       helper.remove("*");
-      helper.define(
-        "VimResized",
-        "*",
-        `call denops#notify('ddu', '${idSetUiSize}', [])`,
-      );
+      helper.define("VimResized", "*", notify(() => setUiSize(args)));
       helper.define(
         ["CursorMoved", "TextChangedI"],
         "ddu-ff-*",
-        `call denops#notify('ddu', '${idUpdateLightline}', [])`,
+        notify(() => updateLightline(args)),
       );
     });
     await setUiSize(args);
