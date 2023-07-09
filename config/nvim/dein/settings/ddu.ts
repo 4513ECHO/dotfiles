@@ -53,6 +53,8 @@ export class Config extends BaseConfig {
         file: { defaultAction: "open" },
         help: { defaultAction: "open" },
         highlight: { defaultAction: "edit" },
+        lsp: { defaultAction: "open" },
+        lsp_codeAction: { defaultAction: "apply" },
         readme_viewer: { defaultAction: "open" },
         source: { defaultAction: "execute" },
         "ui-select": { defaultAction: "execute" },
@@ -154,6 +156,16 @@ export class Config extends BaseConfig {
       uiParams: {
         ff: {
           autoAction: { name: "itemAction" },
+          startAutoAction: true,
+        } satisfies Partial<UiFFParams>,
+      },
+    });
+
+    args.contextBuilder.patchLocal("codeAction", {
+      sources: [{ name: "lsp_codeAction" }],
+      uiParams: {
+        ff: {
+          autoAction: { name: "preview" },
           startAutoAction: true,
         } satisfies Partial<UiFFParams>,
       },

@@ -62,6 +62,7 @@ autocmd vimrc OptionSet buftype
 [[plugins]]
 repo = 'halkn/lightline-lsp'
 on_source = ['lightline.vim']
+if = '!has("nvim")'
 
 [[plugins]]
 repo = 'haya14busa/dein-command.vim'
@@ -140,7 +141,7 @@ let g:lightline = #{
       \   left: [
       \     ['mode', 'paste'],
       \     ['readonly', 'filename', 'modified'],
-      \     ['protocol', 'ddu', 'lsp_progress'],
+      \     ['protocol', 'ddu'] + (has('nvim') ? [] : ['lsp_progress']),
       \   ],
       \   right: [
       \     ['lsp_errors', 'lsp_warnings', 'lineinfo'],
@@ -165,8 +166,8 @@ let g:lightline = #{
       \   lineinfo: '%3l:%-2v',
       \ },
       \ component_expand: #{
-      \   lsp_errors: 'lightline_lsp#errors',
-      \   lsp_warnings: 'lightline_lsp#warnings',
+      \   lsp_errors: has('nvim') ? 'lightline#lsp#errors' :'lightline_lsp#errors',
+      \   lsp_warnings: has('nvim') ? 'lightline#lsp#warnings' :'lightline_lsp#warnings',
       \ },
       \ component_type: #{
       \   lsp_errors: 'error',
@@ -296,21 +297,6 @@ nnoremap g+    <Plug>(highlightedundo-gplus)
 '''
 
 [[plugins]]
-repo = 'mattn/vim-lsp-settings'
-depends = ['vim-lsp']
-on_event = ['BufRead']
-hook_add = '''
-Runtime dein/settings/vim-lsp.vim
-'''
-hook_source = '''
-if v:vim_did_enter
-  call timer_start(0, { -> lsp#enable() })
-else
-  autocmd vimrc VimEnter *  call timer_start(0, { -> lsp#enable() })
-endif
-'''
-
-[[plugins]]
 repo = 'mattn/vim-maketable'
 on_cmd = ['MakeTable', 'UnmakeTable']
 
@@ -357,6 +343,7 @@ endfunction
 [[plugins]]
 repo = 'micchy326/lightline-lsp-progress'
 on_source = ['lightline.vim']
+if = '!has("nvim")'
 
 [[plugins]]
 repo = 'ojroques/vim-oscyank'
@@ -387,10 +374,6 @@ let g:jplus#config = #{
       \   right_matchstr_pattern: '^\s*\\\s*\zs.*\|^\s*"\s*\zs.*\|\s*\zs.*',
       \ }}
 '''
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-on_source = ['vim-lsp-settings']
 
 [[plugins]]
 repo = 'shinchu/lightline-gruvbox.vim'
@@ -477,6 +460,16 @@ let g:Hexokinase_ftOptInPatterns = #{
       \ }
 let g:Hexokinase_ftDisabled = ['molder', 'ddu-ff', 'ddu-ff-filter']
 let g:Hexokinase_executable_path = exepath('hexokinase')
+'''
+
+[[plugins]]
+repo = 'spywhere/lightline-lsp'
+name = 'lightline-nvim-lsp'
+on_source = ['lightline.vim']
+if = 'has("nvim")'
+hook_add = '''
+let g:lightline#lsp#indicator_errors = '✗'
+let g:lightline#lsp#indicator_warnings = '‼'
 '''
 
 [[plugins]]

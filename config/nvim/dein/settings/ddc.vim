@@ -30,7 +30,7 @@ endfunction
 inoremap <expr> <C-x><C-l> <SID>ddc_complete('line')
 inoremap <expr> <C-x><C-n> <SID>ddc_complete('around')
 inoremap <expr> <C-x><C-f> <SID>ddc_complete('file')
-inoremap <expr> <C-x><C-d> <SID>ddc_complete('vim-lsp')
+inoremap <expr> <C-x><C-d> <SID>ddc_complete(has('nvim') ? 'nvim-lsp' : 'vim-lsp')
 inoremap <expr> <C-x><C-v> <SID>ddc_complete('cmdline')
 inoremap <expr> <C-x><C-u> <SID>ddc_complete()
 inoremap <expr> <C-x><C-o> <SID>ddc_complete('omni')
