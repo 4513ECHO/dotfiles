@@ -1,8 +1,8 @@
 import {
   BaseConfig,
   type ConfigArguments,
-} from "https://deno.land/x/ddu_vim@v3.3.3/base/config.ts";
-import { ActionFlags } from "https://deno.land/x/ddu_vim@v3.3.3/types.ts";
+} from "https://deno.land/x/ddu_vim@v3.4.1/base/config.ts";
+import { ActionFlags } from "https://deno.land/x/ddu_vim@v3.4.1/types.ts";
 import type { Params as DduUiFFParams } from "https://deno.land/x/ddu_ui_ff@v1.0.3/ff.ts";
 import type { Denops } from "https://deno.land/x/denops_std@v5.0.1/mod.ts";
 import { collect } from "https://deno.land/x/denops_std@v5.0.1/batch/collect.ts";
