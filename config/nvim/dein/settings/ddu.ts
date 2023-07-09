@@ -61,16 +61,9 @@ export class Config extends BaseConfig {
   override async config(args: ConfigArguments): Promise<void> {
     const hasNvim = args.denops.meta.host === "nvim";
 
-    args.setAlias("source", "color", "custom-list");
     args.setAlias("source", "file_git", "file_external");
     args.setAlias("source", "mrr", "mr");
     args.setAlias("source", "mrw", "mr");
-
-    // NOTE: for ddu-source-custom-list (as color source)
-    const [callbackId, texts] = await collect(args.denops, (denops) => [
-      denops.eval("denops#callback#register({_->user#colorscheme#command(_)})"),
-      denops.eval("keys(user#colorscheme#get())"),
-    ]);
 
     args.contextBuilder.patchGlobal({
       actionOptions: {
@@ -111,9 +104,11 @@ export class Config extends BaseConfig {
         source: {
           matchers: ["matcher_source", "matcher_fzf"],
         },
+        colorscheme: {
+          matchers: ["matcher_colorscheme", "matcher_fzf"],
+        },
       },
       sourceParams: {
-        color: { callbackId, texts },
         ghq: { display: "relative" },
         file_git: {
           cmd: ["git", "ls-files", "-co", "--exclude-standard"],
@@ -170,9 +165,9 @@ export class Config extends BaseConfig {
     });
 
     args.contextBuilder.patchLocal("UBA", {
-      sources: [{ name: "color" }],
+      sources: [{ name: "colorscheme" }],
       actionOptions: {
-        callback: { quit: false },
+        set: { quit: false },
       },
       uiParams: {
         ff: {
