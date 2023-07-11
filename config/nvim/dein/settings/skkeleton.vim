@@ -1,25 +1,29 @@
 " hook_add {{{
 noremap! <C-j> <Plug>(skkeleton-toggle)
 tnoremap <C-\><C-j> <Plug>(skkeleton-toggle)
-" }}}
 
-" hook_source {{{
-let s:skk_dir = expand('~/.local/share/skk')
-let s:globalJisyo = denops#request('vimrc', 'downloadJisyo', [s:skk_dir])
+autocmd vimrc User DenopsPluginPost:skkeleton call skkeleton#initialize()
+autocmd vimrc User skkeleton-initialize-pre call s:on_init()
+autocmd vimrc User skkeleton-enable-pre call s:on_enable()
+autocmd vimrc User skkeleton-disable-pre call s:on_disable()
+autocmd vimrc User skkeleton-enable-post,skkeleton-mode-changed call lightline#update()
 
 function! s:on_init() abort
+  let skk_dir = expand('~/.local/share/skk')
+  let globalJisyo = denops#request('vimrc', 'downloadJisyo', [skk_dir])
+
   call skkeleton#config(#{
         \ eggLikeNewline: v:true,
-        \ completionRankFile: s:skk_dir .. '/completionRankFile',
+        \ completionRankFile: skk_dir .. '/completionRankFile',
         \ globalDictionaries: [
-        \   s:skk_dir .. '/SKK-JISYO.4513echo',
-        \   [s:globalJisyo, 'euc-jp'],
+        \   skk_dir .. '/SKK-JISYO.4513echo',
+        \   [globalJisyo, 'euc-jp'],
         \ ],
         \ immediatelyCancel: v:false,
         \ keepState: v:true,
         \ registerConvertResult: v:true,
         \ showCandidatesCount: 2,
-        \ userJisyo: s:skk_dir .. '/SKK-JISYO.user',
+        \ userJisyo: skk_dir .. '/SKK-JISYO.user',
         \ })
 
   call skkeleton#register_keymap('input', ';', 'henkanPoint')
@@ -48,14 +52,11 @@ function! s:on_disable() abort
   endif
 endfunction
 
-autocmd vimrc User skkeleton-initialize-pre call s:on_init()
-autocmd vimrc User skkeleton-enable-pre call s:on_enable()
-autocmd vimrc User skkeleton-disable-pre call s:on_disable()
-autocmd vimrc User skkeleton-enable-post,skkeleton-mode-changed call lightline#update()
-
 " Show mode on virtual text
 " original code by @uga-rosa
 " based on https://github.com/kuuote/dotvim/blob/6a69151c/conf/plug/skkeleton.lua#L32
+autocmd vimrc User skkeleton-enable-post call s:show_mode_enable()
+autocmd vimrc User skkeleton-disable-post call s:show_mode_disable()
 
 let s:skkeleton_modes = #{
       \ hira: 'あ',
@@ -112,7 +113,4 @@ function! s:show_mode_disable() abort
   augroup END
   call s:reset()
 endfunction
-
-autocmd vimrc User skkeleton-enable-post call s:show_mode_enable()
-autocmd vimrc User skkeleton-disable-post call s:show_mode_disable()
 " }}}
