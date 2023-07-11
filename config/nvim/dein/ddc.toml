@@ -65,15 +65,10 @@ repo = 'uga-rosa/ddc-source-vsnip'
 
 [[plugins]]
 repo = 'vim-skk/skkeleton'
-depends = 'denops.vim'
+depends = ['denops.vim']
 lazy = true
-on_map = { ic = '<Plug>' }
-hook_add = '''
-noremap! <C-j> <Plug>(skkeleton-toggle)
-'''
-hook_source = '''
-Runtime dein/settings/skkeleton.vim
-'''
+on_map = { ict = '<Plug>' }
+hooks_file = '$DEIN_DIR/settings/skkeleton.vim'
 
 # filters
 

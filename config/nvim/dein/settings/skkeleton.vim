@@ -1,3 +1,9 @@
+" hook_add {{{
+noremap! <C-j> <Plug>(skkeleton-toggle)
+tnoremap <C-\><C-j> <Plug>(skkeleton-toggle)
+" }}}
+
+" hook_source {{{
 let s:skk_dir = expand('~/.local/share/skk')
 let s:globalJisyo = denops#request('vimrc', 'downloadJisyo', [s:skk_dir])
 
@@ -9,14 +15,17 @@ function! s:on_init() abort
         \   s:skk_dir .. '/SKK-JISYO.4513echo',
         \   [s:globalJisyo, 'euc-jp'],
         \ ],
+        \ immediatelyCancel: v:false,
         \ keepState: v:true,
         \ registerConvertResult: v:true,
         \ userJisyo: s:skk_dir .. '/SKK-JISYO.user',
         \ })
 
+  call skkeleton#register_keymap('input', ';', 'henkanPoint')
+
+  " NOTE: z0 is from https://github.com/yasunori-kirin0418/dotfiles/blob/c5863428/config/nvim/autoload/vimrc.vim#L122
   call skkeleton#register_kanatable('rom', {
         \ "z\<Space>": ["\u3000"],
-        "\ from https://github.com/yasunori-kirin0418/dotfiles/blob/c5863428/config/nvim/autoload/vimrc.vim#L122
         \ 'z0': ["\u25CB"],
         \ })
 endfunction
@@ -27,10 +36,12 @@ function! s:on_enable() abort
         \ sources: ['skkeleton'],
         \ specialBufferCompletion: v:true,
         \ })
+  call pum#set_buffer_option(#{ auto_select: v:false })
 endfunction
 function! s:on_disable() abort
   if exists('b:skkeleton_config')
     call ddc#custom#set_buffer(b:skkeleton_config)
+    call pum#set_buffer_option(#{ auto_select: v:true })
     unlet b:skkeleton_config
   endif
 endfunction
@@ -38,8 +49,7 @@ endfunction
 autocmd vimrc User skkeleton-initialize-pre call s:on_init()
 autocmd vimrc User skkeleton-enable-pre call s:on_enable()
 autocmd vimrc User skkeleton-disable-pre call s:on_disable()
-autocmd vimrc User skkeleton-enable-post call lightline#update()
-autocmd vimrc User skkeleton-mode-changed call lightline#update()
+autocmd vimrc User skkeleton-enable-post,skkeleton-mode-changed call lightline#update()
 
 " Show mode on virtual text
 " original code by @uga-rosa
@@ -103,3 +113,4 @@ endfunction
 
 autocmd vimrc User skkeleton-enable-post call s:show_mode_enable()
 autocmd vimrc User skkeleton-disable-post call s:show_mode_disable()
+" }}}
