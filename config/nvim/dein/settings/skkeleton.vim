@@ -18,6 +18,7 @@ function! s:on_init() abort
         \ immediatelyCancel: v:false,
         \ keepState: v:true,
         \ registerConvertResult: v:true,
+        \ showCandidatesCount: 2,
         \ userJisyo: s:skk_dir .. '/SKK-JISYO.user',
         \ })
 
@@ -25,8 +26,9 @@ function! s:on_init() abort
 
   " NOTE: z0 is from https://github.com/yasunori-kirin0418/dotfiles/blob/c5863428/config/nvim/autoload/vimrc.vim#L122
   call skkeleton#register_kanatable('rom', {
-        \ "z\<Space>": ["\u3000"],
         \ 'z0': ["\u25CB"],
+        \ '(': ["\uFF08"],
+        \ ')': ["\uFF09"],
         \ })
 endfunction
 
