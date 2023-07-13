@@ -14,14 +14,15 @@ config/gh/hosts.yml
 # btop
 config/btop/btop.log
 
-# fcitx
-config/fcitx/*
-!config/fcitx/config
-!config/fcitx/skk/
-!config/fcitx/conf/
-config/fcitx/conf/*
-!config/fcitx/conf/fcitx-skk.config
-!config/fcitx/conf/fcitx-xkb.config
+# fcitx5
+config/fcitx5/*
+!config/fcitx5/config
+!config/fcitx5/dictionary_list
+!config/fcitx5/profile
+!config/fcitx5/conf/
+config/fcitx5/conf/*
+!config/fcitx5/conf/skk.conf
+!config/fcitx5/conf/xcb.conf
 
 # systemd
 config/systemd/user/*

@@ -7,7 +7,8 @@ ciw	$XDG_CONFIG_HOME
 curlrc	$HOME/.curlrc
 dunst	$XDG_CONFIG_HOME
 efm-langserver	$XDG_CONFIG_HOME
-fcitx	$XDG_CONFIG_HOME
+fcitx5	$XDG_CONFIG_HOME
+fcitx5/dictionary_list	$XDG_DATA_HOME/fcitx5/skk/dictionary_list
 fontconfig	$XDG_CONFIG_HOME
 gh	$XDG_CONFIG_HOME
 git	$XDG_CONFIG_HOME

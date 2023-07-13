@@ -21,14 +21,14 @@ fi
 
 # define variables for GUI
 # IME settings
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-export XMODIFIERS=@im=fcitx
+export GTK_IM_MODULE=fcitx5
+export QT_IM_MODULE=fcitx5
+export XMODIFIERS=@im=fcitx5
 has chromium-browser && export BROWSER=chromium-browser-wrapper
 # has wezterm && export TERMINAL=wezterm
 [ -n "$LOADED_ZSHRC" ] && unset LOADED_ZSHRC
 
-fcitx-autostart &
+fcitx5 &
 # xremap "$XDG_CONFIG_HOME"/xremap/config.yml &
 xkbcomp -I"$XDG_CONFIG_HOME"/X11/xkb "$XDG_CONFIG_HOME"/X11/xkb/keymap/mine "$DISPLAY"
 
