@@ -125,6 +125,31 @@ cnoremap <C-k> <Cmd>call setcmdline(
 noremap! <C-y> <C-r>"
 " }}}
 
+function! s:term_insert(content) abort
+  if has('nvim')
+    call chansend(b:terminal_job_id, a:content)
+  else
+    call term_sendkeys(bufnr(), a:content->join("\n"))
+    call term_wait(bufnr())
+  endif
+endfunction
+
+function! s:put(regname) abort
+  if has('nvim')
+    if a:regname ==# '='
+      autocmd vimrc ModeChanged c:nt ++once call feedkeys('i', 'n')
+      autocmd vimrc ModeChanged nt:t ++once call s:term_insert(getreg('='))
+      return "\<C-\>\<C-n>\"="
+    endif
+    return $"\<C-\>\<C-n>\"{a:regname}pi"
+  endif
+  return a:regname ==# '=' ? "\<C-w>\"="
+        \ : s:term_insert(getreg(a:regname, 1, 1)) ?? ''
+endfunction
+
+tnoremap <expr> <C-\><C-y> <SID>put(v:register)
+tnoremap <expr> <C-\><C-r> <SID>put(getcharstr())
+
 " Use backslack instead of ¥
 map!  ¥     <Bslash>
 map   ¥     <Bslash>
