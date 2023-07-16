@@ -29,10 +29,10 @@ on_cmd = [
 ]
 hook_add = '''
 let g:tmux_navigator_no_mappings = v:true
-nnoremap <C-w>h <Cmd>TmuxNavigateLeft<CR>
-nnoremap <C-w>j <Cmd>TmuxNavigateDown<CR>
-nnoremap <C-w>k <Cmd>TmuxNavigateUp<CR>
-nnoremap <C-w>l <Cmd>TmuxNavigateRight<CR>
+nnoremap <A-h> <Cmd>TmuxNavigateLeft<CR>
+nnoremap <A-j> <Cmd>TmuxNavigateDown<CR>
+nnoremap <A-k> <Cmd>TmuxNavigateUp<CR>
+nnoremap <A-l> <Cmd>TmuxNavigateRight<CR>
 '''
 
 [[plugins]]
