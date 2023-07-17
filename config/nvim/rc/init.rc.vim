@@ -80,4 +80,5 @@ autocmd vimrc User VimrcSearchPost :
 if has('nvim')
   lua vim.loader.enable()
   lua require('vimrc.autocmd')
+  lua require('vimrc.neovide')
 endif
