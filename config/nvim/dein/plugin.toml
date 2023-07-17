@@ -309,7 +309,7 @@ on_cmd = ['MakeTable', 'UnmakeTable']
 
 [[plugins]]
 repo = 'mattn/vim-sonictemplate'
-on_map = { n = '<Plug>' }
+on_cmd = ['Template']
 hook_add = '''
 let g:sonictemplate_vim_template_dir = [
       \ g:config_home .. '/template',
@@ -322,9 +322,9 @@ let g:sonictemplate_vim_vars = #{
       \   author: 'Hibiki <mail@4513echo.dev>'
       \ },
       \ }
+let g:sonictemplate_key = ''
+let g:sonictemplate_intelligent_key = ''
 let g:sonictemplate_postfix_key = ''
-nnoremap <C-x>T <Plug>(sonictemplate)
-nnoremap <C-x><C-t> <Plug>(sonictemplate-intelligent)
 '''
 
 [[plugins]]
