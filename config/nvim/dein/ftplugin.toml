@@ -92,7 +92,7 @@ help = '''
 nnoremap <buffer> q <C-w>q
 nnoremap <buffer> <CR> <C-]>zv
 xnoremap <buffer> <CR> <C-]>zv
-nnoremap <buffer><silent><expr> [Toggle]l
+nnoremap <buffer><expr> [Toggle]l
       \ printf('<Cmd>help %s@%s<CR>', expand('<cword>'),
       \ expand('%:e') ==# 'jax' ? 'en': 'ja')
 

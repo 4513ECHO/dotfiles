@@ -10,8 +10,8 @@ autocmd vimrc OptionSet buftype
       \ | endif
 
 " key mappings
-inoremap <silent><expr> <C-n> pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>' : '<Down>'
-inoremap <silent><expr> <C-p> pum#visible() ? '<Cmd>call pum#map#select_relative(-1)<CR>' : '<Up>'
+inoremap <expr> <C-n> pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>' : '<Down>'
+inoremap <expr> <C-p> pum#visible() ? '<Cmd>call pum#map#select_relative(-1)<CR>' : '<Up>'
 cnoremap <expr> <C-n> pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>' : '<Down>'
 cnoremap <expr> <C-p> pum#visible() ? '<Cmd>call pum#map#select_relative(-1)<CR>' : '<Up>'
 cnoremap <expr> <BS>  pum#visible() ? '<Cmd>call pum#map#cancel()<CR>' : '<BS>'
@@ -26,18 +26,18 @@ cnoremap         <expr> <CR> pum#visible() ? '<Cmd>call pum#map#confirm()<CR>' :
 function! s:ddc_complete(...) abort
   return ddc#map#manual_complete(#{ sources: a:000 })
 endfunction
-inoremap <silent><expr> <C-x><C-l> <SID>ddc_complete('line')
-inoremap <silent><expr> <C-x><C-n> <SID>ddc_complete('around')
-inoremap <silent><expr> <C-x><C-f> <SID>ddc_complete('file')
-inoremap <silent><expr> <C-x><C-d> <SID>ddc_complete('vim-lsp')
-inoremap <silent><expr> <C-x><C-v> <SID>ddc_complete('cmdline')
-inoremap <silent><expr> <C-x><C-u> <SID>ddc_complete()
-inoremap <silent><expr> <C-x><C-o> <SID>ddc_complete('omni')
-inoremap <silent><expr> <C-x><C-s> <SID>ddc_complete('mocword')
-inoremap <silent><expr> <C-x><C-t> <SID>ddc_complete('tmux')
+inoremap <expr> <C-x><C-l> <SID>ddc_complete('line')
+inoremap <expr> <C-x><C-n> <SID>ddc_complete('around')
+inoremap <expr> <C-x><C-f> <SID>ddc_complete('file')
+inoremap <expr> <C-x><C-d> <SID>ddc_complete('vim-lsp')
+inoremap <expr> <C-x><C-v> <SID>ddc_complete('cmdline')
+inoremap <expr> <C-x><C-u> <SID>ddc_complete()
+inoremap <expr> <C-x><C-o> <SID>ddc_complete('omni')
+inoremap <expr> <C-x><C-s> <SID>ddc_complete('mocword')
+inoremap <expr> <C-x><C-t> <SID>ddc_complete('tmux')
 
 if bufname() =~# '^/tmp/\d\+\.md$'
-  inoremap <silent><expr><buffer> <C-x><C-g> <SID>ddc_complete('github_issue', 'github_pull_request')
+  inoremap <buffer><expr> <C-x><C-g> <SID>ddc_complete('github_issue', 'github_pull_request')
 endif
 
 call ddc#custom#load_config(expand('$DEIN_DIR/settings/ddc.ts'))

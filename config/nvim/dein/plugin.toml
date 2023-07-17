@@ -538,7 +538,7 @@ hook_add = '''
 nnoremap <Leader>rr <Plug>(quickrun)
 nnoremap <Leader>r <Plug>(quickrun-op)
 xnoremap <Leader>r <Plug>(quickrun)
-nnoremap <silent><expr> <C-c> quickrun#session#exists()
+nnoremap <expr> <C-c> quickrun#session#exists()
       \ ? '<Cmd>call quickrun#session#sweep()<CR>'
       \ : '<C-c>'
 let g:quickrun_config = {
@@ -690,8 +690,8 @@ repo = 'yuttie/comfortable-motion.vim'
 on_func = ['comfortable_motion#flick']
 hook_add = '''
 let g:comfortable_motion_no_default_key_mappings = v:true
-nnoremap <silent> <C-d> <Cmd>call comfortable_motion#flick(winheight(0) * 2)<CR>
-nnoremap <silent> <C-u> <Cmd>call comfortable_motion#flick(winheight(0) * -2)<CR>
-nnoremap <silent> <C-f> <Cmd>call comfortable_motion#flick(winheight(0) * 4)<CR>
-nnoremap <silent> <C-b> <Cmd>call comfortable_motion#flick(winheight(0) * -4)<CR>
+nnoremap <C-d> <Cmd>call comfortable_motion#flick(winheight(0) * 2)<CR>
+nnoremap <C-u> <Cmd>call comfortable_motion#flick(winheight(0) * -2)<CR>
+nnoremap <C-f> <Cmd>call comfortable_motion#flick(winheight(0) * 4)<CR>
+nnoremap <C-b> <Cmd>call comfortable_motion#flick(winheight(0) * -4)<CR>
 '''

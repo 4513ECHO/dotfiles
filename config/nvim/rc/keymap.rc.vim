@@ -54,11 +54,9 @@ inoremap <Left> <Nop>
 inoremap <Right> <Nop>
 
 " better aliases of <Home>/<End>
-nnoremap <silent><expr> H
-      \ getline('.')[:col('.') - 2] =~# '^\s*$' ? '0' : '^'
+nnoremap <expr> H getline('.')[:col('.') - 2] =~# '^\s*$' ? '0' : '^'
 nnoremap L <End>
-xnoremap <silent><expr> H
-      \ getline('.')[:col('.') - 2] =~# '^\s*$' ? '0' : '^'
+xnoremap <expr> H getline('.')[:col('.') - 2] =~# '^\s*$' ? '0' : '^'
 xnoremap L <End>
 
 inoremap <C-u> <C-g>u<C-u>

@@ -11,8 +11,8 @@ endif
 
 nnoremap <buffer> q <Nop>
 nnoremap <buffer> <CR> <CR>
-inoremap <silent><expr> <Leader>= repeat('=', &textwidth)
-inoremap <silent><expr> <Leader>- repeat('-', &textwidth)
+inoremap <expr> <C-g>= repeat('=', &textwidth)
+inoremap <expr> <C-g>- repeat('-', &textwidth)
 nnoremap <buffer> [Toggle]c <Cmd>call <SID>toggle_conceal()<CR>
 
 function! s:toggle_conceal() abort
