@@ -101,10 +101,10 @@ xnoremap > >gv
 onoremap <Space> t<Space>
 onoremap ) t)
 
-inoremap <C-g>z <C-o>zz
 inoremap <C-g><C-z> <C-o>zz
-inoremap <C-g>p <Cmd>setlocal paste! paste?<CR>
 inoremap <C-g><C-p> <Cmd>setlocal paste! paste?<CR>
+inoremap <C-g><C-y> <C-y>
+inoremap <C-g><C-d> <C-d>
 
 " emacs-like insert/cmdline mode mapping {{{
 function! s:is_at_end() abort
@@ -121,7 +121,7 @@ noremap! <C-f> <Right>
 noremap! <expr> <C-d> <SID>is_at_end() ? '<C-d>' : '<Del>'
 inoremap <expr> <C-k> <SID>is_at_end() ? '<C-o>gJ' : '<C-o>D'
 cnoremap <C-k> <Cmd>call setcmdline(
-      \ getcmdpos() ==# 1 ? '' : getcmdline()[:getcmdpos() - 2])<CR>
+      \ getcmdpos() > 1 ? getcmdline()[:getcmdpos() - 2] : '')<CR>
 noremap! <C-y> <C-r>"
 " }}}
 

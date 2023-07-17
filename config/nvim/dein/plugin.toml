@@ -56,10 +56,9 @@ on_cmd = ['Copilot']
 on_event = ['InsertEnter']
 hook_add = '''
 let g:copilot_no_maps = v:true
-inoremap <silent><expr> <C-g>g copilot#Accept()
 inoremap <silent><expr> <C-g><C-g> copilot#Accept()
-inoremap <C-g>] <Cmd>call copilot#Dismiss()<CR>
-inoremap <C-g><C-]> <Cmd>call copilot#Dismiss()<CR>
+inoremap <C-g><C-]> <Cmd>call copilot#Next()<CR>
+inoremap <C-g><C-[> <Cmd>call copilot#Previous()<CR>
 autocmd vimrc OptionSet buftype
       \ : if !empty(&buftype) && &buftype !=# 'acwrite' && bufname() !=# 'mininote'
       \ |   let b:copilot_enabled = v:false
