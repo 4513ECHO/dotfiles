@@ -165,6 +165,6 @@ LeximaAlterCommand copi\%[lot]                  Copilot
 " My Commands
 LeximaAlterCommand colo\%[rscheme]              ColorScheme
 LeximaAlterCommand ra\%[ndomcolorscheme]        RandomColorScheme
-LeximaAlterCommand todo\%[list]                 TodoList
 LeximaAlterCommand mi\%[ninote]                 MiniNote
 LeximaAlterCommand deinu\%[pdatemine]           DeinUpdateMine
+LeximaAlterCommand vt\%[erminal]                VTerminal

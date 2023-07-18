@@ -50,14 +50,8 @@ command! -nargs=? -bar -bang -complete=customlist,user#colorscheme#completion
 " from https://qiita.com/gorilla0513/items/11be5413405792337558
 command! -nargs=1 WWW call user#google(<q-args>)
 
-command! -bar HtmlFormat
-      \ : silent! keepjumps keeppattern substitute+\v\>(\<)@=+>\r+ge
-      \ | silent! keepjumps normal! gg=G
-
-command! -bar -bang TodoList vimgrep '\vTODO\ze%(\(.{-}\))?:' `git ls-files`
-
 command! -nargs=? -bar -complete=filetype MiniNote
-      \ : execute (<q-mods> ?? 'botright') 'new mininote'
+      \ : execute (<q-mods> ?? 'botright 10') 'new mininote'
       \ | setlocal bufhidden=wipe buftype=nofile filetype=<args>
 
 command! -bar DeinUpdateMine
@@ -68,6 +62,12 @@ command! -bar DeinUpdateMine
 command! -bar DiffOrig
       \ : vertical new | setlocal buftype=nofile | r ++edit # | 0d_
       \ | diffthis | wincmd p | diffthis
+
+if has('nvim')
+  command! -bar VTerminal <mods> vsplit +terminal
+else
+  command! -bar VTerminal <mods> vertical terminal
+endif
 
 if filereadable(expand('~/.vimrc_secret'))
   source ~/.vimrc_secret
