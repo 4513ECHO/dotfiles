@@ -19,10 +19,10 @@ M.autocmd "TermOpen" {
     vim.fn.timer_start(0, function()
       if vim.bo.buftype == "terminal" then
         vim.cmd.startinsert {}
-        vim.wo.number = false
-        vim.wo.relativenumber = false
-        vim.wo.signcolumn = "no"
-        vim.wo.cursorline = false
+        vim.opt_local.number = false
+        vim.opt_local.relativenumber = false
+        vim.opt_local.signcolumn = "no"
+        vim.opt_local.cursorline = false
       end
     end)
   end,

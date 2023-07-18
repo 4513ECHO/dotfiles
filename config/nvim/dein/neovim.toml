@@ -1,4 +1,15 @@
 [[plugins]]
+repo = 'chomosuke/term-edit.nvim'
+lazy = true
+on_event = ['TermOpen']
+lua_source = '''
+require("term-edit").setup {
+  prompt_end = "❯ ",
+  mapping = { n = { S = false } },
+}
+'''
+
+[[plugins]]
 repo = 'hrsh7th/nvim-pasta'
 lazy = true
 on_lua = ['pasta']
