@@ -1,6 +1,6 @@
 [[plugins]]
 repo = 'Shougo/ddc.vim'
-depends = ['denops.vim', 'lexima.vim', 'pum.vim']
+depends = ['denops.vim', 'pum.vim']
 lazy = true
 on_event = ['InsertEnter']
 hooks_file = '$DEIN_DIR/settings/ddc.vim'

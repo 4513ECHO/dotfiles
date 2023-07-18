@@ -35,3 +35,9 @@ function! user#auto_mkdir(dir, force) abort
     call mkdir(a:dir, 'p')
   endif
 endfunction
+
+function! user#is_at_end() abort
+  return mode() ==# 'c'
+        \ ? getcmdpos() > strlen(getcmdline())
+        \ : col('.')    > strlen(getline('.'))
+endfunction

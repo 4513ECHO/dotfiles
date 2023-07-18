@@ -105,19 +105,14 @@ inoremap <C-g><C-y> <C-y>
 inoremap <C-g><C-d> <C-d>
 
 " emacs-like insert/cmdline mode mapping {{{
-function! s:is_at_end() abort
-  return mode() ==# 'c'
-        \ ? getcmdpos() > strlen(getcmdline())
-        \ : col('.')    > strlen(getline('.'))
-endfunction
 noremap! <C-a> <Home>
-inoremap <expr> <C-e> <SID>is_at_end() ? '<C-e>' : '<End>'
+inoremap <expr> <C-e> user#is_at_end() ? '<C-e>' : '<End>'
 noremap! <C-b> <Left>
 noremap! <C-n> <Down>
 noremap! <C-p> <Up>
 noremap! <C-f> <Right>
-noremap! <expr> <C-d> <SID>is_at_end() ? '<C-d>' : '<Del>'
-inoremap <expr> <C-k> <SID>is_at_end() ? '<C-o>gJ' : '<C-o>D'
+noremap! <expr> <C-d> user#is_at_end() ? '<C-d>' : '<Del>'
+inoremap <expr> <C-k> user#is_at_end() ? '<C-o>gJ' : '<C-o>D'
 cnoremap <C-k> <Cmd>call setcmdline(
       \ getcmdpos() > 1 ? getcmdline()[:getcmdpos() - 2] : '')<CR>
 noremap! <C-y> <C-r>"
