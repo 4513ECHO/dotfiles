@@ -22,7 +22,7 @@ export class Filter extends BaseFilter<Params> {
 
   override params(): Params {
     return {
-      ignoredSources: ["action", "custom-list", "ddc"],
+      ignoredSources: ["action", "file_external", "custom-list", "ddc"],
     };
   }
 }

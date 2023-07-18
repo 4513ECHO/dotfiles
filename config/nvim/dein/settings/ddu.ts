@@ -95,6 +95,9 @@ export class Config extends BaseConfig {
           matchers: ["matcher_fzf"],
           sorters: ["sorter_fzf"],
         },
+        action: {
+          matchers: ["matcher_action", "matcher_fzf"],
+        },
         dein_update: {
           matchers: ["matcher_dein_update"],
         },

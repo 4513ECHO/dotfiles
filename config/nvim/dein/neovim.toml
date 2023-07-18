@@ -37,7 +37,9 @@ autocmd vimrc User SearchxEnter,SearchxInputChanged,VimrcSearchPost lua require(
 autocmd vimrc User SearchxCancel lua require("hlslens").stop()
 '''
 lua_source = '''
-require("hlslens").setup {}
+require("hlslens").setup {
+  enable_incsearch = false,
+}
 '''
 
 [[plugins]]
