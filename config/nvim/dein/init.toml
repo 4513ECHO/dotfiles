@@ -35,7 +35,7 @@ repo = 'itchyny/vim-parenmatch'
 repo = 'lambdalisue/guise.vim'
 depends = ['denops.vim']
 hook_add = '''
-let g:guise_edit_opener = 'vsplit'
+let g:guise_edit_opener = 'split'
 '''
 
 [[plugins]]
