@@ -1,51 +1,20 @@
 import {
   BaseConfig,
   type ConfigArguments,
-} from "https://deno.land/x/ddu_vim@v3.4.1/base/config.ts";
-import { ActionFlags } from "https://deno.land/x/ddu_vim@v3.4.1/types.ts";
-import type { Params as DduUiFFParams } from "https://deno.land/x/ddu_ui_ff@v1.0.3/ff.ts";
+} from "https://deno.land/x/ddu_vim@v3.4.3/base/config.ts";
+import { ActionFlags } from "https://deno.land/x/ddu_vim@v3.4.3/types.ts";
+import {
+  type Params as UiFFParams_,
+  Ui as UiFF,
+} from "https://deno.land/x/ddu_ui_ff@v1.1.0/ff.ts";
 import type { Denops } from "https://deno.land/x/denops_std@v5.0.1/mod.ts";
-import { collect } from "https://deno.land/x/denops_std@v5.0.1/batch/collect.ts";
 import * as autocmd from "https://deno.land/x/denops_std@v5.0.1/autocmd/mod.ts";
 import * as lambda from "https://deno.land/x/denops_std@v5.0.1/lambda/mod.ts";
-import * as opt from "https://deno.land/x/denops_std@v5.0.1/option/mod.ts";
 
-// based on https://github.com/kuuote/dotvim/blob/4ed6461/conf/plug/ddu.ts#L13
-type Size = [x: number, y: number, width: number, height: number];
-async function calculateUiSize(denops: Denops): Promise<Size> {
-  const [columns, lines] = await collect(denops, (denops) => [
-    opt.columns.get(denops),
-    opt.lines.get(denops),
-  ]);
-  return [
-    Math.floor(columns / 6),
-    Math.floor(lines / 6),
-    Math.floor(columns / 3) * 2,
-    Math.floor(lines / 3) * 2,
-  ];
-}
-
-async function setUiSize(args: ConfigArguments): Promise<void> {
-  const [winCol, winRow, winWidth, winHeight] = await calculateUiSize(
-    args.denops,
-  );
-  const options = {
-    uiParams: {
-      ff: {
-        winCol,
-        winRow,
-        winWidth,
-        winHeight,
-        previewWidth: winWidth / 2,
-        previewCol: 0,
-        previewRow: 0,
-        previewHeight: winHeight,
-      } satisfies Partial<DduUiFFParams>,
-    },
-  };
-  args.contextBuilder.patchGlobal(options);
-  await args.denops.call("ddu#ui#do_action", "updateOptions", options);
-}
+type UiFFParams<T extends keyof UiFFParams_ = "autoResize"> = {
+  [P in keyof UiFFParams_]: P extends T ? UiFFParams_[P] | string
+    : UiFFParams_[P];
+};
 
 let timer = -1;
 function updateLightline(args: { denops: Denops }): Promise<ActionFlags> {
@@ -59,6 +28,7 @@ function updateLightline(args: { denops: Denops }): Promise<ActionFlags> {
 
 export class Config extends BaseConfig {
   override async config(args: ConfigArguments): Promise<void> {
+    const defaultUiFFParams = new UiFF().params();
     const hasNvim = args.denops.meta.host === "nvim";
 
     args.setAlias("source", "file_git", "file_external");
@@ -134,8 +104,11 @@ export class Config extends BaseConfig {
           autoAction: {
             name: "preview",
           },
+          autoResize: "sources[0] ==# 'action'",
+          exprParams: defaultUiFFParams.exprParams
+            .concat(["autoResize", "floatingTitle"]),
           floatingBorder: "rounded",
-          floatingTitle: "ddu-ff",
+          floatingTitle: "sources->join(', ')",
           highlights: {
             floating: "Normal,EndOfBuffer:DduEndOfBuffer,SignColumn:Normal",
             floatingBorder: "Identifier",
@@ -146,7 +119,13 @@ export class Config extends BaseConfig {
           prompt: ">",
           split: hasNvim ? "floating" : "horizontal",
           statusline: false,
-        } satisfies Partial<DduUiFFParams>,
+          winCol: "&columns / 6",
+          winRow: "&lines / 6",
+          winWidth: "sources[0] !=# 'action' ? &columns / 3 * 2 : &columns / 3",
+          winHeight: "&lines / 3 * 2",
+          previewWidth: "&columns / 3",
+          previewHeight: "&lines / 3 * 2",
+        } satisfies Partial<UiFFParams>,
       },
     });
 
@@ -163,7 +142,7 @@ export class Config extends BaseConfig {
           ignoreEmpty: true,
           autoResize: false,
           startFilter: true,
-        } satisfies Partial<DduUiFFParams>,
+        } satisfies Partial<UiFFParams>,
       },
     });
 
@@ -176,7 +155,7 @@ export class Config extends BaseConfig {
         ff: {
           autoAction: { name: "itemAction" },
           startAutoAction: true,
-        } satisfies Partial<DduUiFFParams>,
+        } satisfies Partial<UiFFParams>,
       },
     });
 
@@ -185,13 +164,11 @@ export class Config extends BaseConfig {
 
     await autocmd.group(args.denops, "vimrc-ddu", (helper) => {
       helper.remove("*");
-      helper.define("VimResized", "*", notify(() => setUiSize(args)));
       helper.define(
         ["CursorMoved", "TextChangedI"],
         "ddu-ff-*",
         notify(() => updateLightline(args)),
       );
     });
-    await setUiSize(args);
   }
 }
