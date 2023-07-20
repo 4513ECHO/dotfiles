@@ -265,6 +265,17 @@ cnoremap <C-x><C-k> <Cmd>call <SID>convert_kensaku()<CR>
 '''
 
 [[plugins]]
+repo = 'lambdalisue/pinkyless.vim'
+on_map = { icn = '<Plug>' }
+hook_add = '''
+let g:pinkyless#keyboard = 'JIS'
+let g:pinkyless_default_keymap = v:false
+noremap! <C-g><C-l> <Plug>(pinkyless-capslock-toggle)
+noremap! ; <Plug>(pinkyless-stickyshift-enter)
+nnoremap r <Plug>(pinkyless-stickyreplace-enter)
+'''
+
+[[plugins]]
 repo = 'lambdalisue/suda.vim'
 on_cmd = ['SudaRead', 'SudaWrite']
 
