@@ -80,6 +80,9 @@ function! s:select_type() abort
   put! =title
 endfunction
 nnoremap <buffer> <CR><CR> <Cmd>call <SID>select_type()<CR>A
+if expand('#')->getbufvar('&buftype') ==# 'terminal'
+  autocmd vimrc WinClosed <buffer> ++once startinsert
+endif
 '''
 
 gitrebase = '''
