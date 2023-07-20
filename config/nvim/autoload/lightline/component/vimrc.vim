@@ -35,28 +35,26 @@ let s:skkeleton_modes = #{
       \ }
 
 function! lightline#component#vimrc#mode() abort
-  if !empty(submode#current())
-    let mode = ['Sub', submode#current()]
+  if exists('*submode#current') && submode#current() !=# ''
+    let mode = submode#current()
   elseif exists('*skkeleton#is_enabled') && skkeleton#is_enabled()
     let skk_mode = skkeleton#mode()
-    let mode = [lightline#mode(), s:skkeleton_modes->get(skk_mode, skk_mode)]
+    let mode = s:skkeleton_modes->get(skk_mode, skk_mode)
+  elseif b:->get('pinkyless_capslock', v:false)
+    let mode = 'Capslock'
   else
-    let mode = [lightline#mode()]
+    let mode = lightline#mode()
   endif
-  return s:statuswidth() > 70
-        \ ? (!empty(mode->get(1))
-        \   ? printf('%s[%s]', mode[0], mode[1])
-        \   : mode[0])
-        \ : mode->get(1, mode[0])->strcharpart(0, 1)
+  return s:statuswidth() > 70 ? mode : mode->strcharpart(0, 1)
 endfunction
 
 function! lightline#component#vimrc#readonly() abort
-  return index(s:lightline_ignore_filetypes, &filetype) >= 0 ? ''
+  return index(s:lightline_ignore_filetypes, &filetype) > -1 ? ''
         \ : &readonly ? 'RO' : ''
 endfunction
 
 function! lightline#component#vimrc#modified() abort
-  return index(s:lightline_ignore_filetypes, &filetype) >= 0 ? ''
+  return index(s:lightline_ignore_filetypes, &filetype) > -1 ? ''
         \ : &modified ? '+'
         \ : &modifiable ? '' : '-'
 endfunction
