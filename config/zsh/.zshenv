@@ -72,13 +72,8 @@ fpath=(
 )
 fpath=(${(R)fpath%/})
 
-if command -v nvim > /dev/null; then
-  export EDITOR="${EDITOR:-nvim}"
-else
-  export EDITOR="${EDITOR:-vim}"
-fi
+typeset -ax EDITOR=(${(Q@s: :)EDITOR:-$(command -v nvim > /dev/null && echo nvim || echo vim)})
 export PAGER='less'
-export BROWSER="${BROWSER:-w3m}"
 export MANPAGER='less +Gg'
 
 export LANG='ja_JP.UTF-8'

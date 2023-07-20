@@ -29,7 +29,7 @@ autocmd vimrc ColorScheme *
 
 " echo message vim start up time
 " https://github.com/lighttiger2505/.dotfiles/blob/6d0d4b8392/.vimrc#L11
-if has('vim_starting')
+if has('vim_starting') && (!has('nvim') || index(v:argv, '--headless') < 0)
   let g:startuptime = reltime()
   autocmd vimrc VimEnter *
         \ : let g:startuptime = reltime(g:startuptime)

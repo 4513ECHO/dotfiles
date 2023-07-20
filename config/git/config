@@ -3,15 +3,15 @@
   email = mail@4513echo.dev
 
 [core]
-  editor = nvim
+  editor = $HOME/.config/git/editor.sh
   quotepath = false
   commentChar = ";"
   hooksPath = ~/.config/git/hooks
 
 [pager]
-  diff = gitdiff.sh | less -R
-  log = gitdiff.sh | less -R
-  show = gitdiff.sh | less -R
+  diff = $HOME/.config/git/diff.sh | less -R
+  log = $HOME/.config/git/diff.sh | less -R
+  show = $HOME/.config/git/diff.sh | less -R
 
 [color]
   ui = auto
