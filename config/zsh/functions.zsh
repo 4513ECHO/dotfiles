@@ -40,6 +40,18 @@ hook-git-auto-save () {
 }
 add-zsh-hook preexec hook-git-auto-save
 
+PERIOD=5
+hook-vim-terminal () {
+  local vim_cwd=$(lsof -a -d cwd -p "$VIM_PID" -Fn | tail -n1 | cut -c2-)
+  if [[ -n "$vim_cwd" ]] && [[ "$vim_cwd" != "$PWD" ]]; then
+    echo 'Vim cwd change detected!'
+    cd "$vim_cwd"
+  fi
+}
+if [[ -n "$VIM_PID" ]]; then
+  add-zsh-hook periodic hook-vim-terminal
+fi
+
 zshaddhistory () {
   local line="${1%%$'\n'}"
   local cmd="${line%% *}"

@@ -2,6 +2,7 @@ augroup vimrc
   autocmd!
 augroup END
 
+let $VIM_PID = getpid()
 let g:cache_home = $XDG_CACHE_HOME .. '/nvim'
 let g:config_home = $XDG_CONFIG_HOME .. '/nvim'
 let g:data_home = $XDG_DATA_HOME .. '/nvim'
