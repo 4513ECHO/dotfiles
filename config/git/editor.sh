@@ -4,14 +4,10 @@ if [ -n "${GIT_EDITOR:-}" ]; then
   $GIT_EDITOR "$@"
   exit $?
 fi
-if [ -n "$NVIM" ]; then
-  nvim -R -n --headless "$@"
-elif [ -n "$VIM_TERMINAL" ]; then
-  vim -R -N -n -X -e -s "$@"
+if [ -n "$NVIM" ] || [ -n "$VIM_TERMINAL" ]; then
+  $EDITOR "$@"
 elif command -v nvim > /dev/null; then
   nvim "$@"
-elif command -v vim > /dev/null; then
-  vim "$@"
 else
-  exit 1
+  vim "$@"
 fi

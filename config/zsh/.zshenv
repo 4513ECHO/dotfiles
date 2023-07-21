@@ -72,7 +72,7 @@ fpath=(
 )
 fpath=(${(R)fpath%/})
 
-typeset -ax EDITOR=(${(Q@s: :)EDITOR:-$(command -v nvim > /dev/null && echo nvim || echo vim)})
+export EDITOR="${(Q@s: :)EDITOR:-$(command -v nvim > /dev/null && echo nvim || echo vim)}"
 export PAGER='less'
 export MANPAGER='less +Gg'
 
