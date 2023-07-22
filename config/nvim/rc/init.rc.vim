@@ -52,8 +52,8 @@ command! -nargs=? -bar -bang -complete=customlist,user#colorscheme#completion
 command! -nargs=1 WWW call user#google(<q-args>)
 
 command! -nargs=? -bar -complete=filetype MiniNote
-      \ : execute (<q-mods> ?? 'botright 10') 'new mininote'
-      \ | setlocal bufhidden=wipe buftype=nofile filetype=<args>
+      \ : execute (<q-mods> ?? 'belowright 10') 'new mininote'
+      \ | setlocal bufhidden=wipe buftype=nofile filetype=<args> winfixheight
 
 command! -bar DeinUpdateMine
       \ call dein#update(dein#get()->copy()
@@ -65,9 +65,9 @@ command! -bar DiffOrig
       \ | diffthis | wincmd p | diffthis
 
 if has('nvim')
-  command! -bar VTerminal <mods> vsplit +terminal
+  command! -bar VTerminal execute (<q-mods> ?? 'topleft') 'vsplit +terminal'
 else
-  command! -bar VTerminal <mods> vertical terminal
+  command! -bar VTerminal execute (<q-mods> ?? 'topleft') 'vertical terminal'
 endif
 
 if filereadable(expand('~/.vimrc_secret'))

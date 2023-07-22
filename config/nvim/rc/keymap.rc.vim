@@ -69,7 +69,7 @@ nnoremap [Space]w <Cmd>update<CR>
 nnoremap [Space]W <Cmd>write<CR>
 nnoremap ^ <C-^><Cmd>edit<CR>
 nnoremap [Space]f <Cmd>edit %:p:h<CR>
-nnoremap [Space]q <Cmd>confirm qall<CR>
+nnoremap <expr> [Space]q &filetype !=# 'gitcommit' ? '<Cmd>confirm qall<CR>' : '<C-w>c'
 nnoremap gf gF
 cnoremap <expr> / getcmdtype() ==# '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() ==# '?' ? '\?' : '?'
@@ -144,12 +144,12 @@ tnoremap <expr> <C-\><C-y> <SID>put(v:register)
 tnoremap <expr> <C-\><C-r> <SID>put(getcharstr())
 
 " Use backslack instead of ¥
-map!  ¥     <Bslash>
-map   ¥     <Bslash>
-tmap  ¥     <Bslash>
-map!  <C-¥> <C-\>
-map   <C-¥> <C-\>
-tmap  <C-¥> <C-\>
+map! ¥     <Bslash>
+map  ¥     <Bslash>
+tmap ¥     <Bslash>
+map! <C-¥> <C-\>
+map  <C-¥> <C-\>
+tmap <C-¥> <C-\>
 
 " insert current file fullpath
 cnoremap <C-x><C-x> <C-r>=expand('%:p')<CR>
