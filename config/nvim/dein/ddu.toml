@@ -159,3 +159,6 @@ repo = 'shun/ddu-source-buffer'
 
 [[plugins]]
 repo = 'shun/ddu-source-rg'
+
+[[plugins]]
+repo = 'uga-rosa/ddu-source-lsp'

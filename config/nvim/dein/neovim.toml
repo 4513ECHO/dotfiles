@@ -1,4 +1,7 @@
 [[plugins]]
+repo = 'b0o/SchemaStore.nvim'
+
+[[plugins]]
 repo = 'chomosuke/term-edit.nvim'
 lazy = true
 on_event = ['TermOpen']
@@ -7,6 +10,13 @@ require("term-edit").setup {
   prompt_end = "❯ ",
   mapping = { n = { S = false } },
 }
+'''
+
+[[plugins]]
+repo = 'folke/neodev.nvim'
+on_event = ['LspAttach']
+lua_source = '''
+require("neodev").setup {}
 '''
 
 [[plugins]]
@@ -25,7 +35,39 @@ require("pasta").setup.filetype({ "markdown", "python", "yaml" }, {
 '''
 
 [[plugins]]
-repo = 'ii14/emmylua-nvim'
+repo = 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
+on_event = ['LspAttach']
+lua_source = '''
+require("lsp_lines").setup()
+vim.diagnostic.config { virtual_lines = false }
+vim.keymap.set("n", "[Toggle]d", function()
+  local config = vim.diagnostic.config()
+  vim.diagnostic.config {
+    virtual_text = not config.virtual_text,
+    virtual_lines = not config.virtual_lines,
+  }
+  vim.api.nvim_echo(
+    {
+      { "Diagnostic Mode: " },
+      { config.virtual_lines and "virtual_text" or "virtual_lines", "Constant" },
+    },
+    false,
+    {}
+  )
+end)
+'''
+
+[[plugins]]
+repo = 'j-hui/fidget.nvim'
+on_event = ['LspAttach']
+rev = 'legacy'
+lua_source = '''
+require("fidget").setup {
+  text = {
+    spinner = "dots_pulse",
+  },
+}
+'''
 
 [[plugins]]
 repo = 'kevinhwang91/nvim-hlslens'
@@ -40,6 +82,13 @@ lua_source = '''
 require("hlslens").setup {
   enable_incsearch = false,
 }
+'''
+
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+on_event = ['BufRead']
+lua_source = '''
+require "vimrc.plugins.lsp"
 '''
 
 [[plugins]]
@@ -100,7 +149,6 @@ require("colorful-winsep").setup {
 
 [[plugins]]
 repo = 'rcarriga/nvim-notify'
-lazy = true
 on_lua = ['notify']
 lua_add = '''
 vim.notify = function(...) require "notify" (...) end
@@ -118,4 +166,11 @@ require("notify").setup {
     TRACE = "T",
   },
 }
+'''
+
+[[plugins]]
+repo = 'smjonas/inc-rename.nvim'
+on_event = ['LspAttach']
+lua_source = '''
+require("inc_rename").setup {}
 '''

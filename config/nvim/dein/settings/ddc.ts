@@ -5,6 +5,7 @@ import {
 
 export class Config extends BaseConfig {
   override config(args: ConfigArguments): Promise<void> {
+    const hasNvim = args.denops.meta.host === "nvim";
     const sources = ["file", "around", "vsnip", "tmux", "buffer"];
 
     args.contextBuilder.patchGlobal({
@@ -71,6 +72,10 @@ export class Config extends BaseConfig {
           isVolatile: true,
           maxItems: 8,
         },
+        "nvim-lsp": {
+          mark: "[lsp]",
+          forceCompletionPattern: "\\.|:\\s*|->\\s*",
+        },
         omni: {
           mark: "[omni]",
         },
@@ -115,6 +120,12 @@ export class Config extends BaseConfig {
           trailingSlash: true,
           followSymlinks: true,
         },
+        "nvim-lsp": {
+          snippetEngine: async (body: string) =>
+            await args.denops.call("vsnip#anonymous", body),
+          enableResolveItem: true,
+          enableAdditionalTextEdit: true,
+        },
         tmux: {
           currentWinOnly: true,
           excludeCurrentPane: true,
@@ -146,6 +157,9 @@ export class Config extends BaseConfig {
     });
     args.contextBuilder.patchFiletype("toml", {
       sourceOptions: {
+        "nvim-lsp": {
+          forceCompletionPattern: '\\.|[=#{[,"]\\s*',
+        },
         "vim-lsp": {
           forceCompletionPattern: '\\.|[=#{[,"]\\s*',
         },
@@ -167,7 +181,7 @@ export class Config extends BaseConfig {
       ]
     ) {
       args.contextBuilder.patchFiletype(ft, {
-        sources: ["vim-lsp", ...sources],
+        sources: [hasNvim ? "nvim-lsp" : "vim-lsp", ...sources],
       });
     }
     for (const ft of ["markdown", "gitcommit", "help"]) {

@@ -15,6 +15,21 @@ let g:traces_normal_preview = v:true
 '''
 
 [[plugins]]
+repo = 'mattn/vim-lsp-settings'
+depends = ['vim-lsp']
+on_event = ['BufRead']
+hook_add = '''
+Runtime dein/settings/vim-lsp.vim
+'''
+hook_source = '''
+if v:vim_did_enter
+  call timer_start(0, { -> lsp#enable() })
+else
+  autocmd vimrc VimEnter *  call timer_start(0, { -> lsp#enable() })
+endif
+'''
+
+[[plugins]]
 repo = 'mattn/vim-notification'
 lazy = true
 on_func = ['notification#']
@@ -38,6 +53,10 @@ repo = 'obcat/vim-sclow'
 hook_add = '''
 let g:sclow_hide_full_length = v:true
 '''
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+on_source = ['vim-lsp-settings']
 
 [[plugins]]
 repo = 'rbtnn/vim-coloredit'

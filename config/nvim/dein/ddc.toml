@@ -31,6 +31,10 @@ repo = 'Shougo/ddc-source-line'
 repo = 'Shougo/ddc-source-mocword'
 
 [[plugins]]
+repo = 'Shougo/ddc-source-nvim-lsp'
+if = 'has("nvim")'
+
+[[plugins]]
 repo = 'Shougo/ddc-source-omni'
 
 [[plugins]]
@@ -47,7 +51,7 @@ repo = 'delphinus/ddc-tmux'
 [[plugins]]
 repo = 'hrsh7th/vim-vsnip'
 lazy = true
-on_source = 'ddc.vim'
+on_source = ['ddc.vim']
 hook_add = '''
 let g:vsnip_snippet_dir = g:config_home .. '/snippets'
 inoremap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : ''
@@ -59,6 +63,7 @@ repo = 'matsui54/ddc-buffer'
 
 [[plugins]]
 repo = 'shun/ddc-source-vim-lsp'
+if = '!has("nvim")'
 
 [[plugins]]
 repo = 'uga-rosa/ddc-source-vsnip'
