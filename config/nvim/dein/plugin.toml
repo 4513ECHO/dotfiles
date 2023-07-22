@@ -233,11 +233,13 @@ repo = 'kyoh86/vim-ripgrep'
 on_cmd = ['Rg']
 hook_source = '''
 function! s:ripgrep(args, bang) abort
+  doautocmd <nomodeline> QuickFixCmdPre Rg
   let root = a:bang ? ['.git'] : ['.']
   let cwd = ripgrep#path#traverse_root(getcwd(), root)
   let cmd = ['rg', '--json', &smartcase ? '--smart-case' : '', a:args]->join()
   echomsg cmd
   call ripgrep#call(cmd, cwd[0], cwd[1])
+  doautocmd <nomodeline> QuickFixCmdPost Rg
 endfunction
 command! -bar -bang -nargs=1 Rg call s:ripgrep(<q-args>, <bang>0)
 '''

@@ -131,10 +131,9 @@ setlocal numberwidth=2
 nnoremap <buffer><expr> q getwininfo(win_getid())[0].loclist
       \ ? '<Cmd>lclose<CR>'
       \ : '<Cmd>cclose<CR>'
-" based on https://github.com/kuuote/dotvim/blob/9c7ba6307c/ftplugin/qf.vim#L1
-nnoremap <buffer><expr> j (line('.') == line('$') ? 'gg' : 'j') .. '<CR>zz<C-w>p'
-nnoremap <buffer><expr> k (line('.') == 1 ? 'G' : 'k') .. '<CR>zz<C-w>p'
-" from https://github.com/mityu/dotfiles/blob/f5cb5f9a92/dot_vim/runtime/ftplugin/qf.vim#L6
+nnoremap <buffer><expr> j line('.') == line('$') ? 'gg' : 'j'
+nnoremap <buffer><expr> k line('.') == 1         ? 'G'  : 'k'
+" from https://github.com/mityu/dotfiles/blob/f5cb5f9a/dot_vim/runtime/ftplugin/qf.vim#L6
 nnoremap <buffer> o <CR>zz<C-w>p
 nnoremap <buffer> p <CR>zz<C-w>p
 '''
@@ -192,6 +191,10 @@ merge_ftdetect = true
 rasi = '''
 setlocal shiftwidth=4 indentkeys=0{,0},o,O
 '''
+
+[[plugins]]
+repo = 'itchyny/vim-qfedit'
+on_event = ['QuickFixCmdPost']
 
 [[plugins]]
 repo = 'lark-parser/vim-lark-syntax'
