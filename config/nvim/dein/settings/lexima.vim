@@ -1,3 +1,9 @@
+" hook_add {{{
+let g:lexima_no_default_rules = v:true
+let g:lexima_ctrlh_as_backspace = v:true
+" }}}
+
+" hook_source {{{
 call lexima#set_default_rules()
 
 let s:rules = {}
@@ -16,7 +22,7 @@ let s:rules._ += [
 
 let s:rules._ += [
       \ #{ char: '<',     at: '\<\h\w*\%#', input_after: '>' },
-      \ #{ char: '<BS>',  at: '<\%#>',      delete: '>'      },
+      \ #{ char: '<BS>',  at: '<\%#>',      delete: 1        },
       \ #{ char: '>',     at: '\%#>',       leave: '>'       },
       \ #{ char: '<Tab>', at: '\%#\s*>',    leave: '>'       },
       \ ]
@@ -33,13 +39,13 @@ let s:rules.python += [
 let s:rules.help = []
 let s:rules.help += [
       \ #{ char: '*',     input: '*',    input_after: '*' },
-      \ #{ char: '*',     at: '\%#\*',   leave:  '*'      },
-      \ #{ char: '<BS>',  at: '|\%#|',   delete: '|'      },
-      \ #{ char: '<BS>',  at: '\*\%#\*', delete: '*'      },
-      \ #{ char: '<Bar>', at: '\%#|',    leave:  '|'      },
+      \ #{ char: '*',     at: '\%#\*',   leave: '*'       },
+      \ #{ char: '<BS>',  at: '|\%#|',   delete: 1        },
+      \ #{ char: '<BS>',  at: '\*\%#\*', delete: 1        },
+      \ #{ char: '<Bar>', at: '\%#|',    leave: '|'       },
       \ #{ char: '<Bar>', input: '|',    input_after: '|' },
-      \ #{ char: '<Tab>', at: '\%#|',    leave:  '|'      },
-      \ #{ char: '<Tab>', at: '\%#\*',   leave:  '*'      },
+      \ #{ char: '<Tab>', at: '\%#|',    leave: '|'       },
+      \ #{ char: '<Tab>', at: '\%#\*',   leave: '*'       },
       \ ]
 
 " toml
@@ -84,10 +90,9 @@ let s:rules.markdown += [
 " smart bold, italic and strikethrough
 let s:rules.markdown += [
       \ #{ char: '~',     input: '~',    input_after: '~' },
-      \ #{ char: '<Tab>', at: '\%#\*',   leave:  '*'      },
-      \ #{ char: '<Tab>', at: '\%#\~',   leave:  '~'      },
-      \ #{ char: '<BS>',  at: '\*\%#\*', delete: '*'      },
-      \ #{ char: '<BS>',  at: '\~\%#\~', delete: '~'      },
+      \ #{ char: '<Tab>', at: '\%#\~',   leave: 1         },
+      \ #{ char: '<BS>',  at: '\*\%#\*', delete: 1        },
+      \ #{ char: '<BS>',  at: '\~\%#\~', delete: 1        },
       \ ]
 
 " lua
@@ -168,3 +173,4 @@ LeximaAlterCommand ra\%[ndomcolorscheme]        RandomColorScheme
 LeximaAlterCommand mi\%[ninote]                 MiniNote
 LeximaAlterCommand deinu\%[pdatemine]           DeinUpdateMine
 LeximaAlterCommand vt\%[erminal]                VTerminal
+" }}}
