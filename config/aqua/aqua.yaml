@@ -37,8 +37,10 @@ packages:
   - name: high-moctane/mocword@v0.2.0
   - name: itchyny/gojq@v0.12.13
   - name: itchyny/mmv@v0.1.6
+  - name: JohnnyMorganz/StyLua@v0.18.1
   - name: junegunn/fzf/fzf-tmux@0.42.0
   - name: junegunn/fzf@0.42.0
+  - name: k0kubun/xremap/x11@v0.8.5
   - name: ko1nksm/getoptions/gengetoptions@v3.3.0
   - name: ko1nksm/getoptions@v3.3.0
   - name: koalaman/shellcheck@v0.9.0
@@ -60,11 +62,9 @@ packages:
   - name: sharkdp/hexyl@v0.13.0
   - name: sharkdp/hyperfine@v1.17.0
   - name: sharkdp/pastel@v0.9.0
-  - name: sheepla/fzwiki@v0.0.9 # FIXME: support newer version
   - name: sheepla/longgopher@v0.0.3
   - name: sheepla/pingu@v0.0.5
   - name: simeji/jid@v0.7.6
-  - name: skanehira/rtty@v0.3.0
   - name: tamasfe/taplo/full@0.8.1
   - name: tomnomnom/gron@v0.7.1
   - name: TomWright/dasel@v2.3.4
@@ -94,11 +94,5 @@ packages:
   - name: rrethy/hexokinase
     registry: local
     version: master
-  - name: itchyny/maze@v0.0.9
-    registry: local
-  - name: JohnnyMorganz/StyLua@v0.18.1
-    registry: local
   - name: pipeseroni/pipes.sh@v1.3.0
-    registry: local
-  - name: k0kubun/xremap/x11@v0.8.5
     registry: local

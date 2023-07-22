@@ -26,35 +26,8 @@ packages:
     description: ▁▂▃▅▂▇ in your shell
 
   # init: i
-  - type: github_release
-    repo_owner: itchyny
-    repo_name: maze
-    asset: maze_{{.Version}}_{{.OS}}_{{.Arch}}.{{.Format}}
-    format: zip
-    description: A maze command written in Go
-    overrides:
-      - goos: linux
-        format: tar.gz
-    files:
-      - name: maze
-        src: maze_{{.Version}}_{{.OS}}_{{.Arch}}/maze
 
   # init: j
-  - type: github_release
-    repo_owner: JohnnyMorganz
-    repo_name: StyLua
-    asset: stylua-{{.OS}}-{{.Arch}}.zip
-    description: An opinionated Lua code formatter
-    replacements:
-      amd64: x86_64
-      arm64: aarch64
-      darwin: macos
-    supported_envs:
-      - darwin
-      - linux
-      - amd64
-    files:
-      - name: stylua
   - type: github_content
     repo_owner: JosefZIla
     repo_name: bash2048
@@ -68,24 +41,6 @@ packages:
       - linux
 
   # init: k
-  - type: github_release
-    name: k0kubun/xremap/x11 # and gnome, sway
-    repo_owner: k0kubun
-    repo_name: xremap
-    asset: xremap-{{.OS}}-{{.Arch}}-x11.zip
-    description: Key remapper for X11 and Wayland
-    replacements:
-      amd64: x86_64
-      arm64: aarch64
-    supported_envs:
-      - linux
-    files:
-      - name: xremap
-    version_constraint: semver(">= 0.5.0")
-    version_overrides:
-      - version_constraint: "true"
-        supported_envs:
-          - linux/amd64
 
   # init: l
 
