@@ -75,15 +75,15 @@ cnoremap <expr> / getcmdtype() ==# '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() ==# '?' ? '\?' : '?'
 " open native cmdline
 nnoremap g/ /
-" from https://github.com/pesblog/dots-base/blob/a0762b8ffe/home/.vimrc#L140
+" from https://github.com/pesblog/dots-base/blob/a0762b8f/home/.vimrc#L140
 nnoremap <expr> gp $'`[{getregtype()->strpart(0, 1)}`]'
 " from https://baqamore.hatenablog.com/entry/2016/07/07/201856
 xnoremap <expr> p $'pgv"{v:register}ygv<Esc>'
 " from https://vim-jp.org/vim-users-jp/2009/08/31/Hack-65.html
 xnoremap / <Esc>/\%V
-" from https://github.com/nnsnico/dotfiles/blob/cf9ce83cfa/vim/vimrcs/basic.vim#L150-L151
+" from https://github.com/nnsnico/dotfiles/blob/cf9ce83c/vim/vimrcs/basic.vim#L150-L151
 " center horizontally on cursor position
-nnoremap z. <Cmd>normal! zszH<CR>
+nnoremap z. zszH
 " based on https://github.com/romgrk/nvim/blob/ba305c52/rc/keymap.vim#L98-L99
 nnoremap <expr> i getline('.') =~# '^\s*$' ? 'cc' : 'i'
 " from https://github.com/monaqa/dotfiles/blob/de4bdb9f/.config/nvim/lua/rc/keymap.lua#L436

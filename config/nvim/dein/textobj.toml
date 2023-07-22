@@ -85,7 +85,7 @@ repo = 'machakann/vim-textobj-functioncall'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
 hook_add = '''
-" from https://github.com/yuki-yano/dotfiles/blob/8840dc3a90/.vimrc#L2953
+" from https://github.com/yuki-yano/dotfiles/blob/8840dc3a/.vimrc#L2953
 let g:textobj_functioncall_no_default_key_mappings = v:true
 let g:textobj_functioncall_patterns = [#{
       \ header: '\<\%(\h\k*\.\)*\h\k*',

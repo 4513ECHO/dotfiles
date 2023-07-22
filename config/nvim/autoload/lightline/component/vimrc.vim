@@ -25,7 +25,7 @@ function! lightline#component#vimrc#filename() abort
   return ''
 endfunction
 
-" from https://github.com/thinca/config/blob/4b02d5abcb/dotfiles/dot.vim/vimrc#L2263
+" from https://github.com/thinca/config/blob/4b02d5ab/dotfiles/dot.vim/vimrc#L2263
 let s:skkeleton_modes = #{
       \ hira: 'あ',
       \ kata: 'ア',

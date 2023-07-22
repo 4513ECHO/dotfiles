@@ -14,7 +14,7 @@ autocmd vimrc BufWritePre *
 autocmd vimrc InsertLeave * setlocal nopaste
 
 " auto quickfix opener
-" from https://github.com/monaqa/dotfiles/blob/424b0ab2d7/.config/nvim/scripts/autocmd.vim
+" from https://github.com/monaqa/dotfiles/blob/424b0ab2/.config/nvim/scripts/autocmd.vim
 autocmd vimrc QuickFixCmdPost [^l]* cwindow
 autocmd vimrc QuickFixCmdPost l* lwindow
 
@@ -29,10 +29,10 @@ autocmd vimrc BufWinEnter *
       \ |   execute 'normal! zz' .. repeat("\<C-y>", winheight(0) / 6)
       \ | endif
 
-" from https://github.com/yuki-yano/dotfiles/blob/11bfe29f07/.vimrc#L696
+" from https://github.com/yuki-yano/dotfiles/blob/11bfe29f/.vimrc#L696
 autocmd vimrc FocusGained * checktime
 
-" from https://github.com/kuuote/dotvim/blob/46760385c2/conf/rc/autocmd.vim#L5
+" from https://github.com/kuuote/dotvim/blob/46760385/conf/rc/autocmd.vim#L5
 function! s:chmod(file) abort
   let perm = getfperm(a:file)
   let newperm = printf('%sx%sx%sx', perm[0:1], perm[3:4], perm[6:7])

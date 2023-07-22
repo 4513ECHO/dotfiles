@@ -50,7 +50,7 @@ let s:rules.toml += [
       \ ]
 
 " vim
-" based on https://github.com/thinca/config/blob/5413e42a18/dotfiles/dot.vim/vimrc#L2755
+" based on https://github.com/thinca/config/blob/5413e42a/dotfiles/dot.vim/vimrc#L2755
 let s:vim_input_bslash = printf('<CR>%s<Bslash><Space>', repeat('<Space>', g:vim_indent_cont))
 
 let s:rules.vim = []
@@ -135,7 +135,7 @@ function! s:lexima_init() abort
 endfunction
 call s:lexima_init()
 
-" based on https://github.com/yuki-yano/dotfiles/blob/9bfee6c807/.vimrc#L3335
+" based on https://github.com/yuki-yano/dotfiles/blob/9bfee6c8/.vimrc#L3335
 function! s:lexima_alter_command(original, altanative) abort
   for char in ['<CR>', '<Space>', '!']
     call lexima#add_rule(#{
