@@ -61,6 +61,21 @@
   "bash-language-server": {
     "disabled": true
   },
+  "deno": {
+    "initialization_options": {
+      "enable": true,
+      "lint": true,
+      "suggest": {
+        "autoImports": false,
+        "hosts": {
+          "https://crux.land": true,
+          "https://deno.land": true,
+          "https://x.nest.land": true
+        }
+      },
+      "unstable": true
+    }
+  },
   "efm-langserver": {
     "allowlist": [
       "json",

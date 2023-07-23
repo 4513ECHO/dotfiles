@@ -25,7 +25,7 @@ hook_source = '''
 if v:vim_did_enter
   call timer_start(0, { -> lsp#enable() })
 else
-  autocmd vimrc VimEnter *  call timer_start(0, { -> lsp#enable() })
+  autocmd vimrc VimEnter * call timer_start(0, { -> lsp#enable() })
 endif
 '''
 
