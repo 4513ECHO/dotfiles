@@ -38,8 +38,6 @@ if has('vim_starting') && (!has('nvim') || index(v:argv, '--headless') < 0)
         \ | echomsg printf('startuptime: %fms', reltimefloat(g:startuptime) * 1000)
 endif
 
-command! -nargs=1 Runtime runtime! g:config_home <args>
-
 " from https://github.com/thinca/config/blob/d92e41ce/dotfiles/dot.vim/vimrc#L1382
 command! -bar RTP echo substitute(&runtimepath, ',', "\n", 'g')
 
