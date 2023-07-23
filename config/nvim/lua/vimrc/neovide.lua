@@ -9,4 +9,11 @@ vim.g.neovide_cursor_vfx_mode = "pixiedust"
 vim.g.neovide_cursor_trail_size = 0.5
 vim.g.neovide_cursor_vfx_particle_density = 15
 
-vim.keymap.set({ "i", "c" }, "<D-v>", "<C-r>+")
+local pastekey
+if vim.fn.has "mac" == 1 then
+  pastekey = "<D-v>"
+else
+  pastekey = "<C-S-v>"
+end
+vim.keymap.set({ "i", "c" }, pastekey, "<C-r>+")
+vim.keymap.set("t", pastekey, '<C-\\><C-n>"+pi')
