@@ -120,7 +120,17 @@ require("nvim-treesitter.configs").setup {
   },
   highlight = {
     enable = true,
-    disable = { "bash", "yaml", "vimdoc" },
+    ---@param lang string
+    ---@param bufnr integer
+    disable = function(lang, bufnr)
+      return vim.tbl_contains({ "bash", "yaml", "vimdoc" }, lang)
+        or (
+          lang == "vim"
+          and vim.api
+            .nvim_buf_get_lines(bufnr, 0, 1, false)[1]
+            :match "^vim9script"
+        )
+    end,
   },
 }
 '''
