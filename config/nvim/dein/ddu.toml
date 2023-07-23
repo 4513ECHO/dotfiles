@@ -19,7 +19,7 @@ inoremap <C-x><C-e> <Cmd>call ddu#start(#{
       \ })<CR>
 '''
 hook_source = '''
-Runtime dein/settings/ddu.vim
+call ddu#custom#load_config(expand('$DEIN_DIR/settings/ddu.ts'))
 '''
 
 [[plugins]]
@@ -58,6 +58,8 @@ nnoremap <buffer> q
 nnoremap <buffer> E
       \ <Cmd>call ddu#ui#do_action('itemAction',
       \ #{ params: eval(input('params: ', "#{}\<lt>Left>")) })<CR>
+nnoremap <buffer> d
+      \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'delete' })<CR>
 nnoremap <buffer> <
       \ <Cmd>call ddu#ui#do_action('collapseItem')<CR>
 nnoremap <buffer> >

@@ -10,11 +10,27 @@ import {
 import type { Denops } from "https://deno.land/x/denops_std@v5.0.1/mod.ts";
 import * as autocmd from "https://deno.land/x/denops_std@v5.0.1/autocmd/mod.ts";
 import * as lambda from "https://deno.land/x/denops_std@v5.0.1/lambda/mod.ts";
+import { ensure, is } from "https://deno.land/x/unknownutil@v3.0.1/mod.ts";
+import { sprintf } from "https://deno.land/std@0.195.0/fmt/printf.ts";
 
 type UiFFParams<T extends keyof UiFFParams_ = "autoResize"> = {
   [P in keyof UiFFParams_]: P extends T ? UiFFParams_[P] | string
     : UiFFParams_[P];
 };
+
+async function onColorScheme(denops: Denops): Promise<void> {
+  // NOTE: eob of 'fillchars' is annoying
+  const bgcolorObj = ensure(
+    await denops.call("nvim_get_hl", 0, { name: "Normal" }),
+    is.ObjectOf({ bg: is.OneOf([is.Number, is.Undefined]) }),
+  );
+  const bgcolor = sprintf("#%06x", bgcolorObj.bg ?? 0x000000);
+  await denops.call("nvim_set_hl", 0, "DduEndOfBuffer", {
+    foreground: bgcolor,
+    background: bgcolor,
+    default: true,
+  });
+}
 
 let timer = -1;
 function updateLightline(args: { denops: Denops }): Promise<ActionFlags> {
@@ -171,11 +187,19 @@ export class Config extends BaseConfig {
       },
     });
 
+    hasNvim && await onColorScheme(args.denops);
+
     const notify = (fn: () => unknown) =>
       `call denops#notify('ddu', '${lambda.register(args.denops, fn)}', [])`;
 
     await autocmd.group(args.denops, "vimrc-ddu", (helper) => {
       helper.remove("*");
+      hasNvim &&
+        helper.define(
+          "ColorScheme",
+          "*",
+          notify(() => onColorScheme(args.denops)),
+        );
       helper.define(
         ["CursorMoved", "TextChangedI"],
         "ddu-ff-*",
