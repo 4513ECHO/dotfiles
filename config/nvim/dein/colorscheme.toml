@@ -170,12 +170,14 @@ name = 'urara'
 
 # Thank mityu very much!
 [[plugins]]
-repo = 'https://raw.githubusercontent.com/mityu/dotfiles/master/dot_vim/runtime/colors/reliquiae.vim'
+repo = 'https://raw.githubusercontent.com/mityu/dotfiles/master/vim/runtime/colors/reliquiae.vim'
 script_type = 'colors'
 type = 'raw'
 [[plugins.colorschemes]]
 name = 'reliquiae'
 lightline = 'mini'
+[plugins.colorschemes.link]
+NonText = 'Comment'
 
 # Thank Shougo very much!
 [[plugins]]
