@@ -77,3 +77,8 @@ autocmd vimrc VimResized *
       \ : if &equalalways
       \ |   wincmd =
       \ | endif
+
+if !has('nvim')
+  autocmd vimrc TerminalWinOpen *
+        \ setlocal nonumber norelativenumber signcolumn=no nocursorline
+endif
