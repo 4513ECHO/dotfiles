@@ -199,10 +199,7 @@
         },
         "lazy": {
           "description": "If set to v:true, dein doesn't add the path to 'runtimepath' automatically. If you don't set it, dein will set it automatically when the conditions are met. Note: You should not specify the plugins which have no 'plugin/' directory as lazy load plugins.  It is meaningless and just increases the overhead.  You can get the no meaning lazy plugins by |dein#check_lazy_plugins()|.",
-          "type": [
-            "boolean",
-            "integer"
-          ],
+          "$ref": "#/definitions/Boolean",
           "x-taplo": {
             "links": {
               "key": "https://github.com/Shougo/dein.vim/blob/f93be8c/doc/dein.txt#L746"
@@ -449,6 +446,9 @@
               "key": "https://github.com/Shougo/dein.vim/blob/f93be8c/doc/dein.txt#L981"
             }
           }
+        },
+        "hook_depends_update": {
+          "type": "string"
         },
         "hook_done_update": {
           "description": "It is executed after the all plugins are updated.",
