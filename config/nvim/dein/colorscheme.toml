@@ -213,9 +213,17 @@ repo = 'karoliskoncevicius/sacredforest-vim'
 name = 'sacredforest'
 
 [[plugins]]
+repo = 'kihachi2000/yash.nvim'
+if = 'has("nvim")'
+[[plugins.colorschemes]]
+name = 'yash'
+lightline = 'mini'
+
+[[plugins]]
 repo = 'kyoh86/momiji'
 [[plugins.colorschemes]]
 name = 'momiji'
+terminal = 'mini'
 [plugins.colorschemes.highlight]
 # NOTE: Remove term/cterm/gui attrs
 SignifySignDelete = { ctermfg = 9, ctermbg = 0, guifg = '#f5875b', guibg = '#140c0c' }
