@@ -45,9 +45,9 @@ setlocal formatoptions+=mMBl
 
 dockerfile = '''
 function! s:set_abbrev(instruction) abort
-  execute 'inoreabbrev <expr><buffer>' a:instruction
-        \ printf("(getline('.')[:col('.') - 2] ==# '%s')", a:instruction)
-        \ printf("? '%s' : '%s'", toupper(a:instruction), a:instruction)
+  execute 'inoreabbrev <buffer><expr>' a:instruction
+        \ "(getline('.')[:col('.') - 2] ==# '{a:instruction}')"
+        \ $"? '{toupper(a:instruction)}' : '{a:instruction}'"
 endfunction
 
 call s:set_abbrev('add')
@@ -67,7 +67,7 @@ call s:set_abbrev('user')
 call s:set_abbrev('volume')
 call s:set_abbrev('workdir')
 
-inoreabbrev <expr><buffer> as
+inoreabbrev <buffer><expr> as
       \ (getline('.')[:col('.') - 2] =~# '^FROM\s\+.*\s\+') ? 'AS' : 'as'
 '''
 

@@ -29,9 +29,9 @@ function! user#google(query) abort
 endfunction
 
 function! user#auto_mkdir(dir, force) abort
-  if !isdirectory(a:dir) && (a:force ||
-        \ input(printf('"%s" does not exist. Create? [y/N]', a:dir))
-        \ =~? '^y\%[es]$')
+  let msg = $'"{a:dir}" is not a directory. Create?'
+  if !isdirectory(a:dir) &&
+        \ (a:force || confirm(msg, "&Yes\n&No", 2) < 2)
     call mkdir(a:dir, 'p')
   endif
 endfunction

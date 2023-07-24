@@ -253,7 +253,8 @@ function! s:convert_kensaku() abort
     call setcmdline(s:kensaku_state.cmdline)
   else
     let s:kensaku_state.cmdline = getcmdline()
-    call setcmdline(kensaku#query(s:kensaku_state.cmdline))
+    call kensaku#query_async(s:kensaku_state.cmdline,
+          \ { result -> setcmdline(result) })
   endif
   let s:kensaku_state.converted = !s:kensaku_state.converted
 endfunction

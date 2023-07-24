@@ -48,7 +48,7 @@ function! user#colorscheme#set_customize() abort
     for [group, attr] in items(highlight)
       let attrs = ''
       for [name, value] in items(attr)
-        let attrs ..= printf('%s=%s ', name, value)
+        let attrs ..= $'{name}={value} '
       endfor
       execute 'hi' group attrs
     endfor

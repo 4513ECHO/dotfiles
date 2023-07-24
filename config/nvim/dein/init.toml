@@ -71,9 +71,9 @@ molder = '''
 setlocal nolist nospell
 nnoremap <buffer> <C-l> <Plug>(molder-reload)<Cmd>set nohlsearch<CR>
 nnoremap <buffer> q <C-w>q
-nnoremap <buffer><expr> R
-      \ printf('<Cmd>edit %s<CR>', system('git rev-parse --show-toplevel'))
-nnoremap <buffer><expr> . printf('<Cmd>edit %s<CR>', getcwd())
+nnoremap <buffer><expr> R printf('<Cmd>edit %s<CR>',
+      \ systemlist('git rev-parse --show-superproject-working-tree --show-toplevel')[0])
+nnoremap <buffer><expr> . $'<Cmd>edit {getcwd()}<CR>'
 nnoremap <buffer><expr> j line('.') == line('$') ? 'gg' : 'j'
 nnoremap <buffer><expr> k line('.') == 1         ? 'G'  : 'k'
 '''
