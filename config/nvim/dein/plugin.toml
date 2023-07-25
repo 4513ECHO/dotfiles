@@ -255,8 +255,7 @@ function! s:convert_kensaku() abort
     call setcmdline(s:kensaku_state.cmdline)
   else
     let s:kensaku_state.cmdline = getcmdline()
-    call kensaku#query_async(s:kensaku_state.cmdline,
-          \ { result -> setcmdline(result) })
+    call setcmdline(kensaku#query(s:kensaku_state.cmdline))
   endif
   let s:kensaku_state.converted = !s:kensaku_state.converted
 endfunction
@@ -273,6 +272,10 @@ let g:pinkyless_default_keymap = v:false
 noremap! <C-g><C-l> <Plug>(pinkyless-capslock-toggle)
 noremap! ; <Plug>(pinkyless-stickyshift-enter)
 nnoremap r <Plug>(pinkyless-stickyreplace-enter)
+'''
+# NOTE: Override keymap to enable remap
+hook_post_source = '''
+map! <expr> <Plug>(pinkyless-stickyshift-enter) pinkyless#stickyshift#enter(';')
 '''
 
 [[plugins]]

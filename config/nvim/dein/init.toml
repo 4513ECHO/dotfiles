@@ -28,8 +28,6 @@ repo = 'itchyny/vim-highlighturl'
 
 [[plugins]]
 repo = 'itchyny/vim-parenmatch'
-# TODO: send PR to the repository to use instead 'hi def Group' instead of 'hi Group'
-# autocmd vimrc ColorScheme * hi link ParenMatch MatchParen
 
 [[plugins]]
 repo = 'lambdalisue/guise.vim'

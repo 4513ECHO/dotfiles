@@ -162,6 +162,7 @@ repo = 'haystackandroid/stellarized'
 [[plugins.colorschemes]]
 name = 'stellarized'
 lightline = 'stellarized_dark'
+terminal = 'mini'
 
 [[plugins]]
 repo = 'haxibami/urara.vim'
@@ -217,7 +218,6 @@ repo = 'kihachi2000/yash.nvim'
 if = 'has("nvim")'
 [[plugins.colorschemes]]
 name = 'yash'
-lightline = 'mini'
 
 [[plugins]]
 repo = 'kyoh86/momiji'
