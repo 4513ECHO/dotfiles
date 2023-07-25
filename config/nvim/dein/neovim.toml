@@ -99,37 +99,7 @@ repo = 'nvim-treesitter/nvim-treesitter'
 on_event = ['BufRead']
 hook_post_update = 'TSUpdate'
 lua_source = '''
-require("nvim-treesitter.configs").setup {
-  ensure_installed = {
-    "bash",
-    "go",
-    "html",
-    "lua",
-    "markdown",
-    "markdown_inline",
-    "python",
-    "query",
-    "rust",
-    "toml",
-    "typescript",
-    "vim",
-    "yaml",
-  },
-  highlight = {
-    enable = true,
-    ---@param lang string
-    ---@param bufnr integer
-    disable = function(lang, bufnr)
-      return vim.tbl_contains({ "bash", "yaml", "vimdoc" }, lang)
-        or (
-          lang == "vim"
-          and vim.api
-            .nvim_buf_get_lines(bufnr, 0, 1, false)[1]
-            :match "^vim9script"
-        )
-    end,
-  },
-}
+require "vimrc.plugins.treesitter"
 '''
 
 [[plugins]]
