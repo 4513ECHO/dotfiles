@@ -1,7 +1,6 @@
 [[plugins]]
 repo = 'Shougo/ddu.vim'
 depends = ['denops.vim']
-lazy = true
 on_func = ['ddu#start']
 hook_add = '''
 let g:launcher_config.ddu = #{
@@ -25,7 +24,6 @@ call ddu#custom#load_config(expand('$DEIN_DIR/settings/ddu.ts'))
 [[plugins]]
 repo = 'Shougo/ddu-commands.vim'
 depends = ['ddu.vim']
-lazy = true
 on_cmd = ['Ddu']
 
 # UI

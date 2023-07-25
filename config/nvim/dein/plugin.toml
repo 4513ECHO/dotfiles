@@ -131,6 +131,7 @@ xnoremap n <Cmd>call searchx#next_dir()<CR><Plug>(VimrcSearchPost)zzzv
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
+lazy = true
 hook_add = '''
 autocmd vimrc VimEnter * call timer_start(0, { -> dein#source('lightline.vim') })
 '''
@@ -246,6 +247,7 @@ on_path = ['^file://']
 [[plugins]]
 repo = 'lambdalisue/kensaku.vim'
 denops_wait = false
+on_func = ['kensaku#']
 hook_add = '''
 let s:kensaku_state = #{ cmdline: '', converted: v:false }
 function! s:convert_kensaku() abort
@@ -284,7 +286,6 @@ on_path = ['^https\?://']
 [[plugins]]
 repo = 'lambdalisue/vim-quickrun-neovim-job'
 if = 'has("nvim")'
-on_source = ['vim-quickrun']
 
 [[plugins]]
 repo = 'machakann/vim-highlightedundo'
@@ -409,7 +410,6 @@ xnoremap <Leader>t :Translate<CR>
 [[plugins]]
 repo = 'statiolake/vim-quickrun-runner-nvimterm'
 if = 'has("nvim")'
-on_source = ['vim-quickrun']
 
 [[plugins]]
 repo = 'rhysd/clever-f.vim'

@@ -1,7 +1,6 @@
 [[plugins]]
 repo = 'Shougo/ddc.vim'
 depends = ['denops.vim', 'pum.vim']
-lazy = true
 on_event = ['InsertEnter']
 hooks_file = '$DEIN_DIR/settings/ddc.vim'
 
@@ -42,7 +41,6 @@ repo = 'Shougo/ddc-source-zsh'
 
 [[plugins]]
 repo = 'Shougo/neco-vim'
-lazy = true
 on_ft = ['toml', 'vim']
 
 [[plugins]]
@@ -50,7 +48,6 @@ repo = 'delphinus/ddc-tmux'
 
 [[plugins]]
 repo = 'hrsh7th/vim-vsnip'
-lazy = true
 on_source = ['ddc.vim']
 hook_add = '''
 let g:vsnip_snippet_dir = g:config_home .. '/snippets'

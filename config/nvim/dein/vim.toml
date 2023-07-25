@@ -1,6 +1,5 @@
 [[plugins]]
 repo = 'machakann/vim-highlightedyank'
-lazy = true
 on_event = ['TextYankPost']
 hook_add = '''
 let g:highlightedyank_highlight_duration = 100
@@ -8,7 +7,6 @@ let g:highlightedyank_highlight_duration = 100
 
 [[plugins]]
 repo = 'markonm/traces.vim'
-lazy = true
 on_event = ['CmdlineEnter']
 hook_add = '''
 let g:traces_normal_preview = v:true
@@ -22,12 +20,10 @@ hooks_file = '$DEIN_DIR/settings/vim-lsp.vim'
 
 [[plugins]]
 repo = 'mattn/vim-notification'
-lazy = true
 on_func = ['notification#']
 
 [[plugins]]
 repo = 'obcat/vim-hitspop'
-lazy = true
 on_event = ['CmdlineLeave']
 on_func = ['hitspop#main']
 hook_add = '''
@@ -51,7 +47,6 @@ on_source = ['vim-lsp-settings']
 
 [[plugins]]
 repo = 'rbtnn/vim-coloredit'
-lazy = true
 on_cmd = ['ColorEdit']
 
 [[plugins]]

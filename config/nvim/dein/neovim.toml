@@ -3,7 +3,6 @@ repo = 'b0o/SchemaStore.nvim'
 
 [[plugins]]
 repo = 'chomosuke/term-edit.nvim'
-lazy = true
 on_event = ['TermOpen']
 lua_source = '''
 require("term-edit").setup {
@@ -21,13 +20,14 @@ require("neodev").setup {}
 
 [[plugins]]
 repo = 'hrsh7th/nvim-pasta'
-lazy = true
-on_lua = ['pasta']
+on_map = { nx = "<Plug>" }
 lua_add = '''
-vim.keymap.set({ "n", "x" }, "p", function() require("pasta.mappings").p() end)
-vim.keymap.set({ "n", "x" }, "P", function() require("pasta.mappings").P() end)
+vim.keymap.set({ "n", "x" }, "p", "<Plug>(pasta-p)")
+vim.keymap.set({ "n", "x" }, "P", "<Plug>(pasta-P)")
 '''
 lua_source = '''
+vim.keymap.set({ "n", "x" }, "<Plug>(pasta-p)", require("pasta.mappings").p)
+vim.keymap.set({ "n", "x" }, "<Plug>(pasta-P)", require("pasta.mappings").P)
 require("pasta").setup {}
 require("pasta").setup.filetype({ "markdown", "python", "yaml" }, {
   fix_indent = false,
@@ -71,7 +71,6 @@ require("fidget").setup {
 
 [[plugins]]
 repo = 'kevinhwang91/nvim-hlslens'
-lazy = true
 on_lua = ['hlslens']
 on_event = ['CmdlineEnter']
 hook_add = '''
@@ -93,12 +92,10 @@ require "vimrc.plugins.lsp"
 
 [[plugins]]
 repo = 'nvim-lua/plenary.nvim'
-lazy = true
 on_lua = ['plenary']
 
 [[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
-lazy = true
 on_event = ['BufRead']
 hook_post_update = 'TSUpdate'
 lua_source = '''
@@ -137,7 +134,6 @@ require("nvim-treesitter.configs").setup {
 
 [[plugins]]
 repo = 'nvim-zh/colorful-winsep.nvim'
-lazy = true
 on_event = ['WinNew']
 lua_source = '''
 require("colorful-winsep").setup {
