@@ -38,6 +38,8 @@ let g:guise_edit_opener = 'split'
 
 [[plugins]]
 repo = 'lambdalisue/mr.vim'
+# from https://github.com/kuuote/dotvim/commit/eef000e6
+on_event = ['BufNewFile', 'BufReadPre', 'BufWritePre']
 hook_add = '''
 let s:predicates = [
       \ { fname -> fname !~# '/.git/COMMIT_EDITMSG$' },
@@ -64,6 +66,21 @@ command! -nargs=? -complete=custom,s:complete -bar MrClean call s:mr_clean(<f-ar
 
 [[plugins]]
 repo = 'mattn/vim-molder'
+# from https://github.com/kuuote/dotvim/commit/09151c52
+lazy = true
+hook_add = '''
+function s:molder_init() abort
+  if isdirectory(expand('%:p'))
+    call dein#source('vim-molder')
+    call molder#init()
+    autocmd! vimrc_molder
+  endif
+endfunction
+augroup vimrc_molder
+  autocmd!
+  autocmd BufEnter * call s:molder_init()
+augroup END
+'''
 [plugins.ftplugin]
 molder = '''
 setlocal nolist nospell
