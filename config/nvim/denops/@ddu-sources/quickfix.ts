@@ -1,10 +1,10 @@
 import * as fn from "https://deno.land/x/denops_std@v5.0.1/function/mod.ts";
-import type { ActionData } from "https://deno.land/x/ddu_kind_file@v0.5.2/file.ts";
+import type { ActionData } from "https://deno.land/x/ddu_kind_file@v0.5.3/file.ts";
 import {
   BaseSource,
   type GatherArguments,
-} from "https://deno.land/x/ddu_vim@v3.4.1/base/source.ts";
-import type { Item } from "https://deno.land/x/ddu_vim@v3.4.1/types.ts";
+} from "https://deno.land/x/ddu_vim@v3.4.3/base/source.ts";
+import type { Item } from "https://deno.land/x/ddu_vim@v3.4.3/types.ts";
 
 type Params = {
   useLoclist: boolean;

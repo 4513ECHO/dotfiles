@@ -3,7 +3,7 @@ import {
   type FilterArguments,
 } from "https://deno.land/x/ddu_vim@v3.4.3/base/filter.ts";
 import type { DduItem } from "https://deno.land/x/ddu_vim@v3.4.3/types.ts";
-import { ensure, is } from "https://deno.land/x/unknownutil@v3.2.0/mod.ts";
+import { ensure, is } from "https://deno.land/x/unknownutil@v3.4.0/mod.ts";
 
 export type Params = {
   ignoredActions: Record<string, string[]>;

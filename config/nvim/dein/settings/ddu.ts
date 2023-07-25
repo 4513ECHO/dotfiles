@@ -10,7 +10,7 @@ import {
 import type { Denops } from "https://deno.land/x/denops_std@v5.0.1/mod.ts";
 import * as autocmd from "https://deno.land/x/denops_std@v5.0.1/autocmd/mod.ts";
 import * as lambda from "https://deno.land/x/denops_std@v5.0.1/lambda/mod.ts";
-import { ensure, is } from "https://deno.land/x/unknownutil@v3.0.1/mod.ts";
+import { ensure, is } from "https://deno.land/x/unknownutil@v3.4.0/mod.ts";
 import { sprintf } from "https://deno.land/std@0.195.0/fmt/printf.ts";
 
 type UiFFParams<T extends keyof UiFFParams_ = "autoResize"> = {
@@ -22,7 +22,7 @@ async function onColorScheme(denops: Denops): Promise<void> {
   // NOTE: eob of 'fillchars' is annoying
   const bgcolorObj = ensure(
     await denops.call("nvim_get_hl", 0, { name: "Normal" }),
-    is.ObjectOf({ bg: is.OneOf([is.Number, is.Undefined]) }),
+    is.ObjectOf({ bg: is.OptionalOf(is.Number) }),
   );
   const bgcolor = sprintf("#%06x", bgcolorObj.bg ?? 0x000000);
   await denops.call("nvim_set_hl", 0, "DduEndOfBuffer", {
