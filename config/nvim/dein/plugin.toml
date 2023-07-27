@@ -7,6 +7,21 @@ let g:readme_viewer#plugin_manager = 'dein.vim'
 '''
 
 [[plugins]]
+repo = '4513echo/vim-snipewin'
+on_map = { n = '<Plug>' }
+hook_add = '''
+let g:snipewin_label_chars = 'ASDFGHJKLQWERTYUIOP'
+let g:snipewin_label_font = 'asciian_inverted'
+nnoremap <C-w>W <Plug>(snipewin)
+nnoremap <C-w>X <Plug>(snipewin-swap)
+nnoremap <C-w>O <Plug>(snipewin-only)
+'''
+hook_source = '''
+nnoremap <Plug>(snipewin-swap) <Cmd>call snipewin#select(g:snipewin#callback#swap)<CR>
+nnoremap <Plug>(snipewin-only) <Cmd>call snipewin#select(g:snipewin#callback#only)<CR>
+'''
+
+[[plugins]]
 repo = '4513echo/vim-vimhelp-url'
 on_cmd = ['HelpUrl']
 
@@ -474,15 +489,6 @@ if = 'has("nvim")'
 hook_add = '''
 let g:lightline#lsp#indicator_errors = '✗'
 let g:lightline#lsp#indicator_warnings = '‼'
-'''
-
-[[plugins]]
-repo = 't9md/vim-choosewin'
-on_map = { n = '<Plug>' }
-hook_add = '''
-let g:choosewin_overlay_enable = v:true
-let g:choosewin_overlay_clear_multibyte = v:true
-nnoremap <C-w>w <Plug>(choosewin)
 '''
 
 [[plugins]]

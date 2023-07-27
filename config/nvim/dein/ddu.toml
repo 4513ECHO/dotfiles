@@ -58,6 +58,9 @@ nnoremap <buffer> E
       \ #{ params: eval(input('params: ', "#{}\<lt>Left>")) })<CR>
 nnoremap <buffer> d
       \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'delete' })<CR>
+nnoremap <buffer> W
+      \ <Cmd>call ddu#ui#do_action('itemAction', #{ params:
+      \ #{ command: 'call snipewin#select()<Bar>edit' } })<CR>
 nnoremap <buffer> <
       \ <Cmd>call ddu#ui#do_action('collapseItem')<CR>
 nnoremap <buffer> >
