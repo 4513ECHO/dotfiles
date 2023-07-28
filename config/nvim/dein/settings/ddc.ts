@@ -184,11 +184,14 @@ export class Config extends BaseConfig {
         sources: [hasNvim ? "nvim-lsp" : "vim-lsp", ...sources],
       });
     }
-    for (const ft of ["markdown", "gitcommit", "help"]) {
+    for (const ft of ["markdown", "gitcommit"]) {
       args.contextBuilder.patchFiletype(ft, {
         sources: ["mocword", "github_issue", "github_pull_request", ...sources],
       });
     }
+    args.contextBuilder.patchFiletype("help", {
+      sources: ["mocword", ...sources],
+    });
     for (const ft of ["sh", "zsh"]) {
       args.contextBuilder.patchFiletype(ft, {
         sources: ["zsh", ...sources],

@@ -1,4 +1,4 @@
-let s:lightline_ignore_filetypes = ['help', 'ddu-ff', 'ddu-ff-filter', 'molder']
+let s:lightline_ignore_filetypes = ['ddu-ff', 'ddu-ff-filter', 'molder']
 
 let s:statuswidth = { -> &laststatus > 2 ? &columns : winwidth(0) }
 
@@ -50,11 +50,13 @@ endfunction
 
 function! lightline#component#vimrc#readonly() abort
   return index(s:lightline_ignore_filetypes, &filetype) > -1 ? ''
+        \ : &filetype ==# 'help' && &buftype ==# 'help' ? ''
         \ : &readonly ? 'RO' : ''
 endfunction
 
 function! lightline#component#vimrc#modified() abort
   return index(s:lightline_ignore_filetypes, &filetype) > -1 ? ''
+        \ : &filetype ==# 'help' && &buftype ==# 'help' ? ''
         \ : &modified ? '+'
         \ : &modifiable ? '' : '-'
 endfunction
