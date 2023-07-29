@@ -1,4 +1,12 @@
 [[plugins]]
+repo = '4513echo/registerm.vim'
+on_map = { t = '<Plug>' }
+hook_add = '''
+tnoremap <C-\><C-y> <Plug>(registerm)
+tnoremap <C-\><C-r> <Plug>(registerm-getchar)
+'''
+
+[[plugins]]
 repo = '4513echo/vim-readme-viewer'
 on_cmd = ['DeinReadme']
 on_source = ['ddu.vim']
