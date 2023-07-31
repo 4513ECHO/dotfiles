@@ -37,7 +37,7 @@ if = 'has("nvim")'
 repo = 'Shougo/ddc-source-omni'
 
 [[plugins]]
-repo = 'Shougo/ddc-source-zsh'
+repo = 'Shougo/ddc-source-shell-native'
 
 [[plugins]]
 repo = 'Shougo/neco-vim'

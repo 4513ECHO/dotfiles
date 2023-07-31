@@ -6,7 +6,8 @@ import {
 export class Config extends BaseConfig {
   override config(args: ConfigArguments): Promise<void> {
     const hasNvim = args.denops.meta.host === "nvim";
-    const sources = ["file", "around", "vsnip", "tmux", "buffer"];
+    const sources = ["file", "around", "vsnip", "buffer"]
+      .concat(Deno.env.has("TMUX") ? ["tmux"] : []);
 
     args.contextBuilder.patchGlobal({
       cmdlineSources: {
@@ -32,7 +33,6 @@ export class Config extends BaseConfig {
         around: {
           mark: "[ard]",
           isVolatile: true,
-          maxItems: 8,
         },
         buffer: {
           mark: "[buf]",
@@ -70,7 +70,6 @@ export class Config extends BaseConfig {
         necovim: {
           mark: "[vim]",
           isVolatile: true,
-          maxItems: 8,
         },
         "nvim-lsp": {
           mark: "[lsp]",
@@ -100,11 +99,10 @@ export class Config extends BaseConfig {
           mark: "[snip]",
           dup: "keep",
         },
-        zsh: {
-          mark: "[zsh]",
+        "shell-native": {
+          mark: "[sh]",
           isVolatile: true,
           forceCompletionPattern: "[\\w@:~._-]/[\\w@:~._-]*",
-          maxItems: 8,
         },
       },
       sourceParams: {
@@ -130,6 +128,10 @@ export class Config extends BaseConfig {
           currentWinOnly: true,
           excludeCurrentPane: true,
           kindFormat: "#{pane_index}.#{pane_current_command}",
+        },
+        "shell-native": {
+          envs: { COLUMNS: "127" },
+          shell: "zsh",
         },
       },
       filterParams: {
@@ -194,7 +196,7 @@ export class Config extends BaseConfig {
     });
     for (const ft of ["sh", "zsh"]) {
       args.contextBuilder.patchFiletype(ft, {
-        sources: ["zsh", ...sources],
+        sources: ["shell-native", ...sources],
       });
     }
 
