@@ -143,10 +143,3 @@ require("notify").setup {
   },
 }
 '''
-
-[[plugins]]
-repo = 'smjonas/inc-rename.nvim'
-on_event = ['LspAttach']
-lua_source = '''
-require("inc_rename").setup {}
-'''

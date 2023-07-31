@@ -28,12 +28,6 @@ autocmd "LspAttach" {
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
     vim.keymap.set("n", "gr", vim.lsp.buf.rename, opts)
-    -- vim.keymap.set(
-    --   "n",
-    --   "gr",
-    --   function() return ":IncRename " .. vim.fn.expand "<cword>" end,
-    --   { buffer = true, expr = true }
-    -- )
     -- vim.keymap.set("n", "ma", vim.lsp.buf.code_action, opts)
     vim.keymap.set({ "n", "x" }, "ma", "<Cmd>Ddu -name=codeAction<CR>", opts)
     vim.keymap.set("n", "mf", vim.lsp.buf.references, opts)
@@ -203,21 +197,23 @@ lspconfig.yamlls.setup {
       completion = true,
       hover = true,
       validate = true,
-      -- NOTE: This option will disable the manual schema option also unfortunately.
-      -- schemaStore = { enable = false },
+      schemaStore = { enable = false, url = "" },
       schemas = require("schemastore").yaml.schemas {
         extra = {
           {
+            description = "efm-langserver config",
             fileMatch = "/efm-langserver/config.yaml",
             name = "efm-langserver",
             url = "https://mattn.github.io/efm-langserver/schema.json",
           },
           {
+            description = "aqua.yaml",
             fileMatch = "/aqua/aqua.yaml",
             name = "aqua.yaml",
             url = "https://pax.deno.dev/aquaproj/aqua@v2.10.2-1/json-schema/aqua-yaml.json",
           },
           {
+            description = "aqua-registry",
             fileMatch = {
               "/aqua-registry/pkgs/**/registry.yaml",
               "/aqua-registry/registry.yaml",
