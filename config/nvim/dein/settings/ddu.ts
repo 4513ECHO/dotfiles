@@ -2,7 +2,6 @@ import {
   BaseConfig,
   type ConfigArguments,
 } from "https://deno.land/x/ddu_vim@v3.4.4/base/config.ts";
-import { ActionFlags } from "https://deno.land/x/ddu_vim@v3.4.4/types.ts";
 import {
   type Params as UiFFParams_,
   Ui as UiFF,
@@ -30,16 +29,6 @@ async function onColorScheme(denops: Denops): Promise<void> {
     background: bgcolor,
     default: true,
   });
-}
-
-let timer = -1;
-function updateLightline(args: { denops: Denops }): Promise<ActionFlags> {
-  clearTimeout(timer);
-  timer = setTimeout(async () => {
-    await args.denops.call("lightline#update");
-    await args.denops.cmd("redrawstatus");
-  }, 200);
-  return Promise.resolve(ActionFlags.Persist);
 }
 
 export class Config extends BaseConfig {
@@ -119,7 +108,6 @@ export class Config extends BaseConfig {
         },
       },
       ui: "ff",
-      uiOptions: { ff: { actions: { updateLightline } } },
       uiParams: {
         ff: {
           autoAction: {
@@ -203,11 +191,6 @@ export class Config extends BaseConfig {
           "*",
           notify(() => onColorScheme(args.denops)),
         );
-      helper.define(
-        ["CursorMoved", "TextChangedI"],
-        "ddu-ff-*",
-        notify(() => updateLightline(args)),
-      );
     });
   }
 }

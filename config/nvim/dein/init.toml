@@ -120,7 +120,7 @@ let g:denops_server_addr = '127.0.0.1:32123'
 [[plugins]]
 # repo = 'vim-denops/denops-shared-server.vim'
 repo = '4513echo/denops-shared-server.vim'
-rev = 'support-aqua'
+rev = 'sync-environment'
 depends = ['denops.vim']
 
 [[plugins]]

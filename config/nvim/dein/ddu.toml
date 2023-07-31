@@ -73,12 +73,8 @@ nnoremap <buffer> q     <Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
 nnoremap <buffer> <CR>  <Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
 inoremap <buffer> <CR>  <Esc><Cmd>call ddu#ui#do_action('itemAction')<CR>
 inoremap <buffer> <C-l> <Esc><Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
-inoremap <buffer> <C-n> <Cmd>call ddu#ui#multi_actions([
-      \ ['cursorNext'], ['updateLightline'],
-      \ ])<CR>
-inoremap <buffer> <C-p> <Cmd>call ddu#ui#multi_actions([
-      \ ['cursorPrevious'], ['updateLightline'],
-      \ ])<CR>
+inoremap <buffer> <C-n> <Cmd>call ddu#ui#do_action('cursorNext')<CR>
+inoremap <buffer> <C-p> <Cmd>call ddu#ui#do_action('cursorPrevious')<CR>
 '''
 
 # filters
