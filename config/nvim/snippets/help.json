@@ -1,17 +1,4 @@
 {
-  "contents": {
-    "body": [
-      "CONTENTS\t\t\t\t\t\t*${1:plugin}-contents*",
-      "",
-      "Introduction\t\t\t\t\t\t|$1-introduction|",
-      "Interface\t\t\t\t\t\t|$1-interface|",
-      "About\t\t\t\t\t\t\t|$1-about|"
-    ],
-    "description": "help contents toc",
-    "prefix": [
-      "contents"
-    ]
-  },
   "lastc": {
     "body": [
       "Last change: ${VIM:strftime('%Y %b %d')}"

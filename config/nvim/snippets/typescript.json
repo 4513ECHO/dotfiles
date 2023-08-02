@@ -1,26 +1,4 @@
 {
-  "dd": {
-    "body": [
-      "export class ${1:Source} extends Base$1 {",
-      "\t$0",
-      "\tgather() {",
-      "\t}",
-      "}"
-    ],
-    "description": "ddc/ddu class definition",
-    "prefix": [
-      "dd"
-    ]
-  },
-  "denoland": {
-    "body": [
-      "https://deno.land/$0"
-    ],
-    "description": "https://deno.land url",
-    "prefix": [
-      "denoland"
-    ]
-  },
   "echomsg": {
     "body": [
       "await ${1:denops}.cmd(\"unsilent echomsg val\", { val: $0 })"
@@ -28,33 +6,6 @@
     "description": "denops.vim debug stuff",
     "prefix": [
       "echomsg"
-    ]
-  },
-  "export": {
-    "body": [
-      "export { ${1:module} } from \"$0\";"
-    ],
-    "description": "export statement",
-    "prefix": [
-      "export"
-    ]
-  },
-  "import": {
-    "body": [
-      "import { ${1:module} } from \"$0\";"
-    ],
-    "description": "import statement",
-    "prefix": [
-      "import"
-    ]
-  },
-  "paxdeno": {
-    "body": [
-      "https://pax.deno.dev/$0"
-    ],
-    "description": "https://pax.deno.dev url",
-    "prefix": [
-      "paxdeno"
     ]
   }
 }

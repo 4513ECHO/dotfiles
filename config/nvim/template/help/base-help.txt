@@ -1,32 +1,32 @@
-*{{_expr_:expand('%:p:t')}}*			{{_input_:title}}
+*{{_expr_:expand('%:p:t')}}*				{{_input_:description}}
 
 Author: {{_input_:author}}
 License: {{_input_:license}}
-URL: {{_input_:url}}
+URL: {{_input_:url:'https://github.com/4513ECHO/'}}
 Last change: {{_expr_:strftime('%Y %b %d')}}
 
 ==============================================================================
-CONTENTS						*{{_expr_:expand('%:t:r')}}-contents*
+CONTENTS						*{{_expr_:expand('%:t:r')->substitute('_','-','g')}}-contents*
 
-Introduction						|{{_expr_:expand('%:t:r')}}-introduction|
-Interface						|{{_expr_:expand('%:t:r')}}-interface|
-About							|{{_expr_:expand('%:t:r')}}-about|
-
-==============================================================================
-INTRODUCTION						*{{_expr_:expand('%:t:r')}}-introduction*
-
-*{{_expr_:expand('%:t:r')}}*
+Introduction						|{{_expr_:user#plugins#sonictemplate#help()}}-introduction|
+Interface						|{{_expr_:user#plugins#sonictemplate#help()}}-interface|
+About							|{{_expr_:user#plugins#sonictemplate#help()}}-about|
 
 ==============================================================================
-INTERFACE						*{{_expr_:expand('%:t:r')}}-interface*
+INTRODUCTION						*{{_expr_:user#plugins#sonictemplate#help()}}-introduction*
+
+*{{_expr_:user#plugins#sonictemplate#help()}}* is a plugin to
+
+==============================================================================
+INTERFACE						*{{_expr_:user#plugins#sonictemplate#help()}}-interface*
 
 ------------------------------------------------------------------------------
 {{_cursor_}}
 
 ==============================================================================
-ABOUT							*{{_expr_:expand('%:t:r')}}-about*
+ABOUT							*{{_expr_:user#plugins#sonictemplate#help()}}-about*
 
-|{{_expr_:expand('%:t:r')}}| is developed by Hibiki(4513ECHO) and licensed under the
+|{{_expr_:user#plugins#sonictemplate#help()}}| is developed by {{_input_:author_without_mail}} and licensed under the
 {{_input_:license}}. Visit the project page for the latest version:
 
 	{{_input_:url}}

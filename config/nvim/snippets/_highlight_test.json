@@ -6,7 +6,7 @@
       "choice placeholder: ${5|hoge,fuga,piyo|}",
       "built-in variables: $TM_SELECTED_TEXT $HOGE",
       "vim script expression: ${VIM:1 + 2}",
-      "uuid ${VIM:system('python -c \"import uuid, sys;sys.stdout.write(str(uuid.uuid4()))\"')}"
+      "uuid ${VIM:system('deno eval \"console.log(crypto.randomUUID())\"')}"
     ],
     "description": "snippet highlight test",
     "prefix": [

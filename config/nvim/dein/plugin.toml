@@ -344,7 +344,9 @@ let g:sonictemplate_vim_vars = #{
       \   author: 'Hibiki',
       \ },
       \ help: #{
-      \   author: 'Hibiki <mail@4513echo.dev>'
+      \   author: 'Hibiki <mail@4513echo.dev>',
+      \   author_without_mail: 'Hibiki(4513ECHO)',
+      \   license: 'MIT License',
       \ },
       \ }
 let g:sonictemplate_key = ''
