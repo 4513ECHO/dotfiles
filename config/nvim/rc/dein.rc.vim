@@ -49,7 +49,7 @@ if has('vim_starting') && dein#check_install()
 endif
 
 if getcwd() =~? expand('~/Develops/github.com/4513ECHO/')
-  let s:git_root = system('git rev-parse --show-toplevel')
+  let s:git_root = systemlist('git rev-parse --show-toplevel')[0]
   execute $'set runtimepath^={s:git_root}'
   if isdirectory(s:git_root .. '/after')
     execute $'set runtimepath+={s:git_root}/after'

@@ -58,7 +58,7 @@ function! s:mr_clean(kind = 'mru') abort
     call mr#{a:kind}#delete(fname)
   endfor
 endfunction
-function s:complete(...)
+function! s:complete(...)
   return ['mru', 'mrw', 'mrr']->join("\n")
 endfunction
 command! -nargs=? -complete=custom,s:complete -bar MrClean call s:mr_clean(<f-args>)
@@ -69,7 +69,7 @@ repo = 'mattn/vim-molder'
 # from https://github.com/kuuote/dotvim/commit/09151c52
 lazy = true
 hook_add = '''
-function s:molder_init() abort
+function! s:molder_init() abort
   if isdirectory(expand('%:p'))
     call dein#source('vim-molder')
     call molder#init()
