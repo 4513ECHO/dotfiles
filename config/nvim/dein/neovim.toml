@@ -12,13 +12,6 @@ require("term-edit").setup {
 '''
 
 [[plugins]]
-repo = 'folke/neodev.nvim'
-on_event = ['LspAttach']
-lua_source = '''
-require("neodev").setup {}
-'''
-
-[[plugins]]
 repo = 'hrsh7th/nvim-pasta'
 on_map = { nx = "<Plug>" }
 lua_add = '''

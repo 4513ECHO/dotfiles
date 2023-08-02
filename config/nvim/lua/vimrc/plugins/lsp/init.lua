@@ -210,7 +210,7 @@ lspconfig.yamlls.setup {
             description = "aqua.yaml",
             fileMatch = "/aqua/aqua.yaml",
             name = "aqua.yaml",
-            url = "https://pax.deno.dev/aquaproj/aqua@v2.10.2-1/json-schema/aqua-yaml.json",
+            url = "https://pax.deno.dev/aquaproj/aqua@v2.11.0-4/json-schema/aqua-yaml.json",
           },
           {
             description = "aqua-registry",
@@ -221,7 +221,7 @@ lspconfig.yamlls.setup {
               "/aqua/registry.yaml",
             },
             name = "aqua-registry",
-            url = "https://pax.deno.dev/aquaproj/aqua@v2.10.2-1/json-schema/registry.json",
+            url = "https://pax.deno.dev/aquaproj/aqua@v2.11.0-4/json-schema/registry.json",
           },
         },
       },
