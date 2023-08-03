@@ -46,7 +46,7 @@ packages:
   - name: ko1nksm/getoptions@v3.3.0
   - name: koalaman/shellcheck@v0.9.0
   - name: LuaLS/lua-language-server@3.6.25
-  - name: LukeChannings/deno-arm64@v1.35.3
+  - name: LukeChannings/deno-arm64@v1.36.0
   # - name: mattn/efm-langserver@v0.0.48
   - name: mattn/efm-langserver
     version: v0.0.44
