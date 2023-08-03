@@ -53,10 +53,20 @@ repo = 'kana/vim-operator-user'
 [[plugins]]
 repo = 'kana/vim-textobj-user'
 
-# [[plugins]]
-# repo = 'kana/vim-textobj-indent'
-# on_map = { xo = '<Plug>' }
-# depends = ['vim-textobj-user']
+[[plugins]]
+repo = 'kana/vim-textobj-indent'
+on_map = { xo = '<Plug>' }
+depends = ['vim-textobj-user']
+hook_add = '''
+onoremap ai <Plug>(textobj-indent-a)
+onoremap ii <Plug>(textobj-indent-i)
+onoremap aI <Plug>(textobj-indent-same-a)
+onoremap iI <Plug>(textobj-indent-same-i)
+xnoremap ai <Plug>(textobj-indent-a)
+xnoremap ii <Plug>(textobj-indent-i)
+xnoremap aI <Plug>(textobj-indent-same-a)
+xnoremap iI <Plug>(textobj-indent-same-i)
+'''
 
 [[plugins]]
 repo = 'kana/vim-textobj-entire'
