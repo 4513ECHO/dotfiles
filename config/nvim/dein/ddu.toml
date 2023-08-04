@@ -39,9 +39,9 @@ nnoremap <buffer> <Space>
       \ <Cmd>call ddu#ui#do_action('toggleSelectItem')<CR>
 xnoremap <buffer><silent> <Space>
       \ :call ddu#ui#do_action('toggleSelectItem')<CR>
-nnoremap <buffer> A
+nnoremap <buffer> a
       \ <Cmd>call ddu#ui#do_action('toggleAllItems')<CR>
-nnoremap <buffer> C
+nnoremap <buffer> c
       \ <Cmd>call ddu#ui#do_action('clearSelectAllItems')<CR>
 nnoremap <buffer> i
       \ <Cmd>call ddu#ui#do_action('openFilterWindow')<CR>
@@ -72,7 +72,7 @@ setlocal nocursorline
 nnoremap <buffer> q     <Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
 nnoremap <buffer> <CR>  <Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
 inoremap <buffer> <CR>  <Esc><Cmd>call ddu#ui#do_action('itemAction')<CR>
-inoremap <buffer> <C-l> <Esc><Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
+inoremap <buffer> <C-c> <Esc><Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
 inoremap <buffer> <C-n> <Cmd>call ddu#ui#do_action('cursorNext')<CR>
 inoremap <buffer> <C-p> <Cmd>call ddu#ui#do_action('cursorPrevious')<CR>
 '''
@@ -124,6 +124,9 @@ repo = '4513echo/ddu-source-source'
 repo = 'kuuote/ddu-source-mr'
 
 [[plugins]]
+repo = 'kuuote/ddu-source-tags'
+
+[[plugins]]
 repo = 'Shougo/ddu-source-action'
 
 [[plugins]]
@@ -161,3 +164,6 @@ repo = 'shun/ddu-source-rg'
 
 [[plugins]]
 repo = 'uga-rosa/ddu-source-lsp'
+
+[[plugins]]
+repo = 'yuki-yano/ddu-source-nvim-notify'
