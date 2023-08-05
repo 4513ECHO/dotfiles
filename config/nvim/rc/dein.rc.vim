@@ -3,7 +3,7 @@ let s:dein_repo_dir = s:dein_dir .. '/repos/github.com/Shougo/dein.vim'
 
 if &runtimepath !~# s:dein_repo_dir
   if !isdirectory(s:dein_repo_dir)
-    execute ['!git', 'clone', '--depth=1', '--filter=blob:none',
+    execute ['!git', 'clone', '--filter=blob:none',
           \ 'https://github.com/Shougo/dein.vim', s:dein_repo_dir]->join()
     if v:shell_error
       echohl ErrorMsg
@@ -21,7 +21,6 @@ let g:dein#enable_notification = v:true
 let g:dein#install_check_diff = v:true
 let g:dein#install_progress_type = 'floating'
 let g:dein#lazy_rplugins = v:true
-let g:dein#types#git#clone_depth = 1
 let g:dein#types#git#enable_partial_clone = v:true
 let $DEIN_DIR = g:config_home .. '/dein'
 

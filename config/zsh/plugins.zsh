@@ -9,7 +9,7 @@ exists() {
 }
 
 if [[ ! -f "$XDG_CACHE_HOME/zpm/zpm.zsh" ]]; then
-  git clone --recursive --depth 1 'https://github.com/zpm-zsh/zpm' \
+  git clone --recursive --filter=blob:none 'https://github.com/zpm-zsh/zpm' \
     "$XDG_CACHE_HOME/zpm"
 fi
 source "$XDG_CACHE_HOME/zpm/zpm.zsh"

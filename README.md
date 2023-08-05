@@ -84,7 +84,7 @@ sh -c "$(curl -sSL https://4513echo.dev/dot)"
 ### Manually install
 
 ```sh
-git clone --depth=1 --filter=blob:none https://github.com/4513ECHO/dotfiles
+git clone --filter=blob:none https://github.com/4513ECHO/dotfiles
 cd dotfiles
 make install
 ```

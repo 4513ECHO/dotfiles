@@ -25,7 +25,7 @@ cat << 'EOF'
 '------------------------------------------------------------------------------'
 EOF
 printf '\e[m'
-git clone --depth=1 --filter=blob:none "$URL" "$DOTPATH"
+git clone --filter=blob:none "$URL" "$DOTPATH"
 cd "$DOTPATH" || error "Could not change directory to $DOTPATH"
 make install
 exec "$SHELL" -l

@@ -8,5 +8,5 @@ set -g @thumbs-osc52 1
 if-shell -b "[ -x $TMUX_THUMBS_PATH/tmux-thumbs.tmux ]" {
   run-shell -b "$TMUX_THUMBS_PATH/tmux-thumbs.tmux"
 } {
-  run-shell -b "git clone --depth 1 https://github.com/fcsonline/tmux-thumbs $TMUX_THUMBS_PATH"
+  run-shell -b "git clone --filter=blob:none https://github.com/fcsonline/tmux-thumbs $TMUX_THUMBS_PATH"
 }
