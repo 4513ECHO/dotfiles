@@ -105,6 +105,10 @@ function! user#colorscheme#command(colorscheme, reload = v:false) abort
   endif
   " NOTE: Use :silent to ignore W18
   execute 'silent colorscheme' colorscheme
+  if !has('nvim')
+    " Reload syntax for typescript-vim
+    let &l:syntax = &l:syntax
+  endif
 endfunction
 
 function! user#colorscheme#update_lightline() abort

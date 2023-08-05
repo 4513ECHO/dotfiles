@@ -1,4 +1,7 @@
 [[plugins]]
+repo = 'leafgarland/typescript-vim'
+
+[[plugins]]
 repo = 'machakann/vim-highlightedyank'
 on_event = ['TextYankPost']
 hook_add = '''
