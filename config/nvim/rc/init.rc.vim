@@ -65,7 +65,7 @@ command! -bar DiffOrig
 if has('nvim')
   command! -bar VTerminal execute (<q-mods> ?? 'topleft') 'vsplit +terminal'
 else
-  command! -bar VTerminal execute (<q-mods> ?? 'topleft') 'vertical terminal'
+  command! -bar VTerminal execute (<q-mods> ?? 'topleft') 'vertical terminal ++close'
 endif
 
 if filereadable(expand('~/.vimrc_secret'))

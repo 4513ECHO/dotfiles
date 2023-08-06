@@ -1,4 +1,13 @@
 [[plugins]]
+repo = 'cocopon/colorswatch.vim'
+on_cmd = ['ColorSwatchGenerate']
+
+[[plugins]]
+repo = 'cocopon/inspecthi.vim'
+depends = ['colorswatch.vim']
+on_cmd = ['Inspecthi']
+
+[[plugins]]
 repo = 'leafgarland/typescript-vim'
 
 [[plugins]]

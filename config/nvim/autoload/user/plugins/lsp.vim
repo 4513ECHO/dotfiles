@@ -7,7 +7,7 @@ export def OnLspBufferEnabled(): void
 
   nnoremap <buffer> gq <Plug>(lsp-document-format)
   xnoremap <buffer> gq <Plug>(lsp-document-range-format)
-  if index(['lua', 'markdown', 'toml', 'vim'], &filetype) < 0
+  if ['lua', 'markdown', 'toml', 'vim']->index(&filetype) < 0
     nnoremap <buffer> K <Plug>(lsp-hover)
   endif
   nnoremap <buffer> gK <Plug>(lsp-hover)
@@ -23,7 +23,7 @@ enddef
 
 export def JumpDefinition(): void
   normal! m'
-  if index(['typescript', 'typescriptreact'], &filetype) > -1
+  if ['typescript', 'typescriptreact']->index(&filetype) > -1
     execute 'LspDenoDefinition'
   else
     execute 'LspDefinition'
@@ -31,48 +31,51 @@ export def JumpDefinition(): void
 enddef
 
 export def OnColorScheme(): void
-  # from autoload/lsp/internal/diagnostics/highlights.vim
-  hi def link LspErrorHighlight Error
-  hi def link LspWarningHighlight Todo
-  hi def link LspInformationHighlight Normal
-  hi def link LspHintHighlight Normal
-  # from autoload/lsp/internal/diagnostics/signs.vim
-  hi def link LspErrorText Error
-  hi def link LspWarningText Todo
-  hi def link LspInformationText Normal
-  hi def link LspHintText Normal
-  # from autoload/lsp/internal/diagnostics/virtual_text.vim
-  hi def link LspErrorVirtualText LspErrorText
-  hi def link LspWarningVirtualText LspWarningText
-  hi def link LspInformationVirtualText LspInformationText
-  hi def link LspHintVirtualText LspHintText
-  # from autoload/lsp/internal/document_code_action/signs.vim
-  hi def link LspCodeActionText Normal
-  # from autoload/lsp/internal/document_highlight.vim
-  hi def link lspReference CursorColumn
-  # from autoload/lsp/internal/semantic.vim
-  hi def link LspSemanticType Type
-  hi def link LspSemanticClass Type
-  hi def link LspSemanticEnum Type
-  hi def link LspSemanticInterface TypeDef
-  hi def link LspSemanticStruct Type
-  hi def link LspSemanticTypeParameter Type
-  hi def link LspSemanticParameter Identifier
-  hi def link LspSemanticVariable Identifier
-  hi def link LspSemanticProperty Identifier
-  hi def link LspSemanticEnumMember Constant
-  hi def link LspSemanticEvent Identifier
-  hi def link LspSemanticFunction Function
-  hi def link LspSemanticMethod Function
-  hi def link LspSemanticMacro Macro
-  hi def link LspSemanticKeyword Keyword
-  hi def link LspSemanticModifier Type
-  hi def link LspSemanticComment Comment
-  hi def link LspSemanticString String
-  hi def link LspSemanticNumber Number
-  hi def link LspSemanticRegexp String
-  hi def link LspSemanticOperator Operator
-  hi def link LspSemanticDecorator Macro
+  var hl = [
+    # from autoload/lsp/internal/diagnostics/highlights.vim
+    { name: 'LspErrorHighlight', linksto: 'Error', default: true },
+    { name: 'LspWarningHighlight', linksto: 'Todo', default: true },
+    { name: 'LspInformationHighlight', linksto: 'Normal', default: true },
+    { name: 'LspHintHighlight', linksto: 'Normal', default: true },
+    # from autoload/lsp/internal/diagnostics/signs.vim
+    { name: 'LspErrorText', linksto: 'Error', default: true },
+    { name: 'LspWarningText', linksto: 'Todo', default: true },
+    { name: 'LspInformationText', linksto: 'Normal', default: true },
+    { name: 'LspHintText', linksto: 'Normal', default: true },
+    # from autoload/lsp/internal/diagnostics/virtual_text.vim
+    { name: 'LspErrorVirtualText', linksto: 'Error', default: true },
+    { name: 'LspWarningVirtualText', linksto: 'Todo', default: true },
+    { name: 'LspInformationVirtualText', linksto: 'Normal', default: true },
+    { name: 'LspHintVirtualText', linksto: 'Normal', default: true },
+    # from autoload/lsp/internal/document_code_action/signs.vim
+    { name: 'LspCodeActionText', linksto: 'Normal', default: true },
+    # from autoload/lsp/internal/document_highlight.vim
+    { name: 'lspReference', linksto: 'CursorColumn', default: true },
+    # from autoload/lsp/internal/semantic.vim
+    { name: 'LspSemanticType', linksto: 'Type', default: true },
+    { name: 'LspSemanticClass', linksto: 'Type', default: true },
+    { name: 'LspSemanticEnum', linksto: 'Type', default: true },
+    { name: 'LspSemanticInterface', linksto: 'TypeDef', default: true },
+    { name: 'LspSemanticStruct', linksto: 'Type', default: true },
+    { name: 'LspSemanticTypeParameter', linksto: 'Type', default: true },
+    { name: 'LspSemanticParameter', linksto: 'Identifier', default: true },
+    { name: 'LspSemanticVariable', linksto: 'Identifier', default: true },
+    { name: 'LspSemanticProperty', linksto: 'Identifier', default: true },
+    { name: 'LspSemanticEnumMember', linksto: 'Constant', default: true },
+    { name: 'LspSemanticEvent', linksto: 'Identifier', default: true },
+    { name: 'LspSemanticFunction', linksto: 'Function', default: true },
+    { name: 'LspSemanticMethod', linksto: 'Function', default: true },
+    { name: 'LspSemanticMacro', linksto: 'Macro', default: true },
+    { name: 'LspSemanticKeyword', linksto: 'Keyword', default: true },
+    { name: 'LspSemanticModifier', linksto: 'Type', default: true },
+    { name: 'LspSemanticComment', linksto: 'Comment', default: true },
+    { name: 'LspSemanticString', linksto: 'String', default: true },
+    { name: 'LspSemanticNumber', linksto: 'Number', default: true },
+    { name: 'LspSemanticRegexp', linksto: 'String', default: true },
+    { name: 'LspSemanticOperator', linksto: 'Operator', default: true },
+    { name: 'LspSemanticDecorator', linksto: 'Macro', default: true },
+  ]
+  hlset(hl)
 enddef
 
 export def HookAdd(): void

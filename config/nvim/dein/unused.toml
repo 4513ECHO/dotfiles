@@ -1,13 +1,4 @@
 [[plugins]]
-repo = 'cocopon/colorswatch.vim'
-on_cmd = ['ColorSwatchGenerate']
-
-[[plugins]]
-repo = 'cocopon/inspecthi.vim'
-depends = ['colorswatch.vim']
-on_cmd = ['Inspecthi']
-
-[[plugins]]
 repo = 'cocopon/snapbuffer.vim'
 on_cmd = ['SnapBuffer']
 
@@ -78,14 +69,11 @@ let g:fern#keepjumps_on_edit = v:true
 fern = '''
 nnoremap <buffer> F <Plug>(fern-action-focus:parent)
 nnoremap <buffer> q <C-w>q
-nnoremap <silent><buffer><expr> r
-      \ printf('<Cmd>Fern %s<CR>', system('git rev-parse --show-toplevel'))
-nnoremap <silent><buffer><expr> W
-      \ printf('<Cmd>Fern %s<CR>', getcwd())
-nnoremap <silent><buffer><expr> j
-      \ line('.') == line('$') ? 'gg' : 'j'
-nnoremap <silent><buffer><expr> k
-      \ line('.') == 1 ? 'G' : 'k'
+nnoremap <buffer><expr> r printf('<Cmd>Fern %s<CR>',
+      \ systemlist('git rev-parse --show-superproject-working-tree --show-toplevel')[0])
+nnoremap <buffer><expr> W $'<Cmd>Fern {getcwd()}<CR>'
+nnoremap <buffer><expr> j line('.') == line('$') ? 'gg' : 'j'
+nnoremap <buffer><expr> k line('.') == 1         ? 'G'  : 'k'
 '''
 
 [[plugins]]
