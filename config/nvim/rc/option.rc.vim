@@ -110,7 +110,7 @@ set nojoinspaces
 set virtualedit=block
 
 set clipboard-=autoselect
-set mouse=a
+set mouse=n
 
 set completeopt=menuone,noinsert,noselect
 if !has('nvim')
