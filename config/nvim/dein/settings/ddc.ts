@@ -154,9 +154,6 @@ export class Config extends BaseConfig {
       ui: "pum",
     });
 
-    args.contextBuilder.patchFiletype("vim", {
-      sources: ["necovim", ...sources],
-    });
     args.contextBuilder.patchFiletype("toml", {
       sourceOptions: {
         "nvim-lsp": {
@@ -167,38 +164,34 @@ export class Config extends BaseConfig {
         },
       },
     });
-    for (
-      const ft of [
-        "go",
-        "json",
-        "lua",
-        "markdown",
-        "python",
-        "rust",
-        "sh",
-        "toml",
-        "typescript",
-        "typescriptreact",
-        "yaml",
-      ]
-    ) {
-      args.contextBuilder.patchFiletype(ft, {
-        sources: [hasNvim ? "nvim-lsp" : "vim-lsp", ...sources],
-      });
-    }
-    for (const ft of ["markdown", "gitcommit"]) {
-      args.contextBuilder.patchFiletype(ft, {
-        sources: ["mocword", "github_issue", "github_pull_request", ...sources],
-      });
-    }
-    args.contextBuilder.patchFiletype("help", {
-      sources: ["mocword", ...sources],
-    });
-    for (const ft of ["sh", "zsh"]) {
-      args.contextBuilder.patchFiletype(ft, {
-        sources: ["shell-native", ...sources],
-      });
-    }
+
+    const addSourcesByFiletypes = (filetypes: string[], added: string[]) =>
+      filetypes.forEach((ft) =>
+        args.contextBuilder.patchFiletype(ft, {
+          sources: added.concat(sources),
+        })
+      );
+
+    addSourcesByFiletypes(["vim"], ["necovim"]);
+    addSourcesByFiletypes([
+      "go",
+      "json",
+      "lua",
+      "markdown",
+      "python",
+      "rust",
+      "sh",
+      "toml",
+      "typescript",
+      "typescriptreact",
+      "yaml",
+    ], [hasNvim ? "nvim-lsp" : "vim-lsp"]);
+    addSourcesByFiletypes(
+      ["markdown", "gitcommit"],
+      ["mocword", "github_issue", "github_pull_request"],
+    );
+    addSourcesByFiletypes(["help"], ["mocword"]);
+    addSourcesByFiletypes(["sh", "zsh"], ["shell-native"]);
 
     return Promise.resolve();
   }
