@@ -148,7 +148,7 @@ endif
 " title
 set title
 set titlestring=%{user#title_string()}
-let &titleold = pathshorten(fnamemodify(getcwd(), ':~'))
+let &titleold = getcwd()->fnamemodify(':~')->pathshorten()
 
 " ------------------
 " various

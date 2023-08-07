@@ -11,10 +11,9 @@ nnoremap S <Nop>
 xnoremap q <Nop>
 xnoremap S <Nop>
 
-" Record macro like ["x]Q (in default use 'q' register)
-nnoremap <expr> Q empty(reg_recording())
-      \ ? 'q' .. (v:register =~# '["*+]' ? 'q' : v:register)
-      \ : 'q'
+" Record macro like ["x]Q (in default use "q" register)
+nnoremap <expr> Q 'q' .. !empty(reg_recording()) ? ''
+      \ : v:register =~# '["*+]' ? 'q' : v:register
 
 nnoremap j gj
 nnoremap k gk
@@ -85,7 +84,7 @@ xnoremap / <Esc>/\%V
 " center horizontally on cursor position
 nnoremap z. zszH
 " based on https://github.com/romgrk/nvim/blob/ba305c52/rc/keymap.vim#L98-L99
-nnoremap <expr> i getline('.') =~# '^\s*$' ? 'cc' : 'i'
+nnoremap <expr> i getline('.') =~# '^\s*$' ? '"_cc' : 'i'
 " from https://github.com/monaqa/dotfiles/blob/de4bdb9f/.config/nvim/lua/rc/keymap.lua#L436
 nnoremap <expr> dd empty(getline('.')) && v:count1 ==# 1 && v:register ==# '"'
       \ ? '"_dd' : 'dd'

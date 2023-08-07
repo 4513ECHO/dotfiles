@@ -33,6 +33,7 @@ function M.autocmd(event)
     return vim.api.nvim_create_autocmd(
       event,
       vim.tbl_deep_extend("force", { group = M.group, pattern = "*" }, opts)
+        or {}
     )
   end
 end
@@ -52,14 +53,15 @@ M.autocmd "TermOpen" {
   end,
 }
 
+M.autocmd "BufLeave" {
+  pattern = "term://*",
+  command = "checktime",
+}
+
 M.autocmd "TextYankPost" {
   callback = function()
     vim.highlight.on_yank { timeout = 100, on_macro = true }
   end,
-}
-
-M.autocmd "InsertLeave" {
-  command = "mode",
 }
 
 return setmetatable(M, {

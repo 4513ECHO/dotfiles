@@ -30,7 +30,7 @@ autocmd vimrc ColorScheme *
 
 " echo message vim start up time
 " based on https://github.com/lighttiger2505/.dotfiles/blob/6d0d4b83/.vimrc#L11
-if has('vim_starting') && (!has('nvim') || index(v:argv, '--headless') < 0)
+if has('vim_starting') && (!has('nvim') || v:argv->index('--headless') < 0)
   let g:startuptime = reltime()
   autocmd vimrc VimEnter *
         \ : let g:startuptime = reltime(g:startuptime)
@@ -39,7 +39,7 @@ if has('vim_starting') && (!has('nvim') || index(v:argv, '--headless') < 0)
 endif
 
 " from https://github.com/thinca/config/blob/d92e41ce/dotfiles/dot.vim/vimrc#L1382
-command! -bar RTP echo substitute(&runtimepath, ',', "\n", 'g')
+command! -bar RTP echo &runtimepath->substitute(',', "\n", 'g')
 
 command! -bar RandomColorScheme call user#colorscheme#random()
 

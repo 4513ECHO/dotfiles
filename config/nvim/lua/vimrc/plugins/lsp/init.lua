@@ -102,9 +102,7 @@ lspconfig.lua_ls.setup {
   capabilities = capabilities,
   settings = {
     Lua = {
-      completion = {
-        showWord = "Disable",
-      },
+      completion = { showWord = "Disable" },
       diagnostics = {
         disable = { "lowercase-global" },
         enable = true,
