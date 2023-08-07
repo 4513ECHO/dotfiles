@@ -115,7 +115,7 @@ export class Config extends BaseConfig {
           autoAction: {
             name: "preview",
           },
-          autoResize: "sources[0] ==# 'action'",
+          autoResize: "sources ==# ['action']",
           exprParams: defaultUiFFParams.exprParams
             .concat(["autoResize", "floatingTitle"]),
           floatingBorder: "rounded",
@@ -124,18 +124,18 @@ export class Config extends BaseConfig {
             floating: "Normal,EndOfBuffer:DduEndOfBuffer,SignColumn:Normal",
             floatingBorder: "Identifier",
           },
-          previewFloating: true,
+          previewFloating: hasNvim,
           previewFloatingBorder: "rounded",
           previewSplit: "vertical",
+          previewHeight: hasNvim ? "&lines / 3 * 2" : "&lines / 2",
+          previewWidth: hasNvim ? "&columns / 3" : "&columns / 2",
           prompt: ">",
           split: hasNvim ? "floating" : "horizontal",
           statusline: false,
           winCol: "&columns / 6",
           winRow: "&lines / 6",
-          winWidth: "sources[0] !=# 'action' ? &columns / 3 * 2 : &columns / 3",
-          winHeight: "&lines / 3 * 2",
-          previewWidth: "&columns / 3",
-          previewHeight: "&lines / 3 * 2",
+          winHeight: hasNvim ? "&lines / 3 * 2" : "&lines / 2",
+          winWidth: "&columns / 3 * 2",
         } satisfies Partial<UiFFParams>,
       },
     });
@@ -150,7 +150,7 @@ export class Config extends BaseConfig {
       }],
       uiParams: {
         ff: {
-          ignoreEmpty: true,
+          ignoreEmpty: false,
           autoResize: false,
           startFilter: true,
         } satisfies Partial<UiFFParams>,
