@@ -410,10 +410,6 @@ let g:jplus#config = #{
 '''
 
 [[plugins]]
-repo = 'shinchu/lightline-gruvbox.vim'
-on_source = ['lightline.vim']
-
-[[plugins]]
 repo = 'Shougo/context_filetype.vim'
 on_func = ['context_filetype#get']
 hook_source = '''

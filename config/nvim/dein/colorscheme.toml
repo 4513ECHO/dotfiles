@@ -141,6 +141,13 @@ SignifySignChange = { ctermfg = 110, ctermbg = 234, guifg = '#87afd7', guibg = '
 SignifySignDelete = { ctermfg = 167, ctermbg = 234, guifg = '#d75f5f', guibg = '#1c1c1d' }
 
 [[plugins]]
+repo = 'gruvbox-community/gruvbox'
+[[plugins.colorschemes]]
+name = 'gruvbox'
+[plugins.colorschemes.highlight]
+Visual = { ctermbg = 237, cterm = 'NONE', guibg = '#3c3836', gui = 'NONE' }
+
+[[plugins]]
 repo = 'habamax/vim-gruvbit'
 [[plugins.colorschemes]]
 name = 'gruvbit'
@@ -249,17 +256,6 @@ name =  'OceanicNext'
 lightline = 'oceanicnext'
 
 [[plugins]]
-repo = 'morhetz/gruvbox'
-[[plugins.colorschemes]]
-name = 'gruvbox'
-terminal = [
-  '#282828', '#cc241d', '#98971a', '#d79921', '#458588', '#b16286', '#689d6a', '#a89984',
-  '#928374', '#fb4934', '#b8bb26', '#fabd2f', '#83a598', '#d3869b', '#8ec07c', '#ebdbb2',
-]
-[plugins.colorschemes.highlight]
-Visual = { ctermbg = 237, cterm = 'NONE', guibg = '#3c3836', gui = 'NONE' }
-
-[[plugins]]
 repo = 'mvanderkamp/cocoa.vim'
 [[plugins.colorschemes]]
 name = 'cocoa'
@@ -280,6 +276,7 @@ terminal = [
 repo = 'phanviet/vim-monokai-pro'
 [[plugins.colorschemes]]
 name = 'monokai_pro'
+terminal = 'mini'
 [plugins.colorschemes.highlight]
 # NOTE: Remove term/cterm/gui attrs
 SignifySignAdd = { ctermfg = 231, ctermbg = 64, guifg = '#fcfcfa', guibg = '#47840e' }
@@ -357,7 +354,8 @@ name = 'gruvbox-material'
 lightline = 'gruvbox_material'
 
 [[plugins]]
-repo = 'savq/melange'
+repo = 'savq/melange-nvim'
+if = 'has("nvim")'
 [[plugins.colorschemes]]
 name = 'melange'
 lightline = 'mini'
