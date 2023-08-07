@@ -32,12 +32,12 @@ xnoremap x "_x
 xnoremap s "_s
 xnoremap Y y$
 
-nnoremap n nzzzv<Plug>(VimrcSearchPost)
-nnoremap N Nzzzv<Plug>(VimrcSearchPost)
-nnoremap * *zzzv<Plug>(VimrcSearchPost)
-nnoremap # #zzzv<Plug>(VimrcSearchPost)
-nnoremap g* g*zzzv<Plug>(VimrcSearchPost)
-nnoremap g# g#zzzv<Plug>(VimrcSearchPost)
+nnoremap n n<Plug>(search-post)
+nnoremap N N<Plug>(search-post)
+nnoremap * *<Plug>(search-post)
+nnoremap # #<Plug>(search-post)
+nnoremap g* g*<Plug>(search-post)
+nnoremap g# g#<Plug>(search-post)
 
 " disable arrow keys
 nnoremap <Up> <Nop>
