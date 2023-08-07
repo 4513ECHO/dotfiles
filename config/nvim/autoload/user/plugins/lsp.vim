@@ -78,16 +78,131 @@ export def OnColorScheme(): void
   hlset(hl)
 enddef
 
+const settings = {
+  bash-language-server: { disabled: true },
+  deno: {
+    initialization_options: {
+      enable: true,
+      lint: true,
+      suggest: {
+        autoImports: false,
+        imports: {
+          hosts: {
+            'https://crux.land': true,
+            'https://deno.land': true,
+            'https://x.nest.land': true,
+          },
+        },
+      },
+      unstable: true,
+    },
+  },
+  efm-langserver: {
+    allowlist: ['json', 'lua', 'markdown', 'sh', 'yaml'],
+    disabled: false,
+  },
+  pylsp-all: {
+    cmd: ['pylsp'],
+    workspace_config: {
+      pylsp: {
+        configurationSources: ['flake8'],
+        plugins: {
+          black: { enabled: true },
+          flake8: { enabled: true },
+          mccabe: { enabled: false },
+          pycodestyle: { enabled: false },
+          pyflakes: { enabled: false },
+          pyls_isort: { enabled: true },
+          pylsp_mypy: {
+            enabled: true,
+            overrides: ['--no-pretty', true],
+            report_progress: true,
+          },
+        },
+      },
+    },
+  },
+  sumneko-lua-language-server: {
+    cmd: ['lua-language-server'],
+    workspace_config: {
+      Lua: {
+        completion: { showWord: 'Disable' },
+        diagnostics: {
+          disable: ['lowercase-global'],
+          enable: true,
+          globals: ['vim'],
+        },
+        # NOTE: Use stylua via efm-langserver instead.
+        format: { enable: false },
+        runtime: {
+          path: ['?.lua', '?/init.lua', '?/?.lua'],
+          version: 'LuaJIT',
+        },
+        telemetry: { enable: false },
+        workspace: {
+          checkThirdParty: false,
+          library: [],
+          maxPreload: 1000,
+        },
+      },
+    },
+  },
+  taplo-lsp: {
+    cmd: ['taplo', 'lsp', 'stdio'],
+    workspace_config: {
+      evenBetterToml: {
+        schema: {
+          associations: {
+            '/dein/[^/]+\.toml$': $'file://{g:config_home}/dein/settings/dein.toml.json',
+          },
+        },
+      },
+    },
+  },
+  vim-language-server: { disabled: true },
+  vscode-json-language-server: {
+    cmd: [
+      'deno',
+      'run',
+      '--allow-all',
+      '--no-config',
+      '--no-lock',
+      '--node-modules-dir=false',
+      'npm:vscode-langservers-extracted@4.7.0/vscode-json-language-server',
+      '--stdio',
+    ],
+  },
+  yaml-language-server: {
+    cmd: [
+      g:cache_home .. '/ls/node_modules/yaml-language-server/bin/yaml-language-server',
+      '--stdio',
+    ],
+    workspace_config: {
+      yaml: {
+        completion: true,
+        hover: true,
+        schemas: {
+          'https://mattn.github.io/efm-langserver/schema.json': [
+            '/efm-langserver/config.yaml',
+          ],
+          'https://pax.deno.dev/aquaproj/aqua@v2.11.0-4/json-schema/aqua-yaml.json': [
+            '/aqua/aqua.yaml',
+          ],
+          'https://pax.deno.dev/aquaproj/aqua@v2.11.0-4/json-schema/registry.json': [
+            '/aqua-registry/pkgs/**/registry.yaml',
+            '/aqua-registry/registry.yaml',
+            '/aqua/experimental.yaml',
+            '/aqua/registry.yaml',
+          ],
+        },
+        validate: true,
+      },
+    },
+  },
+}
+
 export def HookAdd(): void
-  # TODO: Move to dict from json
-  g:lsp_settings = (g:config_home .. '/dein/settings/vim-lsp-settings.json')
-    ->readfile()->join()->json_decode()
-  g:lsp_settings['taplo-lsp'].workspace_config.evenBetterToml.schema.associations['/dein/.*\.toml'] =
-    $'file://{g:config_home}/dein/settings/dein.toml.json'
-  g:lsp_settings['yaml-language-server'].cmd = [
-    g:cache_home .. '/ls/node_modules/yaml-language-server/bin/yaml-language-server',
-    '--stdio',
-  ]
+  g:lsp_settings = settings
 
   g:lsp_async_completion = true
   g:lsp_completion_documentation_delay = 50

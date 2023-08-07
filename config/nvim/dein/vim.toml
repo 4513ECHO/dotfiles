@@ -28,7 +28,16 @@ let g:traces_normal_preview = v:true
 repo = 'mattn/vim-lsp-settings'
 depends = ['vim-lsp']
 on_event = ['BufRead']
-hooks_file = '$DEIN_DIR/settings/vim-lsp.vim'
+hook_add = '''
+vim9cmd user#plugins#lsp#HookAdd()
+'''
+hook_source = '''
+if v:vim_did_enter
+  call timer_start(0, { -> lsp#enable() })
+else
+  autocmd vimrc VimEnter * call timer_start(0, { -> lsp#enable() })
+endif
+'''
 
 [[plugins]]
 repo = 'mattn/vim-notification'
