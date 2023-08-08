@@ -78,7 +78,7 @@ export def OnColorScheme(): void
   hlset(hl)
 enddef
 
-const settings = {
+final settings = {
   bash-language-server: { disabled: true },
   deno: {
     initialization_options: {

@@ -63,6 +63,14 @@ denops_notify "vimrc" "cacheLanguageServers" { vim.fn.stdpath "cache" }
 
 lspconfig.efm.setup {
   filetypes = { "json", "lua", "markdown", "sh", "yaml" },
+  init_options = {
+    documentFormatting = true,
+    rangeFormatting = true,
+    hover = true,
+    documentSymbol = true,
+    codeAction = true,
+    completion = true,
+  },
 }
 
 lspconfig.denols.setup {
