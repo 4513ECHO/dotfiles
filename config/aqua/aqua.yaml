@@ -29,7 +29,7 @@ packages:
   - name: ericchiang/pup@v0.4.0
   - name: gohugoio/hugo@v0.117.0
   - name: golang.org/x/tools/gopls@v0.13.1
-  - name: golang/go@go1.20.7
+  - name: golang/go@go1.21.0
   - name: golangci/golangci-lint@v1.53.3
   - name: hadolint/hadolint@v2.12.0
   # - name: hairyhenderson/gomplate@v3.11.5
