@@ -1,8 +1,8 @@
 import type { Denops } from "https://deno.land/x/denops_std@v5.0.1/mod.ts";
 import { ensure, is } from "https://deno.land/x/unknownutil@v3.4.0/mod.ts";
-import { exists } from "https://deno.land/std@0.196.0/fs/exists.ts";
-import { join } from "https://deno.land/std@0.196.0/path/mod.ts";
-import { TextLineStream } from "https://deno.land/std@0.196.0/streams/text_line_stream.ts";
+import { exists } from "https://deno.land/std@0.197.0/fs/exists.ts";
+import { join, toFileUrl } from "https://deno.land/std@0.197.0/path/mod.ts";
+import { TextLineStream } from "https://deno.land/std@0.197.0/streams/text_line_stream.ts";
 
 export function main(denops: Denops): Promise<void> {
   denops.dispatcher = {
@@ -16,21 +16,30 @@ export function main(denops: Denops): Promise<void> {
       };
     },
 
+    async reload(path: unknown): Promise<void> {
+      const mod = await import(
+        `${toFileUrl(ensure(path, is.String)).href}#${performance.now()}`
+      );
+      await mod.main(denops);
+    },
+
     async downloadJisyo(arg: unknown): Promise<unknown> {
       const baseDir = ensure(arg, is.String);
       if (await exists("/usr/share/skk/SKK-JISYO.L", { isFile: true })) {
         return "/usr/share/skk/SKK-JISYO.L";
-      } else if (!(await exists(baseDir, { isDirectory: true }))) {
+      }
+      const jisyoFile = join(baseDir, "SKK-JISYO.L");
+      const url = "https://skk-dev.github.io/dict/SKK-JISYO.L.gz";
+      if (!(await exists(baseDir, { isDirectory: true }))) {
         await denops.cmd("echomsg 'Install SKK-JISYO.L ...'");
-        const url = "https://skk-dev.github.io/dict/SKK-JISYO.L.gz";
         const file = await Deno.mkdir(baseDir, { recursive: true })
-          .then(() => Deno.create(join(baseDir, "SKK-JISYO.L")));
+          .then(() => Deno.create(jisyoFile));
         const response = await fetch(url);
         response.body!
           .pipeThrough(new DecompressionStream("gzip"))
           .pipeTo(file.writable);
       }
-      return join(baseDir, "SKK-JISYO.L");
+      return jisyoFile;
     },
 
     async cacheLanguageServers(arg: unknown): Promise<void> {
