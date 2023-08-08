@@ -51,10 +51,8 @@ set smartcase
 set hlsearch
 set report=0
 if executable('rg')
-  " let &grepprg = 'rg --vimgrep --hidden --sort=path'
-  " set grepformat=%f:%l:%c:%m
   " based on https://github.com/thinca/config/blob/eb27ff47/dotfiles/dot.vim/vimrc#L598
-  set grepprg=vimgrep
+  let &grepprg = 'rg --json $* --sort=path | jq -r ''include "4513echo/ripgrep"; parse'''
   set grepformat=%f:%l:%k:%c:%m
 endif
 

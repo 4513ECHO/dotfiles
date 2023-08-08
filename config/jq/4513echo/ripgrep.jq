@@ -8,4 +8,5 @@ def parse:
   select(.type == "match")
   | .data as $data
   | $data.submatches[]
-  | "\($data.path.text):\($data.line_number):\(.start + 1):\(.end + 1):\($data.lines.text // "" | sub("\n$"; ""))";
+  | [$data.path.text, $data.line_number, .start + 1, .end + 1, $data.lines.text // "" | sub("\n$"; "")]
+  | join(":");
