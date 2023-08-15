@@ -2,21 +2,24 @@
 
 ; :execute command
 ((execute_statement
-  (string_literal) @vim)
- (#offset! @vim 0 1 0 -1))
+  (string_literal) @injection.content)
+ (#set! injection.language "vim")
+ (#offset! @injection.content 0 1 0 -1))
 
 ; command-modifiers
 ((unknown_builtin_statement
  (unknown_command_name) @_cmd
- (arguments) @vim)
+ (arguments) @injection.content)
  (#any-of? @_cmd
   "abroveleft" "belowright"
   "botright" "browse" "confirm" "hide" "keepalt"
   "keepjumps" "keepmarks" "keeppatterns" "leftabrove"
   "lockmarks" "noswapfile" "rightbelow" "silent" "tab"
   "topleft" "verbose" "vertical"
-  "noautocmd" "sandbox" "unsilent"))
+  "noautocmd" "sandbox" "unsilent")
+ (#set! injection.language "vim"))
 
-((comment) @jsdoc
+((comment) @injection.content
  (function_definition)
- (#offset! @jsdoc 0 1 0 0))
+ (#set! injection.language "jsdoc")
+ (#offset! @injection.content 0 1 0 0))
