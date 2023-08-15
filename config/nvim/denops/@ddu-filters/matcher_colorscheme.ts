@@ -2,8 +2,8 @@ import {
   BaseFilter,
   type FilterArguments,
   type OnInitArguments,
-} from "https://deno.land/x/ddu_vim@v3.4.4/base/filter.ts";
-import type { DduItem } from "https://deno.land/x/ddu_vim@v3.4.4/types.ts";
+} from "https://deno.land/x/ddu_vim@v3.5.0/base/filter.ts";
+import type { DduItem } from "https://deno.land/x/ddu_vim@v3.5.0/types.ts";
 import { ensure, is } from "https://deno.land/x/unknownutil@v3.4.0/mod.ts";
 
 export type Params = Record<never, never>;
