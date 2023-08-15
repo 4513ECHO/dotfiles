@@ -1,12 +1,12 @@
-*dotfiles.txt*				My vim configuration files references
+*dotfiles.txt*                           My vim configuration files references
 
 Author: Hibiki <mail@4513echo.dev>
 License: MIT License
 URL: https://github.com/4513ECHO/dotfiles
-Last change: 2023 Apr 18
+Last change: 2023 Aug 15
 
 ==============================================================================
-CONTENTS						*dotfiles-contents*
+CONTENTS                                                   *dotfiles-contents*
 
 Introduction						|dotfiles-introdution|
 Interface						|dotfiles-interface|
@@ -18,93 +18,38 @@ Dark Powered						|dark-powered|
 About							|dotfiles-about|
 
 ==============================================================================
-INTRODUCTION						*dotfiles-introdution*
+INTRODUCTION                                            *dotfiles-introdution*
 
 *dotfiles* is my vim configuration files.
 
 ==============================================================================
-INTERFACE						*dotfiles-interface*
+INTERFACE                                                 *dotfiles-interface*
 
 ------------------------------------------------------------------------------
-COLOR SCHEME						*dotfiles-colorscheme*
+COLOR SCHEME                                            *dotfiles-colorscheme*
 
 Unlet |g:terminal_ansi_colors|, `g:terminal_color_x` (See |terminal-config|)
 in |ColorSchemePre| autocmd.
 
 Following color schemes are available with |:ColorScheme|:
 >
-	deep-space
-	snow
-	challenger_deep
-	falcon
-	dracula
-	nightfly
-	dogrun
-	gruvbit
-	tender
-	github
-	OceanicNext
-	yowish
-	zengarden
-	iceberg
-	nightfox
-	wombat256mod
-	gruvbox-material
-	rigel
-	molokai
-	aquarium
-	miramare
-	cocoa
-	onehalfdark
-	kanagawa
-	ayu
-	edge
-	hydrangea
-	spring-night
-	snazzy
-	vitaminonec
-	momiji
-	srcery
-	gruvbox
-	elly
-	spaceduck
-	felipec
-	vadelma
-	palenight
-	urara
-	solarized8
-	orbital
-	monokai_pro
-	onedark
-	embark
-	apprentice
-	duskfox
-	lighthaus
-	sacredforest
-	stellarized
-	reliquiae
-	melange
-	jellybeans
-	hatsunemiku
-	nordfox
-	candy
-	tokyonight
-	one
-	terafox
-	carbonfox
-	nord
-	night-owl
-	gotham
-	two-firewatch
-	hybrid
+	apprentice aquarium ayu candy carbonfox challenger_deep cocoa
+	deep-space dogrun dracula duskfox edge elly embark falcon felipec
+	github gotham gruvbit gruvbox gruvbox-material hatsunemiku hybrid
+	hydrangea iceberg jellybeans kanagawa lighthaus melange miramare
+	molokai momiji monokai_pro night-owl nightfly nightfox nord nordfox
+	OceanicNext one onedark onehalfdark orbital palenight reliquiae rigel
+	sacredforest snazzy snow solarized8 spaceduck spring-night srcery
+	stellarized tender terafox tokyonight two-firewatch urara vadelma
+	vitaminonec wombat256mod yash yowish zengarden
 
 ------------------------------------------------------------------------------
-COMMANDS						*dotfiles-commands*
+COMMANDS                                                   *dotfiles-commands*
 
-:RTP							*:RTP*
+:RTP                                                                    *:RTP*
 	Output the value of 'runtimepath' human-friendly.
 
-:ColorScheme[!]						*:ColorScheme*
+:ColorScheme[!]                                                 *:ColorScheme*
 	Output the name of the currently active |colorscheme|.
 	If bang exists, this will reload the current colorscheme and output
 	nothing.
@@ -113,41 +58,41 @@ COMMANDS						*dotfiles-commands*
 	Load color scheme {name} more conveniently.
 	This also effects |g:lightline.colorscheme| automatically.
 
-:RandomColorScheme					*:RandomColorScheme*
+:RandomColorScheme                                        *:RandomColorScheme*
 	Load color scheme randomly from definitions.
 
-:WWW {what}						*:WWW*
+:WWW {what}                                                             *:WWW*
 	Search {what} in |terminal| window using "w3m".
 	This uses |termopen()| in Neovim, |term_start()| in Vim.
 
-:MiniNote [{filetype}]					*:MiniNote*
+:MiniNote [{filetype}]                                             *:MiniNote*
 	Open scratch buffer.
 
-:DeinUpdateMine						*:DeinUpdateMine*
+:DeinUpdateMine                                              *:DeinUpdateMine*
 	Call |dein#update()| for the plugins developed by me (4513ECHO).
 
 ------------------------------------------------------------------------------
-MAPPINGS						*dotfiles-mappings*
+MAPPINGS                                                   *dotfiles-mappings*
 
-							*dotfiles-mapleader*
+                                                          *dotfiles-mapleader*
 |<Leader>| is "`,`".
 
- Y							*dotfiles-Y*
+ Y                                                                *dotfiles-Y*
 	This is same as `y$`. This traces |default-mappings| of Neovim.
 
-CTRL-L							*dotfiles-CTRL-L*
+CTRL-L                                                       *dotfiles-CTRL-L*
 
-[Space]w						*SPACE-w*
+[Space]w                                                             *SPACE-w*
 
-[Space]W						*SPACE-W*
+[Space]W                                                             *SPACE-W*
 
-[Space]f						*SPACE-f*
+[Space]f                                                             *SPACE-f*
 
- ^							*dotfiles-^*
+ ^                                                                *dotfiles-^*
 	This is same as |CTRL-^|, just a shortcut for it.
 
 ==============================================================================
-DIRECTORY STRUCTURE					*directory-structure*
+DIRECTORY STRUCTURE                                      *directory-structure*
 
 >
 	after/
@@ -170,11 +115,11 @@ specific plugins settings.
 |ddu-sources|.
 
 ==============================================================================
-DARK POWERED						*dark-powered*
+DARK POWERED                                                    *dark-powered*
 
 Here is mean of "dark powered" in Shougo wares (e.g. |dein|, |ddc|, |ddu|)
-This section is moved from |deoplete-faq-general|
-(https://github.com/Shougo/deoplete.nvim/blob/33ed4fa0/doc/deoplete.txt#L1966).
+This section is moved from |deoplete-faq-general|.
+(https://github.com/Shougo/deoplete.nvim/blob/33ed4fa0/doc/deoplete.txt#L1966)
 
 Q: What means "dark powered"?
 
@@ -184,10 +129,10 @@ A: I think text editor is everything in the world. I want to do everything in
    dark Vimmer. My plugins are dark powered.
 
 ==============================================================================
-ABOUT							*dotfiles-about*
+ABOUT                                                         *dotfiles-about*
 
-|dotfiles| is developed by Hibiki(4513ECHO) and licensed under the
-MIT License. Visit the project page for the latest version:
+|dotfiles| is developed by Hibiki(4513ECHO) and licensed under the MIT
+License. Visit the project page for the latest version:
 
 	https://github.com/4513ECHO/dotfiles
 

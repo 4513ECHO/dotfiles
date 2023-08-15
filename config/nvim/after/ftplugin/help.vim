@@ -25,7 +25,7 @@ endfunction
 function! s:right_align(lnum) abort
   let m = a:lnum->getline()->matchlist('\v' .. [
         \ '^(\s*\S+%(\s\S+)?)?\s+(\*\S+\*)\s*$',
-        \ '^(\*\S+\*)\s+(\S.+)\s*$']->join('|'))
+        \ '^(\*\S+\*)\s\s+(\S.+)\s*$']->join('|'))
   if empty(m)
     return
   endif
