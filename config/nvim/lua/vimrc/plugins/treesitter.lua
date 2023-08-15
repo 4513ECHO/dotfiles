@@ -20,8 +20,11 @@ local function disable_highlight(lang, bufnr)
     )
 end
 
+vim.opt.runtimepath:append(vim.fn.stdpath "data" .. "/parsers")
+
 ---@diagnostic disable-next-line: missing-fields
 require("nvim-treesitter.configs").setup {
+  parser_install_dir = vim.fn.stdpath "data" .. "/parsers",
   ensure_installed = {
     "bash",
     "go",
