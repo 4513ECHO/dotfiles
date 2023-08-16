@@ -58,7 +58,9 @@ autocmd vimrc User SearchxInputChanged call hitspop#main()
 
 [[plugins]]
 repo = 'obcat/vim-sclow'
+lazy = true
 hook_add = '''
+autocmd vimrc VimEnter * ++once call timer_start(0, { -> dein#source('vim-sclow') })
 let g:sclow_hide_full_length = v:true
 '''
 

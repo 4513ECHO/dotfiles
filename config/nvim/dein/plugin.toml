@@ -315,7 +315,6 @@ on_path = ['^https\?://']
 
 [[plugins]]
 repo = 'lambdalisue/vim-quickrun-neovim-job'
-if = 'has("nvim")'
 
 [[plugins]]
 repo = 'machakann/vim-highlightedundo'
@@ -437,7 +436,6 @@ xnoremap <Leader>t :Translate<CR>
 
 [[plugins]]
 repo = 'statiolake/vim-quickrun-runner-nvimterm'
-if = 'has("nvim")'
 
 [[plugins]]
 repo = 'rhysd/clever-f.vim'
