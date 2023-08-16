@@ -1,5 +1,6 @@
 # vim
 config/nvim/colors/*
+config/nvim/tags
 
 # zsh
 config/zsh/.zcompdump*
