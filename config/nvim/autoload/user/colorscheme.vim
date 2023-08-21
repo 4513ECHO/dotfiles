@@ -125,7 +125,6 @@ function! user#colorscheme#update_lightline() abort
   call lightline#update()
 endfunction
 
-function! user#colorscheme#completion(ArgLead, CmdLine, CursorPos) abort
-  let items = user#colorscheme#get()->keys()->copy()
-  return empty(a:ArgLead) ? sort(items) : matchfuzzy(items, a:ArgLead)
+function! user#colorscheme#completion(...) abort
+  return user#colorscheme#get()->keys()->join("\n")
 endfunction

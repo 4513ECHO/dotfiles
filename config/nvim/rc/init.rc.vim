@@ -43,7 +43,7 @@ command! -bar RTP echo &runtimepath->substitute(',', "\n", 'g')
 
 command! -bar RandomColorScheme call user#colorscheme#random()
 
-command! -nargs=? -bar -bang -complete=customlist,user#colorscheme#completion
+command! -nargs=? -bar -bang -complete=custom,user#colorscheme#completion
       \ ColorScheme call user#colorscheme#command(<q-args>, <bang>0)
 
 " from https://qiita.com/gorilla0513/items/11be5413405792337558
