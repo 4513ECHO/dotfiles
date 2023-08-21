@@ -7,6 +7,9 @@ local denops_notify = require("vimrc.plugins.lsp.util").denops_notify
 
 autocmd "LspAttach" {
   callback = function(ctx)
+    if vim.lsp.get_client_by_id(ctx.data.client_id).name == "copilot" then
+      return
+    end
     local filetype =
       vim.api.nvim_get_option_value("filetype", { buf = ctx.buf })
     local opts = { buffer = true }
