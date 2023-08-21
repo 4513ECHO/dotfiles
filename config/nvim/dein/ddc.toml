@@ -1,5 +1,5 @@
 [[plugins]]
-repo = 'Shougo/ddc.vim'
+repo = 'https://github.com/Shougo/ddc.vim'
 depends = ['denops.vim', 'pum.vim']
 on_event = ['InsertEnter']
 hooks_file = '$DEIN_DIR/settings/ddc.vim'
@@ -7,47 +7,47 @@ hooks_file = '$DEIN_DIR/settings/ddc.vim'
 # UI
 
 [[plugins]]
-repo = 'Shougo/ddc-ui-pum'
+repo = 'https://github.com/Shougo/ddc-ui-pum'
 
 # sources
 
 [[plugins]]
-repo = '4513echo/ddc-github'
+repo = 'https://github.com/4513ECHO/ddc-github'
 
 [[plugins]]
-repo = 'LumaKernel/ddc-source-file'
+repo = 'https://github.com/LumaKernel/ddc-source-file'
 
 [[plugins]]
-repo = 'Shougo/ddc-source-around'
+repo = 'https://github.com/Shougo/ddc-source-around'
 
 [[plugins]]
-repo = 'Shougo/ddc-source-cmdline'
+repo = 'https://github.com/Shougo/ddc-source-cmdline'
 
 [[plugins]]
-repo = 'Shougo/ddc-source-line'
+repo = 'https://github.com/Shougo/ddc-source-line'
 
 [[plugins]]
-repo = 'Shougo/ddc-source-mocword'
+repo = 'https://github.com/Shougo/ddc-source-mocword'
 
 [[plugins]]
-repo = 'Shougo/ddc-source-nvim-lsp'
+repo = 'https://github.com/Shougo/ddc-source-nvim-lsp'
 if = 'has("nvim")'
 
 [[plugins]]
-repo = 'Shougo/ddc-source-omni'
+repo = 'https://github.com/Shougo/ddc-source-omni'
 
 [[plugins]]
-repo = 'Shougo/ddc-source-shell-native'
+repo = 'https://github.com/Shougo/ddc-source-shell-native'
 
 [[plugins]]
-repo = 'Shougo/neco-vim'
+repo = 'https://github.com/Shougo/neco-vim'
 on_ft = ['toml', 'vim']
 
 [[plugins]]
-repo = 'delphinus/ddc-tmux'
+repo = 'https://github.com/delphinus/ddc-tmux'
 
 [[plugins]]
-repo = 'hrsh7th/vim-vsnip'
+repo = 'https://github.com/hrsh7th/vim-vsnip'
 on_source = ['ddc.vim']
 hook_add = '''
 let g:vsnip_snippet_dir = g:config_home .. '/snippets'
@@ -56,30 +56,30 @@ snoremap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : ''
 '''
 
 [[plugins]]
-repo = 'matsui54/ddc-buffer'
+repo = 'https://github.com/matsui54/ddc-buffer'
 
 [[plugins]]
-repo = 'shun/ddc-source-vim-lsp'
+repo = 'https://github.com/shun/ddc-source-vim-lsp'
 if = '!has("nvim")'
 
 [[plugins]]
-repo = 'uga-rosa/ddc-source-vsnip'
+repo = 'https://github.com/uga-rosa/ddc-source-vsnip'
 
 [[plugins]]
-repo = 'vim-skk/skkeleton'
+repo = 'https://github.com/vim-skk/skkeleton'
 denops_wait = false
 hooks_file = '$DEIN_DIR/settings/skkeleton.vim'
 
 # filters
 
 [[plugins]]
-repo = 'Shougo/ddc-filter-converter_remove_overlap'
+repo = 'https://github.com/Shougo/ddc-filter-converter_remove_overlap'
 
 [[plugins]]
-repo = 'matsui54/ddc-converter_truncate'
+repo = 'https://github.com/matsui54/ddc-converter_truncate'
 
 [[plugins]]
-repo = 'tani/ddc-fuzzy'
+repo = 'https://github.com/tani/ddc-fuzzy'
 hook_add = '''
 autocmd vimrc ColorScheme * hi def link FuzzyAccent Number
 '''
@@ -87,7 +87,7 @@ autocmd vimrc ColorScheme * hi def link FuzzyAccent Number
 # popup windows
 
 [[plugins]]
-repo = 'Shougo/pum.vim'
+repo = 'https://github.com/Shougo/pum.vim'
 hook_source = '''
 call pum#set_option(#{
       \ highlight_columns: #{
@@ -101,7 +101,7 @@ call pum#set_option(#{
 '''
 
 [[plugins]]
-repo = 'matsui54/denops-popup-preview.vim'
+repo = 'https://github.com/matsui54/denops-popup-preview.vim'
 depends = ['denops.vim']
 hook_add = '''
 let g:popup_preview_config = #{
@@ -111,7 +111,7 @@ autocmd vimrc TextChangedI * ++once ++nested call popup_preview#enable()
 '''
 
 [[plugins]]
-repo = 'matsui54/denops-signature_help'
+repo = 'https://github.com/matsui54/denops-signature_help'
 depends = ['denops.vim']
 hook_add = '''
 let g:signature_help_config = #{

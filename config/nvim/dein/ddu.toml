@@ -1,5 +1,5 @@
 [[plugins]]
-repo = 'Shougo/ddu.vim'
+repo = 'https://github.com/Shougo/ddu.vim'
 depends = ['denops.vim']
 on_func = ['ddu#start']
 hook_add = '''
@@ -22,14 +22,14 @@ call ddu#custom#load_config(expand('$DEIN_DIR/settings/ddu.ts'))
 '''
 
 [[plugins]]
-repo = 'Shougo/ddu-commands.vim'
+repo = 'https://github.com/Shougo/ddu-commands.vim'
 depends = ['ddu.vim']
 on_cmd = ['Ddu']
 
 # UI
 
 [[plugins]]
-repo = 'Shougo/ddu-ui-ff'
+repo = 'https://github.com/Shougo/ddu-ui-ff'
 [plugins.ftplugin]
 ddu-ff = '''
 setlocal cursorline signcolumn=yes
@@ -80,90 +80,90 @@ inoremap <buffer> <C-p> <Cmd>call ddu#ui#do_action('cursorPrevious')<CR>
 # filters
 
 [[plugins]]
-repo = 'Shougo/ddu-filter-matcher_hidden'
+repo = 'https://github.com/Shougo/ddu-filter-matcher_hidden'
 
 [[plugins]]
-repo = 'Shougo/ddu-filter-matcher_relative'
+repo = 'https://github.com/Shougo/ddu-filter-matcher_relative'
 
 [[plugins]]
-repo = 'Shougo/ddu-filter-matcher_substring'
+repo = 'https://github.com/Shougo/ddu-filter-matcher_substring'
 
 [[plugins]]
-repo = 'yuki-yano/ddu-filter-fzf'
+repo = 'https://github.com/yuki-yano/ddu-filter-fzf'
 
 # kinds
 
 [[plugins]]
-repo = '4513echo/ddu-kind-url'
+repo = 'https://github.com/4513ECHO/ddu-kind-url'
 depends = ['open-browser.vim']
 
 [[plugins]]
-repo = 'Shougo/ddu-kind-file'
+repo = 'https://github.com/Shougo/ddu-kind-file'
 
 [[plugins]]
-repo = 'Shougo/ddu-kind-word'
+repo = 'https://github.com/Shougo/ddu-kind-word'
 
 # sources
 
 [[plugins]]
-repo = '4513echo/ddu-source-colorscheme'
+repo = 'https://github.com/4513ECHO/ddu-source-colorscheme'
 
 [[plugins]]
-repo = '4513echo/ddu-source-emoji'
+repo = 'https://github.com/4513ECHO/ddu-source-emoji'
 
 [[plugins]]
-repo = '4513echo/ddu-source-ghq'
+repo = 'https://github.com/4513ECHO/ddu-source-ghq'
 
 [[plugins]]
-repo = '4513echo/ddu-source-pypi_classifiers'
+repo = 'https://github.com/4513ECHO/ddu-source-pypi_classifiers'
 
 [[plugins]]
-repo = '4513echo/ddu-source-source'
+repo = 'https://github.com/4513ECHO/ddu-source-source'
 
 [[plugins]]
-repo = 'kuuote/ddu-source-mr'
+repo = 'https://github.com/kuuote/ddu-source-mr'
 
 [[plugins]]
-repo = 'kuuote/ddu-source-tags'
+repo = 'https://github.com/kuuote/ddu-source-tags'
 
 [[plugins]]
-repo = 'Shougo/ddu-source-action'
+repo = 'https://github.com/Shougo/ddu-source-action'
 
 [[plugins]]
-repo = 'Shougo/ddu-source-file'
+repo = 'https://github.com/Shougo/ddu-source-file'
 
 [[plugins]]
-repo = 'Shougo/ddu-source-file_rec'
+repo = 'https://github.com/Shougo/ddu-source-file_rec'
 
 [[plugins]]
-repo = 'Shougo/ddu-source-line'
+repo = 'https://github.com/Shougo/ddu-source-line'
 
 [[plugins]]
-repo = 'Shougo/ddu-source-register'
+repo = 'https://github.com/Shougo/ddu-source-register'
 
 [[plugins]]
-repo = 'matsui54/ddu-source-dein_update'
+repo = 'https://github.com/matsui54/ddu-source-dein_update'
 
 [[plugins]]
-repo = 'matsui54/ddu-source-file_external'
+repo = 'https://github.com/matsui54/ddu-source-file_external'
 
 [[plugins]]
-repo = 'matsui54/ddu-source-command_history'
+repo = 'https://github.com/matsui54/ddu-source-command_history'
 
 [[plugins]]
-repo = 'matsui54/ddu-source-help'
+repo = 'https://github.com/matsui54/ddu-source-help'
 
 [[plugins]]
-repo = 'matsui54/ddu-source-man'
+repo = 'https://github.com/matsui54/ddu-source-man'
 
 [[plugins]]
-repo = 'shun/ddu-source-buffer'
+repo = 'https://github.com/shun/ddu-source-buffer'
 
 [[plugins]]
-repo = 'shun/ddu-source-rg'
+repo = 'https://github.com/shun/ddu-source-rg'
 
 [[plugins]]
-repo = 'uga-rosa/ddu-source-lsp'
+repo = 'https://github.com/uga-rosa/ddu-source-lsp'
 
 [[plugins]]
-repo = 'yuki-yano/ddu-source-nvim-notify'
+repo = 'https://github.com/yuki-yano/ddu-source-nvim-notify'

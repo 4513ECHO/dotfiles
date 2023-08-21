@@ -1,5 +1,5 @@
 [[plugins]]
-repo = 'machakann/vim-sandwich'
+repo = 'https://github.com/machakann/vim-sandwich'
 on_map = { xno = '<Plug>', n = '<Plug>(operator-sandwich-dot)' }
 hook_add = '''
 " vim-surround like mappings
@@ -16,7 +16,7 @@ call operator#sandwich#set('add', 'char', 'skip_space', 1)
 '''
 
 [[plugins]]
-repo = 'yuki-yano/vim-textobj-generics'
+repo = 'https://github.com/yuki-yano/vim-textobj-generics'
 depends = ['vim-sandwich', 'vim-textobj-functioncall']
 on_source = ['vim-sandwich']
 on_map = { xo = '<Plug>' }
@@ -48,13 +48,13 @@ let g:sandwich#recipes = get(g:, 'sandwich#recipes', g:sandwich#default_recipes)
 '''
 
 [[plugins]]
-repo = 'kana/vim-operator-user'
+repo = 'https://github.com/kana/vim-operator-user'
 
 [[plugins]]
-repo = 'kana/vim-textobj-user'
+repo = 'https://github.com/kana/vim-textobj-user'
 
 [[plugins]]
-repo = 'kana/vim-textobj-indent'
+repo = 'https://github.com/kana/vim-textobj-indent'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
 hook_add = '''
@@ -69,7 +69,7 @@ xnoremap iI <Plug>(textobj-indent-same-i)
 '''
 
 [[plugins]]
-repo = 'kana/vim-textobj-entire'
+repo = 'https://github.com/kana/vim-textobj-entire'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
 hook_add = '''
@@ -80,7 +80,7 @@ xnoremap ie <Plug>(textobj-entire-i)
 '''
 
 [[plugins]]
-repo = 'kana/vim-textobj-line'
+repo = 'https://github.com/kana/vim-textobj-line'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
 hook_add = '''
@@ -91,7 +91,7 @@ xnoremap il <Plug>(textobj-line-i)
 '''
 
 [[plugins]]
-repo = 'machakann/vim-textobj-functioncall'
+repo = 'https://github.com/machakann/vim-textobj-functioncall'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
 hook_add = '''
@@ -110,7 +110,7 @@ xnoremap if <Plug>(textobj-functioncall-innerparen-i)
 '''
 
 [[plugins]]
-repo = 'osyo-manga/vim-textobj-context'
+repo = 'https://github.com/osyo-manga/vim-textobj-context'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
 hook_add = '''
@@ -119,7 +119,7 @@ xnoremap ix <Plug>(textobj-context-i)
 '''
 
 [[plugins]]
-repo = 'rhysd/vim-textobj-anyblock'
+repo = 'https://github.com/rhysd/vim-textobj-anyblock'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
 hook_add = '''
@@ -130,7 +130,7 @@ xnoremap ib <Plug>(textobj-anyblock-i)
 '''
 
 [[plugins]]
-repo = 'rhysd/vim-textobj-wiw'
+repo = 'https://github.com/rhysd/vim-textobj-wiw'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
 hook_add = '''
@@ -142,7 +142,7 @@ xnoremap iu <Plug>(textobj-wiw-i)
 '''
 
 [[plugins]]
-repo = 'thinca/vim-textobj-between'
+repo = 'https://github.com/thinca/vim-textobj-between'
 on_map = { xo = '<Plug>' }
 depends = ['vim-textobj-user']
 hook_add = '''

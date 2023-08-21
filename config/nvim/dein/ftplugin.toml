@@ -150,10 +150,10 @@ setlocal formatoptions-=ro textwidth=0
 '''
 
 [[plugins]]
-repo = '4513echo/vim-jq-indent'
+repo = 'https://github.com/4513ECHO/vim-jq-indent'
 
 [[plugins]]
-repo = '4513echo/vim-vimhelp-hoptag'
+repo = 'https://github.com/4513ECHO/vim-vimhelp-hoptag'
 [plugins.ftplugin]
 help = '''
 nnoremap <buffer> <C-n> <Plug>(hoptag-next)
@@ -161,11 +161,11 @@ nnoremap <buffer> <C-p> <Plug>(hoptag-prev)
 '''
 
 [[plugins]]
-repo = 'bfrg/vim-jq'
+repo = 'https://github.com/bfrg/vim-jq'
 merge_ftdetect = true
 
 [[plugins]]
-repo = 'cohama/vim-hier'
+repo = 'https://github.com/cohama/vim-hier'
 on_event = ['QuickFixCmdPost']
 [plugins.ftplugin]
 qf = '''
@@ -176,7 +176,7 @@ autocmd vimrc WinClosed <buffer>
 '''
 
 [[plugins]]
-repo = 'Fymyte/rasi.vim'
+repo = 'https://github.com/Fymyte/rasi.vim'
 merge_ftdetect = true
 [plugins.ftplugin]
 rasi = '''
@@ -184,33 +184,33 @@ setlocal shiftwidth=4 indentkeys=0{,0},o,O
 '''
 
 [[plugins]]
-repo = 'itchyny/vim-qfedit'
+repo = 'https://github.com/itchyny/vim-qfedit'
 on_event = ['QuickFixCmdPost']
 
 [[plugins]]
-repo = 'lark-parser/vim-lark-syntax'
+repo = 'https://github.com/lark-parser/vim-lark-syntax'
 merge_ftdetect = true
 
 [[plugins]]
-repo = 'lifepillar/pgsql.vim'
+repo = 'https://github.com/lifepillar/pgsql.vim'
 merge_ftdetect = true
 hook_add = '''
 let g:sql_type_default = 'pgsql'
 '''
 
 [[plugins]]
-repo = 'MTDL9/vim-log-highlighting'
+repo = 'https://github.com/MTDL9/vim-log-highlighting'
 merge_ftdetect = true
 
 [[plugins]]
-repo = 'rbtnn/vim-vimscript_indentexpr'
+repo = 'https://github.com/rbtnn/vim-vimscript_indentexpr'
 
 [[plugins]]
-repo = 'syusui-s/scrapbox-vim'
+repo = 'https://github.com/syusui-s/scrapbox-vim'
 merge_ftdetect = true
 
 [[plugins]]
-repo = 'thinca/vim-qfreplace'
+repo = 'https://github.com/thinca/vim-qfreplace'
 on_cmd = ['Qfreplace']
 [plugins.ftplugin]
 qf = '''
@@ -221,13 +221,13 @@ nnoremap <buffer> q <C-w>q
 '''
 
 [[plugins]]
-repo = 'tmux-plugins/vim-tmux'
+repo = 'https://github.com/tmux-plugins/vim-tmux'
 merge_ftdetect = true
 
 [[plugins]]
-repo = 'tpope/vim-git'
+repo = 'https://github.com/tpope/vim-git'
 merge_ftdetect = true
 
 [[plugins]]
-repo = 'vim-skk/skkdict.vim'
+repo = 'https://github.com/vim-skk/skkdict.vim'
 merge_ftdetect = true

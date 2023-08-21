@@ -1,31 +1,31 @@
 [[plugins]]
-repo = 'cocopon/colorswatch.vim'
+repo = 'https://github.com/cocopon/colorswatch.vim'
 on_cmd = ['ColorSwatchGenerate']
 
 [[plugins]]
-repo = 'cocopon/inspecthi.vim'
+repo = 'https://github.com/cocopon/inspecthi.vim'
 depends = ['colorswatch.vim']
 on_cmd = ['Inspecthi']
 
 [[plugins]]
-repo = 'leafgarland/typescript-vim'
+repo = 'https://github.com/leafgarland/typescript-vim'
 
 [[plugins]]
-repo = 'machakann/vim-highlightedyank'
+repo = 'https://github.com/machakann/vim-highlightedyank'
 on_event = ['TextYankPost']
 hook_add = '''
 let g:highlightedyank_highlight_duration = 100
 '''
 
 [[plugins]]
-repo = 'markonm/traces.vim'
+repo = 'https://github.com/markonm/traces.vim'
 on_event = ['CmdlineEnter']
 hook_add = '''
 let g:traces_normal_preview = v:true
 '''
 
 [[plugins]]
-repo = 'mattn/vim-lsp-settings'
+repo = 'https://github.com/mattn/vim-lsp-settings'
 depends = ['vim-lsp']
 on_event = ['BufRead']
 hook_add = '''
@@ -40,11 +40,11 @@ endif
 '''
 
 [[plugins]]
-repo = 'mattn/vim-notification'
+repo = 'https://github.com/mattn/vim-notification'
 on_func = ['notification#']
 
 [[plugins]]
-repo = 'obcat/vim-hitspop'
+repo = 'https://github.com/obcat/vim-hitspop'
 on_event = ['CmdlineLeave']
 on_func = ['hitspop#main']
 hook_add = '''
@@ -57,7 +57,7 @@ autocmd vimrc User SearchxInputChanged call hitspop#main()
 '''
 
 [[plugins]]
-repo = 'obcat/vim-sclow'
+repo = 'https://github.com/obcat/vim-sclow'
 lazy = true
 hook_add = '''
 autocmd vimrc VimEnter * ++once call timer_start(0, { -> dein#source('vim-sclow') })
@@ -65,12 +65,12 @@ let g:sclow_hide_full_length = v:true
 '''
 
 [[plugins]]
-repo = 'prabirshrestha/vim-lsp'
+repo = 'https://github.com/prabirshrestha/vim-lsp'
 on_source = ['vim-lsp-settings']
 
 [[plugins]]
-repo = 'rbtnn/vim-coloredit'
+repo = 'https://github.com/rbtnn/vim-coloredit'
 on_cmd = ['ColorEdit']
 
 [[plugins]]
-repo = 'vim-jp/syntax-vim-ex'
+repo = 'https://github.com/vim-jp/syntax-vim-ex'

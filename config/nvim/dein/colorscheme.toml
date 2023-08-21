@@ -1,18 +1,18 @@
 
 [[plugins]]
-repo = '4513echo/vim-colors-hatsunemiku'
+repo = 'https://github.com/4513ECHO/vim-colors-hatsunemiku'
 [[plugins.colorschemes]]
 name = 'hatsunemiku'
 # [[plugins.colorschemes]]
 # name = 'hatsunemiku_light'
 
 [[plugins]]
-repo = 'arcticicestudio/nord-vim'
+repo = 'https://github.com/arcticicestudio/nord-vim'
 [[plugins.colorschemes]]
 name = 'nord'
 
 [[plugins]]
-repo = 'ayu-theme/ayu-vim'
+repo = 'https://github.com/ayu-theme/ayu-vim'
 [[plugins.colorschemes]]
 name = 'ayu'
 [plugins.colorschemes.highlight]
@@ -20,48 +20,48 @@ name = 'ayu'
 SignifySignDelete = { ctermfg = 12, ctermbg = 6, guifg = '#0000ff', guibg = '#008080' }
 
 [[plugins]]
-repo = 'bluz71/vim-nightfly-guicolors'
+repo = 'https://github.com/bluz71/vim-nightfly-guicolors'
 [[plugins.colorschemes]]
 name = 'nightfly'
 
 [[plugins]]
-repo = 'challenger-deep-theme/vim'
+repo = 'https://github.com/challenger-deep-theme/vim'
 name = 'challenger-deep-theme'
 [[plugins.colorschemes]]
 name = 'challenger_deep'
 
 [[plugins]]
-repo = 'cocopon/iceberg.vim'
+repo = 'https://github.com/cocopon/iceberg.vim'
 [[plugins.colorschemes]]
 name = 'iceberg'
 [plugins.colorschemes.highlight]
 String = { ctermfg = 144, guifg = '#a7b1a9' }
 
 [[plugins]]
-repo = 'connorholyday/vim-snazzy'
+repo = 'https://github.com/connorholyday/vim-snazzy'
 [[plugins.colorschemes]]
 name = 'snazzy'
 
 [[plugins]]
-repo = 'cormacrelf/vim-colors-github'
+repo = 'https://github.com/cormacrelf/vim-colors-github'
 [[plugins.colorschemes]]
 name = 'github'
 [plugins.colorschemes.highlight]
 EndOfBuffer = { ctermfg = 'NONE', guibg = 'NONE' }
 
 [[plugins]]
-repo = 'dracula/vim'
+repo = 'https://github.com/dracula/vim'
 name = 'dracula'
 [[plugins.colorschemes]]
 name = 'dracula'
 
 [[plugins]]
-repo = 'drewtempelmeyer/palenight.vim'
+repo = 'https://github.com/drewtempelmeyer/palenight.vim'
 [[plugins.colorschemes]]
 name = 'palenight'
 
 [[plugins]]
-repo = 'EdenEast/nightfox.nvim'
+repo = 'https://github.com/EdenEast/nightfox.nvim'
 [[plugins.colorschemes]]
 name = 'nightfox'
 [[plugins.colorschemes]]
@@ -78,26 +78,26 @@ name = 'carbonfox'
 # name = 'dayfox'
 
 [[plugins]]
-repo = 'embark-theme/vim'
+repo = 'https://github.com/embark-theme/vim'
 name = 'embark-theme'
 [[plugins.colorschemes]]
 name = 'embark'
 
 [[plugins]]
-repo = 'fcpg/vim-orbital'
+repo = 'https://github.com/fcpg/vim-orbital'
 [[plugins.colorschemes]]
 name = 'orbital'
 terminal = 'mini'
 
 [[plugins]]
-repo = 'felipec/vim-felipec'
+repo = 'https://github.com/felipec/vim-felipec'
 [[plugins.colorschemes]]
 name = 'felipec'
 [plugins.colorschemes.highlight]
 NonText = { ctermbg = 'NONE', guibg = 'NONE' }
 
 [[plugins]]
-repo = 'fenetikm/falcon'
+repo = 'https://github.com/fenetikm/falcon'
 hook_add = '''
 let g:loaded_falcon = v:true
 '''
@@ -109,12 +109,12 @@ Normal = { ctermfg = 249, guifg = '#b4b4b9', ctermbg = 0, guibg = '#000000' }
 NonText = { ctermfg = 237, guifg = '#36363a', ctermbg = 'NONE', guibg = 'NONE' }
 
 [[plugins]]
-repo = 'franbach/miramare'
+repo = 'https://github.com/franbach/miramare'
 [[plugins.colorschemes]]
 name = 'miramare'
 
 [[plugins]]
-repo = 'FrenzyExists/aquarium-vim'
+repo = 'https://github.com/FrenzyExists/aquarium-vim'
 [[plugins.colorschemes]]
 name = 'aquarium'
 terminal = 'mini'
@@ -125,12 +125,12 @@ NonText = 'Comment'
 SignifySignDelete = { ctermfg = 12, ctermbg = 6, guifg = '#ebb9b9', guibg = '#20202a' }
 
 [[plugins]]
-repo = 'ghifarit53/tokyonight-vim'
+repo = 'https://github.com/ghifarit53/tokyonight-vim'
 [[plugins.colorschemes]]
 name = 'tokyonight'
 
 [[plugins]]
-repo = 'gkapfham/vim-vitamin-onec'
+repo = 'https://github.com/gkapfham/vim-vitamin-onec'
 [[plugins.colorschemes]]
 name = 'vitaminonec'
 lightline = 'mini'
@@ -141,38 +141,38 @@ SignifySignChange = { ctermfg = 110, ctermbg = 234, guifg = '#87afd7', guibg = '
 SignifySignDelete = { ctermfg = 167, ctermbg = 234, guifg = '#d75f5f', guibg = '#1c1c1d' }
 
 [[plugins]]
-repo = 'gruvbox-community/gruvbox'
+repo = 'https://github.com/gruvbox-community/gruvbox'
 [[plugins.colorschemes]]
 name = 'gruvbox'
 [plugins.colorschemes.highlight]
 Visual = { ctermbg = 237, cterm = 'NONE', guibg = '#3c3836', gui = 'NONE' }
 
 [[plugins]]
-repo = 'habamax/vim-gruvbit'
+repo = 'https://github.com/habamax/vim-gruvbit'
 [[plugins.colorschemes]]
 name = 'gruvbit'
 
 [[plugins]]
-repo = 'haishanh/night-owl.vim'
+repo = 'https://github.com/haishanh/night-owl.vim'
 [[plugins.colorschemes]]
 name = 'night-owl'
 lightline = 'nightowl'
 
 [[plugins]]
-repo = 'haystackandroid/snow'
+repo = 'https://github.com/haystackandroid/snow'
 [[plugins.colorschemes]]
 name = 'snow'
 lightline = 'snow_dark'
 
 [[plugins]]
-repo = 'haystackandroid/stellarized'
+repo = 'https://github.com/haystackandroid/stellarized'
 [[plugins.colorschemes]]
 name = 'stellarized'
 lightline = 'stellarized_dark'
 terminal = 'mini'
 
 [[plugins]]
-repo = 'haxibami/urara.vim'
+repo = 'https://github.com/haxibami/urara.vim'
 [[plugins.colorschemes]]
 name = 'urara'
 
@@ -198,17 +198,17 @@ lightline = 'mini'
 terminal = 'mini'
 
 [[plugins]]
-repo = 'jacoborus/tender.vim'
+repo = 'https://github.com/jacoborus/tender.vim'
 [[plugins.colorschemes]]
 name = 'tender'
 
 [[plugins]]
-repo = 'joshdick/onedark.vim'
+repo = 'https://github.com/joshdick/onedark.vim'
 [[plugins.colorschemes]]
 name = 'onedark'
 
 [[plugins]]
-repo = 'KabbAmine/yowish.vim'
+repo = 'https://github.com/KabbAmine/yowish.vim'
 [[plugins.colorschemes]]
 name = 'yowish'
 terminal = 'mini'
@@ -216,18 +216,18 @@ terminal = 'mini'
 Directory = 'Statement'
 
 [[plugins]]
-repo = 'karoliskoncevicius/sacredforest-vim'
+repo = 'https://github.com/karoliskoncevicius/sacredforest-vim'
 [[plugins.colorschemes]]
 name = 'sacredforest'
 
 [[plugins]]
-repo = 'kihachi2000/yash.nvim'
+repo = 'https://github.com/kihachi2000/yash.nvim'
 if = 'has("nvim")'
 [[plugins.colorschemes]]
 name = 'yash'
 
 [[plugins]]
-repo = 'kyoh86/momiji'
+repo = 'https://github.com/kyoh86/momiji'
 [[plugins.colorschemes]]
 name = 'momiji'
 terminal = 'mini'
@@ -236,7 +236,7 @@ terminal = 'mini'
 SignifySignDelete = { ctermfg = 9, ctermbg = 0, guifg = '#f5875b', guibg = '#140c0c' }
 
 [[plugins]]
-repo = 'lifepillar/vim-solarized8'
+repo = 'https://github.com/lifepillar/vim-solarized8'
 [[plugins.colorschemes]]
 name = 'solarized8'
 lightline = 'solarized'
@@ -245,18 +245,18 @@ lightline = 'solarized'
 SignifySignDelete = { ctermfg = 160, ctermbg = 236, guifg = '#dc322f', guibg = '#073642' }
 
 [[plugins]]
-repo = 'lighthaus-theme/vim-lighthaus'
+repo = 'https://github.com/lighthaus-theme/vim-lighthaus'
 [[plugins.colorschemes]]
 name = 'lighthaus'
 
 [[plugins]]
-repo = 'mhartington/oceanic-next'
+repo = 'https://github.com/mhartington/oceanic-next'
 [[plugins.colorschemes]]
 name =  'OceanicNext'
 lightline = 'oceanicnext'
 
 [[plugins]]
-repo = 'mvanderkamp/cocoa.vim'
+repo = 'https://github.com/mvanderkamp/cocoa.vim'
 [[plugins.colorschemes]]
 name = 'cocoa'
 [plugins.colorschemes.highlight]
@@ -264,7 +264,7 @@ name = 'cocoa'
 SignifySignDelete = { ctermfg = 4, ctermbg = 0, guifg = '#573e55', guibg = '#280f0e' }
 
 [[plugins]]
-repo = 'nanotech/jellybeans.vim'
+repo = 'https://github.com/nanotech/jellybeans.vim'
 [[plugins.colorschemes]]
 name = 'jellybeans'
 terminal = [
@@ -273,7 +273,7 @@ terminal = [
 ]
 
 [[plugins]]
-repo = 'phanviet/vim-monokai-pro'
+repo = 'https://github.com/phanviet/vim-monokai-pro'
 [[plugins.colorschemes]]
 name = 'monokai_pro'
 terminal = 'mini'
@@ -284,18 +284,18 @@ SignifySignDelete = { ctermfg = 88, guifg = '#8c0809' }
 SignifySignChange = { ctermfg = 231, ctermbg = 23, guifg = '#fcfcfa', guibg = '#273a5b' }
 
 [[plugins]]
-repo = 'pineapplegiant/spaceduck'
+repo = 'https://github.com/pineapplegiant/spaceduck'
 [[plugins.colorschemes]]
 name = 'spaceduck'
 
 [[plugins]]
-repo = 'rakr/vim-two-firewatch'
+repo = 'https://github.com/rakr/vim-two-firewatch'
 [[plugins.colorschemes]]
 name = 'two-firewatch'
 lightline = 'twofirewatch'
 
 [[plugins]]
-repo = 'rakr/vim-one'
+repo = 'https://github.com/rakr/vim-one'
 [[plugins.colorschemes]]
 name = 'one'
 terminal = [
@@ -304,7 +304,7 @@ terminal = [
 ]
 
 [[plugins]]
-repo = 'rebelot/kanagawa.nvim'
+repo = 'https://github.com/rebelot/kanagawa.nvim'
 if = 'has("nvim")'
 on_event = ['ColorSchemePre']
 lua_source = '''
@@ -318,13 +318,13 @@ name = 'kanagawa'
 lightline = 'mini'
 
 [[plugins]]
-repo = 'rhysd/vim-color-spring-night'
+repo = 'https://github.com/rhysd/vim-color-spring-night'
 [[plugins.colorschemes]]
 name = 'spring-night'
 lightline = 'spring_night'
 
 [[plugins]]
-repo = 'Rigellute/rigel'
+repo = 'https://github.com/Rigellute/rigel'
 [[plugins.colorschemes]]
 name = 'rigel'
 [plugins.colorschemes.highlight]
@@ -332,12 +332,12 @@ name = 'rigel'
 SignifySignChange = { ctermfg = 44, ctermbg = 235, guifg = '#00cccc', guibg = '#002635' }
 
 [[plugins]]
-repo = 'romainl/Apprentice'
+repo = 'https://github.com/romainl/Apprentice'
 [[plugins.colorschemes]]
 name = 'apprentice'
 
 [[plugins]]
-repo = 'sainnhe/edge'
+repo = 'https://github.com/sainnhe/edge'
 hook_add = '''
 let g:edge_better_performance = v:true
 '''
@@ -345,7 +345,7 @@ let g:edge_better_performance = v:true
 name = 'edge'
 
 [[plugins]]
-repo = 'sainnhe/gruvbox-material'
+repo = 'https://github.com/sainnhe/gruvbox-material'
 hook_add = '''
 let g:gruvbox_material_better_performance = v:true
 '''
@@ -354,7 +354,7 @@ name = 'gruvbox-material'
 lightline = 'gruvbox_material'
 
 [[plugins]]
-repo = 'savq/melange-nvim'
+repo = 'https://github.com/savq/melange-nvim'
 if = 'has("nvim")'
 [[plugins.colorschemes]]
 name = 'melange'
@@ -364,13 +364,13 @@ terminal = 'mini'
 CursorLineNr = { cterm = 'NONE' }
 
 [[plugins]]
-repo = 'severij/vadelma'
+repo = 'https://github.com/severij/vadelma'
 [[plugins.colorschemes]]
 name = 'vadelma'
 terminal = 'mini'
 
 [[plugins]]
-repo = 'sonph/onehalf'
+repo = 'https://github.com/sonph/onehalf'
 rtp = 'vim'
 [[plugins.colorschemes]]
 name = 'onehalfdark'
@@ -380,19 +380,19 @@ terminal = [
 ]
 
 [[plugins]]
-repo = 'srcery-colors/srcery-vim'
+repo = 'https://github.com/srcery-colors/srcery-vim'
 [[plugins.colorschemes]]
 name = 'srcery'
 [plugins.colorschemes.highlight]
 Visual = { ctermbg = 236, guibg = '#303030', term = 'NONE', cterm = 'NONE', gui = 'NONE' }
 
 [[plugins]]
-repo = 'tobi-wan-kenobi/zengarden'
+repo = 'https://github.com/tobi-wan-kenobi/zengarden'
 [[plugins.colorschemes]]
 name = 'zengarden'
 
 [[plugins]]
-repo = 'tomasr/molokai'
+repo = 'https://github.com/tomasr/molokai'
 [[plugins.colorschemes]]
 name = 'molokai'
 terminal = [
@@ -404,7 +404,7 @@ terminal = [
 SignifySignDelete = { ctermfg = 162, ctermbg = 5, guifg = '#960050', guibg = '#1e0010' }
 
 [[plugins]]
-repo = 'tyrannicaltoucan/vim-deep-space'
+repo = 'https://github.com/tyrannicaltoucan/vim-deep-space'
 [[plugins.colorschemes]]
 name = 'deep-space'
 lightline = 'deepspace'
@@ -412,12 +412,12 @@ terminal = 'mini'
 
 [[plugins]]
 # repo = 'ulwlu/elly.vim'
-repo = 'kuuote/elly.vim'
+repo = 'https://github.com/kuuote/elly.vim'
 [[plugins.colorschemes]]
 name = 'elly'
 
 [[plugins]]
-repo = 'vim-scripts/wombat256.vim'
+repo = 'https://github.com/vim-scripts/wombat256.vim'
 [[plugins.colorschemes]]
 name = 'wombat256mod'
 lightline = 'wombat'
@@ -428,7 +428,7 @@ NonText = 'Comment'
 CursorLineNr = { cterm = 'NONE' }
 
 [[plugins]]
-repo = 'w0ng/vim-hybrid'
+repo = 'https://github.com/w0ng/vim-hybrid'
 [[plugins.colorschemes]]
 name = 'hybrid'
 terminal = [
@@ -437,7 +437,7 @@ terminal = [
 ]
 
 [[plugins]]
-repo = 'wadackel/vim-dogrun'
+repo = 'https://github.com/wadackel/vim-dogrun'
 [[plugins.colorschemes]]
 name = 'dogrun'
 terminal = [
@@ -451,13 +451,13 @@ SignifySignChange = { ctermbg = 23, guibg = '#26463b' }
 SignifySignDelete = { ctermfg = 189, ctermbg = 96, guifg = '#d2d9ff', guibg = '#5e3e5e' }
 
 [[plugins]]
-repo = 'whatyouhide/vim-gotham'
+repo = 'https://github.com/whatyouhide/vim-gotham'
 [[plugins.colorschemes]]
 name = 'gotham'
 
 # NOTE: green and yellow of term ansi color is original
 [[plugins]]
-repo = 'yuttie/hydrangea-vim'
+repo = 'https://github.com/yuttie/hydrangea-vim'
 [[plugins.colorschemes]]
 name = 'hydrangea'
 terminal = [

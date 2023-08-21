@@ -1,8 +1,8 @@
 [[plugins]]
-repo = 'b0o/SchemaStore.nvim'
+repo = 'https://github.com/b0o/SchemaStore.nvim'
 
 [[plugins]]
-repo = 'chomosuke/term-edit.nvim'
+repo = 'https://github.com/chomosuke/term-edit.nvim'
 on_event = ['TermOpen']
 lua_source = '''
 require("term-edit").setup {
@@ -12,7 +12,7 @@ require("term-edit").setup {
 '''
 
 [[plugins]]
-repo = 'hrsh7th/nvim-pasta'
+repo = 'https://github.com/hrsh7th/nvim-pasta'
 on_map = { nx = "<Plug>" }
 lua_add = '''
 vim.keymap.set({ "n", "x" }, "p", "<Plug>(pasta-p)")
@@ -51,7 +51,7 @@ end)
 '''
 
 [[plugins]]
-repo = 'j-hui/fidget.nvim'
+repo = 'https://github.com/j-hui/fidget.nvim'
 on_event = ['LspAttach']
 rev = 'legacy'
 lua_source = '''
@@ -63,7 +63,7 @@ require("fidget").setup {
 '''
 
 [[plugins]]
-repo = 'kevinhwang91/nvim-hlslens'
+repo = 'https://github.com/kevinhwang91/nvim-hlslens'
 on_lua = ['hlslens']
 on_event = ['CmdlineEnter']
 hook_add = '''
@@ -77,18 +77,18 @@ require("hlslens").setup {
 '''
 
 [[plugins]]
-repo = 'neovim/nvim-lspconfig'
+repo = 'https://github.com/neovim/nvim-lspconfig'
 on_event = ['BufRead']
 lua_source = '''
 require "vimrc.plugins.lsp"
 '''
 
 [[plugins]]
-repo = 'nvim-lua/plenary.nvim'
+repo = 'https://github.com/nvim-lua/plenary.nvim'
 on_lua = ['plenary']
 
 [[plugins]]
-repo = 'nvim-treesitter/nvim-treesitter'
+repo = 'https://github.com/nvim-treesitter/nvim-treesitter'
 on_event = ['BufRead']
 hook_post_update = 'TSUpdate'
 lua_source = '''
@@ -96,7 +96,7 @@ require "vimrc.plugins.treesitter"
 '''
 
 [[plugins]]
-repo = 'nvim-zh/colorful-winsep.nvim'
+repo = 'https://github.com/nvim-zh/colorful-winsep.nvim'
 on_event = ['WinNew']
 lua_source = '''
 require("colorful-winsep").setup {
@@ -117,7 +117,7 @@ require("colorful-winsep").setup {
 '''
 
 [[plugins]]
-repo = 'rcarriga/nvim-notify'
+repo = 'https://github.com/rcarriga/nvim-notify'
 on_lua = ['notify']
 lua_add = '''
 ---@diagnostic disable-next-line: duplicate-set-field

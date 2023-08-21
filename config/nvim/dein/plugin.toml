@@ -1,9 +1,9 @@
 [[plugins]]
-repo = '4513echo/lightline-ddu-ui-ff'
+repo = 'https://github.com/4513ECHO/lightline-ddu-ui-ff'
 on_source = ['lightline.vim']
 
 [[plugins]]
-repo = '4513echo/registerm.vim'
+repo = 'https://github.com/4513ECHO/registerm.vim'
 on_map = { t = '<Plug>' }
 hook_add = '''
 tnoremap <C-\><C-y> <Plug>(registerm)
@@ -11,7 +11,7 @@ tnoremap <C-\><C-r> <Plug>(registerm-getchar)
 '''
 
 [[plugins]]
-repo = '4513echo/vim-readme-viewer'
+repo = 'https://github.com/4513ECHO/vim-readme-viewer'
 on_cmd = ['DeinReadme']
 on_source = ['ddu.vim']
 hook_add = '''
@@ -19,7 +19,7 @@ let g:readme_viewer#plugin_manager = 'dein.vim'
 '''
 
 [[plugins]]
-repo = '4513echo/vim-snipewin'
+repo = 'https://github.com/4513ECHO/vim-snipewin'
 on_map = { n = '<Plug>' }
 hook_add = '''
 let g:snipewin_label_chars = 'ASDFGHJKLQWERTYUIOP'
@@ -34,13 +34,13 @@ nnoremap <Plug>(snipewin-only) <Cmd>call snipewin#select(g:snipewin#callback#onl
 '''
 
 [[plugins]]
-repo = '4513echo/vim-vimhelp-url'
+repo = 'https://github.com/4513ECHO/vim-vimhelp-url'
 on_cmd = ['HelpUrl']
 
 [[plugins]]
 # NOTE: latest original is broken for only Neovim
 # repo = 'bronson/vim-trailing-whitespace'
-repo = 'PabloScolpino/vim-trailing-whitespace'
+repo = 'https://github.com/PabloScolpino/vim-trailing-whitespace'
 on_cmd = ['FixWhitespace']
 on_event = ['InsertLeave']
 hook_add = '''
@@ -48,7 +48,7 @@ let g:extra_whitespace_ignored_filetypes = ['diff', 'help', 'capture', 'tsv']
 '''
 
 [[plugins]]
-repo = 'christoomey/vim-tmux-navigator'
+repo = 'https://github.com/christoomey/vim-tmux-navigator'
 if = '!has("gui_running")'
 on_cmd = [
   'TmuxNavigateLeft', 'TmuxNavigateDown',
@@ -63,16 +63,16 @@ nnoremap <A-l> <Cmd>TmuxNavigateRight<CR>
 '''
 
 [[plugins]]
-repo = 'cocopon/lightline-hybrid.vim'
+repo = 'https://github.com/cocopon/lightline-hybrid.vim'
 on_source = ['lightline.vim']
 
 [[plugins]]
-repo = 'cohama/lexima.vim'
+repo = 'https://github.com/cohama/lexima.vim'
 on_event = ['InsertEnter', 'CmdlineEnter']
 hooks_file = '$DEIN_DIR/settings/lexima.vim'
 
 [[plugins]]
-repo = 'github/copilot.vim'
+repo = 'https://github.com/github/copilot.vim'
 on_cmd = ['Copilot']
 on_event = ['InsertEnter']
 hook_add = '''
@@ -87,16 +87,16 @@ autocmd vimrc OptionSet buftype
 '''
 
 [[plugins]]
-repo = 'halkn/lightline-lsp'
+repo = 'https://github.com/halkn/lightline-lsp'
 on_source = ['lightline.vim']
 if = '!has("nvim")'
 
 [[plugins]]
-repo = 'haya14busa/dein-command.vim'
+repo = 'https://github.com/haya14busa/dein-command.vim'
 on_cmd = ['Dein']
 
 [[plugins]]
-repo = 'haya14busa/vim-asterisk'
+repo = 'https://github.com/haya14busa/vim-asterisk'
 on_map = { nx = '<Plug>' }
 hook_add = '''
 let g:asterisk#keeppos = v:true
@@ -111,7 +111,7 @@ xnoremap g# <Plug>(asterisk-gz#)<Plug>(search-post)
 '''
 
 [[plugins]]
-repo = 'haya14busa/vim-edgemotion'
+repo = 'https://github.com/haya14busa/vim-edgemotion'
 on_map = { nx = '<Plug>' }
 hook_add = '''
 nnoremap <C-j> <Plug>(edgemotion-j)
@@ -121,7 +121,7 @@ xnoremap <C-k> <Plug>(edgemotion-k)
 '''
 
 [[plugins]]
-repo = 'hrsh7th/vim-searchx'
+repo = 'https://github.com/hrsh7th/vim-searchx'
 on_func = ['searchx#']
 hook_add = '''
 let g:searchx = #{
@@ -157,7 +157,7 @@ xnoremap n <Cmd>call searchx#next_dir()<CR><Plug>(search-post)
 '''
 
 [[plugins]]
-repo = 'itchyny/lightline.vim'
+repo = 'https://github.com/itchyny/lightline.vim'
 lazy = true
 hook_add = '''
 autocmd vimrc VimEnter * call timer_start(0, { -> dein#source('lightline.vim') })
@@ -209,7 +209,7 @@ messages
 '''
 
 [[plugins]]
-repo = 'kana/vim-niceblock'
+repo = 'https://github.com/kana/vim-niceblock'
 on_map = { x = '<Plug>' }
 hook_add = '''
 xnoremap I  <Plug>(niceblock-I)
@@ -218,7 +218,7 @@ xnoremap A  <Plug>(niceblock-A)
 '''
 
 [[plugins]]
-repo = 'kana/vim-submode'
+repo = 'https://github.com/kana/vim-submode'
 on_map = { n = '<Plug>' }
 hook_add = '''
 let g:submode_always_show_submode = v:true
@@ -252,7 +252,7 @@ endfor
 '''
 
 [[plugins]]
-repo = 'kyoh86/vim-ripgrep'
+repo = 'https://github.com/kyoh86/vim-ripgrep'
 on_cmd = ['Rg']
 hook_source = '''
 function! s:ripgrep(args, bang) abort
@@ -268,11 +268,11 @@ command! -bar -bang -nargs=1 Rg call s:ripgrep(<q-args>, <bang>0)
 '''
 
 [[plugins]]
-repo = 'lambdalisue/file-protocol.vim'
+repo = 'https://github.com/lambdalisue/file-protocol.vim'
 on_path = ['^file://']
 
 [[plugins]]
-repo = 'lambdalisue/kensaku.vim'
+repo = 'https://github.com/lambdalisue/kensaku.vim'
 denops_wait = false
 on_func = ['kensaku#']
 hook_add = '''
@@ -291,7 +291,7 @@ cnoremap <C-x><C-k> <Cmd>call <SID>convert_kensaku()<CR>
 '''
 
 [[plugins]]
-repo = 'lambdalisue/pinkyless.vim'
+repo = 'https://github.com/lambdalisue/pinkyless.vim'
 on_map = { icn = '<Plug>' }
 hook_add = '''
 let g:pinkyless#keyboard = 'JIS'
@@ -306,18 +306,18 @@ map! <expr> <Plug>(pinkyless-stickyshift-enter) pinkyless#stickyshift#enter(';')
 '''
 
 [[plugins]]
-repo = 'lambdalisue/suda.vim'
+repo = 'https://github.com/lambdalisue/suda.vim'
 on_cmd = ['SudaRead', 'SudaWrite']
 
 [[plugins]]
-repo = 'lambdalisue/vim-protocol'
+repo = 'https://github.com/lambdalisue/vim-protocol'
 on_path = ['^https\?://']
 
 [[plugins]]
-repo = 'lambdalisue/vim-quickrun-neovim-job'
+repo = 'https://github.com/lambdalisue/vim-quickrun-neovim-job'
 
 [[plugins]]
-repo = 'machakann/vim-highlightedundo'
+repo = 'https://github.com/machakann/vim-highlightedundo'
 on_map = { n = '<Plug>' }
 hook_add = '''
 nnoremap u     <Plug>(highlightedundo-undo)
@@ -328,11 +328,11 @@ nnoremap g+    <Plug>(highlightedundo-gplus)
 '''
 
 [[plugins]]
-repo = 'mattn/vim-maketable'
+repo = 'https://github.com/mattn/vim-maketable'
 on_cmd = ['MakeTable', 'UnmakeTable']
 
 [[plugins]]
-repo = 'mattn/vim-sonictemplate'
+repo = 'https://github.com/mattn/vim-sonictemplate'
 on_cmd = ['Template']
 hook_add = '''
 let g:sonictemplate_vim_template_dir = [
@@ -354,7 +354,7 @@ let g:sonictemplate_postfix_key = ''
 '''
 
 [[plugins]]
-repo = 'mhinz/vim-signify'
+repo = 'https://github.com/mhinz/vim-signify'
 on_event = ['BufRead']
 hook_add = '''
 call setcellwidths([[0x2503, 0x2503, 1]])
@@ -374,12 +374,12 @@ endfunction
 '''
 
 [[plugins]]
-repo = 'micchy326/lightline-lsp-progress'
+repo = 'https://github.com/micchy326/lightline-lsp-progress'
 on_source = ['lightline.vim']
 if = '!has("nvim")'
 
 [[plugins]]
-repo = 'ojroques/vim-oscyank'
+repo = 'https://github.com/ojroques/vim-oscyank'
 if = '!has("gui_running")'
 on_cmd = ['OSCYankRegister']
 hook_add = '''
@@ -390,7 +390,7 @@ autocmd vimrc TextYankPost *
 '''
 
 [[plugins]]
-repo = 'osyo-manga/vim-jplus'
+repo = 'https://github.com/osyo-manga/vim-jplus'
 on_map = { nx = '<Plug>' }
 hook_add = '''
 nnoremap J  <Plug>(jplus-getchar)<Space>
@@ -409,7 +409,7 @@ let g:jplus#config = #{
 '''
 
 [[plugins]]
-repo = 'Shougo/context_filetype.vim'
+repo = 'https://github.com/Shougo/context_filetype.vim'
 on_func = ['context_filetype#get']
 hook_source = '''
 let g:context_filetype#filetypes =
@@ -426,7 +426,7 @@ let g:context_filetype#filetypes =
 '''
 
 [[plugins]]
-repo = 'skanehira/denops-translate.vim'
+repo = 'https://github.com/skanehira/denops-translate.vim'
 depends = ['denops.vim']
 on_cmd = ['Translate']
 hook_add = '''
@@ -435,10 +435,10 @@ xnoremap <Leader>t :Translate<CR>
 '''
 
 [[plugins]]
-repo = 'statiolake/vim-quickrun-runner-nvimterm'
+repo = 'https://github.com/statiolake/vim-quickrun-runner-nvimterm'
 
 [[plugins]]
-repo = 'rhysd/clever-f.vim'
+repo = 'https://github.com/rhysd/clever-f.vim'
 on_map = { nxo = '<Plug>(clever-f' }
 hook_add = '''
 nnoremap F <Plug>(clever-f-F)
@@ -470,7 +470,7 @@ autocmd vimrc ColorScheme *
 '''
 
 [[plugins]]
-repo = 'RRethy/vim-hexokinase'
+repo = 'https://github.com/RRethy/vim-hexokinase'
 on_event = ['BufRead', 'InsertLeave']
 hook_add = '''
 let g:Hexokinase_highlighters = ['backgroundfull']
@@ -490,7 +490,7 @@ let g:Hexokinase_executable_path = exepath('hexokinase')
 '''
 
 [[plugins]]
-repo = 'spywhere/lightline-lsp'
+repo = 'https://github.com/spywhere/lightline-lsp'
 name = 'lightline-nvim-lsp'
 on_source = ['lightline.vim']
 if = 'has("nvim")'
@@ -500,7 +500,7 @@ let g:lightline#lsp#indicator_warnings = '‼'
 '''
 
 [[plugins]]
-repo = 'tani/glance-vim'
+repo = 'https://github.com/tani/glance-vim'
 depends = ['denops.vim']
 on_cmd = ['Glance']
 hook_add = '''
@@ -511,14 +511,14 @@ let g:glance#stylesheet = '@import url("https://unpkg.com/sakura.css/css/sakura.
 '''
 
 [[plugins]]
-repo = 'thinca/vim-localrc'
+repo = 'https://github.com/thinca/vim-localrc'
 on_event = ['BufRead']
 hook_add = '''
 let g:localrc_filename = '.vimrc.local'
 '''
 
 [[plugins]]
-repo = 'thinca/vim-partedit'
+repo = 'https://github.com/thinca/vim-partedit'
 depends = ['context_filetype.vim']
 on_cmd = ['Partedit']
 on_func = ['partedit#start']
@@ -549,7 +549,7 @@ let b:partedit_auto_prefix = v:false
 '''
 
 [[plugins]]
-repo = 'thinca/vim-quickrun'
+repo = 'https://github.com/thinca/vim-quickrun'
 on_cmd = ['QuickRun']
 on_map = { nx = '<Plug>' }
 hook_add = '''
@@ -613,11 +613,11 @@ nnoremap <buffer> <C-c> <Cmd>call quickrun#session#sweep()<CR>
 '''
 
 [[plugins]]
-repo = 'tweekmonster/helpful.vim'
+repo = 'https://github.com/tweekmonster/helpful.vim'
 on_cmd = ['HelpfulVersion']
 
 [[plugins]]
-repo = 'tyru/capture.vim'
+repo = 'https://github.com/tyru/capture.vim'
 on_cmd = ['Capture', 'CaptureJson']
 hook_source = '''
 command! -bang -bar -nargs=1 -complete=expression CaptureJson
@@ -646,7 +646,7 @@ nnoremap <buffer> q <C-w>q
 '''
 
 [[plugins]]
-repo = 'tyru/caw.vim'
+repo = 'https://github.com/tyru/caw.vim'
 on_map = { nx = '<Plug>' }
 depends = ['context_filetype.vim', 'vim-operator-user']
 hook_add = '''
@@ -682,7 +682,7 @@ let b:caw_oneline_comment = ';'
 '''
 
 [[plugins]]
-repo = 'tyru/open-browser.vim'
+repo = 'https://github.com/tyru/open-browser.vim'
 on_map = { nx = '<Plug>(openbrowser' }
 hook_add = '''
 nnoremap gx <Plug>(openbrowser-open)
@@ -704,7 +704,7 @@ let g:openbrowser_browser_commands = []
 '''
 
 [[plugins]]
-repo = 'yuttie/comfortable-motion.vim'
+repo = 'https://github.com/yuttie/comfortable-motion.vim'
 on_func = ['comfortable_motion#flick']
 hook_add = '''
 let g:comfortable_motion_no_default_key_mappings = v:true

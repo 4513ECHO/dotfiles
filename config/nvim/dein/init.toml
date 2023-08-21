@@ -1,8 +1,8 @@
 [[plugins]]
-repo = 'Shougo/dein.vim'
+repo = 'https://github.com/Shougo/dein.vim'
 
 [[plugins]]
-repo = 'delphinus/vim-auto-cursorline'
+repo = 'https://github.com/delphinus/vim-auto-cursorline'
 hook_add = '''
 let g:auto_cursorline_wait_ms = 4000
 '''
@@ -24,20 +24,20 @@ let b:auto_cursorline_disabled = v:true
 '''
 
 [[plugins]]
-repo = 'itchyny/vim-highlighturl'
+repo = 'https://github.com/itchyny/vim-highlighturl'
 
 [[plugins]]
-repo = 'itchyny/vim-parenmatch'
+repo = 'https://github.com/itchyny/vim-parenmatch'
 
 [[plugins]]
-repo = 'lambdalisue/guise.vim'
+repo = 'https://github.com/lambdalisue/guise.vim'
 depends = ['denops.vim']
 hook_add = '''
 let g:guise_edit_opener = 'split'
 '''
 
 [[plugins]]
-repo = 'lambdalisue/mr.vim'
+repo = 'https://github.com/lambdalisue/mr.vim'
 # from https://github.com/kuuote/dotvim/commit/eef000e6
 on_event = ['BufNewFile', 'BufReadPre', 'BufWritePre']
 hook_add = '''
@@ -65,7 +65,7 @@ command! -nargs=? -complete=custom,s:complete -bar MrClean call s:mr_clean(<f-ar
 '''
 
 [[plugins]]
-repo = 'mattn/vim-molder'
+repo = 'https://github.com/mattn/vim-molder'
 # from https://github.com/kuuote/dotvim/commit/09151c52
 lazy = true
 hook_add = '''
@@ -94,7 +94,7 @@ nnoremap <buffer><expr> k line('.') == 1         ? 'G'  : 'k'
 '''
 
 [[plugins]]
-repo = 'mattn/vim-molder-operations'
+repo = 'https://github.com/mattn/vim-molder-operations'
 [plugins.ftplugin]
 molder = '''
 nnoremap <silent><buffer> dd <Plug>(molder-operations-delete)
@@ -102,14 +102,14 @@ nnoremap <silent><buffer> r  <Plug>(molder-operations-rename)
 '''
 
 [[plugins]]
-repo = 'rafamadriz/friendly-snippets'
+repo = 'https://github.com/rafamadriz/friendly-snippets'
 
 [[plugins]]
-repo = 'roxma/vim-tmux-clipboard'
+repo = 'https://github.com/roxma/vim-tmux-clipboard'
 if = '!has("gui_running")'
 
 [[plugins]]
-repo = 'vim-denops/denops.vim'
+repo = 'https://github.com/vim-denops/denops.vim'
 hook_depends_update = '''
 call denops_shared_server#restart()
 '''
@@ -119,9 +119,9 @@ let g:denops_server_addr = '127.0.0.1:32123'
 
 [[plugins]]
 # repo = 'vim-denops/denops-shared-server.vim'
-repo = '4513echo/denops-shared-server.vim'
+repo = 'https://github.com/4513ECHO/denops-shared-server.vim'
 rev = 'sync-environment'
 depends = ['denops.vim']
 
 [[plugins]]
-repo = 'vim-jp/vimdoc-ja'
+repo = 'https://github.com/vim-jp/vimdoc-ja'

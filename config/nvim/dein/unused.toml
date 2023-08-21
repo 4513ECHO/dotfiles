@@ -1,19 +1,19 @@
 [[plugins]]
-repo = 'cocopon/snapbuffer.vim'
+repo = 'https://github.com/cocopon/snapbuffer.vim'
 on_cmd = ['SnapBuffer']
 
 [[plugins]]
-repo = 'guns/xterm-color-table.vim'
+repo = 'https://github.com/guns/xterm-color-table.vim'
 on_cmd = ['XtermColorTable']
 
 [[plugins]]
-repo = 'junegunn/fzf'
+repo = 'https://github.com/junegunn/fzf'
 on_func = ['fzf#']
 merged = false
 on_cmd = ['FZF']
 
 [[plugins]]
-repo = 'junegunn/fzf.vim'
+repo = 'https://github.com/junegunn/fzf.vim'
 depends = ['fzf']
 on_cmd = [
   'FzfFiles', 'FzfGFiles', 'FzfBuffers', 'FzfColors', 'FzfAg', 'FzfRg',
@@ -59,7 +59,7 @@ command! -bar FzfMru call fzf#run(fzf#wrap({
 '''
 
 [[plugins]]
-repo = 'lambdalisue/fern.vim'
+repo = 'https://github.com/lambdalisue/fern.vim'
 on_cmd = ['Fern']
 hook_add = '''
 let g:fern#keepalt_on_edit = v:true
@@ -77,48 +77,48 @@ nnoremap <buffer><expr> k line('.') == 1         ? 'G'  : 'k'
 '''
 
 [[plugins]]
-repo = 'lambdalisue/vim-manpager'
+repo = 'https://github.com/lambdalisue/vim-manpager'
 on_cmd = ['MANPAGER', 'Man']
 
 [[plugins]]
-repo = 'mattn/benchvimrc-vim'
+repo = 'https://github.com/mattn/benchvimrc-vim'
 on_cmd = ['BenchVimrc']
 
 [[plugins]]
-repo = 'mattn/vim-sl'
+repo = 'https://github.com/mattn/vim-sl'
 on_func = ['sl#animate']
 
 [[plugins]]
-repo = 'pocke/keycast.vim'
+repo = 'https://github.com/pocke/keycast.vim'
 depends = ['vanner']
 if = '!has("nvim")'
 on_cmd = ['KeycastStart', 'KeycastStop']
 
 [[plugins]]
-repo = 'pocke/vanner'
+repo = 'https://github.com/pocke/vanner'
 
 [[plugins]]
-repo = 'prabirshrestha/async.vim'
+repo = 'https://github.com/prabirshrestha/async.vim'
 on_cmd = ['AsyncEmbed']
 
 [[plugins]]
-repo = 'skanehira/badapple.vim'
+repo = 'https://github.com/skanehira/badapple.vim'
 if = '!has("nvim")'
 on_cmd = ['BadApple']
 
 [[plugins]]
-repo = 'thinca/vim-prettyprint'
+repo = 'https://github.com/thinca/vim-prettyprint'
 on_cmd = ['PP', 'PrettyPrint']
 
 [[plugins]]
-repo = 'thinca/vim-scall'
+repo = 'https://github.com/thinca/vim-scall'
 on_func = ['S']
 hook_add = '''
 let g:scall_function_name = 'S'
 '''
 
 [[plugins]]
-repo = 'thinca/vim-scouter'
+repo = 'https://github.com/thinca/vim-scouter'
 on_cmd = ['Scouter']
 on_func = ['Scouter']
 hook_add = '''
@@ -126,11 +126,11 @@ command! Scouter echo Scouter(g:config_home)
 '''
 
 [[plugins]]
-repo = 'tweekmonster/startuptime.vim'
+repo = 'https://github.com/tweekmonster/startuptime.vim'
 on_cmd = ['StartupTime']
 
 [[plugins]]
-repo = 'wsdjeg/dein-ui.vim'
+repo = 'https://github.com/wsdjeg/dein-ui.vim'
 on_cmd = ['DeinUpdate']
 [plugins.ftplugin]
 SpaceVimPlugManager = '''
@@ -138,7 +138,7 @@ autocmd vimrc TextChanged <buffer> normal! G
 '''
 
 [[plugins]]
-repo = 'Yggdroot/indentLine'
+repo = 'https://github.com/Yggdroot/indentLine'
 on_event = ['BufRead']
 hook_add = '''
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
