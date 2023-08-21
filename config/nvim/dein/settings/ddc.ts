@@ -165,15 +165,15 @@ export class Config extends BaseConfig {
       },
     });
 
-    const addSourcesByFiletypes = (filetypes: string[], added: string[]) =>
-      filetypes.forEach((ft) =>
-        args.contextBuilder.patchFiletype(ft, {
-          sources: added.concat(sources),
-        })
+    const setSourcesByFiletypes = (filetypes: string[], sources: string[]) =>
+      filetypes.forEach((filetype) =>
+        args.contextBuilder.patchFiletype(filetype, { sources })
       );
+    // NOTE: mocword source should be placed after around source.
+    const sourcesWithMocword = sources.toSpliced(2, 0, "mocword");
 
-    addSourcesByFiletypes(["vim"], ["necovim"]);
-    addSourcesByFiletypes([
+    setSourcesByFiletypes(["vim"], ["necovim", ...sources]);
+    setSourcesByFiletypes([
       "go",
       "json",
       "lua",
@@ -185,13 +185,13 @@ export class Config extends BaseConfig {
       "typescript",
       "typescriptreact",
       "yaml",
-    ], [hasNvim ? "nvim-lsp" : "vim-lsp"]);
-    addSourcesByFiletypes(
+    ], [hasNvim ? "nvim-lsp" : "vim-lsp", ...sources]);
+    setSourcesByFiletypes(
       ["markdown", "gitcommit"],
-      ["mocword", "github_issue", "github_pull_request"],
+      ["github_issue", "github_pull_request", ...sourcesWithMocword],
     );
-    addSourcesByFiletypes(["help"], ["mocword"]);
-    addSourcesByFiletypes(["sh", "zsh"], ["shell-native"]);
+    setSourcesByFiletypes(["help"], sourcesWithMocword);
+    setSourcesByFiletypes(["sh", "zsh"], ["shell-native", ...sources]);
 
     return Promise.resolve();
   }
