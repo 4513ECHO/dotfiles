@@ -1,7 +1,7 @@
 {
   "echomsg": {
     "body": [
-      "await ${1:denops}.cmd(\"unsilent echomsg val\", { val: $0 })"
+      "await ${1:denops}.cmd(\"unsilent echomsg val\", { val: ${2:val} });"
     ],
     "description": "denops.vim debug stuff",
     "prefix": [

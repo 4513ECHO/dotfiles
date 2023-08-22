@@ -6,7 +6,6 @@
     ],
     "description": "colorscheme plugin definition",
     "prefix": [
-      "color",
       "colorschemes"
     ]
   },
@@ -33,19 +32,10 @@
       "hook"
     ]
   },
-  "on": {
-    "body": [
-      "on_${1:cmd} = ['$0']"
-    ],
-    "description": "dein on_* option definition",
-    "prefix": [
-      "on"
-    ]
-  },
   "plugins": {
     "body": [
       "[[plugins]]",
-      "repo = '$1'"
+      "repo = 'https://${1:github.com}/$0'"
     ],
     "description": "dein plugin definition",
     "prefix": [
