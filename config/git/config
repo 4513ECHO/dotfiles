@@ -25,6 +25,7 @@
 
 [push]
   default = simple
+  autoSetupRemote = false
 
 [pull]
   rebase = false
@@ -69,12 +70,10 @@
   dft = difftool
   pl = pull
   ps = push
-  shorts = status --short --branch
   st = status
   stat = diff --stat
   sw = switch
   ### feature shortcut ###
-  all-files = !git ls-files
   alias = !git config --get-regexp "^alias" | sed 's@alias\\.\\(\\S*\\) \\(.*\\)@\\1\\\t -> \\2@'
   colorst = !git -c color.status=always status --short --branch
   contributors = shortlog --summary --numbered --email
@@ -82,7 +81,6 @@
   dirs = !git ls-files | sed -e "/^[^\\/]*$/d" -e "s:/[^/]*$::" | uniq
   fixit = commit --amend --no-edit
   graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
-  hash = rev-parse --short HEAD
   sha = "!f(){ git rev-parse --short \"${1:-HEAD}\"; };f"
   home = !git switch $(git default-branch)
   ignored = !git status --ignored --short | awk '$1 == \"!!\" {print $2}'
@@ -93,7 +91,6 @@
   };f"
   undo = !git reset --hard $(git reflog --color=always | fzf --ansi | awk '{print substr($2, 1, length($2)-1)})'
   upstream = !git pull upstream "$(git default-branch)"
-  pwd = !pwd
   recommit = commit --amend
   root = rev-parse --show-toplevel
   uncommit = reset --soft HEAD^

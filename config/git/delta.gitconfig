@@ -38,3 +38,5 @@
   plus-emph-style = syntax "#4a694a"
   plus-style = syntax "#5f875f"
   tabs = 8
+
+# vim:ft=gitconfig
