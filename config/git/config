@@ -1,6 +1,7 @@
 [user]
   name = 4513ECHO
   email = mail@4513echo.dev
+  signingKey = C2DB74FEBDBD70BAB486B87D0A1D7A083E45B697
 
 [core]
   editor = $HOME/.config/git/editor.sh
@@ -35,9 +36,7 @@
 [commit]
   template = ~/.config/git/commit_template
   verbose = true
-
-# [url "git@github.com:"]
-#   pushInsteadOf = https://github.com/
+  gpgSign = true
 
 [diff]
   tool = vimdiff
