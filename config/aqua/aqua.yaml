@@ -20,7 +20,8 @@ packages:
   - name: charmbracelet/glow@v1.5.1
   - name: cli/cli@v2.33.0
   - name: dandavison/delta@0.16.5
-  - name: denoland/deno@v1.36.2
+  - name: denoland/deno
+    version: v1.36.1
   - name: docker/cli/rootless@v20.10.17
   - name: docker/cli@v20.10.17
   - name: docker/compose@v2.20.3
@@ -46,7 +47,8 @@ packages:
   - name: ko1nksm/getoptions@v3.3.0
   - name: koalaman/shellcheck@v0.9.0
   - name: LuaLS/lua-language-server@3.6.25
-  - name: LukeChannings/deno-arm64@v1.36.2
+  - name: LukeChannings/deno-arm64
+    version: v1.36.1
   - name: mattn/efm-langserver@v0.0.48
   - name: microsoft/ripgrep-prebuilt@v13.0.0-10
   - name: mvdan/sh@v3.7.0
@@ -69,6 +71,7 @@ packages:
   - name: tamasfe/taplo/full@0.8.1
   - name: tomnomnom/gron@v0.7.1
   - name: TomWright/dasel@v2.3.4
+  - name: tree-sitter/tree-sitter@v0.20.8
   - name: vishaltelangre/ff@v0.1.8
   - name: x-motemen/ghq@v1.4.2
   - name: XAMPPRocky/tokei@v12.1.2
