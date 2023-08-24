@@ -411,7 +411,7 @@ lightline = 'deepspace'
 terminal = 'mini'
 
 [[plugins]]
-# repo = 'ulwlu/elly.vim'
+# repo = 'https://github.com/ulwlu/elly.vim'
 repo = 'https://github.com/kuuote/elly.vim'
 [[plugins.colorschemes]]
 name = 'elly'
