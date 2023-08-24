@@ -29,7 +29,7 @@ M.deno_as_npm.cmd_env = { NO_COLOR = true }
 ---@return { uri: string }[]
 function M.get_yaml_json_schema()
   return vim
-    .iter(vim.lsp.get_active_clients { buffer = 0 })
+    .iter(vim.lsp.get_clients { buffer = 0 })
     :filter(function(client) return client.name == "yamlls" end)
     :next()
     .request_sync("yaml/get/jsonSchema", vim.uri_from_bufnr(0)).result

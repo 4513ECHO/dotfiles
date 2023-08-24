@@ -5,7 +5,7 @@ if empty($VIM_DISABLE_DEIN)
     endif
     let s:cache = {}
     for plugins in dein#get()->copy()
-          \ ->filter({ _, val -> val->has_key('colorschemes') })
+          \ ->filter({ -> v:val->has_key('colorschemes') })
           \ ->values()
       if plugins->has_key('if') && !eval(plugins.if)
         continue
@@ -126,5 +126,5 @@ function! user#colorscheme#update_lightline() abort
 endfunction
 
 function! user#colorscheme#completion(...) abort
-  return user#colorscheme#get()->keys()->join("\n")
+  return user#colorscheme#get()->keys()->sort()->join("\n")
 endfunction

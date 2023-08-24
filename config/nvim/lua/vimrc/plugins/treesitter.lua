@@ -13,7 +13,7 @@ parser_config.unifieddiff = {
 ---@param bufnr integer
 ---@return boolean
 local function disable_highlight(lang, bufnr)
-  return vim.tbl_contains({ "bash", "yaml", "vimdoc" }, lang)
+  return vim.iter({ "bash", "yaml", "vimdoc" }):find(lang)
     or (
       lang == "vim"
       and vim.api.nvim_buf_get_lines(bufnr, 0, 1, false)[1]:match "^vim9script"

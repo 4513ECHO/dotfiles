@@ -54,8 +54,8 @@ command! -nargs=? -bar -complete=filetype MiniNote
       \ | setlocal bufhidden=wipe buftype=nofile filetype=<args> winfixheight
 
 command! -bar DeinUpdateMine
-      \ call dein#update(dein#get()->copy()
-      \ ->filter({ _, val -> val.repo =~? '^4513ECHO/' })->keys())
+      \ call dein#get()->copy()->filter({ -> v:val.repo =~? '/4513ECHO/' })
+      \ ->keys()->dein#update()
 
 " from `:help :DiffOrig`
 command! -bar DiffOrig

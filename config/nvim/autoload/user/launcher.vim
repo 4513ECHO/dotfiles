@@ -1,28 +1,25 @@
 function! s:echo(...) abort
   for chunk in a:000
-    execute 'echohl' get(chunk, 1, 'NONE')
+    execute 'echohl' chunk->get(1, 'NONE')
     echon chunk[0]
     echohl NONE
   endfor
 endfunction
 
-function! user#launcher#select(...) abort
-  let launcher_config = get(a:000, 0, g:launcher_config)
-  call map(copy(launcher_config),
-        \ { k, v -> s:echo([printf('%s: ', k)], [v.char, 'Statement'], [' ']) })
+function! user#launcher#select(config = g:launcher_config) abort
+  call copy(a:config)->map({ -> s:echo([$'{v:key}: '], [v:val.char, 'Statement'], [' ']) })
   let char = getcharstr()
   redraw | echo ''
-  let launcher = filter(copy(launcher_config), { _, v -> v.char ==# char })
-  call user#launcher#run(launcher)
+  call user#launcher#run(copy(a:config)->filter({ -> v:val.char ==# char }))
 endfunction
 
 function! user#launcher#run(launcher) abort
-  if empty(a:launcher)
+  let launcher = values(a:launcher)->get(0)
+  if empty(launcher)
     return
   endif
-  let launcher = values(a:launcher)[0]
   let Run = launcher.run
-  if get(launcher, 'nested', v:false) && type(Run) == v:t_dict
+  if launcher->get('nested', v:false) && type(Run) == v:t_dict
     call user#launcher#select(Run)
   elseif type(Run) == v:t_func
     call call(Run, [])

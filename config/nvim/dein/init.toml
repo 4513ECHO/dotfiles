@@ -49,19 +49,17 @@ let g:mr#mru#predicates = s:predicates
 let g:mr#mrw#predicates = s:predicates
 
 function! s:mr_clean(kind = 'mru') abort
-  let list = mr#{a:kind}#list()
-  let to_delete = []
-  for Pred in g:mr#{a:kind}#predicates
-    let to_delete += list->copy()->filter({ _, fname -> !Pred(fname) })
-  endfor
-  for fname in to_delete
-    call mr#{a:kind}#delete(fname)
-  endfor
+  let s:kind = a:kind
+  eval g:mr#{a:kind}#predicates->reduce(
+        \ { acc, Pred -> acc->extend(mr#{s:kind}#list()->copy()
+        \   ->filter({ -> !Pred(v:val) }))
+        \ }, [])
+        \ ->map({ -> mr#{s:kind}#delete(v:val) })
 endfunction
-function! s:complete(...)
+function! s:mr_complete(...)
   return ['mru', 'mrw', 'mrr']->join("\n")
 endfunction
-command! -nargs=? -complete=custom,s:complete -bar MrClean call s:mr_clean(<f-args>)
+command! -nargs=? -complete=custom,s:mr_complete -bar MrClean call s:mr_clean(<f-args>)
 '''
 
 [[plugins]]

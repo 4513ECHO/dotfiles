@@ -19,7 +19,7 @@ autocmd "LspAttach" {
       }
     end, opts)
     local K
-    if not vim.tbl_contains({ "lua", "markdown", "toml", "vim" }, filetype) then
+    if not vim.iter({ "lua", "markdown", "toml", "vim" }):find(filetype) then
       K = vim.lsp.buf.hover
     elseif filetype == "lua" then
       K = require "vimrc.plugins.lsp.lua_help"

@@ -488,7 +488,7 @@ let g:Hexokinase_ftOptInPatterns = #{
       \ ],
       \ }
 let g:Hexokinase_ftDisabled = ['molder', 'ddu-ff', 'ddu-ff-filter']
-let g:Hexokinase_executable_path = exepath('hexokinase')
+let g:Hexokinase_executable_path = expand('$AQUA_ROOT_DIR/bin/hexokinase')
 '''
 
 [[plugins]]
