@@ -302,7 +302,11 @@ nnoremap r <Plug>(pinkyless-stickyreplace-enter)
 '''
 # NOTE: Override keymap to enable remap
 hook_post_source = '''
-map! <expr> <Plug>(pinkyless-stickyshift-enter) pinkyless#stickyshift#enter(';')
+function! s:pinkyless_enter(trigger) abort
+  let char = pinkyless#stickyshift#enter(a:trigger)
+  return char !~# a:trigger ? char : feedkeys(char, 'ni') ?? ''
+endfunction
+map! <expr> <Plug>(pinkyless-stickyshift-enter) <SID>pinkyless_enter(';')
 '''
 
 [[plugins]]
