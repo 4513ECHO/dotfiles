@@ -16,6 +16,14 @@ export function main(denops: Denops): Promise<void> {
       };
     },
 
+    jseval(expr, ctx): Promise<unknown> {
+      const fn = new Function(
+        "_A",
+        `"use strict";return ${ensure(expr, is.String).trim()};`,
+      ) as (ctx: unknown) => unknown;
+      return Promise.resolve(fn(ctx));
+    },
+
     async reload(path: unknown): Promise<void> {
       const mod = await import(
         `${toFileUrl(ensure(path, is.String)).href}#${performance.now()}`
