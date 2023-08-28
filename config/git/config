@@ -80,19 +80,34 @@
   default-branch = !git symbolic-ref refs/remotes/origin/HEAD | sed "s@refs/remotes/origin/@@"
   dirs = !git ls-files | sed -e "/^[^\\/]*$/d" -e "s:/[^/]*$::" | uniq
   fixit = commit --amend --no-edit
+  get = "!f(){ \
+    ghq get --update $1; \
+    cd \"$(ghq list --exact --full-path $1)\"; \
+    [ -z \"$(git config --get remote.origin.gh-resolved)\" ] && gh repo set-default </dev/tty >/dev/tty; \
+    git remote get-url upstream 2>/dev/null >&2 || \
+      git remote add upstream \"$(gh repo view --json url --jq .url)\"; \
+    echo $PWD; \
+  };f"
   graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
   sha = "!f(){ git rev-parse --short \"${1:-HEAD}\"; };f"
   home = !git switch $(git default-branch)
   ignored = !git status --ignored --short | awk '$1 == \"!!\" {print $2}'
   latest = describe --tags --abbrev=0
   logi = "!f(){ \
-    git show \"$(git log --oneline --color \"${1:-HEAD}\" \
-      | fzf --ansi | awk '{print $1}')\"; \
+    sha=\"$(git log --oneline --color \"${1:-HEAD}\" | fzf --ansi | awk '{print $1}')\"; \
+    [ -n \"$sha\" ] && git show \"$sha\"; \
   };f"
-  undo = !git reset --hard $(git reflog --color=always | fzf --ansi | awk '{print substr($2, 1, length($2)-1)})'
-  upstream = !git pull upstream "$(git default-branch)"
   recommit = commit --amend
   root = rev-parse --show-toplevel
+  sync = "!f(){ \
+    [ -z \"$(git config --get remote.origin.gh-resolved)\" ] && gh repo set-default; \
+    [ -z \"$(gh repo view \"$(git config --get remote.origin.url)\" --json isFork --jq '.isFork and empty')\" ] && { \
+      git remote get-url upstream 2>/dev/null >&2 || \
+        git remote add upstream \"$(gh repo view --json url --jq .url)\"; \
+      git pull --ff-only upstream \"$(git default-branch)\"; \
+    }; \
+    git pull --ff-only origin \"$(git default-branch)\"; \
+  };f"
   uncommit = reset --soft HEAD^
   unstage = restore --staged
   untrack = rm --cached
