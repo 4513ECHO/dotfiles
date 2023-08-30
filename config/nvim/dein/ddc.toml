@@ -95,9 +95,36 @@ call pum#set_option(#{
       \ },
       \ max_columns: #{},
       \ max_width: 100,
+      \ padding: v:true,
       \ scrollbar_char: '█',
       \ use_complete: v:true,
       \ })
+if has('nvim')
+  function! s:pum_set_hl() abort
+    let hl = nvim_get_hl(0, #{ name: 'PmenuSel' })
+    if hl->get('reverse', v:false)
+      unlet hl.reverse
+      let [fg, bg] = [hl->get('fg', v:null), hl->get('bg', v:null)]
+      eval hl ->extend(fg isnot# v:null ? #{ bg: fg->printf('#%06x') } : {})
+            \ ->extend(bg isnot# v:null ? #{ fg: bg->printf('#%06x') } : {})
+            \ ->{ hl -> nvim_set_hl(0, 'PmenuSel', hl) }()
+    endif
+  endfunction
+else
+  function! s:pum_set_hl() abort
+    let [hl] = hlget('PmenuSel', v:true)
+    if hl->get('gui', {})->get('reverse', v:false)
+      unlet hl.gui.reverse hl.cterm.reverse
+      let [fg, bg] = [hl->get('guifg', v:null), hl->get('guibg', v:null)]
+      eval hl ->extend(fg isnot# v:null ? #{ guibg: fg } : {})
+            \ ->extend(bg isnot# v:null ? #{ guifg: bg } : {})
+            \ ->extend(#{ force: v:true })
+            \ ->{ hl -> hlset([hl]) }()
+    endif
+  endfunction
+endif
+call s:pum_set_hl()
+autocmd vimrc ColorScheme * call s:pum_set_hl()
 '''
 
 [[plugins]]
