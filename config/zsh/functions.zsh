@@ -33,7 +33,7 @@ hook-git-auto-save () {
     && [[ ! -d .git/rebase-apply ]]; then
     touch .git/auto-save \
       && git add --all \
-      && git commit --no-verify --message "Auto save: $(date -R)" >/dev/null \
+      && git commit --no-verify --no-gpg-sign --message "Auto save: $(date -R)" >/dev/null \
       && git reset HEAD^ >/dev/null \
       && echo 'Git auto save!'
   fi

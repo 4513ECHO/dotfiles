@@ -40,6 +40,7 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 if [[ -n "$TMUX" ]]; then
   hook::venv
   hook-set-title
+  export GPG_TTY=$(tty)
 fi
 [[ -f '~/.ssh/id_git_ed25519' ]] && enable-agent-forward '~/.ssh/id_git_ed25519'
 [[ -z "$MINIMUM_DOTFILES" ]] && agent-symlink
