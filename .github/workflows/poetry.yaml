@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       # NOTE: use paths-filter instead of on.pull_request.paths to trigger test always
       - name: Check Changed Files
         uses: dorny/paths-filter@v2
