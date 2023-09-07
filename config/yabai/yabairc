@@ -1,0 +1,21 @@
+#!/bin/sh
+
+yabai -m signal --add event=dock_did_restart action='sudo yabai --load-sa'
+sudo yabai --load-sa
+
+# bsp or float (default: float)
+yabai -m config layout bsp
+yabai -m config auto_balance on
+
+# Set all padding and gaps to 12pt (default: 0)
+yabai -m config top_padding    12
+yabai -m config bottom_padding 12
+yabai -m config left_padding   12
+yabai -m config right_padding  12
+yabai -m config window_gap     12
+
+# float system preferences and system infomation
+yabai -m rule --add app='^(System Preferences|システム設定)$' manage=off
+yabai -m rule --add app='^(System Information|システム情報)$' manage=off
+
+yabai -m rule --add app='^LINE$' manage=off

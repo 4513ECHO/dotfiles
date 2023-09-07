@@ -1,0 +1,30 @@
+#!/bin/sh
+set -ue
+
+focus_space() {
+  jq_query='.[] | select(.["has-focus"]).index'
+  if [ -z "$1" ] || [ "$(yabai -m query --spaces | jq -r "$jq_query")" = "$1" ]; then
+    return
+  fi
+  if ! yabai -m space --focus "$1"; then
+    yabai -m space --create
+    yabai -m space --focus "$1"
+  fi
+}
+
+screencapture() {
+  command screencapture -T0.5 ~/Pictures/screenshot-"$(date +%F_%H%M%S)"-all.png
+  osascript -e 'display notification "Screencapture saved" with title "Screencapture"'
+}
+
+screencapture_selected() {
+  command screencapture -T0.5 -s ~/Pictures/screenshot-"$(date +%F_%H%M%S)"-selected.png
+  osascript -e 'display notification "Screencapture saved" with title "Screencapture"'
+}
+
+case "$1" in
+  focus_space) focus_space "$2" ;;
+  screencapture) screencapture ;;
+  screencapture_selected) screencapture_selected ;;
+  *) exit 1 ;;
+esac

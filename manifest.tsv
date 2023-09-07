@@ -22,6 +22,7 @@ profile	$HOME/.profile
 python	$XDG_CONFIG_HOME
 ripgrep	$XDG_CONFIG_HOME
 rofi	$XDG_CONFIG_HOME
+skhd	$XDG_CONFIG_HOME
 stylua	$XDG_CONFIG_HOME
 systemd	$XDG_CONFIG_HOME
 tmux	$XDG_CONFIG_HOME
@@ -29,4 +30,5 @@ vimrc	$HOME/.vimrc
 X11	$XDG_CONFIG_HOME
 xinitrc	$HOME/.xinitrc
 xremap	$XDG_CONFIG_HOME
+yabai	$XDG_CONFIG_HOME
 zsh	$XDG_CONFIG_HOME

@@ -1,0 +1,51 @@
+# kill focused window
+cmd + shift - q : yabai -m window --close
+
+# change focus
+cmd + ctrl - h : yabai -m window --focus west
+cmd + ctrl - j : yabai -m window --focus south
+cmd + ctrl - k : yabai -m window --focus north
+cmd + ctrl - l : yabai -m window --focus east
+
+cmd - tab : yabai -m window --focus next || yabai -m window --focus first
+
+# move focuesd window
+cmd + shift - h : yabai -m window --swap west
+cmd + shift - j : yabai -m window --swap south
+cmd + shift - k : yabai -m window --swap north
+cmd + shift - l : yabai -m window --swap east
+
+# enter fullscreen mode for the focused window
+cmd - f         : yabai -m window --toggle zoom-fullscreen
+cmd + shift - f : yabai -m window --toggle native-fullscreen
+
+# switch to space
+cmd - 1 : yabai-util focus_space 1
+cmd - 2 : yabai-util focus_space 2
+cmd - 3 : yabai-util focus_space 3
+cmd - 4 : yabai-util focus_space 4
+cmd - 5 : yabai-util focus_space 5
+
+# move focused window to space
+cmd + shift - 1 : yabai -m window --space 1
+cmd + shift - 2 : yabai -m window --space 2
+cmd + shift - 3 : yabai -m window --space 3
+cmd + shift - 4 : yabai -m window --space 4
+cmd + shift - 5 : yabai -m window --space 5
+
+# restart yabai and skhd inplace
+cmd + shift - r : yabai --restart-service && skhd --restart-service
+
+# screenshot
+cmd + alt         - p : yabai-util screencapture
+cmd + alt + shift - p : yabai-util screencapture_selected
+
+# resize window
+:: resize @ : osascript -e 'display notification "Enter resize mode" with title "yabai"'
+resize < h : yabai -m window --resize left:10:0
+resize < j : yabai -m window --resize bottom:0:10
+resize < k : yabai -m window --resize bottem:0:-10
+resize < l : yabai -m window --resize left:-10:0
+resize < 0x35 ; default
+resize < return ; default
+cmd + ctrl - r ; resize
