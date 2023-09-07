@@ -100,13 +100,13 @@
   recommit = commit --amend
   root = rev-parse --show-toplevel
   sync = "!f(){ \
-    [ -z \"$(git config --get remote.origin.gh-resolved)\" ] && gh repo set-default; \
+    [ -z \"$(git config --get remote.origin.gh-resolved)\" ] && gh repo set-default </dev/tty >/dev/tty; \
     [ -z \"$(gh repo view \"$(git config --get remote.origin.url)\" --json isFork --jq '.isFork and empty')\" ] && { \
       git remote get-url upstream 2>/dev/null >&2 || \
         git remote add upstream \"$(gh repo view --json url --jq .url)\"; \
-      git pull --ff-only upstream \"$(git default-branch)\"; \
+      git pull --ff-only --prune upstream \"$(git default-branch)\"; \
     }; \
-    git pull --ff-only origin \"$(git default-branch)\"; \
+    git pull --ff-only --prune origin \"$(git default-branch)\"; \
   };f"
   uncommit = reset --soft HEAD^
   unstage = restore --staged

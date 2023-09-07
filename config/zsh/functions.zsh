@@ -40,7 +40,7 @@ hook-git-auto-save () {
 }
 add-zsh-hook preexec hook-git-auto-save
 
-PERIOD=5
+PERIOD=15
 hook-vim-terminal () {
   local vim_cwd=$(lsof -a -d cwd -p "$VIM_PID" -Fn | tail -n1 | cut -c2-)
   if [[ -n "$vim_cwd" ]] && [[ "$vim_cwd" != "$PWD" ]]; then
