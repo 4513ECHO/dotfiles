@@ -22,7 +22,7 @@ vim.keymap.set({ "i", "c", "t" }, modifier "v", function()
 end)
 
 -- disable mouse selecting
-for _, mod in pairs { "S", "A", "2", "3", "4" } do
+for _, mod in pairs { "S", "C", "A", "D", "2", "3", "4" } do
   vim.keymap.set("", ("<%s-LeftMouse>"):format(mod), "<Nop>")
   vim.keymap.set("", ("<%s-LeftDrag>"):format(mod), "<LeftMouse>")
   vim.keymap.set("", ("<%s-LeftRelease>"):format(mod), "<Nop>")
@@ -31,19 +31,8 @@ vim.keymap.set("", "<LeftDrag>", "<LeftMouse>")
 vim.keymap.set("", "<LeftRelease>", "<Nop>")
 
 -- adjust font size
----@param size integer
-local function set_font_size(size)
-  font_size = size
+---@param ctx { fargs: string[] }
+vim.api.nvim_create_user_command("FontSize", function(ctx)
+  font_size = tonumber(ctx.fargs[1] or 12) or font_size
   vim.opt.guifont = font_base:format(font_size)
-  vim.notify(
-    "font size: " .. font_size,
-    vim.log.levels.INFO,
-    { title = "neovide" }
-  )
-end
-vim.keymap.set("n", modifier ";", function() set_font_size(font_size + 1) end)
-vim.keymap.set(
-  "n",
-  modifier "-",
-  function() set_font_size(font_size > 1 and font_size - 1 or 1) end
-)
+end, { nargs = "?" })

@@ -54,6 +54,16 @@ vim.lsp.handlers["textDocument/hover"] =
   vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 require("lspconfig.ui.windows").default_options.border = "single"
 
+-- from https://github.com/neovim/neovim/pull/15981
+local util = require "vim.lsp.util"
+local orig = util.make_floating_popup_options
+---@diagnostic disable-next-line: duplicate-set-field
+util.make_floating_popup_options = function(width, height, opts)
+  local orig_opts = orig(width, height, opts)
+  orig_opts.noautocmd = true
+  return orig_opts
+end
+
 vim.diagnostic.config { signs = { priority = 20 } }
 vim.fn.sign_define {
   { name = "DiagnosticSignError", text = "✗", texthl = "DiagnosticError" },
@@ -62,7 +72,9 @@ vim.fn.sign_define {
   { name = "DiagnosticSignHint", text = "?", texthl = "DiagnosticHint" },
 }
 
-denops_notify "vimrc" "cacheLanguageServers" { vim.fn.stdpath "cache" }
+-- NOTE: Ignore stylua to make it work casting
+-- stylua: ignore
+denops_notify "vimrc" "cacheLanguageServers" { vim.fn.stdpath "cache" --[[@as string]] }
 
 lspconfig.efm.setup {
   filetypes = { "json", "lua", "markdown", "sh", "yaml" },

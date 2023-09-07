@@ -8,6 +8,14 @@ parser_config.unifieddiff = {
   filetype = "diff",
   maintainers = { "@monaqa" },
 }
+-- parser_config.vim = {
+--   install_info = {
+--     url = "~/Develops/github.com/4513ECHO/tree-sitter-vim",
+--     branch = "interpolated-string",
+--     files = { "src/parser.c", "src/scanner.c" },
+--   },
+--   filetype = "vim",
+-- }
 
 ---@param lang string
 ---@param bufnr integer
