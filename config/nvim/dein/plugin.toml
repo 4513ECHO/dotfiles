@@ -274,15 +274,19 @@ repo = 'https://github.com/lambdalisue/kensaku.vim'
 denops_wait = false
 on_func = ['kensaku#']
 hook_add = '''
-let s:kensaku_state = #{ cmdline: '', converted: v:false }
+let s:kensaku_state = #{ converted: v:false, cmdline: #{ prev: '', converted: '' } }
 function! s:convert_kensaku() abort
-  if s:kensaku_state.converted
-    call setcmdline(s:kensaku_state.cmdline)
+  if s:kensaku_state.converted &&
+        \ getcmdline()->match(s:kensaku_state.cmdline.converted->escape('\')) > -1
+    let s:kensaku_state.converted = v:false
+    let s:kensaku_state.cmdline.converted = ''
+    call setcmdline(s:kensaku_state.cmdline.prev)
   else
-    let s:kensaku_state.cmdline = getcmdline()
-    call setcmdline(kensaku#query(s:kensaku_state.cmdline))
+    let s:kensaku_state.converted = v:true
+    let s:kensaku_state.cmdline.prev = getcmdline()
+    let s:kensaku_state.cmdline.converted = kensaku#query(s:kensaku_state.cmdline.prev)
+    call setcmdline(s:kensaku_state.cmdline.converted)
   endif
-  let s:kensaku_state.converted = !s:kensaku_state.converted
 endfunction
 autocmd vimrc CmdlineLeave * let s:kensaku_state.converted = v:false
 cnoremap <C-x><C-k> <Cmd>call <SID>convert_kensaku()<CR>

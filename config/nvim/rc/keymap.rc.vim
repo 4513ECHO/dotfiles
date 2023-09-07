@@ -12,8 +12,8 @@ xnoremap q <Nop>
 xnoremap S <Nop>
 
 " Record macro like ["x]Q (in default use "q" register)
-nnoremap <expr> Q 'q' .. !empty(reg_recording()) ? ''
-      \ : v:register =~# '["*+]' ? 'q' : v:register
+nnoremap <expr> Q 'q' .. (!empty(reg_recording()) ? ''
+      \ : v:register =~# '["*+]' ? 'q' : v:register)
 
 nnoremap j gj
 nnoremap k gk

@@ -1,8 +1,10 @@
 " hook_add {{{
 noremap! <C-j> <Plug>(skkeleton-toggle)
 tnoremap <C-\><C-j> <Plug>(skkeleton-toggle)
-
 autocmd vimrc User DenopsPluginPost:skkeleton call skkeleton#initialize()
+" }}}
+
+" hook_source {{{
 autocmd vimrc User skkeleton-initialize-pre call s:on_init()
 autocmd vimrc User skkeleton-enable-pre call s:on_enable()
 autocmd vimrc User skkeleton-disable-pre call s:on_disable()

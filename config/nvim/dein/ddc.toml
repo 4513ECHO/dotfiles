@@ -48,7 +48,7 @@ repo = 'https://github.com/delphinus/ddc-tmux'
 
 [[plugins]]
 repo = 'https://github.com/hrsh7th/vim-vsnip'
-on_source = ['ddc.vim']
+on_event = ['InsertEnter']
 hook_add = '''
 let g:vsnip_snippet_dir = g:config_home .. '/snippets'
 inoremap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : ''
@@ -67,7 +67,7 @@ repo = 'https://github.com/uga-rosa/ddc-source-vsnip'
 
 [[plugins]]
 repo = 'https://github.com/vim-skk/skkeleton'
-denops_wait = false
+on_map = { ict = '<Plug>' }
 hooks_file = '$DEIN_DIR/settings/skkeleton.vim'
 
 # filters

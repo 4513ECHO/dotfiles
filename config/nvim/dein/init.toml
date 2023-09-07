@@ -120,6 +120,15 @@ let g:denops_server_addr = '127.0.0.1:32123'
 repo = 'https://github.com/4513ECHO/denops-shared-server.vim'
 rev = 'sync-environment'
 depends = ['denops.vim']
+hook_add = '''
+function! s:dss(action) abort
+  call denops_shared_server#{a:action}()
+endfunction
+function! s:dss_complete(...) abort
+  return ['install', 'uninstall', 'restart']->join("\n")
+endfunction
+command! -nargs=1 -complete=custom,s:dss_complete -bar DenopsSharedServer call s:dss(<f-args>)
+'''
 
 [[plugins]]
 repo = 'https://github.com/vim-jp/vimdoc-ja'

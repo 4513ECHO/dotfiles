@@ -12,7 +12,7 @@ import * as lambda from "https://deno.land/x/denops_std@v5.0.1/lambda/mod.ts";
 import { ensure, is } from "https://deno.land/x/unknownutil@v3.4.0/mod.ts";
 import { sprintf } from "https://deno.land/std@0.198.0/fmt/printf.ts";
 
-type UiFFParams<T extends keyof UiFFParams_ = "autoResize"> = {
+type UiFFParams<T extends keyof UiFFParams_ = never> = {
   [P in keyof UiFFParams_]: P extends T ? UiFFParams_[P] | string
     : UiFFParams_[P];
 };
@@ -115,9 +115,7 @@ export class Config extends BaseConfig {
           autoAction: {
             name: "preview",
           },
-          autoResize: "sources ==# ['action']",
-          exprParams: defaultUiFFParams.exprParams
-            .concat(["autoResize", "floatingTitle"]),
+          exprParams: defaultUiFFParams.exprParams.concat("floatingTitle"),
           floatingBorder: "rounded",
           floatingTitle: "sources->join(', ')",
           highlights: {

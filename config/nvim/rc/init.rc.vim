@@ -68,6 +68,8 @@ else
   command! -bar VTerminal execute (<q-mods> ?? 'topleft') 'vertical terminal ++close'
 endif
 
+command! -bar Udd let $NO_COLOR = 1 | execute '!udd %' | unlet $NO_COLOR
+
 if filereadable(expand('~/.vimrc_secret'))
   source ~/.vimrc_secret
 endif
