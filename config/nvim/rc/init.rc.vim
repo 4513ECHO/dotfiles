@@ -16,7 +16,7 @@ let g:launcher_config.color = #{
       \ run: 'RandomColorScheme',
       \ }
 
-autocmd vimrc VimEnter * ++nested call user#colorscheme#random()
+autocmd vimrc VimEnter,DirChanged * ++nested call user#colorscheme#random()
 autocmd vimrc ColorSchemePre *
       \ : unlet! g:terminal_color_foreground
       \          g:terminal_color_background

@@ -51,11 +51,6 @@ autocmd vimrc BufEnter,WinEnter,Syntax *
       \ silent! let g:todo_match =  matchadd('TodoExt',
       \ '\v\zs(TODO|NOTE|XXX|FIXME|INFO)\ze%(\(.{-}\))?\:')
 
-autocmd vimrc ColorScheme *
-      \ : if &laststatus == 3
-      \ |   hi clear VertSplit
-      \ | endif
-
 autocmd vimrc BufWritePost *
       \ : if empty(&filetype)
       \ |   filetype detect

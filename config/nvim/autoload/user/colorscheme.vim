@@ -4,15 +4,12 @@ if empty($VIM_DISABLE_DEIN)
       return s:cache
     endif
     let s:cache = {}
-    for plugins in dein#get()->copy()
+    for colorscheme in dein#get()->copy()
           \ ->filter({ -> v:val->has_key('colorschemes') })
           \ ->values()
-      if plugins->has_key('if') && !eval(plugins.if)
-        continue
-      endif
-      for colorscheme in plugins.colorschemes
-        let s:cache[colorscheme.name] = colorscheme
-      endfor
+          \ ->filter({ -> !v:val->has_key('if') || eval(v:val.if) })
+          \ ->map({ -> v:val.colorschemes }) ->flatten()
+      let s:cache[colorscheme.name] = colorscheme
     endfor
     return s:cache
   endfunction
@@ -23,12 +20,11 @@ else
 endif
 
 function! user#colorscheme#lightline() abort
-  if g:colors_name ==# 'random'
-    return 'default'
-  endif
-  return user#colorscheme#get()
-        \ ->get(g:colors_name, {})
-        \ ->get('lightline', g:colors_name)
+  return g:colors_name ==# 'random'
+        \ ? 'default'
+        \ : user#colorscheme#get()
+        \   ->get(g:colors_name, {})
+        \   ->get('lightline', g:colors_name)
 endfunction
 
 function! user#colorscheme#random() abort
@@ -64,10 +60,8 @@ function! user#colorscheme#set_customize() abort
           \ ] : terminal
           \ )
   elseif !has('nvim') && exists('g:terminal_color_0')
-    let g:terminal_ansi_colors = []
-    for i in range(16)
-      silent! call add(g:terminal_ansi_colors, g:terminal_color_{i})
-    endfor
+    let g:terminal_ansi_colors = range(16)
+          \ ->map({ -> g:->get($'terminal_color_{v:val}', '#000000') })
   elseif has('nvim') && exists('g:terminal_ansi_colors')
     for i in range(16)
       let g:terminal_color_{i} = g:terminal_ansi_colors[i]

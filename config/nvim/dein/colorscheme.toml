@@ -248,6 +248,10 @@ SignifySignDelete = { ctermfg = 160, ctermbg = 236, guifg = '#dc322f', guibg = '
 repo = 'https://github.com/lighthaus-theme/vim-lighthaus'
 [[plugins.colorschemes]]
 name = 'lighthaus'
+terminal = [
+  '#21252D', '#FC2929', '#44B273', '#E25600', '#1D918B', '#D16BB7', '#00BFA4', '#FFFADE',
+  '#8E8D8D', '#FF5050', '#50C16E', '#ED722E', '#47A8A1', '#D68EB2', '#5AD1AA', '#CCCCCC',
+]
 
 [[plugins]]
 repo = 'https://github.com/mhartington/oceanic-next'

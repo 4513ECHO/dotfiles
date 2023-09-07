@@ -64,6 +64,14 @@ M.autocmd "TextYankPost" {
   end,
 }
 
+M.autocmd "ColorScheme" {
+  callback = function()
+    if vim.opt.laststatus:get() == 3 then
+      vim.api.nvim_set_hl(0, "VertSplit", {})
+    end
+  end,
+}
+
 return setmetatable(M, {
   __call = function(_, event) return M.autocmd(event) end,
 })
