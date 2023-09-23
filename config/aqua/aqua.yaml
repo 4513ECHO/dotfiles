@@ -52,7 +52,7 @@ packages:
   - name: microsoft/ripgrep-prebuilt@v13.0.0-10
   - name: mvdan/sh@v3.7.0
   - name: nametake/golangci-lint-langserver@v0.0.8
-  - name: nektos/act@v0.2.50
+  - name: nektos/act@v0.2.51
   - name: noahgorstein/jqp@v0.5.0
   - name: ogham/exa@v0.10.1
   - name: rhysd/actionlint@v1.6.26
