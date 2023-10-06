@@ -85,7 +85,7 @@ packages:
     version: master
   - name: nodejs/node@v20.8.0
     registry: local
-  # - name: rust-lang/rust@1.72.1
+  # - name: rust-lang/rust@1.73.0
   #   registry: local
   - name: thinca/ciw
     registry: local
