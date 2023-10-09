@@ -589,13 +589,13 @@ test = ["coverage", "pycodestyle", "pyflakes", "pylint", "pytest", "pytest-cov"]
 
 [[package]]
 name = "python-lsp-server"
-version = "1.8.1"
+version = "1.8.2"
 description = "Python Language Server for the Language Server Protocol"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "python-lsp-server-1.8.1.tar.gz", hash = "sha256:6f282af95880a98b833645f42bd9d3aa045378cf08b0c2c1c50966a65f521237"},
-    {file = "python_lsp_server-1.8.1-py3-none-any.whl", hash = "sha256:63816a34c32e120ac0e646f06f37695934c2ade7d7cdbf81e3ecb2f18e7aa5ac"},
+    {file = "python-lsp-server-1.8.2.tar.gz", hash = "sha256:fd85e1c6ad95c1d276c82a33c2c85898f110afc3c7bfeaced79c0df095076fd1"},
+    {file = "python_lsp_server-1.8.2-py3-none-any.whl", hash = "sha256:65cfb20c8945bdb7b6bf7577207004e05e2550dac867339ef2e3605a0eeca9ca"},
 ]
 
 [package.dependencies]
