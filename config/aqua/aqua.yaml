@@ -27,7 +27,7 @@ packages:
   - name: dylanaraps/neofetch@7.1.0
   - name: ekalinin/github-markdown-toc@0.8.0
   - name: ericchiang/pup@v0.4.0
-  - name: gohugoio/hugo@v0.120.3
+  - name: gohugoio/hugo@v0.120.4
   - name: golang.org/x/tools/gopls@v0.14.1
   - name: golang/go@go1.21.4
   - name: golangci/golangci-lint@v1.55.2
