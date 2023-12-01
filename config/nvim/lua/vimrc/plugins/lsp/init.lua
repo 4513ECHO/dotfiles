@@ -85,20 +85,23 @@ lspconfig.efm.setup {
 
 lspconfig.denols.setup {
   capabilities = capabilities,
-  init_options = {
-    enable = true,
-    lint = true,
-    suggest = {
-      autoImports = false,
-      imports = {
-        hosts = {
-          ["https://deno.land"] = true,
-          ["https://crux.land"] = true,
-          ["https://x.nest.land"] = true,
+  settings = {
+    deno = {
+      enable = true,
+      lint = true,
+      suggest = {
+        autoImports = false,
+        imports = {
+          hosts = {
+            ["https://deno.land"] = true,
+            ["https://crux.land"] = true,
+            ["https://x.nest.land"] = true,
+            ["https://mod.4513echo.dev"] = true,
+          },
         },
       },
+      unstable = true,
     },
-    unstable = true,
   },
   root_dir = root_pattern("deno.json", "deno.jsonc", "denops"),
 }
@@ -226,7 +229,7 @@ lspconfig.yamlls.setup {
             description = "aqua.yaml",
             fileMatch = "/aqua/aqua.yaml",
             name = "aqua.yaml",
-            url = "https://pax.deno.dev/aquaproj/aqua@v2.11.0-4/json-schema/aqua-yaml.json",
+            url = "https://pax.deno.dev/aquaproj/aqua@v2.21.0/json-schema/aqua-yaml.json",
           },
           {
             description = "aqua-registry",
@@ -237,7 +240,7 @@ lspconfig.yamlls.setup {
               "/aqua/registry.yaml",
             },
             name = "aqua-registry",
-            url = "https://pax.deno.dev/aquaproj/aqua@v2.11.0-4/json-schema/registry.json",
+            url = "https://pax.deno.dev/aquaproj/aqua@v2.21.0/json-schema/registry.json",
           },
         },
       },

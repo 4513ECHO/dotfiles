@@ -81,20 +81,23 @@ enddef
 final settings = {
   bash-language-server: { disabled: true },
   deno: {
-    initialization_options: {
-      enable: true,
-      lint: true,
-      suggest: {
-        autoImports: false,
-        imports: {
-          hosts: {
-            'https://crux.land': true,
-            'https://deno.land': true,
-            'https://x.nest.land': true,
+    workspace_config: {
+      deno: {
+        enable: true,
+        lint: true,
+        suggest: {
+          autoImports: false,
+          imports: {
+            hosts: {
+              'https://crux.land': true,
+              'https://deno.land': true,
+              'https://x.nest.land': true,
+              'https://mod.4513echo.dev': true,
+            },
           },
         },
+        unstable: true,
       },
-      unstable: true,
     },
   },
   efm-langserver: {
@@ -191,10 +194,10 @@ final settings = {
           'https://mattn.github.io/efm-langserver/schema.json': [
             '/efm-langserver/config.yaml',
           ],
-          'https://pax.deno.dev/aquaproj/aqua@v2.11.0-4/json-schema/aqua-yaml.json': [
+          'https://pax.deno.dev/aquaproj/aqua@v2.21.0/json-schema/aqua-yaml.json': [
             '/aqua/aqua.yaml',
           ],
-          'https://pax.deno.dev/aquaproj/aqua@v2.11.0-4/json-schema/registry.json': [
+          'https://pax.deno.dev/aquaproj/aqua@v2.21.0/json-schema/registry.json': [
             '/aqua-registry/pkgs/**/registry.yaml',
             '/aqua-registry/registry.yaml',
             '/aqua/experimental.yaml',
