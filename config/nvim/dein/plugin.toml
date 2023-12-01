@@ -211,6 +211,14 @@ messages
 '''
 
 [[plugins]]
+repo = 'https://github.com/itchyny/vim-external'
+on_map = { nx = '<Plug>' }
+hook_add = '''
+nnoremap gx <Plug>(external-browser)
+xnoremap gx <Plug>(external-browser)
+'''
+
+[[plugins]]
 repo = 'https://github.com/kana/vim-niceblock'
 on_map = { x = '<Plug>' }
 hook_add = '''
@@ -689,28 +697,6 @@ _G.package.preload.caw = function() return M end
 [plugins.ftplugin]
 gitcommit = '''
 let b:caw_oneline_comment = ';'
-'''
-
-[[plugins]]
-repo = 'https://github.com/tyru/open-browser.vim'
-on_map = { nx = '<Plug>(openbrowser' }
-hook_add = '''
-nnoremap gx <Plug>(openbrowser-open)
-xnoremap gx <Plug>(openbrowser-open)
-let g:openbrowser_allowed_schemes = ['http', 'https']
-let g:openbrowser_browser_commands = []
-      \ + (empty($DISPLAY) ? [] : [#{
-      \   name: 'xdg-open',
-      \   args: ['{browser}', '{uri}'],
-      \ }])
-      \ + (empty($TMUX) ? [] : [#{
-      \   name: 'w3m',
-      \   args: 'tmux-w3m {uri} -t open-browser',
-      \ }])
-      \ + (!has('mac') ? [] : [#{
-      \   name: 'open',
-      \   args: ['{browser}', '{uri}'],
-      \ }])
 '''
 
 [[plugins]]
