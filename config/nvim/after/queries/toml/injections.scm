@@ -39,3 +39,11 @@
  (#eq? @_key "plugins.ftplugin")
  (#set! injection.language "vim")
  (#offset! @injection.content 0 3 0 -3))
+
+((table_array_element
+   (pair
+     (bare_key) @_key
+     (string) @injection.content))
+ (#eq? @_key "repo")
+ (#set! injection.language "uri")
+ (#offset! @injection.content 0 1 0 -1))

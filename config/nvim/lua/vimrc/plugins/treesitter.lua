@@ -1,3 +1,4 @@
+---@type table<string, ParserInfo>
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
 parser_config.unifieddiff = {
@@ -7,6 +8,15 @@ parser_config.unifieddiff = {
   },
   filetype = "diff",
   maintainers = { "@monaqa" },
+}
+parser_config.uri = {
+  install_info = {
+    url = "https://github.com/atusy/tree-sitter-uri",
+    branch = "main",
+    files = { "src/parser.c" },
+  },
+  filetype = "uri",
+  maintainers = { "@atusy" },
 }
 -- parser_config.vim = {
 --   install_info = {
@@ -28,11 +38,12 @@ local function disable_highlight(lang, bufnr)
     )
 end
 
-vim.opt.runtimepath:append(vim.fn.stdpath "data" .. "/parsers")
+local parser_install_dir = vim.fn.stdpath "data" --[[@as string]] .. "/parsers"
+vim.opt.runtimepath:append(parser_install_dir)
 
 ---@diagnostic disable-next-line: missing-fields
 require("nvim-treesitter.configs").setup {
-  parser_install_dir = vim.fn.stdpath "data" .. "/parsers",
+  parser_install_dir = parser_install_dir,
   ensure_installed = {
     "bash",
     "go",
@@ -46,6 +57,7 @@ require("nvim-treesitter.configs").setup {
     "toml",
     "typescript",
     "unifieddiff",
+    "uri",
     "vim",
     "yaml",
   },
