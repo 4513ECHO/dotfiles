@@ -12,22 +12,6 @@ require("term-edit").setup {
 '''
 
 [[plugins]]
-repo = 'https://github.com/hrsh7th/nvim-pasta'
-on_map = { nx = "<Plug>" }
-lua_add = '''
-vim.keymap.set({ "n", "x" }, "p", "<Plug>(pasta-p)")
-vim.keymap.set({ "n", "x" }, "P", "<Plug>(pasta-P)")
-'''
-lua_source = '''
-vim.keymap.set({ "n", "x" }, "<Plug>(pasta-p)", require("pasta.mappings").p)
-vim.keymap.set({ "n", "x" }, "<Plug>(pasta-P)", require("pasta.mappings").P)
-require("pasta").setup {}
-require("pasta").setup.filetype({ "markdown", "python", "yaml" }, {
-  fix_indent = false,
-})
-'''
-
-[[plugins]]
 repo = 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
 on_event = ['LspAttach']
 lua_source = '''
