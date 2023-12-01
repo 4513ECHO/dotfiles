@@ -168,13 +168,19 @@ final settings = {
       '--no-config',
       '--no-lock',
       '--node-modules-dir=false',
-      'npm:vscode-langservers-extracted@4.7.0/vscode-json-language-server',
+      'npm:vscode-langservers-extracted@4.8.0/vscode-json-language-server',
       '--stdio',
     ],
   },
   yaml-language-server: {
     cmd: [
-      g:cache_home .. '/ls/node_modules/yaml-language-server/bin/yaml-language-server',
+      'deno',
+      'run',
+      '--allow-all',
+      '--no-config',
+      '--no-lock',
+      '--node-modules-dir=false',
+      'npm:yaml-language-server@1.14.0',
       '--stdio',
     ],
     workspace_config: {

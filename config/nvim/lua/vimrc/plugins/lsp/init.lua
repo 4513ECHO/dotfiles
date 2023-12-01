@@ -3,7 +3,6 @@ local lspconfig = require "lspconfig"
 local capabilities = require("ddc_nvim_lsp").make_client_capabilities()
 local root_pattern = lspconfig.util.root_pattern
 local deno_as_npm = require("vimrc.plugins.lsp.util").deno_as_npm
-local denops_notify = require("vimrc.plugins.lsp.util").denops_notify
 
 autocmd "LspAttach" {
   callback = function(ctx)
@@ -72,10 +71,6 @@ vim.fn.sign_define {
   { name = "DiagnosticSignHint", text = "?", texthl = "DiagnosticHint" },
 }
 
--- NOTE: Ignore stylua to make it work casting
--- stylua: ignore
-denops_notify "vimrc" "cacheLanguageServers" { vim.fn.stdpath "cache" --[[@as string]] }
-
 lspconfig.efm.setup {
   filetypes = { "json", "lua", "markdown", "sh", "yaml" },
   init_options = {
@@ -110,7 +105,7 @@ lspconfig.denols.setup {
 
 lspconfig.vtsls.setup {
   capabilities = capabilities,
-  -- cmd = deno_as_npm { "npm:@vtsls/language-server", "--stdio" },
+  -- cmd = deno_as_npm { "npm:@vtsls/language-server@0.1.22", "--stdio" },
   -- cmd_env = deno_as_npm.cmd_env,
   cmd = {
     vim.fn.stdpath "cache"
@@ -119,6 +114,11 @@ lspconfig.vtsls.setup {
   },
   single_file_support = false,
   root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json"),
+  on_new_config = function()
+    require("vimrc.plugins.lsp.util").denops_notify "vimrc" "cacheLanguageServers" {
+      vim.fn.stdpath "cache" --[[@as string]],
+    }
+  end,
 }
 
 lspconfig.lua_ls.setup {
@@ -154,7 +154,7 @@ lspconfig.gopls.setup {
 lspconfig.jsonls.setup {
   capabilities = capabilities,
   cmd = deno_as_npm {
-    "npm:vscode-langservers-extracted@4.7.0/vscode-json-language-server",
+    "npm:vscode-langservers-extracted@4.8.0/vscode-json-language-server",
     "--stdio",
   },
   cmd_env = deno_as_npm.cmd_env,
@@ -206,13 +206,8 @@ lspconfig.taplo.setup {
 }
 
 lspconfig.yamlls.setup {
-  -- cmd = deno_as_npm { "npm:yaml-language-server", "--stdio" },
-  -- cmd_env = deno_as_npm.cmd_env,
-  cmd = {
-    vim.fn.stdpath "cache"
-      .. "/ls/node_modules/yaml-language-server/bin/yaml-language-server",
-    "--stdio",
-  },
+  cmd = deno_as_npm { "npm:yaml-language-server@1.14.0", "--stdio" },
+  cmd_env = deno_as_npm.cmd_env,
   settings = {
     yaml = {
       completion = true,

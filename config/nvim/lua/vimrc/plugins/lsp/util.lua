@@ -10,6 +10,7 @@ local M = {}
 ---}
 ---```
 ---@class deno_as_npm
+---@diagnostic disable-next-line: duplicate-doc-field
 ---@field cmd_env table<string, unknown> The `cmd_env` option for lspconfig-setup
 ---@overload fun(cmd: string[]): string[]
 M.deno_as_npm = setmetatable({}, {

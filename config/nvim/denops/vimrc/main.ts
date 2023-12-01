@@ -52,7 +52,7 @@ export function main(denops: Denops): Promise<void> {
 
     async cacheLanguageServers(arg: unknown): Promise<void> {
       const cacheDir = join(ensure(arg, is.String), "ls");
-      if ((await exists(cacheDir, { isDirectory: true }))) {
+      if (await exists(cacheDir, { isDirectory: true })) {
         return;
       }
       await Deno.mkdir(cacheDir, { recursive: true });
@@ -61,9 +61,7 @@ export function main(denops: Denops): Promise<void> {
           "cache",
           "--reload",
           "--node-modules-dir",
-          "npm:@vtsls/language-server@0.1.20", //
-          "npm:yaml-language-server@1.13.0", //
-          "npm:prettier@2.8.8", //
+          "npm:@vtsls/language-server@0.1.22",
         ],
         cwd: cacheDir,
         stderr: "piped",
@@ -72,30 +70,38 @@ export function main(denops: Denops): Promise<void> {
       stderr
         .pipeThrough(new TextDecoderStream())
         .pipeThrough(new TextLineStream())
-        .pipeTo(new EchomsgStream(denops));
+        .pipeTo(new FidgetStream(denops));
     },
   };
 
   return Promise.resolve();
 }
 
-class EchomsgStream extends WritableStream<string> {
+class FidgetStream extends WritableStream<string> {
   constructor(denops: Denops) {
     super({
       write: (chunk) => {
-        this.#echo(denops, chunk);
+        this.#echo(denops, chunk, false);
       },
       close: () => {
-        this.#echo(denops, "Caching Done");
-        ["vtsls", "yamlls"].map((server) =>
-          denops.call("luaeval", "require('lspconfig')[_A].launch()", server)
-        );
-        this.#echo(denops, "Servers Restarted");
+        this.#echo(denops, "Done", true);
+        denops.call("luaeval", "require('lspconfig').vtsls.launch()");
+        this.#echo(denops, "Server Restarted", true);
       },
     });
   }
 
-  #echo(denops: Denops, chunk: string): void {
-    denops.call("nvim_echo", [["[Caching LS] ", "Comment"], [chunk]], true, []);
+  #echo(denops: Denops, chunk: string, done: boolean): void {
+    denops.call(
+      "luaeval",
+      `require('fidget.notification').notify(require('fidget.progress').format_progress {
+        token = 'cache_vtsls',
+        title = 'Cache vtsls',
+        message = _A.chunk,
+        done = _A.done,
+        lsp_name = 'vtsls'
+      })`.replaceAll("\n", ""),
+      { chunk, done },
+    );
   }
 }
