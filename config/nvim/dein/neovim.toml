@@ -59,6 +59,7 @@ autocmd vimrc User SearchxCancel lua require("hlslens").stop()
 lua_source = '''
 require("hlslens").setup {
   enable_incsearch = false,
+  nearest_only = true,
 }
 '''
 

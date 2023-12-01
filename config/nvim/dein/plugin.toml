@@ -149,8 +149,8 @@ nnoremap / <Cmd>call searchx#start(#{ dir: 1 })<CR>
 xnoremap ? <Cmd>call searchx#start(#{ dir: 0 })<CR>
 xnoremap / <Cmd>call searchx#start(#{ dir: 1 })<CR>
 
-cnoremap <C-g> <Cmd>call searchx#next_dir()<CR>
-cnoremap <C-t> <Cmd>call searchx#prev_dir()<CR>
+cnoremap <C-g> <Cmd>call searchx#next_dir()<CR><Plug>(search-post)
+cnoremap <C-t> <Cmd>call searchx#prev_dir()<CR><Plug>(search-post)
 
 nnoremap N <Cmd>call searchx#prev_dir()<CR><Plug>(search-post)
 nnoremap n <Cmd>call searchx#next_dir()<CR><Plug>(search-post)

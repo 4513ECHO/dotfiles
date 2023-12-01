@@ -75,7 +75,8 @@ if filereadable(expand('~/.vimrc_secret'))
 endif
 
 " custom autocmd
-noremap <Plug>(search-post) <Cmd>doautocmd <nomodeline> User VimrcSearchPost<CR>
+noremap  <Plug>(search-post) <Cmd>doautocmd <nomodeline> User VimrcSearchPost<CR>
+noremap! <Plug>(search-post) <Cmd>doautocmd <nomodeline> User VimrcSearchPost<CR>
 autocmd vimrc User VimrcSearchPost normal! zzzv
 
 if has('nvim')
