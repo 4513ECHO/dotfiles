@@ -1,10 +1,11 @@
-import * as fn from "https://deno.land/x/denops_std@v5.0.1/function/mod.ts";
-import type { ActionData } from "https://deno.land/x/ddu_kind_file@v0.5.3/file.ts";
+import * as fn from "https://deno.land/x/denops_std@v5.1.0/function/mod.ts";
+import type { ActionData } from "https://deno.land/x/ddu_kind_file@v0.7.1/file.ts";
 import {
   BaseSource,
   type GatherArguments,
-} from "https://deno.land/x/ddu_vim@v3.5.0/base/source.ts";
-import type { Item } from "https://deno.land/x/ddu_vim@v3.5.0/types.ts";
+} from "https://deno.land/x/ddu_vim@v3.7.0/base/source.ts";
+import type { Item } from "https://deno.land/x/ddu_vim@v3.7.0/types.ts";
+import { defer } from "https://deno.land/x/denops_defer@v1.0.0/batch/defer.ts";
 
 type Params = {
   useLoclist: boolean;
@@ -24,28 +25,23 @@ export class Source extends BaseSource<Params, ActionData> {
   ): ReadableStream<Item<ActionData>[]> {
     return new ReadableStream({
       async start(controller) {
-        const func = args.sourceParams.useLoclist
+        const func: [string, ...unknown[]] = args.sourceParams.useLoclist
           ? ["getloclist", 0]
           : ["getqflist"];
-        const items = await args.denops.call(
-          ...func as [string, ...unknown[]],
-        ) as QflistItem[];
+        const items = await args.denops.call(...func) as QflistItem[];
         controller.enqueue(
-          await Promise.all(
-            items.map(async (i): Promise<Item<ActionData>> => ({
+          await defer(args.denops, (denops) =>
+            items.map((i) => ({
               word: i.text,
-              display: `${await fn.bufname(
-                args.denops,
-                i.bufnr,
-              )}|${i.lnum} col ${i.col}|${i.text}`,
+              display: fn.bufname(denops, i.bufnr)
+                .then((name) => `${name}|${i.lnum} col ${i.col}|${i.text}`),
               action: {
                 bufNr: i.bufnr,
                 col: i.col,
                 lineNr: i.lnum,
                 text: i.text,
               },
-            })),
-          ),
+            }))),
         );
         controller.close();
       },

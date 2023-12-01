@@ -1,8 +1,8 @@
-import type { Denops } from "https://deno.land/x/denops_std@v5.0.1/mod.ts";
-import { ensure, is } from "https://deno.land/x/unknownutil@v3.4.0/mod.ts";
-import { exists } from "https://deno.land/std@0.198.0/fs/exists.ts";
-import { join, toFileUrl } from "https://deno.land/std@0.198.0/path/mod.ts";
-import { TextLineStream } from "https://deno.land/std@0.198.0/streams/text_line_stream.ts";
+import type { Denops } from "https://deno.land/x/denops_std@v5.1.0/mod.ts";
+import { ensure, is } from "https://deno.land/x/unknownutil@v3.11.0/mod.ts";
+import { exists } from "https://deno.land/std@0.208.0/fs/exists.ts";
+import { join, toFileUrl } from "https://deno.land/std@0.208.0/path/mod.ts";
+import { TextLineStream } from "https://deno.land/std@0.208.0/streams/text_line_stream.ts";
 
 export function main(denops: Denops): Promise<void> {
   denops.dispatcher = {
@@ -12,7 +12,7 @@ export function main(denops: Denops): Promise<void> {
         denoVersion: Deno.version,
         nvimVersion: denops.meta.host === "nvim"
           ? await denops.call("luaeval", "vim.version()")
-          : {},
+          : null,
       };
     },
 

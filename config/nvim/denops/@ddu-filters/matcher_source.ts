@@ -1,9 +1,9 @@
 import {
   BaseFilter,
   type FilterArguments,
-} from "https://deno.land/x/ddu_vim@v3.5.0/base/filter.ts";
-import type { DduItem } from "https://deno.land/x/ddu_vim@v3.5.0/types.ts";
-import { ensure, is } from "https://deno.land/x/unknownutil@v3.4.0/mod.ts";
+} from "https://deno.land/x/ddu_vim@v3.7.0/base/filter.ts";
+import type { DduItem } from "https://deno.land/x/ddu_vim@v3.7.0/types.ts";
+import { ensure, is } from "https://deno.land/x/unknownutil@v3.11.0/mod.ts";
 
 export type Params = {
   ignoredSources: string[];

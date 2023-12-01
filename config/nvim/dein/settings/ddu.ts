@@ -1,16 +1,16 @@
 import {
   BaseConfig,
   type ConfigArguments,
-} from "https://deno.land/x/ddu_vim@v3.5.0/base/config.ts";
+} from "https://deno.land/x/ddu_vim@v3.7.0/base/config.ts";
 import {
   type Params as UiFFParams_,
   Ui as UiFF,
 } from "https://deno.land/x/ddu_ui_ff@v1.1.0/ff.ts";
-import type { Denops } from "https://deno.land/x/denops_std@v5.0.1/mod.ts";
-import * as autocmd from "https://deno.land/x/denops_std@v5.0.1/autocmd/mod.ts";
-import * as lambda from "https://deno.land/x/denops_std@v5.0.1/lambda/mod.ts";
-import { ensure, is } from "https://deno.land/x/unknownutil@v3.4.0/mod.ts";
-import { sprintf } from "https://deno.land/std@0.198.0/fmt/printf.ts";
+import type { Denops } from "https://deno.land/x/denops_std@v5.1.0/mod.ts";
+import * as autocmd from "https://deno.land/x/denops_std@v5.1.0/autocmd/mod.ts";
+import * as lambda from "https://deno.land/x/denops_std@v5.1.0/lambda/mod.ts";
+import { ensure, is } from "https://deno.land/x/unknownutil@v3.11.0/mod.ts";
+import { sprintf } from "https://deno.land/std@0.208.0/fmt/printf.ts";
 
 type UiFFParams<T extends keyof UiFFParams_ = never> = {
   [P in keyof UiFFParams_]: P extends T ? UiFFParams_[P] | string

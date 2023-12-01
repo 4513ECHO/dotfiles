@@ -1,8 +1,8 @@
-import type { Item } from "https://deno.land/x/ddc_vim@v4.0.4/types.ts";
+import type { Item } from "https://deno.land/x/ddc_vim@v4.1.0/types.ts";
 import {
   BaseFilter,
   type FilterArguments,
-} from "https://deno.land/x/ddc_vim@v4.0.4/base/filter.ts";
+} from "https://deno.land/x/ddc_vim@v4.1.0/base/filter.ts";
 // based on https://github.com/kuuote/dotvim/blob/92773506/denops/%40ddc-filters/sorter_file.ts
 
 const kindRankDefinition: Record<string, number> = {
@@ -27,7 +27,7 @@ function parseMenu(menu?: string): string {
   return isRelative ? menu.slice(1, 4) : menu.slice(0, 3);
 }
 
-type Params = Record<never, never>;
+type Params = Record<PropertyKey, never>;
 
 export class Filter extends BaseFilter<Params> {
   override filter(args: FilterArguments<Params>): Promise<Item[]> {
