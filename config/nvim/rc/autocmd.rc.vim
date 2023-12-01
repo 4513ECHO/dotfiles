@@ -56,12 +56,6 @@ autocmd vimrc BufWritePost *
       \ |   filetype detect
       \ | endif
 
-autocmd vimrc SwapExists *
-      \ : let v:swapchoice = 'o'
-      \ | echohl ErrorMsg
-      \ | echomsg 'Swapfile is found:' v:swapname
-      \ | echohl NONE
-
 " from https://github.com/aiotter/dotfiles/blob/8e759221/.vimrc#L185
 autocmd vimrc WinEnter *
       \ : if winnr('$') == 1 && &buftype ==# 'quickfix'

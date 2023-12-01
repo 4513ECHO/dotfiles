@@ -46,6 +46,10 @@ let g:extra_whitespace_ignored_filetypes = ['diff', 'help', 'capture', 'tsv']
 '''
 
 [[plugins]]
+repo = 'https://github.com/chrisbra/Recover.vim'
+on_event = ['BufWinEnter', 'FocusGained', 'SwapExists']
+
+[[plugins]]
 repo = 'https://github.com/christoomey/vim-tmux-navigator'
 if = '!has("gui_running")'
 on_cmd = [
