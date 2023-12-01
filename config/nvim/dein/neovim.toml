@@ -37,11 +37,13 @@ end)
 [[plugins]]
 repo = 'https://github.com/j-hui/fidget.nvim'
 on_event = ['LspAttach']
-rev = 'legacy'
+on_lua = ['fidget']
 lua_source = '''
 require("fidget").setup {
-  text = {
-    spinner = "dots_pulse",
+  progress = {
+    display = {
+      progress_icon = { "dots_pulse" },
+    },
   },
 }
 '''
