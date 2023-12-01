@@ -95,27 +95,6 @@ let s:rules.markdown += [
       \ #{ char: '<BS>',  at: '\~\%#\~', delete: 1        },
       \ ]
 
-" lua
-" from https://github.com/cohama/lexima.vim/issues/107
-function! s:make_rule(at, end, filetype, syntax)
-  return #{
-        \ char: '<CR>',
-        \ input: '<CR>',
-        \ input_after: '<CR>' .. a:end,
-        \ at: a:at,
-        \ except: '\C\v^(\s*)\S.*%#\n%(%(\s*|\1\s.+)\n)*\1' .. a:end,
-        \ filetype: a:filetype,
-        \ syntax: a:syntax,
-        \ }
-endfunction
-
-let s:rules.lua = []
-let s:rules.lua += [
-      \ s:make_rule('\%(^\s*--.*\)\@<!\<function\>\%(.*\<end\>\)\@!.*\%#', 'end', 'lua', []),
-      \ s:make_rule('\%(^\s*--.*\)\@<!\<do\s*\%#', 'end', 'lua', []),
-      \ s:make_rule('\%(^\s*--.*\)\@<!\<then\s*\%#', 'end', 'lua', []),
-      \ ]
-
 " sh
 let s:rules.sh = []
 let s:rules.sh += [
