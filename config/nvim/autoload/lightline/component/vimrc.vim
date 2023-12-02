@@ -65,3 +65,14 @@ function! lightline#component#vimrc#protocol() abort
   return bufname() =~# '^\a\+://' && s:statuswidth() > 70
         \ ? bufname()->matchstr('^\a\+\ze://')->printf('(%s)') : ''
 endfunction
+
+function! lightline#component#vimrc#tabname(tabpagenr) abort
+  let buflist = tabpagebuflist(a:tabpagenr)
+  let bufnr = buflist[tabpagewinnr(a:tabpagenr) - 1]
+  let fname = expand($'#{bufnr}:p')
+  let cwd = getcwd(-1, a:tabpagenr)
+  return buflist->len() > 1 || fname->stridx(cwd) ==# 0
+        \ || bufnr->getbufvar('&filetype') ==# 'molder'
+        \ ? cwd->fnamemodify(':t')
+        \ : fname->fnamemodify(':t') ?? '[No name]'
+endfunction
