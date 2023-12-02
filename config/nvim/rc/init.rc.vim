@@ -62,11 +62,8 @@ command! -bar DiffOrig
       \ : vertical new | setlocal buftype=nofile | r ++edit # | 0d_
       \ | diffthis | wincmd p | diffthis
 
-if has('nvim')
-  command! -bar VTerminal execute (<q-mods> ?? 'topleft') 'vsplit +terminal'
-else
-  command! -bar VTerminal execute (<q-mods> ?? 'topleft') 'vertical terminal ++close'
-endif
+command! -bar VTerminal execute (<q-mods> ?? 'topleft vertical')
+      \ has('nvim') ? 'split +terminal' : 'terminal ++close'
 
 command! -bar Udd let $NO_COLOR = 1 | execute '!udd %' | unlet $NO_COLOR
 
@@ -79,8 +76,11 @@ noremap  <Plug>(search-post) <Cmd>doautocmd <nomodeline> User VimrcSearchPost<CR
 noremap! <Plug>(search-post) <Cmd>doautocmd <nomodeline> User VimrcSearchPost<CR>
 autocmd vimrc User VimrcSearchPost normal! zzzv
 
-if has('nvim')
-  lua vim.loader.enable()
-  lua require('vimrc.autocmd')
-  lua require('vimrc.neovide')
+if !has('nvim')
+  finish
 endif
+lua << EOF
+vim.loader.enable()
+require('vimrc.autocmd')
+require('vimrc.neovide')
+EOF

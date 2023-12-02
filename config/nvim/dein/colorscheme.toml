@@ -219,6 +219,7 @@ Directory = 'Statement'
 repo = 'https://github.com/karoliskoncevicius/sacredforest-vim'
 [[plugins.colorschemes]]
 name = 'sacredforest'
+terminal = 'mini'
 
 [[plugins]]
 repo = 'https://github.com/kihachi2000/yash.nvim'

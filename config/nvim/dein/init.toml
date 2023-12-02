@@ -108,10 +108,9 @@ if = '!has("gui_running")'
 
 [[plugins]]
 repo = 'https://github.com/vim-denops/denops.vim'
-hook_depends_update = '''
-call denops_shared_server#restart()
-'''
+rev = 'liberate-from-worker'
 hook_add = '''
+let g:denops#plugin_architecture_model = 'worker'
 let g:denops_server_addr = '127.0.0.1:32123'
 '''
 

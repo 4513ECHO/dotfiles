@@ -101,7 +101,6 @@ onoremap ) t)
 inoremap <C-g><C-z> <C-o>zz
 inoremap <C-g><C-p> <Cmd>setlocal paste! paste?<CR>
 inoremap <C-g><C-y> <C-y>
-inoremap <C-g><C-d> <C-d>
 
 " emacs-like insert/cmdline mode mapping {{{
 noremap! <C-a> <Home>

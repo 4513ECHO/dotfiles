@@ -51,8 +51,7 @@ hook_add = '''
 let g:hitspop_line = 'winbot'
 let g:hitspop_column = 'winleft'
 let g:hitspop_timeout = 2000
-autocmd vimrc ColorScheme *
-      \ hi link hitspopErrormsg ErrorMsg
+autocmd vimrc ColorScheme * hi link hitspopErrormsg ErrorMsg
 autocmd vimrc User SearchxInputChanged call hitspop#main()
 '''
 

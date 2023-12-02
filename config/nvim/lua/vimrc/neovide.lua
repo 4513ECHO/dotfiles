@@ -30,6 +30,8 @@ end
 vim.keymap.set("", "<LeftDrag>", "<LeftMouse>")
 vim.keymap.set("", "<LeftRelease>", "<Nop>")
 
+vim.cmd.aunmenu { "PopUp" }
+
 -- adjust font size
 ---@param ctx { fargs: string[] }
 vim.api.nvim_create_user_command("FontSize", function(ctx)

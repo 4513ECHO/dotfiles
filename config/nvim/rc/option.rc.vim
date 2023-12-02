@@ -109,6 +109,7 @@ set virtualedit=block
 
 set clipboard-=autoselect
 set mouse=n
+set mousemodel=popup_setpos
 
 set completeopt=menuone,noinsert,noselect
 if !has('nvim')

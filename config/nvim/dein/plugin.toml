@@ -80,6 +80,7 @@ on_event = ['InsertEnter']
 hook_add = '''
 let g:copilot_no_maps = v:true
 inoremap <silent><expr> <C-g><C-g> copilot#Accept()
+inoremap <silent><expr> <C-g><C-w> copilot#AcceptWord()
 inoremap <C-g><C-]> <Cmd>call copilot#Next()<CR>
 inoremap <C-g><C-[> <Cmd>call copilot#Previous()<CR>
 autocmd vimrc OptionSet buftype
@@ -466,7 +467,7 @@ repo = 'https://github.com/statiolake/vim-quickrun-runner-nvimterm'
 
 [[plugins]]
 repo = 'https://github.com/rhysd/clever-f.vim'
-on_map = { nxo = '<Plug>(clever-f' }
+on_map = { nxo = '<Plug>' }
 hook_add = '''
 nnoremap F <Plug>(clever-f-F)
 nnoremap T <Plug>(clever-f-T)
@@ -491,9 +492,6 @@ let g:clever_f_ignore_case = v:true
 let g:clever_f_smart_case = v:true
 let g:clever_f_use_migemo = v:true
 let g:clever_f_chars_match_any_signs = "\<C-g>"
-let g:clever_f_timeout_ms = 5000
-autocmd vimrc ColorScheme *
-      \ hi def CleverFDefaultLabel guifg=red guibg=NONE gui=bold,underline
 '''
 
 [[plugins]]
