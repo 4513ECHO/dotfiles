@@ -10,6 +10,7 @@ import type { Denops } from "https://deno.land/x/denops_std@v5.1.0/mod.ts";
 import * as autocmd from "https://deno.land/x/denops_std@v5.1.0/autocmd/mod.ts";
 import * as batch from "https://deno.land/x/denops_std@v5.1.0/batch/mod.ts";
 import * as lambda from "https://deno.land/x/denops_std@v5.1.0/lambda/mod.ts";
+import * as vars from "https://deno.land/x/denops_std@v5.1.0/variable/mod.ts";
 import { ensure, is } from "https://deno.land/x/unknownutil@v3.11.0/mod.ts";
 import { sprintf } from "https://deno.land/std@0.208.0/fmt/printf.ts";
 
@@ -203,6 +204,12 @@ export class Config extends BaseConfig {
         } satisfies Partial<UiFFParams>,
       },
     });
+
+    await vars.g.set(
+      args.denops,
+      "ddu_source_lsp_clientName",
+      hasNvim ? "nvim-lsp" : "vim-lsp",
+    );
 
     hasNvim && await onColorScheme(args.denops);
 

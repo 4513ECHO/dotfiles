@@ -14,7 +14,9 @@ export def OnLspBufferEnabled(): void
   nnoremap <buffer> gd <ScriptCmd>JumpDefinition()<CR>
   nnoremap <buffer> gi <Plug>(lsp-implementation)
   nnoremap <buffer> gr <Plug>(lsp-rename)
-  nnoremap <buffer> ma <Plug>(lsp-code-action)
+  # nnoremap <buffer> ma <Plug>(lsp-code-action)
+  nnoremap <buffer> ma <Cmd>Ddu -name=codeAction<CR>
+  xnoremap <buffer> ma <Cmd>Ddu -name=codeAction<CR>
   nnoremap <buffer> md <Plug>(lsp-document-diagnostics)
   nnoremap <buffer> mf <Plug>(lsp-references)
   nnoremap <buffer> ]d <Plug>(lsp-next-diagnostic)
