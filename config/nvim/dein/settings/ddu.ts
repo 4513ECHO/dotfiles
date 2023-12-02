@@ -3,19 +3,15 @@ import {
   type ConfigArguments,
 } from "https://deno.land/x/ddu_vim@v3.7.0/base/config.ts";
 import {
-  type Params as UiFFParams_,
+  type Params as UiFFParams,
   Ui as UiFF,
 } from "https://deno.land/x/ddu_ui_ff@v1.1.0/ff.ts";
 import type { Denops } from "https://deno.land/x/denops_std@v5.1.0/mod.ts";
 import * as autocmd from "https://deno.land/x/denops_std@v5.1.0/autocmd/mod.ts";
+import * as batch from "https://deno.land/x/denops_std@v5.1.0/batch/mod.ts";
 import * as lambda from "https://deno.land/x/denops_std@v5.1.0/lambda/mod.ts";
 import { ensure, is } from "https://deno.land/x/unknownutil@v3.11.0/mod.ts";
 import { sprintf } from "https://deno.land/std@0.208.0/fmt/printf.ts";
-
-type UiFFParams<T extends keyof UiFFParams_ = never> = {
-  [P in keyof UiFFParams_]: P extends T ? UiFFParams_[P] | string
-    : UiFFParams_[P];
-};
 
 async function onColorScheme(denops: Denops): Promise<void> {
   // NOTE: eob of 'fillchars' is annoying
@@ -29,6 +25,36 @@ async function onColorScheme(denops: Denops): Promise<void> {
     background: bgcolor,
     default: true,
   });
+}
+
+async function applySyntax(denops: Denops): Promise<void> {
+  const { sources } = ensure(
+    await denops.call("ddu#custom#get_current"),
+    is.ObjectOf({ sources: is.ArrayOf(is.ObjectOf({ name: is.String })) }),
+  );
+  for (const source of sources) {
+    switch (source.name) {
+      case "quickfix":
+        await denops.cmd("setlocal syntax=qf");
+        return;
+      case "command_history":
+        if (denops.meta.host === "nvim") {
+          await batch.batch(denops, async (denops) => {
+            await denops.cmd("lua vim.treesitter.start(nil, 'vim')");
+            await autocmd.define(
+              denops,
+              "WinClosed",
+              "<buffer>",
+              "lua vim.treesitter.stop()",
+              { group: "vimrc-ddu", once: true },
+            );
+          });
+        } else {
+          await denops.cmd("setlocal syntax=vim");
+        }
+        return;
+    }
+  }
 }
 
 export class Config extends BaseConfig {
@@ -191,6 +217,11 @@ export class Config extends BaseConfig {
           "*",
           notify(() => onColorScheme(args.denops)),
         );
+      helper.define(
+        "FileType",
+        "ddu-ff",
+        notify(() => applySyntax(args.denops)),
+      );
     });
   }
 }
