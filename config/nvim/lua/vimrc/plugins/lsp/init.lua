@@ -1,6 +1,6 @@
 local autocmd = require("vimrc.autocmd").autocmd
 local lspconfig = require "lspconfig"
-local capabilities = require("ddc_nvim_lsp").make_client_capabilities()
+local capabilities = require("ddc_source_lsp").make_client_capabilities()
 local root_pattern = lspconfig.util.root_pattern
 local deno_as_npm = require("vimrc.plugins.lsp.util").deno_as_npm
 

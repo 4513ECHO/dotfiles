@@ -61,6 +61,10 @@ export class Config extends BaseConfig {
         line: {
           mark: "[line]",
         },
+        lsp: {
+          mark: "[lsp]",
+          forceCompletionPattern: "\\.|:\\s*|->\\s*",
+        },
         mocword: {
           mark: "[word]",
           minAutoCompleteLength: 3,
@@ -70,10 +74,6 @@ export class Config extends BaseConfig {
         necovim: {
           mark: "[vim]",
           isVolatile: true,
-        },
-        "nvim-lsp": {
-          mark: "[lsp]",
-          forceCompletionPattern: "\\.|:\\s*|->\\s*",
         },
         omni: {
           mark: "[omni]",
@@ -89,11 +89,6 @@ export class Config extends BaseConfig {
         tmux: {
           mark: "[tmux]",
           enabledIf: "exists('$TMUX')",
-        },
-        "vim-lsp": {
-          mark: "[lsp]",
-          isVolatile: true,
-          forceCompletionPattern: "\\.|:\\s*|->\\s*",
         },
         vsnip: {
           mark: "[snip]",
@@ -117,11 +112,12 @@ export class Config extends BaseConfig {
           trailingSlash: true,
           followSymlinks: true,
         },
-        "nvim-lsp": {
+        lsp: {
+          enableAdditionalTextEdit: true,
+          enableResolveItem: true,
+          lspEngine: hasNvim ? "nvim-lsp" : "vim-lsp",
           snippetEngine: async (body: string) =>
             await args.denops.call("vsnip#anonymous", body),
-          enableResolveItem: true,
-          enableAdditionalTextEdit: true,
         },
         tmux: {
           currentWinOnly: true,
@@ -153,17 +149,6 @@ export class Config extends BaseConfig {
       ui: "pum",
     });
 
-    args.contextBuilder.patchFiletype("toml", {
-      sourceOptions: {
-        "nvim-lsp": {
-          forceCompletionPattern: '\\.|[=#{[,"]\\s*',
-        },
-        "vim-lsp": {
-          forceCompletionPattern: '\\.|[=#{[,"]\\s*',
-        },
-      },
-    });
-
     const setSourcesByFiletypes = (filetypes: string[], sources: string[]) =>
       filetypes.forEach((filetype) =>
         args.contextBuilder.patchFiletype(filetype, { sources })
@@ -184,7 +169,7 @@ export class Config extends BaseConfig {
       "typescript",
       "typescriptreact",
       "yaml",
-    ], [hasNvim ? "nvim-lsp" : "vim-lsp", ...sources]);
+    ], ["lsp", ...sources]);
     setSourcesByFiletypes(
       ["markdown", "gitcommit"],
       ["github_issue", "github_pull_request", ...sourcesWithMocword],
