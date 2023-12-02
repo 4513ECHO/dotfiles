@@ -11,10 +11,10 @@ export class Config extends BaseConfig {
 
     args.contextBuilder.patchGlobal({
       cmdlineSources: {
-        ":": ["cmdline", "around"],
+        ":": ["cmdline", "around", "buffer"],
         "@": [
           { name: "around", options: { minAutoCompleteLength: 1 } },
-          "buffer",
+          { name: "buffer", options: { minAutoCompleteLength: 1 } },
         ],
       },
       sources,
@@ -110,9 +110,8 @@ export class Config extends BaseConfig {
           maxSize: 500,
         },
         buffer: {
-          requireSameFiletype: false,
-          fromAltBuf: true,
           bufNameStyle: "basename",
+          getBufnrs: async () => await args.denops.call("tabpagebuflist"),
         },
         file: {
           trailingSlash: true,

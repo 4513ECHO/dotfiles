@@ -56,7 +56,7 @@ snoremap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : ''
 '''
 
 [[plugins]]
-repo = 'https://github.com/matsui54/ddc-buffer'
+repo = 'https://github.com/uga-rosa/ddc-source-buffer'
 
 [[plugins]]
 repo = 'https://github.com/shun/ddc-source-vim-lsp'
