@@ -80,7 +80,7 @@ export class Config extends BaseConfig {
         },
         skkeleton: {
           mark: "[skk]",
-          matchers: ["skkeleton"],
+          matchers: [],
           sorters: [],
           converters: [],
           minAutoCompleteLength: 1,

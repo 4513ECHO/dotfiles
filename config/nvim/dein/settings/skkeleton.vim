@@ -10,7 +10,7 @@ autocmd vimrc User skkeleton-enable-pre call s:on_enable()
 autocmd vimrc User skkeleton-disable-pre call s:on_disable()
 autocmd vimrc User skkeleton-enable-post,skkeleton-mode-changed call lightline#update()
 
-autocmd vimrc User skkeleton-enable-post  call user#plugins#skkeleton#show_mode()
+autocmd vimrc User skkeleton-handled  call user#plugins#skkeleton#show_mode()
 autocmd vimrc User skkeleton-disable-post call user#plugins#skkeleton#hide_mode()
 
 function! s:on_init() abort
@@ -26,6 +26,8 @@ function! s:on_init() abort
         \ ],
         \ immediatelyCancel: v:false,
         \ keepState: v:true,
+        \ markerHenkan: '',
+        \ markerHenkanSelect: '',
         \ registerConvertResult: v:true,
         \ showCandidatesCount: 2,
         \ userJisyo: skk_dir .. '/SKK-JISYO.user',
@@ -44,6 +46,7 @@ endfunction
 function! s:on_enable() abort
   let b:skkeleton_config = ddc#custom#get_buffer()
   call ddc#custom#patch_buffer(#{
+        \ cmdlineSources: ['skkeleton'],
         \ sources: ['skkeleton'],
         \ specialBufferCompletion: v:true,
         \ })
