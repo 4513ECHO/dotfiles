@@ -80,6 +80,7 @@ function! s:select_type() abort
   put! =title
 endfunction
 nnoremap <buffer> <CR><CR> <Cmd>call <SID>select_type()<CR>A
+nnoremap <buffer> [Space]q <C-w>q
 if expand('#')->getbufvar('&buftype') ==# 'terminal'
   autocmd vimrc WinClosed <buffer> ++once startinsert
 endif
@@ -89,6 +90,10 @@ gitrebase = '''
 nnoremap <buffer> <CR>  <Cmd>Cycle<CR>
 nnoremap <buffer> <C-j> <Cmd>move +1<CR>
 nnoremap <buffer> <C-k> <Cmd>move -2<CR>
+nnoremap <buffer> [Space]q <C-w>q
+if expand('#')->getbufvar('&buftype') ==# 'terminal'
+  autocmd vimrc WinClosed <buffer> ++once startinsert
+endif
 '''
 
 help = '''

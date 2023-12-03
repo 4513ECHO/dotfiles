@@ -68,7 +68,7 @@ nnoremap [Space]w <Cmd>update<CR>
 nnoremap [Space]W <Cmd>write<CR>
 nnoremap ^ <C-^><Cmd>edit<CR>
 nnoremap [Space]f <Cmd>edit %:p:h<CR>
-nnoremap <expr> [Space]q &filetype !=# 'gitcommit' ? '<Cmd>confirm qall<CR>' : '<C-w>q'
+nnoremap [Space]q <Cmd>confirm qall<CR>
 nnoremap gf gF
 cnoremap <expr> / getcmdtype() ==# '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() ==# '?' ? '\?' : '?'
