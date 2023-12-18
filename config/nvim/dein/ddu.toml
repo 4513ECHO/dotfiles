@@ -20,6 +20,10 @@ inoremap <C-x><C-e> <Cmd>call ddu#start(#{
 hook_source = '''
 call ddu#custom#load_config(expand('$DEIN_DIR/settings/ddu.ts'))
 '''
+hook_post_update = '''
+call ddu#set_static_import_path()
+echomsg '[ddu] ddu#set_static_import_path() called'
+'''
 
 [[plugins]]
 repo = 'https://github.com/Shougo/ddu-commands.vim'

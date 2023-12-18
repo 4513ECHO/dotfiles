@@ -46,3 +46,8 @@ call ddc#enable(#{
       \ context_filetype: has('nvim') ? 'treesitter': 'context_filetype',
       \ })
 " }}}
+
+" hook_post_update {{{
+call ddc#set_static_import_path()
+echomsg '[ddc] ddc#set_static_import_path() called'
+" }}}

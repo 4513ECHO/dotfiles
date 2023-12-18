@@ -95,7 +95,6 @@ call pum#set_option(#{
       \ max_width: 100,
       \ padding: v:true,
       \ scrollbar_char: '█',
-      \ use_complete: v:true,
       \ })
 '''
 
