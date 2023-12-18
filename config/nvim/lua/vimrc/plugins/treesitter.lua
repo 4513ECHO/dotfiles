@@ -27,16 +27,26 @@ parser_config.uri = {
 --   filetype = "vim",
 -- }
 
----@param lang string
----@param bufnr integer
----@return boolean
-local function disable_highlight(lang, bufnr)
-  return vim.iter({ "bash", "yaml", "vimdoc" }):find(lang)
-    or (
-      lang == "vim"
-      and vim.api.nvim_buf_get_lines(bufnr, 0, 1, false)[1]:match "^vim9script"
-    )
-end
+vim.treesitter.start = (function(wrapped)
+  ---@param bufnr integer|nil
+  ---@param lang string|nil
+  return function(bufnr, lang)
+    bufnr = bufnr or vim.api.nvim_get_current_buf()
+    lang = vim.treesitter.language.get_lang(lang or vim.bo.filetype)
+    if
+      vim.iter({ "bash", "yaml", "vimdoc" }):find(lang)
+      or (
+        lang == "vim"
+        and vim.api
+          .nvim_buf_get_lines(bufnr, 0, 1, false)[1]
+          :match "^vim9script"
+      )
+    then
+      return
+    end
+    wrapped(bufnr, lang)
+  end
+end)(vim.treesitter.start)
 
 local parser_install_dir = vim.fn.stdpath "data" --[[@as string]] .. "/parsers"
 vim.opt.runtimepath:append(parser_install_dir)
@@ -63,6 +73,5 @@ require("nvim-treesitter.configs").setup {
   },
   highlight = {
     enable = true,
-    disable = disable_highlight,
   },
 }
