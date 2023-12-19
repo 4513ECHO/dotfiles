@@ -552,17 +552,17 @@ test = ["coverage", "pytest", "pytest-cov", "tox"]
 
 [[package]]
 name = "python-lsp-black"
-version = "1.3.0"
+version = "2.0.0"
 description = "Black plugin for the Python LSP Server"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "python-lsp-black-1.3.0.tar.gz", hash = "sha256:5aa257e9e7b7e5a2316ef2a9fbcd242e82e0f695bf1622e31c0bf5cd69e6113f"},
-    {file = "python_lsp_black-1.3.0-py3-none-any.whl", hash = "sha256:5f583b4395d8d048885974095088ab81e36e501de369cc49a621a82473bb9070"},
+    {file = "python-lsp-black-2.0.0.tar.gz", hash = "sha256:8286d2d310c566844b3c116b824ada6fccfa6ba228b1a09a0526b74c04e0805f"},
+    {file = "python_lsp_black-2.0.0-py3-none-any.whl", hash = "sha256:d5efdee45f5fa9e5241f5d4d396cd46127f45c85817916b1fd92c2986652bf7e"},
 ]
 
 [package.dependencies]
-black = ">=22.3.0"
+black = ">=23.11.0"
 python-lsp-server = ">=1.4.0"
 tomli = {version = "*", markers = "python_version < \"3.11\""}
 
@@ -927,4 +927,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "d42924b76cd6f131e528871f250cfb249c977fc563fb9889aa2fbcb88a6806e3"
+content-hash = "8abb499322e541d5cfb266cac68a58ce5a1ae4dbc14bef84fa7a39f61508c105"

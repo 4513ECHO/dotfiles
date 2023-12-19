@@ -32,7 +32,7 @@ pep8-naming = "^0.13.3"
 
 [tool.poetry.group.lsp.dependencies]
 python-lsp-server = { version = "^1.7.2", extras = ["all"] }
-python-lsp-black = "^1.2.1"
+python-lsp-black = "^2.0.0"
 pyls-isort = "^0.2.2"
 pylsp-mypy = "^0.6.6"
 
