@@ -2,15 +2,15 @@
 name = "dotfiles"
 version = "0.0.0"
 description = ""
-authors = ["4513ECHO <mail@4513echo.dev>"]
+authors = ["Hibiki <mail@4513echo.dev>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
 
 [tool.poetry.group.tool.dependencies]
-black = "^23.3.0"
-isort = "^5.12.0"
-mypy = "^1.3.0"
+black = "^23.12.1"
+isort = "^5.13.2"
+mypy = "^1.8.0"
 
 # cli tools that has low priority
 [tool.poetry.group.util.dependencies]
@@ -25,24 +25,24 @@ mypy = "^1.3.0"
 # yamllint = "^1.28.0"
 
 [tool.poetry.group.flake8.dependencies]
-flake8 = "^6.0.0"
+flake8 = "^6.1.0"
 flake8-pyproject = "^1.2.3"
-flake8-isort = "^6.0.0"
+flake8-isort = "^6.1.1"
 pep8-naming = "^0.13.3"
 
 [tool.poetry.group.lsp.dependencies]
-python-lsp-server = { version = "^1.7.2", extras = ["all"] }
+python-lsp-server = { version = "^1.9.0", extras = ["all"] }
 python-lsp-black = "^2.0.0"
 pyls-isort = "^0.2.2"
-pylsp-mypy = "^0.6.6"
+pylsp-mypy = "^0.6.8"
 
 [tool.poetry.group.poetry.dependencies]
-# poetry = "^1.6.1"
-# poetry-plugin-export = "^1.5.0"
-# poetry-dynamic-versioning-plugin = "^0.4.0"
+poetry = "^1.7.1"
+poetry-plugin-export = "^1.6.0"
+poetry-dynamic-versioning-plugin = "^0.4.0"
 
 [tool.poetry.group.game.dependencies]
-pycowsay = "^0.0.0.1"
+pycowsay = "^0.0.0.2"
 term2048 = "^0.2.7"
 
 [build-system]
