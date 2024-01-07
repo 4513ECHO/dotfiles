@@ -94,8 +94,6 @@ lspconfig.denols.setup {
         imports = {
           hosts = {
             ["https://deno.land"] = true,
-            ["https://crux.land"] = true,
-            ["https://x.nest.land"] = true,
             ["https://mod.4513echo.dev"] = true,
           },
         },

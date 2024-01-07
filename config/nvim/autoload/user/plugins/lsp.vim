@@ -91,9 +91,7 @@ final settings = {
           autoImports: false,
           imports: {
             hosts: {
-              'https://crux.land': true,
               'https://deno.land': true,
-              'https://x.nest.land': true,
               'https://mod.4513echo.dev': true,
             },
           },
