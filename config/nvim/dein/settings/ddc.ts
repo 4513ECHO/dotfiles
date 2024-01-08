@@ -149,12 +149,24 @@ export class Config extends BaseConfig {
       ui: "pum",
     });
 
+    const commentContextCallback = async () =>
+      await args.denops.call("ddc#syntax#in", ["comment", "Comment"])
+        ? { sources: ["around", "buffer", "mocword"] }
+        : {};
+
     const setSourcesByFiletypes = (filetypes: string[], sources: string[]) =>
-      filetypes.forEach((filetype) =>
-        args.contextBuilder.patchFiletype(filetype, { sources })
-      );
+      filetypes.forEach((filetype) => {
+        args.contextBuilder.patchFiletype(filetype, { sources });
+        args.contextBuilder.setContextFiletype(
+          commentContextCallback,
+          filetype,
+        );
+      });
+
     // NOTE: mocword source should be placed after around source.
     const sourcesWithMocword = sources.toSpliced(2, 0, "mocword");
+
+    args.contextBuilder.setContextGlobal(commentContextCallback);
 
     setSourcesByFiletypes(["vim"], ["necovim", ...sources]);
     setSourcesByFiletypes([
