@@ -36,22 +36,4 @@ function M.get_yaml_json_schema()
     .request_sync("yaml/get/jsonSchema", vim.uri_from_bufnr(0)).result
 end
 
----@param name string
----@return fun(method: string): fun(args: string[])
-function M.denops_notify(name)
-  ---@param method string
-  ---@return fun(args: string[])
-  return function(method)
-    ---@param args string[]
-    return function(args)
-      local function callback() vim.fn["denops#notify"](name, method, args) end
-      if vim.fn["denops#plugin#is_loaded"](name) > 0 then
-        callback()
-      else
-        vim.fn["denops#plugin#wait_async"](name, callback)
-      end
-    end
-  end
-end
-
 return M

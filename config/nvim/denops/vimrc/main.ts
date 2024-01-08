@@ -50,10 +50,18 @@ export function main(denops: Denops): Promise<void> {
       return jisyoFile;
     },
 
-    async cacheLanguageServers(arg: unknown): Promise<void> {
+    async cacheVtsls(arg: unknown): Promise<unknown> {
       const cacheDir = join(ensure(arg, is.String), "ls");
+      const vtsls = join(
+        cacheDir,
+        "node_modules",
+        "@vtsls",
+        "language-server",
+        "bin",
+        "vtsls.js",
+      );
       if (await exists(cacheDir, { isDirectory: true })) {
-        return;
+        return vtsls;
       }
       await Deno.mkdir(cacheDir, { recursive: true });
       const { stderr } = new Deno.Command("deno", {
@@ -61,7 +69,7 @@ export function main(denops: Denops): Promise<void> {
           "cache",
           "--reload",
           "--node-modules-dir",
-          "npm:@vtsls/language-server@0.1.22",
+          "npm:@vtsls/language-server@0.1.23",
         ],
         cwd: cacheDir,
         stderr: "piped",
@@ -71,6 +79,7 @@ export function main(denops: Denops): Promise<void> {
         .pipeThrough(new TextDecoderStream())
         .pipeThrough(new TextLineStream())
         .pipeTo(new FidgetStream(denops));
+      return vtsls;
     },
   };
 
@@ -84,8 +93,7 @@ class FidgetStream extends WritableStream<string> {
         this.#echo(denops, chunk, false);
       },
       close: () => {
-        this.#echo(denops, "Done", true);
-        denops.call("luaeval", "require('lspconfig').vtsls.launch()");
+        denops.call("luaeval", `require("lspconfig").vtsls.launch()`);
         this.#echo(denops, "Server Restarted", true);
       },
     });
@@ -94,14 +102,8 @@ class FidgetStream extends WritableStream<string> {
   #echo(denops: Denops, chunk: string, done: boolean): void {
     denops.call(
       "luaeval",
-      `require('fidget.notification').notify(require('fidget.progress').format_progress {
-        token = 'cache_vtsls',
-        title = 'Cache vtsls',
-        message = _A.chunk,
-        done = _A.done,
-        lsp_name = 'vtsls'
-      })`.replaceAll("\n", ""),
-      { chunk, done },
+      `require("vimrc.plugins.fidget").${done ? "done" : "report"}(_A)`,
+      chunk,
     );
   }
 }

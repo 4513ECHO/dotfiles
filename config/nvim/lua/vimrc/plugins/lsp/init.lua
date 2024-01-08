@@ -105,20 +105,15 @@ lspconfig.denols.setup {
 }
 
 lspconfig.vtsls.setup {
-  capabilities = capabilities,
-  -- cmd = deno_as_npm { "npm:@vtsls/language-server@0.1.22", "--stdio" },
+  -- cmd = deno_as_npm { "npm:@vtsls/language-server@0.1.23", "--stdio" },
   -- cmd_env = deno_as_npm.cmd_env,
-  cmd = {
-    vim.fn.stdpath "cache"
-      .. "/ls/node_modules/@vtsls/language-server/bin/vtsls.js",
-    "--stdio",
-  },
   single_file_support = false,
   root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json"),
-  on_new_config = function()
-    require("vimrc.plugins.lsp.util").denops_notify "vimrc" "cacheLanguageServers" {
+  on_new_config = function(new_config)
+    local vtsls = vim.fn["denops#request"]("vimrc", "cacheVtsls", {
       vim.fn.stdpath "cache" --[[@as string]],
-    }
+    })
+    new_config.cmd = { vtsls, "--stdio" }
   end,
 }
 
