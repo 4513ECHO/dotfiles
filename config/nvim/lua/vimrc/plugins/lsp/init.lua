@@ -102,6 +102,7 @@ lspconfig.denols.setup {
     },
   },
   root_dir = root_pattern("deno.json", "deno.jsonc", "denops"),
+  single_file_support = true,
 }
 
 lspconfig.vtsls.setup {
@@ -182,6 +183,10 @@ lspconfig.pylsp.setup {
       },
     },
   },
+}
+
+lspconfig.rust_analyzer.setup {
+  capabilities = capabilities,
 }
 
 lspconfig.taplo.setup {
