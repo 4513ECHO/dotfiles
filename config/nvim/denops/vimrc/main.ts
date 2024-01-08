@@ -16,12 +16,13 @@ export function main(denops: Denops): Promise<void> {
       };
     },
 
-    jseval(expr, ctx): Promise<unknown> {
-      const fn = new Function(
+    async jseval(expr, ctx): Promise<unknown> {
+      const fn = async function () {}.constructor(
+        "denops",
         "_A",
         `"use strict";return ${ensure(expr, is.String).trim()};`,
-      ) as (ctx: unknown) => unknown;
-      return Promise.resolve(fn(ctx));
+      ) as (denops: Denops, _A: unknown) => Promise<unknown>;
+      return await fn(denops, ctx);
     },
 
     async reload(path: unknown): Promise<void> {
@@ -29,6 +30,10 @@ export function main(denops: Denops): Promise<void> {
         `${toFileUrl(ensure(path, is.String)).href}#${performance.now()}`
       );
       await mod.main(denops);
+    },
+
+    getUuid(): Promise<unknown> {
+      return Promise.resolve(crypto.randomUUID());
     },
 
     async downloadJisyo(arg: unknown): Promise<unknown> {
