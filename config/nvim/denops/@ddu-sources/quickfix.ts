@@ -3,8 +3,8 @@ import type { ActionData } from "https://deno.land/x/ddu_kind_file@v0.7.1/file.t
 import {
   BaseSource,
   type GatherArguments,
-} from "https://deno.land/x/ddu_vim@v3.8.1/base/source.ts";
-import type { Item } from "https://deno.land/x/ddu_vim@v3.8.1/types.ts";
+} from "https://deno.land/x/ddu_vim@v3.9.0/base/source.ts";
+import type { Item } from "https://deno.land/x/ddu_vim@v3.9.0/types.ts";
 import { defer } from "https://deno.land/x/denops_defer@v1.0.0/batch/defer.ts";
 
 type Params = {

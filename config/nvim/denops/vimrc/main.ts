@@ -1,8 +1,8 @@
 import type { Denops } from "https://deno.land/x/denops_std@v5.2.0/mod.ts";
-import { ensure, is } from "https://deno.land/x/unknownutil@v3.11.0/mod.ts";
-import { exists } from "https://deno.land/std@0.209.0/fs/exists.ts";
-import { join, toFileUrl } from "https://deno.land/std@0.209.0/path/mod.ts";
-import { TextLineStream } from "https://deno.land/std@0.209.0/streams/text_line_stream.ts";
+import { ensure, is } from "https://deno.land/x/unknownutil@v3.13.0/mod.ts";
+import { exists } from "https://deno.land/std@0.212.0/fs/exists.ts";
+import { join, toFileUrl } from "https://deno.land/std@0.212.0/path/mod.ts";
+import { TextLineStream } from "https://deno.land/std@0.212.0/streams/text_line_stream.ts";
 
 export function main(denops: Denops): Promise<void> {
   denops.dispatcher = {
