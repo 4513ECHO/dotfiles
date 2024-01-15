@@ -12,17 +12,24 @@ autocmd vimrc User skkeleton-enable-post,skkeleton-mode-changed call lightline#u
 
 autocmd vimrc User skkeleton-handled  call user#plugins#skkeleton#show_mode()
 autocmd vimrc User skkeleton-disable-post call user#plugins#skkeleton#hide_mode()
+autocmd vimrc User PumCompleteDone call user#plugins#skkeleton#hide_mode()
 
 function! s:on_init() abort
-  let skk_dir = expand('~/.local/share/skk')
+  let skk_dir = has('mac') ?
+        \   expand('~/Library/Containers/net.mtgto.inputmethod.macSKK/Data/Documents/Dictionaries')
+        \ : expand('~/.local/share/skk')
   let globalJisyo = denops#request('vimrc', 'downloadJisyo', [skk_dir])
 
   call skkeleton#config(#{
         \ eggLikeNewline: v:true,
         \ completionRankFile: skk_dir .. '/completionRankFile',
+        \ databasePath: skk_dir .. '/skk.db',
         \ globalDictionaries: [
         \   skk_dir .. '/SKK-JISYO.4513echo',
-        \   [globalJisyo, 'euc-jp'],
+        \   skk_dir .. '/SKK-JISYO.bluearchive',
+        \   skk_dir .. '/SKK-JISYO.scp',
+        \   globalJisyo,
+        \   skk_dir .. '/SKK-JISYO.emoji-ja',
         \ ],
         \ immediatelyCancel: v:false,
         \ keepState: v:true,
@@ -30,7 +37,9 @@ function! s:on_init() abort
         \ markerHenkanSelect: '',
         \ registerConvertResult: v:true,
         \ showCandidatesCount: 2,
-        \ userJisyo: skk_dir .. '/SKK-JISYO.user',
+        \ sources: ['deno_kv'],
+        \ userDictionary: skk_dir ..
+        \   (has('mac') ? '/skk-jisyo.utf-8' : '/SKK-JISYO.user'),
         \ })
 
   call skkeleton#register_keymap('input', ';', 'henkanPoint')

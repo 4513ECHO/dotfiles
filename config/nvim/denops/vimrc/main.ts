@@ -38,11 +38,16 @@ export function main(denops: Denops): Promise<void> {
 
     async downloadJisyo(arg: unknown): Promise<unknown> {
       const baseDir = ensure(arg, is.String);
-      if (await exists("/usr/share/skk/SKK-JISYO.L", { isFile: true })) {
-        return "/usr/share/skk/SKK-JISYO.L";
-      }
       const jisyoFile = join(baseDir, "SKK-JISYO.L");
       const url = "https://skk-dev.github.io/dict/SKK-JISYO.L.gz";
+      if (Deno.build.os === "darwin") {
+        return jisyoFile;
+      } else if (
+        Deno.build.os === "linux" &&
+        await exists("/usr/share/skk/SKK-JISYO.L", { isFile: true })
+      ) {
+        return "/usr/share/skk/SKK-JISYO.L";
+      }
       if (!(await exists(baseDir, { isDirectory: true }))) {
         await denops.cmd("echomsg 'Install SKK-JISYO.L ...'");
         const file = await Deno.mkdir(baseDir, { recursive: true })

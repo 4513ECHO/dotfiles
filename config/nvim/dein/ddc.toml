@@ -62,6 +62,7 @@ repo = 'https://github.com/uga-rosa/ddc-source-vsnip'
 
 [[plugins]]
 repo = 'https://github.com/vim-skk/skkeleton'
+denops_wait = false
 on_map = { ict = '<Plug>' }
 hooks_file = '$DEIN_DIR/settings/skkeleton.vim'
 
