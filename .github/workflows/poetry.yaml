@@ -37,7 +37,7 @@ jobs:
       - name: Load cached venv
         if: steps.filter.outputs.python == 'true'
         id: cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/venv
           key: venv-${{ runner.os }}-${{ steps.python.outputs.python-version }}-${{ hashFiles('config/python/poetry.lock') }}
