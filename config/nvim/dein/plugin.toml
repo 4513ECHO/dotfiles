@@ -672,14 +672,13 @@ nnoremap <buffer> q <C-w>q
 
 [[plugins]]
 repo = 'https://github.com/tyru/caw.vim'
-on_map = { nx = '<Plug>' }
+on_map = { nxo = '<Plug>' }
 depends = ['context_filetype.vim', 'vim-operator-user']
 hook_add = '''
-let g:caw_operator_keymappings = v:true
 let g:caw_no_default_keymappings = v:true
-nnoremap <silent> <Bslash><Bslash> <Plug>(caw:hatpos:toggle)
-nnoremap <silent> <Bslash>         <Plug>(caw:hatpos:toggle:operator)
-xnoremap <silent> <Bslash>         <Plug>(caw:hatpos:toggle:operator)
+nnoremap <silent> <Bslash> <Plug>(caw:hatpos:toggle:operator)
+onoremap <silent> <Bslash> <Plug>(caw:hatpos:toggle:operator)
+xnoremap <silent> <Bslash> <Plug>(caw:hatpos:toggle:operator)
 '''
 # NOTE: Workaround of https://github.com/tyru/caw.vim/issues/183
 # based on https://github.com/tyru/caw.vim/pull/185
