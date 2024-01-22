@@ -1,5 +1,5 @@
 ;; extends
-(uri) @text.uri
+(uri) @markup.link.uri
 
 ((uri
    [ (scheme) ":" ] @conceal
