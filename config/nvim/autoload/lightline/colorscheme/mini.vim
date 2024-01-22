@@ -1,7 +1,7 @@
 let s:bg = ['#1d1f21', 15]
 let s:fg = ['#707880', 0]
 
-let s:p = { 'normal': {}, 'inactive': {}, 'tabline': {}}
+let s:p = #{ normal: {}, inactive: {}, tabline: {} }
 let s:p.normal.info    = [ [ s:bg, s:fg ] ]
 let s:p.normal.error   = [ [ s:bg, s:fg ] ]
 let s:p.normal.warning = [ [ s:bg, s:bg ] ]

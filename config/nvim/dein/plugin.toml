@@ -66,7 +66,6 @@ nnoremap <A-l> <Cmd>TmuxNavigateRight<CR>
 
 [[plugins]]
 repo = 'https://github.com/cocopon/lightline-hybrid.vim'
-on_source = ['lightline.vim']
 
 [[plugins]]
 repo = 'https://github.com/cohama/lexima.vim'
@@ -163,8 +162,8 @@ xnoremap n <Cmd>call searchx#next_dir()<CR><Plug>(search-post)
 repo = 'https://github.com/itchyny/lightline.vim'
 lazy = true
 hook_add = '''
-autocmd vimrc VimEnter * call timer_start(0, { -> dein#source('lightline.vim') })
-autocmd vimrc ModeChanged t:nt call lightline#update()
+autocmd vimrc VimEnter * ++once call timer_start(0, { -> dein#source('lightline.vim') })
+autocmd vimrc ModeChanged t:n* call lightline#update()
 '''
 hook_source = '''
 let g:lightline = #{
@@ -182,7 +181,8 @@ let g:lightline = #{
       \     ['colorscheme', 'fileformat', 'fileencoding', 'filetype'],
       \   ],
       \ },
-      \ inactive: #{ left: [ ['filename', 'modified'] ] },
+      \ inactive: #{ left: [['filename', 'modified']] },
+      \ tabline: #{ left: [['tabs']], right: [] },
       \ tab: #{
       \   active: ['tabnum', 'tabname'],
       \   inactive: ['tabnum', 'tabname'],
