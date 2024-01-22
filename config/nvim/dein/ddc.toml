@@ -39,6 +39,9 @@ repo = 'https://github.com/Shougo/ddc-source-omni'
 repo = 'https://github.com/Shougo/ddc-source-shell-native'
 
 [[plugins]]
+repo = 'https://github.com/Shougo/ddc-source-vim'
+
+[[plugins]]
 repo = 'https://github.com/Shougo/neco-vim'
 on_ft = ['toml', 'vim']
 

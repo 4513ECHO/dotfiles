@@ -71,10 +71,6 @@ export class Config extends BaseConfig {
           isVolatile: true,
           enabledIf: "exists('$MOCWORD_DATA')",
         },
-        necovim: {
-          mark: "[vim]",
-          isVolatile: true,
-        },
         omni: {
           mark: "[omni]",
         },
@@ -89,6 +85,10 @@ export class Config extends BaseConfig {
         tmux: {
           mark: "[tmux]",
           enabledIf: "exists('$TMUX')",
+        },
+        vim: {
+          mark: "[vim]",
+          isVolatile: true,
         },
         vsnip: {
           mark: "[snip]",
@@ -168,7 +168,7 @@ export class Config extends BaseConfig {
 
     args.contextBuilder.setContextGlobal(commentContextCallback);
 
-    setSourcesByFiletypes(["vim"], ["necovim", ...sources]);
+    setSourcesByFiletypes(["vim"], ["vim", ...sources]);
     setSourcesByFiletypes([
       "go",
       "json",
