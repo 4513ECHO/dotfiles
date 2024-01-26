@@ -13,7 +13,7 @@ packages:
   - name: antonmedv/fx@31.0.0
   - name: aquaproj/aqua-installer@v2.2.0
   - name: aquaproj/registry-tool@v0.2.3
-  - name: aristocratos/btop@v1.2.13
+  - name: aristocratos/btop@v1.3.0
   - name: b3nj5m1n/xdg-ninja@v0.2.0.1
   - name: babarot/afx@v0.2.1
   - name: babarot/gomi@v1.1.6
