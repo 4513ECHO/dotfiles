@@ -76,11 +76,6 @@ noremap  <Plug>(search-post) <Cmd>doautocmd <nomodeline> User VimrcSearchPost<CR
 noremap! <Plug>(search-post) <Cmd>doautocmd <nomodeline> User VimrcSearchPost<CR>
 autocmd vimrc User VimrcSearchPost normal! zzzv
 
-if !has('nvim')
-  finish
+if has('nvim')
+  lua require('vimrc')
 endif
-lua << EOF
-vim.loader.enable()
-require('vimrc.autocmd')
-require('vimrc.neovide')
-EOF
