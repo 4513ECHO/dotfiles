@@ -13,10 +13,6 @@ packages:
   # init: f
 
   # init: g
-  - type: go_install
-    repo_owner: greymd
-    repo_name: ojichat
-    description: おじさんがLINEやメールで送ってきそうな文を生成する
 
   # init: h
   - type: github_content
