@@ -115,7 +115,7 @@ let g:denops#server#deno_args = [
       \ '--quiet',
       \ '--no-lock',
       \ '--allow-all',
-      \ '--unstable',
+      \ '--unstable-kv',
       \ ]
 '''
 
