@@ -25,8 +25,8 @@ if has('nvim')
           \ })
   endfunction
   function! s:show_phase(marker, new) abort
-    let [row, col] = a:new
-          \ ? [line('.') - 1, col('.') - 1]
+    let [row, col] = a:new ?
+          \   [line('.') - 1, col('.') - 1]
           \ : nvim_buf_get_extmark_by_id(0, s:ns, s:state_id, {})
     call nvim_buf_set_extmark(0, s:ns, row, col, #{
           \ id: s:state_id,
@@ -58,8 +58,8 @@ else
   endfunction
 
   function! s:show_phase(marker, new) abort
-    let coord = a:new
-          \ ? #{ lnum: line('.'), col: col('.') }
+    let coord = a:new ?
+          \   #{ lnum: line('.'), col: col('.') }
           \ : prop_find(#{ type: s:prop_type_phase })
     call s:reset_phase()
     call prop_add(coord.lnum, coord.col, #{

@@ -7,8 +7,8 @@ function! user#title_string() abort
   elseif &buftype ==# 'terminal'
     let [dir, file] = ['terminal', f]
   elseif &buftype ==# 'nofile'
-    let [dir, file] = &filetype ==# 'molder'
-          \ ? [d, f]
+    let [dir, file] = &filetype ==# 'molder' ?
+          \   [d, f]
           \ : [r, bufname()]
   elseif &buftype ==# 'quickfix'
     let [dir, file] = [r, 'QuickFix']
@@ -37,7 +37,7 @@ function! user#auto_mkdir(dir, force) abort
 endfunction
 
 function! user#is_at_end() abort
-  return mode() ==# 'c'
-        \ ? getcmdpos() > strlen(getcmdline())
+  return mode() ==# 'c' ?
+        \   getcmdpos() > strlen(getcmdline())
         \ : col('.')    > strlen(getline('.'))
 endfunction

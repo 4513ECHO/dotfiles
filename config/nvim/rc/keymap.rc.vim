@@ -86,8 +86,8 @@ nnoremap z. zszH
 " based on https://github.com/romgrk/nvim/blob/ba305c52/rc/keymap.vim#L98-L99
 nnoremap <expr> i getline('.') =~# '^\s*$' ? '"_cc' : 'i'
 " from https://github.com/monaqa/dotfiles/blob/de4bdb9f/.config/nvim/lua/rc/keymap.lua#L436
-nnoremap <expr> dd empty(getline('.')) && v:count1 ==# 1 && v:register ==# '"'
-      \ ? '"_dd' : 'dd'
+nnoremap <expr> dd empty(getline('.')) && v:count1 ==# 1
+      \ && v:register ==# '"' ? '"_dd' : 'dd'
 
 " NOTE: `g_` is almost same as `$h`
 xnoremap <expr> v mode() ==# 'v' ? 'g_' : 'v'

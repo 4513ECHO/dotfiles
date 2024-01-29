@@ -581,8 +581,8 @@ hook_add = '''
 nnoremap <Leader>rr <Plug>(quickrun)
 nnoremap <Leader>r <Plug>(quickrun-op)
 xnoremap <Leader>r <Plug>(quickrun)
-nnoremap <expr> <C-c> quickrun#session#exists()
-      \ ? '<Cmd>call quickrun#session#sweep()<CR>'
+nnoremap <expr> <C-c> quickrun#session#exists() ?
+      \   '<Cmd>call quickrun#session#sweep()<CR>'
       \ : '<C-c>'
 let g:quickrun_config = {
       \ '_': {

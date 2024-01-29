@@ -111,15 +111,15 @@ setlocal textwidth=80
 setlocal smarttab nosmartindent
 inoreabbrev <expr><buffer> improt
       \ (getline('.')[:col('.') - 2] =~# 'from\s\+.*\s\+' <Bar><Bar>
-      \  getline('.')[:col('.') - 2] ==# 'improt')
-      \ ? 'import' : 'improt'
+      \  getline('.')[:col('.') - 2] ==# 'improt') ? 'import'
+      \ : 'improt'
 '''
 
 qf = '''
 setlocal nowrap nolist
 setlocal numberwidth=2
-nnoremap <buffer><expr> q getwininfo(win_getid())[0].loclist
-      \ ? '<Cmd>lclose<CR>'
+nnoremap <buffer><expr> q getwininfo(win_getid())[0].loclist ?
+      \   '<Cmd>lclose<CR>'
       \ : '<Cmd>cclose<CR>'
 nnoremap <buffer><expr> j line('.') == line('$') ? 'gg' : 'j'
 nnoremap <buffer><expr> k line('.') == 1         ? 'G'  : 'k'

@@ -9,20 +9,17 @@ let s:symbol_map = {
 let s:symbol_map_r = pinkyless#util#swap(s:symbol_map)
 
 function! s:keyboard.shift(char) abort
-  return a:char =~# '\l'
-        \ ? toupper(a:char)
+  return a:char =~# '\l' ? toupper(a:char)
         \ : s:symbol_map->get(a:char, a:char)
 endfunction
 
 function! s:keyboard.unshift(char) abort
-  return a:char =~# '\L'
-        \ ? tolower(a:char)
+  return a:char =~# '\L' ? tolower(a:char)
         \ : s:symbol_map_r->get(a:char, a:char)
 endfunction
 
 function! s:keyboard.swap(char) abort
-  return index(self.keys(), a:char) < 0
-        \ ? self.unshift(a:char)
+  return index(self.keys(), a:char) < 0 ? self.unshift(a:char)
         \ : self.shift(a:char)
 endfunction
 

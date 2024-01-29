@@ -8,7 +8,7 @@ if empty($VIM_DISABLE_DEIN)
           \ ->filter({ -> v:val->has_key('colorschemes') })
           \ ->values()
           \ ->filter({ -> !v:val->has_key('if') || eval(v:val.if) })
-          \ ->map({ -> v:val.colorschemes }) ->flatten()
+          \ ->map({ -> v:val.colorschemes })->flatten()
       let s:cache[colorscheme.name] = colorscheme
     endfor
     return s:cache
@@ -20,8 +20,7 @@ else
 endif
 
 function! user#colorscheme#lightline() abort
-  return g:colors_name ==# 'random'
-        \ ? 'default'
+  return g:colors_name ==# 'random' ? 'default'
         \ : user#colorscheme#get()
         \   ->get(g:colors_name, {})
         \   ->get('lightline', g:colors_name)
@@ -53,11 +52,11 @@ function! user#colorscheme#set_customize() abort
   let terminal = customize->get('terminal')
   if !empty(terminal)
     call s:set_terminal_colors(
-          \ terminal is# 'mini'
-          \ ? [
-          \ '#1d1f21', '#cc6666', '#b5bd68', '#f0c674', '#81a2be', '#b294bb', '#8abeb7', '#d3d7cf',
-          \ '#707880', '#cc6666', '#b5bd68', '#de955f', '#729fcf', '#b294bb', '#005f5f', '#707880',
-          \ ] : terminal
+          \ terminal is# 'mini' ? [
+          \   '#1d1f21', '#cc6666', '#b5bd68', '#f0c674', '#81a2be', '#b294bb', '#8abeb7', '#d3d7cf',
+          \   '#707880', '#cc6666', '#b5bd68', '#de955f', '#729fcf', '#b294bb', '#005f5f', '#707880',
+          \ ]
+          \ : terminal
           \ )
   elseif !has('nvim') && exists('g:terminal_color_0')
     let g:terminal_ansi_colors = range(16)

@@ -7,13 +7,13 @@ function! lightline#component#vimrc#colorscheme() abort
 endfunction
 
 function! lightline#component#vimrc#file_format() abort
-  return &fileformat !=# 'unix' && s:statuswidth() > 70
-        \ ? &fileformat : ''
+  return &fileformat !=# 'unix' && s:statuswidth() > 70 ? &fileformat
+        \ : ''
 endfunction
 
 function! lightline#component#vimrc#file_encoding() abort
-  return &fileencoding !=# 'utf-8' && s:statuswidth() > 70
-        \ ? &fileencoding : ''
+  return &fileencoding !=# 'utf-8' && s:statuswidth() > 70 ? &fileencoding
+        \ : ''
 endfunction
 
 function! lightline#component#vimrc#filename() abort
@@ -58,12 +58,14 @@ function! lightline#component#vimrc#modified() abort
   return index(s:lightline_ignore_filetypes, &filetype) > -1 ? ''
         \ : &filetype ==# 'help' && &buftype ==# 'help' ? ''
         \ : &modified ? '+'
-        \ : &modifiable ? '' : '-'
+        \ : &modifiable ? ''
+        \ : '-'
 endfunction
 
 function! lightline#component#vimrc#protocol() abort
-  return bufname() =~# '^\a\+://' && s:statuswidth() > 70
-        \ ? bufname()->matchstr('^\a\+\ze://')->printf('(%s)') : ''
+  return bufname() =~# '^\a\+://' && s:statuswidth() > 70 ?
+        \   bufname()->matchstr('^\a\+\ze://')->printf('(%s)')
+        \ : ''
 endfunction
 
 function! lightline#component#vimrc#tabname(tabpagenr) abort
@@ -72,7 +74,7 @@ function! lightline#component#vimrc#tabname(tabpagenr) abort
   let fname = expand($'#{bufnr}:p')
   let cwd = getcwd(-1, a:tabpagenr)
   return buflist->len() > 1 || fname->stridx(cwd) ==# 0
-        \ || bufnr->getbufvar('&filetype') ==# 'molder'
-        \ ? cwd->fnamemodify(':t')
+        \   || bufnr->getbufvar('&filetype') ==# 'molder' ?
+        \ cwd->fnamemodify(':t')
         \ : fname->fnamemodify(':t') ?? '[No name]'
 endfunction
