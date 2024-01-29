@@ -52,7 +52,7 @@ nnoremap <buffer> i
 nnoremap <buffer> <Tab>
       \ <Cmd>call ddu#ui#do_action('chooseAction')<CR>
 nnoremap <buffer> <C-l>
-      \ <Cmd>call ddu#ui#do_action('refreshItems')<Bar>redraw<CR>
+      \ <Cmd>call ddu#ui#do_action('redraw', #{ method: 'refreshItems' })<Bar>redraw<CR>
 nnoremap <buffer> p
       \ <Cmd>call ddu#ui#do_action('togglePreview')<CR>
 nnoremap <buffer> q
