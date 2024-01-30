@@ -64,6 +64,16 @@ let g:sclow_hide_full_length = v:true
 '''
 
 [[plugins]]
+repo = 'https://github.com/ojroques/vim-oscyank'
+on_func = ['OSCYankRegister']
+hook_add = '''
+autocmd vimrc TextYankPost *
+      \ : if stridx('*+', v:event.regname) > -1
+      \ |   call OSCYankRegister(v:event.regname)
+      \ | endif
+'''
+
+[[plugins]]
 repo = 'https://github.com/prabirshrestha/vim-lsp'
 on_source = ['vim-lsp-settings']
 

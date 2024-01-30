@@ -299,7 +299,7 @@ hook_add = '''
 let s:kensaku_state = #{ converted: v:false, cmdline: #{ prev: '', converted: '' } }
 function! s:convert_kensaku() abort
   if s:kensaku_state.converted &&
-        \ getcmdline()->match(s:kensaku_state.cmdline.converted->escape('\')) > -1
+        \ getcmdline()->stridx(s:kensaku_state.cmdline.converted) > -1
     let s:kensaku_state.converted = v:false
     let s:kensaku_state.cmdline.converted = ''
     call setcmdline(s:kensaku_state.cmdline.prev)
@@ -407,17 +407,6 @@ on_source = ['lightline.vim']
 if = '!has("nvim")'
 
 [[plugins]]
-repo = 'https://github.com/ojroques/vim-oscyank'
-if = '!has("gui_running")'
-on_cmd = ['OSCYankRegister']
-hook_add = '''
-autocmd vimrc TextYankPost *
-      \ : if v:event.regname ==# 'p'
-      \ |   execute 'OSCYankRegister p'
-      \ | endif
-'''
-
-[[plugins]]
 repo = 'https://github.com/osyo-manga/vim-jplus'
 on_map = { nx = '<Plug>' }
 hook_add = '''
@@ -443,13 +432,12 @@ hook_source = '''
 let g:context_filetype#filetypes =
       \ context_filetype#default_filetypes()->copy()->extend(#{
       \ markdown:
-      \   {'\(\h\w*\)': '\1', 'viml': 'vim'}
-      \   ->map({ key, val -> #{
-      \     start: '^\s*```\s*' .. key,
+      \   [['\(\h\w*\)', '\1'], ['viml', 'vim']]
+      \   ->map({ -> #{
+      \     start: '^\s*```\s*' .. v:val[0],
       \     end: '^\s*```$',
-      \     filetype: val,
-      \   } })
-      \   ->values(),
+      \     filetype: v:val[1],
+      \   } }),
       \ })
 '''
 
@@ -551,7 +539,7 @@ hook_add = '''
 let g:partedit#opener = 'split'
 function! s:operator_partedit() abort
   let context = context_filetype#get()
-  if context.range == [[0, 0], [0, 0]]
+  if context.range ==# [[0, 0], [0, 0]]
     echohl WarningMsg
     echomsg '[partedit] Context is not found'
     echohl NONE
@@ -651,14 +639,14 @@ function! s:capture_json(value, bang) abort
   execute printf('Capture%s echo json_encode(%sto_string(%s))',
         \ a:bang, expand('<SID>'), a:value)
   if &filetype ==# 'capture'
-    silent! execute '%!gojq'
+    silent execute '%!gojq'
     setlocal filetype=json
   endif
 endfunction
 function! s:to_string(expr) abort
   let type = type(a:expr)
   if type ==# v:t_list || type ==# v:t_dict
-    return copy(a:expr)->map({ _, val -> s:to_string(val) })
+    return copy(a:expr)->map({ -> s:to_string(v:val) })
   elseif type ==# v:t_func
     return string(a:expr)
   endif

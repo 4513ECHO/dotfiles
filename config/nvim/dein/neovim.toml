@@ -18,16 +18,14 @@ lua_source = '''
 require("lsp_lines").setup()
 vim.diagnostic.config { virtual_lines = false }
 vim.keymap.set("n", "[Toggle]d", function()
-  local config = vim.diagnostic.config()
+  local old_config = vim.diagnostic.config()
   vim.diagnostic.config {
-    virtual_text = not config.virtual_text,
-    virtual_lines = not config.virtual_lines,
+    virtual_text = not old_config.virtual_text,
+    virtual_lines = not old_config.virtual_lines,
   }
+  local mode = old_config.virtual_lines and "virtual_text" or "virtual_lines"
   vim.api.nvim_echo(
-    {
-      { "Diagnostic Mode: " },
-      { config.virtual_lines and "virtual_text" or "virtual_lines", "Constant" },
-    },
+    { { "Diagnostic Mode: " }, { mode, "Constant" } },
     false,
     {}
   )
