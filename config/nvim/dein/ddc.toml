@@ -46,9 +46,7 @@ repo = 'https://github.com/Shougo/neco-vim'
 on_ft = ['toml', 'vim']
 
 [[plugins]]
-# repo = 'https://github.com/delphinus/ddc-tmux'
-repo = 'https://github.com/4513ECHO/ddc-tmux'
-rev = 'fix/update_for_latest'
+repo = 'https://github.com/delphinus/ddc-source-tmux'
 
 [[plugins]]
 repo = 'https://github.com/hrsh7th/vim-vsnip'
