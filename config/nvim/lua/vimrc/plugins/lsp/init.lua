@@ -9,8 +9,7 @@ autocmd "LspAttach" {
     if vim.lsp.get_client_by_id(ctx.data.client_id).name == "copilot" then
       return
     end
-    local filetype =
-      vim.api.nvim_get_option_value("filetype", { buf = ctx.buf })
+    local filetype = vim.bo[ctx.buf].filetype
     local opts = { buffer = true }
     vim.keymap.set({ "n", "x" }, "gq", function()
       vim.lsp.buf.format {
@@ -53,22 +52,17 @@ vim.lsp.handlers["textDocument/hover"] =
   vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 require("lspconfig.ui.windows").default_options.border = "single"
 
--- from https://github.com/neovim/neovim/pull/15981
-local util = require "vim.lsp.util"
-local orig = util.make_floating_popup_options
----@diagnostic disable-next-line: duplicate-set-field
-util.make_floating_popup_options = function(width, height, opts)
-  local orig_opts = orig(width, height, opts)
-  orig_opts.noautocmd = true
-  return orig_opts
-end
 
-vim.diagnostic.config { signs = { priority = 20 } }
-vim.fn.sign_define {
-  { name = "DiagnosticSignError", text = "✗", texthl = "DiagnosticError" },
-  { name = "DiagnosticSignWarn", text = "‼", texthl = "DiagnosticWarn" },
-  { name = "DiagnosticSignInfo", text = "i", texthl = "DiagnosticInfo" },
-  { name = "DiagnosticSignHint", text = "?", texthl = "DiagnosticHint" },
+vim.diagnostic.config {
+  signs = {
+    priority = 20,
+    text = {
+      [vim.diagnostic.severity.ERROR] = "✗",
+      [vim.diagnostic.severity.WARN] = "‼",
+      [vim.diagnostic.severity.INFO] = "i",
+      [vim.diagnostic.severity.HINT] = "?",
+    },
+  },
 }
 
 lspconfig.efm.setup {
@@ -79,7 +73,7 @@ lspconfig.efm.setup {
     hover = true,
     documentSymbol = true,
     codeAction = true,
-    completion = true,
+    completion = false,
   },
 }
 
@@ -118,6 +112,23 @@ lspconfig.vtsls.setup {
   end,
 }
 
+---@param plugins string[]
+---@return string[]
+local function library(plugins)
+  local plugin_paths = vim
+    .iter(vim.fn["dein#get"]())
+    :filter(function(name) return vim.list_contains(plugins, name) end)
+    :map(function(_, plugin) return vim.fs.joinpath(plugin.path, "lua") end)
+    :totable()
+  return vim.list_extend(plugin_paths, {
+    vim.fs.joinpath(vim.fn.stdpath "config" --[[@as string]], "lua"),
+    vim.fs.joinpath(vim.env.VIMRUNTIME, "lua"),
+    "${3rd}/luv/library",
+    "${3rd}/busted/library",
+    "${3rd}/luassert/library",
+  })
+end
+
 lspconfig.lua_ls.setup {
   capabilities = capabilities,
   settings = {
@@ -131,13 +142,18 @@ lspconfig.lua_ls.setup {
       -- NOTE: Use stylua via efm-langserver instead.
       format = { enable = false },
       runtime = {
-        path = { "?.lua", "?/init.lua", "?/?.lua" },
+        path = { "?.lua", "?/init.lua" },
+        pathStrict = true,
         version = "LuaJIT",
       },
       telemetry = { enable = false },
       workspace = {
         checkThirdParty = false,
-        library = vim.api.nvim_get_runtime_file("lua", true),
+        library = library {
+          "fidget.nvim",
+          "nvim-lspconfig",
+          "nvim-treesitter",
+        },
         maxPreload = 1000,
       },
     },
