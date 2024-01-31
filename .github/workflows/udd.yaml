@@ -28,7 +28,7 @@ jobs:
           path: ../output.txt
       - name: Create Pull Request
         id: pr
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v6
         with:
           commit-message: "chore(deps): update deno dependencies"
           title: "chore(deps): update deno dependencies"
