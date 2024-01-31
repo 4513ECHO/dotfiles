@@ -27,6 +27,7 @@ stylua	$XDG_CONFIG_HOME
 systemd	$XDG_CONFIG_HOME
 tmux	$XDG_CONFIG_HOME
 vimrc	$HOME/.vimrc
+wezterm	$XDG_CONFIG_HOME
 X11	$XDG_CONFIG_HOME
 xinitrc	$HOME/.xinitrc
 xremap	$XDG_CONFIG_HOME
