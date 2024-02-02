@@ -70,7 +70,7 @@ packages:
   - name: TomWright/dasel@v2.5.0
   - name: tree-sitter/tree-sitter@v0.20.9
   - name: vishaltelangre/ff@v0.1.8
-  - name: x-motemen/ghq@v1.4.2
+  - name: x-motemen/ghq@v1.5.0
   - name: XAMPPRocky/tokei@v12.1.2
   - name: ziglang/zig@0.11.0
 
