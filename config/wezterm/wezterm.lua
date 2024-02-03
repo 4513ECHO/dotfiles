@@ -8,6 +8,18 @@ wezterm.on(
   end
 )
 
+local OpenLinkSelectedOrAtMouseCursor = wezterm.action_callback(
+  function(window, pane)
+    local url = window:get_selection_text_for_pane(pane)
+    if url == "" then
+      return window:perform_action(wezterm.action.OpenLinkAtMouseCursor, pane)
+    elseif not url:find "^https?://" then
+      url = "https://" .. url
+    end
+    wezterm.open_with(url)
+  end
+)
+
 return {
   adjust_window_size_when_changing_font_size = false,
   colors = {
@@ -32,6 +44,13 @@ return {
       key = "¥",
       mods = "CTRL",
       action = wezterm.action.SendKey { key = "\\", mods = "CTRL" },
+    },
+  },
+  mouse_bindings = {
+    {
+      event = { Up = { streak = 1, button = "Left" } },
+      mods = "CTRL",
+      action = OpenLinkSelectedOrAtMouseCursor,
     },
   },
   use_ime = false,
