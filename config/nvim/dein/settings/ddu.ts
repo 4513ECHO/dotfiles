@@ -1,18 +1,18 @@
 import {
   BaseConfig,
   type ConfigArguments,
-} from "https://deno.land/x/ddu_vim@v3.10.1/base/config.ts";
+} from "https://deno.land/x/ddu_vim@v3.10.3/base/config.ts";
 import {
   type Params as UiFFParams,
   Ui as UiFF,
 } from "https://deno.land/x/ddu_ui_ff@v1.1.0/ff.ts";
-import type { Denops } from "https://deno.land/x/denops_std@v5.3.0/mod.ts";
-import * as autocmd from "https://deno.land/x/denops_std@v5.3.0/autocmd/mod.ts";
-import * as batch from "https://deno.land/x/denops_std@v5.3.0/batch/mod.ts";
-import * as lambda from "https://deno.land/x/denops_std@v5.3.0/lambda/mod.ts";
-import * as vars from "https://deno.land/x/denops_std@v5.3.0/variable/mod.ts";
-import { ensure, is } from "https://deno.land/x/unknownutil@v3.14.1/mod.ts";
-import { sprintf } from "https://deno.land/std@0.213.0/fmt/printf.ts";
+import type { Denops } from "https://deno.land/x/denops_std@v6.4.0/mod.ts";
+import * as autocmd from "https://deno.land/x/denops_std@v6.4.0/autocmd/mod.ts";
+import * as batch from "https://deno.land/x/denops_std@v6.4.0/batch/mod.ts";
+import * as lambda from "https://deno.land/x/denops_std@v6.4.0/lambda/mod.ts";
+import * as vars from "https://deno.land/x/denops_std@v6.4.0/variable/mod.ts";
+import { ensure, is } from "https://deno.land/x/unknownutil@v3.17.0/mod.ts";
+import { sprintf } from "https://deno.land/std@0.220.0/fmt/printf.ts";
 
 async function onColorScheme(denops: Denops): Promise<void> {
   // NOTE: eob of 'fillchars' is annoying
