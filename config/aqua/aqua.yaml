@@ -48,7 +48,7 @@ packages:
   - name: LukeChannings/deno-arm64@v1.40.4
   - name: mattn/efm-langserver@v0.0.50
   - name: microsoft/ripgrep-prebuilt@v13.0.0-10
-  - name: mvdan/sh@v3.7.0
+  - name: mvdan/sh@v3.8.0
   - name: nametake/golangci-lint-langserver@v0.0.9
   - name: nektos/act@v0.2.59
   - name: noahgorstein/jqp@v0.5.0
