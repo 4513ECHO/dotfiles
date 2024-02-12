@@ -55,7 +55,7 @@ packages:
   - name: ogham/exa@v0.10.1
   - name: rhysd/actionlint@v1.6.26
   - name: rhysd/hgrep@v0.3.4
-  - name: rhysd/vim-startuptime@v1.3.1
+  - name: rhysd/vim-startuptime@v1.3.2
   - name: rust-lang/rust-analyzer@2024-01-22
   - name: sharkdp/bat@v0.24.0
   - name: sharkdp/fd@v9.0.0
