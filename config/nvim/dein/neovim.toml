@@ -1,4 +1,7 @@
 [[plugins]]
+repo = 'https://github.com/4513ECHO/treesitter-compat-highlights.nvim'
+
+[[plugins]]
 repo = 'https://github.com/b0o/SchemaStore.nvim'
 
 [[plugins]]
