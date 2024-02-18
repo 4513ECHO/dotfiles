@@ -226,13 +226,5 @@ nnoremap <buffer> q <C-w>q
 '''
 
 [[plugins]]
-repo = 'https://github.com/tmux-plugins/vim-tmux'
-merge_ftdetect = true
-
-[[plugins]]
-repo = 'https://github.com/tpope/vim-git'
-merge_ftdetect = true
-
-[[plugins]]
 repo = 'https://github.com/vim-skk/skkdict.vim'
 merge_ftdetect = true

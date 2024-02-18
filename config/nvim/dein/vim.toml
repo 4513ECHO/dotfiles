@@ -8,9 +8,6 @@ depends = ['colorswatch.vim']
 on_cmd = ['Inspecthi']
 
 [[plugins]]
-repo = 'https://github.com/leafgarland/typescript-vim'
-
-[[plugins]]
 repo = 'https://github.com/machakann/vim-highlightedyank'
 on_event = ['TextYankPost']
 hook_add = '''
@@ -80,6 +77,3 @@ on_source = ['vim-lsp-settings']
 [[plugins]]
 repo = 'https://github.com/rbtnn/vim-coloredit'
 on_cmd = ['ColorEdit']
-
-[[plugins]]
-repo = 'https://github.com/vim-jp/syntax-vim-ex'

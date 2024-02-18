@@ -513,17 +513,6 @@ let g:lightline#lsp#indicator_warnings = '‼'
 '''
 
 [[plugins]]
-repo = 'https://github.com/tani/glance-vim'
-depends = ['denops.vim']
-on_cmd = ['Glance']
-hook_add = '''
-let g:glance#markdown_html = v:true
-let g:glance#markdown_linkify = v:true
-let g:glance#markdown_breaks = v:true
-let g:glance#stylesheet = '@import url("https://unpkg.com/sakura.css/css/sakura.css");'
-'''
-
-[[plugins]]
 repo = 'https://github.com/thinca/vim-localrc'
 on_event = ['BufRead']
 hook_add = '''
