@@ -1,7 +1,7 @@
 let s:dein_dir = (has('nvim') ? g:cache_home : g:vim_cache_home) .. '/dein'
 let s:dein_repo_dir = s:dein_dir .. '/repos/github.com/Shougo/dein.vim'
 
-if &runtimepath !~# s:dein_repo_dir
+if &runtimepath->stridx(s:dein_repo_dir) < 0
   if !isdirectory(s:dein_repo_dir)
     execute ['!git', 'clone', '--filter=blob:none',
           \ 'https://github.com/Shougo/dein.vim', s:dein_repo_dir]->join()
@@ -38,12 +38,8 @@ if dein#min#load_state(s:dein_dir)
 
   call dein#end()
   call dein#save_state()
-endif
-
-if has('vim_starting') && dein#check_install()
-  call dein#install()
-  if !empty(g:->get('dein#install_github_api_token'))
-    call timer_start(0, { -> dein#check_update(v:true) })
+  if dein#check_install()
+    call dein#install()
   endif
 endif
 
