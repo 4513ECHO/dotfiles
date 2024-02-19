@@ -134,4 +134,7 @@ command! -nargs=1 -complete=custom,s:dss_complete -bar DenopsSharedServer call s
 '''
 
 [[plugins]]
+repo = 'https://github.com/vim-denops/denops-startup-recorder.vim'
+
+[[plugins]]
 repo = 'https://github.com/vim-jp/vimdoc-ja'
