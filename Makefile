@@ -58,7 +58,11 @@ python: ## Install and initialize python enviroments
 
 .PHONY: aqua
 aqua: ## Install and initialize aqua enviroments
-	curl -sSfL https://raw.githubusercontent.com/aquaproj/aqua-installer/v2.1.1/aqua-installer | bash
+if eq ($(shell command -v aqua),)
+	curl -sSfL https://raw.githubusercontent.com/aquaproj/aqua-installer/v2.1.2/aqua-installer | bash
+else
+	aqua update-aqua
+endif
 	$${AQUA_ROOT_DIR:-$$XDG_DATA_HOME/aquaproj-aqua}/bin/aqua install --all
 
 .PHONY: rust
