@@ -43,7 +43,7 @@ packages:
   - name: k0kubun/xremap/x11@v0.8.14
   - name: ko1nksm/getoptions/gengetoptions@v3.3.0
   - name: ko1nksm/getoptions@v3.3.0
-  - name: koalaman/shellcheck@v0.9.0
+  - name: koalaman/shellcheck@v0.10.0
   - name: LuaLS/lua-language-server@3.7.4
   - name: mattn/efm-langserver@v0.0.50
   - name: microsoft/ripgrep-prebuilt@v13.0.0-10
