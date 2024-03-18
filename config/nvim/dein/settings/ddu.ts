@@ -12,7 +12,7 @@ import * as batch from "https://deno.land/x/denops_std@v6.4.0/batch/mod.ts";
 import * as lambda from "https://deno.land/x/denops_std@v6.4.0/lambda/mod.ts";
 import * as vars from "https://deno.land/x/denops_std@v6.4.0/variable/mod.ts";
 import { ensure, is } from "https://deno.land/x/unknownutil@v3.17.0/mod.ts";
-import { sprintf } from "https://deno.land/std@0.220.0/fmt/printf.ts";
+import { sprintf } from "https://deno.land/std@0.220.1/fmt/printf.ts";
 
 async function onColorScheme(denops: Denops): Promise<void> {
   // NOTE: eob of 'fillchars' is annoying
