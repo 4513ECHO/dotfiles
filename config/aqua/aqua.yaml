@@ -45,7 +45,7 @@ packages:
   - name: ko1nksm/getoptions@v3.3.0
   - name: koalaman/shellcheck@v0.10.0
   - name: LuaLS/lua-language-server@3.7.4
-  - name: mattn/efm-langserver@v0.0.50
+  - name: mattn/efm-langserver@v0.0.53
   - name: microsoft/ripgrep-prebuilt@v13.0.0-10
   - name: mvdan/sh@v3.8.0
   - name: nametake/golangci-lint-langserver@v0.0.9
