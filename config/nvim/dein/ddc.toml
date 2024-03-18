@@ -42,10 +42,6 @@ repo = 'https://github.com/Shougo/ddc-source-shell-native'
 repo = 'https://github.com/Shougo/ddc-source-vim'
 
 [[plugins]]
-repo = 'https://github.com/Shougo/neco-vim'
-on_ft = ['toml', 'vim']
-
-[[plugins]]
 repo = 'https://github.com/delphinus/ddc-source-tmux'
 
 [[plugins]]

@@ -39,8 +39,8 @@ async function applySyntax(denops: Denops): Promise<void> {
         await denops.cmd("setlocal syntax=qf");
         return;
       case "command_history":
-        if (denops.meta.host === "nvim") {
-          await batch.batch(denops, async (denops) => {
+        await batch.batch(denops, async (denops) => {
+          if (denops.meta.host === "nvim") {
             await denops.cmd("lua vim.treesitter.start(nil, 'vim')");
             await autocmd.define(
               denops,
@@ -49,12 +49,22 @@ async function applySyntax(denops: Denops): Promise<void> {
               "lua vim.treesitter.stop()",
               { group: "vimrc-ddu", once: true },
             );
-          });
-        } else {
-          await denops.cmd("setlocal syntax=vim");
-        }
+          } else {
+            await denops.cmd("setlocal syntax=vim");
+          }
+        });
         return;
     }
+  }
+}
+
+async function startFilterRgLive(denops: Denops): Promise<void> {
+  const [filetype, name] = await batch.collect(denops, (denops) => [
+    denops.eval("&filetype"),
+    denops.call("getbufvar", "", "ddu_ui_name", ""),
+  ]) as [string, string];
+  if (filetype === "ddu-ff" && name === "rg_live") {
+    await denops.call("ddu#ui#do_action", "openFilterWindow");
   }
 }
 
@@ -177,7 +187,6 @@ export class Config extends BaseConfig {
         ff: {
           ignoreEmpty: false,
           autoResize: false,
-          startFilter: true,
         } satisfies Partial<UiFFParams>,
       },
     });
@@ -213,22 +222,15 @@ export class Config extends BaseConfig {
 
     hasNvim && await onColorScheme(args.denops);
 
-    const notify = (fn: () => unknown) =>
-      `call denops#notify('ddu', '${lambda.register(args.denops, fn)}', [])`;
+    const notify = (callback: (denops: Denops) => Promise<void>) =>
+      "call " + lambda.add(args.denops, () => callback(args.denops)).notify();
 
     await autocmd.group(args.denops, "vimrc-ddu", (helper) => {
       helper.remove("*");
       hasNvim &&
-        helper.define(
-          "ColorScheme",
-          "*",
-          notify(() => onColorScheme(args.denops)),
-        );
-      helper.define(
-        "FileType",
-        "ddu-ff",
-        notify(() => applySyntax(args.denops)),
-      );
+        helper.define("ColorScheme", "*", notify(onColorScheme));
+      helper.define("FileType", "ddu-ff", notify(applySyntax));
+      helper.define("User", "Ddu:uiReady", notify(startFilterRgLive));
     });
   }
 }
