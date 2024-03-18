@@ -1,6 +1,7 @@
 import type { Denops } from "https://deno.land/x/denops_std@v6.4.0/mod.ts";
 import { ensure, is } from "https://deno.land/x/unknownutil@v3.17.0/mod.ts";
 import { exists } from "https://deno.land/std@0.220.1/fs/exists.ts";
+import { expandGlob } from "https://deno.land/std@0.220.1/fs/expand_glob.ts";
 import { join, toFileUrl } from "https://deno.land/std@0.220.1/path/mod.ts";
 import { TextLineStream } from "https://deno.land/std@0.220.1/streams/text_line_stream.ts";
 
@@ -36,28 +37,12 @@ export function main(denops: Denops): Promise<void> {
       return Promise.resolve(crypto.randomUUID());
     },
 
-    async downloadJisyo(arg: unknown): Promise<unknown> {
-      const baseDir = ensure(arg, is.String);
-      const jisyoFile = join(baseDir, "SKK-JISYO.L");
-      const url = "https://skk-dev.github.io/dict/SKK-JISYO.L.gz";
-      if (Deno.build.os === "darwin") {
-        return jisyoFile;
-      } else if (
-        Deno.build.os === "linux" &&
-        await exists("/usr/share/skk/SKK-JISYO.L", { isFile: true })
-      ) {
-        return "/usr/share/skk/SKK-JISYO.L";
-      }
-      if (!(await exists(baseDir, { isDirectory: true }))) {
-        await denops.cmd("echomsg 'Install SKK-JISYO.L ...'");
-        const file = await Deno.mkdir(baseDir, { recursive: true })
-          .then(() => Deno.create(jisyoFile));
-        const response = await fetch(url);
-        response.body!
-          .pipeThrough(new DecompressionStream("gzip"))
-          .pipeTo(file.writable);
-      }
-      return jisyoFile;
+    async ensureSkkJisyo(arg: unknown): Promise<unknown> {
+      const root = ensure(arg, is.String);
+      return (await Array.fromAsync(expandGlob("SKK-JISYO.*", { root })))
+        .map((entry) => entry.path)
+        .concat(await downloadLJisyo(root))
+        .sort((a) => a.endsWith(".L") ? 2 : a.endsWith(".emoji-ja") ? 1 : -1);
     },
 
     async cacheVtsls(arg: unknown): Promise<unknown> {
@@ -94,6 +79,29 @@ export function main(denops: Denops): Promise<void> {
   };
 
   return Promise.resolve();
+}
+
+async function downloadLJisyo(root: string): Promise<string[]> {
+  const jisyoFile = join(root, "SKK-JISYO.L");
+  const url = "https://skk-dev.github.io/dict/SKK-JISYO.L.gz";
+  if (
+    Deno.build.os === "linux" &&
+    await exists("/usr/share/skk/SKK-JISYO.L", { isFile: true })
+  ) {
+    return ["/usr/share/skk/SKK-JISYO.L"];
+  }
+  if (!(await exists(jisyoFile, { isFile: true }))) {
+    const file = await Deno.mkdir(root, { recursive: true })
+      .then(() => Deno.create(jisyoFile));
+    const response = await fetch(url);
+    if (!response.ok || !response.body) {
+      throw new Error("Failed to download SKK-JISYO.L");
+    }
+    response.body
+      .pipeThrough(new DecompressionStream("gzip"))
+      .pipeTo(file.writable);
+  }
+  return [jisyoFile];
 }
 
 class FidgetStream extends WritableStream<string> {

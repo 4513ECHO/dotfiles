@@ -60,7 +60,7 @@ else
   function! s:show_phase(marker, new) abort
     let coord = a:new ?
           \   #{ lnum: line('.'), col: col('.') }
-          \ : prop_find(#{ type: s:prop_type_phase })
+          \ : prop_find(#{ type: s:prop_type_phase, skipstart: v:true })
     call s:reset_phase()
     call prop_add(coord.lnum, coord.col, #{
           \ type: s:prop_type_phase,

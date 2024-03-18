@@ -18,19 +18,13 @@ function! s:on_init() abort
   let skk_dir = has('mac') ?
         \   expand('~/Library/Containers/net.mtgto.inputmethod.macSKK/Data/Documents/Dictionaries')
         \ : expand('~/.local/share/skk')
-  let globalJisyo = denops#request('vimrc', 'downloadJisyo', [skk_dir])
+  let globalDictionaries = denops#request('vimrc', 'ensureSkkJisyo', [skk_dir])
 
   call skkeleton#config(#{
         \ eggLikeNewline: v:true,
         \ completionRankFile: skk_dir .. '/completionRankFile',
         \ databasePath: skk_dir .. '/skk.db',
-        \ globalDictionaries: [
-        \   skk_dir .. '/SKK-JISYO.4513echo',
-        \   skk_dir .. '/SKK-JISYO.bluearchive',
-        \   skk_dir .. '/SKK-JISYO.scp',
-        \   globalJisyo,
-        \   skk_dir .. '/SKK-JISYO.emoji-ja',
-        \ ],
+        \ globalDictionaries: globalDictionaries,
         \ immediatelyCancel: v:false,
         \ keepState: v:true,
         \ markerHenkan: '',
@@ -38,8 +32,7 @@ function! s:on_init() abort
         \ registerConvertResult: v:true,
         \ showCandidatesCount: 2,
         \ sources: ['deno_kv'],
-        \ userDictionary: skk_dir ..
-        \   (has('mac') ? '/skk-jisyo.utf-8' : '/SKK-JISYO.user'),
+        \ userDictionary: skk_dir .. '/skk-jisyo.utf8',
         \ })
 
   call skkeleton#register_keymap('input', ';', 'henkanPoint')
