@@ -35,10 +35,23 @@ deploy: ## Create symlinks to actual directories
 	@$(DOTPATH)/scripts/link.sh link
 
 .PHONY: update
-update: ## Fetch and merge all changes from remote repository
+update: ## Fetch and rebase all changes from remote repository
 	@echo 'Updating dotfiles...'
+ifneq ($(shell git rev-parse --abbrev-ref HEAD),main)
+ifneq ($(FETCH_FROM_MAIN),)
+	git stash
+	git switch -m main
+endif
+endif
 	git fetch origin
 	git rebase --autostash --stat FETCH_HEAD
+ifneq ($(shell git rev-parse --abbrev-ref HEAD),main)
+ifneq ($(FETCH_FROM_MAIN),)
+	git switch -m -
+	git stash pop
+	git rebase --autostash --stat main
+endif
+endif
 
 .PHONY: install
 install: update init deploy ## Initialize and deploy dotfiles
@@ -58,7 +71,7 @@ python: ## Install and initialize python enviroments
 
 .PHONY: aqua
 aqua: ## Install and initialize aqua enviroments
-if eq ($(shell command -v aqua),)
+ifeq ($(shell command -v aqua),)
 	curl -sSfL https://raw.githubusercontent.com/aquaproj/aqua-installer/v2.1.2/aqua-installer | bash
 else
 	aqua update-aqua
