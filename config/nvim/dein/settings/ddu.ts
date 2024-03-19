@@ -60,12 +60,12 @@ async function applySyntax(denops: Denops): Promise<void> {
   }
 }
 
-async function startFilterRgLive(denops: Denops): Promise<void> {
+async function startFilterAuto(denops: Denops): Promise<void> {
   const [filetype, name] = await batch.collect(denops, (denops) => [
     denops.eval("&filetype"),
     denops.call("getbufvar", "", "ddu_ui_name", ""),
   ]) as [string, string];
-  if (filetype === "ddu-ff" && name === "rg_live") {
+  if (filetype === "ddu-ff" && ["rg_live", "gin_action"].includes(name)) {
     await denops.call("ddu#ui#do_action", "openFilterWindow");
   }
 }
@@ -144,6 +144,9 @@ export class Config extends BaseConfig {
         },
         ghq: {
           defaultAction: "cd",
+        },
+        gin_action: {
+          defaultAction: "execute",
         },
         git_status: {
           converters: ["converter_git_status"],
@@ -239,6 +242,10 @@ export class Config extends BaseConfig {
       },
     });
 
+    args.contextBuilder.patchLocal("gin_action", {
+      sources: [{ name: "gin_action" }],
+    });
+
     await vars.g.set(
       args.denops,
       "ddu_source_lsp_clientName",
@@ -255,7 +262,7 @@ export class Config extends BaseConfig {
       hasNvim &&
         helper.define("ColorScheme", "*", notify(onColorScheme));
       helper.define("FileType", "ddu-ff", notify(applySyntax));
-      helper.define("User", "Ddu:uiReady", notify(startFilterRgLive));
+      helper.define("User", "Ddu:uiReady", notify(startFilterAuto));
     });
   }
 }

@@ -295,6 +295,12 @@ on_path = ['^file://']
 repo = 'https://github.com/lambdalisue/gin.vim'
 on_cmd = ['Gin', 'GinLog', 'GinStatus']
 [plugins.ftplugin]
+gin-log = '''
+nnoremap <buffer> a <Cmd>Ddu -name=gin_action<CR>
+'''
+gin-status = '''
+nnoremap <buffer> a <Cmd>Ddu -name=gin_action<CR>
+'''
 gitcommit = '''
 nnoremap <buffer> ZZ <Cmd>Apply<CR>
 '''
