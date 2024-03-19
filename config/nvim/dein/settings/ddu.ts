@@ -2,10 +2,12 @@ import {
   BaseConfig,
   type ConfigArguments,
 } from "https://deno.land/x/ddu_vim@v3.10.3/base/config.ts";
+import { ActionFlags } from "https://deno.land/x/ddu_vim@v3.10.3/types.ts";
 import {
   type Params as UiFFParams,
   Ui as UiFF,
 } from "https://deno.land/x/ddu_ui_ff@v1.1.0/ff.ts";
+import type { ActionData as GitStatusActionData } from "https://pax.deno.dev/kuuote/ddu-source-git_status@v1.0.0/denops/@ddu-kinds/git_status.ts";
 import type { Denops } from "https://deno.land/x/denops_std@v6.4.0/mod.ts";
 import * as autocmd from "https://deno.land/x/denops_std@v6.4.0/autocmd/mod.ts";
 import * as batch from "https://deno.land/x/denops_std@v6.4.0/batch/mod.ts";
@@ -93,6 +95,26 @@ export class Config extends BaseConfig {
         "custom-list": { defaultAction: "callback" },
         dein_update: { defaultAction: "viewDiff" },
         file: { defaultAction: "open" },
+        git_status: {
+          defaultAction: "open",
+          actions: {
+            commit: async () => {
+              await args.denops.cmd("Gin commit");
+              return ActionFlags.None;
+            },
+            patch: async (args) => {
+              await batch.batch(args.denops, async (denops) => {
+                for (const item of args.items) {
+                  const action = item.action as GitStatusActionData;
+                  await denops.cmd("tabnew");
+                  await denops.cmd("tcd " + action.worktree);
+                  await denops.cmd("GinPatch ++no-head " + action.path);
+                }
+              });
+              return ActionFlags.None;
+            },
+          },
+        },
         help: { defaultAction: "open" },
         highlight: { defaultAction: "edit" },
         lsp: { defaultAction: "open" },
@@ -122,6 +144,9 @@ export class Config extends BaseConfig {
         },
         ghq: {
           defaultAction: "cd",
+        },
+        git_status: {
+          converters: ["converter_git_status"],
         },
         source: {
           matchers: ["matcher_source", "matcher_fzf"],
