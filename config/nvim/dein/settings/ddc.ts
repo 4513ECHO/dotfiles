@@ -13,6 +13,7 @@ export class Config extends BaseConfig {
       cmdlineSources: {
         ":": ["cmdline", "around", "buffer"],
         "@": [
+          "input",
           { name: "around", options: { minAutoCompleteLength: 1 } },
           { name: "buffer", options: { minAutoCompleteLength: 1 } },
         ],
@@ -57,6 +58,10 @@ export class Config extends BaseConfig {
         github_pull_request: {
           mark: "[PR]",
           forceCompletionPattern: "#\\d*",
+        },
+        input: {
+          mark: "[input]",
+          isVolatile: true,
         },
         line: {
           mark: "[line]",

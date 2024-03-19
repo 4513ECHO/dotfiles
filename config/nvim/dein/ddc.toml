@@ -24,13 +24,16 @@ repo = 'https://github.com/Shougo/ddc-source-around'
 repo = 'https://github.com/Shougo/ddc-source-cmdline'
 
 [[plugins]]
+repo = 'https://github.com/Shougo/ddc-source-input'
+
+[[plugins]]
 repo = 'https://github.com/Shougo/ddc-source-line'
 
 [[plugins]]
-repo = 'https://github.com/Shougo/ddc-source-mocword'
+repo = 'https://github.com/Shougo/ddc-source-lsp'
 
 [[plugins]]
-repo = 'https://github.com/Shougo/ddc-source-lsp'
+repo = 'https://github.com/Shougo/ddc-source-mocword'
 
 [[plugins]]
 repo = 'https://github.com/Shougo/ddc-source-omni'
