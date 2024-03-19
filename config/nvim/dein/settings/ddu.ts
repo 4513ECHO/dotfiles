@@ -2,7 +2,10 @@ import {
   BaseConfig,
   type ConfigArguments,
 } from "https://deno.land/x/ddu_vim@v3.10.3/base/config.ts";
-import { ActionFlags } from "https://deno.land/x/ddu_vim@v3.10.3/types.ts";
+import {
+  ActionFlags,
+  type DduOptions,
+} from "https://deno.land/x/ddu_vim@v3.10.3/types.ts";
 import {
   type Params as UiFFParams,
   Ui as UiFF,
@@ -13,12 +16,14 @@ import * as autocmd from "https://deno.land/x/denops_std@v6.4.0/autocmd/mod.ts";
 import * as batch from "https://deno.land/x/denops_std@v6.4.0/batch/mod.ts";
 import * as lambda from "https://deno.land/x/denops_std@v6.4.0/lambda/mod.ts";
 import * as vars from "https://deno.land/x/denops_std@v6.4.0/variable/mod.ts";
-import { ensure, is } from "https://deno.land/x/unknownutil@v3.17.0/mod.ts";
+import { is } from "https://deno.land/x/unknownutil@v3.17.0/mod.ts";
+import * as u from "https://deno.land/x/unknownutil@v3.17.0/mod.ts";
 import { sprintf } from "https://deno.land/std@0.220.1/fmt/printf.ts";
+import { join } from "https://deno.land/std@0.220.1/path/mod.ts";
 
 async function onColorScheme(denops: Denops): Promise<void> {
   // NOTE: eob of 'fillchars' is annoying
-  const bgcolorObj = ensure(
+  const bgcolorObj = u.ensure(
     await denops.call("nvim_get_hl", 0, { name: "Normal" }),
     is.ObjectOf({ bg: is.OptionalOf(is.Number) }),
   );
@@ -31,7 +36,7 @@ async function onColorScheme(denops: Denops): Promise<void> {
 }
 
 async function applySyntax(denops: Denops): Promise<void> {
-  const { sources } = ensure(
+  const { sources } = u.ensure(
     await denops.call("ddu#custom#get_current"),
     is.ObjectOf({ sources: is.ArrayOf(is.ObjectOf({ name: is.String })) }),
   );
@@ -100,6 +105,25 @@ export class Config extends BaseConfig {
           actions: {
             commit: async () => {
               await args.denops.cmd("Gin commit");
+              return ActionFlags.None;
+            },
+            diff: (args) => {
+              const action = args.items[0].action as GitStatusActionData;
+              const path = join(action.worktree, action.path);
+              args.denops.dispatcher.start(
+                {
+                  name: "git_diff_current",
+                  sources: [{
+                    name: "git_diff",
+                    options: { path },
+                    params: {
+                      unifiedContext: 0,
+                      onlyFile: true,
+                      ...u.maybe(args.actionParams, is.Record) ?? {},
+                    },
+                  }],
+                } satisfies Partial<DduOptions>,
+              );
               return ActionFlags.None;
             },
             patch: async (args) => {
@@ -244,6 +268,16 @@ export class Config extends BaseConfig {
 
     args.contextBuilder.patchLocal("gin_action", {
       sources: [{ name: "gin_action" }],
+    });
+
+    args.contextBuilder.patchLocal("git_diff_current", {
+      sources: [{
+        name: "git_diff",
+        params: {
+          unifiedContext: 0,
+          onlyFile: true,
+        },
+      }],
     });
 
     await vars.g.set(

@@ -16,6 +16,26 @@ inoremap <C-x><C-e> <Cmd>call ddu#start(#{
       \   ff: #{ replaceCol: col('.') },
       \ },
       \ })<CR>
+
+function! s:open_current_hunk() abort
+  autocmd vimrc User Ddu:uiReady ++once call s:on_ui_ready()
+  call ddu#start(#{
+        \ name: 'git_diff_current',
+        \ sourceOptions: #{ _: #{ path: expand('%:p') } },
+        \ sync: v:true
+        \ })
+endfunction
+function! s:on_ui_ready() abort
+  let lnum = line('.', ddu#get_context(b:ddu_ui_name).winId)
+  let items = ddu#ui#get_items()
+  const idx = items->indexof(
+        \ { -> v:val.word->stridx('@@') < 0 && v:val.data.git_diff.lines->indexof({ -> v:val.nlinum ==# lnum }) > -1 },
+        \ #{ startidx: 2 })
+  if idx > -1
+    call ddu#redraw(b:ddu_ui_name, #{ searchItem: items[idx] })
+  endif
+endfunction
+nnoremap <Leader>gd <Cmd>call <SID>open_current_hunk()<CR>
 '''
 hook_source = '''
 call ddu#custom#load_config(expand('$DEIN_DIR/settings/ddu.ts'))
@@ -123,6 +143,9 @@ repo = 'https://github.com/4513ECHO/ddu-source-pypi_classifiers'
 
 [[plugins]]
 repo = 'https://github.com/4513ECHO/ddu-source-source'
+
+[[plugins]]
+repo = 'https://github.com/kuuote/ddu-source-git_diff'
 
 [[plugins]]
 repo = 'https://github.com/kuuote/ddu-source-git_status'

@@ -1,3 +1,4 @@
+local autocmd = require("vimrc.autocmd").autocmd
 ---@type table<string, ParserInfo>
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
@@ -26,6 +27,8 @@ parser_config.uri = {
 --   },
 --   filetype = "vim",
 -- }
+
+vim.treesitter.language.register("unifieddiff", "gin-diff")
 
 vim.treesitter.start = (function(wrapped)
   ---@param bufnr integer|nil
@@ -77,7 +80,23 @@ require("nvim-treesitter.configs").setup {
   },
 }
 
-require("vimrc.autocmd").autocmd "ColorScheme" {
+local function link_diff_highlights()
+  if vim.fn.empty(vim.api.nvim_get_hl(0, { name = "diffAdded" })) == 1 then
+    vim.api.nvim_set_hl(0, "@diff.plus", { link = "DiffAdd" })
+    vim.api.nvim_set_hl(0, "@diff.minus", { link = "DiffDelete" })
+  else
+    vim.api.nvim_set_hl(0, "@diff.plus", { link = "diffAdded" })
+    vim.api.nvim_set_hl(0, "@diff.minus", { link = "diffRemoved" })
+  end
+end
+
+autocmd "ColorScheme" {
   callback = require("treesitter-compat-highlights").apply,
   desc = "Apply compatible highlights for nvim-treesitter",
 }
+autocmd "ColorScheme" {
+  callback = link_diff_highlights,
+  desc = "Link diff highlights of nvim-treesitter",
+}
+require("treesitter-compat-highlights").apply()
+link_diff_highlights()
