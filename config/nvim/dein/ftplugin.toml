@@ -84,6 +84,12 @@ nnoremap <buffer> [Space]q <C-w>q
 if expand('#')->getbufvar('&buftype') ==# 'terminal'
   autocmd vimrc WinClosed <buffer> ++once startinsert
 endif
+" Open diff view
+if winnr('$') ==# 1
+  belowright wincmd v
+  execute "normal! />8\<CR>zt\<Cmd>nohlsearch\<CR>"
+  wincmd p
+endif
 '''
 
 gitrebase = '''

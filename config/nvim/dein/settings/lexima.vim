@@ -145,6 +145,7 @@ LeximaAlterCommand deinr\%[eadme]               DeinReadme
 LeximaAlterCommand rg                           Rg
 LeximaAlterCommand helpfu\%[lversion]           HelpfulVersion
 LeximaAlterCommand copi\%[lot]                  Copilot
+LeximaAlterCommand gi\%[n]                      Gin
 
 " My Commands
 LeximaAlterCommand colo\%[rscheme]              ColorScheme

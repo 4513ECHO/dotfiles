@@ -292,6 +292,17 @@ repo = 'https://github.com/lambdalisue/file-protocol.vim'
 on_path = ['^file://']
 
 [[plugins]]
+repo = 'https://github.com/lambdalisue/gin.vim'
+on_cmd = ['Gin', 'GinLog', 'GinStatus']
+[plugins.ftplugin]
+gitcommit = '''
+nnoremap <buffer> ZZ <Cmd>Apply<CR>
+'''
+gitrebase = '''
+nnoremap <buffer> ZZ <Cmd>Apply<CR>
+'''
+
+[[plugins]]
 repo = 'https://github.com/lambdalisue/kensaku.vim'
 denops_wait = false
 on_func = ['kensaku#']
