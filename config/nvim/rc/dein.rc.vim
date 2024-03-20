@@ -24,6 +24,9 @@ let g:dein#lazy_rplugins = v:true
 let g:dein#types#git#enable_partial_clone = v:true
 let $DEIN_DIR = g:config_home .. '/dein'
 
+let g:dein#inline_vimrcs = ['autocmd', 'keymap', 'option']
+      \ ->map({ -> $'{g:config_home}/rc/{v:val}.rc.vim' })
+
 if dein#min#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
@@ -41,6 +44,10 @@ if dein#min#load_state(s:dein_dir)
   if dein#check_install()
     call dein#install()
   endif
+  if dein#is_available('denops-shared-server.vim')
+    call denops_shared_server#restart()
+  endif
+  quitall!
 endif
 
 if getcwd() =~? expand('~/Develops/github.com/4513ECHO/')
