@@ -82,7 +82,7 @@ packages:
     version: master
   - name: nodejs/node@v21.7.1
     registry: local
-  # - name: rust-lang/rust@1.76.0
+  # - name: rust-lang/rust@1.77.0
   #   registry: local
   - name: thinca/ciw
     registry: local
