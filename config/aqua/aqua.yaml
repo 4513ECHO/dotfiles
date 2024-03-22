@@ -17,6 +17,7 @@ packages:
   - name: b3nj5m1n/xdg-ninja@v0.2.0.1
   - name: babarot/afx@v0.2.1
   - name: babarot/gomi@v1.1.6
+  - name: BurntSushi/ripgrep@14.1.0
   - name: charmbracelet/glow@v1.5.1
   - name: cli/cli@v2.46.0
   - name: dandavison/delta@0.17.0
@@ -30,7 +31,6 @@ packages:
   - name: gohugoio/hugo@v0.124.1
   - name: golang.org/x/tools/gopls@v0.15.2
   - name: golang/go@go1.22.1
-  - name: golangci/golangci-lint@v1.57.1
   - name: hadolint/hadolint@v2.12.0
   - name: hairyhenderson/gomplate@v3.11.7
   - name: high-moctane/mocword@v0.2.0
@@ -46,7 +46,6 @@ packages:
   - name: koalaman/shellcheck@v0.10.0
   - name: LuaLS/lua-language-server@3.7.4
   - name: mattn/efm-langserver@v0.0.53
-  - name: microsoft/ripgrep-prebuilt@v13.0.0-10
   - name: mvdan/sh@v3.8.0
   - name: nametake/golangci-lint-langserver@v0.0.9
   - name: nektos/act@v0.2.60
@@ -74,16 +73,11 @@ packages:
   - name: ziglang/zig@0.11.0
 
   # local registry
-  - name: holman/spark
-    registry: local
-    version: master
   - name: JosefZIla/bash2048
     registry: local
     version: master
   - name: nodejs/node@v21.7.1
     registry: local
-  # - name: rust-lang/rust@1.77.0
-  #   registry: local
   - name: thinca/ciw
     registry: local
     version: master
