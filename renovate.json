@@ -14,15 +14,16 @@
   "platformAutomerge": true,
   "prConcurrentLimit": 0,
   "prHourlyLimit": 0,
-  "regexManagers": [
+  "customManagers": [
     {
+      "customType": "regex",
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "actions/go-versions",
       "fileMatch": [
-        ".github/workflows/aqua.yaml"
+        "\\.github/workflows/aqua\\.yaml"
       ],
       "matchStrings": [
-        "^\\s+go-version: \"(?<currentValue>.*?)\"$"
+        "go-version: \"(?<currentValue>.*?)\""
       ]
     }
   ]
