@@ -57,7 +57,7 @@ let s:rules.toml += [
 
 " vim
 " based on https://github.com/thinca/config/blob/5413e42a/dotfiles/dot.vim/vimrc#L2755
-let s:vim_input_bslash = printf('<CR>%s<Bslash><Space>', repeat('<Space>', g:vim_indent_cont))
+let s:vim_input_bslash = '<Space>'->repeat(g:vim_indent_cont)->printf('<CR>%s<Bslash><Space>')
 
 let s:rules.vim = []
 let s:rules.vim += [
@@ -71,28 +71,6 @@ let s:rules.vim += [
 " endmarker
 let s:rules.vim += [
       \ #{ char: '<CR>', at: '<<\s*\%(trim\s\+\)\?\(\h\w*\)\%#$', input: '<CR>', input_after: '<CR>\1', with_submatch: v:true },
-      \ ]
-
-" markdown
-let s:rules.markdown = []
-" smart itemize indent
-let s:rules.markdown += [
-      \ #{ char: '<Tab>', at: '^\s*[-*]\s*\%#$', input: '<Home><Space><Space><End>' },
-      \ #{ char: '<BS>',  at: '^\s*[-*]\s*\%#$', input: '<Home><Del><Del><End>'     },
-      \ #{ char: '-',     at: '^\s*\%#$',        input: '-<Space>',                 },
-      \ ]
-" smart checkbox
-let s:rules.markdown += [
-      \ #{ char: ']',       at: '^\s*[-*]\s*\%#$',       input: '[<Space>]'          },
-      \ #{ char: '<Space>', at: '^\s*[-*]\s*\[\%#\]$',   input: '<Space>'            },
-      \ #{ char: 'x',       at: '^\s*[-*]\s*\[\s\]\%#$', input: '<Left><BS>x<Right>' },
-      \ ]
-" smart bold, italic and strikethrough
-let s:rules.markdown += [
-      \ #{ char: '~',     input: '~',    input_after: '~' },
-      \ #{ char: '<Tab>', at: '\%#\~',   leave: 1         },
-      \ #{ char: '<BS>',  at: '\*\%#\*', delete: 1        },
-      \ #{ char: '<BS>',  at: '\~\%#\~', delete: 1        },
       \ ]
 
 " sh
@@ -109,26 +87,20 @@ let s:rules.jq += [
       \ #{ char: '(', at: '\\\%#', input_after: ')' },
       \ ]
 
-function! s:lexima_init() abort
-  for [filetype, rules] in items(s:rules)
-    let base = filetype ==# '_' ? {} : #{ filetype: filetype }
-    for rule in rules
-      call lexima#add_rule(extend(copy(base), rule))
-    endfor
-  endfor
-endfunction
-call s:lexima_init()
+eval s:rules
+      \ ->map({ ft, rules -> rules
+      \   ->map({ -> (ft ==# '_' ? {} : #{ filetype: ft })
+      \     ->extend(v:val)->lexima#add_rule() }) })
 
 " based on https://github.com/yuki-yano/dotfiles/blob/9bfee6c8/.vimrc#L3335
 function! s:lexima_alter_command(original, altanative) abort
-  for char in ['<CR>', '<Space>', '!']
-    call lexima#add_rule(#{
-          \ char: char,
-          \ mode: ':',
-          \ at: $'\c^\(''<,''>\)\?{a:original}\%#',
-          \ input: $'<C-w>{a:altanative}{char}',
-          \ })
-  endfor
+  eval ['<CR>', '<Space>', '!']->map({ ->
+        \ lexima#add_rule(#{
+        \   char: v:val,
+        \   mode: ':',
+        \   at: $'\c^\(''<,''>\)\?{a:original}\%#',
+        \   input: $'<C-w>{a:altanative}{v:val}',
+        \ }) })
 endfunction
 command! -nargs=+ -complete=command LeximaAlterCommand call <SID>lexima_alter_command(<f-args>)
 
@@ -147,10 +119,11 @@ LeximaAlterCommand helpfu\%[lversion]           HelpfulVersion
 LeximaAlterCommand copi\%[lot]                  Copilot
 LeximaAlterCommand gi\%[n]                      Gin
 
-" My Commands
+" Original Commands
 LeximaAlterCommand colo\%[rscheme]              ColorScheme
 LeximaAlterCommand ra\%[ndomcolorscheme]        RandomColorScheme
 LeximaAlterCommand mi\%[ninote]                 MiniNote
+LeximaAlterCommand den\%[opssharedserver]       DenopsSharedServer
 LeximaAlterCommand deinu\%[pdatemine]           DeinUpdateMine
 LeximaAlterCommand vt\%[erminal]                VTerminal
 " }}}
