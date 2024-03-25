@@ -126,3 +126,13 @@ vim.notify = function(...)
   vim.notify(...)
 end
 '''
+
+[[plugins]]
+repo = 'https://github.com/tzachar/highlight-undo.nvim'
+on_map = { n = ['u', '<C-r>'] }
+hook_add = '''
+autocmd vimrc ColorScheme * hi link HighlightUndo DiffChange
+'''
+lua_source = '''
+require("highlight-undo").setup { duration = 200 }
+'''

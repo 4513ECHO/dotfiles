@@ -8,6 +8,17 @@ depends = ['colorswatch.vim']
 on_cmd = ['Inspecthi']
 
 [[plugins]]
+repo = 'https://github.com/machakann/vim-highlightedundo'
+on_map = { n = '<Plug>' }
+hook_add = '''
+nnoremap u     <Plug>(highlightedundo-undo)
+nnoremap <C-r> <Plug>(highlightedundo-redo)
+nnoremap U     <Plug>(highlightedundo-Undo)
+nnoremap g-    <Plug>(highlightedundo-gminus)
+nnoremap g+    <Plug>(highlightedundo-gplus)
+'''
+
+[[plugins]]
 repo = 'https://github.com/machakann/vim-highlightedyank'
 on_event = ['TextYankPost']
 hook_add = '''
