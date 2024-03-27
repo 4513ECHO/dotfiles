@@ -1,6 +1,5 @@
 cargo:cargo-expand
 cargo:dont
-cargo:exa
 go:github.com/b4b4r07/git-bump
 go:github.com/fedeztk/got/cmd/got
 go:github.com/haya14busa/hyperlink/cmd/hyperlink

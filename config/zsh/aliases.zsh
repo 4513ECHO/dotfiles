@@ -5,11 +5,11 @@ alias -- -='cd -'
 
 alias dot='cd ~/dotfiles'
 
-if command -v exa > /dev/null; then
-  alias ls='exa -a'
-  alias ll='exa -al'
-  alias exa='exa -a'
-  alias tree='exa --tree --group-directories-first --git-ignore --ignore-glob .git'
+if command -v eza > /dev/null; then
+  alias ls='eza -a'
+  alias ll='eza -al'
+  alias eza='eza -a'
+  alias tree='eza --tree --group-directories-first --git-ignore --ignore-glob .git'
 else
   alias ls='ls -a --color=auto'
   alias ll='ls -l'
@@ -26,6 +26,7 @@ alias a='aqua'
 alias d='docker'
 alias g='git'
 alias sys='systemctl --user'
+alias brwe='brew'
 alias carog='cargo' # for typo
 alias globalip='curl -q globalip.me'
 alias reload='exec $SHELL -l && rehash'
