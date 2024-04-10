@@ -76,7 +76,7 @@ packages:
   - name: JosefZIla/bash2048
     registry: local
     version: master
-  - name: nodejs/node@v21.7.2
+  - name: nodejs/node@v21.7.3
     registry: local
   - name: thinca/ciw
     registry: local
