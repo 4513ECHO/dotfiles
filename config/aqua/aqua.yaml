@@ -40,7 +40,7 @@ packages:
   - name: JohnnyMorganz/StyLua@v0.20.0
   - name: jqlang/jq@jq-1.7.1
   - name: junegunn/fzf/fzf-tmux@0.51.0
-  - name: junegunn/fzf@0.51.0
+  - name: junegunn/fzf@0.52.0
   - name: k0kubun/xremap/x11@v0.8.18
   - name: ko1nksm/getoptions/gengetoptions@v3.3.0
   - name: ko1nksm/getoptions@v3.3.0
