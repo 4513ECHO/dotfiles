@@ -12,7 +12,7 @@ packages:
   - name: ajeetdsouza/zoxide@v0.9.4
   - name: antonmedv/fx@34.0.0
   - name: aquaproj/aqua-installer@v3.0.1
-  - name: aquaproj/registry-tool@v0.2.4
+  - name: aquaproj/registry-tool@v0.2.5
   - name: aristocratos/btop@v1.3.2
   - name: b3nj5m1n/xdg-ninja@v0.2.0.1
   - name: babarot/afx@v0.2.1
