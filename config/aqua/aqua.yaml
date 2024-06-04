@@ -31,7 +31,7 @@ packages:
   - name: eza-community/eza@v0.18.16
   - name: gohugoio/hugo@v0.126.3
   - name: golang.org/x/tools/gopls@v0.15.3
-  - name: golang/go@go1.22.3
+  - name: golang/go@go1.22.4
   - name: hadolint/hadolint@v2.12.0
   - name: hairyhenderson/gomplate@v3.11.8
   - name: high-moctane/mocword@v0.2.0
