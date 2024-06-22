@@ -126,3 +126,6 @@ vim.notify = function(...)
   vim.notify(...)
 end
 '''
+
+[[plugins]]
+repo = 'https://github.com/uga-rosa/ddc-source-lsp-setup'

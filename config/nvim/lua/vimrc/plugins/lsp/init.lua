@@ -1,6 +1,5 @@
 local autocmd = require("vimrc.autocmd").autocmd
 local lspconfig = require "lspconfig"
-local capabilities = require("ddc_source_lsp").make_client_capabilities()
 local root_pattern = lspconfig.util.root_pattern
 local deno_as_npm = require("vimrc.plugins.lsp.util").deno_as_npm
 
@@ -52,6 +51,10 @@ vim.lsp.handlers["textDocument/hover"] =
   vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 require("lspconfig.ui.windows").default_options.border = "single"
 
+require("ddc_source_lsp_setup").setup {
+  override_capabilities = true,
+  respect_trigger = true,
+}
 
 vim.diagnostic.config {
   signs = {
@@ -78,7 +81,6 @@ lspconfig.efm.setup {
 }
 
 lspconfig.denols.setup {
-  capabilities = capabilities,
   settings = {
     deno = {
       enable = true,
@@ -130,7 +132,6 @@ local function library(plugins)
 end
 
 lspconfig.lua_ls.setup {
-  capabilities = capabilities,
   settings = {
     Lua = {
       completion = { showWord = "Disable" },
@@ -150,6 +151,7 @@ lspconfig.lua_ls.setup {
       workspace = {
         checkThirdParty = false,
         library = library {
+          "ddc-source-lsp-setup",
           "fidget.nvim",
           "nvim-lspconfig",
           "nvim-treesitter",
@@ -160,12 +162,9 @@ lspconfig.lua_ls.setup {
   },
 }
 
-lspconfig.gopls.setup {
-  capabilities = capabilities,
-}
+lspconfig.gopls.setup {}
 
 lspconfig.jsonls.setup {
-  capabilities = capabilities,
   cmd = deno_as_npm {
     "npm:vscode-langservers-extracted@4.8.0/vscode-json-language-server",
     "--stdio",
@@ -180,7 +179,6 @@ lspconfig.jsonls.setup {
 }
 
 lspconfig.pylsp.setup {
-  capabilities = capabilities,
   settings = {
     pylsp = {
       configurationSources = { "flake8" },
@@ -201,12 +199,9 @@ lspconfig.pylsp.setup {
   },
 }
 
-lspconfig.rust_analyzer.setup {
-  capabilities = capabilities,
-}
+lspconfig.rust_analyzer.setup {}
 
 lspconfig.taplo.setup {
-  capabilities = capabilities,
   settings = {
     evenBetterToml = {
       schema = {
