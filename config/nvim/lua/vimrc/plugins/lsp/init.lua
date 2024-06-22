@@ -218,6 +218,15 @@ lspconfig.taplo.setup {
   },
 }
 
+lspconfig.vimls.setup {
+  cmd = deno_as_npm { "npm:vim-language-server@2.3.1", "--stdio" },
+  cmd_env = deno_as_npm.cmd_env,
+  init_options = {
+    runtimepath = vim.o.runtimepath,
+    vimruntime = vim.env.VIMRUNTIME,
+  },
+}
+
 lspconfig.yamlls.setup {
   cmd = deno_as_npm { "npm:yaml-language-server@1.14.0", "--stdio" },
   cmd_env = deno_as_npm.cmd_env,

@@ -185,6 +185,7 @@ export class Config extends BaseConfig {
       "toml",
       "typescript",
       "typescriptreact",
+      "vim",
       "yaml",
     ], ["lsp", ...sources]);
     setSourcesByFiletypes(
