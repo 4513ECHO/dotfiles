@@ -31,27 +31,33 @@ parser_config.uri = {
 vim.treesitter.language.register("unifieddiff", "gin-diff")
 
 vim.treesitter.start = (function(wrapped)
+  ---@param msg string
+  local function notify(msg)
+    vim.notify(msg, vim.log.levels.WARN, { title = "vim.treesitter.start" })
+  end
   ---@param bufnr integer|nil
   ---@param lang string|nil
   return function(bufnr, lang)
     bufnr = bufnr or vim.api.nvim_get_current_buf()
     lang = vim.treesitter.language.get_lang(lang or vim.bo.filetype)
-    if
-      vim.iter({ "bash", "yaml", "vimdoc" }):find(lang)
-      or (
-        lang == "vim"
-        and vim.api
-          .nvim_buf_get_lines(bufnr, 0, 1, false)[1]
-          :match "^vim9script"
-      )
+    local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(bufnr))
+    if ok and stats and stats.size > 1024 * 1024 then -- 1MB
+      return notify "The file is too large"
+    elseif vim.fn.line "$" > 20000 then
+      return notify "The buffer has too many lines"
+    elseif vim.list_contains({ "bash", "yaml", "vimdoc" }, lang) then
+      return -- Not supported language
+    elseif
+      lang == "vim"
+      and vim.api.nvim_buf_get_lines(bufnr, 0, 1, false)[1]:match "^vim9script"
     then
-      return
+      return notify "vim9script is not supported"
     end
     wrapped(bufnr, lang)
   end
 end)(vim.treesitter.start)
 
-local parser_install_dir = vim.fn.stdpath "data" --[[@as string]] .. "/parsers"
+local parser_install_dir = vim.fn.stdpath "data" .. "/parsers"
 vim.opt.runtimepath:append(parser_install_dir)
 
 ---@diagnostic disable-next-line: missing-fields
