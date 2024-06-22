@@ -9,14 +9,11 @@ tools:
     prefix: textlint
     lint-command: >
       deno run --allow-all --no-lock
-      npm:textlint --cache -f unix --no-color ${INPUT}
+      npm:textlint --cache --format=unix --no-color ${INPUT}
     lint-ignore-exit-code: true
     lint-formats:
       - "%f:%l:%c: %m [%trror/%r]"
-      - "%f:%l:%c: 【%r】 %m"
       - "%E%f:%l:%c: %m"
-      - "%Z%m [%trror/%r]"
-      - "%C%m"
     root-markers:
       - .textlintrc
       - .textlintrc.json
@@ -24,7 +21,7 @@ tools:
       - .textlintrc.yml
     require-marker: true
     commands:
-      - title: "textlint fix"
+      - title: textlint fix
         command: deno
         arguments:
           - run
@@ -37,30 +34,9 @@ tools:
 
   hadolint-lint: &hadolint-lint
     prefix: hadolint
-    lint-command: "hadolint"
+    lint-command: hadolint
     lint-formats:
       - "%f:%l DL%n %t%*[a-z]: %m"
-
-  commitlint-lint: &commitlint-lint
-    prefix: commitlint
-    lint-command: "npx --no-install commitlint -c false"
-    lint-stdin: true
-    lint-formats:
-      - "%t%*[^ ] %m"
-    root-markers:
-      - .commitlintrc
-      - .commitlintrc.json
-      - .commitlintrc.yaml
-      - .commitlintrc.yml
-      - .commitlintrc.js
-      - .commitlintrc.cjs
-      - .commitlintrc.ts
-      - commitlint.config.js
-      - commitlint.config.cjs
-      - commitlint.config.ts
-    lint-category-map:
-      ✖: E
-      ⚠: W
 
   fixjson-format: &fixjson-format
     format-command: >
@@ -69,18 +45,18 @@ tools:
     format-stdin: true
 
   stylua-format: &stylua-format
-    format-command: "stylua --search-parent-directories -"
+    format-command: stylua --search-parent-directories -
     format-stdin: true
 
   shellcheck-lint: &shellcheck-lint
     prefix: shellcheck
-    lint-command: "shellcheck -f gcc -x -"
+    lint-command: shellcheck -f gcc -x -
     lint-stdin: true
     lint-formats:
       - "%f:%l:%c: %t%*[^:]: %m [SC%n]"
 
   shfmt-format: &shfmt-format
-    format-command: "shfmt -s -ln bash -i 2 -bn -ci -sr"
+    format-command: shfmt -s -ln bash -i 2 -bn -ci -sr
     format-stdin: true
 
   actionlint-lint: &actionlint-lint
@@ -93,27 +69,16 @@ tools:
       - .github
 
 languages:
-  markdown:
-    - <<: *textlint-lint
-
   dockerfile:
     - <<: *hadolint-lint
-
-  gitcommit:
-    - <<: *commitlint-lint
-
+  json:
+    - <<: *fixjson-format
+  markdown:
+    - <<: *textlint-lint
+  lua:
+    - <<: *stylua-format
   sh:
     - <<: *shellcheck-lint
     - <<: *shfmt-format
-
-  lua:
-    - <<: *stylua-format
-
-  json:
-    - <<: *fixjson-format
-
   yaml:
     - <<: *actionlint-lint
-
-  zsh:
-    - <<: *shfmt-format
