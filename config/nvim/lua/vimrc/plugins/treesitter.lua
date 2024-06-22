@@ -76,6 +76,7 @@ require("nvim-treesitter.configs").setup {
     "toml",
     "tsx",
     "typescript",
+    "typst",
     "unifieddiff",
     "uri",
     "vim",

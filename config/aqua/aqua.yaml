@@ -27,6 +27,7 @@ packages:
   - name: docker/compose@v2.29.1
   - name: dylanaraps/neofetch@7.1.0
   - name: ekalinin/github-markdown-toc@0.10.0
+  - name: Enter-tainer/typstyle@v0.11.27
   - name: ericchiang/pup@v0.4.0
   - name: eza-community/eza@v0.18.23
   - name: gohugoio/hugo@v0.131.0
@@ -48,6 +49,7 @@ packages:
   - name: LuaLS/lua-language-server@3.10.1
   - name: mattn/efm-langserver@v0.0.53
   - name: mvdan/sh@v3.8.0
+  - name: Myriad-Dreamin/tinymist@v0.11.11
   - name: nametake/golangci-lint-langserver@v0.0.9
   - name: nektos/act@v0.2.65
   - name: noahgorstein/jqp@v0.7.0
@@ -67,6 +69,9 @@ packages:
   - name: tomnomnom/gron@v0.7.1
   - name: TomWright/dasel@v2.8.1
   - name: tree-sitter/tree-sitter@v0.22.6
+  - name: typst/typst
+    # NOTE: v0.11.1 has a bug (https://github.com/typst/typst/issues/4242)
+    version: v0.11.0
   - name: vishaltelangre/ff@v0.1.8
   - name: x-motemen/ghq@v1.6.2
   - name: XAMPPRocky/tokei@v12.1.2
