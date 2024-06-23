@@ -30,10 +30,14 @@ function M.autocmd(event)
   ---@param opts AutocmdOptions
   ---@return integer
   return function(opts)
+    ---@type string|string[]|nil
+    local pattern = opts.pattern or "*"
+    if opts.buffer then
+      pattern = nil
+    end
     return vim.api.nvim_create_autocmd(
       event,
-      vim.tbl_deep_extend("force", { group = M.group, pattern = "*" }, opts)
-        or {}
+      vim.tbl_extend("force", { group = M.group, pattern = pattern }, opts)
     )
   end
 end
@@ -56,12 +60,14 @@ M.autocmd "TermOpen" {
 M.autocmd "BufLeave" {
   pattern = "term://*",
   command = "checktime",
+  desc = "Check files changes in terminal buffers",
 }
 
 M.autocmd "TextYankPost" {
   callback = function()
     vim.highlight.on_yank { timeout = 100, on_macro = true }
   end,
+  desc = "Highlight yanked text",
 }
 
 M.autocmd "ColorScheme" {
@@ -70,6 +76,7 @@ M.autocmd "ColorScheme" {
       vim.api.nvim_set_hl(0, "VertSplit", {})
     end
   end,
+  desc = "Clear VertSplit highlight",
 }
 
 return setmetatable(M, {
