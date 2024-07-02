@@ -49,7 +49,7 @@ export class Config extends BaseConfig {
           minAutoCompleteLength: 30,
           isVolatile: true,
           forceCompletionPattern: "[\\w@:~._-]/[\\w@:~._-]*",
-          sorters: ["sorter_file"],
+          sorters: ["sorter_fuzzy", "sorter_file"],
         },
         github_issue: {
           mark: "[issue]",

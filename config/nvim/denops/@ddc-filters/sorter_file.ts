@@ -46,8 +46,8 @@ export class Filter extends BaseFilter<Params> {
         return kindRank;
       }
 
-      // Compare word
-      return a.word.localeCompare(b.word);
+      // Return the original order if the kind is the same
+      return 0;
     }));
   }
 
