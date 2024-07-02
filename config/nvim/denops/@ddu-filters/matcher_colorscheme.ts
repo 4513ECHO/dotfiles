@@ -4,7 +4,7 @@ import {
   type OnInitArguments,
 } from "https://deno.land/x/ddu_vim@v3.10.3/base/filter.ts";
 import type { DduItem } from "https://deno.land/x/ddu_vim@v3.10.3/types.ts";
-import { ensure, is } from "https://deno.land/x/unknownutil@v3.17.0/mod.ts";
+import { ensure, is } from "jsr:@core/unknownutil@^3.18.1";
 
 export type Params = Record<PropertyKey, never>;
 

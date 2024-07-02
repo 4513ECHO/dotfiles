@@ -1,8 +1,9 @@
 import type { Denops } from "https://deno.land/x/denops_std@v6.4.0/mod.ts";
-import { ensure, is } from "https://deno.land/x/unknownutil@v3.17.0/mod.ts";
-import { exists } from "https://deno.land/std@0.220.1/fs/exists.ts";
-import { expandGlob } from "https://deno.land/std@0.220.1/fs/expand_glob.ts";
-import { join, toFileUrl } from "https://deno.land/std@0.220.1/path/mod.ts";
+import { ensure, is } from "jsr:@core/unknownutil@^3.18.1";
+import { exists } from "jsr:@std/fs@^1.0.0/exists";
+import { expandGlob } from "jsr:@std/fs@^1.0.0/expand-glob";
+import { join } from "jsr:@std/path@^1.0.2/join";
+import { toFileUrl } from "jsr:@std/path@^1.0.2/to-file-url";
 
 const decoder = new TextDecoder();
 

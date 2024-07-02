@@ -16,10 +16,10 @@ import * as autocmd from "https://deno.land/x/denops_std@v6.4.0/autocmd/mod.ts";
 import * as batch from "https://deno.land/x/denops_std@v6.4.0/batch/mod.ts";
 import * as lambda from "https://deno.land/x/denops_std@v6.4.0/lambda/mod.ts";
 import * as vars from "https://deno.land/x/denops_std@v6.4.0/variable/mod.ts";
-import { is } from "https://deno.land/x/unknownutil@v3.17.0/mod.ts";
-import * as u from "https://deno.land/x/unknownutil@v3.17.0/mod.ts";
-import { sprintf } from "https://deno.land/std@0.220.1/fmt/printf.ts";
-import { join } from "https://deno.land/std@0.220.1/path/mod.ts";
+import { is } from "jsr:@core/unknownutil@^3.18.1";
+import * as u from "jsr:@core/unknownutil@^3.18.1";
+import { sprintf } from "jsr:@std/fmt@^1.0.0-rc.1/printf";
+import { join } from "jsr:@std/path@^1.0.2/join";
 
 async function onColorScheme(denops: Denops): Promise<void> {
   // NOTE: eob of 'fillchars' is annoying
