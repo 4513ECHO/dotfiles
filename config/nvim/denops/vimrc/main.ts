@@ -3,7 +3,8 @@ import { ensure, is } from "https://deno.land/x/unknownutil@v3.17.0/mod.ts";
 import { exists } from "https://deno.land/std@0.220.1/fs/exists.ts";
 import { expandGlob } from "https://deno.land/std@0.220.1/fs/expand_glob.ts";
 import { join, toFileUrl } from "https://deno.land/std@0.220.1/path/mod.ts";
-import { TextLineStream } from "https://deno.land/std@0.220.1/streams/text_line_stream.ts";
+
+const decoder = new TextDecoder();
 
 export function main(denops: Denops): Promise<void> {
   denops.dispatcher = {
@@ -45,36 +46,30 @@ export function main(denops: Denops): Promise<void> {
         .sort((a) => a.endsWith(".L") ? 2 : a.endsWith(".emoji-ja") ? 1 : -1);
     },
 
-    async cacheVtsls(arg: unknown): Promise<unknown> {
-      const cacheDir = join(ensure(arg, is.String), "ls");
-      const vtsls = join(
-        cacheDir,
-        "node_modules",
-        "@vtsls",
-        "language-server",
-        "bin",
-        "vtsls.js",
+    async getGlobalTsdk(): Promise<unknown> {
+      const [{ stdout: denoInfo }, { stdout: vtslsInfo }] = await Promise.all(
+        [[], ["npm:@vtsls/language-server"]].map((name) =>
+          new Deno.Command("deno", {
+            args: ["info", "--json"].concat(name),
+            stdout: "piped",
+          }).output()
+        ),
       );
-      if (await exists(cacheDir, { isDirectory: true })) {
-        return vtsls;
-      }
-      await Deno.mkdir(cacheDir, { recursive: true });
-      const { stderr } = new Deno.Command("deno", {
-        args: [
-          "cache",
-          "--reload",
-          "--node-modules-dir",
-          "npm:@vtsls/language-server@0.1.23",
-        ],
-        cwd: cacheDir,
-        stderr: "piped",
-        env: { NO_COLOR: "1" },
-      }).spawn();
-      stderr
-        .pipeThrough(new TextDecoderStream())
-        .pipeThrough(new TextLineStream())
-        .pipeTo(new FidgetStream(denops));
-      return vtsls;
+
+      const { npmCache } = ensure(
+        JSON.parse(decoder.decode(denoInfo)),
+        is.ObjectOf({ npmCache: is.String }),
+      );
+      const { npmPackages } = ensure(
+        JSON.parse(decoder.decode(vtslsInfo)),
+        is.ObjectOf({ npmPackages: is.Record }),
+      );
+      const [, { version }] = ensure(
+        Object.entries(npmPackages)
+          .find(([name]) => name.startsWith("typescript@")),
+        is.TupleOf([is.String, is.ObjectOf({ version: is.String })]),
+      );
+      return join(npmCache, "registry.npmjs.org", "typescript", version, "lib");
     },
   };
 
@@ -104,24 +99,3 @@ async function downloadLJisyo(root: string): Promise<string[]> {
   return [jisyoFile];
 }
 
-class FidgetStream extends WritableStream<string> {
-  constructor(denops: Denops) {
-    super({
-      write: (chunk) => {
-        this.#echo(denops, chunk, false);
-      },
-      close: () => {
-        denops.call("luaeval", `require("lspconfig").vtsls.launch()`);
-        this.#echo(denops, "Server Restarted", true);
-      },
-    });
-  }
-
-  #echo(denops: Denops, chunk: string, done: boolean): void {
-    denops.call(
-      "luaeval",
-      `require("vimrc.plugins.fidget").${done ? "done" : "report"}(_A)`,
-      chunk,
-    );
-  }
-}
