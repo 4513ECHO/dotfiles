@@ -30,14 +30,14 @@ repo = 'https://github.com/itchyny/vim-highlighturl'
 repo = 'https://github.com/itchyny/vim-parenmatch'
 
 [[plugins]]
-repo = 'https://github.com/lambdalisue/guise.vim'
+repo = 'https://github.com/lambdalisue/vim-guise'
 depends = ['denops.vim']
 hook_add = '''
 let g:guise_edit_opener = 'split'
 '''
 
 [[plugins]]
-repo = 'https://github.com/lambdalisue/mr.vim'
+repo = 'https://github.com/lambdalisue/vim-mr'
 # from https://github.com/kuuote/dotvim/commit/eef000e6
 on_event = ['BufNewFile', 'BufReadPre', 'BufWritePre']
 hook_add = '''

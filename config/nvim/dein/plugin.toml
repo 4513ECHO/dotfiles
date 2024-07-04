@@ -288,11 +288,11 @@ command! -bar -bang -nargs=1 Rg call s:ripgrep(<q-args>, <bang>0)
 '''
 
 [[plugins]]
-repo = 'https://github.com/lambdalisue/file-protocol.vim'
+repo = 'https://github.com/lambdalisue/vim-file-protocol'
 on_path = ['^file://']
 
 [[plugins]]
-repo = 'https://github.com/lambdalisue/gin.vim'
+repo = 'https://github.com/lambdalisue/vim-gin'
 on_cmd = ['Gin', 'GinLog', 'GinStatus']
 [plugins.ftplugin]
 gin-log = '''
@@ -309,7 +309,7 @@ nnoremap <buffer> ZZ <Cmd>Apply<CR>
 '''
 
 [[plugins]]
-repo = 'https://github.com/lambdalisue/kensaku.vim'
+repo = 'https://github.com/lambdalisue/vim-kensaku'
 denops_wait = false
 on_func = ['kensaku#']
 hook_add = '''
@@ -332,7 +332,7 @@ cnoremap <C-x><C-k> <Cmd>call <SID>convert_kensaku()<CR>
 '''
 
 [[plugins]]
-repo = 'https://github.com/lambdalisue/pinkyless.vim'
+repo = 'https://github.com/lambdalisue/vim-pinkyless'
 on_map = { icn = '<Plug>' }
 hook_add = '''
 let g:pinkyless#keyboard = 'JIS'
@@ -351,7 +351,7 @@ map! <expr> <Plug>(pinkyless-stickyshift-enter) <SID>pinkyless_enter(';')
 '''
 
 [[plugins]]
-repo = 'https://github.com/lambdalisue/suda.vim'
+repo = 'https://github.com/lambdalisue/vim-suda'
 on_cmd = ['SudaRead', 'SudaWrite']
 
 [[plugins]]
