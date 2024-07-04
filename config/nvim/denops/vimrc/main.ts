@@ -3,7 +3,6 @@ import { ensure, is } from "jsr:@core/unknownutil@^3.18.1";
 import { exists } from "jsr:@std/fs@^1.0.0/exists";
 import { expandGlob } from "jsr:@std/fs@^1.0.0/expand-glob";
 import { join } from "jsr:@std/path@^1.0.2/join";
-import { toFileUrl } from "jsr:@std/path@^1.0.2/to-file-url";
 
 const decoder = new TextDecoder();
 
@@ -26,13 +25,6 @@ export function main(denops: Denops): Promise<void> {
         `"use strict";return ${ensure(expr, is.String).trim()};`,
       ) as (denops: Denops, _A: unknown) => Promise<unknown>;
       return await fn(denops, ctx);
-    },
-
-    async reload(path: unknown): Promise<void> {
-      const mod = await import(
-        `${toFileUrl(ensure(path, is.String)).href}#${performance.now()}`
-      );
-      await mod.main(denops);
     },
 
     getUuid(): Promise<unknown> {
