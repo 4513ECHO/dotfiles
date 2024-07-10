@@ -1,4 +1,4 @@
-import type { Denops } from "https://deno.land/x/denops_std@v6.4.0/mod.ts";
+import type { Denops, Entrypoint } from "jsr:@denops/std@^7.0.1";
 import { ensure, is } from "jsr:@core/unknownutil@^3.18.1";
 import { exists } from "jsr:@std/fs@^1.0.0/exists";
 import { expandGlob } from "jsr:@std/fs@^1.0.0/expand-glob";
@@ -6,7 +6,7 @@ import { join } from "jsr:@std/path@^1.0.2/join";
 
 const decoder = new TextDecoder();
 
-export function main(denops: Denops): Promise<void> {
+export const main: Entrypoint = (denops) => {
   denops.dispatcher = {
     async meta(): Promise<unknown> {
       return {
@@ -66,8 +66,12 @@ export function main(denops: Denops): Promise<void> {
     },
   };
 
-  return Promise.resolve();
-}
+  return {
+    async [Symbol.asyncDispose](): Promise<void> {
+      await denops.cmd("echomsg 'Goodbye, Denops'");
+    },
+  };
+};
 
 async function downloadLJisyo(root: string): Promise<string[]> {
   const jisyoFile = join(root, "SKK-JISYO.L");

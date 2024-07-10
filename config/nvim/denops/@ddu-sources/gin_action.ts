@@ -6,11 +6,11 @@ import {
 } from "https://deno.land/x/ddu_vim@v3.10.3/types.ts";
 import { BaseSource } from "https://deno.land/x/ddu_vim@v3.10.3/types.ts";
 import type { ActionData } from "https://deno.land/x/ddu_kind_word@v0.2.1/word.ts";
-import { ensure } from "https://deno.land/x/denops_std@v6.4.0/buffer/buffer.ts";
+import { ensure } from "jsr:@denops/std@^7.0.1/buffer";
 import {
   exprQuote as q,
   useExprString,
-} from "https://deno.land/x/denops_std@v6.4.0/helper/expr_string.ts";
+} from "jsr:@denops/std@^7.0.1/helper/expr_string";
 
 type Params = Record<PropertyKey, never>;
 const collector =

@@ -11,11 +11,11 @@ import {
   Ui as UiFF,
 } from "https://deno.land/x/ddu_ui_ff@v1.1.0/ff.ts";
 import type { ActionData as GitStatusActionData } from "https://pax.deno.dev/kuuote/ddu-source-git_status@v1.0.0/denops/@ddu-kinds/git_status.ts";
-import type { Denops } from "https://deno.land/x/denops_std@v6.4.0/mod.ts";
-import * as autocmd from "https://deno.land/x/denops_std@v6.4.0/autocmd/mod.ts";
-import * as batch from "https://deno.land/x/denops_std@v6.4.0/batch/mod.ts";
-import * as lambda from "https://deno.land/x/denops_std@v6.4.0/lambda/mod.ts";
-import * as vars from "https://deno.land/x/denops_std@v6.4.0/variable/mod.ts";
+import type { Denops } from "jsr:@denops/std@^7.0.1";
+import * as autocmd from "jsr:@denops/std@^7.0.1/autocmd";
+import * as batch from "jsr:@denops/std@^7.0.1/batch";
+import * as lambda from "jsr:@denops/std@^7.0.1/lambda";
+import * as vars from "jsr:@denops/std@^7.0.1/variable";
 import { is } from "jsr:@core/unknownutil@^3.18.1";
 import * as u from "jsr:@core/unknownutil@^3.18.1";
 import { sprintf } from "jsr:@std/fmt@^1.0.0-rc.1/printf";

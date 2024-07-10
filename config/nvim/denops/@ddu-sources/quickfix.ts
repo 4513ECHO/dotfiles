@@ -1,4 +1,4 @@
-import * as fn from "https://deno.land/x/denops_std@v6.4.0/function/mod.ts";
+import * as fn from "jsr:@denops/std@^7.0.1/function";
 import type { ActionData } from "https://deno.land/x/ddu_kind_file@v0.7.1/file.ts";
 import {
   BaseSource,
