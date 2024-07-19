@@ -156,6 +156,10 @@ tsv = '''
 setlocal noexpandtab
 '''
 
+rasi = '''
+setlocal shiftwidth=4 indentkeys=0{,0},o,O
+'''
+
 vim = '''
 setlocal formatoptions-=ro textwidth=0
 '''
@@ -172,10 +176,6 @@ nnoremap <buffer> <C-p> <Plug>(hoptag-prev)
 '''
 
 [[plugins]]
-repo = 'https://github.com/bfrg/vim-jq'
-merge_ftdetect = true
-
-[[plugins]]
 repo = 'https://github.com/cohama/vim-hier'
 on_event = ['QuickFixCmdPost']
 [plugins.ftplugin]
@@ -187,38 +187,23 @@ autocmd vimrc WinClosed <buffer>
 '''
 
 [[plugins]]
-repo = 'https://github.com/Fymyte/rasi.vim'
-merge_ftdetect = true
-[plugins.ftplugin]
-rasi = '''
-setlocal shiftwidth=4 indentkeys=0{,0},o,O
-'''
-
-[[plugins]]
 repo = 'https://github.com/itchyny/vim-qfedit'
 on_event = ['QuickFixCmdPost']
 
 [[plugins]]
-repo = 'https://github.com/lark-parser/vim-lark-syntax'
-merge_ftdetect = true
-
-[[plugins]]
 repo = 'https://github.com/lifepillar/pgsql.vim'
-merge_ftdetect = true
 hook_add = '''
 let g:sql_type_default = 'pgsql'
 '''
 
 [[plugins]]
 repo = 'https://github.com/MTDL9/vim-log-highlighting'
-merge_ftdetect = true
 
 [[plugins]]
 repo = 'https://github.com/rbtnn/vim-vimscript_indentexpr'
 
 [[plugins]]
 repo = 'https://github.com/syusui-s/scrapbox-vim'
-merge_ftdetect = true
 
 [[plugins]]
 repo = 'https://github.com/thinca/vim-qfreplace'
@@ -233,4 +218,3 @@ nnoremap <buffer> q <C-w>q
 
 [[plugins]]
 repo = 'https://github.com/vim-skk/skkdict.vim'
-merge_ftdetect = true
