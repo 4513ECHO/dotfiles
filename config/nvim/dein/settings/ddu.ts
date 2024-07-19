@@ -4,6 +4,7 @@ import {
 } from "https://deno.land/x/ddu_vim@v3.10.3/base/config.ts";
 import {
   ActionFlags,
+  type DduItem,
   type DduOptions,
 } from "https://deno.land/x/ddu_vim@v3.10.3/types.ts";
 import {
@@ -11,6 +12,7 @@ import {
   Ui as UiFF,
 } from "https://deno.land/x/ddu_ui_ff@v1.1.0/ff.ts";
 import type { ActionData as GitStatusActionData } from "https://pax.deno.dev/kuuote/ddu-source-git_status@v1.0.0/denops/@ddu-kinds/git_status.ts";
+import type { Data as GitDiffItemData } from "https://pax.deno.dev/kuuote/ddu-source-git_diff@6a7b725b/denops/@ddu-sources/git_diff.ts";
 import type { Denops } from "jsr:@denops/std@^7.0.1";
 import * as autocmd from "jsr:@denops/std@^7.0.1/autocmd";
 import * as batch from "jsr:@denops/std@^7.0.1/batch";
@@ -20,6 +22,8 @@ import { is } from "jsr:@core/unknownutil@^3.18.1";
 import * as u from "jsr:@core/unknownutil@^3.18.1";
 import { sprintf } from "jsr:@std/fmt@^1.0.0-rc.1/printf";
 import { join } from "jsr:@std/path@^1.0.2/join";
+
+type GitDiffItem = DduItem & { data: GitDiffItemData };
 
 async function onColorScheme(denops: Denops): Promise<void> {
   // NOTE: eob of 'fillchars' is annoying
@@ -278,7 +282,70 @@ export class Config extends BaseConfig {
           unifiedContext: 0,
           onlyFile: true,
         },
+        options: {
+          actions: {
+            currentHunk: async (args) => {
+              const [lnum, currentItem, items] = await batch.collect(
+                args.denops,
+                (denops) => [
+                  denops.call("line", "."),
+                  denops.call("ddu#ui#get_item"),
+                  denops.call("ddu#ui#get_items"),
+                ],
+              ) as [number, GitDiffItem, GitDiffItem[]];
+              if (lnum < 3) {
+                return ActionFlags.None;
+              }
+              const [{ nlinum }] = currentItem.data.git_diff.lines;
+              const searchItem = items.slice(2).find((item) =>
+                item.word.startsWith("@@") &&
+                item.data.git_diff.lines.some((line) => line.nlinum === nlinum)
+              );
+              if (searchItem) {
+                await args.denops.dispatcher.redraw(
+                  "git_diff_current",
+                  { searchItem },
+                );
+              }
+              return ActionFlags.None;
+            },
+            currentLine: async (args) => {
+              const [lnum, items] = await batch.collect(
+                args.denops,
+                (denops) => [
+                  denops.call("line", ".", args.context.winId),
+                  denops.call("ddu#ui#get_items"),
+                ],
+              ) as [number, GitDiffItem[]];
+              const searchItem = items.slice(2).find((item) =>
+                !item.word.startsWith("@@") &&
+                item.data.git_diff.lines.some(({ nlinum }) => nlinum === lnum)
+              );
+              if (searchItem) {
+                await args.denops.dispatcher.redraw(
+                  "git_diff_current",
+                  { searchItem },
+                );
+              } else {
+                await args.denops.call(
+                  "ddu#util#print_error",
+                  "Current line has not changed",
+                );
+              }
+              return ActionFlags.None;
+            },
+          },
+        },
       }],
+      actionOptions: {
+        currentHunk: { quit: false },
+        currentLine: { quit: false },
+      },
+      uiParams: {
+        ff: {
+          maxHighlightItems: 300,
+        } satisfies Partial<UiFFParams>,
+      },
     });
 
     await vars.g.set(
@@ -297,7 +364,7 @@ export class Config extends BaseConfig {
       hasNvim &&
         helper.define("ColorScheme", "*", notify(onColorScheme));
       helper.define("FileType", "ddu-ff", notify(applySyntax));
-      helper.define("User", "Ddu:uiDone", notify(startFilterAuto));
+      helper.define("User", "Ddu:uiReady", notify(startFilterAuto));
     });
   }
 }

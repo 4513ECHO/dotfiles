@@ -17,25 +17,18 @@ inoremap <C-x><C-e> <Cmd>call ddu#start(#{
       \ },
       \ })<CR>
 
-function! s:open_current_hunk() abort
-  autocmd vimrc User Ddu:uiReady ++once call s:on_ui_ready()
+function! s:open_current_line_hunk() abort
+  if !empty(&buftype)
+    return
+  endif
+  autocmd vimrc User Ddu:uiDone ++once
+        \ call ddu#ui#async_action('itemAction', #{ name: 'currentLine' })
   call ddu#start(#{
         \ name: 'git_diff_current',
         \ sourceOptions: #{ _: #{ path: expand('%:p') } },
-        \ sync: v:true
         \ })
 endfunction
-function! s:on_ui_ready() abort
-  let lnum = line('.', ddu#get_context(b:ddu_ui_name).winId)
-  let items = ddu#ui#get_items()
-  const idx = items->indexof(
-        \ { -> v:val.word->stridx('@@') < 0 && v:val.data.git_diff.lines->indexof({ -> v:val.nlinum ==# lnum }) > -1 },
-        \ #{ startidx: 2 })
-  if idx > -1
-    call ddu#redraw(b:ddu_ui_name, #{ searchItem: items[idx] })
-  endif
-endfunction
-nnoremap <Leader>gd <Cmd>call <SID>open_current_hunk()<CR>
+nnoremap <Leader>gd <Cmd>call <SID>open_current_line_hunk()<CR>
 '''
 hook_source = '''
 call ddu#custom#load_config(expand('$DEIN_DIR/settings/ddu.ts'))
