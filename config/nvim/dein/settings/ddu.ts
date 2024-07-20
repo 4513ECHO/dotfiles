@@ -65,13 +65,14 @@ async function applySyntax(denops: Denops): Promise<void> {
   }
 }
 
+const names = ["rg_live", "gin_action", "startmenu"];
 async function startFilterAuto(denops: Denops): Promise<void> {
   const [filetype, name] = await batch.collect(denops, (denops) => [
     denops.eval("&filetype"),
     denops.call("getbufvar", "", "ddu_ui_name", ""),
   ]) as [string, string];
-  if (filetype === "ddu-ff" && ["rg_live", "gin_action"].includes(name)) {
-    await denops.call("ddu#ui#do_action", "openFilterWindow");
+  if (filetype === "ddu-ff" && names.includes(name)) {
+    await denops.call("ddu#ui#async_action", "openFilterWindow");
   }
 }
 
@@ -296,7 +297,7 @@ export class Config extends BaseConfig {
       hasNvim &&
         helper.define("ColorScheme", "*", notify(onColorScheme));
       helper.define("FileType", "ddu-ff", notify(applySyntax));
-      helper.define("User", "Ddu:uiReady", notify(startFilterAuto));
+      helper.define("User", "Ddu:uiDone", notify(startFilterAuto));
     });
   }
 }
