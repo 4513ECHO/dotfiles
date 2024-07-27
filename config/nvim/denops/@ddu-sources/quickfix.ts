@@ -1,11 +1,11 @@
 import * as fn from "jsr:@denops/std@^7.0.1/function";
-import type { ActionData } from "https://deno.land/x/ddu_kind_file@v0.7.1/file.ts";
+import type { ActionData } from "jsr:@shougo/ddu-kind-file@0.8.0";
 import {
   BaseSource,
   type GatherArguments,
-} from "https://deno.land/x/ddu_vim@v3.10.3/base/source.ts";
-import type { Item } from "https://deno.land/x/ddu_vim@v3.10.3/types.ts";
-import { defer } from "https://deno.land/x/denops_defer@v1.0.0/batch/defer.ts";
+} from "jsr:@shougo/ddu-vim@^5.0.0/source";
+import type { Item } from "jsr:@shougo/ddu-vim@^5.0.0/types";
+import { accumulate } from "jsr:@milly/denops-batch-accumulate@^1.0.0-pre4";
 
 type Params = {
   useLoclist: boolean;
@@ -30,18 +30,21 @@ export class Source extends BaseSource<Params, ActionData> {
           : ["getqflist"];
         const items = await args.denops.call(...func) as QflistItem[];
         controller.enqueue(
-          await defer(args.denops, (denops) =>
-            items.map((i) => ({
-              word: i.text,
-              display: fn.bufname(denops, i.bufnr)
-                .then((name) => `${name}|${i.lnum} col ${i.col}|${i.text}`),
-              action: {
-                bufNr: i.bufnr,
-                col: i.col,
-                lineNr: i.lnum,
-                text: i.text,
-              },
-            }))),
+          await accumulate(
+            args.denops,
+            async (denops) =>
+              await Promise.all(items.map(async (i) => {
+                const bufname = await fn.bufname(denops, i.bufnr);
+                return {
+                  word: i.text,
+                  display: `${bufname}|${i.lnum} col ${i.col}|${i.text}`,
+                  action: {
+                    ...i,
+                    lineNr: i.lnum,
+                  },
+                } satisfies Item<ActionData>;
+              })),
+          ),
         );
         controller.close();
       },

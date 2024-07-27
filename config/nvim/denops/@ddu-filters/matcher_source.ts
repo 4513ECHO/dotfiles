@@ -1,8 +1,8 @@
 import {
   BaseFilter,
   type FilterArguments,
-} from "https://deno.land/x/ddu_vim@v3.10.3/base/filter.ts";
-import type { DduItem } from "https://deno.land/x/ddu_vim@v3.10.3/types.ts";
+} from "jsr:@shougo/ddu-vim@^5.0.0/filter";
+import type { DduItem } from "jsr:@shougo/ddu-vim@^5.0.0/types";
 import { ensure, is } from "jsr:@core/unknownutil@^3.18.1";
 
 export type Params = {

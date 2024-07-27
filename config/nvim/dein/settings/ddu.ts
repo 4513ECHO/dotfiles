@@ -1,16 +1,16 @@
 import {
   BaseConfig,
   type ConfigArguments,
-} from "https://deno.land/x/ddu_vim@v3.10.3/base/config.ts";
+} from "jsr:@shougo/ddu-vim@^5.0.0/config";
 import {
   ActionFlags,
   type DduItem,
   type DduOptions,
-} from "https://deno.land/x/ddu_vim@v3.10.3/types.ts";
+} from "jsr:@shougo/ddu-vim@^5.0.0/types";
 import {
   type Params as UiFFParams,
   Ui as UiFF,
-} from "https://deno.land/x/ddu_ui_ff@v1.1.0/ff.ts";
+} from "jsr:@shougo/ddu-ui-ff@^1.2.0";
 import type { ActionData as GitStatusActionData } from "https://pax.deno.dev/kuuote/ddu-source-git_status@v1.0.0/denops/@ddu-kinds/git_status.ts";
 import type { Data as GitDiffItemData } from "https://pax.deno.dev/kuuote/ddu-source-git_diff@6a7b725b/denops/@ddu-sources/git_diff.ts";
 import type { Denops } from "jsr:@denops/std@^7.0.1";

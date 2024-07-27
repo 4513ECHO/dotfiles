@@ -1,11 +1,13 @@
-import type { GatherArguments } from "https://deno.land/x/ddu_vim@v3.10.3/base/source.ts";
+import {
+  BaseSource,
+  type GatherArguments,
+} from "jsr:@shougo/ddu-vim@^5.0.0/source";
 import {
   ActionFlags,
   type Actions,
   type Item,
-} from "https://deno.land/x/ddu_vim@v3.10.3/types.ts";
-import { BaseSource } from "https://deno.land/x/ddu_vim@v3.10.3/types.ts";
-import type { ActionData } from "https://deno.land/x/ddu_kind_word@v0.2.1/word.ts";
+} from "jsr:@shougo/ddu-vim@^5.0.0/types";
+import type { ActionData } from "jsr:@shougo/ddu-kind-word@0.3.0";
 import { ensure } from "jsr:@denops/std@^7.0.1/buffer";
 import {
   exprQuote as q,
