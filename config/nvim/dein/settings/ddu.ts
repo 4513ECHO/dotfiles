@@ -108,8 +108,13 @@ export class Config extends BaseConfig {
         git_status: {
           defaultAction: "open",
           actions: {
-            commit: async () => {
-              await args.denops.cmd("Gin commit");
+            chaperon: async (args) => {
+              await batch.batch(args.denops, async (denops) => {
+                for (const item of args.items) {
+                  const action = item.action as GitStatusActionData;
+                  await denops.cmd("GinChaperon " + action.path);
+                }
+              });
               return ActionFlags.None;
             },
             diff: (args) => {
@@ -118,15 +123,10 @@ export class Config extends BaseConfig {
               args.denops.dispatcher.start(
                 {
                   name: "git_diff_current",
-                  sources: [{
-                    name: "git_diff",
-                    options: { path },
-                    params: {
-                      unifiedContext: 0,
-                      onlyFile: true,
-                      ...u.maybe(args.actionParams, is.Record) ?? {},
-                    },
-                  }],
+                  sourceOptions: { _: { path } },
+                  sourceParams: {
+                    _: u.maybe(args.actionParams, is.Record) ?? {},
+                  },
                 } satisfies Partial<DduOptions>,
               );
               return ActionFlags.None;
@@ -135,9 +135,9 @@ export class Config extends BaseConfig {
               await batch.batch(args.denops, async (denops) => {
                 for (const item of args.items) {
                   const action = item.action as GitStatusActionData;
-                  await denops.cmd("tabnew");
-                  await denops.cmd("tcd " + action.worktree);
-                  await denops.cmd("GinPatch ++no-head " + action.path);
+                  await denops.cmd(
+                    "GinPatch ++opener=tabedit ++no-head " + action.path,
+                  );
                 }
               });
               return ActionFlags.None;
