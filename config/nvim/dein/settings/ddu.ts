@@ -22,6 +22,7 @@ import { is } from "jsr:@core/unknownutil@^3.18.1";
 import * as u from "jsr:@core/unknownutil@^3.18.1";
 import { sprintf } from "jsr:@std/fmt@^1.0.0-rc.1/printf";
 import { join } from "jsr:@std/path@^1.0.2/join";
+import { equal } from "jsr:@std/assert@^1.0.0/equal";
 
 type GitDiffItem = DduItem & { data: GitDiffItemData };
 
@@ -78,6 +79,38 @@ async function startFilterAuto(denops: Denops): Promise<void> {
   if (filetype === "ddu-ff" && names.includes(name)) {
     await denops.call("ddu#ui#async_action", "openFilterWindow");
   }
+}
+
+async function markSelectedItems(denops: Denops): Promise<void> {
+  const [buffer, items, selectedItems] = await batch.collect(
+    denops,
+    (denops) => [
+      denops.call("bufnr"),
+      denops.call("ddu#ui#get_items"),
+      // NOTE: Use raw value to avoid including the current item
+      denops.call("getbufvar", "", "ddu_ui_selected_items", []),
+    ],
+  ) as [number, DduItem[], DduItem[]];
+  if (!items) {
+    return;
+  }
+  const lnumsToPlace = selectedItems.map((selected) =>
+    items.findIndex((item) => equal(item, selected)) + 1
+  );
+  await batch.batch(denops, async (denops) => {
+    await denops.call("sign_unplace", "*", { buffer });
+    if (lnumsToPlace.length < 1 || lnumsToPlace[0] === 0) {
+      return;
+    }
+    await denops.call(
+      "sign_placelist",
+      lnumsToPlace.map((lnum) => ({
+        buffer,
+        lnum,
+        name: "ddu-ff-selected",
+      })),
+    );
+  });
 }
 
 export class Config extends BaseConfig {
@@ -215,6 +248,7 @@ export class Config extends BaseConfig {
           highlights: {
             floating: "Normal,EndOfBuffer:DduEndOfBuffer,SignColumn:Normal",
             floatingBorder: "Identifier",
+            selected: "Visual",
           },
           previewFloating: hasNvim,
           previewFloatingBorder: "rounded",
@@ -354,6 +388,10 @@ export class Config extends BaseConfig {
       hasNvim ? "nvim-lsp" : "vim-lsp",
     );
 
+    await args.denops.call("sign_define", [
+      { name: "ddu-ff-selected", text: "*", texthl: "Visual" },
+    ]);
+
     hasNvim && await onColorScheme(args.denops);
 
     const notify = (callback: (denops: Denops) => Promise<void>) =>
@@ -364,7 +402,8 @@ export class Config extends BaseConfig {
       hasNvim &&
         helper.define("ColorScheme", "*", notify(onColorScheme));
       helper.define("FileType", "ddu-ff", notify(applySyntax));
-      helper.define("User", "Ddu:uiReady", notify(startFilterAuto));
+      helper.define("User", "Ddu:uiDone", notify(startFilterAuto));
+      helper.define("User", "Ddu:redraw", notify(markSelectedItems));
     });
   }
 }
