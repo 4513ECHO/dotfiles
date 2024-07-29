@@ -88,8 +88,7 @@ repo = 'https://github.com/nvim-zh/colorful-winsep.nvim'
 on_event = ['WinNew']
 lua_source = '''
 require("colorful-winsep").setup {
-  highlight = {
-    -- NvimSeparator
+  highlight --[[NvimSeparator]] = {
     link = "Identifier",
     default = true,
   },

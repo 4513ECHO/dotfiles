@@ -47,7 +47,7 @@ if dein#min#load_state(s:dein_dir)
   if dein#is_available('denops-shared-server.vim')
     call denops_shared_server#restart()
   endif
-  quitall!
+  cquit
 endif
 
 if getcwd() =~? expand('~/Develops/github.com/4513ECHO/')

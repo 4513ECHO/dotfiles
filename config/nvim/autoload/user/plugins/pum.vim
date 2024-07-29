@@ -1,6 +1,6 @@
 if has('nvim')
   function! user#plugins#pum#reverse_hl(name) abort
-    let hl = nvim_get_hl(0, #{ name: a:name })
+    let hl = nvim_get_hl(0, #{ name: a:name, link: v:false })
     if !hl->get('reverse', v:false)
       return
     endif

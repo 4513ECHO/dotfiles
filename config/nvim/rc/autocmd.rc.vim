@@ -36,12 +36,12 @@ autocmd vimrc FocusGained * checktime
 function! s:chmod(file) abort
   let perm = getfperm(a:file)
   let newperm = printf('%sx%sx%sx', perm[0:1], perm[3:4], perm[6:7])
-  if perm != newperm
+  if perm !=# newperm
     call setfperm(a:file, newperm)
   endif
 endfunction
 autocmd vimrc BufWritePost *
-      \ : if getline(1) =~# '^#!/'
+      \ : if getline(1)->stridx('#!/') ==# 0
       \ |   call s:chmod(expand('<afile>'))
       \ | endif
 
@@ -58,7 +58,7 @@ autocmd vimrc BufWritePost *
 
 " from https://github.com/aiotter/dotfiles/blob/8e759221/.vimrc#L185
 autocmd vimrc WinEnter *
-      \ : if winnr('$') == 1 && &buftype ==# 'quickfix'
+      \ : if winnr('$') ==# 1 && &buftype ==# 'quickfix'
       \ |   quit
       \ | endif
 

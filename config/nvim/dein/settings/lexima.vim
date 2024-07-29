@@ -88,13 +88,13 @@ let s:rules.jq += [
       \ ]
 
 eval s:rules
-      \ ->map({ ft, rules -> rules
-      \   ->map({ -> (ft ==# '_' ? {} : #{ filetype: ft })
-      \     ->extend(v:val)->lexima#add_rule() }) })
+      \ ->foreach({ ft, rules -> rules->foreach({ ->
+      \   v:val->extend(ft ==# '_' ? {} : #{ filetype: ft })->lexima#add_rule()
+      \ }) })
 
 " based on https://github.com/yuki-yano/dotfiles/blob/9bfee6c8/.vimrc#L3335
 function! s:lexima_alter_command(original, altanative) abort
-  eval ['<CR>', '<Space>', '!']->map({ ->
+  eval ['<CR>', '<Space>', '!']->foreach({ ->
         \ lexima#add_rule(#{
         \   char: v:val,
         \   mode: ':',

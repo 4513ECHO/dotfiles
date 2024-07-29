@@ -447,9 +447,8 @@ repo = 'https://github.com/Shougo/context_filetype.vim'
 on_func = ['context_filetype#get']
 hook_source = '''
 let g:context_filetype#filetypes =
-      \ context_filetype#default_filetypes()->copy()->extend(#{
-      \ markdown:
-      \   [['\(\h\w*\)', '\1'], ['viml', 'vim']]
+      \ context_filetype#default_filetypes()->extendnew(#{
+      \ markdown: [['\(\h\w*\)', '\1'], ['viml', 'vim']]
       \   ->map({ -> #{
       \     start: '^\s*```\s*' .. v:val[0],
       \     end: '^\s*```$',
@@ -682,9 +681,8 @@ local M = {}
 ---@param col integer
 ---@return boolean
 function M.has_syntax(lnum, col)
-  local bufnr = vim.api.nvim_get_current_buf()
   return vim
-    .iter(vim.treesitter.get_captures_at_pos(bufnr, lnum - 1, col - 1))
+    .iter(vim.treesitter.get_captures_at_pos(0, lnum - 1, col - 1))
     :any(function(capture) return capture.capture == "comment" end)
 end
 ---@diagnostic disable-next-line: duplicate-set-field
