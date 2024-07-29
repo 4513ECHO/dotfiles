@@ -86,9 +86,13 @@ if expand('#')->getbufvar('&buftype') ==# 'terminal'
 endif
 " Open diff view
 if winnr('$') ==# 1
-  belowright wincmd v
-  execute "normal! />8\<CR>zt\<Cmd>nohlsearch\<CR>"
-  wincmd p
+  call cursor(1, 1)
+  let s:scissors = search('>8', 'nW')
+  if s:scissors
+    belowright wincmd v
+    call winrestview(#{ lnum: s:scissors, col: 0, topline: s:scissors })
+    wincmd p
+  endif
 endif
 '''
 
