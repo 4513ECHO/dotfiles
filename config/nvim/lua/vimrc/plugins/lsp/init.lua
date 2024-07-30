@@ -94,12 +94,6 @@ lspconfig.denols.setup {
       lint = true,
       suggest = {
         autoImports = false,
-        imports = {
-          hosts = {
-            ["https://deno.land"] = true,
-            ["https://mod.4513echo.dev"] = true,
-          },
-        },
       },
       unstable = true,
     },
@@ -109,7 +103,7 @@ lspconfig.denols.setup {
 }
 
 lspconfig.vtsls.setup {
-  cmd = deno_as_npm { "npm:@vtsls/language-server@0.2.1", "--stdio" },
+  cmd = deno_as_npm { "npm:@vtsls/language-server@0.2.5", "--stdio" },
   cmd_env = deno_as_npm.cmd_env,
   settings = { vtsls = { typescript = {} } },
   single_file_support = false,
@@ -174,7 +168,7 @@ lspconfig.gopls.setup {}
 
 lspconfig.jsonls.setup {
   cmd = deno_as_npm {
-    "npm:vscode-langservers-extracted@4.8.0/vscode-json-language-server",
+    "npm:vscode-langservers-extracted@4.10.0/vscode-json-language-server",
     "--stdio",
   },
   cmd_env = deno_as_npm.cmd_env,
@@ -261,7 +255,7 @@ lspconfig.vimls.setup {
 }
 
 lspconfig.yamlls.setup {
-  cmd = deno_as_npm { "npm:yaml-language-server@1.14.0", "--stdio" },
+  cmd = deno_as_npm { "npm:yaml-language-server@1.15.0", "--stdio" },
   cmd_env = deno_as_npm.cmd_env,
   settings = {
     yaml = {

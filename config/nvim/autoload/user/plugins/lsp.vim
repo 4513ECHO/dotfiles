@@ -1,9 +1,11 @@
 vim9script
 
+def DenoAsNpm(cmd: list<string>): list<string>
+  return ['deno', 'run', '--allow-all', '--no-config', '--no-lock', '--node-modules-dir=false']->extend(cmd)
+enddef
+
 export def OnLspBufferEnabled(): void
-  setlocal omnifunc=lsp#complete
-  setlocal tagfunc=lsp#tagfunc
-  setlocal signcolumn=number
+  setlocal omnifunc=lsp#complete tagfunc=lsp#tagfunc
 
   nnoremap <buffer> gq <Plug>(lsp-document-format)
   xnoremap <buffer> gq <Plug>(lsp-document-range-format)
@@ -14,7 +16,6 @@ export def OnLspBufferEnabled(): void
   nnoremap <buffer> gd <ScriptCmd>JumpDefinition()<CR>
   nnoremap <buffer> gi <Plug>(lsp-implementation)
   nnoremap <buffer> gr <Plug>(lsp-rename)
-  # nnoremap <buffer> ma <Plug>(lsp-code-action)
   nnoremap <buffer> ma <Cmd>Ddu -name=codeAction<CR>
   xnoremap <buffer> ma <Cmd>Ddu -name=codeAction<CR>
   nnoremap <buffer> md <Plug>(lsp-document-diagnostics)
@@ -89,12 +90,6 @@ final settings = {
         lint: true,
         suggest: {
           autoImports: false,
-          imports: {
-            hosts: {
-              'https://deno.land': true,
-              'https://mod.4513echo.dev': true,
-            },
-          },
         },
         unstable: true,
       },
@@ -138,7 +133,8 @@ final settings = {
         # NOTE: Use stylua via efm-langserver instead.
         format: { enable: false },
         runtime: {
-          path: ['?.lua', '?/init.lua', '?/?.lua'],
+          path: ['?.lua', '?/init.lua'],
+          pathStrict: true,
           version: 'LuaJIT',
         },
         telemetry: { enable: false },
@@ -162,30 +158,21 @@ final settings = {
       },
     },
   },
-  vim-language-server: { disabled: true },
+  vim-language-server: {
+    cmd: DenoAsNpm(['npm:vim-language-server@2.3.1', '--stdio']),
+    initialization_options: {
+      runtimepath: &runtimepath,
+      vimruntime: $VIMRUNTIME,
+    }
+  },
   vscode-json-language-server: {
-    cmd: [
-      'deno',
-      'run',
-      '--allow-all',
-      '--no-config',
-      '--no-lock',
-      '--node-modules-dir=false',
-      'npm:vscode-langservers-extracted@4.8.0/vscode-json-language-server',
+    cmd: DenoAsNpm([
+      'npm:vscode-langservers-extracted@4.10.0/vscode-json-language-server',
       '--stdio',
-    ],
+    ]),
   },
   yaml-language-server: {
-    cmd: [
-      'deno',
-      'run',
-      '--allow-all',
-      '--no-config',
-      '--no-lock',
-      '--node-modules-dir=false',
-      'npm:yaml-language-server@1.14.0',
-      '--stdio',
-    ],
+    cmd: DenoAsNpm(['npm:yaml-language-server@1.15.0', '--stdio']),
     workspace_config: {
       yaml: {
         completion: true,
@@ -215,12 +202,9 @@ export def HookAdd(): void
 
   g:lsp_async_completion = true
   g:lsp_completion_documentation_delay = 50
-  g:lsp_diagnostics_echo_cursor = true
-  g:lsp_diagnostics_echo_delay = 200
   g:lsp_diagnostics_highlights_delay = 100
   g:lsp_diagnostics_highlights_insert_mode_enabled = false
   g:lsp_diagnostics_signs_delay = 200
-  g:lsp_diagnostics_signs_insert_mode_enabled = false
   g:lsp_diagnostics_virtual_text_delay = 200
   g:lsp_document_code_action_signs_enabled = false
   g:lsp_semantic_enabled = true
@@ -234,7 +218,8 @@ export def HookAdd(): void
   g:lsp_diagnostics_signs_hint = { text: '?' }
   g:lsp_diagnostics_signs_information = { text: 'i' }
   g:lsp_diagnostics_signs_warning = { text: '‼' }
-  g:lsp_diagnostics_virtual_text_prefix = ' ‣ '
+  g:lsp_diagnostics_virtual_text_align = 'after'
+  g:lsp_diagnostics_virtual_text_prefix = '■'
 
   g:lsp_log_file = g:data_home .. '/vim-lsp.log'
 
