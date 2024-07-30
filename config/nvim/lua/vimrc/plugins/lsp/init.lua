@@ -3,18 +3,24 @@ local lspconfig = require "lspconfig"
 local root_pattern = lspconfig.util.root_pattern
 local deno_as_npm = require("vimrc.plugins.lsp.util").deno_as_npm
 
+local function with(func, ...)
+  local args = { ... }
+  return function() return func(unpack(args)) end
+end
+local function map(mode, lhs, rhs)
+  vim.keymap.set(mode, lhs, rhs, { buffer = true })
+end
+
 autocmd "LspAttach" {
   callback = function(ctx)
     if vim.lsp.get_client_by_id(ctx.data.client_id).name == "copilot" then
       return
     end
     local filetype = vim.bo[ctx.buf].filetype
-    local opts = { buffer = true }
-    vim.keymap.set({ "n", "x" }, "gq", function()
-      vim.lsp.buf.format {
-        filter = function(client) return client.name ~= "taplo" end,
-      }
-    end, opts)
+
+    local filter = function(client) return client.name ~= "taplo" end
+    map({ "n", "x" }, "gq", with(vim.lsp.buf.format, { filter = filter }))
+
     local K
     if not vim.iter({ "lua", "markdown", "toml", "vim" }):find(filetype) then
       K = vim.lsp.buf.hover
@@ -23,17 +29,24 @@ autocmd "LspAttach" {
     else
       K = "K"
     end
-    vim.keymap.set("n", "K", K, opts)
-    vim.keymap.set("n", "gK", vim.lsp.buf.hover, opts)
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-    vim.keymap.set("n", "gr", vim.lsp.buf.rename, opts)
-    -- vim.keymap.set("n", "ma", vim.lsp.buf.code_action, opts)
-    vim.keymap.set({ "n", "x" }, "ma", "<Cmd>Ddu -name=codeAction<CR>", opts)
-    vim.keymap.set("n", "mf", vim.lsp.buf.references, opts)
-    vim.keymap.set("n", "md", vim.diagnostic.setloclist, opts)
-    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+    map("n", "K", K)
+
+    map("n", "gK", vim.lsp.buf.hover)
+    map("n", "gd", vim.lsp.buf.definition)
+    pcall(function()
+      vim.keymap.del("n", "grn", { buffer = ctx.buf })
+      vim.keymap.del("n", "gra", { buffer = ctx.buf })
+      vim.keymap.del("n", "grr", { buffer = ctx.buf })
+    end)
+    map("n", "gr", vim.lsp.buf.rename)
+    map({ "n", "x" }, "ma", "<Cmd>Ddu -name=codeAction<CR>")
+    map("n", "mf", vim.lsp.buf.references)
+    map("n", "md", vim.diagnostic.setloclist)
+    local function jump(direction)
+      return function() vim.diagnostic.jump { count = direction * vim.v.count1 } end
+    end
+    map("n", "]d", jump(1))
+    map("n", "[d", jump(-1))
   end,
 }
 
