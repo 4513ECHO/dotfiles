@@ -17,7 +17,7 @@ function! lightline#component#vimrc#file_encoding() abort
 endfunction
 
 function! lightline#component#vimrc#filename() abort
-  if &filetype =~# '^ddu'
+  if &filetype ==# 'ddu-ff'
     return ''
   elseif s:statuswidth() > 50
     return bufname()->fnamemodify(':t') ?? '[No name]'

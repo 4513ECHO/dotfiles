@@ -2,41 +2,7 @@
 repo = 'https://github.com/Shougo/ddu.vim'
 depends = ['denops.vim']
 on_func = ['ddu#start']
-hook_add = '''
-let g:launcher_config.ddu = #{
-      \ char: 'd',
-      \ run: { -> ddu#start(#{ sources: [#{ name: 'source' }] }) },
-      \ }
-nnoremap <Leader>d <Cmd>Ddu -resume<CR>
-inoremap <C-x><C-e> <Cmd>call ddu#start(#{
-      \ sources: [
-      \   #{ name: 'emoji', options: #{ defaultAction: 'feedkeys' } },
-      \ ],
-      \ uiParams: #{
-      \   ff: #{ replaceCol: col('.') },
-      \ },
-      \ })<CR>
-
-function! s:open_current_line_hunk() abort
-  if !empty(&buftype)
-    return
-  endif
-  autocmd vimrc User Ddu:uiDone ++once
-        \ call ddu#ui#async_action('itemAction', #{ name: 'currentLine' })
-  call ddu#start(#{
-        \ name: 'git_diff_current',
-        \ sourceOptions: #{ _: #{ path: expand('%:p') } },
-        \ })
-endfunction
-nnoremap <Leader>gd <Cmd>call <SID>open_current_line_hunk()<CR>
-'''
-hook_source = '''
-call ddu#custom#load_config(expand('$DEIN_DIR/settings/ddu.ts'))
-'''
-hook_post_update = '''
-call ddu#set_static_import_path()
-echomsg '[ddu] ddu#set_static_import_path() called'
-'''
+hooks_file = '$DEIN_DIR/settings/ddu.vim'
 
 [[plugins]]
 repo = 'https://github.com/Shougo/ddu-commands.vim'
@@ -46,53 +12,24 @@ on_cmd = ['Ddu']
 # UI
 
 [[plugins]]
-repo = 'https://github.com/Shougo/ddu-ui-ff'
-[plugins.ftplugin]
-ddu-ff = '''
-setlocal cursorline signcolumn=yes
-nnoremap <buffer> <CR>
-      \ <Cmd>call ddu#ui#do_action('itemAction')<CR>
-nnoremap <buffer> <Space>
-      \ <Cmd>call ddu#ui#do_action('toggleSelectItem')<CR>
-xnoremap <buffer><silent> <Space>
-      \ :call ddu#ui#do_action('toggleSelectItem')<CR>
-nnoremap <buffer> a
-      \ <Cmd>call ddu#ui#do_action('toggleAllItems')<CR>
-nnoremap <buffer> c
-      \ <Cmd>call ddu#ui#do_action('clearSelectAllItems')<CR>
-nnoremap <buffer> i
-      \ <Cmd>call ddu#ui#do_action('openFilterWindow')<CR>
-nnoremap <buffer> <Tab>
-      \ <Cmd>call ddu#ui#do_action('chooseAction')<CR>
-nnoremap <buffer> <C-l>
-      \ <Cmd>call ddu#ui#do_action('redraw', #{ method: 'refreshItems' })<Bar>redraw<CR>
-nnoremap <buffer> p
-      \ <Cmd>call ddu#ui#do_action('togglePreview')<CR>
-nnoremap <buffer> q
-      \ <Cmd>call ddu#ui#do_action('quit')<CR>
-nnoremap <buffer> E
-      \ <Cmd>call ddu#ui#do_action('itemAction',
-      \ #{ params: eval(input('params: ', "#{}\<lt>Left>")) })<CR>
-nnoremap <buffer> d
-      \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'delete' })<CR>
-nnoremap <buffer> W
-      \ <Cmd>call ddu#ui#do_action('itemAction', #{ params:
-      \ #{ command: 'call snipewin#select()<Bar>edit' } })<CR>
-nnoremap <buffer> <
-      \ <Cmd>call ddu#ui#do_action('collapseItem')<CR>
-nnoremap <buffer> >
-      \ <Cmd>call ddu#ui#do_action('expandItem', #{ mode: 'toggle' })<CR>
+repo = 'https://github.com/Shougo/cmdline.vim'
+on_ft = ['ddu-ff']
+hook_source = '''
+function! s:cmdline_set_option()
+  call cmdline#set_option(#{
+        \ border: 'rounded',
+        \ col: &columns / 6,
+        \ row: &lines / 6 - 3,
+        \ highlight_border: 'Identifier',
+        \ width: &columns / 3 * 2,
+        \ })
+endfunction
+autocmd vimrc VimResized * call s:cmdline_set_option()
+call s:cmdline_set_option()
 '''
 
-ddu-ff-filter = '''
-setlocal nocursorline
-nnoremap <buffer> q     <Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
-nnoremap <buffer> <CR>  <Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
-inoremap <buffer> <CR>  <Esc><Cmd>call ddu#ui#do_action('itemAction')<CR>
-inoremap <buffer> <C-c> <Esc><Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
-inoremap <buffer> <C-n> <Cmd>call ddu#ui#do_action('cursorNext')<CR>
-inoremap <buffer> <C-p> <Cmd>call ddu#ui#do_action('cursorPrevious')<CR>
-'''
+[[plugins]]
+repo = 'https://github.com/Shougo/ddu-ui-ff'
 
 # filters
 

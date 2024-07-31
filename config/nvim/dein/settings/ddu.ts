@@ -237,6 +237,16 @@ export class Config extends BaseConfig {
         },
       },
       ui: "ff",
+      uiOptions: {
+        ff: {
+          actions: {
+            updateLightline: async (args) => {
+              await args.denops.call("lightline#update");
+              return ActionFlags.Persist;
+            },
+          },
+        },
+      },
       uiParams: {
         ff: {
           autoAction: {
@@ -378,6 +388,15 @@ export class Config extends BaseConfig {
       uiParams: {
         ff: {
           maxHighlightItems: 300,
+        } satisfies Partial<UiFFParams>,
+      },
+    });
+
+    args.contextBuilder.patchLocal("file_tree", {
+      sources: [{ name: "file" }],
+      uiParams: {
+        ff: {
+          displayTree: true,
         } satisfies Partial<UiFFParams>,
       },
     });
