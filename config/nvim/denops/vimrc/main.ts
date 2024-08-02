@@ -64,6 +64,19 @@ export const main: Entrypoint = (denops) => {
       );
       return join(npmCache, "registry.npmjs.org", "typescript", version, "lib");
     },
+
+    // TODO: split to a new plugin "quickrun-hook-denops-interrupt"?
+    registerSweeper(): void {
+      this.sweep = async () => {
+        await denops.cmd("echomsg 'Sweeping quickrun sessions'");
+        await denops.call("quickrun#session#sweep");
+      };
+      denops.interrupted?.addEventListener("abort", this.sweep);
+    },
+
+    unregisterSweeper(): void {
+      denops.interrupted?.removeEventListener("abort", this.sweep);
+    },
   };
 
   return {

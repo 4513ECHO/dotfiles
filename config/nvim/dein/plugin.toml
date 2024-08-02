@@ -574,9 +574,6 @@ hook_add = '''
 nnoremap <Leader>rr <Plug>(quickrun)
 nnoremap <Leader>r <Plug>(quickrun-op)
 xnoremap <Leader>r <Plug>(quickrun)
-nnoremap <expr> <C-c> quickrun#session#exists() ?
-      \   '<Cmd>call quickrun#session#sweep()<CR>'
-      \ : '<C-c>'
 let g:quickrun_config = {
       \ '_': {
       \   'hook/time/enable': v:false,
@@ -612,7 +609,7 @@ let g:quickrun_config = {
       \   type: 'lua/vim',
       \ },
       \ 'deno/run': #{
-      \   cmdopt: '--no-check --allow-all --unstable',
+      \   cmdopt: '--no-check --allow-all',
       \   command: 'deno',
       \   exec: 'NO_COLOR=1 %c run %o %s %a',
       \   tempfile: '%{tempname()}.ts',

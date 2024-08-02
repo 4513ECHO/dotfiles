@@ -115,6 +115,8 @@ let g:denops#server#deno_args = [
       \ '--allow-all',
       \ '--unstable-kv',
       \ ]
+noremap  <C-c> <Cmd>call denops#interrupt()<CR><C-c>
+noremap! <C-c> <Cmd>call denops#interrupt()<CR><C-c>
 '''
 
 [[plugins]]
