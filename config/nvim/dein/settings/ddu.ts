@@ -36,7 +36,6 @@ async function onColorScheme(denops: Denops): Promise<void> {
   await denops.call("nvim_set_hl", 0, "DduEndOfBuffer", {
     foreground: bgcolor,
     background: bgcolor,
-    default: true,
   });
 }
 
@@ -135,7 +134,6 @@ export class Config extends BaseConfig {
         action: { defaultAction: "do" },
         colorscheme: { defaultAction: "set" },
         command_history: { defaultAction: "edit" },
-        "custom-list": { defaultAction: "callback" },
         dein_update: { defaultAction: "viewDiff" },
         file: { defaultAction: "open" },
         git_status: {
@@ -178,14 +176,12 @@ export class Config extends BaseConfig {
           },
         },
         help: { defaultAction: "open" },
-        highlight: { defaultAction: "edit" },
         lsp: { defaultAction: "open" },
         lsp_codeAction: { defaultAction: "apply" },
         "nvim-notify": { defaultAction: "open" },
         readme_viewer: { defaultAction: "open" },
         source: { defaultAction: "execute" },
         tag: { defaultAction: "jump" },
-        "ui-select": { defaultAction: "execute" },
         url: { defaultAction: "open" },
         word: { defaultAction: "append" },
       },
@@ -201,15 +197,9 @@ export class Config extends BaseConfig {
         dein_update: {
           matchers: ["matcher_dein_update"],
         },
-        file: {
-          defaultAction: "narrow",
-        },
-        ghq: {
-          defaultAction: "cd",
-        },
-        gin_action: {
-          defaultAction: "execute",
-        },
+        file: { defaultAction: "narrow" },
+        ghq: { defaultAction: "cd" },
+        gin_action: { defaultAction: "execute" },
         git_status: {
           converters: ["converter_git_status"],
         },
@@ -260,6 +250,7 @@ export class Config extends BaseConfig {
             floatingBorder: "Identifier",
             selected: "Visual",
           },
+          maxHighlightItems: 200,
           previewFloating: hasNvim,
           previewFloatingBorder: "rounded",
           previewSplit: "vertical",

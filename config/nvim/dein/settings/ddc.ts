@@ -35,9 +35,7 @@ export class Config extends BaseConfig {
           mark: "[ard]",
           isVolatile: true,
         },
-        buffer: {
-          mark: "[buf]",
-        },
+        buffer: { mark: "[buf]" },
         cmdline: {
           mark: "[cmd]",
           isVolatile: true,
@@ -63,22 +61,15 @@ export class Config extends BaseConfig {
           mark: "[input]",
           isVolatile: true,
         },
-        line: {
-          mark: "[line]",
-        },
-        lsp: {
-          mark: "[lsp]",
-          forceCompletionPattern: "\\.|:\\s*|->\\s*",
-        },
+        line: { mark: "[line]" },
+        lsp: { mark: "[lsp]" },
         mocword: {
           mark: "[word]",
           minAutoCompleteLength: 3,
           isVolatile: true,
           enabledIf: "exists('$MOCWORD_DATA')",
         },
-        omni: {
-          mark: "[omni]",
-        },
+        omni: { mark: "[omni]" },
         skkeleton: {
           mark: "[skk]",
           matchers: [],
@@ -189,10 +180,10 @@ export class Config extends BaseConfig {
       "vim",
       "yaml",
     ], ["lsp", ...sources]);
-    setSourcesByFiletypes(
-      ["markdown", "gitcommit"],
-      ["github_issue", "github_pull_request", ...sourcesWithMocword],
-    );
+    // setSourcesByFiletypes(
+    //   ["markdown", "gitcommit"],
+    //   ["github_issue", "github_pull_request", ...sourcesWithMocword],
+    // );
     setSourcesByFiletypes(["help"], sourcesWithMocword);
     setSourcesByFiletypes(["sh", "zsh"], ["shell-native", ...sources]);
 
