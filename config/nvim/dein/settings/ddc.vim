@@ -19,9 +19,9 @@ cnoremap <expr> <C-p> pum#visible() ? '<Cmd>call pum#map#select_relative(-1)<CR>
 cnoremap <expr> <Tab> pum#visible() ? '<Cmd>call pum#map#select_relative(+1)<CR>' : ddc#map#manual_complete()
 
 inoremap <expr> <C-e> pum#visible() ? '<Cmd>call pum#map#cancel()<CR>'  : user#is_at_end() ? '<C-e>' : '<End>'
-inoremap <expr> <C-y> pum#visible() ? '<Cmd>call pum#map#confirm()<CR>' : '<C-r>"'
+inoremap <expr> <C-y> pum#visible() ? '<Cmd>call pum#map#confirm()<CR>' : '<C-r><C-p>"'
 cnoremap <expr> <C-e> pum#visible() ? '<Cmd>call pum#map#cancel()<CR>' : '<C-e>'
-cnoremap <expr> <C-y> pum#visible() ? '<Cmd>call pum#map#confirm()<CR>' : '<C-r>"'
+cnoremap <expr> <C-y> pum#visible() ? '<Cmd>call pum#map#confirm()<CR>' : '<C-r><C-p>"'
 
 " emulate default mappings (see `:help ins-completion`)
 function! s:ddc_complete(...) abort

@@ -11,9 +11,11 @@ nnoremap S <Nop>
 xnoremap q <Nop>
 xnoremap S <Nop>
 
-" Record macro like ["x]Q (in default use "q" register)
+" Record/execute macro like ["x]Q (in default use "q" register)
 nnoremap <expr> Q 'q' .. (!empty(reg_recording()) ? ''
-      \ : v:register =~# '["*+]' ? 'q' : v:register)
+      \ : stridx('"*+', v:register) > -1 ? 'q' : v:register)
+xnoremap <expr> Q ':normal! @' ..
+      \ (stridx('"*+', v:register) > -1 ? 'q' : v:register) .. '<CR>'
 
 nnoremap j gj
 nnoremap k gk
@@ -70,14 +72,17 @@ nnoremap ^ <C-^><Cmd>edit<CR>
 nnoremap [Space]f <Cmd>edit %:p:h<CR>
 nnoremap [Space]q <Cmd>confirm qall<CR>
 nnoremap gf gF
+nnoremap p ]p
+nnoremap P ]P
+xnoremap p P
 cnoremap <expr> / getcmdtype() ==# '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() ==# '?' ? '\?' : '?'
 " open native cmdline
 nnoremap g/ /
+" select last yanked/pasted text
 " from https://github.com/pesblog/dots-base/blob/a0762b8f/home/.vimrc#L140
-nnoremap <expr> gp $'`[{getregtype()->strpart(0, 1)}`]'
-" from https://baqamore.hatenablog.com/entry/2016/07/07/201856
-xnoremap <expr> p $'pgv"{v:register}ygv<Esc>'
+"      https://github.com/ibhagwan/nvim-lua/blob/dc846e06/lua/keymaps.lua#L133
+nnoremap <expr> g<C-v> $'`[{visualmode()}`]'
 " from https://vim-jp.org/vim-users-jp/2009/08/31/Hack-65.html
 xnoremap / <Esc>/\%V
 " from https://github.com/nnsnico/dotfiles/blob/cf9ce83c/vim/vimrcs/basic.vim#L150-L151
@@ -93,8 +98,6 @@ nnoremap <expr> dd empty(getline('.')) && v:count1 ==# 1
 xnoremap <expr> v mode() ==# 'v' ? 'g_' : 'v'
 xnoremap <Space> t<Space>
 xnoremap ) t)
-xnoremap < <gv
-xnoremap > >gv
 onoremap <Space> t<Space>
 onoremap ) t)
 
@@ -113,7 +116,7 @@ noremap! <expr> <C-d> user#is_at_end() ? '<C-d>' : '<Del>'
 inoremap <expr> <C-k> user#is_at_end() ? '<C-o>gJ' : '<C-o>D'
 cnoremap <C-k> <Cmd>call setcmdline(
       \ getcmdpos() > 1 ? getcmdline()[:getcmdpos() - 2] : '')<CR>
-noremap! <C-y> <C-r>"
+noremap! <C-y> <C-r><C-p>"
 " }}}
 
 " Use backslack instead of ¥
