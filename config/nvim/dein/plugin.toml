@@ -20,17 +20,14 @@ let g:readme_viewer#plugin_manager = 'dein.vim'
 
 [[plugins]]
 repo = 'https://github.com/4513ECHO/vim-snipewin'
+on_func = ['snipewin#select']
 on_map = { n = '<Plug>' }
 hook_add = '''
 let g:snipewin_label_chars = 'ASDFGHJKLQWERTYUIOP'
 let g:snipewin_label_font = 'asciian_inverted'
 nnoremap <C-w>W <Plug>(snipewin)
-nnoremap <C-w>X <Plug>(snipewin-swap)
-nnoremap <C-w>O <Plug>(snipewin-only)
-'''
-hook_source = '''
-nnoremap <Plug>(snipewin-swap) <Cmd>call snipewin#select(g:snipewin#callback#swap)<CR>
-nnoremap <Plug>(snipewin-only) <Cmd>call snipewin#select(g:snipewin#callback#only)<CR>
+nnoremap <C-w>X <Cmd>call snipewin#select({ winid -> snipewin#callback#swap(winid) })<CR>
+nnoremap <C-w>O <Cmd>call snipewin#select({ winid -> snipewin#callback#only(winid) })<CR>
 '''
 
 [[plugins]]
@@ -275,16 +272,13 @@ endfor
 repo = 'https://github.com/kyoh86/vim-ripgrep'
 on_cmd = ['Rg']
 hook_source = '''
-function! s:ripgrep(args, bang) abort
-  silent doautocmd <nomodeline> QuickFixCmdPre Rg
-  let root = a:bang ? ['.git'] : ['.']
-  let cwd = ripgrep#path#traverse_root(getcwd(), root)
-  let cmd = ['rg', '--json', &smartcase ? '--smart-case' : '', a:args]->join()
-  echomsg cmd
-  call ripgrep#call(cmd, cwd[0], cwd[1])
-  silent doautocmd <nomodeline> QuickFixCmdPost Rg
+autocmd vimrc QuickFixCmdPre,QuickFixCmdPost Rg :
+function! s:ripgrep(args) abort
+  doautocmd <nomodeline> QuickFixCmdPre Rg
+  eval ['--smart-case', a:args]->join()->ripgrep#search()
+  doautocmd <nomodeline> QuickFixCmdPost Rg
 endfunction
-command! -bar -bang -nargs=1 Rg call s:ripgrep(<q-args>, <bang>0)
+command! -nargs=1 -complete=file Rg call s:ripgrep(<q-args>)
 '''
 
 [[plugins]]
@@ -293,10 +287,24 @@ on_path = ['^file://']
 
 [[plugins]]
 repo = 'https://github.com/lambdalisue/vim-gin'
-on_cmd = ['Gin', 'GinLog', 'GinStatus']
+on_cmd = ['Gin', 'GinDiff', 'GinLog', 'GinStatus']
+hook_add = '''
+let g:gin_chaperon_persistent_args = ['++opener=tabedit']
+let g:gin_diff_persistent_args = ['++opener=tabedit']
+let g:gin_log_default_args = ['--oneline']
+autocmd vimrc OptionSet diff call s:on_gin_chaperon(v:option_new)
+function! s:on_gin_chaperon(diff) abort
+  if a:diff
+    nnoremap <buffer> ZZ <Cmd>Gin ++wait add %<Bar>diffoff!<Bar>tabclose<CR>
+  else
+    nunmap <buffer> ZZ
+  endif
+endfunction
+'''
 [plugins.ftplugin]
 gin-log = '''
 nnoremap <buffer> a <Cmd>Ddu -name=gin_action<CR>
+nnoremap <buffer> I <Plug>(gin-action-fixup:instant-fixup)
 '''
 gin-status = '''
 nnoremap <buffer> a <Cmd>Ddu -name=gin_action<CR>
