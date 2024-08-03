@@ -24,10 +24,11 @@ if !has('gui_running') && !has('nvim')
   let &t_EI ..= "\<Esc>[2 q"
   let &t_SR ..= "\<Esc>[4 q"
 endif
+set guicursor=n-v-c-sm:block-Cursor,i-ci-ve:ver25-Cursor,r-cr-o:hor20-Cursor
 
 " ------------------
 " stausline
-" NOTE: Set 'laststatus' in lightline.vim hook
+" NOTE: Set 'laststatus' lazily in hook_source of lightline
 set laststatus=0
 set noshowmode
 set showcmd
@@ -35,6 +36,8 @@ set noruler
 
 " ------------------
 " indent
+set copyindent
+set preserveindent
 set expandtab
 set tabstop=8
 set softtabstop=8
@@ -73,6 +76,7 @@ set nofoldenable
 set synmaxcol=200
 set redrawtime=1000
 set signcolumn=number
+set tabclose=uselast
 
 set sidescroll=1
 set sidescrolloff=2
@@ -98,23 +102,21 @@ endif
 " ------------------
 " editing
 set backspace=indent,eol,start
-set whichwrap=b,s,h,l,<,>,[,],~
+set whichwrap=b,s,h,l
 set hidden
 set confirm
 set timeoutlen=500
+" NOTE: Use vim-parenmatch instead of 'showmatch' and 'matchtime'
 set matchpairs& matchpairs+=<:>
-set nrformats-=octal
+set nrformats=hex,bin,blank
 set nojoinspaces
 set virtualedit=block
 
 set clipboard-=autoselect
-set mouse=n
+set mouse=nr
 set mousemodel=popup_setpos
 
-set completeopt=menuone,noinsert,noselect
-if !has('nvim')
-  set completeopt+=popup
-endif
+set completeopt=menuone,noinsert,noselect,popup
 set isfname& isfname-== isfname+=@-@
 
 " ------------------
