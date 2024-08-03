@@ -15,8 +15,20 @@ let g:launcher_config.color = #{
       \ char: 'r',
       \ run: 'RandomColorScheme',
       \ }
+let g:launcher_config.tabnew = #{
+      \ char: 't',
+      \ run: 'tabnew . | tcd . | Ddu ghq',
+      \ }
 
-autocmd vimrc VimEnter,DirChanged * ++nested call user#colorscheme#random()
+autocmd vimrc VimEnter * ++nested call user#colorscheme#random()
+let s:state = {}
+autocmd vimrc DirChanged * ++nested
+      \ : if s:state->has_key(expand('<afile>'))
+      \ |   execute 'silent colorscheme' s:state[expand('<afile>')]
+      \ | else
+      \ |   call user#colorscheme#random()
+      \ |   let s:state[expand('<afile>')] = g:colors_name
+      \ | endif
 autocmd vimrc ColorSchemePre *
       \ : unlet! g:terminal_color_foreground
       \          g:terminal_color_background
@@ -46,16 +58,23 @@ command! -bar RandomColorScheme call user#colorscheme#random()
 command! -nargs=? -bar -bang -complete=custom,user#colorscheme#completion
       \ ColorScheme call user#colorscheme#command(<q-args>, <bang>0)
 
+function! s:spark_colorscheme(interval = 500) abort
+  if exists('s:spark_timer')
+    call timer_stop(s:spark_timer)
+    unlet s:spark_timer
+  else
+    let s:spark_timer = timer_start(a:interval,
+          \ { -> user#colorscheme#random() }, #{ repeat: -1 })
+  endif
+endfunction
+command! -nargs=? -bar SparkColorScheme call s:spark_colorscheme(<f-args>)
+
 " from https://qiita.com/gorilla0513/items/11be5413405792337558
 command! -nargs=1 WWW call user#google(<q-args>)
 
 command! -nargs=? -bar -complete=filetype MiniNote
       \ : execute (<q-mods> ?? 'belowright 10') 'new mininote'
       \ | setlocal bufhidden=wipe buftype=nofile filetype=<args> winfixheight
-
-command! -bar DeinUpdateMine
-      \ call dein#get()->copy()->filter({ -> v:val.repo =~? '/4513ECHO/' })
-      \ ->keys()->dein#update()
 
 " from `:help :DiffOrig`
 command! -bar DiffOrig
@@ -64,8 +83,6 @@ command! -bar DiffOrig
 
 command! -bar VTerminal execute (<q-mods> ?? 'topleft vertical')
       \ has('nvim') ? 'split +terminal' : 'terminal ++close'
-
-command! -bar Udd let $NO_COLOR = 1 | execute '!udd %' | unlet $NO_COLOR
 
 if filereadable(expand('~/.vimrc_secret'))
   source ~/.vimrc_secret

@@ -1,23 +1,6 @@
-if empty($VIM_DISABLE_DEIN)
-  function! user#colorscheme#get(update = v:false) abort
-    if exists('s:cache') && !a:update
-      return s:cache
-    endif
-    let s:cache = {}
-    for colorscheme in dein#get()->copy()
-          \ ->filter({ -> v:val->has_key('colorschemes') })
-          \ ->values()
-          \ ->filter({ -> !v:val->has_key('if') || eval(v:val.if) })
-          \ ->map({ -> v:val.colorschemes })->flatten()
-      let s:cache[colorscheme.name] = colorscheme
-    endfor
-    return s:cache
-  endfunction
-else
-  function! user#colorscheme#get(update = v:false) abort
-    return {}
-  endfunction
-endif
+function! user#colorscheme#get() abort
+  return g:user#colorscheme#_colorschemes
+endfunction
 
 function! user#colorscheme#lightline() abort
   return g:colors_name ==# 'random' ? 'default'
@@ -39,7 +22,7 @@ function! user#colorscheme#set_customize() abort
   endif
   let highlight = customize->get('highlight')
   if !empty(highlight)
-    " TODO: use hiset() if exists
+    " TODO: use hlset() or nvim_set_hl()
     for [group, attr] in items(highlight)
       let attrs = ''
       for [name, value] in items(attr)

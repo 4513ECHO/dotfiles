@@ -1,3 +1,4 @@
+---@type table<string, (string[]| function)[]>
 local providers = {
   pbcopy = { { "pbcopy" }, { "pbpaste" } },
   tmux = {
@@ -14,6 +15,7 @@ local providers = {
   },
 }
 
+---@param name string
 local function set_provider(name)
   vim.g.clipboard = {
     name = name,

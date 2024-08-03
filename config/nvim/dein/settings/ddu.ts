@@ -392,6 +392,10 @@ export class Config extends BaseConfig {
       },
     });
 
+    args.contextBuilder.patchLocal("startmenu", {
+      sources: [{ name: "source" }],
+    });
+
     await vars.g.set(
       args.denops,
       "ddu_source_lsp_clientName",

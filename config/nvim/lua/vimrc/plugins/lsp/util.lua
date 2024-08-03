@@ -1,3 +1,4 @@
+---@diagnostic disable-next-line: param-type-mismatch, missing-parameter
 local M = {}
 
 ---Helper function to replace language servers using npm with Deno.
@@ -29,11 +30,35 @@ M.deno_as_npm.cmd_env = { NO_COLOR = true }
 
 ---@return { uri: string }[]
 function M.get_yaml_json_schema()
-  return vim
-    .iter(vim.lsp.get_clients { buffer = 0 })
-    :filter(function(client) return client.name == "yamlls" end)
-    :next()
-    .request_sync("yaml/get/jsonSchema", vim.uri_from_bufnr(0)).result
+  local client = vim.lsp.get_clients({ bufnr = 0, name = "yamlls" })[1]
+  if not client then
+    return {}
+  end
+  ---@diagnostic disable-next-line: param-type-mismatch, missing-parameter
+  return client.request_sync("yaml/get/jsonSchema", vim.uri_from_bufnr(0)).result
+end
+
+---@param client string
+---@param command string
+---@param arguments unknown[]
+function M.executeCommand(client, command, arguments)
+  local c = vim.lsp.get_clients({ name = client })[1]
+  if not c then
+    return
+  end
+  c.request(
+    "workspace/executeCommand",
+    { command = command, arguments = arguments },
+    function(err, result)
+      vim.cmd.redraw { bang = true }
+      vim.api.nvim_echo({
+        {
+          err and vim.inspect(err) or vim.inspect(result),
+          err and "ErrorMsg",
+        },
+      }, true, {})
+    end
+  )
 end
 
 return M

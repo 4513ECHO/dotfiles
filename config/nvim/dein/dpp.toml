@@ -1,0 +1,28 @@
+[[plugins]]
+repo = 'https://github.com/vim-denops/denops.vim'
+hook_add = '''
+let g:denops_server_addr = '127.0.0.1:32123'
+let g:denops#server#deno_args = [
+      \ '--quiet',
+      \ '--no-lock',
+      \ '--allow-all',
+      \ '--unstable-kv',
+      \ ]
+noremap  <C-c> <Cmd>call denops#interrupt()<CR><C-c>
+noremap! <C-c> <Cmd>call denops#interrupt()<CR><C-c>
+'''
+
+[[plugins]]
+repo = 'https://github.com/Shougo/dpp.vim'
+
+[[plugins]]
+repo = 'https://github.com/Shougo/dpp-ext-installer'
+
+[[plugins]]
+repo = 'https://github.com/Shougo/dpp-ext-lazy'
+
+[[plugins]]
+repo = 'https://github.com/Shougo/dpp-ext-toml'
+
+[[plugins]]
+repo = 'https://github.com/Shougo/dpp-protocol-git'

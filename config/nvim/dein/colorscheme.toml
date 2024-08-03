@@ -42,6 +42,12 @@ String = { ctermfg = 144, guifg = '#a7b1a9' }
 repo = 'https://github.com/connorholyday/vim-snazzy'
 [[plugins.colorschemes]]
 name = 'snazzy'
+[plugins.colorschemes.link]
+Added = 'DiffAdd'
+Changed = 'DiffChange'
+Removed = 'DiffDelete'
+diffAdded = 'DiffAdd'
+diffRemoved = 'DiffDelete'
 
 [[plugins]]
 repo = 'https://github.com/cormacrelf/vim-colors-github'
@@ -135,7 +141,10 @@ repo = 'https://github.com/FrenzyExists/aquarium-vim'
 [[plugins.colorschemes]]
 name = 'aquarium'
 terminal = 'mini'
+[plugins.colorschemes.highlight]
+Cursor = { guifg = 'NONE', guibg = '#cddbf9' }
 [plugins.colorschemes.link]
+CursorLine = 'Visual'
 NonText = 'Comment'
 SignifySignAdd = 'GitGutterAdd'
 SignifySignChange = 'GitGutterChange'
@@ -151,6 +160,9 @@ repo = 'https://github.com/gkapfham/vim-vitamin-onec'
 [[plugins.colorschemes]]
 name = 'vitaminonec'
 lightline = 'mini'
+[plugins.colorschemes.link]
+diffAdded = 'DiffAdd'
+diffRemoved = 'DiffDelete'
 
 [[plugins]]
 repo = 'https://github.com/gruvbox-community/gruvbox'
@@ -165,8 +177,10 @@ repo = 'https://github.com/habamax/vim-gruvbit'
 name = 'gruvbit'
 [plugins.colorschemes.link]
 SignifySignAdd = 'String'
-SignifySignChange = 'Statement'
+SignifySignChange = 'Identifier'
 SignifySignDelete = 'Special'
+diffAdded = 'String'
+diffRemoved = 'Special'
 
 [[plugins]]
 repo = 'https://github.com/haishanh/night-owl.vim'
@@ -179,6 +193,8 @@ repo = 'https://github.com/haystackandroid/snow'
 [[plugins.colorschemes]]
 name = 'snow'
 lightline = 'snow_dark'
+[plugins.colorschemes.highlight]
+Cursor = { guifg = 'NONE', guibg = 'NONE' }
 
 [[plugins]]
 repo = 'https://github.com/haystackandroid/stellarized'
@@ -186,11 +202,19 @@ repo = 'https://github.com/haystackandroid/stellarized'
 name = 'stellarized'
 lightline = 'stellarized_dark'
 terminal = 'mini'
+[plugins.colorschemes.highlight]
+Cursor = { guifg = 'NONE', guibg = 'NONE' }
 
 [[plugins]]
 repo = 'https://github.com/haxibami/urara.vim'
 [[plugins.colorschemes]]
 name = 'urara'
+[plugins.colorschemes.link]
+Added = 'GitAddSign'
+Changed = 'GitChangeSign'
+Removed = 'GitDeleteSign'
+diffAdded = 'Added'
+diffRemoved = 'Removed'
 
 # Thank mityu very much!
 [[plugins]]
@@ -202,6 +226,8 @@ name = 'reliquiae'
 lightline = 'mini'
 [plugins.colorschemes.link]
 NonText = 'Comment'
+diffAdded = 'Number'
+diffRemoved = 'Statement'
 
 # Thank Shougo very much!
 [[plugins]]
@@ -212,12 +238,17 @@ type = 'raw'
 name = 'candy'
 lightline = 'wombat'
 terminal = 'mini'
+[plugins.colorschemes.highlight]
+Cursor = { guifg = 'NONE', guibg = 'NONE' }
 [plugins.colorschemes.link]
 DiffAdd = 'PreProc'
-diffAdded = 'PreProc'
 DiffChange = 'Type'
 DiffDelete = 'Statement'
+diffAdded = 'PreProc'
 diffRemoved = 'Statement'
+Added = 'PreProc'
+Changed = 'Type'
+Removed = 'Statement'
 
 [[plugins]]
 repo = 'https://github.com/jacoborus/tender.vim'
@@ -249,6 +280,7 @@ if = 'has("nvim")'
 [[plugins.colorschemes]]
 name = 'yash'
 [plugins.colorschemes.highlight]
+Cursor = { guifg = 'NONE', guibg = 'NONE' }
 # diffAdded =
 # diffRemoved =
 
@@ -259,12 +291,18 @@ name = 'momiji'
 terminal = 'mini'
 [plugins.colorschemes.highlight]
 PmenuSel = { ctermfg = 'NONE', guifg = 'NONE' }
+[plugins.colorschemes.link]
+diffAdded = 'DiffAdd'
+diffRemoved = 'DiffDelete'
 
 [[plugins]]
 repo = 'https://github.com/lifepillar/vim-solarized8'
 [[plugins.colorschemes]]
 name = 'solarized8'
 lightline = 'solarized'
+[plugins.colorschemes.link]
+diffAdded = 'String'
+diffRemoved = 'Special'
 
 [[plugins]]
 repo = 'https://github.com/lighthaus-theme/vim-lighthaus'
@@ -274,6 +312,8 @@ terminal = [
   '#21252D', '#FC2929', '#44B273', '#E25600', '#1D918B', '#D16BB7', '#00BFA4', '#FFFADE',
   '#8E8D8D', '#FF5050', '#50C16E', '#ED722E', '#47A8A1', '#D68EB2', '#5AD1AA', '#CCCCCC',
 ]
+[plugins.colorschemes.highlight]
+Cursor = { guifg = 'NONE', guibg = 'NONE' }
 
 [[plugins]]
 repo = 'https://github.com/mhartington/oceanic-next'
@@ -285,6 +325,8 @@ lightline = 'oceanicnext'
 repo = 'https://github.com/mvanderkamp/cocoa.vim'
 [[plugins.colorschemes]]
 name = 'cocoa'
+[plugins.colorschemes.highlight]
+Constant = { ctermbg = 'NONE', guibg = 'NONE' }
 
 [[plugins]]
 repo = 'https://github.com/nanotech/jellybeans.vim'
@@ -417,6 +459,12 @@ terminal = [
   '#1b1d1e', '#f92672', '#82b414', '#fd971f', '#268bd2', '#8c54fe', '#56c2d6', '#ccccc6',
   '#505354', '#ff5995', '#b7eb46', '#feed6c', '#62ade3', '#bfa0fe', '#94d8e5', '#f8f8f2',
 ]
+[plugins.colorschemes.link]
+DiffAdd = 'PreProc'
+DiffChange = 'Type'
+DiffDelete = 'Keyword'
+diffAdded = 'PreProc'
+diffRemoved = 'Keyword'
 
 [[plugins]]
 repo = 'https://github.com/tyrannicaltoucan/vim-deep-space'
@@ -480,6 +528,11 @@ terminal = [
 SignifySignAdd = 'GitGutterAdd'
 SignifySignChange = 'GitGutterChange'
 SignifySignDelete = 'GitGutterDelete'
+Added = 'GitGutterAdd'
+Changed = 'GitGutterChange'
+Removed = 'GitGutterDelete'
+diffAdded = 'Added'
+diffRemoved = 'Removed'
 
 [[plugins]]
 repo = 'https://github.com/whatyouhide/vim-gotham'

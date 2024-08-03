@@ -9,7 +9,6 @@ nnoremap ZZ <Nop>
 nnoremap q <Nop>
 nnoremap S <Nop>
 xnoremap q <Nop>
-xnoremap S <Nop>
 
 " Record/execute macro like ["x]Q (in default use "q" register)
 nnoremap <expr> Q 'q' .. (!empty(reg_recording()) ? ''

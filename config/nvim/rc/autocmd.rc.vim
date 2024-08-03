@@ -45,12 +45,6 @@ autocmd vimrc BufWritePost *
       \ |   call s:chmod(expand('<afile>'))
       \ | endif
 
-" always highlight special comment
-autocmd vimrc ColorScheme * silent! hi def link TodoExt Todo
-autocmd vimrc BufEnter,WinEnter,Syntax *
-      \ silent! let g:todo_match =  matchadd('TodoExt',
-      \ '\v\zs(TODO|NOTE|XXX|FIXME|INFO)\ze%(\(.{-}\))?\:')
-
 autocmd vimrc BufWritePost *
       \ : if empty(&filetype)
       \ |   filetype detect
@@ -67,7 +61,20 @@ autocmd vimrc VimResized *
       \ |   wincmd =
       \ | endif
 
+" based on https://blog.atusy.net/2023/12/17/vim-easy-to-remember-regnames/
+autocmd vimrc TextYankPost *
+      \ : if empty(v:event.regname) || stridx(v:event.regname, '*+') > -1
+      \ |   call setreg(v:event.operator, getreginfo(v:event.regname))
+      \ | endif
+
 if !has('nvim')
   autocmd vimrc TerminalWinOpen *
         \ setlocal nonumber norelativenumber signcolumn=no nocursorline
+  " based on https://vim-jp.slack.com/archives/C052L238E56/p1710653038387719
+  autocmd vimrc WinClosed * wincmd p
+else
+  autocmd vimrc WinClosed *
+        \ : if nvim_win_get_config(+expand('<amatch>')).relative->empty()
+        \ |   wincmd p
+        \ | endif
 endif

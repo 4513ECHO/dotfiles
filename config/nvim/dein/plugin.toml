@@ -159,7 +159,7 @@ xnoremap n <Cmd>call searchx#next_dir()<CR><Plug>(search-post)
 repo = 'https://github.com/itchyny/lightline.vim'
 lazy = true
 hook_add = '''
-autocmd vimrc VimEnter * ++once call timer_start(0, { -> dein#source('lightline.vim') })
+autocmd vimrc VimEnter * ++once call timer_start(0, { -> dpp#source('lightline.vim') })
 autocmd vimrc ModeChanged t:n* call lightline#update()
 '''
 hook_source = '''
@@ -266,6 +266,13 @@ for [s:k1, s:k2] in [['j', '<C-e>'], ['k', '<C-y>']]
   call submode#enter_with('stickycursor', 'n', '', $'z{s:k1}', s:k2)
   call submode#map('stickycursor', 'n', '', s:k1, s:k2)
 endfor
+'''
+
+[[plugins]]
+repo = 'https://github.com/kuuote/lspoints'
+merged = false
+hook_add = '''
+let g:lspoints#extensions = ['copilot']
 '''
 
 [[plugins]]

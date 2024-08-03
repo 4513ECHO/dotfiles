@@ -3,7 +3,7 @@ let s:lightline_ignore_filetypes = ['ddu-ff', 'ddu-ff-filter', 'molder']
 let s:statuswidth = { -> &laststatus > 2 ? &columns : winwidth(0) }
 
 function! lightline#component#vimrc#colorscheme() abort
-  return s:statuswidth() > 70 ? g:colors_name : ''
+  return s:statuswidth() > 70 ? g:->get('colors_name', '') : ''
 endfunction
 
 function! lightline#component#vimrc#file_format() abort

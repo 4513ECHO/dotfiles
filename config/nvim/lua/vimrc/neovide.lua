@@ -37,6 +37,13 @@ end
 vim.keymap.set("", "<LeftDrag>", "<LeftMouse>")
 vim.keymap.set("", "<LeftRelease>", "<Nop>")
 
+vim.keymap.set(
+  "n",
+  modifier "p",
+  "<Cmd>Ddu -name=startmenu<CR>",
+  { desc = "Start menu" }
+)
+
 vim.cmd.aunmenu { "PopUp" }
 
 -- adjust font size

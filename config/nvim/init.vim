@@ -7,8 +7,6 @@ function! s:source_vimrc(vimrc) abort
   execute $'source {s:config_home}/rc/{a:vimrc}.rc.vim'
 endfunction
 call s:source_vimrc('init')
-if empty($VIM_DISABLE_DEIN)
-  call s:source_vimrc('dein')
-endif
+call s:source_vimrc('dpp')
 
 set secure

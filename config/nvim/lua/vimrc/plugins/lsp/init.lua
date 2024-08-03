@@ -52,7 +52,11 @@ autocmd "LspAttach" {
 
 autocmd "LspAttach" {
   pattern = ".env",
-  callback = function(ctx) vim.diagnostic.disable(ctx.buf) end,
+  nested = true,
+  callback = function(ctx)
+    vim.lsp.buf_detach_client(ctx.buf, ctx.data.client_id)
+  end,
+  desc = "Disable shellcheck for .env",
 }
 
 vim.lsp.handlers["textDocument/hover"] =
@@ -74,6 +78,7 @@ vim.diagnostic.config {
       [vim.diagnostic.severity.HINT] = "?",
     },
   },
+  severity_sort = true,
 }
 
 lspconfig.efm.setup {
@@ -133,7 +138,7 @@ lspconfig.vtsls.setup {
 ---@return string[]
 local function library(plugins)
   local plugin_paths = vim
-    .iter(vim.fn["dein#get"]())
+    .iter(vim.fn["dpp#get"]())
     :filter(function(name) return vim.list_contains(plugins, name) end)
     :map(function(_, plugin) return vim.fs.joinpath(plugin.path, "lua") end)
     :totable()

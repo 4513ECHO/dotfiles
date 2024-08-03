@@ -49,7 +49,6 @@ repo = 'https://github.com/yuki-yano/ddu-filter-fzf'
 
 [[plugins]]
 repo = 'https://github.com/4513ECHO/ddu-kind-url'
-depends = ['open-browser.vim']
 
 [[plugins]]
 repo = 'https://github.com/Shougo/ddu-kind-file'

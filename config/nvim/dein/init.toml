@@ -1,7 +1,4 @@
 [[plugins]]
-repo = 'https://github.com/Shougo/dein.vim'
-
-[[plugins]]
 repo = 'https://github.com/delphinus/vim-auto-cursorline'
 hook_add = '''
 let g:auto_cursorline_wait_ms = 4000
@@ -56,7 +53,7 @@ function! s:mr_clean(kind = 'mru') abort
         \ ->foreach({ -> mr#{s:kind}#delete(v:val) })
 endfunction
 function! s:mr_complete(...)
-  return ['mru', 'mrw', 'mrr']->join("\n")
+  return ['mru', 'mrw', 'mrr', 'mrd']->join("\n")
 endfunction
 command! -nargs=? -complete=custom,s:mr_complete -bar MrClean call s:mr_clean(<f-args>)
 '''
@@ -68,7 +65,7 @@ lazy = true
 hook_add = '''
 function! s:molder_init() abort
   if isdirectory(expand('%:p'))
-    call dein#source('vim-molder')
+    call dpp#source('vim-molder')
     call molder#init()
     autocmd! vimrc_molder
   endif
@@ -83,6 +80,8 @@ molder = '''
 setlocal nolist nospell
 nnoremap <buffer> <C-l> <Plug>(molder-reload)<Cmd>set nohlsearch<CR>
 nnoremap <buffer> q <C-w>q
+nnoremap <buffer> <2-LeftMouse> <Plug>(molder-open)
+nnoremap <buffer> <CR> <Plug>(molder-open)
 nnoremap <buffer><expr> R printf('<Cmd>edit %s<CR>',
       \ systemlist('git rev-parse --show-superproject-working-tree --show-toplevel')[0])
 nnoremap <buffer><expr> . $'<Cmd>edit {getcwd()}<CR>'
@@ -104,20 +103,6 @@ repo = 'https://github.com/rafamadriz/friendly-snippets'
 [[plugins]]
 repo = 'https://github.com/roxma/vim-tmux-clipboard'
 if = '!has("gui_running")'
-
-[[plugins]]
-repo = 'https://github.com/vim-denops/denops.vim'
-hook_add = '''
-let g:denops_server_addr = '127.0.0.1:32123'
-let g:denops#server#deno_args = [
-      \ '--quiet',
-      \ '--no-lock',
-      \ '--allow-all',
-      \ '--unstable-kv',
-      \ ]
-noremap  <C-c> <Cmd>call denops#interrupt()<CR><C-c>
-noremap! <C-c> <Cmd>call denops#interrupt()<CR><C-c>
-'''
 
 [[plugins]]
 # repo = 'https://github.com/vim-denops/denops-shared-server.vim'

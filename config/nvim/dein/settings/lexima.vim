@@ -122,6 +122,7 @@ LeximaAlterCommand gi\%[n]                      Gin
 " Original Commands
 LeximaAlterCommand colo\%[rscheme]              ColorScheme
 LeximaAlterCommand ra\%[ndomcolorscheme]        RandomColorScheme
+LeximaAlterCommand spa\%[rkcolorscheme]         SparkColorScheme
 LeximaAlterCommand mi\%[ninote]                 MiniNote
 LeximaAlterCommand den\%[opssharedserver]       DenopsSharedServer
 LeximaAlterCommand deinu\%[pdatemine]           DeinUpdateMine

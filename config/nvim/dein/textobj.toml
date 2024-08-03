@@ -2,8 +2,6 @@
 repo = 'https://github.com/machakann/vim-sandwich'
 on_map = { xno = '<Plug>', n = '<Plug>(operator-sandwich-dot)' }
 hook_add = '''
-" vim-surround like mappings
-execute 'source' dein#get('vim-sandwich').path .. '/macros/sandwich/keymap/surround.vim'
 let g:sandwich#magicchar#f#patterns = [#{
       \ header: '\<\%(\h\k*\.\)*\h\k*',
       \ bra   : '(',
@@ -29,7 +27,7 @@ xnoremap ig <Plug>(textobj-generics-innerparen-i)
 '''
 hook_source = '''
 " from README
-let g:sandwich#recipes = get(g:, 'sandwich#recipes', g:sandwich#default_recipes) + [
+let g:sandwich#recipes += [
       \ #{
       \   buns: ['textobj#generics#input_generics()', '">"'],
       \   expr: v:true,

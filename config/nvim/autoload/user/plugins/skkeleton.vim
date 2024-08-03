@@ -14,8 +14,8 @@ let s:prev_phase = ''
 
 if has('nvim')
   let s:ns = nvim_create_namespace('skkeleton')
-  let s:mode_id = 42
-  let s:state_id = 4242
+  let s:mode_id = 1
+  let s:state_id = 2
   function! s:set() abort
     let skk_mode = skkeleton#mode()
     call nvim_buf_set_extmark(0, s:ns, line('.') - 1, col('.') - 1, #{
@@ -61,6 +61,7 @@ else
     let coord = a:new ?
           \   #{ lnum: line('.'), col: col('.') }
           \ : prop_find(#{ type: s:prop_type_phase, skipstart: v:true })
+          \   ?? #{ lnum: line('.'), col: col('.') }
     call s:reset_phase()
     call prop_add(coord.lnum, coord.col, #{
           \ type: s:prop_type_phase,
