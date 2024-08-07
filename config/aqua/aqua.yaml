@@ -46,7 +46,7 @@ packages:
   - name: ko1nksm/getoptions/gengetoptions@v3.3.1
   - name: ko1nksm/getoptions@v3.3.1
   - name: koalaman/shellcheck@v0.10.0
-  - name: LuaLS/lua-language-server@3.10.1
+  - name: LuaLS/lua-language-server@3.10.2
   - name: mattn/efm-langserver@v0.0.53
   - name: mvdan/sh@v3.8.0
   - name: Myriad-Dreamin/tinymist@v0.11.18
