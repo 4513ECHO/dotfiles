@@ -1,7 +1,8 @@
 import {
   BaseConfig,
   type ConfigArguments,
-} from "jsr:@shougo/ddc-vim@^6.0.0/config";
+} from "jsr:@shougo/ddc-vim@^6.0.1/config";
+import type { DdcOptions } from "jsr:@shougo/ddc-vim@^6.0.1/types";
 
 export class Config extends BaseConfig {
   override config(args: ConfigArguments): Promise<void> {
@@ -145,10 +146,12 @@ export class Config extends BaseConfig {
       ui: "pum",
     });
 
-    const commentContextCallback = async () =>
+    const commentContextCallback = async (): Promise<Partial<DdcOptions>> =>
       await args.denops.call("ddc#syntax#in", ["comment", "Comment"])
         ? { sources: ["around", "buffer", "mocword"] }
         : {};
+
+    args.contextBuilder.setContextGlobal(commentContextCallback);
 
     const setSourcesByFiletypes = (filetypes: string[], sources: string[]) =>
       filetypes.forEach((filetype) => {
@@ -162,9 +165,7 @@ export class Config extends BaseConfig {
     // NOTE: mocword source should be placed after around source.
     const sourcesWithMocword = sources.toSpliced(2, 0, "mocword");
 
-    args.contextBuilder.setContextGlobal(commentContextCallback);
-
-    setSourcesByFiletypes(["vim"], ["vim", ...sources]);
+    setSourcesByFiletypes(["vim"], ["vim", "lsp", ...sources]);
     setSourcesByFiletypes([
       "go",
       "json",
@@ -177,7 +178,6 @@ export class Config extends BaseConfig {
       "typescript",
       "typescriptreact",
       "typst",
-      "vim",
       "yaml",
     ], ["lsp", ...sources]);
     // setSourcesByFiletypes(

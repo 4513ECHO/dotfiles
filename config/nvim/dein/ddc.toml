@@ -97,28 +97,23 @@ call pum#set_option(#{
       \ max_columns: #{},
       \ max_width: 100,
       \ padding: v:true,
+      \ preview: v:true,
+      \ preview_border: 'single',
+      \ preview_delay: 50,
+      \ preview_width: 100,
       \ scrollbar_char: '█',
       \ })
-'''
-
-[[plugins]]
-repo = 'https://github.com/matsui54/denops-popup-preview.vim'
-depends = ['denops.vim']
-hook_add = '''
-let g:popup_preview_config = #{
-      \ maxWidth: 100,
-      \ }
-autocmd vimrc TextChangedI * ++once ++nested
-      \ call denops#plugin#wait_async('popup_preview', { -> popup_preview#enable() })
 '''
 
 [[plugins]]
 repo = 'https://github.com/matsui54/denops-signature_help'
 depends = ['denops.vim']
 hook_add = '''
+autocmd vimrc TextChangedI * ++once call dpp#source('denops-signature_help')
+'''
+hook_source = '''
 let g:signature_help_config = #{
       \ maxWidth: 100,
       \ }
-autocmd vimrc TextChangedI * ++once ++nested
-      \ call denops#plugin#wait_async('signature_help', { -> signature_help#enable() })
+call signature_help#enable()
 '''
