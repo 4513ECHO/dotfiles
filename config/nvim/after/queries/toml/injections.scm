@@ -29,7 +29,7 @@
   (bare_key) @_key
   (pair
    (string) @injection.content))
- (#eq? @_key "ftplugin")
+ (#eq? @_key "ftplugins")
  (#set! injection.language "vim")
  (#offset! @injection.content 0 3 0 -3))
 ((table

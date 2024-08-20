@@ -25,7 +25,7 @@
   (bare_key) @_key
   (pair
    (string) @none))
- (#eq? @_key "ftplugin")
+ (#eq? @_key "ftplugins")
  (#offset! @none 0 3 0 -3))
 ((table
   (dotted_key) @_key

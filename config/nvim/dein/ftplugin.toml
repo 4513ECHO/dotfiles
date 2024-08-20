@@ -1,4 +1,4 @@
-[ftplugin]
+[ftplugins]
 _ = '''
 setlocal formatoptions-=r
 setlocal formatoptions-=o

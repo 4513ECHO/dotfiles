@@ -34,8 +34,8 @@
         }
       }
     },
-    "ftplugin": {
-      "title": "ftplugin definition",
+    "ftplugins": {
+      "title": "ftplugins definition",
       "description": "'_' key is executed after all ftplugin.\n'{filetype}' key is executed {filetype} ftplugin.\n You can define multiple filetypes by '{filetype1}_{filetype2}' key.",
       "type": "object",
       "additionalProperties": false,
