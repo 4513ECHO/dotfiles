@@ -2,50 +2,50 @@ import {
   BaseConfig,
   type ConfigArguments,
   type ConfigReturn,
-} from "jsr:@shougo/dpp-vim@^1.0.0/config";
-import type { MultipleHook, Plugin } from "jsr:@shougo/dpp-vim@^1.0.0/types";
+} from "jsr:@shougo/dpp-vim@^2.3.0/config";
+import type {
+  Action,
+  BaseExtParams,
+  Plugin,
+} from "jsr:@shougo/dpp-vim@^2.3.0/types";
+import { mergeFtplugins } from "jsr:@shougo/dpp-vim@^2.3.0/utils";
+import type { Params as InstallerExtParams } from "jsr:@shougo/dpp-ext-installer@^1.1.0";
+import type { ExtActions as LazyExtActions } from "jsr:@shougo/dpp-ext-lazy@^1.4.0";
+import type {
+  ExtActions as TomlExtActions,
+  Toml,
+} from "jsr:@shougo/dpp-ext-toml@^1.2.0";
+import type { Denops } from "jsr:@denops/std@^7.0.3";
 import * as vars from "jsr:@denops/std@^7.0.3/variable";
 import { exists } from "jsr:@std/fs@^1.0.1/exists";
-import { basename } from "jsr:@std/path@^1.0.2/basename";
 import { join } from "jsr:@std/path@^1.0.2/join";
 import { parse } from "jsr:@std/toml@^1.0.0/parse";
-import { ensure, is } from "jsr:@core/unknownutil@^4.0.0";
+import { ensure, is } from "jsr:@core/unknownutil@^4.2.0";
+import { pipe } from "jsr:@core/pipe@^0.2.0";
+import { filter } from "jsr:@core/iterutil@^0.8.0/pipe/async/filter";
+import { flatMap } from "jsr:@core/iterutil@^0.8.0/pipe/async/flat-map";
 
-type Toml = {
-  ftplugins?: Record<string, string>;
-  hooks_file?: string;
-  multiple_hooks?: MultipleHook[];
-  plugins?: Plugin[];
+type Exts = {
+  lazy: LazyExtActions<BaseExtParams>;
+  toml: TomlExtActions<BaseExtParams>;
 };
+const isColorSchemePlugin = is.ObjectOf({
+  name: is.String,
+  colorschemes: is.ArrayOf(is.ObjectOf({ name: is.String })),
+});
 
-type LazyMakeStateResult = {
-  plugins: Plugin[];
-  stateLines: string[];
-};
-
-type ColorSchemePlugin = Plugin & {
-  colorschemes: { name: string }[];
-};
-
-function mergeToml(results: Toml[]): ConfigReturn {
+function mergeToml(tomls: Toml[]): ConfigReturn {
   return {
-    ftplugins: results.map((x) => x.ftplugins)
-      .reduce((acc, x) => {
-        if (!x) return acc;
-        if (!acc) return x;
-        for (const [key, value] of Object.entries(x)) {
-          acc[key] = acc[key] ? acc[key] + "\n" + value : value;
-        }
-        return acc;
-      }),
-    hooksFiles: results.map((x) => x.hooks_file).filter(is.String),
-    multipleHooks: results.flatMap((x) => x.multiple_hooks ?? []),
-    plugins: results.flatMap((x) => x.plugins ?? []),
+    ftplugins: tomls.map((x) => x.ftplugins).reduce((acc, x) => {
+      if (!x) return acc;
+      if (!acc) return x;
+      mergeFtplugins(acc, x);
+      return acc;
+    }),
+    hooksFiles: tomls.map((x) => x.hooks_file).filter(is.String),
+    multipleHooks: tomls.flatMap((x) => x.multiple_hooks ?? []),
+    plugins: tomls.flatMap((x) => x.plugins ?? []),
   };
-}
-
-function getName(plugin: Plugin): string {
-  return plugin.name ?? basename(plugin.repo ?? "");
 }
 
 function getPath(plugin: Plugin, basePath: string): string {
@@ -56,10 +56,39 @@ function getPath(plugin: Plugin, basePath: string): string {
       const { hostname, pathname } = new URL(plugin.repo ?? "");
       return join(hostname, pathname);
     } else {
-      return getName(plugin);
+      return plugin.name;
     }
   })();
   return join(basePath, "repos", name + rev, plugin.script_type ?? "");
+}
+
+async function evalIf(plugin: Plugin, denops: Denops): Promise<boolean> {
+  if (plugin.if === undefined) return true;
+  if (is.String(plugin.if)) {
+    return Boolean(await denops.eval(plugin.if));
+  }
+  return plugin.if;
+}
+
+function normalizeOnMap(plugin: Plugin): Plugin {
+  if (!plugin.on_map) return plugin;
+  // Remove conversion of "-" to "_" in on_map
+  const normalize = (lhs: string) =>
+    lhs === "<Plug>"
+      ? "<Plug>(" + plugin.name
+        .replaceAll(/^(?:n?vim|denops)[_-]|[._-]n?vim$/gi, "")
+      : lhs;
+  const on_map = is.String(plugin.on_map)
+    ? normalize(plugin.on_map)
+    : is.ArrayOf(is.String)(plugin.on_map)
+    ? plugin.on_map.map(normalize)
+    : Object.fromEntries(
+      Object.entries(plugin.on_map).map(([mode, lhs]) => [
+        mode,
+        is.String(lhs) ? normalize(lhs) : lhs.map(normalize),
+      ]),
+    );
+  return { ...plugin, on_map };
 }
 
 async function clonePrerequisites(
@@ -74,7 +103,14 @@ async function clonePrerequisites(
     const path = getPath(plugin, basePath);
     if (!(await exists(path))) {
       const { status } = new Deno.Command("git", {
-        args: ["clone", "--filter=blob:none", plugin.repo, path],
+        args: [
+          "clone",
+          "--recursive",
+          "--filter=blob:none",
+          ...(plugin.rev ? ["--branch", plugin.rev] : []),
+          plugin.repo,
+          path,
+        ],
         stderr: "inherit",
         stdout: "inherit",
       }).spawn();
@@ -100,7 +136,8 @@ export class Config extends BaseConfig {
       extParams: {
         installer: {
           checkDiff: true,
-        },
+          maxProcesses: 8,
+        } satisfies Partial<InstallerExtParams>,
       },
       protocols: ["git"],
       protocolParams: {
@@ -111,7 +148,11 @@ export class Config extends BaseConfig {
     });
 
     const [context, options] = await args.contextBuilder.get(args.denops);
-    const extAction = async (ext: string, action: string, params?: unknown) =>
+    const extAction = async <
+      E extends keyof Exts,
+      A extends keyof Exts[E] & string,
+      R = Exts[E][A] extends Action<BaseExtParams, infer R> ? R : unknown,
+    >(ext: E, action: A, params?: unknown): Promise<R> =>
       await args.dpp.extAction(
         args.denops,
         context,
@@ -119,7 +160,7 @@ export class Config extends BaseConfig {
         ext,
         action,
         params,
-      );
+      ) as R;
 
     const { plugins, ftplugins } = mergeToml(
       await Promise.all(
@@ -135,20 +176,18 @@ export class Config extends BaseConfig {
           hasNvim ? "neovim" : "vim",
         ]
           .map((path) => join(deinDir, path + ".toml"))
-          .map((path) => extAction("toml", "load", { path }) as Promise<Toml>),
+          .map((path) => extAction("toml", "load", { path })),
       ),
     );
 
-    const lazyResult = await extAction(
-      "lazy",
-      "makeState",
-      { plugins },
-    ) as LazyMakeStateResult;
+    const lazyResult = await extAction("lazy", "makeState", {
+      plugins: plugins.map(normalizeOnMap),
+    });
 
     const sandwichPlugin = plugins
-      .find((plugin) => getName(plugin) === "vim-sandwich");
-    let sandwichStateLines: string[] = [];
-    if (sandwichPlugin) {
+      .find((plugin) => plugin.name === "vim-sandwich");
+    const sandwichStateLines = await (async () => {
+      if (!sandwichPlugin) return [];
       const sandwichPath = join(
         getPath(sandwichPlugin, args.basePath),
         "macros",
@@ -156,30 +195,27 @@ export class Config extends BaseConfig {
         "keymap",
         "surround.vim",
       );
-      if (await exists(sandwichPath)) {
-        sandwichStateLines = await Deno.readTextFile(sandwichPath).then((x) =>
-          x.split("\n").reduce((acc, x) =>
-            // Remove line-continuation backslashes
-            acc + (x.match(/^\s*\\\s*/) ? x.replace(/^\s*\\\s*/, "") : "\n" + x)
-          ).split("\n")
-        );
-      }
-    }
+      if (!(await exists(sandwichPath))) return [];
+      return await Deno.readTextFile(sandwichPath).then((x) =>
+        x.split("\n").reduce((acc, x) =>
+          // Remove line-continuation backslashes
+          acc + (x.match(/^\s*\\\s*/) ? x.replace(/^\s*\\\s*/, "") : "\n" + x)
+        ).split("\n")
+      );
+    })();
 
-    const colorschemes = Object.fromEntries(
-      plugins
-        .filter((x): x is ColorSchemePlugin => Object.hasOwn(x, "colorschemes"))
-        .flatMap((plugin) =>
-          plugin.colorschemes.map((x) => [x.name, x] as const)
-        ),
+    const colorschemes = pipe(
+      plugins,
+      filter(isColorSchemePlugin),
+      filter((x) => evalIf(x, args.denops)),
+      flatMap((x) => x.colorschemes.map((x) => [x.name, x] as const)),
     );
-    const colorschemeStateLines = [
-      "let g:user#colorscheme#_colorschemes = " + JSON.stringify(colorschemes),
-    ];
-
-    // if (await extAction("installer", "getNotInstalled")) {
-    //   extAction("installer", "install");
-    // }
+    const colorschemeStateLines = pipe(
+      await Array.fromAsync(colorschemes),
+      Object.fromEntries,
+      JSON.stringify,
+      (v) => ["let g:user#colorscheme#_colorschemes = " + v],
+    );
 
     return {
       ftplugins,

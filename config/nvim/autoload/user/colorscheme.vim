@@ -1,5 +1,5 @@
 function! user#colorscheme#get() abort
-  return g:user#colorscheme#_colorschemes
+  return g:->get('user#colorscheme#_colorschemes', {})
 endfunction
 
 function! user#colorscheme#lightline() abort
