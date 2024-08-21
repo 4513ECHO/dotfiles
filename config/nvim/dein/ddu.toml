@@ -95,13 +95,7 @@ repo = 'https://github.com/Shougo/ddu-source-file'
 repo = 'https://github.com/Shougo/ddu-source-file_rec'
 
 [[plugins]]
-repo = 'https://github.com/Shougo/ddu-source-line'
-
-[[plugins]]
 repo = 'https://github.com/Shougo/ddu-source-register'
-
-[[plugins]]
-repo = 'https://github.com/matsui54/ddu-source-dein_update'
 
 [[plugins]]
 repo = 'https://github.com/matsui54/ddu-source-file_external'
@@ -111,9 +105,6 @@ repo = 'https://github.com/matsui54/ddu-source-command_history'
 
 [[plugins]]
 repo = 'https://github.com/matsui54/ddu-source-help'
-
-[[plugins]]
-repo = 'https://github.com/matsui54/ddu-source-man'
 
 [[plugins]]
 repo = 'https://github.com/shun/ddu-source-buffer'

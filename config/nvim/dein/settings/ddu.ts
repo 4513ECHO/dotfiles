@@ -11,8 +11,8 @@ import {
   type Params as UiFFParams,
   Ui as UiFF,
 } from "jsr:@shougo/ddu-ui-ff@^1.2.0";
-import type { ActionData as GitStatusActionData } from "https://pax.deno.dev/kuuote/ddu-source-git_status@v1.0.0/denops/@ddu-kinds/git_status.ts";
-import type { Data as GitDiffItemData } from "https://pax.deno.dev/kuuote/ddu-source-git_diff@6a7b725b/denops/@ddu-sources/git_diff.ts";
+import type { ActionData as GitStatusActionData } from "jsr:@kuuote/ddu-kind-git-status@^1.1.0";
+import type { Data as GitDiffItemData } from "jsr:@kuuote/ddu-source-git-diff@^1.0.0";
 import type { Denops } from "jsr:@denops/std@^7.0.1";
 import * as autocmd from "jsr:@denops/std@^7.0.1/autocmd";
 import * as batch from "jsr:@denops/std@^7.0.1/batch";
@@ -134,7 +134,6 @@ export class Config extends BaseConfig {
         action: { defaultAction: "do" },
         colorscheme: { defaultAction: "set" },
         command_history: { defaultAction: "edit" },
-        dein_update: { defaultAction: "viewDiff" },
         file: { defaultAction: "open" },
         git_status: {
           defaultAction: "open",
@@ -193,9 +192,6 @@ export class Config extends BaseConfig {
         },
         action: {
           matchers: ["matcher_action", "matcher_fzf"],
-        },
-        dein_update: {
-          matchers: ["matcher_dein_update"],
         },
         file: { defaultAction: "narrow" },
         ghq: { defaultAction: "cd" },
