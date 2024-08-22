@@ -13,7 +13,7 @@ endif
 if dpp#min#load_state(s:dpp_dir)
   for s:plugin in [
         \ 'github.com/vim-denops/denops.vim',
-        \ 'github.com/Shougo/dpp-ext-installer',
+        \ 'github.com/4513ECHO/dpp-ext-installer_feat_streamed-message',
         \ 'github.com/Shougo/dpp-ext-lazy',
         \ 'github.com/Shougo/dpp-ext-toml',
         \ 'github.com/Shougo/dpp-protocol-git',

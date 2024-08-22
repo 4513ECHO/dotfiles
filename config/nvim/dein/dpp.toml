@@ -16,7 +16,9 @@ noremap! <C-c> <Cmd>call denops#interrupt()<CR><C-c>
 repo = 'https://github.com/Shougo/dpp.vim'
 
 [[plugins]]
-repo = 'https://github.com/Shougo/dpp-ext-installer'
+# repo = 'https://github.com/Shougo/dpp-ext-installer'
+repo = 'https://github.com/4513ECHO/dpp-ext-installer'
+rev = 'feat/streamed-message'
 
 [[plugins]]
 repo = 'https://github.com/Shougo/dpp-ext-lazy'
