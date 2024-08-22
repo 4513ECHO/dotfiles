@@ -25,11 +25,14 @@
 
 [push]
   default = simple
-  autoSetupRemote = false
+  autoSetupRemote = true
 
 [pull]
   rebase = false
   ff = only
+
+[rerere]
+  enabled = true
 
 [status]
   showUntrackedFiles = all
@@ -65,17 +68,14 @@
   adp = add --patch # -p
   adu = add --update # -u
   br = branch
-  cm = commit
   df = diff
   dft = difftool
-  pl = pull
-  ps = push
+  pushf = push --force-with-lease --force-if-includes
   st = status
   stat = diff --stat
   sw = switch
   ### feature shortcut ###
   alias = !git config --get-regexp "^alias" | sed 's@alias\\.\\(\\S*\\) \\(.*\\)@\\1\\\t -> \\2@'
-  colorst = !git -c color.status=always status --short --branch
   contributors = shortlog --summary --numbered --email
   default-branch = !git symbolic-ref refs/remotes/origin/HEAD | sed "s@refs/remotes/origin/@@"
   dirs = !git ls-files | sed -e "/^[^\\/]*$/d" -e "s:/[^/]*$::" | uniq
@@ -93,10 +93,6 @@
   home = !git switch $(git default-branch)
   ignored = !git status --ignored --short | awk '$1 == \"!!\" {print $2}'
   latest = describe --tags --abbrev=0
-  logi = "!f(){ \
-    sha=\"$(git log --oneline --color \"${1:-HEAD}\" | fzf --ansi | awk '{print $1}')\"; \
-    [ -n \"$sha\" ] && git show \"$sha\"; \
-  };f"
   recommit = commit --amend
   root = rev-parse --show-toplevel
   sync = "!f(){ \
@@ -104,9 +100,10 @@
     [ -z \"$(gh repo view \"$(git config --get remote.origin.url)\" --json isFork --jq '.isFork and empty')\" ] && { \
       git remote get-url upstream 2>/dev/null >&2 || \
         git remote add upstream \"$(gh repo view --json url --jq .url)\"; \
-      git pull --ff-only --prune upstream \"$(git default-branch)\"; \
+      git pull upstream \"$(git default-branch)\"; \
     }; \
-    git pull --ff-only --prune origin \"$(git default-branch)\"; \
+    git fetch --prune; \
+    git pull origin \"$(git default-branch)\"; \
   };f"
   uncommit = reset --soft HEAD^
   unstage = restore --staged
