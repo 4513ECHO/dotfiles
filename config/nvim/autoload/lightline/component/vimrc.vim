@@ -1,4 +1,4 @@
-let s:lightline_ignore_filetypes = ['ddu-ff', 'ddu-ff-filter', 'molder']
+let s:lightline_ignore_filetypes = ['ddu-ff', 'molder']
 
 let s:statuswidth = { -> &laststatus > 2 ? &columns : winwidth(0) }
 

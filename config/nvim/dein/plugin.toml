@@ -123,6 +123,20 @@ xnoremap <C-k> <Plug>(edgemotion-k)
 repo = 'https://github.com/hrsh7th/vim-searchx'
 on_func = ['searchx#']
 hook_add = '''
+nnoremap ? <Cmd>call searchx#start(#{ dir: 0 })<CR>
+nnoremap / <Cmd>call searchx#start(#{ dir: 1 })<CR>
+xnoremap ? <Cmd>call searchx#start(#{ dir: 0 })<CR>
+xnoremap / <Cmd>call searchx#start(#{ dir: 1 })<CR>
+
+cnoremap <C-g> <Cmd>call searchx#next_dir()<CR><Plug>(search-post)
+cnoremap <C-t> <Cmd>call searchx#prev_dir()<CR><Plug>(search-post)
+
+nnoremap N <Cmd>call searchx#prev_dir()<CR><Plug>(search-post)
+nnoremap n <Cmd>call searchx#next_dir()<CR><Plug>(search-post)
+xnoremap N <Cmd>call searchx#prev_dir()<CR><Plug>(search-post)
+xnoremap n <Cmd>call searchx#next_dir()<CR><Plug>(search-post)
+'''
+hook_source = '''
 let g:searchx = #{
       \ auto_accept: v:true,
       \ markers: split('ASDFGHJKLQWERTYUIOPZXCVBNM', '.\zs'),
@@ -140,19 +154,6 @@ endfunction
 
 autocmd vimrc User SearchxLeave call searchx#clear()
 autocmd vimrc User SearchxAccept normal! zzzv
-
-nnoremap ? <Cmd>call searchx#start(#{ dir: 0 })<CR>
-nnoremap / <Cmd>call searchx#start(#{ dir: 1 })<CR>
-xnoremap ? <Cmd>call searchx#start(#{ dir: 0 })<CR>
-xnoremap / <Cmd>call searchx#start(#{ dir: 1 })<CR>
-
-cnoremap <C-g> <Cmd>call searchx#next_dir()<CR><Plug>(search-post)
-cnoremap <C-t> <Cmd>call searchx#prev_dir()<CR><Plug>(search-post)
-
-nnoremap N <Cmd>call searchx#prev_dir()<CR><Plug>(search-post)
-nnoremap n <Cmd>call searchx#next_dir()<CR><Plug>(search-post)
-xnoremap N <Cmd>call searchx#prev_dir()<CR><Plug>(search-post)
-xnoremap n <Cmd>call searchx#next_dir()<CR><Plug>(search-post)
 '''
 
 [[plugins]]
@@ -529,7 +530,7 @@ let g:Hexokinase_ftOptInPatterns = #{
       \   'rgba', 'hsl', 'hsla', 'colour_names'
       \ ],
       \ }
-let g:Hexokinase_ftDisabled = ['molder', 'ddu-ff', 'ddu-ff-filter']
+let g:Hexokinase_ftDisabled = ['molder', 'ddu-ff']
 let g:Hexokinase_executable_path = expand('$AQUA_ROOT_DIR/bin/hexokinase')
 '''
 

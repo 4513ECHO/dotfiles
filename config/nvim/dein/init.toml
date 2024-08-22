@@ -13,9 +13,6 @@ let b:auto_cursorline_disabled = v:true
 ddu-ff = '''
 let b:auto_cursorline_disabled = v:true
 '''
-ddu-ff-filter = '''
-let b:auto_cursorline_disabled = v:true
-'''
 fern = '''
 let b:auto_cursorline_disabled = v:true
 '''
