@@ -63,10 +63,40 @@ vim.lsp.handlers["textDocument/hover"] =
   vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 require("lspconfig.ui.windows").default_options.border = "single"
 
+vim.lsp.util.open_floating_preview = (function(wrapped)
+  return function(contents, syntax, opts)
+    local bufnr, winid = wrapped(contents, syntax, opts)
+    if syntax == "markdown" then
+      -- Reapply treesitter highlighting
+      vim.treesitter.stop(bufnr)
+      vim.treesitter.start(bufnr, "markdown")
+      vim.wo[winid].conceallevel = 0
+      -- Remove zero-width space
+      vim._with(
+        { buf = bufnr, bo = { modifiable = true } },
+        function() vim.cmd "silent keeppatterns %substitute/&#8203;//eg" end
+      )
+    end
+    return bufnr, winid
+  end
+end)(vim.lsp.util.open_floating_preview)
+
 require("ddc_source_lsp_setup").setup {
-  override_capabilities = true,
+  override_capabilities = false,
   respect_trigger = true,
 }
+lspconfig.util.on_setup = lspconfig.util.add_hook_before(
+  lspconfig.util.on_setup,
+  ---@param config lspconfig.Config
+  function(config)
+    ---@type lsp.ClientCapabilities
+    local capabilities = require("ddc_source_lsp").make_client_capabilities()
+    if config.name == "vimls" then
+      capabilities.textDocument.completion.completionItem.snippetSupport = false
+    end
+    config.capabilities = capabilities
+  end
+)
 
 vim.diagnostic.config {
   signs = {
