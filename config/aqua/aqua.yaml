@@ -30,7 +30,7 @@ packages:
   - name: Enter-tainer/typstyle@v0.11.32
   - name: ericchiang/pup@v0.4.0
   - name: eza-community/eza@v0.19.0
-  - name: gohugoio/hugo@v0.133.0
+  - name: gohugoio/hugo@v0.133.1
   - name: golang.org/x/tools/gopls@v0.16.1
   - name: golang/go@go1.23.0
   - name: hadolint/hadolint@v2.12.0
