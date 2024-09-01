@@ -1,8 +1,8 @@
-import type { Item } from "jsr:@shougo/ddc-vim@^6.0.0/types";
+import type { Item } from "jsr:@shougo/ddc-vim@^7.0.0/types";
 import {
   BaseFilter,
   type FilterArguments,
-} from "jsr:@shougo/ddc-vim@^6.0.0/filter";
+} from "jsr:@shougo/ddc-vim@^7.0.0/filter";
 // based on https://github.com/kuuote/dotvim/blob/92773506/denops/%40ddc-filters/sorter_file.ts
 
 const kindRankDefinition: Record<string, number> = {
@@ -30,7 +30,7 @@ function parseMenu(menu?: string): string {
 type Params = Record<PropertyKey, never>;
 
 export class Filter extends BaseFilter<Params> {
-  override filter(args: FilterArguments<Params>): Promise<Item[]> {
+  filter(args: FilterArguments<Params>): Promise<Item[]> {
     return Promise.resolve(args.items.sort((a, b) => {
       const menuRank = // Compare menu
         (menuRankDefinition[parseMenu(a.menu)] ?? 99) -
@@ -51,7 +51,7 @@ export class Filter extends BaseFilter<Params> {
     }));
   }
 
-  override params(): Params {
+  params(): Params {
     return {};
   }
 }

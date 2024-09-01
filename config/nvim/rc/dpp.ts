@@ -2,32 +2,29 @@ import {
   BaseConfig,
   type ConfigArguments,
   type ConfigReturn,
-} from "jsr:@shougo/dpp-vim@^2.3.0/config";
-import type {
-  Action,
-  BaseExtParams,
-  Plugin,
-} from "jsr:@shougo/dpp-vim@^2.3.0/types";
-import { mergeFtplugins } from "jsr:@shougo/dpp-vim@^2.3.0/utils";
-import type { Params as InstallerExtParams } from "jsr:@shougo/dpp-ext-installer@^1.1.0";
-import type { ExtActions as LazyExtActions } from "jsr:@shougo/dpp-ext-lazy@^1.4.0";
+} from "jsr:@shougo/dpp-vim@^3.0.0/config";
+import { Action } from "jsr:@shougo/dpp-vim@^3.0.0/ext";
+import type { BaseParams, Plugin } from "jsr:@shougo/dpp-vim@^3.0.0/types";
+import { mergeFtplugins } from "jsr:@shougo/dpp-vim@^3.0.0/utils";
+import type { Params as InstallerExtParams } from "jsr:@shougo/dpp-ext-installer@^1.2.0";
+import type { ExtActions as LazyExtActions } from "jsr:@shougo/dpp-ext-lazy@^1.5.0";
 import type {
   ExtActions as TomlExtActions,
   Toml,
-} from "jsr:@shougo/dpp-ext-toml@^1.2.0";
-import type { Denops } from "jsr:@denops/std@^7.0.3";
-import * as vars from "jsr:@denops/std@^7.0.3/variable";
-import { exists } from "jsr:@std/fs@^1.0.1/exists";
-import { join } from "jsr:@std/path@^1.0.2/join";
-import { parse } from "jsr:@std/toml@^1.0.0/parse";
-import { ensure, is } from "jsr:@core/unknownutil@^4.2.0";
-import { pipe } from "jsr:@core/pipe@^0.2.0";
+} from "jsr:@shougo/dpp-ext-toml@^1.3.0";
+import type { Denops } from "jsr:@denops/std@^7.1.1";
+import * as vars from "jsr:@denops/std@^7.1.1/variable";
+import { exists } from "jsr:@std/fs@^1.0.3/exists";
+import { join } from "jsr:@std/path@^1.0.4/join";
+import { parse } from "jsr:@std/toml@^1.0.1/parse";
+import { ensure, is } from "jsr:@core/unknownutil@^4.3.0";
+import { pipe } from "jsr:@core/pipe@^0.3.0";
 import { filter } from "jsr:@core/iterutil@^0.8.0/pipe/async/filter";
 import { flatMap } from "jsr:@core/iterutil@^0.8.0/pipe/async/flat-map";
 
 type Exts = {
-  lazy: LazyExtActions<BaseExtParams>;
-  toml: TomlExtActions<BaseExtParams>;
+  lazy: LazyExtActions<BaseParams>;
+  toml: TomlExtActions<BaseParams>;
 };
 const isColorSchemePlugin = is.ObjectOf({
   name: is.String,

@@ -1,36 +1,38 @@
 import {
   BaseConfig,
   type ConfigArguments,
-} from "jsr:@shougo/ddu-vim@^5.0.0/config";
+} from "jsr:@shougo/ddu-vim@^6.1.0/config";
 import {
   ActionFlags,
   type DduItem,
   type DduOptions,
-} from "jsr:@shougo/ddu-vim@^5.0.0/types";
+} from "jsr:@shougo/ddu-vim@^6.1.0/types";
 import {
   type Params as UiFFParams,
   Ui as UiFF,
 } from "jsr:@shougo/ddu-ui-ff@^1.2.0";
 import type { ActionData as GitStatusActionData } from "jsr:@kuuote/ddu-kind-git-status@^1.1.0";
 import type { Data as GitDiffItemData } from "jsr:@kuuote/ddu-source-git-diff@^1.0.0";
-import type { Denops } from "jsr:@denops/std@^7.0.1";
-import * as autocmd from "jsr:@denops/std@^7.0.1/autocmd";
-import * as batch from "jsr:@denops/std@^7.0.1/batch";
-import * as lambda from "jsr:@denops/std@^7.0.1/lambda";
-import * as vars from "jsr:@denops/std@^7.0.1/variable";
-import { is } from "jsr:@core/unknownutil@^3.18.1";
-import * as u from "jsr:@core/unknownutil@^3.18.1";
-import { sprintf } from "jsr:@std/fmt@^1.0.0-rc.1/printf";
-import { join } from "jsr:@std/path@^1.0.2/join";
-import { equal } from "jsr:@std/assert@^1.0.0/equal";
+import type { Denops } from "jsr:@denops/std@^7.1.1";
+import * as autocmd from "jsr:@denops/std@^7.1.1/autocmd";
+import * as batch from "jsr:@denops/std@^7.1.1/batch";
+import * as lambda from "jsr:@denops/std@^7.1.1/lambda";
+import * as vars from "jsr:@denops/std@^7.1.1/variable";
+import { is } from "jsr:@core/unknownutil@^4.3.0/is";
+import { asOptional } from "jsr:@core/unknownutil@^4.3.0/as/optional";
+import { ensure } from "jsr:@core/unknownutil@^4.3.0/ensure";
+import { maybe } from "jsr:@core/unknownutil@^4.3.0/maybe";
+import { sprintf } from "jsr:@std/fmt@^1.0.0/printf";
+import { join } from "jsr:@std/path@^1.0.3/join";
+import { equal } from "jsr:@std/assert@^1.0.3/equal";
 
 type GitDiffItem = DduItem & { data: GitDiffItemData };
 
 async function onColorScheme(denops: Denops): Promise<void> {
   // NOTE: eob of 'fillchars' is annoying
-  const bgcolorObj = u.ensure(
+  const bgcolorObj = ensure(
     await denops.call("nvim_get_hl", 0, { name: "Normal" }),
-    is.ObjectOf({ bg: is.OptionalOf(is.Number) }),
+    is.ObjectOf({ bg: asOptional(is.Number) }),
   );
   const bgcolor = sprintf("#%06x", bgcolorObj.bg ?? 0x000000);
   await denops.call("nvim_set_hl", 0, "DduEndOfBuffer", {
@@ -40,7 +42,7 @@ async function onColorScheme(denops: Denops): Promise<void> {
 }
 
 async function applySyntax(denops: Denops): Promise<void> {
-  const { sources } = u.ensure(
+  const { sources } = ensure(
     await denops.call("ddu#custom#get_current"),
     is.ObjectOf({ sources: is.ArrayOf(is.ObjectOf({ name: is.String })) }),
   );
@@ -155,7 +157,7 @@ export class Config extends BaseConfig {
                   name: "git_diff_current",
                   sourceOptions: { _: { path } },
                   sourceParams: {
-                    _: u.maybe(args.actionParams, is.Record) ?? {},
+                    _: maybe(args.actionParams, is.Record) ?? {},
                   },
                 } satisfies Partial<DduOptions>,
               );

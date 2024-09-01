@@ -1,10 +1,10 @@
-import type { ActionData } from "jsr:@4513echo/ddu-kind-url@0.4.0";
+import type { ActionData } from "jsr:@4513echo/ddu-kind-url@^0.6.0";
 import {
   BaseSource,
   type GatherArguments,
   type OnInitArguments,
-} from "jsr:@shougo/ddu-vim@^5.0.0/source";
-import type { Item } from "jsr:@shougo/ddu-vim@^5.0.0/types";
+} from "jsr:@shougo/ddu-vim@^6.1.0/source";
+import type { Item } from "jsr:@shougo/ddu-vim@^6.1.0/types";
 import type {
   BasePage,
   PageList,
@@ -16,10 +16,10 @@ type Params = {
 };
 
 export class Source extends BaseSource<Params, ActionData> {
-  override kind = "url";
+  kind = "url";
   #pages: Record<string, BasePage[]> = {};
 
-  override async onInit(args: OnInitArguments<Params>): Promise<void> {
+  async onInit(args: OnInitArguments<Params>): Promise<void> {
     if (!args.sourceParams.project) {
       await args.denops.call(
         "ddu#util#print_error",

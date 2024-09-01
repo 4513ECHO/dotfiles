@@ -1,8 +1,9 @@
-import type { Denops, Entrypoint } from "jsr:@denops/std@^7.0.1";
-import { ensure, is } from "jsr:@core/unknownutil@^3.18.1";
-import { exists } from "jsr:@std/fs@^1.0.0/exists";
-import { expandGlob } from "jsr:@std/fs@^1.0.0/expand-glob";
-import { join } from "jsr:@std/path@^1.0.2/join";
+import type { Denops, Entrypoint } from "jsr:@denops/std@^7.1.1";
+import { is } from "jsr:@core/unknownutil@^4.3.0/is";
+import { ensure } from "jsr:@core/unknownutil@^4.3.0/ensure";
+import { exists } from "jsr:@std/fs@^1.0.2/exists";
+import { expandGlob } from "jsr:@std/fs@^1.0.2/expand-glob";
+import { join } from "jsr:@std/path@^1.0.3/join";
 
 const decoder = new TextDecoder();
 

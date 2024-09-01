@@ -1,11 +1,11 @@
 import {
   BaseConfig,
   type ConfigArguments,
-} from "jsr:@shougo/ddc-vim@^6.0.1/config";
-import type { DdcOptions } from "jsr:@shougo/ddc-vim@^6.0.1/types";
+} from "jsr:@shougo/ddc-vim@^7.0.0/config";
+import type { DdcOptions } from "jsr:@shougo/ddc-vim@^7.0.0/types";
 
 export class Config extends BaseConfig {
-  override config(args: ConfigArguments): Promise<void> {
+  config(args: ConfigArguments): Promise<void> {
     const hasNvim = args.denops.meta.host === "nvim";
     const sources = ["file", "around", "vsnip", "buffer"]
       .concat(Deno.env.has("TMUX") ? ["tmux"] : []);
