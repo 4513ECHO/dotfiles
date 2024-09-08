@@ -1,4 +1,4 @@
-let s:dpp_dir = (has('nvim') ? g:cache_home : g:vim_cache_home) .. '/dpp'
+let s:dpp_dir = g:cache_home .. '/dpp'
 let s:dpp_ts = g:config_home .. '/rc/dpp.ts'
 let $DEIN_DIR = g:config_home .. '/dein'
 

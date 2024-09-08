@@ -6,7 +6,6 @@ let $VIM_PID = getpid()
 let g:cache_home = $XDG_CACHE_HOME .. '/nvim'
 let g:config_home = $XDG_CONFIG_HOME .. '/nvim'
 let g:data_home = $XDG_DATA_HOME .. '/nvim'
-let g:vim_cache_home = $XDG_CACHE_HOME .. '/vim'
 let g:vim_data_home = $XDG_DATA_HOME .. '/vim'
 
 let g:launcher_config = g:->get('launcher_config', {})
