@@ -7,7 +7,6 @@
   editor = $HOME/.config/git/editor.sh
   quotepath = false
   commentChar = ";"
-  hooksPath = ~/.config/git/hooks
 
 [pager]
   diff = $HOME/.config/git/diff.sh | less -R
