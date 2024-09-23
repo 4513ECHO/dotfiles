@@ -54,24 +54,6 @@ packages:
       - linux
 
   # init: n
-  - type: http
-    repo_owner: nodejs
-    repo_name: node
-    rosetta2: true
-    url: https://nodejs.org/dist/{{.Version}}/node-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz
-    link: https://nodejs.org/
-    description: Node.js JavaScript runtime
-    replacements:
-      amd64: x64
-    files:
-      - name: corepack
-        src: node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/corepack
-      - name: node
-        src: node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/node
-      - name: npm
-        src: node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/npm
-      - name: npx
-        src: node-{{.Version}}-{{.OS}}-{{.Arch}}/bin/npx
 
   # init: o
 
@@ -93,44 +75,6 @@ packages:
     repo_owner: rrethy
     repo_name: hexokinase
     description: Fast text scraper to find and convert colours (hex, rgb, rgb, hsl, web colours, custom patterns, etc.) into hex values
-  - type: http
-    repo_owner: rust-lang
-    repo_name: rust
-    url: https://static.rust-lang.org/dist/rust-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz
-    description: Empowering everyone to build reliable and efficient software
-    replacements:
-      darwin: apple-darwin
-      linux: unknown-linux-musl
-      freebsd: unknown-freebsd
-      netbsd: unknown-netbsd
-      amd64: x86_64
-      arm64: aarch64
-      386: i686
-    files:
-      - name: cargo
-        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/cargo/bin/cargo
-      - name: clippy-driver
-        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/clippy-preview/bin/clippy-driver
-      - name: cargo-clippy
-        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/clippy-preview/bin/cargo-clippy
-      - name: rls
-        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/rls-preview/bin/rls
-      - name: rust-demangler
-        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/rust-demangler-preview/bin/rust-demangler
-      - name: rustdoc
-        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rustdoc
-      - name: rust-lldb
-        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rust-lldb
-      - name: rustc
-        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rustc
-      - name: rust-gdbgui
-        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rust-gdbgui
-      - name: rust-gdb
-        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustc/bin/rust-gdb
-      - name: rustfmt
-        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustfmt-preview/bin/rustfmt
-      - name: cargo-fmt
-        src: rust-{{.Version}}-{{.Arch}}-{{.OS}}/rustfmt-preview/bin/cargo-fmt
 
   # init: s
   - type: github_content

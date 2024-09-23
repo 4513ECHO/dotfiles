@@ -10,27 +10,19 @@ registries:
 
 packages:
   - name: ajeetdsouza/zoxide@v0.9.6
-  - name: antonmedv/fx@35.0.0
   - name: aquaproj/aqua-installer@v3.0.1
   - name: aquaproj/registry-tool@v0.2.5
   - name: aristocratos/btop@v1.4.0
   - name: b3nj5m1n/xdg-ninja@v0.2.0.1
   - name: babarot/afx@v0.2.1
-  - name: babarot/gomi@v1.1.6
   - name: BurntSushi/ripgrep@14.1.1
   - name: charmbracelet/glow@v2.0.0
   - name: cli/cli@v2.57.0
   - name: dandavison/delta@0.18.2
   - name: denoland/deno@v1.46.3
-  - name: docker/cli/rootless@v20.10.17
-  - name: docker/cli@v20.10.17
-  - name: docker/compose@v2.29.7
   - name: dylanaraps/neofetch@7.1.0
-  - name: ekalinin/github-markdown-toc@0.10.0
   - name: Enter-tainer/typstyle@v0.11.34
-  - name: ericchiang/pup@v0.4.0
   - name: eza-community/eza@v0.19.4
-  - name: gohugoio/hugo@v0.135.0
   - name: golang.org/x/tools/gopls@v0.16.2
   - name: golang/go@go1.23.1
   - name: hadolint/hadolint@v2.12.0
@@ -52,6 +44,7 @@ packages:
   - name: Myriad-Dreamin/tinymist@v0.11.22
   - name: nametake/golangci-lint-langserver@v0.0.9
   - name: nektos/act@v0.2.67
+  - name: nodejs/node@v22.9.0
   - name: noahgorstein/jqp@v0.7.0
   - name: rhysd/actionlint@v1.7.2
   - name: rhysd/hgrep@v0.3.7
@@ -63,16 +56,13 @@ packages:
   - name: sharkdp/hyperfine@v1.18.0
   - name: sharkdp/pastel@v0.10.0
   - name: sheepla/longgopher@v0.0.3
-  - name: sheepla/pingu@v0.0.5
   - name: simeji/jid@v0.7.6
   - name: tamasfe/taplo/full@0.9.3
-  - name: tomnomnom/gron@v0.7.1
   - name: TomWright/dasel@v2.8.1
   - name: tree-sitter/tree-sitter@v0.23.0
   - name: typst/typst
     # NOTE: v0.11.1 has a bug (https://github.com/typst/typst/issues/4242)
     version: v0.11.0
-  - name: vishaltelangre/ff@v0.1.8
   - name: x-motemen/ghq@v1.6.2
   - name: XAMPPRocky/tokei@v12.1.2
   - name: ziglang/zig@0.13.0
@@ -81,8 +71,6 @@ packages:
   - name: JosefZIla/bash2048
     registry: local
     version: master
-  - name: nodejs/node@v22.9.0
-    registry: local
   - name: thinca/ciw
     registry: local
     version: master
