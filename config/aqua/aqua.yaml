@@ -53,7 +53,7 @@ packages:
   - name: nametake/golangci-lint-langserver@v0.0.9
   - name: nektos/act@v0.2.67
   - name: noahgorstein/jqp@v0.7.0
-  - name: rhysd/actionlint@v1.7.1
+  - name: rhysd/actionlint@v1.7.2
   - name: rhysd/hgrep@v0.3.7
   - name: rhysd/vim-startuptime@v1.3.2
   - name: rust-lang/rust-analyzer@2024-01-22
