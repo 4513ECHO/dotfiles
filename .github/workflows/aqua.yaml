@@ -1,20 +1,17 @@
----
 name: aqua
+
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+
 jobs:
   test:
     strategy:
       matrix:
-        goos:
-          - darwin
-          - linux
-        goarch:
-          - amd64
-          - arm64
+        goos: [darwin, linux]
+        goarch: [amd64, arm64]
     runs-on: ubuntu-latest
     env:
       AQUA_CONFIG: config/aqua/aqua.yaml
@@ -22,27 +19,23 @@ jobs:
       AQUA_POLICY_CONFIG: config/aqua/aqua-policy.yaml
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       # NOTE: use paths-filter instead of on.pull_request.paths to trigger test always
-      - name: Check Changed Files
-        uses: dorny/paths-filter@v2
+      - uses: dorny/paths-filter@v3
         id: filter
         with:
           filters: |
             aqua:
-              - ".github/workflows/aqua.yaml"
-              - "config/aqua/aqua.yaml"
-              - "config/aqua/experimental.yaml"
+              - .github/workflows/aqua.yaml
+              - config/aqua/aqua.yaml
+              - config/aqua/experimental.yaml
       - name: Install aqua
         if: steps.filter.outputs.aqua == 'true'
-        uses: aquaproj/aqua-installer@v1.1.1
+        uses: aquaproj/aqua-installer@v3.0.1
         with:
           aqua_version: v2.35.0
-          policy_allow: config/aqua/aqua-policy.yaml
-      - name: Set up Golang
+      - uses: actions/setup-go@v5
         if: steps.filter.outputs.aqua == 'true'
-        uses: actions/setup-go@v3
         with:
           go-version: "1.22.1"
       - name: Run test

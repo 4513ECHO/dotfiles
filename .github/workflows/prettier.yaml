@@ -1,22 +1,24 @@
----
 name: prettier
+
 on:
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
       - "**/*.yaml"
       - "**/*.yml"
   pull_request:
-    branches: [main]
+    branches:
+      - main
     paths:
       - "**/*.yaml"
       - "**/*.yml"
+
 jobs:
   prettier:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       - name: Install prettier
         run: npm install --location=global prettier
       - name: Check style
