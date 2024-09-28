@@ -1,4 +1,4 @@
-import type { Denops, Entrypoint } from "jsr:@denops/std@^7.1.1";
+import type { Denops, Entrypoint } from "jsr:@denops/std@^7.2.0";
 import { is } from "jsr:@core/unknownutil@^4.3.0/is";
 import { ensure } from "jsr:@core/unknownutil@^4.3.0/ensure";
 import { exists } from "jsr:@std/fs@^1.0.2/exists";

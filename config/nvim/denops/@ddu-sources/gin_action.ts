@@ -8,8 +8,8 @@ import {
   type Item,
 } from "jsr:@shougo/ddu-vim@^6.1.0/types";
 import type { ActionData } from "jsr:@shougo/ddu-kind-word@^0.4.1";
-import { ensure } from "jsr:@denops/std@^7.1.1/buffer";
-import { rawString, useEval } from "jsr:@denops/std@^7.1.1/eval";
+import { ensure } from "jsr:@denops/std@^7.2.0/buffer";
+import { rawString, useEval } from "jsr:@denops/std@^7.2.0/eval";
 
 type Params = Record<PropertyKey, never>;
 const collector =

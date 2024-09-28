@@ -1,4 +1,4 @@
-import * as fn from "jsr:@denops/std@^7.1.1/function";
+import * as fn from "jsr:@denops/std@^7.2.0/function";
 import type { ActionData } from "jsr:@shougo/ddu-kind-file@^0.9.0";
 import {
   BaseSource,

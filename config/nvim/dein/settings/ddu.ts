@@ -13,11 +13,11 @@ import {
 } from "jsr:@shougo/ddu-ui-ff@^1.2.0";
 import type { ActionData as GitStatusActionData } from "jsr:@kuuote/ddu-kind-git-status@^1.1.0";
 import type { Data as GitDiffItemData } from "jsr:@kuuote/ddu-source-git-diff@^1.0.0";
-import type { Denops } from "jsr:@denops/std@^7.1.1";
-import * as autocmd from "jsr:@denops/std@^7.1.1/autocmd";
-import * as batch from "jsr:@denops/std@^7.1.1/batch";
-import * as lambda from "jsr:@denops/std@^7.1.1/lambda";
-import * as vars from "jsr:@denops/std@^7.1.1/variable";
+import type { Denops } from "jsr:@denops/std@^7.2.0";
+import * as autocmd from "jsr:@denops/std@^7.2.0/autocmd";
+import * as batch from "jsr:@denops/std@^7.2.0/batch";
+import * as lambda from "jsr:@denops/std@^7.2.0/lambda";
+import * as vars from "jsr:@denops/std@^7.2.0/variable";
 import { is } from "jsr:@core/unknownutil@^4.3.0/is";
 import { asOptional } from "jsr:@core/unknownutil@^4.3.0/as/optional";
 import { ensure } from "jsr:@core/unknownutil@^4.3.0/ensure";

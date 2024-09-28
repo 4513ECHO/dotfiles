@@ -12,8 +12,8 @@ import type {
   ExtActions as TomlExtActions,
   Toml,
 } from "jsr:@shougo/dpp-ext-toml@^1.3.0";
-import type { Denops } from "jsr:@denops/std@^7.1.1";
-import * as vars from "jsr:@denops/std@^7.1.1/variable";
+import type { Denops } from "jsr:@denops/std@^7.2.0";
+import * as vars from "jsr:@denops/std@^7.2.0/variable";
 import { exists } from "jsr:@std/fs@^1.0.3/exists";
 import { join } from "jsr:@std/path@^1.0.4/join";
 import { parse } from "jsr:@std/toml@^1.0.1/parse";
