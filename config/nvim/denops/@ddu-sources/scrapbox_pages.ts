@@ -16,10 +16,10 @@ type Params = {
 };
 
 export class Source extends BaseSource<Params, ActionData> {
-  kind = "url";
+  override kind = "url";
   #pages: Record<string, BasePage[]> = {};
 
-  async onInit(args: OnInitArguments<Params>): Promise<void> {
+  override async onInit(args: OnInitArguments<Params>): Promise<void> {
     if (!args.sourceParams.project) {
       await args.denops.call(
         "ddu#util#print_error",

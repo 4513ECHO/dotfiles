@@ -16,13 +16,15 @@ const collector =
   "maplist()->filter({ -> v:val.lhs->stridx('<Plug>(gin-action') ==# 0 })->map({ -> v:val.lhs })";
 
 export class Source extends BaseSource<Params, ActionData> {
-  kind = "word";
+  override kind = "word";
 
-  gather(args: GatherArguments<Params>): ReadableStream<Item<ActionData>[]> {
+  override gather(
+    args: GatherArguments<Params>,
+  ): ReadableStream<Item<ActionData>[]> {
     return ReadableStream.from(this.#processItems(args));
   }
 
-  actions: Actions<Params> = {
+  override actions: Actions<Params> = {
     async execute(args) {
       await useEval(args.denops, async (denops) => {
         for (const item of args.items) {
@@ -38,7 +40,7 @@ export class Source extends BaseSource<Params, ActionData> {
     },
   };
 
-  params(): Params {
+  override params(): Params {
     return {};
   }
 

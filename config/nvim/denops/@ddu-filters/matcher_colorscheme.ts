@@ -11,7 +11,7 @@ export type Params = Record<PropertyKey, never>;
 export class Filter extends BaseFilter<Params> {
   #colorschemes: string[] = [];
 
-  async onInit(args: OnInitArguments<Params>): Promise<void> {
+  override async onInit(args: OnInitArguments<Params>): Promise<void> {
     this.#colorschemes = Object.keys(
       ensure(
         await args.denops.call("user#colorscheme#get"),
@@ -20,7 +20,7 @@ export class Filter extends BaseFilter<Params> {
     );
   }
 
-  filter(args: FilterArguments<Params>): Promise<DduItem[]> {
+  override filter(args: FilterArguments<Params>): Promise<DduItem[]> {
     return Promise.resolve(
       args.items.filter((item) =>
         this.#colorschemes.includes(

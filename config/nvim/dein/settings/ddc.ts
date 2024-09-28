@@ -5,7 +5,7 @@ import {
 import type { DdcOptions } from "jsr:@shougo/ddc-vim@^7.0.0/types";
 
 export class Config extends BaseConfig {
-  config(args: ConfigArguments): Promise<void> {
+  override config(args: ConfigArguments): Promise<void> {
     const hasNvim = args.denops.meta.host === "nvim";
     const sources = ["file", "around", "vsnip", "buffer"]
       .concat(Deno.env.has("TMUX") ? ["tmux"] : []);

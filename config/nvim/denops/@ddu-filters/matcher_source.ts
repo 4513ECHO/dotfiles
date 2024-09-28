@@ -10,7 +10,7 @@ export type Params = {
 };
 
 export class Filter extends BaseFilter<Params> {
-  filter(args: FilterArguments<Params>): Promise<DduItem[]> {
+  override filter(args: FilterArguments<Params>): Promise<DduItem[]> {
     return Promise.resolve(
       args.items.filter((item) =>
         !args.filterParams.ignoredSources.includes(
@@ -20,7 +20,7 @@ export class Filter extends BaseFilter<Params> {
     );
   }
 
-  params(): Params {
+  override params(): Params {
     return {
       ignoredSources: ["action", "file_external", "custom-list", "ddc"],
     };

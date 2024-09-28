@@ -18,7 +18,7 @@ const isItem = is.ObjectOf({
 const isActionData = is.ObjectOf({ action: is.String });
 
 export class Filter extends BaseFilter<Params> {
-  filter(args: FilterArguments<Params>): Promise<DduItem[]> {
+  override filter(args: FilterArguments<Params>): Promise<DduItem[]> {
     if (args.items.length === 0) {
       return Promise.resolve(args.items);
     }
@@ -35,7 +35,7 @@ export class Filter extends BaseFilter<Params> {
     );
   }
 
-  params(): Params {
+  override params(): Params {
     return {
       ignoredActions: {
         buffer: ["browse", "copy", "executeSystem", "newDirectory", "newFile"],

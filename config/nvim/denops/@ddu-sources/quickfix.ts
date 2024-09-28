@@ -18,9 +18,11 @@ interface QflistItem {
 }
 
 export class Source extends BaseSource<Params, ActionData> {
-  kind = "file";
+  override kind = "file";
 
-  gather(args: GatherArguments<Params>): ReadableStream<Item<ActionData>[]> {
+  override gather(
+    args: GatherArguments<Params>,
+  ): ReadableStream<Item<ActionData>[]> {
     return new ReadableStream({
       async start(controller) {
         const func: [string, ...unknown[]] = args.sourceParams.useLoclist
@@ -49,7 +51,7 @@ export class Source extends BaseSource<Params, ActionData> {
     });
   }
 
-  params(): Params {
+  override params(): Params {
     return {
       useLoclist: false,
     };

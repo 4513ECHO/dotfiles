@@ -30,7 +30,7 @@ function parseMenu(menu?: string): string {
 type Params = Record<PropertyKey, never>;
 
 export class Filter extends BaseFilter<Params> {
-  filter(args: FilterArguments<Params>): Promise<Item[]> {
+  override filter(args: FilterArguments<Params>): Promise<Item[]> {
     return Promise.resolve(args.items.sort((a, b) => {
       const menuRank = // Compare menu
         (menuRankDefinition[parseMenu(a.menu)] ?? 99) -
