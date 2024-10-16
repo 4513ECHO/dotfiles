@@ -44,7 +44,7 @@ packages:
   - name: Myriad-Dreamin/tinymist@v0.11.32
   - name: nametake/golangci-lint-langserver@v0.0.9
   - name: nektos/act@v0.2.68
-  - name: nodejs/node@v22.9.0
+  - name: nodejs/node@v23.0.0
   - name: noahgorstein/jqp@v0.7.0
   - name: rhysd/actionlint@v1.7.3
   - name: rhysd/hgrep@v0.3.7
