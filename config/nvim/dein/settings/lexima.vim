@@ -112,8 +112,6 @@ LeximaAlterCommand quic\%[krun]                 QuickRun
 LeximaAlterCommand qr\%[un]                     QuickRun
 LeximaAlterCommand fixw\%[hitespace]            FixWhitespace
 LeximaAlterCommand dd\%[u]                      Ddu
-LeximaAlterCommand dei\%[n]                     Dein
-LeximaAlterCommand deinr\%[eadme]               DeinReadme
 LeximaAlterCommand rg                           Rg
 LeximaAlterCommand helpfu\%[lversion]           HelpfulVersion
 LeximaAlterCommand copi\%[lot]                  Copilot
@@ -125,6 +123,5 @@ LeximaAlterCommand ra\%[ndomcolorscheme]        RandomColorScheme
 LeximaAlterCommand spa\%[rkcolorscheme]         SparkColorScheme
 LeximaAlterCommand mi\%[ninote]                 MiniNote
 LeximaAlterCommand den\%[opssharedserver]       DenopsSharedServer
-LeximaAlterCommand deinu\%[pdatemine]           DeinUpdateMine
 LeximaAlterCommand vt\%[erminal]                VTerminal
 " }}}

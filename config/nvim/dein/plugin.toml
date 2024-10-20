@@ -11,14 +11,6 @@ tnoremap <C-\><C-r> <Plug>(registerm-getchar)
 '''
 
 [[plugins]]
-repo = 'https://github.com/4513ECHO/vim-readme-viewer'
-on_cmd = ['DeinReadme']
-on_source = ['ddu.vim']
-hook_add = '''
-let g:readme_viewer#plugin_manager = 'dein.vim'
-'''
-
-[[plugins]]
 repo = 'https://github.com/4513ECHO/vim-snipewin'
 on_func = ['snipewin#select']
 on_map = { n = '<Plug>' }
@@ -89,10 +81,6 @@ autocmd vimrc OptionSet buftype
 repo = 'https://github.com/halkn/lightline-lsp'
 on_source = ['lightline.vim']
 if = '!has("nvim")'
-
-[[plugins]]
-repo = 'https://github.com/haya14busa/dein-command.vim'
-on_cmd = ['Dein']
 
 [[plugins]]
 repo = 'https://github.com/haya14busa/vim-asterisk'
