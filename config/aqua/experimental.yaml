@@ -15,26 +15,10 @@ packages:
   # init: g
 
   # init: h
-  - type: github_content
-    repo_owner: holman
-    repo_name: spark
-    path: spark
-    description: ▁▂▃▅▂▇ in your shell
 
   # init: i
 
   # init: j
-  - type: github_content
-    repo_owner: JosefZIla
-    repo_name: bash2048
-    path: bash2048.sh
-    description: Bash implementation of 2048 game
-    format: raw
-    files:
-      - name: bash2048.sh
-    supported_envs:
-      - darwin
-      - linux
 
   # init: k
 
@@ -77,11 +61,6 @@ packages:
     description: Fast text scraper to find and convert colours (hex, rgb, rgb, hsl, web colours, custom patterns, etc.) into hex values
 
   # init: s
-  - type: github_content
-    repo_owner: sheepla
-    repo_name: fzpac
-    path: fzpac
-    description: Arch Linux package finder with fzf
 
   # init: t
   - type: github_content
