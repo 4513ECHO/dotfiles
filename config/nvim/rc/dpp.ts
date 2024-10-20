@@ -14,13 +14,16 @@ import type {
 } from "jsr:@shougo/dpp-ext-toml@^1.3.0";
 import type { Denops } from "jsr:@denops/std@^7.2.0";
 import * as vars from "jsr:@denops/std@^7.2.0/variable";
+import { tee } from "jsr:@std/async@^1.0.5/tee";
 import { exists } from "jsr:@std/fs@^1.0.3/exists";
+import { expandGlob } from "jsr:@std/fs@^1.0.3/expand-glob";
 import { join } from "jsr:@std/path@^1.0.4/join";
 import { parse } from "jsr:@std/toml@^1.0.1/parse";
 import { ensure, is } from "jsr:@core/unknownutil@^4.3.0";
-import { pipe } from "jsr:@core/pipe@^0.3.0";
+import { pipe } from "jsr:@core/pipe@^0.3.0/async";
 import { filter } from "jsr:@core/iterutil@^0.8.0/pipe/async/filter";
 import { flatMap } from "jsr:@core/iterutil@^0.8.0/pipe/async/flat-map";
+import { map } from "jsr:@core/iterutil@^0.8.0/pipe/async/map";
 
 type Exts = {
   lazy: LazyExtActions<BaseParams>;
@@ -49,8 +52,8 @@ function getPath(plugin: Plugin, basePath: string): string {
   if (plugin.path) return plugin.path;
   const rev = plugin.rev ? "_" + plugin.rev.replaceAll(/[^\w.-]/g, "_") : "";
   const name = (() => {
-    if (URL.canParse(plugin.repo ?? "")) {
-      const { hostname, pathname } = new URL(plugin.repo ?? "");
+    if (plugin.repo && URL.canParse(plugin.repo)) {
+      const { hostname, pathname } = new URL(plugin.repo);
       return join(hostname, pathname);
     } else {
       return plugin.name;
@@ -88,6 +91,18 @@ function normalizeOnMap(plugin: Plugin): Plugin {
   return { ...plugin, on_map };
 }
 
+async function withPluginPath<T>(
+  plugin: Plugin | undefined,
+  fn1: (plugin: Plugin) => string,
+  fn2: (plugin: Plugin, path: string) => Promise<T>,
+): Promise<T | undefined> {
+  if (!plugin) return;
+  const path = fn1(plugin);
+  if (await exists(path)) {
+    return await fn2(plugin, path);
+  }
+}
+
 async function clonePrerequisites(
   basePath: string,
   tomlPath: string,
@@ -98,7 +113,7 @@ async function clonePrerequisites(
   const cloned: Promise<Deno.CommandStatus>[] = [];
   for (const plugin of plugins) {
     const path = getPath(plugin, basePath);
-    if (!(await exists(path))) {
+    if (!await exists(path)) {
       const { status } = new Deno.Command("git", {
         args: [
           "clone",
@@ -119,11 +134,22 @@ async function clonePrerequisites(
   await Promise.all(cloned);
 }
 
+const decoder = new TextDecoder();
+async function getGitRoot(): Promise<string> {
+  const { stdout } = await new Deno.Command("git", {
+    args: ["rev-parse", "--show-toplevel"],
+    cwd: import.meta.dirname,
+    stdout: "piped",
+  }).output();
+  return decoder.decode(stdout).trim();
+}
+
 export class Config extends BaseConfig {
   override async config(args: ConfigArguments): Promise<ConfigReturn> {
     const hasNvim = args.denops.meta.host === "nvim";
     const configHome = await vars.g.get<string>(args.denops, "config_home");
     const deinDir = Deno.env.get("DEIN_DIR")!;
+    const githubAPIToken = Deno.env.get("GITHUB_TOKEN");
 
     const inlineVimrcs = ["autocmd", "keymap", "option", "var"]
       .map((x) => join(configHome, "rc", x + ".rc.vim"));
@@ -133,7 +159,12 @@ export class Config extends BaseConfig {
       extParams: {
         installer: {
           checkDiff: true,
+          githubAPIToken,
           maxProcesses: 8,
+          logFilePath: join(
+            await vars.g.get<string>(args.denops, "data_home"),
+            `dpp-installer-${new Date().toISOString().substring(0, 19)}.log`,
+          ),
         } satisfies Partial<InstallerExtParams>,
       },
       protocols: ["git"],
@@ -142,14 +173,16 @@ export class Config extends BaseConfig {
           enablePartialClone: true,
         },
       },
+      skipMergeFilenamePattern:
+        "^tags(?:-\\w\\w)?$|^package(?:-lock)?.json$|\\.png$|^README",
     });
 
     const [context, options] = await args.contextBuilder.get(args.denops);
     const extAction = async <
       E extends keyof Exts,
       A extends keyof Exts[E] & string,
-      R = Exts[E][A] extends Action<BaseExtParams, infer R> ? R : unknown,
-    >(ext: E, action: A, params?: unknown): Promise<R> =>
+      R = Exts[E][A] extends Action<BaseParams, infer R> ? R : unknown,
+    >(ext: E, action: A, params: BaseParams): Promise<R> =>
       await args.dpp.extAction(
         args.denops,
         context,
@@ -159,66 +192,99 @@ export class Config extends BaseConfig {
         params,
       ) as R;
 
-    const { plugins, ftplugins } = mergeToml(
-      await Promise.all(
-        [
-          "init",
-          "colorscheme",
-          "textobj",
-          "ftplugin",
-          "plugin",
-          "ddc",
-          "ddu",
-          "dpp",
-          hasNvim ? "neovim" : "vim",
-        ]
-          .map((path) => join(deinDir, path + ".toml"))
-          .map((path) => extAction("toml", "load", { path })),
+    const [iter1, iter2] = await pipe(
+      expandGlob(join(deinDir, "*.toml")),
+      map(async ({ path }) =>
+        [path, await extAction("toml", "load", { path })] as const
       ),
+      tee,
     );
 
-    const lazyResult = await extAction("lazy", "makeState", {
-      plugins: plugins.map(normalizeOnMap),
-    });
+    await pipe(
+      iter1,
+      flatMap(([path, { plugins }]) =>
+        plugins?.map(({ name, repo }) =>
+          `${name}\t${path}\t?^repo = '${repo}'`
+        ) ?? []
+      ),
+      flatMap((x) => [x, "\n"]),
+      ReadableStream.from,
+      async (v) =>
+        Deno.writeTextFile(join(await getGitRoot(), "tags"), v),
+    );
 
-    const sandwichPlugin = plugins
-      .find((plugin) => plugin.name === "vim-sandwich");
-    const sandwichStateLines = await (async () => {
-      if (!sandwichPlugin) return [];
-      const sandwichPath = join(
-        getPath(sandwichPlugin, args.basePath),
-        "macros",
-        "sandwich",
-        "keymap",
-        "surround.vim",
-      );
-      if (!(await exists(sandwichPath))) return [];
-      return await Deno.readTextFile(sandwichPath).then((x) =>
-        x.split("\n").reduce((acc, x) =>
+    const { plugins: tomlPlugins, ftplugins } = await pipe(
+      iter2,
+      filter(([path]) =>
+        !path.endsWith("/unused.toml") &&
+        ((hasNvim && !path.endsWith("/vim.toml")) ||
+          (!hasNvim && !path.endsWith("/neovim.toml")))
+      ),
+      map(([_, toml]) => toml),
+      (v) => Array.fromAsync(v),
+      mergeToml,
+    );
+
+    const { plugins, stateLines: lazyStateLines } = await pipe(
+      tomlPlugins,
+      (plugins) => extAction("gh_pull_request", "replace", { plugins }),
+      map(normalizeOnMap),
+      (v) => Array.fromAsync(v),
+      (plugins) => extAction("lazy", "makeState", { plugins }),
+    );
+
+    const sandwichStateLines = await withPluginPath(
+      plugins.find(({ name }) => name === "vim-sandwich"),
+      (plugin) =>
+        join(
+          getPath(plugin, args.basePath),
+          "macros",
+          "sandwich",
+          "keymap",
+          "surround.vim",
+        ),
+      async (_, path) => {
+        const content = await Deno.readTextFile(path);
+        return content.split("\n").reduce((acc, x) =>
           // Remove line-continuation backslashes
           acc + (x.match(/^\s*\\\s*/) ? x.replace(/^\s*\\\s*/, "") : "\n" + x)
-        ).split("\n")
-      );
-    })();
+        ).split("\n");
+      },
+    ) ?? [];
 
-    const colorschemes = pipe(
+    for (const val of ["ddc", "ddu"]) {
+      await withPluginPath(
+        plugins.find(({ name }) => name === `${val}.vim`),
+        (plugin) => getPath(plugin, args.basePath),
+        async (_, cwd) => {
+          await new Deno.Command("git", {
+            args: ["update-index", "--skip-worktree", `denops/${val}/_mods.js`],
+            cwd,
+          }).output();
+        },
+      );
+    }
+
+    const colorschemeStateLines = await pipe(
       plugins,
       filter(isColorSchemePlugin),
       filter((x) => evalIf(x, args.denops)),
       flatMap((x) => x.colorschemes.map((x) => [x.name, x] as const)),
-    );
-    const colorschemeStateLines = pipe(
-      await Array.fromAsync(colorschemes),
+      (v) => Array.fromAsync(v),
       Object.fromEntries,
       JSON.stringify,
       (v) => ["let g:user#colorscheme#_colorschemes = " + v],
     );
 
+    console.log(
+      `makeState ${args.name} successed with ${plugins.length} plugins`,
+    );
+
     return {
       ftplugins,
-      plugins: lazyResult.plugins,
+      plugins,
       stateLines: [
-        lazyResult.stateLines,
+        lazyStateLines,
         sandwichStateLines,
         colorschemeStateLines,
       ].flat(),

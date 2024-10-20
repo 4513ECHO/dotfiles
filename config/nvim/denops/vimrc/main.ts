@@ -32,19 +32,6 @@ export const main: Entrypoint = (denops) => {
       return Promise.resolve(crypto.randomUUID());
     },
 
-    async skipModJs(): Promise<void> {
-      const args = ["update-index", "--skip-worktree"];
-      const promises = ["ddc", "ddu"]
-        .map((name) => [name, denops.call("dein#get", name + ".vim")])
-        .map(async ([name, plugin]) =>
-          new Deno.Command("git", {
-            args: args.concat(`denops/${name}/_mods.js`),
-            cwd: (await plugin as { path: string }).path,
-          }).output()
-        );
-      await Promise.all(promises);
-    },
-
     async ensureSkkJisyo(arg: unknown): Promise<unknown> {
       const root = ensure(arg, is.String);
       return (await Array.fromAsync(expandGlob("SKK-JISYO.*", { root })))
