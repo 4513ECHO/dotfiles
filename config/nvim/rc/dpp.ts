@@ -219,8 +219,7 @@ export class Config extends BaseConfig {
       iter2,
       map(([path, toml]) => [basename(path, ".toml"), toml] as const),
       filter(([path]) =>
-        path !== "unused" &&
-        ((hasNvim && path !== "vim") || (!hasNvim && path !== "neovim"))
+        (hasNvim && path !== "vim") || (!hasNvim && path !== "neovim")
       ),
       map(([_, toml]) => toml),
       (v) => Array.fromAsync(v),
