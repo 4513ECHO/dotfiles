@@ -40,25 +40,20 @@ export class Source extends BaseSource<Params, ActionData> {
   override gather(
     args: GatherArguments<Params>,
   ): ReadableStream<Item<ActionData>[]> {
-    return new ReadableStream({
-      start: (controller) => {
-        const items = this.#pages[args.sourceParams.project]
-          .map((item): Item<ActionData> => ({
-            word: item.title,
-            action: {
-              url: [
-                "https://scrapbox.io/",
-                args.sourceParams.rawTextUrl ? "api/pages/" : "",
-                args.sourceParams.project,
-                "/" + encodeURI(item.title.replaceAll(" ", "_")),
-                args.sourceParams.rawTextUrl ? "/text" : "",
-              ].join(""),
-            },
-          }));
-        controller.enqueue(items);
-        controller.close();
-      },
-    });
+    const items = this.#pages[args.sourceParams.project]
+      .map((item): Item<ActionData> => ({
+        word: item.title,
+        action: {
+          url: [
+            "https://scrapbox.io/",
+            args.sourceParams.rawTextUrl ? "api/pages/" : "",
+            args.sourceParams.project,
+            "/" + encodeURI(item.title.replaceAll(" ", "_")),
+            args.sourceParams.rawTextUrl ? "/text" : "",
+          ].join(""),
+        },
+      }));
+    return ReadableStream.from([items]);
   }
 
   override params(): Params {

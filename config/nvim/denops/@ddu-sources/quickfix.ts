@@ -1,3 +1,4 @@
+import type { Denops } from "jsr:@denops/std@^7.2.0";
 import * as fn from "jsr:@denops/std@^7.2.0/function";
 import type { ActionData } from "jsr:@shougo/ddu-kind-file@^0.9.0";
 import {
@@ -23,37 +24,42 @@ export class Source extends BaseSource<Params, ActionData> {
   override gather(
     args: GatherArguments<Params>,
   ): ReadableStream<Item<ActionData>[]> {
-    return new ReadableStream({
-      async start(controller) {
-        const func: [string, ...unknown[]] = args.sourceParams.useLoclist
-          ? ["getloclist", 0]
-          : ["getqflist"];
-        const items = await args.denops.call(...func) as QflistItem[];
-        controller.enqueue(
-          await accumulate(
-            args.denops,
-            async (denops) =>
-              await Promise.all(items.map(async (i) => {
-                const bufname = await fn.bufname(denops, i.bufnr);
-                return {
-                  word: i.text,
-                  display: `${bufname}|${i.lnum} col ${i.col}|${i.text}`,
-                  action: {
-                    ...i,
-                    lineNr: i.lnum,
-                  },
-                } satisfies Item<ActionData>;
-              })),
-          ),
-        );
-        controller.close();
-      },
-    });
+    const func: [string, ...unknown[]] = args.sourceParams.useLoclist
+      ? ["getloclist", 0]
+      : ["getqflist"];
+    return ReadableStream.from(this.#processItems(args.denops, func));
   }
 
   override params(): Params {
     return {
       useLoclist: false,
+    };
+  }
+
+  async *#processItems(
+    denops: Denops,
+    func: [string, ...unknown[]],
+  ): AsyncGenerator<Item<ActionData>[]> {
+    const items = await denops.call(...func) as QflistItem[];
+    yield await accumulate(
+      denops,
+      async (denops) =>
+        await Promise.all(items.map((item) => this.#processItem(denops, item))),
+    );
+  }
+
+  async #processItem(
+    denops: Denops,
+    item: QflistItem,
+  ): Promise<Item<ActionData>> {
+    const bufname = await fn.bufname(denops, item.bufnr);
+    return {
+      word: item.text,
+      display: `${bufname}|${item.lnum} col ${item.col}|${item.text}`,
+      action: {
+        ...item,
+        lineNr: item.lnum,
+      },
     };
   }
 }
