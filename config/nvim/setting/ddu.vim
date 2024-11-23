@@ -53,7 +53,7 @@ function! s:on_ddu_ff_filter() abort
   endif
 endfunction
 
-call ddu#custom#load_config(expand('$DEIN_DIR/settings/ddu.ts'))
+call ddu#custom#load_config(expand('$MYVIMDIR/setting/ddu.ts'))
 " }}}
 
 " hook_post_update {{{

@@ -59,7 +59,7 @@ repo = 'https://github.com/cocopon/lightline-hybrid.vim'
 [[plugins]]
 repo = 'https://github.com/cohama/lexima.vim'
 on_event = ['InsertEnter', 'CmdlineEnter']
-hooks_file = '$DEIN_DIR/settings/lexima.vim'
+hooks_file = '$MYVIMDIR/setting/lexima.vim'
 
 [[plugins]]
 repo = 'https://github.com/github/copilot.vim'

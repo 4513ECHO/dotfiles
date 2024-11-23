@@ -2,7 +2,7 @@
 repo = 'https://github.com/Shougo/ddu.vim'
 depends = ['denops.vim']
 on_func = ['ddu#start']
-hooks_file = '$DEIN_DIR/settings/ddu.vim'
+hooks_file = '$MYVIMDIR/setting/ddu.vim'
 
 [[plugins]]
 repo = 'https://github.com/Shougo/ddu-commands.vim'

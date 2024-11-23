@@ -1,11 +1,10 @@
 let s:dpp_dir = g:cache_home .. '/dpp'
 let s:dpp_ts = g:config_home .. '/rc/dpp.ts'
-let $DEIN_DIR = g:config_home .. '/dein'
 
 if &runtimepath->stridx(s:dpp_dir) < 0
   if !isdirectory(s:dpp_dir)
     execute printf('!deno run --allow-read --allow-run=git %s %s %s',
-          \ s:dpp_ts, s:dpp_dir, expand('$DEIN_DIR/dpp.toml'))
+          \ s:dpp_ts, s:dpp_dir, expand('$MYVIMDIR/dein/dpp.toml'))
   endif
   execute $'set runtimepath^={s:dpp_dir}/repos/github.com/Shougo/dpp.vim'
 endif

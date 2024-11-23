@@ -149,7 +149,6 @@ export class Config extends BaseConfig {
   override async config(args: ConfigArguments): Promise<ConfigReturn> {
     const hasNvim = args.denops.meta.host === "nvim";
     const configHome = await vars.g.get<string>(args.denops, "config_home");
-    const deinDir = Deno.env.get("DEIN_DIR")!;
     const githubAPIToken = Deno.env.get("GITHUB_TOKEN");
 
     const inlineVimrcs = ["autocmd", "keymap", "option", "var"]
@@ -195,7 +194,7 @@ export class Config extends BaseConfig {
 
     // Load plugins from toml files
     const [iter1, iter2] = await pipe(
-      expandGlob(join(deinDir, "*.toml")),
+      expandGlob(join(Deno.env.get("MYVIMDIR")!, "dein", "*.toml")),
       map(async ({ path }) =>
         [path, await extAction("toml", "load", { path })] as const
       ),

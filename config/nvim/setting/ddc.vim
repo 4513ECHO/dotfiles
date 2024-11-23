@@ -41,7 +41,7 @@ if bufname() =~# '^/tmp/\d\+\.md$'
   inoremap <buffer><expr> <C-x><C-g> <SID>ddc_complete('github_issue', 'github_pull_request')
 endif
 
-call ddc#custom#load_config(expand('$DEIN_DIR/settings/ddc.ts'))
+call ddc#custom#load_config(expand('$MYVIMDIR/setting/ddc.ts'))
 call ddc#enable(#{
       \ context_filetype: has('nvim') ? 'treesitter': 'context_filetype',
       \ })

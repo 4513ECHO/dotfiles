@@ -284,7 +284,7 @@ lspconfig.taplo.setup {
         associations = {
           ["/dein/[^/]+\\.toml$"] = (
             "file://"
-            .. vim.env.DEIN_DIR
+            .. vim.env.MYVIMDIR
             .. "/settings/dein.toml.json"
           ),
         },
