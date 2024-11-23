@@ -11,6 +11,25 @@ let g:sandwich#magicchar#f#patterns = [#{
 '''
 hook_source = '''
 call operator#sandwich#set('add', 'char', 'skip_space', 1)
+autocmd vimrc ModeChanged [vV\x16]*:* call operator#sandwich#set('add', 'char', 'skip_space', 1)
+autocmd vimrc ModeChanged *:[vV\x16]* call operator#sandwich#set('add', 'char', 'skip_space', 0)
+'''
+[plugins.ftplugin]
+rust = '''
+let b:sandwich_magicchar_f_patterns = [
+      \ #{
+      \   header: '\<\%(\h\k*\.\)*\h\k*',
+      \   bra   : '(',
+      \   ket   : ')',
+      \   footer: '',
+      \ },
+      \ #{
+      \   header: '\<\%(\h\k*::\)*\h\k*!\?',
+      \   bra   : '(',
+      \   ket   : ')',
+      \   footer: '',
+      \ },
+      \ ]
 '''
 
 [[plugins]]
@@ -105,6 +124,23 @@ onoremap af <Plug>(textobj-functioncall-i)
 onoremap if <Plug>(textobj-functioncall-innerparen-i)
 xnoremap af <Plug>(textobj-functioncall-i)
 xnoremap if <Plug>(textobj-functioncall-innerparen-i)
+'''
+[plugins.ftplugin]
+rust = '''
+let b:textobj_functioncall_patterns = [
+      \ #{
+      \   header: '\<\%(\h\k*\.\)*\h\k*',
+      \   bra   : '(',
+      \   ket   : ')',
+      \   footer: '',
+      \ },
+      \ #{
+      \   header: '\<\%(\h\k*::\)*\h\k*!\?',
+      \   bra   : '(',
+      \   ket   : ')',
+      \   footer: '',
+      \ },
+      \ ]
 '''
 
 [[plugins]]
