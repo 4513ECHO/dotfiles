@@ -283,10 +283,11 @@ on_path = ['^file://']
 
 [[plugins]]
 repo = 'https://github.com/lambdalisue/vim-gin'
-on_cmd = ['Gin', 'GinDiff', 'GinLog', 'GinStatus']
+on_cmd = ['Gin', 'GinBranch', 'GinDiff', 'GinLog', 'GinStatus']
 hook_add = '''
 let g:gin_chaperon_persistent_args = ['++opener=tabedit']
 let g:gin_diff_persistent_args = ['++opener=tabedit']
+let g:gin_branch_default_args = ['--all']
 let g:gin_log_default_args = ['--oneline']
 autocmd vimrc OptionSet diff call s:on_gin_chaperon(v:option_new)
 function! s:on_gin_chaperon(diff) abort
@@ -298,6 +299,9 @@ function! s:on_gin_chaperon(diff) abort
 endfunction
 '''
 [plugins.ftplugin]
+gin-branch = '''
+nnoremap <buffer> a <Cmd>Ddu -name=gin_action<CR>
+'''
 gin-log = '''
 nnoremap <buffer> a <Cmd>Ddu -name=gin_action<CR>
 nnoremap <buffer> I <Plug>(gin-action-fixup:instant-fixup)
