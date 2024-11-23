@@ -194,7 +194,7 @@ export class Config extends BaseConfig {
 
     // Load plugins from toml files
     const [iter1, iter2] = await pipe(
-      expandGlob(join(Deno.env.get("MYVIMDIR")!, "dein", "*.toml")),
+      expandGlob(join(Deno.env.get("MYVIMDIR")!, "dpp", "*.toml")),
       map(async ({ path }) =>
         [path, await extAction("toml", "load", { path })] as const
       ),

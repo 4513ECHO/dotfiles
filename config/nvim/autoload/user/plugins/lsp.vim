@@ -152,7 +152,7 @@ final settings = {
       evenBetterToml: {
         schema: {
           associations: {
-            '/dein/[^/]+\.toml$': $'file://{g:config_home}/dein/settings/dein.toml.json',
+            '/dpp/[^/]+\.toml$': $'file://{g:config_home}/dein/settings/dein.toml.json',
           },
         },
       },

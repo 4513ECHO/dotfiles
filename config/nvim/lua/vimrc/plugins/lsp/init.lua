@@ -282,7 +282,7 @@ lspconfig.taplo.setup {
     evenBetterToml = {
       schema = {
         associations = {
-          ["/dein/[^/]+\\.toml$"] = (
+          ["/dpp/[^/]+\\.toml$"] = (
             "file://"
             .. vim.env.MYVIMDIR
             .. "/settings/dein.toml.json"
