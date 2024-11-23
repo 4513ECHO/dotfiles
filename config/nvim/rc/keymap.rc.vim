@@ -3,7 +3,7 @@ let g:mapleader = ','
 nnoremap <Leader> <Nop>
 xnoremap <Leader> <Nop>
 
-" disable dengerous/annoying mapping
+" disable dangerous/annoying mapping
 " NOTE: ZQ is useful when cmdline is broken
 nnoremap ZZ <Nop>
 nnoremap q <Nop>
@@ -62,14 +62,13 @@ xnoremap L <End>
 inoremap <C-u> <C-g>u<C-u>
 inoremap <C-w> <C-g>u<C-w>
 
-nnoremap [Space] <Nop>
-nmap <Space> [Space]
+nmap <Space> <Nop>
 nnoremap <C-l> <Cmd>nohlsearch<Bar>diffupdate<CR><C-l>
-nnoremap [Space]w <Cmd>update<CR>
-nnoremap [Space]W <Cmd>write<CR>
+nnoremap <Space>w <Cmd>update<CR>
+nnoremap <Space>W <Cmd>write<CR>
 nnoremap ^ <C-^><Cmd>edit<CR>
-nnoremap [Space]f <Cmd>edit %:p:h<CR>
-nnoremap [Space]q <Cmd>confirm qall<CR>
+nnoremap <Space>f <Cmd>edit %:p:h<CR>
+nnoremap <Space>q <Cmd>confirm qall<CR>
 nnoremap gf gF
 nnoremap p ]p
 nnoremap P ]P
@@ -118,7 +117,7 @@ cnoremap <C-k> <Cmd>call setcmdline(
 noremap! <C-y> <C-r><C-p>"
 " }}}
 
-" Use backslack instead of ¥
+" Use backslash instead of ¥
 map! ¥     <Bslash>
 map  ¥     <Bslash>
 tmap ¥     <Bslash>

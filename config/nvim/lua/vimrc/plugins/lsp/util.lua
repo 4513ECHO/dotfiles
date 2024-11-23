@@ -22,7 +22,7 @@ M.deno_as_npm = setmetatable({}, {
       "--allow-all",
       "--no-config",
       "--no-lock",
-      "--node-modules-dir=false",
+      "--node-modules-dir=none",
     }, cmd)
   end,
 })

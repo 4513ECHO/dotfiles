@@ -65,7 +65,7 @@ M.autocmd "BufLeave" {
 
 M.autocmd "TextYankPost" {
   callback = function()
-    vim.highlight.on_yank { timeout = 100, on_macro = true }
+    vim.hl.on_yank { timeout = 100, on_macro = true }
   end,
   desc = "Highlight yanked text",
 }
