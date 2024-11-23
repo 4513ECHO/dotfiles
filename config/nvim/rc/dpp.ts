@@ -17,6 +17,7 @@ import * as vars from "jsr:@denops/std@^7.2.0/variable";
 import { tee } from "jsr:@std/async@^1.0.5/tee";
 import { exists } from "jsr:@std/fs@^1.0.3/exists";
 import { expandGlob } from "jsr:@std/fs@^1.0.3/expand-glob";
+import { basename } from "jsr:@std/path@^1.0.8/basename";
 import { join } from "jsr:@std/path@^1.0.4/join";
 import { parse } from "jsr:@std/toml@^1.0.1/parse";
 import { ensure, is } from "jsr:@core/unknownutil@^4.3.0";
@@ -192,6 +193,7 @@ export class Config extends BaseConfig {
         params,
       ) as R;
 
+    // Load plugins from toml files
     const [iter1, iter2] = await pipe(
       expandGlob(join(deinDir, "*.toml")),
       map(async ({ path }) =>
@@ -200,6 +202,7 @@ export class Config extends BaseConfig {
       tee,
     );
 
+    // Write tags file
     await pipe(
       iter1,
       flatMap(([path, { plugins }]) =>
@@ -209,16 +212,15 @@ export class Config extends BaseConfig {
       ),
       flatMap((x) => [x, "\n"]),
       ReadableStream.from,
-      async (v) =>
-        Deno.writeTextFile(join(await getGitRoot(), "tags"), v),
+      async (v) => Deno.writeTextFile(join(await getGitRoot(), "tags"), v),
     );
 
     const { plugins: tomlPlugins, ftplugins } = await pipe(
       iter2,
+      map(([path, toml]) => [basename(path, ".toml"), toml] as const),
       filter(([path]) =>
-        !path.endsWith("/unused.toml") &&
-        ((hasNvim && !path.endsWith("/vim.toml")) ||
-          (!hasNvim && !path.endsWith("/neovim.toml")))
+        path !== "unused" &&
+        ((hasNvim && path !== "vim") || (!hasNvim && path !== "neovim"))
       ),
       map(([_, toml]) => toml),
       (v) => Array.fromAsync(v),
