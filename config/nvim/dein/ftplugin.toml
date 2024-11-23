@@ -34,7 +34,7 @@ inoreabbrev <buffer><expr> as
 '''
 
 gitcommit = '''
-setlocal textwidth=72 colorcolumn=+1
+setlocal textwidth=72 colorcolumn=+1 foldenable foldmethod=manual
 " based on https://zenn.dev/uochan/articles/2021-12-08-vim-conventional-commits
 function! s:select_type() abort
   let title = getline('.')->split(';')[0]->trim()->printf('%s: ')
@@ -53,7 +53,9 @@ if winnr('$') ==# 1
   if s:scissors
     belowright wincmd v
     call winrestview(#{ lnum: s:scissors, col: 0, topline: s:scissors })
+    execute $'keepjumps 1,{s:scissors-1}fold'
     wincmd p
+    execute $'keepjumps {s:scissors},$fold'
   endif
 endif
 '''
