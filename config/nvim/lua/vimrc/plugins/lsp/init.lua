@@ -31,7 +31,7 @@ autocmd "LspAttach" {
     end
     map("n", "K", K)
 
-    map("n", "gK", vim.lsp.buf.hover)
+    map("n", "gK", with(vim.lsp.buf.hover, { border = "single" }))
     map("n", "gd", vim.lsp.buf.definition)
     pcall(function()
       vim.keymap.del("n", "grn", { buffer = ctx.buf })
@@ -59,9 +59,16 @@ autocmd "LspAttach" {
   desc = "Disable shellcheck for .env",
 }
 
-vim.lsp.handlers["textDocument/hover"] =
-  vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-require("lspconfig.ui.windows").default_options.border = "single"
+-- https://github.com/neovim/neovim/issues/30985
+for _, method in ipairs { "textDocument/diagnostic", "workspace/diagnostic" } do
+  local default_diagnostic_handler = vim.lsp.handlers[method]
+  vim.lsp.handlers[method] = function(err, result, context)
+    if err and err.code == -32802 then
+      return
+    end
+    return default_diagnostic_handler(err, result, context)
+  end
+end
 
 vim.lsp.util.open_floating_preview = (function(wrapped)
   return function(contents, syntax, opts)
@@ -72,10 +79,11 @@ vim.lsp.util.open_floating_preview = (function(wrapped)
       vim.treesitter.start(bufnr, "markdown")
       vim.wo[winid].conceallevel = 0
       -- Remove zero-width space
-      vim._with(
-        { buf = bufnr, bo = { modifiable = true } },
-        function() vim.cmd "silent keeppatterns %substitute/&#8203;//eg" end
-      )
+      vim.api.nvim_buf_call(bufnr, function()
+        vim.bo[bufnr].modifiable = true
+        vim.cmd "silent keeppatterns %substitute/&#8203;//eg"
+        vim.bo[bufnr].modifiable = false
+      end)
     end
     return bufnr, winid
   end
@@ -93,6 +101,8 @@ lspconfig.util.on_setup = lspconfig.util.add_hook_before(
     local capabilities = require("ddc_source_lsp").make_client_capabilities()
     if config.name == "vimls" then
       capabilities.textDocument.completion.completionItem.snippetSupport = false
+    elseif config.name == "rust_analyzer" then
+      capabilities.general.positionEncodings = { "utf-16" }
     end
     config.capabilities = capabilities
   end
@@ -147,7 +157,6 @@ lspconfig.denols.setup {
     },
   },
   root_dir = root_pattern("deno.json", "deno.jsonc", "denops"),
-  single_file_support = true,
 }
 
 lspconfig.vtsls.setup {
@@ -249,7 +258,24 @@ lspconfig.pylsp.setup {
   },
 }
 
-lspconfig.rust_analyzer.setup {}
+lspconfig.rust_analyzer.setup {
+  settings = {
+    ["rust-analyzer"] = {
+      check = {
+        command = "clippy",
+      },
+      completion = {
+        callable = { snippets = "add_parentheses" },
+        hideDeprecated = true,
+      },
+      hover = {
+        documentation = {
+          keywords = { enable = false },
+        },
+      },
+    },
+  },
+}
 
 lspconfig.taplo.setup {
   settings = {
