@@ -37,7 +37,7 @@ pyls-isort = "^0.2.2"
 pylsp-mypy = "^0.6.8"
 
 [tool.poetry.group.poetry.dependencies]
-poetry = "^1.7.1"
+poetry = "^2.0.0"
 poetry-plugin-export = "^1.6.0"
 poetry-dynamic-versioning-plugin = "^0.4.0"
 
