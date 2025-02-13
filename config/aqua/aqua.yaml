@@ -45,7 +45,7 @@ packages:
   - name: nametake/golangci-lint-langserver@v0.0.10
   - name: nektos/act@v0.2.74
   - name: noahgorstein/jqp@v0.7.0
-  - name: nodejs/node@v23.7.0
+  - name: nodejs/node@v23.8.0
   - name: oven-sh/bun@bun-v1.2.2
   - name: rhysd/actionlint@v1.7.7
   - name: rhysd/hgrep@v0.3.7
