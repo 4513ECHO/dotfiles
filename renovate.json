@@ -4,9 +4,9 @@
   "dependencyDashboard": true,
   "extends": [
     "config:base",
-    "github>aquaproj/aqua-renovate-config#2.7.0",
-    "github>aquaproj/aqua-renovate-config:file#2.7.0(config/aqua/aqua\\.yaml)",
-    "github>aquaproj/aqua-renovate-config:installer-script#2.7.0(Makefile)"
+    "github>aquaproj/aqua-renovate-config#2.7.1",
+    "github>aquaproj/aqua-renovate-config:file#2.7.1(config/aqua/aqua\\.yaml)",
+    "github>aquaproj/aqua-renovate-config:installer-script#2.7.1(Makefile)"
   ],
   "labels": [
     "dependencies"
