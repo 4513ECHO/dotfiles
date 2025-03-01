@@ -43,7 +43,7 @@ packages:
   - name: mvdan/sh@v3.10.0
   - name: Myriad-Dreamin/tinymist@v0.13.0
   - name: nametake/golangci-lint-langserver@v0.0.10
-  - name: nektos/act@v0.2.74
+  - name: nektos/act@v0.2.75
   - name: noahgorstein/jqp@v0.7.0
   - name: nodejs/node@v23.9.0
   - name: oven-sh/bun@bun-v1.2.4
