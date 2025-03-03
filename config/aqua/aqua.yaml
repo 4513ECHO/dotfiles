@@ -48,7 +48,7 @@ packages:
   - name: nodejs/node@v23.9.0
   - name: oven-sh/bun@bun-v1.2.4
   - name: rhysd/actionlint@v1.7.7
-  - name: rhysd/hgrep@v0.3.7
+  - name: rhysd/hgrep@v0.3.8
   - name: rhysd/vim-startuptime@v1.3.2
   - name: sharkdp/bat@v0.25.0
   - name: sharkdp/fd@v10.2.0
