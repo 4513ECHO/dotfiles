@@ -40,7 +40,7 @@ packages:
   - name: koalaman/shellcheck@v0.10.0
   - name: LuaLS/lua-language-server@3.13.6
   - name: mattn/efm-langserver@v0.0.54
-  - name: mvdan/sh@v3.10.0
+  - name: mvdan/sh@v3.11.0
   - name: Myriad-Dreamin/tinymist@v0.13.4
   - name: nametake/golangci-lint-langserver@v0.0.10
   - name: nektos/act@v0.2.75
