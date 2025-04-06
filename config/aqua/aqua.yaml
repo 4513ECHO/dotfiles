@@ -10,7 +10,7 @@ registries:
 
 packages:
   - name: ajeetdsouza/zoxide@v0.9.7
-  - name: aquaproj/aqua-installer@v3.1.1
+  - name: aquaproj/aqua-installer@v3.1.2
   - name: aquaproj/registry-tool@v0.3.4
   - name: aristocratos/btop@v1.4.0
   - name: b3nj5m1n/xdg-ninja@v0.2.0.1
