@@ -28,7 +28,7 @@ mypy = "^1.8.0"
 flake8 = "^7.0.0"
 flake8-pyproject = "^1.2.3"
 flake8-isort = "^6.1.1"
-pep8-naming = "^0.14.0"
+pep8-naming = "^0.15.0"
 
 [tool.poetry.group.lsp.dependencies]
 python-lsp-server = { version = "^1.9.0", extras = ["all"] }
