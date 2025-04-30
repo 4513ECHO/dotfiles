@@ -21,7 +21,7 @@ packages:
   - name: dandavison/delta@0.18.2
   - name: denoland/deno@v2.3.0
   - name: dylanaraps/neofetch@7.1.0
-  - name: Enter-tainer/typstyle@v0.13.3
+  - name: Enter-tainer/typstyle@v0.13.4
   - name: eza-community/eza@v0.21.2
   - name: golang.org/x/tools/gopls@v0.18.1
   - name: golang/go@go1.24.2
