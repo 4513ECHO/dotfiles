@@ -24,7 +24,7 @@ packages:
   - name: Enter-tainer/typstyle@v0.13.4
   - name: eza-community/eza@v0.21.3
   - name: golang.org/x/tools/gopls@v0.18.1
-  - name: golang/go@go1.24.2
+  - name: golang/go@go1.24.3
   - name: hadolint/hadolint@v2.12.0
   - name: hairyhenderson/gomplate@v4.3.2
   - name: high-moctane/mocword@v0.2.0
