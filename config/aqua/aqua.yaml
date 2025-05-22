@@ -46,7 +46,7 @@ packages:
   - name: nektos/act@v0.2.77
   - name: noahgorstein/jqp@v0.7.0
   - name: nodejs/node@v24.1.0
-  - name: oven-sh/bun@bun-v1.2.13
+  - name: oven-sh/bun@bun-v1.2.14
   - name: rhysd/actionlint@v1.7.7
   - name: rhysd/hgrep@v0.3.8
   - name: rhysd/vim-startuptime@v1.3.2
