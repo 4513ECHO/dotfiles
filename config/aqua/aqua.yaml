@@ -9,7 +9,7 @@ registries:
     path: experimental.yaml
 
 packages:
-  - name: ajeetdsouza/zoxide@v0.9.7
+  - name: ajeetdsouza/zoxide@v0.9.8
   - name: aquaproj/aqua-installer@v4.0.0
   - name: aquaproj/registry-tool@v0.3.5
   - name: aristocratos/btop@v1.4.3
