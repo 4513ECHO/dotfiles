@@ -41,7 +41,7 @@ packages:
   - name: LuaLS/lua-language-server@3.14.0
   - name: mattn/efm-langserver@v0.0.54
   - name: mvdan/sh@v3.11.0
-  - name: Myriad-Dreamin/tinymist@v0.13.12
+  - name: Myriad-Dreamin/tinymist@v0.13.14
   - name: nametake/golangci-lint-langserver@v0.0.11
   - name: nektos/act@v0.2.78
   - name: noahgorstein/jqp@v0.7.0
