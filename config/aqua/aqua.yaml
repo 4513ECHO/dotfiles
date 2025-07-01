@@ -13,10 +13,9 @@ packages:
   - name: aquaproj/aqua-installer@v4.0.2
   - name: aquaproj/registry-tool@v0.3.5
   - name: aristocratos/btop@v1.4.3
-  - name: b3nj5m1n/xdg-ninja@v0.2.0.1
+  - name: astral-sh/uv@0.7.15
   - name: babarot/afx@v0.2.1
   - name: BurntSushi/ripgrep@14.1.1
-  - name: charmbracelet/glow@v2.1.1
   - name: cli/cli@v2.74.2
   - name: dandavison/delta@0.18.2
   - name: denoland/deno@v2.3.7
@@ -42,21 +41,15 @@ packages:
   - name: mattn/efm-langserver@v0.0.54
   - name: mvdan/sh@v3.11.0
   - name: Myriad-Dreamin/tinymist@v0.13.14
-  - name: nametake/golangci-lint-langserver@v0.0.11
-  - name: nektos/act@v0.2.79
-  - name: noahgorstein/jqp@v0.7.0
   - name: nodejs/node@v24.3.0
   - name: oven-sh/bun@bun-v1.2.17
   - name: rhysd/actionlint@v1.7.7
-  - name: rhysd/hgrep@v0.3.8
   - name: rhysd/vim-startuptime@v1.3.2
   - name: sharkdp/bat@v0.25.0
   - name: sharkdp/fd@v10.2.0
   - name: sharkdp/hexyl@v0.16.0
   - name: sharkdp/hyperfine@v1.19.0
   - name: sharkdp/pastel@v0.10.0
-  - name: sheepla/longgopher@v0.0.3
-  - name: simeji/jid@v0.7.6
   - name: tamasfe/taplo/full@0.9.3
   - name: TomWright/dasel@v2.8.1
   - name: tree-sitter/tree-sitter@v0.25.6
@@ -66,11 +59,6 @@ packages:
   - name: ziglang/zig@0.14.1
 
   # local registry
-  - name: thinca/ciw
-    registry: local
-    version: master
-  - name: machikado-network/sakura@v0.4.3
-    registry: local
   - name: rrethy/hexokinase
     registry: local
     version: master

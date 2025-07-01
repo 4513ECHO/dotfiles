@@ -62,13 +62,6 @@ clean: ## Remove symlinks from actual directories
 	@echo 'Cleaning dotfiles...'
 	@$(DOTPATH)/scripts/link.sh unlink
 
-.PHONY: python
-python: ## Install and initialize python enviroments
-	python3 -m venv $(XDG_DATA_HOME)/poetry
-	$(XDG_DATA_HOME)/poetry/bin/python -m pip install poetry
-	cd $(XDG_CONFIG_HOME)/python; \
-	$(XDG_DATA_HOME)/poetry/bin/poetry install
-
 .PHONY: aqua
 aqua: ## Install and initialize aqua enviroments
 ifeq ($(shell command -v aqua),)
@@ -80,6 +73,12 @@ endif
 
 .PHONY: rust
 rust: ## Install and initialize rust enviroments
+ifeq ($(shell command -v rustup),)
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
-	rustup update nightly
+	rustup toolchain install nightly
 	rustup default nightly
+	rustsp target add wasm32-wasip2
+	rustup component add rust-analyzer
+else
+	rustup update nightly
+endif
