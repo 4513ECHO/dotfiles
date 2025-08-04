@@ -36,7 +36,7 @@ packages:
   - name: k0kubun/xremap/x11@v0.16.6
   - name: ko1nksm/getoptions/gengetoptions@v3.3.2
   - name: ko1nksm/getoptions@v3.3.2
-  - name: koalaman/shellcheck@v0.10.0
+  - name: koalaman/shellcheck@v0.11.0
   - name: LuaLS/lua-language-server@3.15.0
   - name: mattn/efm-langserver@v0.0.54
   - name: mvdan/sh@v3.12.0
