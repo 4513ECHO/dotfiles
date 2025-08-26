@@ -46,7 +46,7 @@ packages:
   - name: rhysd/actionlint@v1.7.7
   - name: rhysd/vim-startuptime@v1.3.2
   - name: sharkdp/bat@v0.25.0
-  - name: sharkdp/fd@v10.2.0
+  - name: sharkdp/fd@v10.3.0
   - name: sharkdp/hexyl@v0.16.0
   - name: sharkdp/hyperfine@v1.19.0
   - name: sharkdp/pastel@v0.10.0
