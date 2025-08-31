@@ -56,7 +56,7 @@ packages:
   - name: typst/typst@v0.13.1
   - name: x-motemen/ghq@v1.8.0
   - name: XAMPPRocky/tokei@v12.1.2
-  - name: ziglang/zig@0.14.1
+  - name: ziglang/zig@0.15.1
 
   # local registry
   - name: rrethy/hexokinase
