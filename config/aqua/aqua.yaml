@@ -13,7 +13,7 @@ packages:
   - name: aquaproj/aqua-installer@v4.0.3
   - name: aquaproj/registry-tool@v0.3.6
   - name: aristocratos/btop@v1.4.5
-  - name: astral-sh/uv@0.8.19
+  - name: astral-sh/uv@0.8.20
   - name: babarot/afx@v0.2.1
   - name: BurntSushi/ripgrep@14.1.1
   - name: cli/cli@v2.79.0
