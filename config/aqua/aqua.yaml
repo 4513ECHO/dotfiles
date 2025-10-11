@@ -42,7 +42,7 @@ packages:
   - name: mvdan/sh@v3.12.0
   - name: Myriad-Dreamin/tinymist@v0.13.28
   - name: nodejs/node@v24.9.0
-  - name: oven-sh/bun@bun-v1.2.23
+  - name: oven-sh/bun@bun-v1.3.0
   - name: rhysd/actionlint@v1.7.7
   - name: rhysd/vim-startuptime@v1.3.2
   - name: sharkdp/bat@v0.25.0
