@@ -53,7 +53,7 @@ packages:
   - name: tamasfe/taplo/full@0.9.3
   - name: TomWright/dasel@v2.8.1
   - name: tree-sitter/tree-sitter@v0.25.10
-  - name: typst/typst@v0.13.1
+  - name: typst/typst@v0.14.0
   - name: x-motemen/ghq@v1.8.0
   - name: XAMPPRocky/tokei@v12.1.2
   - name: ziglang/zig@0.15.1
