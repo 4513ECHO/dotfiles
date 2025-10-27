@@ -31,7 +31,7 @@ packages:
   - name: itchyny/mmv@v0.1.6
   - name: JohnnyMorganz/StyLua@v2.3.0
   - name: jqlang/jq@jq-1.8.1
-  - name: junegunn/fzf/fzf-tmux@v0.66.0
+  - name: junegunn/fzf/fzf-tmux@v0.66.1
   - name: junegunn/fzf@v0.66.1
   - name: k0kubun/xremap/x11@v0.16.6
   - name: ko1nksm/getoptions/gengetoptions@v3.3.2
