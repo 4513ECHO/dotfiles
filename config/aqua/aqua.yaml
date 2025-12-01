@@ -27,7 +27,7 @@ packages:
   - name: hadolint/hadolint@v2.14.0
   - name: hairyhenderson/gomplate@v4.3.3
   - name: high-moctane/mocword@v0.2.0
-  - name: itchyny/gojq@v0.12.17
+  - name: itchyny/gojq@v0.12.18
   - name: itchyny/mmv@v0.1.6
   - name: JohnnyMorganz/StyLua@v2.3.1
   - name: jqlang/jq@jq-1.8.1
