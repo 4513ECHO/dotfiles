@@ -45,7 +45,7 @@ packages:
   - name: oven-sh/bun@bun-v1.3.3
   - name: rhysd/actionlint@v1.7.9
   - name: rhysd/vim-startuptime@v1.3.2
-  - name: sharkdp/bat@v0.26.0
+  - name: sharkdp/bat@v0.26.1
   - name: sharkdp/fd@v10.3.0
   - name: sharkdp/hexyl@v0.16.0
   - name: sharkdp/hyperfine@v1.20.0
