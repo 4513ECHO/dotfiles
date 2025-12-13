@@ -52,7 +52,7 @@ packages:
   - name: sharkdp/pastel@v0.11.0
   - name: tamasfe/taplo/full@0.9.3
   - name: TomWright/dasel@v2.8.1
-  - name: tree-sitter/tree-sitter@v0.26.2
+  - name: tree-sitter/tree-sitter@v0.26.3
   - name: typst/typst@v0.14.2
   - name: x-motemen/ghq@v1.8.0
   - name: XAMPPRocky/tokei@v13.0.0
