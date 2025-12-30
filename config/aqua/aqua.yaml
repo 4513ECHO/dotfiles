@@ -43,7 +43,7 @@ packages:
   - name: Myriad-Dreamin/tinymist@v0.14.4
   - name: nodejs/node@v25.2.1
   - name: oven-sh/bun@bun-v1.3.5
-  - name: rhysd/actionlint@v1.7.9
+  - name: rhysd/actionlint@v1.7.10
   - name: rhysd/vim-startuptime@v1.3.2
   - name: sharkdp/bat@v0.26.1
   - name: sharkdp/fd@v10.3.0
