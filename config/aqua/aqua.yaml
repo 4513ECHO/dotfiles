@@ -55,7 +55,7 @@ packages:
   - name: tree-sitter/tree-sitter@v0.26.3
   - name: typst/typst@v0.14.2
   - name: x-motemen/ghq@v1.8.0
-  - name: XAMPPRocky/tokei@v13.0.0
+  - name: XAMPPRocky/tokei@v14.0.0
   - name: ziglang/zig@0.15.1
 
   # local registry
