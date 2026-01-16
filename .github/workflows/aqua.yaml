@@ -37,7 +37,7 @@ jobs:
       - uses: actions/setup-go@v5
         if: steps.filter.outputs.aqua == 'true'
         with:
-          go-version: "1.25.5"
+          go-version: "1.25.6"
       - name: Run test
         if: steps.filter.outputs.aqua == 'true'
         run: aqua install
