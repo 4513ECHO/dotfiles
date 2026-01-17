@@ -50,7 +50,7 @@ packages:
   - name: sharkdp/hexyl@v0.16.0
   - name: sharkdp/hyperfine@v1.20.0
   - name: sharkdp/pastel@v0.11.0
-  - name: tamasfe/taplo/full@0.9.3
+  - name: tamasfe/taplo/full@0.10.0
   - name: TomWright/dasel@v3.2.1
   - name: tree-sitter/tree-sitter@v0.26.3
   - name: typst/typst@v0.14.2
