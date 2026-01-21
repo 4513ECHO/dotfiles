@@ -25,7 +25,7 @@ packages:
   - name: golang.org/x/tools/gopls@v0.21.0
   - name: golang/go@go1.25.6
   - name: hadolint/hadolint@v2.14.0
-  - name: hairyhenderson/gomplate@v4.3.3
+  - name: hairyhenderson/gomplate@v5.0.0
   - name: high-moctane/mocword@v0.2.0
   - name: itchyny/gojq@v0.12.18
   - name: itchyny/mmv@v0.1.6
