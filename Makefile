@@ -65,7 +65,7 @@ clean: ## Remove symlinks from actual directories
 .PHONY: aqua
 aqua: ## Install and initialize aqua enviroments
 ifeq ($(shell command -v aqua),)
-	curl -sSfL https://raw.githubusercontent.com/aquaproj/aqua-installer/v4.0.4/aqua-installer | bash -s -- -v v2.48.1
+	curl -sSfL https://raw.githubusercontent.com/aquaproj/aqua-installer/v4.0.4/aqua-installer | bash -s -- -v v2.56.5
 else
 	aqua update-aqua
 endif
