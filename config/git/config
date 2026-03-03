@@ -13,18 +13,11 @@
   log = $HOME/.config/git/diff.sh | less -R
   show = $HOME/.config/git/diff.sh | less -R
 
-[color]
-  ui = auto
-  diff = auto
-  status = auto
-  branch = auto
-
 [init]
   defaultBranch = main
 
 [push]
   default = simple
-  autoSetupRemote = true
 
 [pull]
   rebase = false
@@ -52,14 +45,14 @@
   prompt = false
 
 [merge]
-  conflictstyle = diff3
+  conflictStyle = zdiff3
   ff = false
 
 [fetch]
   prune = true
 
 [rebase]
-  autostash = true
+  autoStash = true
 
 [alias]
   ### command abbrev ###

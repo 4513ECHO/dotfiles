@@ -66,10 +66,7 @@ COMMANDS                                                   *dotfiles-commands*
 	This uses |termopen()| in Neovim, |term_start()| in Vim.
 
 :MiniNote [{filetype}]                                             *:MiniNote*
-	Open scratch buffer.
-
-:DeinUpdateMine                                              *:DeinUpdateMine*
-	Call |dein#update()| for the plugins developed by me (4513ECHO).
+	Open scratch buffer with specific 'filetype'.
 
 ------------------------------------------------------------------------------
 MAPPINGS                                                   *dotfiles-mappings*
@@ -109,15 +106,15 @@ DIRECTORY STRUCTURE                                      *directory-structure*
 
 See also 'runtimepath' option. `after/`, `autoload/`, `doc/`, `ftdetect/` and
 `lua/` (only in Neovim) are used for default feature.
-`dein/` contains TOML files to use with |dein-toml|. `dein/settings/` contains
-specific plugins settings.
+`dein/` contains TOML files to use with |dpp-ext-toml|. `dein/settings/`
+contains specific plugins settings.
 `denops/` contains TypeScript files for |denops.vim|, especially used for
 |ddu-sources|.
 
 ==============================================================================
 DARK POWERED                                                    *dark-powered*
 
-Here is mean of "dark powered" in Shougo wares (e.g. |dein|, |ddc|, |ddu|)
+Here is mean of "dark powered" in Shougo-wares, such as |dpp|, |ddc|, |ddu|.
 This section is moved from |deoplete-faq-general|.
 (https://github.com/Shougo/deoplete.nvim/blob/33ed4fa0/doc/deoplete.txt#L1966)
 

@@ -16,6 +16,7 @@ gtk-3.0	$XDG_CONFIG_HOME
 i3	$XDG_CONFIG_HOME
 jq	$HOME/.jq
 libskk	$XDG_CONFIG_HOME
+neovide	$XDG_CONFIG_HOME
 nvim	$XDG_CONFIG_HOME
 pip	$XDG_CONFIG_HOME
 profile	$HOME/.profile

@@ -6,6 +6,10 @@ import {
 import { Action } from "jsr:@shougo/dpp-vim@^3.0.0/ext";
 import type { BaseParams, Plugin } from "jsr:@shougo/dpp-vim@^3.0.0/types";
 import { mergeFtplugins } from "jsr:@shougo/dpp-vim@^3.0.0/utils";
+import {
+  type ExtActions as GhPRExtActions,
+  replacePlugin,
+} from "../denops/@dpp-exts/gh_pull_request.ts";
 import type { Params as InstallerExtParams } from "jsr:@shougo/dpp-ext-installer@^1.2.0";
 import type { ExtActions as LazyExtActions } from "jsr:@shougo/dpp-ext-lazy@^1.5.0";
 import type {
@@ -21,18 +25,21 @@ import { basename } from "jsr:@std/path@^1.0.8/basename";
 import { join } from "jsr:@std/path@^1.0.4/join";
 import { parse } from "jsr:@std/toml@^1.0.1/parse";
 import { ensure, is } from "jsr:@core/unknownutil@^4.3.0";
-import { pipe } from "jsr:@core/pipe@^0.3.0/async";
+import { pipe } from "jsr:@core/pipe@^0.3.0";
 import { filter } from "jsr:@core/iterutil@^0.8.0/pipe/async/filter";
 import { flatMap } from "jsr:@core/iterutil@^0.8.0/pipe/async/flat-map";
 import { map } from "jsr:@core/iterutil@^0.8.0/pipe/async/map";
 
 type Exts = {
+  gh_pull_request: GhPRExtActions<BaseParams>;
   lazy: LazyExtActions<BaseParams>;
   toml: TomlExtActions<BaseParams>;
 };
 const isColorSchemePlugin = is.ObjectOf({
   name: is.String,
-  colorschemes: is.ArrayOf(is.ObjectOf({ name: is.String })),
+  extAttrs: is.ObjectOf({
+    colorschemes: is.ArrayOf(is.ObjectOf({ name: is.String })),
+  }),
 });
 
 function mergeToml(tomls: Toml[]): ConfigReturn {
@@ -42,7 +49,7 @@ function mergeToml(tomls: Toml[]): ConfigReturn {
       if (!acc) return x;
       mergeFtplugins(acc, x);
       return acc;
-    }),
+    }, {}),
     hooksFiles: tomls.map((x) => x.hooks_file).filter(is.String),
     multipleHooks: tomls.flatMap((x) => x.multiple_hooks ?? []),
     plugins: tomls.flatMap((x) => x.plugins ?? []),
@@ -52,21 +59,21 @@ function mergeToml(tomls: Toml[]): ConfigReturn {
 function getPath(plugin: Plugin, basePath: string): string {
   if (plugin.path) return plugin.path;
   const rev = plugin.rev ? "_" + plugin.rev.replaceAll(/[^\w.-]/g, "_") : "";
-  const name = (() => {
+  const getName = () => {
     if (plugin.repo && URL.canParse(plugin.repo)) {
       const { hostname, pathname } = new URL(plugin.repo);
       return join(hostname, pathname);
     } else {
       return plugin.name;
     }
-  })();
-  return join(basePath, "repos", name + rev, plugin.script_type ?? "");
+  };
+  return join(basePath, "repos", getName() + rev, plugin.script_type ?? "");
 }
 
 async function evalIf(plugin: Plugin, denops: Denops): Promise<boolean> {
   if (plugin.if === undefined) return true;
   if (is.String(plugin.if)) {
-    return Boolean(await denops.eval(plugin.if));
+    return await denops.eval(plugin.if) as boolean;
   }
   return plugin.if;
 }
@@ -112,27 +119,46 @@ async function clonePrerequisites(
     await Deno.readTextFile(tomlPath),
   ) as { plugins: (Plugin & { repo: string })[] };
   const cloned: Promise<Deno.CommandStatus>[] = [];
+  const paths: string[] = [];
   for (const plugin of plugins) {
-    const path = getPath(plugin, basePath);
+    const path = getPath(await replacePlugin(plugin), basePath);
+    paths.push(path);
     if (!await exists(path)) {
       const { status } = new Deno.Command("git", {
         args: [
           "clone",
           "--recursive",
           "--filter=blob:none",
-          ...(plugin.rev ? ["--branch", plugin.rev] : []),
           plugin.repo,
           path,
         ],
         stderr: "inherit",
         stdout: "inherit",
       }).spawn();
-      cloned.push(status);
+      if (plugin.rev) {
+        const switchCommand = new Deno.Command("git", {
+          args: [
+            "switch",
+            "--detach",
+            plugin.rev,
+          ],
+          cwd: path,
+          stderr: "inherit",
+          stdout: "inherit",
+        });
+        cloned.push(status.then(() => switchCommand.spawn().status));
+      } else {
+        cloned.push(status);
+      }
     } else {
       console.error(`Already cloned: ${plugin.repo}`);
     }
   }
   await Promise.all(cloned);
+  await Deno.writeTextFile(
+    join(basePath, "runtimepath_cache"),
+    paths.join("\n"),
+  );
 }
 
 const decoder = new TextDecoder();
@@ -157,6 +183,7 @@ export class Config extends BaseConfig {
     args.contextBuilder.patchGlobal({
       inlineVimrcs,
       extParams: {
+        gh_pull_request: { githubAPIToken },
         installer: {
           checkDiff: true,
           githubAPIToken,
@@ -181,7 +208,7 @@ export class Config extends BaseConfig {
     const extAction = async <
       E extends keyof Exts,
       A extends keyof Exts[E] & string,
-      R = Exts[E][A] extends Action<BaseParams, infer R> ? R : unknown,
+      R = Exts[E][A] extends Action<BaseParams, infer R> ? R : never,
     >(ext: E, action: A, params: BaseParams): Promise<R> =>
       await args.dpp.extAction(
         args.denops,
@@ -193,16 +220,16 @@ export class Config extends BaseConfig {
       ) as R;
 
     // Load plugins from toml files
-    const [iter1, iter2] = await pipe(
-      expandGlob(join(Deno.env.get("MYVIMDIR")!, "dpp", "*.toml")),
+    const [iter1, iter2, iter3] = pipe(
+      expandGlob(join(Deno.env.get("VIMRCDIR")!, "dpp", "*.toml")),
       map(async ({ path }) =>
         [path, await extAction("toml", "load", { path })] as const
       ),
-      tee,
+      (iter) => tee(iter, 3),
     );
 
     // Write tags file
-    await pipe(
+    const tagIter = pipe(
       iter1,
       flatMap(([path, { plugins }]) =>
         plugins?.map(({ name, repo }) =>
@@ -210,27 +237,47 @@ export class Config extends BaseConfig {
         ) ?? []
       ),
       flatMap((x) => [x, "\n"]),
-      ReadableStream.from,
-      async (v) => Deno.writeTextFile(join(await getGitRoot(), "tags"), v),
+    );
+    await Deno.writeTextFile(
+      join(await getGitRoot(), "tags"),
+      ReadableStream.from(tagIter),
     );
 
-    const { plugins: tomlPlugins, ftplugins } = await pipe(
+    const runtimepathIter = pipe(
       iter2,
+      filter(([path]) => path.endsWith("dpp.toml")),
+      flatMap(([_, toml]) =>
+        toml.plugins?.map((plugin) => getPath(plugin, args.basePath)) ?? []
+      ),
+    );
+    const runtimepath = await Array.fromAsync(runtimepathIter);
+    await Deno.writeTextFile(
+      join(args.basePath, "runtimepath_cache"),
+      runtimepath.join("\n"),
+    );
+
+    const tomlIter = pipe(
+      iter3,
       map(([path, toml]) => [basename(path, ".toml"), toml] as const),
-      filter(([path]) =>
-        (hasNvim && path !== "vim") || (!hasNvim && path !== "neovim")
+      filter(([name]) =>
+        (hasNvim && name !== "vim") || (!hasNvim && name !== "neovim")
       ),
       map(([_, toml]) => toml),
-      (v) => Array.fromAsync(v),
-      mergeToml,
+    );
+    const { plugins: tomlPlugins, ftplugins } = mergeToml(
+      await Array.fromAsync(tomlIter),
     );
 
-    const { plugins, stateLines: lazyStateLines } = await pipe(
-      tomlPlugins,
-      (plugins) => extAction("gh_pull_request", "replace", { plugins }),
-      map(normalizeOnMap),
-      (v) => Array.fromAsync(v),
-      (plugins) => extAction("lazy", "makeState", { plugins }),
+    const prPlugins = await extAction("gh_pull_request", "replace", {
+      plugins: tomlPlugins,
+    });
+    const mapPlugins = await Array.fromAsync(
+      pipe(prPlugins, map(normalizeOnMap)),
+    );
+    const { plugins, stateLines: lazyStateLines } = await extAction(
+      "lazy",
+      "makeState",
+      { plugins: mapPlugins },
     );
 
     const sandwichStateLines = await withPluginPath(
@@ -252,35 +299,25 @@ export class Config extends BaseConfig {
       },
     ) ?? [];
 
-    for (const val of ["ddc", "ddu"]) {
-      await withPluginPath(
-        plugins.find(({ name }) => name === `${val}.vim`),
-        (plugin) => getPath(plugin, args.basePath),
-        async (_, cwd) => {
-          await new Deno.Command("git", {
-            args: ["update-index", "--skip-worktree", `denops/${val}/_mods.js`],
-            cwd,
-          }).output();
-        },
-      );
-    }
-
-    const colorschemeStateLines = await pipe(
+    const colorschemeIter = pipe(
       plugins,
       filter(isColorSchemePlugin),
       filter((x) => evalIf(x, args.denops)),
-      flatMap((x) => x.colorschemes.map((x) => [x.name, x] as const)),
-      (v) => Array.fromAsync(v),
-      Object.fromEntries,
-      JSON.stringify,
-      (v) => ["let g:user#colorscheme#_colorschemes = " + v],
+      flatMap((x) => x.extAttrs.colorschemes.map((x) => [x.name, x] as const)),
     );
+    const colorschemeStateLines = [
+      "let g:user#colorscheme#_colorschemes = " +
+      JSON.stringify(
+        Object.fromEntries(await Array.fromAsync(colorschemeIter)),
+      ),
+    ];
 
     console.log(
       `makeState ${args.name} successed with ${plugins.length} plugins`,
     );
 
     return {
+      checkFiles: inlineVimrcs,
       ftplugins,
       plugins,
       stateLines: [

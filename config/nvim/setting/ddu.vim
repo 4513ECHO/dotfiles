@@ -26,18 +26,18 @@ function! s:open_current_line_hunk() abort
 endfunction
 nnoremap <Leader>gd <Cmd>call <SID>open_current_line_hunk()<CR>
 
-call timer_start(10, { -> ddu#load('ui', ['ff']) })
+call timer_start(10, { -> ddu#load('default', 'ui', ['ff']) })
 " }}}
 
 " hook_source {{{
-autocmd vimrc User Ddu:ui:ff:openFilterWindow call s:on_ddu_ff_filter()
-autocmd vimrc User Ddu:ui:ff:closeFilterWindow call ddu#ui#ff#restore_cmaps()
+autocmd vimrc User Ddu:uiOpenFilterWindow call s:on_ddu_ff_filter()
+autocmd vimrc User Ddu:uiCloseFilterWindow call ddu#ui#restore_cmaps()
 function! s:on_ddu_ff_filter() abort
   " NOTE: lexima defines mappings on CmdlineEnter only once, so if we start Ddu from keymap, we need to define <CR> manually
   if empty(maparg('<CR>', 'c'))
     cnoremap <expr> <CR> lexima#expand('<lt>CR>', ':')
   endif
-  call ddu#ui#ff#save_cmaps(['<Esc>', '<CR>', '<C-n>', '<C-p>'])
+  call ddu#ui#save_cmaps(['<Esc>', '<CR>', '<C-n>', '<C-p>'])
   cnoremap <buffer> <Esc> <CR>
   cnoremap <buffer> <CR>  <CR><Cmd>call ddu#ui#do_action('itemAction')<CR>
   cnoremap <buffer> <C-n> <Cmd>call ddu#ui#multi_actions([
@@ -53,7 +53,7 @@ function! s:on_ddu_ff_filter() abort
   endif
 endfunction
 
-call ddu#custom#load_config(expand('$MYVIMDIR/setting/ddu.ts'))
+call ddu#custom#load_config(expand('$VIMRCDIR/setting/ddu.ts'))
 " }}}
 
 " hook_post_update {{{

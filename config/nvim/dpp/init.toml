@@ -57,21 +57,6 @@ command! -nargs=? -complete=custom,s:mr_complete -bar MrClean call s:mr_clean(<f
 
 [[plugins]]
 repo = 'https://github.com/mattn/vim-molder'
-# from https://github.com/kuuote/dotvim/commit/09151c52
-lazy = true
-hook_add = '''
-function! s:molder_init() abort
-  if isdirectory(expand('%:p'))
-    call dpp#source('vim-molder')
-    call molder#init()
-    autocmd! vimrc_molder
-  endif
-endfunction
-augroup vimrc_molder
-  autocmd!
-  autocmd BufEnter * call s:molder_init()
-augroup END
-'''
 [plugins.ftplugin]
 molder = '''
 setlocal nolist nospell

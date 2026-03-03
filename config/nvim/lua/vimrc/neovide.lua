@@ -10,7 +10,7 @@ vim.g.neovide_scroll_animation_length = 0.1
 vim.g.neovide_cursor_vfx_mode = "pixiedust"
 vim.g.neovide_cursor_trail_size = 0.5
 vim.g.neovide_cursor_vfx_particle_density = 15
-vim.g.neovide_transparency = 0.8
+vim.g.neovide_opacity = 0.8
 vim.g.neovide_input_macos_option_key_is_meta = "both"
 vim.g.neovide_input_ime = false
 
@@ -47,11 +47,14 @@ vim.keymap.set(
 vim.cmd.aunmenu { "PopUp" }
 
 -- adjust font size
----@param ctx { fargs: string[] }
 vim.api.nvim_create_user_command("FontSize", function(ctx)
   local args = ctx.fargs[1] or "12"
-  font_size = (vim.startswith(args, "+") or vim.startswith(args, "-"))
-      and font_size + (tonumber(args) or font_size)
-    or (tonumber(args) or font_size)
+  local is_delta = args:sub(1, 1) == "+" or args:sub(1, 1) == "-"
+  local value = tonumber(args)
+  if not value then
+    vim.notify("Invalid font size: " .. args, vim.log.levels.ERROR)
+    return
+  end
+  font_size = is_delta and (font_size + value) or value
   vim.opt.guifont = font_base:format(font_size)
 end, { nargs = "?" })

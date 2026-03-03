@@ -78,3 +78,16 @@ else
         \ |   wincmd p
         \ | endif
 endif
+
+if has('patch-9.1.1016')
+  " from https://zenn.dev/vim_jp/articles/20250804_ekiden_oscyank
+  function s:oscyank(contents) abort
+    let encoded = a:contents->join("\n")->str2blob()->base64_encode()
+    let seq = "\<Esc>]52;c;" .. encoded .. "\<Esc>\\"
+    call echoraw(seq)
+  endfunction
+  autocmd vimrc TextYankPost *
+        \ : if v:event.regname ==# '+'
+        \ |   call s:oscyank(v:event.regcontents)
+        \ | endif
+endif

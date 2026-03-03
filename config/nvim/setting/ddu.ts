@@ -1,30 +1,30 @@
 import {
   BaseConfig,
   type ConfigArguments,
-} from "jsr:@shougo/ddu-vim@^6.1.0/config";
+} from "jsr:@shougo/ddu-vim@^9.0.1/config";
 import {
   ActionFlags,
   type DduItem,
   type DduOptions,
-} from "jsr:@shougo/ddu-vim@^6.1.0/types";
+} from "jsr:@shougo/ddu-vim@^9.0.1/types";
 import {
   type Params as UiFFParams,
   Ui as UiFF,
-} from "jsr:@shougo/ddu-ui-ff@^1.2.0";
+} from "jsr:@shougo/ddu-ui-ff@^1.5.0";
 import type { ActionData as GitStatusActionData } from "jsr:@kuuote/ddu-kind-git-status@^1.1.0";
 import type { Data as GitDiffItemData } from "jsr:@kuuote/ddu-source-git-diff@^1.0.0";
-import type { Denops } from "jsr:@denops/std@^7.2.0";
-import * as autocmd from "jsr:@denops/std@^7.2.0/autocmd";
-import * as batch from "jsr:@denops/std@^7.2.0/batch";
-import * as lambda from "jsr:@denops/std@^7.2.0/lambda";
-import * as vars from "jsr:@denops/std@^7.2.0/variable";
+import type { Denops } from "jsr:@denops/std@^7.4.0";
+import * as autocmd from "jsr:@denops/std@^7.4.0/autocmd";
+import * as batch from "jsr:@denops/std@^7.4.0/batch";
+import * as lambda from "jsr:@denops/std@^7.4.0/lambda";
+import * as vars from "jsr:@denops/std@^7.4.0/variable";
 import { is } from "jsr:@core/unknownutil@^4.3.0/is";
 import { asOptional } from "jsr:@core/unknownutil@^4.3.0/as/optional";
 import { ensure } from "jsr:@core/unknownutil@^4.3.0/ensure";
 import { maybe } from "jsr:@core/unknownutil@^4.3.0/maybe";
-import { sprintf } from "jsr:@std/fmt@^1.0.0/printf";
-import { join } from "jsr:@std/path@^1.0.3/join";
-import { equal } from "jsr:@std/assert@^1.0.3/equal";
+import { sprintf } from "jsr:@std/fmt@^1.0.3/printf";
+import { join } from "jsr:@std/path@^1.0.8/join";
+import { equal } from "jsr:@std/assert@^1.0.8/equal";
 
 type GitDiffItem = DduItem & { data: GitDiffItemData };
 
@@ -119,9 +119,9 @@ export class Config extends BaseConfig {
     const defaultUiFFParams = new UiFF().params();
     const hasNvim = args.denops.meta.host === "nvim";
 
-    args.setAlias("source", "file_git", "file_external");
-    args.setAlias("source", "mrr", "mr");
-    args.setAlias("source", "mrw", "mr");
+    args.setAlias("default", "source", "file_git", "file_external");
+    args.setAlias("default", "source", "mrr", "mr");
+    args.setAlias("default", "source", "mrw", "mr");
 
     args.contextBuilder.patchGlobal({
       actionOptions: {
@@ -415,7 +415,7 @@ export class Config extends BaseConfig {
         helper.define("ColorScheme", "*", notify(onColorScheme));
       helper.define("FileType", "ddu-ff", notify(applySyntax));
       helper.define("User", "Ddu:uiDone", notify(startFilterAuto));
-      helper.define("User", "Ddu:redraw", notify(markSelectedItems));
+      helper.define("User", "Ddu:uiRedraw", notify(markSelectedItems));
     });
   }
 }

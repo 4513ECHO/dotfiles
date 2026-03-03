@@ -1,26 +1,32 @@
+# diff
+# cocoa
+# orbital
+# reliquiae
+# wombat256mod
+# yash
 
 [[plugins]]
 repo = 'https://github.com/4513ECHO/vim-colors-hatsunemiku'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'hatsunemiku'
-# [[plugins.colorschemes]]
+# [[plugins.extAttrs.colorschemes]]
 # name = 'hatsunemiku_light'
 
 [[plugins]]
 repo = 'https://github.com/arcticicestudio/nord-vim'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'nord'
 
 [[plugins]]
 repo = 'https://github.com/ayu-theme/ayu-vim'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'ayu'
 
 [[plugins]]
 repo = 'https://github.com/bluz71/vim-nightfly-guicolors'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'nightfly'
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
 SignifySignAdd = 'NightflyEmerald'
 SignifySignChange = 'NightflyMalibu'
 SignifySignDelete = 'NightflyRed'
@@ -28,21 +34,21 @@ SignifySignDelete = 'NightflyRed'
 [[plugins]]
 repo = 'https://github.com/challenger-deep-theme/vim'
 name = 'challenger-deep-theme'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'challenger_deep'
 
 [[plugins]]
 repo = 'https://github.com/cocopon/iceberg.vim'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'iceberg'
-[plugins.colorschemes.highlight]
+[plugins.extAttrs.colorschemes.highlight]
 String = { ctermfg = 144, guifg = '#a7b1a9' }
 
 [[plugins]]
 repo = 'https://github.com/connorholyday/vim-snazzy'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'snazzy'
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
 Added = 'DiffAdd'
 Changed = 'DiffChange'
 Removed = 'DiffDelete'
@@ -51,68 +57,68 @@ diffRemoved = 'DiffDelete'
 
 [[plugins]]
 repo = 'https://github.com/cormacrelf/vim-colors-github'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'github'
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
 SignifySignAdd = 'GitGutterAdd'
 SignifySignChange = 'GitGutterChange'
 SignifySignDelete = 'GitGutterDelete'
-[plugins.colorschemes.highlight]
+[plugins.extAttrs.colorschemes.highlight]
 EndOfBuffer = { ctermfg = 'NONE', guibg = 'NONE' }
 
 [[plugins]]
 repo = 'https://github.com/dracula/vim'
 name = 'dracula'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'dracula'
 
 [[plugins]]
 repo = 'https://github.com/drewtempelmeyer/palenight.vim'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'palenight'
 
 [[plugins]]
 repo = 'https://github.com/EdenEast/nightfox.nvim'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'nightfox'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'duskfox'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'nordfox'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'terafox'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'carbonfox'
-# [[plugins.colorschemes]]
+# [[plugins.extAttrs.colorschemes]]
 # name = 'dawnfox'
-# [[plugins.colorschemes]]
+# [[plugins.extAttrs.colorschemes]]
 # name = 'dayfox'
 
 [[plugins]]
 repo = 'https://github.com/embark-theme/vim'
 name = 'embark-theme'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'embark'
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
 SignifySignAdd = 'GitGutterAdd'
 SignifySignChange = 'GitGutterChange'
 SignifySignDelete = 'GitGutterDelete'
 
 [[plugins]]
 repo = 'https://github.com/fcpg/vim-orbital'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'orbital'
 terminal = 'mini'
 
 [[plugins]]
 repo = 'https://github.com/felipec/vim-felipec'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'felipec'
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
 SignifySignAdd = 'GitGutterAdd'
 SignifySignChange = 'GitGutterChange'
 SignifySignDelete = 'GitGutterDelete'
-[plugins.colorschemes.highlight]
+[plugins.extAttrs.colorschemes.highlight]
 NonText = { ctermbg = 'NONE', guibg = 'NONE' }
 
 [[plugins]]
@@ -120,30 +126,30 @@ repo = 'https://github.com/fenetikm/falcon'
 hook_add = '''
 let g:loaded_falcon = v:true
 '''
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'falcon'
 lightline = 'mini'
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
 SignifySignAdd = 'GitGutterAdd'
 SignifySignChange = 'GitGutterChange'
 SignifySignDelete = 'GitGutterDelete'
-[plugins.colorschemes.highlight]
+[plugins.extAttrs.colorschemes.highlight]
 Normal = { ctermfg = 249, guifg = '#b4b4b9', ctermbg = 0, guibg = '#000000' }
 NonText = { ctermfg = 237, guifg = '#36363a', ctermbg = 'NONE', guibg = 'NONE' }
 
 [[plugins]]
 repo = 'https://github.com/franbach/miramare'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'miramare'
 
 [[plugins]]
 repo = 'https://github.com/FrenzyExists/aquarium-vim'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'aquarium'
 terminal = 'mini'
-[plugins.colorschemes.highlight]
+[plugins.extAttrs.colorschemes.highlight]
 Cursor = { guifg = 'NONE', guibg = '#cddbf9' }
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
 CursorLine = 'Visual'
 NonText = 'Comment'
 SignifySignAdd = 'GitGutterAdd'
@@ -152,30 +158,30 @@ SignifySignDelete = 'GitGutterDelete'
 
 [[plugins]]
 repo = 'https://github.com/ghifarit53/tokyonight-vim'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'tokyonight'
 
 [[plugins]]
 repo = 'https://github.com/gkapfham/vim-vitamin-onec'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'vitaminonec'
 lightline = 'mini'
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
 diffAdded = 'DiffAdd'
 diffRemoved = 'DiffDelete'
 
 [[plugins]]
 repo = 'https://github.com/gruvbox-community/gruvbox'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'gruvbox'
-[plugins.colorschemes.highlight]
+[plugins.extAttrs.colorschemes.highlight]
 Visual = { ctermbg = 237, cterm = 'NONE', guibg = '#3c3836', gui = 'NONE' }
 
 [[plugins]]
 repo = 'https://github.com/habamax/vim-gruvbit'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'gruvbit'
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
 SignifySignAdd = 'String'
 SignifySignChange = 'Identifier'
 SignifySignDelete = 'Special'
@@ -184,32 +190,32 @@ diffRemoved = 'Special'
 
 [[plugins]]
 repo = 'https://github.com/haishanh/night-owl.vim'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'night-owl'
 lightline = 'nightowl'
 
 [[plugins]]
 repo = 'https://github.com/haystackandroid/snow'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'snow'
 lightline = 'snow_dark'
-[plugins.colorschemes.highlight]
+[plugins.extAttrs.colorschemes.highlight]
 Cursor = { guifg = 'NONE', guibg = 'NONE' }
 
 [[plugins]]
 repo = 'https://github.com/haystackandroid/stellarized'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'stellarized'
 lightline = 'stellarized_dark'
 terminal = 'mini'
-[plugins.colorschemes.highlight]
+[plugins.extAttrs.colorschemes.highlight]
 Cursor = { guifg = 'NONE', guibg = 'NONE' }
 
 [[plugins]]
 repo = 'https://github.com/haxibami/urara.vim'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'urara'
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
 Added = 'GitAddSign'
 Changed = 'GitChangeSign'
 Removed = 'GitDeleteSign'
@@ -217,120 +223,120 @@ diffAdded = 'Added'
 diffRemoved = 'Removed'
 
 # Thank mityu very much!
-[[plugins]]
-repo = 'https://raw.githubusercontent.com/mityu/dotfiles/master/vim/runtime/colors/reliquiae.vim'
-script_type = 'colors'
-type = 'raw'
-[[plugins.colorschemes]]
-name = 'reliquiae'
-lightline = 'mini'
-[plugins.colorschemes.link]
-NonText = 'Comment'
-diffAdded = 'Number'
-diffRemoved = 'Statement'
+# [[plugins]]
+# repo = 'https://raw.githubusercontent.com/mityu/dotfiles/master/vim/runtime/colors/reliquiae.vim'
+# script_type = 'colors'
+# type = 'raw'
+# [[plugins.extAttrs.colorschemes]]
+# name = 'reliquiae'
+# lightline = 'mini'
+# [plugins.extAttrs.colorschemes.link]
+# NonText = 'Comment'
+# diffAdded = 'Number'
+# diffRemoved = 'Statement'
 
 # Thank Shougo very much!
-[[plugins]]
-repo = 'https://raw.githubusercontent.com/Shougo/shougo-s-github/master/vim/colors/candy.vim'
-script_type = 'colors'
-type = 'raw'
-[[plugins.colorschemes]]
-name = 'candy'
-lightline = 'wombat'
-terminal = 'mini'
-[plugins.colorschemes.highlight]
-Cursor = { guifg = 'NONE', guibg = 'NONE' }
-[plugins.colorschemes.link]
-DiffAdd = 'PreProc'
-DiffChange = 'Type'
-DiffDelete = 'Statement'
-diffAdded = 'PreProc'
-diffRemoved = 'Statement'
-Added = 'PreProc'
-Changed = 'Type'
-Removed = 'Statement'
+# [[plugins]]
+# repo = 'https://raw.githubusercontent.com/Shougo/shougo-s-github/master/vim/colors/candy.vim'
+# script_type = 'colors'
+# type = 'raw'
+# [[plugins.extAttrs.colorschemes]]
+# name = 'candy'
+# lightline = 'wombat'
+# terminal = 'mini'
+# [plugins.extAttrs.colorschemes.highlight]
+# Cursor = { guifg = 'NONE', guibg = 'NONE' }
+# [plugins.extAttrs.colorschemes.link]
+# DiffAdd = 'PreProc'
+# DiffChange = 'Type'
+# DiffDelete = 'Statement'
+# diffAdded = 'PreProc'
+# diffRemoved = 'Statement'
+# Added = 'PreProc'
+# Changed = 'Type'
+# Removed = 'Statement'
 
 [[plugins]]
 repo = 'https://github.com/jacoborus/tender.vim'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'tender'
 
 [[plugins]]
 repo = 'https://github.com/joshdick/onedark.vim'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'onedark'
 
 [[plugins]]
 repo = 'https://github.com/KabbAmine/yowish.vim'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'yowish'
 terminal = 'mini'
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
 Directory = 'Statement'
 
 [[plugins]]
 repo = 'https://github.com/karoliskoncevicius/sacredforest-vim'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'sacredforest'
 terminal = 'mini'
 
 [[plugins]]
 repo = 'https://github.com/kihachi2000/yash.nvim'
 if = 'has("nvim")'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'yash'
-[plugins.colorschemes.highlight]
+[plugins.extAttrs.colorschemes.highlight]
 Cursor = { guifg = 'NONE', guibg = 'NONE' }
 # diffAdded =
 # diffRemoved =
 
 [[plugins]]
 repo = 'https://github.com/kyoh86/momiji'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'momiji'
 terminal = 'mini'
-[plugins.colorschemes.highlight]
+[plugins.extAttrs.colorschemes.highlight]
 PmenuSel = { ctermfg = 'NONE', guifg = 'NONE' }
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
 diffAdded = 'DiffAdd'
 diffRemoved = 'DiffDelete'
 
 [[plugins]]
 repo = 'https://github.com/lifepillar/vim-solarized8'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'solarized8'
 lightline = 'solarized'
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
 diffAdded = 'String'
 diffRemoved = 'Special'
 
 [[plugins]]
 repo = 'https://github.com/lighthaus-theme/vim-lighthaus'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'lighthaus'
 terminal = [
   '#21252D', '#FC2929', '#44B273', '#E25600', '#1D918B', '#D16BB7', '#00BFA4', '#FFFADE',
   '#8E8D8D', '#FF5050', '#50C16E', '#ED722E', '#47A8A1', '#D68EB2', '#5AD1AA', '#CCCCCC',
 ]
-[plugins.colorschemes.highlight]
+[plugins.extAttrs.colorschemes.highlight]
 Cursor = { guifg = 'NONE', guibg = 'NONE' }
 
 [[plugins]]
 repo = 'https://github.com/mhartington/oceanic-next'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name =  'OceanicNext'
 lightline = 'oceanicnext'
 
 [[plugins]]
 repo = 'https://github.com/mvanderkamp/cocoa.vim'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'cocoa'
-[plugins.colorschemes.highlight]
+[plugins.extAttrs.colorschemes.highlight]
 Constant = { ctermbg = 'NONE', guibg = 'NONE' }
 
 [[plugins]]
 repo = 'https://github.com/nanotech/jellybeans.vim'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'jellybeans'
 terminal = [
   '#151515', '#cf6a4c', '#70b950', '#fad07a', '#8fbfdc', '#c6b6ee', '#89b8c2', '#e8e8d3',
@@ -339,59 +345,62 @@ terminal = [
 
 [[plugins]]
 repo = 'https://github.com/phanviet/vim-monokai-pro'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'monokai_pro'
 terminal = 'mini'
 
 [[plugins]]
 repo = 'https://github.com/pineapplegiant/spaceduck'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'spaceduck'
 
 [[plugins]]
 repo = 'https://github.com/rakr/vim-two-firewatch'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'two-firewatch'
 lightline = 'twofirewatch'
-[plugins.colorschemes.highlight]
-PmenuSel = { ctermfg = 'NONE', guifg = 'NONE' }
+[plugins.extAttrs.colorschemes.highlight]
+PmenuSel = { ctermfg = 145, guifg = '#abb2bf' }
+Search = { ctermfg = 145, guifg = '#abb2bf' }
 SignifySignAdd = { ctermfg = 73, guifg = '#56b6c2' }
 SignifySignDelete = { ctermfg = 168, guifg = '#e06c75' }
 
 [[plugins]]
 repo = 'https://github.com/rakr/vim-one'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'one'
 terminal = [
   '#282c34', '#e06c75', '#98c379', '#e5c07b', '#61afef', '#c678dd', '#56b6c2', '#828997',
   '#5c6370', '#e06c75', '#98c379', '#e5c07b', '#61afef', '#c678dd', '#56b6c2', '#abb2bf',
 ]
+[plugins.extAttrs.colorschemes.highlight]
+PmenuSel = { ctermfg = 145, guifg = '#abb2bf' }
 
 [[plugins]]
 repo = 'https://github.com/rebelot/kanagawa.nvim'
 if = 'has("nvim")'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'kanagawa'
 lightline = 'tokyonight'
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
 SignifySignAdd = 'GitSignsAdd'
 SignifySignChange = 'GitSignsChange'
 SignifySignDelete = 'GitSignsDelete'
 
 [[plugins]]
 repo = 'https://github.com/rhysd/vim-color-spring-night'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'spring-night'
 lightline = 'spring_night'
 
 [[plugins]]
 repo = 'https://github.com/Rigellute/rigel'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'rigel'
 
 [[plugins]]
 repo = 'https://github.com/romainl/Apprentice'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'apprentice'
 
 [[plugins]]
@@ -399,7 +408,7 @@ repo = 'https://github.com/sainnhe/edge'
 hook_add = '''
 let g:edge_better_performance = v:true
 '''
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'edge'
 
 [[plugins]]
@@ -407,59 +416,62 @@ repo = 'https://github.com/sainnhe/gruvbox-material'
 hook_add = '''
 let g:gruvbox_material_better_performance = v:true
 '''
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'gruvbox-material'
 lightline = 'gruvbox_material'
 
 [[plugins]]
 repo = 'https://github.com/savq/melange-nvim'
 if = 'has("nvim")'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'melange'
 lightline = 'mini'
 terminal = 'mini'
-[plugins.colorschemes.highlight]
+[plugins.extAttrs.colorschemes.highlight]
 CursorLineNr = { cterm = 'NONE' }
 
 [[plugins]]
 repo = 'https://github.com/severij/vadelma'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'vadelma'
 terminal = 'mini'
 
 [[plugins]]
 repo = 'https://github.com/sonph/onehalf'
 rtp = 'vim'
-[[plugins.colorschemes]]
-name = 'onehalfdark'
-terminal = [
-  '#282c34', '#e06c75', '#98c379', '#e5c07b', '#61afef', '#c678dd', '#56b6c2', '#dcdfe4',
-  '#282c34', '#e06c75', '#98c379', '#e5c07b', '#61afef', '#c678dd', '#56b6c2', '#dcdfe4',
-]
-[plugins.colorschemes.link]
-FuzzyAccent = 'Label'
+# [[plugins.extAttrs.colorschemes]]
+# name = 'onehalfdark'
+# terminal = [
+#   '#282c34', '#e06c75', '#98c379', '#e5c07b', '#61afef', '#c678dd', '#56b6c2', '#dcdfe4',
+#   '#282c34', '#e06c75', '#98c379', '#e5c07b', '#61afef', '#c678dd', '#56b6c2', '#dcdfe4',
+# ]
+# [plugins.extAttrs.colorschemes.link]
+# FuzzyAccent = 'Label'
 
 [[plugins]]
 repo = 'https://github.com/srcery-colors/srcery-vim'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'srcery'
-[plugins.colorschemes.highlight]
+[plugins.extAttrs.colorschemes.highlight]
 Visual = { ctermbg = 236, guibg = '#303030', term = 'NONE', cterm = 'NONE', gui = 'NONE' }
 
 [[plugins]]
 repo = 'https://github.com/tobi-wan-kenobi/zengarden'
-[[plugins.colorschemes]]
+if = false
+[[plugins.extAttrs.colorschemes]]
 name = 'zengarden'
 
 [[plugins]]
 repo = 'https://github.com/tomasr/molokai'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'molokai'
 terminal = [
   '#1b1d1e', '#f92672', '#82b414', '#fd971f', '#268bd2', '#8c54fe', '#56c2d6', '#ccccc6',
   '#505354', '#ff5995', '#b7eb46', '#feed6c', '#62ade3', '#bfa0fe', '#94d8e5', '#f8f8f2',
 ]
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.highlight]
+PmenuSel = { ctermfg = 81, guifg = '#66d9ef' }
+[plugins.extAttrs.colorschemes.link]
 DiffAdd = 'PreProc'
 DiffChange = 'Type'
 DiffDelete = 'Keyword'
@@ -468,7 +480,7 @@ diffRemoved = 'Keyword'
 
 [[plugins]]
 repo = 'https://github.com/tyrannicaltoucan/vim-deep-space'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'deep-space'
 lightline = 'deepspace'
 terminal = 'mini'
@@ -476,40 +488,43 @@ terminal = 'mini'
 [[plugins]]
 # repo = 'https://github.com/ulwlu/elly.vim'
 repo = 'https://github.com/kuuote/elly.vim'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'elly'
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
+diffAdded = 'GitGutterAdd'
+diffRemoved = 'GitGutterDelete'
+diffChanged = 'GitGutterChange'
 SignifySignAdd = 'GitGutterAdd'
 SignifySignChange = 'GitGutterChange'
 SignifySignDelete = 'GitGutterDelete'
 
 [[plugins]]
 repo = 'https://github.com/utubo/vim-colorscheme-girly'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'girly'
 lightline = 'wombat'
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
 SignifySignAdd = 'GitGutterAdd'
 SignifySignChange = 'GitGutterChange'
 SignifySignDelete = 'GitGutterDelete'
-[plugins.colorschemes.highlight]
+[plugins.extAttrs.colorschemes.highlight]
 CursorLine = { gui = 'NONE' }
 String = { guibg = 'NONE' }
 
 [[plugins]]
 repo = 'https://github.com/vim-scripts/wombat256.vim'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'wombat256mod'
 lightline = 'wombat'
 terminal = 'mini'
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
 NonText = 'Comment'
-[plugins.colorschemes.highlight]
+[plugins.extAttrs.colorschemes.highlight]
 CursorLineNr = { cterm = 'NONE' }
 
 [[plugins]]
 repo = 'https://github.com/w0ng/vim-hybrid'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'hybrid'
 terminal = [
   '#1d1f21', '#cc6666', '#b5bd68', '#f0c674', '#81a2be', '#b294bb', '#8abeb7', '#d3d7cf',
@@ -518,13 +533,13 @@ terminal = [
 
 [[plugins]]
 repo = 'https://github.com/wadackel/vim-dogrun'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'dogrun'
 terminal = [
   '#111219', '#c261b6', '#7cbe8c', '#8e8a6f', '#4c89ac', '#6c75cb', '#73c1a9', '#9ea3c0',
   '#545c8c', '#b871b8', '#7cbe8c', '#a8a384', '#589ec6', '#929be5', '#59b6b6', '#9ea3c0',
 ]
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
 SignifySignAdd = 'GitGutterAdd'
 SignifySignChange = 'GitGutterChange'
 SignifySignDelete = 'GitGutterDelete'
@@ -536,9 +551,9 @@ diffRemoved = 'Removed'
 
 [[plugins]]
 repo = 'https://github.com/whatyouhide/vim-gotham'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'gotham'
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
 SignifySignAdd = 'GitGutterAdd'
 SignifySignChange = 'GitGutterChange'
 SignifySignDelete = 'GitGutterDelete'
@@ -546,14 +561,14 @@ SignifySignDelete = 'GitGutterDelete'
 # NOTE: green and yellow of term ansi color is original
 [[plugins]]
 repo = 'https://github.com/yuttie/hydrangea-vim'
-[[plugins.colorschemes]]
+[[plugins.extAttrs.colorschemes]]
 name = 'hydrangea'
 terminal = [
   '#1e222c', '#e91e63', '#9df086', '#fedc1b', '#537dd5', '#c398fe', '#56c7ee', '#586374',
   '#3b4351', '#e91e63', '#9df086', '#fedc1b', '#537dd5', '#fe7ecd', '#56c7ee', '#c3d5ec',
 ]
 lightline = 'mini'
-[plugins.colorschemes.link]
+[plugins.extAttrs.colorschemes.link]
 SignifySignAdd = 'GitGutterAdd'
 SignifySignChange = 'Statement'
 SignifySignDelete = 'GitGutterDelete'

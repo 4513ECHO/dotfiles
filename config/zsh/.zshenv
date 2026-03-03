@@ -9,8 +9,10 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 ## docker ##
-export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
-export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock"
+[[ $(uname) == 'Linux' ]] && {
+  export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+  export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock"
+}
 
 ## go ##
 export GOPATH="$XDG_DATA_HOME/go"
@@ -58,6 +60,8 @@ path=(
   $CARGO_HOME/bin(N-/)
   $GOPATH/bin(N-/)
   $DENO_INSTALL/bin(N-/)
+  $HOME/.docker/bin(N-/)
+  $HOME/Library/bin(N-/)
   $HOME/.local/bin(N-/)
   $AQUA_ROOT_DIR/bin(N-/)
   $AFX_COMMAND_PATH(N-/)
@@ -71,6 +75,11 @@ fpath=(
   $fpath[@]
 )
 fpath=(${(R)fpath%/})
+# () {
+#   for gnubin in ~/Library/Caches/homebrew/opt/*/libexec/gnubin; do
+#     export PATH="$gnubin:$PATH"
+#   done
+# }
 
 export EDITOR="${(Q@s: :)EDITOR:-$(command -v nvim > /dev/null && echo nvim || echo vim)}"
 export PAGER='less'

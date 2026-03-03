@@ -146,6 +146,9 @@
             }
           }
         },
+        "extAttrs": {
+          "type": "object"
+        },
         "frozen": {
           "description": "If set to v:true, dein doesn't update it automatically. It is useful for outdated plugins that can no longer be updated.",
           "$ref": "#/definitions/Boolean",

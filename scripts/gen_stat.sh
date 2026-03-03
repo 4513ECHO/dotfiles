@@ -19,7 +19,7 @@ insert_command() {
   fi
   # http://fahdshariff.blogspot.ru/2012/12/sed-mutli-line-replacement-between-two.html
   # clear old result
-  sed -i"$ext" "/$ts/,/$te/{//!d;}" "$src"
+  gsed -i"$ext" "/$ts/,/$te/{//!d;}" "$src"
   # create result file
   {
     echo '```'
@@ -27,13 +27,13 @@ insert_command() {
     echo '```'
   } | tee -a "$tmp"
   # insert result file
-  sed -i "/$ts/r $tmp" "$src"
+  gsed -i "/$ts/r $tmp" "$src"
   rm -f "$tmp" "$src$ext"
 }
 
 vim_plugins() {
   vim_plugins_tempfile="$(mktemp)"
-  for toml in config/nvim/dein/*.toml; do
+  for toml in config/nvim/dpp/*.toml; do
     printf '%-20s %3d\n' "$(basename "$toml")" \
         "$(dasel -r toml -w json -f "$toml" | jq -r '.plugins|length')"
   done | tee "$vim_plugins_tempfile"
@@ -48,4 +48,4 @@ insert_command 'vim-plugins' vim_plugins
 updated_at=$(printf 'Statistics are updated at [`%s`](%s/commit/%s),' \
   "$(git rev-parse --short HEAD)" "$(git remote get-url origin)" "$(git rev-parse HEAD)")
 echo "$updated_at"
-sed -i "s@^Statistics are updated at .*\$@$updated_at@" "$src"
+gsed -i "s@^Statistics are updated at .*\$@$updated_at@" "$src"

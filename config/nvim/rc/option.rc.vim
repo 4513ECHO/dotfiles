@@ -102,7 +102,6 @@ endif
 " ------------------
 " editing
 set backspace=indent,eol,start
-set whichwrap=b,s,h,l
 set hidden
 set confirm
 set timeoutlen=500
@@ -160,6 +159,10 @@ set packpath=
 set ttyfast
 set autoread
 set tildeop
-set diffopt=internal,filler,vertical,algorithm:histogram,indent-heuristic
+set diffopt=filler,vertical
+" NOTE: native macOS Vim does not support internal diff option
+if !has('mac') || $VIM !=# '/usr/share/vim'
+  set diffopt+=internal,algorithm:histogram,indent-heuristic
+endif
 set nofsync
 set nolangremap

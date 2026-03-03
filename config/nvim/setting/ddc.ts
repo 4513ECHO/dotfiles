@@ -91,7 +91,7 @@ export class Config extends BaseConfig {
           mark: "[snip]",
           dup: "keep",
         },
-        "shell-native": {
+        shell_native: {
           mark: "[sh]",
           isVolatile: true,
           forceCompletionPattern: "[\\w@:~._-]/[\\w@:~._-]*",
@@ -111,6 +111,7 @@ export class Config extends BaseConfig {
         },
         lsp: {
           enableAdditionalTextEdit: true,
+          enableDisplayDetail: true,
           enableResolveItem: true,
           lspEngine: hasNvim ? "nvim-lsp" : "vim-lsp",
           snippetEngine: async (body: string) =>
@@ -121,7 +122,7 @@ export class Config extends BaseConfig {
           excludeCurrentPane: true,
           kindFormat: "#{pane_index}.#{pane_current_command}",
         },
-        "shell-native": {
+        shell_native: {
           envs: { COLUMNS: "127" },
           shell: "zsh",
         },
@@ -167,8 +168,10 @@ export class Config extends BaseConfig {
 
     setSourcesByFiletypes(["vim"], ["vim", "lsp", ...sources]);
     setSourcesByFiletypes([
+      "css",
       "go",
       "json",
+      "jsonc",
       "lua",
       "markdown",
       "python",
@@ -184,8 +187,8 @@ export class Config extends BaseConfig {
     //   ["markdown", "gitcommit"],
     //   ["github_issue", "github_pull_request", ...sourcesWithMocword],
     // );
-    setSourcesByFiletypes(["help"], sourcesWithMocword);
-    setSourcesByFiletypes(["sh", "zsh"], ["shell-native", ...sources]);
+    setSourcesByFiletypes(["help", "gitcommit"], sourcesWithMocword);
+    setSourcesByFiletypes(["sh", "zsh"], ["shell_native", ...sources]);
 
     return Promise.resolve();
   }

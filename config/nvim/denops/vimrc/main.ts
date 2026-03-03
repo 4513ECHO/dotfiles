@@ -36,7 +36,7 @@ export const main: Entrypoint = (denops) => {
       const root = ensure(arg, is.String);
       return (await Array.fromAsync(expandGlob("SKK-JISYO.*", { root })))
         .map((entry) => entry.path)
-        .concat(await downloadLJisyo(root))
+        .concat(await downloadLJisyo(denops, root))
         .sort((a) => a.endsWith(".L") ? 2 : a.endsWith(".emoji-ja") ? 1 : -1);
     },
 
@@ -87,7 +87,7 @@ export const main: Entrypoint = (denops) => {
   };
 };
 
-async function downloadLJisyo(root: string): Promise<string[]> {
+async function downloadLJisyo(denops: Denops, root: string): Promise<string[]> {
   const jisyoFile = join(root, "SKK-JISYO.L");
   const url = "https://skk-dev.github.io/dict/SKK-JISYO.L.gz";
   if (
@@ -99,7 +99,7 @@ async function downloadLJisyo(root: string): Promise<string[]> {
   if (!(await exists(jisyoFile, { isFile: true }))) {
     const file = await Deno.mkdir(root, { recursive: true })
       .then(() => Deno.create(jisyoFile));
-    const response = await fetch(url);
+    const response = await fetch(url, { signal: denops.interrupted });
     if (!response.ok || !response.body) {
       throw new Error("Failed to download SKK-JISYO.L");
     }
@@ -109,4 +109,3 @@ async function downloadLJisyo(root: string): Promise<string[]> {
   }
   return [jisyoFile];
 }
-

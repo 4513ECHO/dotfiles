@@ -32,14 +32,5 @@
     "prefix": [
       "function"
     ]
-  },
-  "unsilent": {
-    "body": [
-      "unsilent echomsg string($0)"
-    ],
-    "description": "debug stuff",
-    "prefix": [
-      "unsilent"
-    ]
   }
 }

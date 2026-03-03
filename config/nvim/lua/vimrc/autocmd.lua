@@ -1,33 +1,12 @@
----@diagnostic disable: duplicate-doc-field
 local M = {}
 
 ---@type integer
 M.group = vim.api.nvim_create_augroup("nvim_vimrc", { clear = true })
 
----Options for vim.api.nvim_create_autocmd()
----@class AutocmdOptions
----@field group? string|integer
----@field pattern? string|string[]
----@field buffer? integer
----@field desc? string
----@field callback? fun(ctx: AutocmdContext)|string
----@field command? string
----@field once? boolean
----@field nested? boolean
-
----@class AutocmdContext
----@field id integer autocommand id
----@field event string name of the triggered event |autocmd-event|
----@field group integer|nil autocommand group id, if any
----@field match string expanded value of <amatch>
----@field buf integer expanded value of <abuf>
----@field file string expanded value of <afile>
----@field data any arbitary data passed from |nvim_exec_autocmds()|
-
 ---@param event string|string[]
----@return fun(opts: AutocmdOptions): integer
+---@return fun(opts: vim.api.keyset.create_autocmd): integer
 function M.autocmd(event)
-  ---@param opts AutocmdOptions
+  ---@param opts vim.api.keyset.create_autocmd
   ---@return integer
   return function(opts)
     ---@type string|string[]|nil
@@ -64,9 +43,7 @@ M.autocmd "BufLeave" {
 }
 
 M.autocmd "TextYankPost" {
-  callback = function()
-    vim.hl.on_yank { timeout = 100, on_macro = true }
-  end,
+  callback = function() vim.hl.on_yank { timeout = 100, on_macro = true } end,
   desc = "Highlight yanked text",
 }
 
@@ -79,6 +56,4 @@ M.autocmd "ColorScheme" {
   desc = "Clear VertSplit highlight",
 }
 
-return setmetatable(M, {
-  __call = function(_, event) return M.autocmd(event) end,
-})
+return M

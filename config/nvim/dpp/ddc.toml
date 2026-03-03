@@ -2,7 +2,7 @@
 repo = 'https://github.com/Shougo/ddc.vim'
 depends = ['denops.vim', 'pum.vim']
 on_event = ['InsertEnter']
-hooks_file = '$MYVIMDIR/setting/ddc.vim'
+hooks_file = '$VIMRCDIR/setting/ddc.vim'
 
 # UI
 
@@ -39,7 +39,7 @@ repo = 'https://github.com/Shougo/ddc-source-mocword'
 repo = 'https://github.com/Shougo/ddc-source-omni'
 
 [[plugins]]
-repo = 'https://github.com/Shougo/ddc-source-shell-native'
+repo = 'https://github.com/Shougo/ddc-source-shell_native'
 
 [[plugins]]
 repo = 'https://github.com/Shougo/ddc-source-vim'
@@ -66,7 +66,7 @@ repo = 'https://github.com/uga-rosa/ddc-source-vsnip'
 repo = 'https://github.com/vim-skk/skkeleton'
 denops_wait = false
 on_map = { ict = '<Plug>' }
-hooks_file = '$MYVIMDIR/setting/skkeleton.vim'
+hooks_file = '$VIMRCDIR/setting/skkeleton.vim'
 
 # filters
 

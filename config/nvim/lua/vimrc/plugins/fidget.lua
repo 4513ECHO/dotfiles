@@ -1,26 +1,29 @@
 local M = {}
----@type ProgressHandle|nil
-local handle
+---@type table<string, ProgressHandle|nil>
+local handles = {}
 local progress = require "fidget.progress"
 
-function M.report(message)
-  if handle then
-    handle:report { message = message }
+---@param name string
+---@param message { percentage: integer|nil, title: string|nil }
+function M.report(name, message)
+  if handles[name] then
+    handles[name]:report(message)
   else
-    handle = progress.handle.create {
-      title = "Cache vtsls",
-      message = message,
-      lsp_client = { name = "cache_vtsls" },
+    handles[name] = progress.handle.create {
+      title = "Download SKK-JISYO.L",
+      lsp_client = { name = name },
+      percentage = message.percentage,
     }
   end
 end
 
-function M.done()
-  if not handle then
+---@param name string
+function M.done(name)
+  if not handles[name] then
     return
   end
-  handle:finish()
-  handle = nil
+  handles[name]:finish()
+  handles[name] = nil
 end
 
 return M

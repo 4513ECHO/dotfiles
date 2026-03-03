@@ -1,34 +1,27 @@
 local autocmd = require("vimrc.autocmd").autocmd
----@type table<string, ParserInfo>
-local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
-parser_config.unifieddiff = {
-  install_info = {
-    url = "https://github.com/monaqa/tree-sitter-unifieddiff",
-    files = { "src/parser.c", "src/scanner.c" },
-  },
-  filetype = "diff",
-  maintainers = { "@monaqa" },
+autocmd "User" {
+  pattern = "TSUpdate",
+  callback = function()
+    ---@diagnostic disable: missing-fields
+    local parser_config = require "nvim-treesitter.parsers"
+    parser_config.unifieddiff = {
+      install_info = {
+        url = "https://github.com/monaqa/tree-sitter-unifieddiff",
+        branch = "master",
+        queries = "queries",
+      },
+    }
+    parser_config.uri = {
+      install_info = {
+        url = "https://github.com/atusy/tree-sitter-uri",
+      },
+    }
+    ---@diagnostic enable: missing-fields
+  end,
 }
-parser_config.uri = {
-  install_info = {
-    url = "https://github.com/atusy/tree-sitter-uri",
-    branch = "main",
-    files = { "src/parser.c" },
-  },
-  filetype = "uri",
-  maintainers = { "@atusy" },
-}
--- parser_config.vim = {
---   install_info = {
---     url = "~/Develops/github.com/4513ECHO/tree-sitter-vim",
---     branch = "interpolated-string",
---     files = { "src/parser.c", "src/scanner.c" },
---   },
---   filetype = "vim",
--- }
 
-vim.treesitter.language.register("unifieddiff", "gin-diff")
+vim.treesitter.language.register("unifieddiff", { "diff", "gin-diff" })
 
 vim.treesitter.start = (function(wrapped)
   ---@param msg string
@@ -45,11 +38,10 @@ vim.treesitter.start = (function(wrapped)
       return notify "The file is too large"
     elseif vim.fn.line "$" > 20000 then
       return notify "The buffer has too many lines"
-    elseif vim.list_contains({ "bash", "yaml", "vimdoc" }, lang) then
-      return -- Not supported language
+    elseif vim.list_contains({ "bash", "json", "yaml" }, lang) then
+      return -- I want to disable treesitter for these languages
     elseif
-      lang == "vim"
-      and vim.api.nvim_buf_get_lines(bufnr, 0, 1, false)[1]:match "^vim9script"
+      lang == "vim" and vim.fn.getbufoneline(bufnr, 1):match "^vim9script"
     then
       return notify "vim9script is not supported"
     end
@@ -57,38 +49,46 @@ vim.treesitter.start = (function(wrapped)
   end
 end)(vim.treesitter.start)
 
-local parser_install_dir = vim.fn.stdpath "data" .. "/parsers"
-vim.opt.runtimepath:append(parser_install_dir)
+---@type string[]
+local ensure_installed = {
+  "bash",
+  "css",
+  "go",
+  "html",
+  "json",
+  "lua",
+  "markdown",
+  "markdown_inline",
+  "python",
+  "query",
+  "rust",
+  "toml",
+  "tsx",
+  "typescript",
+  "typst",
+  "unifieddiff",
+  "uri",
+  "vim",
+  "yaml",
+}
 
----@diagnostic disable-next-line: missing-fields
-require("nvim-treesitter.configs").setup {
-  parser_install_dir = parser_install_dir,
-  ensure_installed = {
-    "bash",
-    "go",
-    "html",
-    "lua",
-    "markdown",
-    "markdown_inline",
-    "python",
-    "query",
-    "rust",
-    "toml",
-    "tsx",
-    "typescript",
-    "typst",
-    "unifieddiff",
-    "uri",
-    "vim",
-    "yaml",
-  },
-  highlight = {
-    enable = true,
-  },
+autocmd "FileType" {
+  pattern = vim
+    .iter(ensure_installed)
+    :map(vim.treesitter.language.get_filetypes)
+    :flatten()
+    :totable(),
+  callback = function() vim.treesitter.start() end,
+}
+
+autocmd "User" {
+  pattern = "TSUpdate",
+  once = true,
+  callback = function() require("nvim-treesitter").install(ensure_installed) end,
 }
 
 local function link_diff_highlights()
-  if vim.fn.empty(vim.api.nvim_get_hl(0, { name = "diffAdded" })) == 1 then
+  if vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = "diffAdded" })) then
     vim.api.nvim_set_hl(0, "@diff.plus", { link = "DiffAdd" })
     vim.api.nvim_set_hl(0, "@diff.minus", { link = "DiffDelete" })
   else

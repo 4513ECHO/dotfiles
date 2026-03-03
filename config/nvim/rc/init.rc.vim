@@ -23,7 +23,7 @@ autocmd vimrc VimEnter * ++nested call user#colorscheme#random()
 let s:state = {}
 autocmd vimrc DirChanged * ++nested
       \ : if s:state->has_key(expand('<afile>'))
-      \ |   execute 'silent colorscheme' s:state[expand('<afile>')]
+      \ |   execute 'ColorScheme' s:state[expand('<afile>')]
       \ | else
       \ |   call user#colorscheme#random()
       \ |   let s:state[expand('<afile>')] = g:colors_name

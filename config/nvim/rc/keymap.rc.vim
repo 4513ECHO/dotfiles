@@ -101,6 +101,7 @@ onoremap ) t)
 
 inoremap <C-g><C-z> <C-o>zz
 inoremap <C-g><C-p> <Cmd>setlocal paste! paste?<CR>
+inoremap <expr> <C-g><C-u> nr2char(str2nr(input('U+'), 16))
 inoremap <C-g><C-y> <C-y>
 
 " emacs-like insert/cmdline mode mapping {{{
@@ -139,3 +140,9 @@ nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
+
+" window move
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l

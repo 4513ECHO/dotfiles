@@ -1,6 +1,8 @@
 # vim
 config/nvim/colors/*
-config/nvim/tags
+config/nvim/profile
+config/nvim/startuptime*
+tags
 
 # zsh
 config/zsh/.zcompdump*
@@ -8,6 +10,7 @@ config/zsh/.zinit/*
 config/zsh/completions/*
 config/zsh/.zcompcache/*
 config/zsh/.zsh_sessions/*
+config/zsh/.zsh_history
 
 # gh
 config/gh/hosts.yml

@@ -5,6 +5,32 @@ if [[ -f ~/.minimum_dotfiles ]]; then
   export MINIMUM_DOTFILES=true
 fi
 
+typeset -Ux path fpath manpath cdpath
+path=(
+  $CARGO_HOME/bin(N-/)
+  $GOPATH/bin(N-/)
+  $DENO_INSTALL/bin(N-/)
+  $HOME/.docker/bin(N-/)
+  $HOME/Library/bin(N-/)
+  $HOME/.local/bin(N-/)
+  $AQUA_ROOT_DIR/bin(N-/)
+  $AFX_COMMAND_PATH(N-/)
+  /opt/homebrew/bin(N-/)
+  /opt/homebrew/sbin(N-/)
+  $path[@]
+)
+path=(${(R)path%/})
+fpath=(
+  $ZDOTDIR/completions(N-/)
+  $fpath[@]
+)
+fpath=(${(R)fpath%/})
+# () {
+#   for gnubin in ~/Library/Caches/homebrew/opt/*/libexec/gnubin; do
+#     export PATH="$gnubin:$PATH"
+#   done
+# }
+
 HISTFILE="$XDG_DATA_HOME/zsh/history"
 HISTSIZE=10000
 SAVEHIST=10000
@@ -37,11 +63,11 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
   done
 }
 
-if [[ -n "$TMUX" ]]; then
+# if [[ -n "$TMUX" ]]; then
   hook::venv
   hook-set-title
   export GPG_TTY=$(tty)
-fi
+# fi
 [[ -f '~/.ssh/id_git_ed25519' ]] && enable-agent-forward '~/.ssh/id_git_ed25519'
 [[ -z "$MINIMUM_DOTFILES" ]] && agent-symlink
 [[ ! -f "$HISTFILE" ]] && { mkdir -p "$(dirname "$HISTFILE")" && touch "$HISTFILE"; }

@@ -3,21 +3,15 @@ let s:dpp_ts = g:config_home .. '/rc/dpp.ts'
 
 if &runtimepath->stridx(s:dpp_dir) < 0
   if !isdirectory(s:dpp_dir)
-    execute printf('!deno run --allow-read --allow-run=git %s %s %s',
-          \ s:dpp_ts, s:dpp_dir, expand('$MYVIMDIR/dpp/dpp.toml'))
+    let s:cmd = 'deno run --allow-read --allow-write=%s --allow-run=git --allow-net=api.github.com %s %s %s'
+    execute '!' printf(s:cmd, s:dpp_dir, s:dpp_ts, s:dpp_dir, expand('$VIMRCDIR/dpp/dpp.toml'))
   endif
   execute $'set runtimepath^={s:dpp_dir}/repos/github.com/Shougo/dpp.vim'
 endif
 
 if dpp#min#load_state(s:dpp_dir)
-  for s:plugin in [
-        \ 'github.com/vim-denops/denops.vim',
-        \ 'github.com/Shougo/dpp-ext-installer',
-        \ 'github.com/Shougo/dpp-ext-lazy',
-        \ 'github.com/Shougo/dpp-ext-toml',
-        \ 'github.com/Shougo/dpp-protocol-git',
-        \ ]
-    execute $'set runtimepath^={s:dpp_dir}/repos/{s:plugin}'
+  for s:path in readfile(s:dpp_dir .. '/runtimepath_cache')
+    execute $'set runtimepath^={s:path}'
   endfor
   autocmd vimrc User Dpp:makeStatePost cquit
   autocmd vimrc User DenopsReady call dpp#make_state(s:dpp_dir, s:dpp_ts)

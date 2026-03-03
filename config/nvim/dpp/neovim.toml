@@ -15,27 +15,6 @@ require("term-edit").setup {
 '''
 
 [[plugins]]
-repo = 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
-on_event = ['LspAttach']
-lua_source = '''
-require("lsp_lines").setup()
-vim.diagnostic.config { virtual_lines = false }
-vim.keymap.set("n", "[Toggle]d", function()
-  local old_config = vim.diagnostic.config()
-  vim.diagnostic.config {
-    virtual_text = not old_config.virtual_text,
-    virtual_lines = not old_config.virtual_lines,
-  }
-  local mode = old_config.virtual_lines and "virtual_text" or "virtual_lines"
-  vim.api.nvim_echo(
-    { { "Diagnostic Mode: " }, { mode, "Constant" } },
-    false,
-    {}
-  )
-end)
-'''
-
-[[plugins]]
 repo = 'https://github.com/j-hui/fidget.nvim'
 on_event = ['LspAttach']
 on_lua = ['fidget']
@@ -77,9 +56,9 @@ on_lua = ['plenary']
 
 [[plugins]]
 repo = 'https://github.com/nvim-treesitter/nvim-treesitter'
-on_event = ['BufRead']
+rev = 'main'
 hook_post_update = 'TSUpdate'
-lua_source = '''
+lua_add = '''
 require "vimrc.plugins.treesitter"
 '''
 
@@ -88,12 +67,12 @@ repo = 'https://github.com/nvim-zh/colorful-winsep.nvim'
 on_event = ['WinNew']
 lua_source = '''
 require("colorful-winsep").setup {
-  hi --[[NvimSeparator]] = {
+  border = "rounded",
+  excluded_ft = { "ddu-ff" },
+  highlight --[[NvimSeparator]] = {
     link = "Identifier",
     default = true,
   },
-  no_exec_files = { "ddu-ff" },
-  symbols = { "─", "│", "┌", "┐", "└", "┘" },
 }
 '''
 

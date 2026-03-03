@@ -59,7 +59,7 @@ repo = 'https://github.com/cocopon/lightline-hybrid.vim'
 [[plugins]]
 repo = 'https://github.com/cohama/lexima.vim'
 on_event = ['InsertEnter', 'CmdlineEnter']
-hooks_file = '$MYVIMDIR/setting/lexima.vim'
+hooks_file = '$VIMRCDIR/setting/lexima.vim'
 
 [[plugins]]
 repo = 'https://github.com/github/copilot.vim'
@@ -346,16 +346,7 @@ hook_add = '''
 let g:pinkyless#keyboard = 'JIS'
 let g:pinkyless_default_keymap = v:false
 noremap! <C-g><C-l> <Plug>(pinkyless-capslock-toggle)
-noremap! ; <Plug>(pinkyless-stickyshift-enter)
 nnoremap r <Plug>(pinkyless-stickyreplace-enter)
-'''
-# NOTE: Override keymap to enable remap
-hook_post_source = '''
-function! s:pinkyless_enter(trigger) abort
-  let char = pinkyless#stickyshift#enter(a:trigger)
-  return char !~# a:trigger ? char : feedkeys(char, 'ni') ?? ''
-endfunction
-map! <expr> <Plug>(pinkyless-stickyshift-enter) <SID>pinkyless_enter(';')
 '''
 
 [[plugins]]
@@ -674,9 +665,9 @@ on_map = { nxo = '<Plug>' }
 depends = ['context_filetype.vim', 'vim-operator-user']
 hook_add = '''
 let g:caw_no_default_keymappings = v:true
-nnoremap <silent> <Bslash> <Plug>(caw:hatpos:toggle:operator)
-onoremap <silent> <Bslash> <Plug>(caw:hatpos:toggle:operator)
-xnoremap <silent> <Bslash> <Plug>(caw:hatpos:toggle:operator)
+nnoremap <silent> <C-/> <Plug>(caw:hatpos:toggle:operator)
+onoremap <silent> <C-/> <Plug>(caw:hatpos:toggle:operator)
+xnoremap <silent> <C-/> <Plug>(caw:hatpos:toggle:operator)
 '''
 # NOTE: Workaround of https://github.com/tyru/caw.vim/issues/183
 # based on https://github.com/tyru/caw.vim/pull/185
@@ -699,12 +690,9 @@ let b:caw_oneline_comment = ';'
 '''
 
 [[plugins]]
-repo = 'https://github.com/yuttie/comfortable-motion.vim'
-on_func = ['comfortable_motion#flick']
+repo = 'https://github.com/vim-fall/fall.vim'
+on_cmd = ['Fall', 'FallCustom']
 hook_add = '''
-let g:comfortable_motion_no_default_key_mappings = v:true
-nnoremap <C-d> <Cmd>call comfortable_motion#flick(winheight(0) * 2)<CR>
-nnoremap <C-u> <Cmd>call comfortable_motion#flick(winheight(0) * -2)<CR>
-nnoremap <C-f> <Cmd>call comfortable_motion#flick(winheight(0) * 4)<CR>
-nnoremap <C-b> <Cmd>call comfortable_motion#flick(winheight(0) * -4)<CR>
+let g:fall_custom_path = expand('$VIMRCDIR/setting/fall.ts')
+autocmd vimrc User FallPreviewRendered:* setlocal nonumber
 '''
